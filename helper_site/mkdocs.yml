@@ -12,9 +12,6 @@ nav:
     - C语言基础知识: 1. C语言基础知识/1. C语言基础知识.md
 
 markdown_extensions:
-  - pymdownx.superfences
-
-markdown_extensions:
   - abbr
 
 markdown_extensions:

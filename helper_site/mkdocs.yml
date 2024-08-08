@@ -6,11 +6,16 @@ theme:
   features:
   - header.autohide
 
-
 nav:
   - 主页: index.md
   - C语言教程: 
     - C语言基础知识: 1. C语言基础知识/1. C语言基础知识.md
+
+markdown_extensions:
+  - pymdownx.superfences
+
+markdown_extensions:
+  - abbr
 
 markdown_extensions:
   - pymdownx.highlight
@@ -26,9 +31,6 @@ markdown_extensions:
 
 markdown_extensions:
   - pymdownx.keys
-
-markdown_extensions:
-  - pymdownx.superfences
 
 markdown_extensions:
   - pymdownx.snippets

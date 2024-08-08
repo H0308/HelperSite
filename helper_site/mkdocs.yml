@@ -12,22 +12,8 @@ nav:
     - C语言基础知识: 1. C语言基础知识/1. C语言基础知识.md
 
 markdown_extensions:
-  - abbr
-
-markdown_extensions:
-  - pymdownx.highlight
-  - pymdownx.superfences
-
-markdown_extensions:
   - pymdownx.highlight:
-      linenums: true
-
-markdown_extensions:
-  - pymdownx.highlight:
-      linenums_style: pymdownx.inline
-
-markdown_extensions:
-  - pymdownx.keys
-
-markdown_extensions:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
   - pymdownx.snippets
+  - pymdownx.superfences

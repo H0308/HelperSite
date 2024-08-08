@@ -4,3 +4,5 @@ theme:
   name: 'material'
   features:
   - header.autohide
+
+use_directory_urls: false

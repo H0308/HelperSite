@@ -1,1 +1,0 @@
-<img src="images/c-logo.png">

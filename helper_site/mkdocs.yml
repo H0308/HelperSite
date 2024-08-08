@@ -4,8 +4,3 @@ theme:
   name: 'material'
   features:
   - header.autohide
-
-
-nav:
-  - 主页: 'index.md'
-  - 'tools.md'

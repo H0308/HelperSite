@@ -1,0 +1,1018 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../tools.html">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>1. C语言基础知识 - 日常学习帮助网站</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-c" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="日常学习帮助网站" class="md-header__button md-logo" aria-label="日常学习帮助网站" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            日常学习帮助网站
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. C语言基础知识
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="日常学习帮助网站" class="md-nav__button md-logo" aria-label="日常学习帮助网站" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    日常学习帮助网站
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    欢迎来到帮助网站
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    1. C语言基础知识
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            1. C语言基础知识
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1. C语言基础知识
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    1. C语言基础知识
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C语言介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      C语言基础代码分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C语言基础代码分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    <span class="md-ellipsis">
+      main函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      库函数简介
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      C语言关键字介绍
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ascii" class="md-nav__link">
+    <span class="md-ellipsis">
+      字符与ASCII编码
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      转义字符
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      C语言语句分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C语言语句分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      空语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      表达式语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      函数调用语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      复合语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      控制语句
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="控制语句">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      条件判断语句（分支语句）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      循环执行语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      跳转语句
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      C语言中注释
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C语言中注释">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      块注释/**/的形式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      行注释//的形式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C语言介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      C语言基础代码分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C语言基础代码分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    <span class="md-ellipsis">
+      main函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      库函数简介
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      C语言关键字介绍
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ascii" class="md-nav__link">
+    <span class="md-ellipsis">
+      字符与ASCII编码
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      转义字符
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      C语言语句分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C语言语句分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      空语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      表达式语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      函数调用语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      复合语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      控制语句
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="控制语句">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      条件判断语句（分支语句）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      循环执行语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      跳转语句
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      C语言中注释
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C语言中注释">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      块注释/**/的形式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      行注释//的形式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="1-c">1. C语言基础知识</h1>
+<h2 id="c">C语言介绍</h2>
+<p>C语言是一门编译型语言，C语言源代码都是文本文件，但文本文件本身不能运行，必须通过编译器翻译和链接器的链接，生成二进制的可执行文件才可以执行</p>
+<p>在Windows平台下，C语言代码放在后缀为<code>.c</code>文本文件中，通过编译器编译生成后缀为<code>.obj</code>的目标文件，再通过链接器链接目标文件和链接库链接生成后缀为<code>.exe</code>可执行的二进制文件</p>
+<p>在C语言中，把后缀为<code>.h</code>的文件称为头文件</p>
+<h2 id="c_1">C语言基础代码分析</h2>
+<p>C语言代码实例：</p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS 1
+
+#include &lt;stdio.h&gt;
+
+int main()
+{    
+    printf(&quot;Hello world!&quot;);
+    return 0;
+}
+输出结果：
+Hello world!
+</code></pre>
+<h3 id="main">main函数</h3>
+<p><code>main</code>函数形式：</p>
+<pre><code class="language-C">int main()
+{
+    //语句
+}
+</code></pre>
+<p>每个C语言程序不管有多少行代码，都是从 <code>main</code> 函数开始执行的， <code>main</code> 函数是程序的入口<code>main</code> 函数也被叫做：主函数。 <code>main</code> 前面的 <code>int</code> 表示<code>main</code> 函数执行结束的时候返回⼀个整型类型的值。所以在 <code>main</code> 函数的最后写<code>return 0;</code> 正好前后呼应</p>
+<ul>
+<li><code>main</code>函数是程序的入口</li>
+<li><code>main</code>函数有且仅有⼀个</li>
+<li>即使⼀个项目中有多个<code>.c</code>文件，但是只能有一个<code>main</code>函数（因为程序的入口只能有一个）</li>
+</ul>
+<h3 id="_1">库函数简介</h3>
+<pre><code class="language-C">printf(&quot;Hello world!&quot;);
+</code></pre>
+<p>在上面的实例代码中，使用了<code>printf();</code>打印输出函数，使用库函数中函数需要包含特定的头文件，而<code>printf();</code>定义在头文件<code>stdio.h</code>，将该函数中需要打印的内容打印在控制台中，C语言相关函数头文件可在网站中查询：<a href="https://cplusplus.com/reference/clibrary/">C语言头文件查询</a></p>
+<h3 id="c_2">C语言关键字介绍</h3>
+<pre><code class="language-C">C语言中的关键字
+auto  break   case  char  const   continue  default  do   double else  enum 
+extern
+float  for   goto  if   int   long  register    return   short  signed  
+sizeof  static
+struct  switch  typedef union  unsigned   void  volatile  while
+C99标准新增的关键字
+inline 、 restrict 、 _Bool 、 _Comploex 、 _Imaginary等
+</code></pre>
+<ul>
+<li>C语言中关键字都有特殊的意义，程序员在创建标识符时不可单独使用和关键字重名的名称，并且关键字不可自己创建</li>
+</ul>
+<p>C语言关键字介绍网站：<a href="https://zh.cppreference.com/w/c/keyword">C语言关键字</a></p>
+<h2 id="ascii">字符与ASCII编码</h2>
+<p>在C语言中，将各种单独的符号成为字符，而这些字符在表示时需要用单引号<code>''</code>，例如：<code>'a'</code>，<code>'b'</code>等</p>
+<p>由于计算机中的数据都是以二进制的形式存储，而字符在计算机中以二进制序列存储，这个过程叫做编码，而C语言遵循ASCII编码</p>
+<p><img src="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\1. C语言基础知识\images\image.png"></p>
+<p>注：在新的ASCII表共有256个字符</p>
+<p>ASCII表查询：<a href="https://zh.cppreference.com/w/cpp/language/ascii">ASCII编码表</a></p>
+<p>在ASCII中需要记忆的特殊位置的内容</p>
+<ul>
+<li>数字0-9对应ASCII编码位置为：48-57</li>
+<li>大写字母A-Z对应ASCII编码位置为：65-90</li>
+<li>小写字符a-z对应ASCII编码位置为：97-122，其中小写字母与对应大写字母对应的ASCII编码值相差32</li>
+<li>打印中不可见的字符对应ASCII编码位置为：0-32</li>
+</ul>
+<p>ASCII字符打印代码实例：</p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS 1
+
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    //因为0-32字符是不可见字符，故循环变量从32开始
+    for (int i = 32; i &lt; 128; i++)
+    {
+        printf(&quot;%c &quot;, i);
+        if (i % 16 == 15)
+        {
+            printf(&quot;\n&quot;);
+        }
+    }
+    return 0;
+}
+输出结果：
+! &quot; # $ % &amp; ' ( ) * + , - . /
+0 1 2 3 4 5 6 7 8 9 : ; &lt; = &gt; ?
+@ A B C D E F G H I J K L M N O
+P Q R S T U V W X Y Z [ \ ] ^ _
+` a b c d e f g h i j k l m n o
+p q r s t u v w x y z { | } ~
+</code></pre>
+<h2 id="_2">转义字符</h2>
+<p>C语言中的转义字符：</p>
+<ul>
+<li><code>\?</code> ：在书写连续多个问号时使⽤，防⽌他们被解析成三字母词，在新的编译器上没法验证了。</li>
+<li><code>\'</code> ：用于表示字符常量<code>'</code></li>
+<li><code>\"</code> ：用于表示⼀个字符串内部的双引号</li>
+<li><code>\\</code> ：用于表示⼀个反斜杠，防止它被解释为⼀个转义序列符。</li>
+<li><code>\a</code> ：警报，这会使得终端发出警报声或出现闪烁，或者两者同时发⽣。</li>
+<li><code>\b</code> ：退格键，光标回退⼀个字符，但不删除字符。</li>
+<li><code>\f</code> ：换页符，光标移到下一页。在现代系统上，这已经反映不出来了，行为改成类似于<code>\v</code>。</li>
+<li><code>\n</code> ：换行符。</li>
+<li><code>\r</code> ：回车符，光标移到同⼀行的开头。</li>
+<li><code>\t</code> ：制表符，光标移到下⼀个水平制表位，通常是下⼀个8的倍数。</li>
+<li><code>\v</code> ：垂直分隔符，光标移到下⼀个垂直制表位，通常是下⼀行的同⼀列。</li>
+</ul>
+<p>C语言中的特殊转义字符：</p>
+<ul>
+<li><code>\ddd</code> ：ddd中的每一个d表示1~3个八进制（0-7）的数字。如：\130表示字符X</li>
+<li><code>\xdd</code> ：dd中的每一个d表示2个十六进制（0-F）数字（x为固定内容代表十六进制）。如：\x30表示字符0</li>
+<li><code>\0</code> ：null字符，代表没有内容， <code>\0</code>就是<code>\ddd</code>这类转义字符的⼀种，用于字符串的结束标志，其ASCII码值是0</li>
+</ul>
+<blockquote>
+<p>其中注意转义字符\b，具体效果见博客：<a href="https://blog.csdn.net/m0_73281594/article/details/133838696?spm=1001.2014.3001.5501">转义字符\b解析博客</a></p>
+</blockquote>
+<p>C语言中的转义字符参考：<a href="https://zh.cppreference.com/w/c/language/escape">转义字符参考网址</a></p>
+<h2 id="c_3">C语言语句分类</h2>
+<h3 id="_3">空语句</h3>
+<p>只有一个分号的语句即为空语句</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+int main()
+{
+    ;//空语句
+    return 0;
+}
+</code></pre>
+<h3 id="_4">表达式语句</h3>
+<p>表达式后面加上<code>;</code>即为表达式语句</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 10;
+    int b = 5;
+    b = a + b;//表达式语句
+    return 0;
+{
+</code></pre>
+<h3 id="_5">函数调用语句</h3>
+<p>函数调用时需要加上分号，称为函数调用语句</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+int Add(int a, int b)
+{
+    return (a + b);
+{
+
+int main()
+{
+    int a = 20;
+    int b = 4;
+    int ret = Add(a + b);//函数调用语句
+    return 0;
+{
+</code></pre>
+<h3 id="_6">复合语句</h3>
+<p>在C语言中成对的花括号<code>{}</code>中的语句构成一个代码块，亦称为复合语句</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+int main()//函数{}中的代码构成复合语句
+{
+    for(int i = 0; i &lt; 10; i++)//循环的{}中的代码构成复合语句
+    {
+        printf(&quot;%d &quot;, i);
+    }
+    return 0;
+{
+</code></pre>
+<h3 id="_7">控制语句</h3>
+<p>在C语言中用于控制程序的执行流程的语句成为控制语句，从而实现不同的结构方式</p>
+<h4 id="_8">条件判断语句（分支语句）</h4>
+<p><code>if</code>语句、<code>switch</code>语句</p>
+<h4 id="_9">循环执行语句</h4>
+<p><code>do while</code>语句、<code>while</code>语句、<code>for</code>语句</p>
+<h4 id="_10">跳转语句</h4>
+<p><code>break</code>语句、<code>goto</code>语句、<code>continue</code>语句、<code>return</code>语句</p>
+<h2 id="c_4">C语言中注释</h2>
+<p>注释：对代码的说明，编译器会忽略注释</p>
+<h3 id="_11">块注释/**/的形式</h3>
+<p>将注释放在<code>/**/</code>中，从第一个<code>/*</code>开始到后面的<code>*/</code>结束</p>
+<pre><code class="language-C">块注释
+/*
+*
+*
+*/
+</code></pre>
+<p>块注释可以插在行内</p>
+<pre><code class="language-C">int fopen(char* s /* file name */, int mode);
+/* file name */ ⽤来对函数参数进⾏说明，跟在它后面的代码依然会有效执⾏
+</code></pre>
+<blockquote>
+<p>[!NOTE]</p>
+<p>块注释不支持嵌套注释， <code>/*</code> 开始注释后，遇到后面的第⼀个 <code>*/</code> 就认为注释结束了</p>
+</blockquote>
+<h3 id="_12">行注释//的形式</h3>
+<p>将注释放在双斜杠 <code>//</code> 后面，从双斜杠到行尾都属于注释</p>
+<p>行注释只能是单行，可以放在行首，也可以放在一行语句的结尾</p>
+<pre><code class="language-C">printf(&quot;// hello /* world */ &quot;);//行注释和块注释均失效
+</code></pre>
+<blockquote>
+<p>[!NOTE]</p>
+<p>不管是哪⼀种注释，都不能放在双引号里面。双引号里面的注释符号，会成为字符串的⼀部分，解释为普通符号，失去注释作用</p>
+<p>[!NOTE]</p>
+<p>编译时，注释会被替换成⼀个空格，所以<code>min/* 这里是注释*/Value</code> 会变成 <code>min Value</code>（<code>min</code>和<code>Value</code>中间有空格） ，而不是 <code>minValue</code>（<code>min</code>和<code>Value</code>中无空格） </p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["header.autohide"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>

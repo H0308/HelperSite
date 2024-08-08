@@ -2,7 +2,6 @@ site_name: 日常学习帮助网站
 
 theme:
   name: 'material'
-# 自动隐藏头部
   features:
   - header.autohide
 

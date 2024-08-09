@@ -257,6 +257,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    list类模拟实现
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="12.%20list%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html" class="md-nav__link md-nav__link--active">
         
   
@@ -266,6 +277,379 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#list" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类节点结构设计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listconst" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类非const迭代器结构设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="list类非const迭代器结构设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器基本结构设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator*()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator!=()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operatorint" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator==()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator-&gt;()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listconst_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类const迭代器结构设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="list类const迭代器结构设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器基本结构设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator*()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator!=()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operatorint_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-int_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator==()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator-&gt;()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#const" class="md-nav__link">
+    <span class="md-ellipsis">
+      const版本的迭代器使用问题
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constconst" class="md-nav__link">
+    <span class="md-ellipsis">
+      const版本迭代器和非const版本迭代器合并优化
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类无参构造函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类析构函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类拷贝构造函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类赋值运算符重载函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#begin" class="md-nav__link">
+    <span class="md-ellipsis">
+      begin()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end" class="md-nav__link">
+    <span class="md-ellipsis">
+      end()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#push_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      push_back()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#push_front" class="md-nav__link">
+    <span class="md-ellipsis">
+      push_front()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erase" class="md-nav__link">
+    <span class="md-ellipsis">
+      erase()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pop_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      pop_back()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pop_front" class="md-nav__link">
+    <span class="md-ellipsis">
+      pop_front()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    <span class="md-ellipsis">
+      clear()函数
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -320,6 +704,368 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#list" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类节点结构设计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listconst" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类非const迭代器结构设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="list类非const迭代器结构设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器基本结构设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator*()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator!=()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operatorint" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator==()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator-&gt;()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listconst_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类const迭代器结构设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="list类const迭代器结构设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器基本结构设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator*()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator!=()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operatorint_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-int_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator==()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator-&gt;()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#const" class="md-nav__link">
+    <span class="md-ellipsis">
+      const版本的迭代器使用问题
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constconst" class="md-nav__link">
+    <span class="md-ellipsis">
+      const版本迭代器和非const版本迭代器合并优化
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类无参构造函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类析构函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类拷贝构造函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类赋值运算符重载函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#begin" class="md-nav__link">
+    <span class="md-ellipsis">
+      begin()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end" class="md-nav__link">
+    <span class="md-ellipsis">
+      end()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#push_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      push_back()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#push_front" class="md-nav__link">
+    <span class="md-ellipsis">
+      push_front()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erase" class="md-nav__link">
+    <span class="md-ellipsis">
+      erase()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pop_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      pop_back()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pop_front" class="md-nav__link">
+    <span class="md-ellipsis">
+      pop_front()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    <span class="md-ellipsis">
+      clear()函数
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -334,8 +1080,7 @@
 
 
 <h1 id="12-list">12. list类模拟实现<a class="headerlink" href="#12-list" title="Permanent link">&para;</a></h1>
-<h1 id="list">list类模拟实现<a class="headerlink" href="#list" title="Permanent link">&para;</a></h1>
-<h2 id="list_1">list类节点结构设计<a class="headerlink" href="#list_1" title="Permanent link">&para;</a></h2>
+<h2 id="list">list类节点结构设计<a class="headerlink" href="#list" title="Permanent link">&para;</a></h2>
 <p>因为list类为本质是带头双向循环链表，所以在设计list类时，需要先设计节点的结构，并且因为每一个节点是一个整体，所以可以考虑将每一个节点的初始化构造放在结构体中，如下代码所示：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">//节点结构</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
@@ -748,7 +1493,7 @@
 <p>[!NOTE]</p>
 <p>注意，此处也需要考虑到非<code>const</code>对象向<code>const</code>对象的转换问题，为了更方便解决，采取上面的第一种解决方案，如果直接是<code>const</code>对象调用则不需要考虑这个问题</p>
 </blockquote>
-<h2 id="list_2">list类无参构造函数<a class="headerlink" href="#list_2" title="Permanent link">&para;</a></h2>
+<h2 id="list_1">list类无参构造函数<a class="headerlink" href="#list_1" title="Permanent link">&para;</a></h2>
 <p>对于list类来说，因为只有一个头指针作为成员变量，所以无参构造时只需要考虑创建头结点即可</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1">//头节点处理</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">empty_init</span><span class="p">()</span>
@@ -766,7 +1511,7 @@
 <a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="w">    </span><span class="n">empty_init</span><span class="p">();</span>
 <a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="list_3">list类析构函数<a class="headerlink" href="#list_3" title="Permanent link">&para;</a></h2>
+<h2 id="list_2">list类析构函数<a class="headerlink" href="#list_2" title="Permanent link">&para;</a></h2>
 <p>调用<code>clear()</code>函数后将头节点资源清理并置为空即可</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1">//析构函数</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="o">~</span><span class="n">list</span><span class="p">()</span>
@@ -777,7 +1522,7 @@
 <a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">    </span><span class="n">_head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
 <a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="list_4">list类拷贝构造函数<a class="headerlink" href="#list_4" title="Permanent link">&para;</a></h2>
+<h2 id="list_3">list类拷贝构造函数<a class="headerlink" href="#list_3" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1">//拷贝构造函数</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="n">list</span><span class="p">(</span><span class="n">list</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">ls</span><span class="p">)</span>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="p">{</span>
@@ -789,7 +1534,7 @@
 <a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="list_5">list类赋值运算符重载函数<a class="headerlink" href="#list_5" title="Permanent link">&para;</a></h2>
+<h2 id="list_4">list类赋值运算符重载函数<a class="headerlink" href="#list_4" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1">//赋值运算符重载函数</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="n">list</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">list</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">ls</span><span class="p">)</span>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="p">{</span>
@@ -1024,7 +1769,7 @@
 <a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a><span class="p">}</span>
 </code></pre></div>
 <h1 id="_6">项目代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h1>
-<h2 id="list_6">list类实现文件<a class="headerlink" href="#list_6" title="Permanent link">&para;</a></h2>
+<h2 id="list_5">list类实现文件<a class="headerlink" href="#list_5" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="cp">#pragma once</span>
 <a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>
 <a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>

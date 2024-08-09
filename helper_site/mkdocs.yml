@@ -28,9 +28,9 @@ markdown_extensions:
 - toc:
     permalink: true
 
-markdown_extensions:
-- pymdownx.highlight:
-    anchor_linenums: true
-- pymdownx.inlinehilite
-- pymdownx.snippets
-- pymdownx.superfences
+# markdown_extensions:
+# - pymdownx.highlight:
+#     anchor_linenums: true
+# - pymdownx.inlinehilite
+# - pymdownx.snippets
+# - pymdownx.superfences

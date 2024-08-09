@@ -88,6 +88,7 @@ nav:
     - Linux下的gcc与gdb: Linux/4. Linux下的gcc与gdb/4. Linux下的gcc与gdb.md
   - 算法:
     - 双指针算法: 算法/1. 双指针算法/1. 双指针算法.md
+    - 滑动窗口算法: 算法/2. 滑动窗口算法/2. 滑动窗口算法.md
 
 markdown_extensions:
   - admonition

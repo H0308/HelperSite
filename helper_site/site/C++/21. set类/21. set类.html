@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#21-set" class="md-skip">
+        <a href="#set" class="md-skip">
           跳转至
         </a>
       
@@ -1547,6 +1547,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    set类
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="21.%20set%E7%B1%BB.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1556,6 +1567,91 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#set_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      set类介绍与简单使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="set类介绍与简单使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      set类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiset" class="md-nav__link">
+    <span class="md-ellipsis">
+      multiset类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      题目练习
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="题目练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      环形链表Ⅱ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      两个数组的交集
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1976,6 +2072,80 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#set_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      set类介绍与简单使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="set类介绍与简单使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      set类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiset" class="md-nav__link">
+    <span class="md-ellipsis">
+      multiset类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      题目练习
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="题目练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      环形链表Ⅱ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      两个数组的交集
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1992,8 +2162,8 @@
   
 
 
-<h1 id="21-set">21. set类<a class="headerlink" href="#21-set" title="Permanent link">&para;</a></h1>
-<h1 id="set">set类介绍与简单使用<a class="headerlink" href="#set" title="Permanent link">&para;</a></h1>
+<h1 id="set">set类<a class="headerlink" href="#set" title="Permanent link">&para;</a></h1>
+<h2 id="set_1">set类介绍与简单使用<a class="headerlink" href="#set_1" title="Permanent link">&para;</a></h2>
 <p>set类是一种关联式容器，在数据检索时比序列式容器效率更高。本质是一个常规的二叉搜索树，但是为了防止出现单支树导致效率下降进行了相关优化</p>
 <p>set类也满足二叉搜索树的特点：</p>
 <ol>
@@ -2004,11 +2174,12 @@
 <li>set中的底层使用二叉搜索树(红黑树)来实现</li>
 <li>默认按照<code>key</code>升序排序</li>
 </ol>
-<h2 id="set_1">set类<a class="headerlink" href="#set_1" title="Permanent link">&para;</a></h2>
-<blockquote>
+<h3 id="set_2">set类<a class="headerlink" href="#set_2" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>使用set类需要包含头文件<code>&lt;set&gt;</code></p>
-</blockquote>
-<p><a href="[set - C++ Reference (cplusplus.com)](https://legacy.cplusplus.com/reference/set/set/)">set官方文档</a></p>
+</div>
+<p><a href="https://legacy.cplusplus.com/reference/set/set/">set官方文档</a>)</p>
 <p>简单使用实例：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
@@ -2106,9 +2277,10 @@
 <a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>需要注意使用<code>s.erase(s.find(3));</code>时，一定要确保<code>find()</code>函数中的参数一定要存在，因为<code>find()</code>函数中的参数不存在返回end迭代器的位置，所以<code>erase</code>会断言报错，如果直接传入删除的值<code>s.erase(3)</code>，则不论是否存在都不会报错</p>
-</blockquote>
+</div>
 <p>对于<code>count()</code>函数来说，也可以用来判断内容是否在set中，因为当内容在set中，<code>count()</code>函数返回1，否则返回0</p>
 <p>需要注意的两个函数<code>lower_bound()</code>和<code>upper_bound()</code>，这两个函数放在一起的作用是获取到当前中序遍历的[lower_bound, upper_bound]区间</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
@@ -2168,9 +2340,9 @@
 <a id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mi">8</span>
 </code></pre></div></td></tr></table></div>
 <p>首先解释<code>lower_bound(3)</code>的意思，在这个函数中，<code>lower_bound()</code>会取到<strong>第一个</strong>大于或者等于3的数值，返回其位置的迭代器，所以<code>lower_bound(3)</code>返回的是3所在位置的迭代器，接着<code>upper_bound(8)</code>，对于<code>upper_bound(8)</code>会返回<strong>除8以外的</strong>比8大的数值位置的迭代器，也就是<strong>第一个</strong>大于8的数值位置的迭代器，所以上面的程序结果最后会输出8是因为取出了[3, 8]中的所有位于set容器中的值</p>
-<h2 id="multiset">multiset类<a class="headerlink" href="#multiset" title="Permanent link">&para;</a></h2>
+<h3 id="multiset">multiset类<a class="headerlink" href="#multiset" title="Permanent link">&para;</a></h3>
 <p>multiset类与set类不同的是，<strong>multiset类允许数据出现重复</strong></p>
-<p><a href="[multiset - C++ Reference (cplusplus.com)](https://legacy.cplusplus.com/reference/set/multiset/)">multiset类官方文档</a></p>
+<p><a href="https://legacy.cplusplus.com/reference/set/multiset/">multiset类官方文档</a>)</p>
 <p>简单使用实例：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
@@ -2328,13 +2500,14 @@
 <a id="__codelineno-3-41" name="__codelineno-3-41"></a><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">9</span>
 </code></pre></div></td></tr></table></div>
 <p>如果<code>multiset</code>中指定数值有重复，<code>multiset</code>类中<code>find()</code>函数会找到<strong>中序遍历的第一个值</strong>为指定值（不存在则返回其他与指定值相同的节点）的位置，返回该位置的迭代器，所以时调用<code>erase()</code>函数，将<code>find()</code>返回的迭代器传给<code>erase()</code>函数，<strong>删除的就是中序遍历的第一个值</strong>，而如果直接调用<code>erase()</code>函数，传入指定值，则<strong>一次性全部删除</strong></p>
-<h2 id="_1">题目练习<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<h3 id="ii">环形链表Ⅱ<a class="headerlink" href="#ii" title="Permanent link">&para;</a></h3>
+<h3 id="_1">题目练习<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="ii">环形链表Ⅱ<a class="headerlink" href="#ii" title="Permanent link">&para;</a></h4>
 <p>题目链接：<a href="https://leetcode.cn/problems/linked-list-cycle-ii/description/">142. 环形链表 II - 力扣（LeetCode）</a></p>
-<blockquote>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
 <p>给定一个链表的头节点  <code>head</code> ，返回链表开始入环的第一个节点。<strong><em>如果链表无环，则返回</em></strong> <em><code>null</code></em>。
 如果链表中有某个节点，可以通过连续跟踪 <code>next</code> 指针再次到达，则链表中存在环。为了表示给定链表中的环，评测系统内部使用整数 <code>pos</code> 来表示链表尾连接到链表中的位置（<strong>索引从 0 开始</strong>）。如果 <code>pos</code> 是 <code>-1</code>，则在该链表中没有环。<strong>注意：</strong><code>pos</code> <strong>不作为参数进行传递</strong>，仅仅是为了标识链表的实际情况。 <strong>不允许修改</strong> 链表。</p>
-</blockquote>
+</div>
 <p>思路解析：</p>
 <p>在前面学习C语言时，对于本题的解题思路为数学推理。学了set后可以考虑下面的思路：所谓链表是否有环，即是否有重复的节点，而第一个重复的节点即为环的入口点，如果不成环则会一直走到空为止。那么利用set可以考虑将每一个节点插入到set中，因为set在插入时会保证数据不冗余，所以插入失败的第一个节点即为成环，也为环的入口点</p>
 <p>参考代码：</p>
@@ -2398,11 +2571,12 @@
 <a id="__codelineno-4-29" name="__codelineno-4-29"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-4-30" name="__codelineno-4-30"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="_2">两个数组的交集<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h4 id="_2">两个数组的交集<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <p>题目链接：<a href="https://leetcode.cn/problems/intersection-of-two-arrays/">349. 两个数组的交集 - 力扣（LeetCode）</a></p>
-<blockquote>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
 <p>给定两个数组 <code>nums1</code> 和 <code>nums2</code> ，返回 它们的交集。输出结果中的每个元素一定是<strong>唯一</strong>的。我们可以<strong>不考虑输出结果的顺序</strong>。</p>
-</blockquote>
+</div>
 <p>思路解析：</p>
 <p>交集：两个数组中都出现的元素</p>
 <p>差集：两个数组中各自独有的元素</p>

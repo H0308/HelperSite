@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#16-priority_queue" class="md-skip">
+        <a href="#priority_queue" class="md-skip">
           跳转至
         </a>
       
@@ -1442,6 +1442,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    priority_queue模拟实现
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="16.%20priority_queue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1451,6 +1462,127 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#priority_queue_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue模拟实现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="priority_queue模拟实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#priority_queue_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queue_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queuepush" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类push()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queuepop" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类pop()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queuesize" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类size()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queueempty" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类empty()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queuetop" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类top()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority_queue_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      仿函数与priority_queue类模拟实现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="仿函数与priority_queue类模拟实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      仿函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1976,6 +2108,116 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#priority_queue_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue模拟实现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="priority_queue模拟实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#priority_queue_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queue_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queuepush" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类push()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queuepop" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类pop()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queuesize" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类size()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queueempty" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类empty()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority_queuetop" class="md-nav__link">
+    <span class="md-ellipsis">
+      priority_queue类top()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority_queue_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      仿函数与priority_queue类模拟实现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="仿函数与priority_queue类模拟实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      仿函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1992,10 +2234,10 @@
   
 
 
-<h1 id="16-priority_queue">16. priority_queue模拟实现<a class="headerlink" href="#16-priority_queue" title="Permanent link">&para;</a></h1>
 <h1 id="priority_queue">priority_queue模拟实现<a class="headerlink" href="#priority_queue" title="Permanent link">&para;</a></h1>
+<h2 id="priority_queue_1">priority_queue模拟实现<a class="headerlink" href="#priority_queue_1" title="Permanent link">&para;</a></h2>
 <p>实现priority_queue的方式和stack和queue基本类似，因为priority_queue也是一种容器适配器，但是只能使用vector和deque，这里默认使用vector容器作为适配器，因为priority_queue本质是堆结构，所以实现时主要按照堆的实现思路进行</p>
-<h2 id="priority_queue_1">priority_queue类定义<a class="headerlink" href="#priority_queue_1" title="Permanent link">&para;</a></h2>
+<h3 id="priority_queue_2">priority_queue类定义<a class="headerlink" href="#priority_queue_2" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
 <span class="normal"><a href="#__codelineno-0-3">3</a></span>
@@ -2010,16 +2252,16 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="n">Container</span><span class="w"> </span><span class="n">_con</span><span class="o">:</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="priority_queue_2">priority_queue构造函数<a class="headerlink" href="#priority_queue_2" title="Permanent link">&para;</a></h2>
+<h3 id="priority_queue_3">priority_queue构造函数<a class="headerlink" href="#priority_queue_3" title="Permanent link">&para;</a></h3>
 <p>priority_queue主要有两种构造函数：</p>
 <ol>
 <li>无参构造函数</li>
 <li>迭代器构造函数</li>
 </ol>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>需要注意的是，如果不显式实现两个构造函数，则默认是无参构造，该默认构造将会调用容器适配器的构造函数</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -2050,7 +2292,7 @@
 <a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="priority_queuepush">priority_queue类<code>push()</code>函数<a class="headerlink" href="#priority_queuepush" title="Permanent link">&para;</a></h2>
+<h3 id="priority_queuepush">priority_queue类<code>push()</code>函数<a class="headerlink" href="#priority_queuepush" title="Permanent link">&para;</a></h3>
 <p>因为按照堆实现思路进行，所以<code>push()</code>函数实现思路如下：</p>
 <ol>
 <li>向容器适配器中插入数据</li>
@@ -2180,7 +2422,7 @@
 <a id="__codelineno-2-61" name="__codelineno-2-61"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-62" name="__codelineno-2-62"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="priority_queuepop">priority_queue类<code>pop()</code>函数<a class="headerlink" href="#priority_queuepop" title="Permanent link">&para;</a></h2>
+<h3 id="priority_queuepop">priority_queue类<code>pop()</code>函数<a class="headerlink" href="#priority_queuepop" title="Permanent link">&para;</a></h3>
 <p>因为按照堆实现思路进行，所以<code>pop()</code>函数实现思路如下：</p>
 <ol>
 <li>交换根节点数据和最后一个叶子节点的数据</li>
@@ -2205,7 +2447,7 @@
 <a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="n">adjustDown</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="priority_queuesize">priority_queue类<code>size()</code>函数<a class="headerlink" href="#priority_queuesize" title="Permanent link">&para;</a></h2>
+<h3 id="priority_queuesize">priority_queue类<code>size()</code>函数<a class="headerlink" href="#priority_queuesize" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
 <span class="normal"><a href="#__codelineno-4-3">3</a></span>
@@ -2216,7 +2458,7 @@
 <a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_con</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="priority_queueempty">priority_queue类<code>empty()</code>函数<a class="headerlink" href="#priority_queueempty" title="Permanent link">&para;</a></h2>
+<h3 id="priority_queueempty">priority_queue类<code>empty()</code>函数<a class="headerlink" href="#priority_queueempty" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
 <span class="normal"><a href="#__codelineno-5-3">3</a></span>
@@ -2227,7 +2469,7 @@
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_con</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="priority_queuetop">priority_queue类<code>top()</code>函数<a class="headerlink" href="#priority_queuetop" title="Permanent link">&para;</a></h2>
+<h3 id="priority_queuetop">priority_queue类<code>top()</code>函数<a class="headerlink" href="#priority_queuetop" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -2250,9 +2492,9 @@
 <a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_con</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 <a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h1 id="priority_queue_3">仿函数与priority_queue类模拟实现<a class="headerlink" href="#priority_queue_3" title="Permanent link">&para;</a></h1>
+<h2 id="priority_queue_4">仿函数与priority_queue类模拟实现<a class="headerlink" href="#priority_queue_4" title="Permanent link">&para;</a></h2>
 <p>在前面的模拟实现中，priority_queue默认是小堆的实现，但是如果此时需要实现大堆，就需要改变向上/向下调整算法，但是这种实现方式不能在一个文件里面同时创建出小堆和大堆，所以此时需要一个函数来控制比较大小，此时就可以用到仿函数</p>
-<h2 id="_1">仿函数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_1">仿函数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>所谓仿函数就是使用类并且重载<code>()</code>运算符，例如对于比较两个数值，小于返回<code>true</code>的仿函数</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
@@ -2535,10 +2777,10 @@
 <a id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="mi">25</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="mi">45</span><span class="w"> </span><span class="mi">46</span><span class="w"> </span><span class="mi">78</span><span class="w"> </span>
 <a id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="mi">78</span><span class="w"> </span><span class="mi">46</span><span class="w"> </span><span class="mi">45</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="mi">25</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>有了仿函数，除了可以使用内置的一些仿函数，也可自定义自己的仿函数来规定比较方式，这种对于自定义类型并且重载了比较运算符非常便捷</p>
-</blockquote>
+</div>
 
 
 

@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#7-cstlstring" class="md-skip">
+        <a href="#cstlstring" class="md-skip">
           跳转至
         </a>
       
@@ -1253,6 +1253,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    C++STL简介与string类
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="7.%20C%2B%2BSTL%E7%AE%80%E4%BB%8B%E4%B8%8Estring%E7%B1%BB.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1262,6 +1273,367 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stl" class="md-nav__link">
+    <span class="md-ellipsis">
+      STL简介
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STL简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stl_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      STL的版本
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stl_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      STL的六大组件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      标准库中的string类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类的常用接口
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类对象对容量的操作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="string类对象对容量的操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sizelength" class="md-nav__link">
+    <span class="md-ellipsis">
+      size()函数与length()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capacity" class="md-nav__link">
+    <span class="md-ellipsis">
+      capacity()函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="capacity()函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capacity_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      capacity的扩容方式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reserve" class="md-nav__link">
+    <span class="md-ellipsis">
+      reserve()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resize" class="md-nav__link">
+    <span class="md-ellipsis">
+      resize()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类对象的操作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="string类对象的操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#push_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      push_back()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#append" class="md-nav__link">
+    <span class="md-ellipsis">
+      append()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator+=()函数（+=运算符重载函数）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator+()函数（+运算符重载函数）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assign" class="md-nav__link">
+    <span class="md-ellipsis">
+      assign()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erase" class="md-nav__link">
+    <span class="md-ellipsis">
+      erase()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace" class="md-nav__link">
+    <span class="md-ellipsis">
+      replace()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find" class="md-nav__link">
+    <span class="md-ellipsis">
+      find()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swap" class="md-nav__link">
+    <span class="md-ellipsis">
+      swap()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c_str" class="md-nav__link">
+    <span class="md-ellipsis">
+      c_str()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#substr" class="md-nav__link">
+    <span class="md-ellipsis">
+      substr()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rfind" class="md-nav__link">
+    <span class="md-ellipsis">
+      rfind()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find_first_of" class="md-nav__link">
+    <span class="md-ellipsis">
+      find_first_of()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relational-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      relational operators系列函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getline" class="md-nav__link">
+    <span class="md-ellipsis">
+      getline()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类对象的访问及遍历操作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="string类对象的访问及遍历操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operatorat" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator[]()与at()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类迭代器遍历
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="string类迭代器遍历">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      正向遍历
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      逆向遍历
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1976,6 +2348,356 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stl" class="md-nav__link">
+    <span class="md-ellipsis">
+      STL简介
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STL简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stl_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      STL的版本
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stl_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      STL的六大组件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      标准库中的string类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类的常用接口
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类对象对容量的操作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="string类对象对容量的操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sizelength" class="md-nav__link">
+    <span class="md-ellipsis">
+      size()函数与length()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capacity" class="md-nav__link">
+    <span class="md-ellipsis">
+      capacity()函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="capacity()函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capacity_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      capacity的扩容方式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reserve" class="md-nav__link">
+    <span class="md-ellipsis">
+      reserve()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resize" class="md-nav__link">
+    <span class="md-ellipsis">
+      resize()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类对象的操作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="string类对象的操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#push_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      push_back()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#append" class="md-nav__link">
+    <span class="md-ellipsis">
+      append()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator+=()函数（+=运算符重载函数）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator+()函数（+运算符重载函数）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assign" class="md-nav__link">
+    <span class="md-ellipsis">
+      assign()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erase" class="md-nav__link">
+    <span class="md-ellipsis">
+      erase()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace" class="md-nav__link">
+    <span class="md-ellipsis">
+      replace()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find" class="md-nav__link">
+    <span class="md-ellipsis">
+      find()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swap" class="md-nav__link">
+    <span class="md-ellipsis">
+      swap()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c_str" class="md-nav__link">
+    <span class="md-ellipsis">
+      c_str()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#substr" class="md-nav__link">
+    <span class="md-ellipsis">
+      substr()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rfind" class="md-nav__link">
+    <span class="md-ellipsis">
+      rfind()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find_first_of" class="md-nav__link">
+    <span class="md-ellipsis">
+      find_first_of()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relational-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      relational operators系列函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getline" class="md-nav__link">
+    <span class="md-ellipsis">
+      getline()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类对象的访问及遍历操作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="string类对象的访问及遍历操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operatorat" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator[]()与at()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      string类迭代器遍历
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="string类迭代器遍历">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      正向遍历
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      逆向遍历
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1992,10 +2714,10 @@
   
 
 
-<h1 id="7-cstlstring">7. C++STL简介与string类<a class="headerlink" href="#7-cstlstring" title="Permanent link">&para;</a></h1>
-<h1 id="stl">STL简介<a class="headerlink" href="#stl" title="Permanent link">&para;</a></h1>
+<h1 id="cstlstring">C++STL简介与string类<a class="headerlink" href="#cstlstring" title="Permanent link">&para;</a></h1>
+<h2 id="stl">STL简介<a class="headerlink" href="#stl" title="Permanent link">&para;</a></h2>
 <p>STL(standard template libaray-标准模板库)：是C++标准库的重要组成部分，不仅是一个可复用的组件库，而且是一个包罗数据结构与算法的软件框架</p>
-<h2 id="stl_1">STL的版本<a class="headerlink" href="#stl_1" title="Permanent link">&para;</a></h2>
+<h3 id="stl_1">STL的版本<a class="headerlink" href="#stl_1" title="Permanent link">&para;</a></h3>
 <ol>
 <li>原始版本</li>
 </ol>
@@ -2012,15 +2734,15 @@
 <li>SGI版本</li>
 </ol>
 <p>由Silicon Graphics Computer Systems，Inc公司开发，继承自HP版 本。被GCC(Linux)采用，可移植性好，可公开、修改甚至贩卖，从命名风格和编程 风格上看，阅读性非常高。</p>
-<h2 id="stl_2">STL的六大组件<a class="headerlink" href="#stl_2" title="Permanent link">&para;</a></h2>
+<h3 id="stl_2">STL的六大组件<a class="headerlink" href="#stl_2" title="Permanent link">&para;</a></h3>
 <p><a class="glightbox" href="image\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image.png"></a></p>
-<blockquote>
-<p>[!NOte]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在上面的图中，空间配置器实际上就是在内存池中申请空间。另外，<code>string</code>类型本不属于<code>STL</code>，因为出现得早，没被划分到<code>STL</code>中，但是其接口基本上和<code>STL</code>中其他容器的接口类似，故将其列入上图中的<code>STL</code>容器部分</p>
-</blockquote>
-<h1 id="string">string类<a class="headerlink" href="#string" title="Permanent link">&para;</a></h1>
+</div>
+<h2 id="string">string类<a class="headerlink" href="#string" title="Permanent link">&para;</a></h2>
 <p>在C语言中，字符串是以<code>'\0'</code>结尾的字符数组，为了操作方便，C语言还提供了和字符串相关的函数放在<code>string.h</code>中，但是在C语言中，函数和字符串类型是分割的，不符合面向对象编程的思想，并且在操作字符串的过程中还需要注意防止越界</p>
-<h1 id="string_1">标准库中的string类<a class="headerlink" href="#string_1" title="Permanent link">&para;</a></h1>
+<h2 id="string_1">标准库中的string类<a class="headerlink" href="#string_1" title="Permanent link">&para;</a></h2>
 <ol>
 <li>字符串是表示字符序列的类</li>
 <li>标准的字符串类提供了对此类对象的支持，其接口类似于标准字符容器的接口，但添加了专门用于操作</li>
@@ -2028,10 +2750,10 @@
 <li><code>string</code>类是使用<code>char</code>(即作为它的字符类型，使用它的默认<code>char_traits</code>和分配器类型(关于模板的更多信息，请参阅<code>basic_string</code>)</li>
 <li><code>string</code>类是<code>basic_string</code>模板类的一个实例，它使用char来实例化basic_string模板类，并用<code>char_traits</code>和<code>allocator</code>作为<code>basic_string</code>的默认参数(根于更多的模板信息请参考<code>basic_string</code>)</li>
 </ol>
-<blockquote>
-<p>[!Note]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意，这个类独立于所使用的编码来处理字节:如果用来处理多字节或变长字符(如UTF-8)的序列，这个类的所有成员(如长度或大小)以及它的迭代器，将仍然按照字节(而不是实际编码的字符)来操作。</p>
-</blockquote>
+</div>
 <p>总结：</p>
 <ol>
 <li><code>string</code>是表示字符串的字符串类</li>
@@ -2039,11 +2761,11 @@
 <li><code>string</code>在底层实际是：<code>basic_string</code>模板类的别名，<code>typedef basic_string&lt;char, char_traits, allocator&gt; string</code>;</li>
 <li>不能操作多字节或者变长字符的序列。</li>
 </ol>
-<blockquote>
-<p>[!note]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在使用<code>string</code>类时，必须包含<code>#include</code>头文件以及<code>using namespace std;</code>（或者展开需要使用的内容）</p>
-</blockquote>
-<h1 id="string_2">string类的常用接口<a class="headerlink" href="#string_2" title="Permanent link">&para;</a></h1>
+</div>
+<h2 id="string_2">string类的常用接口<a class="headerlink" href="#string_2" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2178,10 +2900,10 @@
 <a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="n">hello</span><span class="w"> </span><span class="n">w</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!note]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>对于函数<code>string (const string&amp; str, size_t pos, size_t len = npos);</code>来说，<code>pos</code>为起始位置，<code>len</code>为需要取的字符串的长度，如果<code>len</code>参数大于字符串的可提供的长度，那么会一直取到字符串结尾；如果使用缺省值<code>npos</code>（缺省值为<code>-1</code>），那么同样会取到字符串结尾</p>
-</blockquote>
+</div>
 <p><code>string</code>类也有析构函数<code>~string()</code>和赋值运算符重载函数</p>
 <table>
 <thead>
@@ -2201,7 +2923,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="string_3">string类对象对容量的操作<a class="headerlink" href="#string_3" title="Permanent link">&para;</a></h1>
+<h2 id="string_3">string类对象对容量的操作<a class="headerlink" href="#string_3" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2232,11 +2954,11 @@
 </tr>
 </tbody>
 </table>
-<h2 id="sizelength"><code>size()</code>函数与<code>length()</code>函数<a class="headerlink" href="#sizelength" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!note]</p>
+<h3 id="sizelength"><code>size()</code>函数与<code>length()</code>函数<a class="headerlink" href="#sizelength" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>对于计算字符串有效字符长度的函数来说不会计算<code>'\0'</code>，并且<code>size()</code>和<code>length()</code>的效果相同</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -2263,7 +2985,7 @@
 <a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="mi">11</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="mi">11</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="capacity"><code>capacity()</code>函数<a class="headerlink" href="#capacity" title="Permanent link">&para;</a></h2>
+<h3 id="capacity"><code>capacity()</code>函数<a class="headerlink" href="#capacity" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -2291,7 +3013,7 @@
 <a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="mi">15</span>
 </code></pre></div></td></tr></table></div>
 <p>在上面的代码中，<code>size()</code>和<code>capacity()</code>并不相等，所以<code>size()</code>不等同于<code>capacity()</code>，可以类比到数据结构中顺序表的有效数据个数<code>size</code>和<code>capacity</code></p>
-<h3 id="capacity_1"><code>capacity</code>的扩容方式<a class="headerlink" href="#capacity_1" title="Permanent link">&para;</a></h3>
+<h4 id="capacity_1"><code>capacity</code>的扩容方式<a class="headerlink" href="#capacity_1" title="Permanent link">&para;</a></h4>
 <p>在VS环境下面，运行下面的代码可以大致估算得到<code>capacity</code>的扩容倍数</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
@@ -2347,10 +3069,10 @@
 <a id="__codelineno-3-26" name="__codelineno-3-26"></a><span class="n">capacity</span><span class="w"> </span><span class="n">changed</span><span class="o">:</span><span class="w"> </span><span class="mi">70</span>
 <a id="__codelineno-3-27" name="__codelineno-3-27"></a><span class="n">capacity</span><span class="w"> </span><span class="n">changed</span><span class="o">:</span><span class="w"> </span><span class="mi">105</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>计算<code>capacity</code>时不会计算<code>\0</code>所存在的空间</p>
-</blockquote>
+</div>
 <p>在上面的代码中，因为并没有计算\0所在的空间，所以实际结果为：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
@@ -2423,9 +3145,9 @@
 <a id="__codelineno-5-28" name="__codelineno-5-28"></a><span class="n">capacity</span><span class="w"> </span><span class="n">changed</span><span class="o">:</span><span class="w"> </span><span class="mi">157</span>
 </code></pre></div></td></tr></table></div>
 <p>此时<code>hello world\0</code>存储的位置在<code>_buf[16]</code>数组中</p>
-<p><a class="glightbox" href="image\image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image1.png" align="left" width="400px" ></a><a class="glightbox" href="image\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image2.png" align="right" width="430px"></a></p>
+<p><a class="glightbox" href="image\image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image1.png"></a><a class="glightbox" href="image\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image2.png"></a></p>
 <p>如果字符串的长度大于16时，则不会存储到<code>_buf[16]</code>中，而是存储到<code>ptr</code>指针指向的内存空间</p>
-<p><a class="glightbox" href="image\image3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image3.png" align="left"></a></p>
+<p><a class="glightbox" href="image\image3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image3.png"></a></p>
 <p>可以推测出，在设计<code>string</code>类时，底层的成员变量有下面几种</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
@@ -2444,7 +3166,7 @@
 <a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
 <p>所以在VS下，第一次和第二次之间是两倍的关系并不是扩容两倍，而是改变了存储位置</p>
-<h2 id="reserve"><code>reserve()</code>函数<a class="headerlink" href="#reserve" title="Permanent link">&para;</a></h2>
+<h3 id="reserve"><code>reserve()</code>函数<a class="headerlink" href="#reserve" title="Permanent link">&para;</a></h3>
 <p>使用<code>reserve()</code>函数可以为字符串预留指定大小的空间，此时当指定大小远大于前面扩容的大小时一般不会再进行扩容</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
@@ -2494,16 +3216,16 @@
 <a id="__codelineno-7-23" name="__codelineno-7-23"></a><span class="n">start</span><span class="err">：</span><span class="mi">111</span>
 <a id="__codelineno-7-24" name="__codelineno-7-24"></a><span class="n">making</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="n">grow</span><span class="o">:</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
-<p>在VS下，使用<code>reserve()</code>函数指定的大小一般会被编译器扩大一小部分，但是在GCC下指定多少就是多少，所以在上面的代码中，虽然指定的大小为100，但是实际的大小为111</p>
-<p>但是不论时哪种编译平台，都要至少保证开辟的大小不能小于指定大小</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>在VS下，使用<code>reserve()</code>函数指定的大小一般会被编译器扩大一小部分，但是在GCC下指定多少就是多少，所以在上面的代码中，虽然指定的大小为100，但是实际的大小为111
+但是不论时哪种编译平台，都要至少保证开辟的大小不能小于指定大小</p>
+</div>
 <p>使用<code>reserve()</code>函数时，如果已经有空间时，对原始空间进行扩容时不会改变有效字符长度<code>size</code>值，只会改变<code>capacity</code>的值，从而达到扩容的效果</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意，若扩容的值小于原始空间时，那么此时<code>reserve()</code>函数不起任何效果</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -2544,15 +3266,15 @@
 <a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="n">after_capacity</span><span class="err">：</span><span class="mi">207</span>
 <a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="n">after_size</span><span class="err">：</span><span class="mi">11</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在扩容之后，尽管原始字符串的大小小于<code>_buf[16]</code>数组的长度，也会被移动到<code>ptr</code>指向的空间，如图所示</p>
 <p>执行<code>reserve()</code>函数前：</p>
-<p><a class="glightbox" href="image\image4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image4.png" align="left"></a></p>
+<p><a class="glightbox" href="image\image4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image4.png"></a></p>
 <p>执行<code>reserve()</code>函数后：</p>
-<p><a class="glightbox" href="image\image5.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image5.png" align="left"></a></p>
-</blockquote>
-<h2 id="resize"><code>resize()</code>函数<a class="headerlink" href="#resize" title="Permanent link">&para;</a></h2>
+<p><a class="glightbox" href="image\image5.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image5.png"></a></p>
+</div>
+<h3 id="resize"><code>resize()</code>函数<a class="headerlink" href="#resize" title="Permanent link">&para;</a></h3>
 <p>不同于<code>reserve()</code>函数，使用<code>resize()</code>函数可以将原始空间扩容并且初始化扩容的空间，默认初始化字符为<code>\0</code>，当指定为某一个字符后，则将初始化对应字符</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
@@ -2593,7 +3315,7 @@
 <a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="n">after_size</span><span class="err">：</span><span class="mi">200</span>
 </code></pre></div></td></tr></table></div>
 <p>在上面的代码中，使用<code>resize()</code>函数时会同时改变<code>size</code>的大小和<code>capacity</code>的大小，<code>size</code>的大小刚好为<code>resize()</code>函数的参数值，并且默认将其余部分初始化为<code>\0</code></p>
-<p><a class="glightbox" href="image\image6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image6.png" align="left"></a></p>
+<p><a class="glightbox" href="image\image6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image6.png"></a></p>
 <p>也可以指定某一个字符</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
@@ -2623,11 +3345,11 @@
 <a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="image\image7.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image7.png" align="left"></a></p>
-<blockquote>
-<p>[!NOTE]</p>
+<p><a class="glightbox" href="image\image7.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image7.png" ></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>使用<code>resize()</code>函数还可以达到删除字符的效果，当扩容值参数的大小小于已经存在的字符串的长度时</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -2670,11 +3392,11 @@
 <a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="n">after_capacity</span><span class="err">：</span><span class="mi">15</span>
 <a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="n">after_size</span><span class="err">：</span><span class="mi">5</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意，尽管使用<code>resize()</code>函数后改变了<code>size</code>的大小，但是对于<code>capacity</code>来说，一旦在开始确定好了大小，那么使用<code>resize()</code>改变<code>size</code>的值使其小于已经设定的值，此时不会改变<code>capacity</code>的大小，因为缩容是非法的，如果支持缩容，那么证明可以支持<code>free</code>释放部分空间</p>
-</blockquote>
-<h1 id="string_4">string类对象的操作<a class="headerlink" href="#string_4" title="Permanent link">&para;</a></h1>
+</div>
+<h2 id="string_4">string类对象的操作<a class="headerlink" href="#string_4" title="Permanent link">&para;</a></h2>
 <p>此处展示部分可能用得到的成员函数，全部成员函数参考文档：<a href="https://legacy.cplusplus.com/reference/string/string/?kw=string">string - C++ Reference (cplusplus.com)</a></p>
 <table>
 <thead>
@@ -2712,7 +3434,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="push_back"><code>push_back()</code>函数<a class="headerlink" href="#push_back" title="Permanent link">&para;</a></h2>
+<h3 id="push_back"><code>push_back()</code>函数<a class="headerlink" href="#push_back" title="Permanent link">&para;</a></h3>
 <p>使用<code>push_back()</code>函数可以在字符串后追加字符</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
@@ -2738,7 +3460,7 @@
 <a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="n">hellow</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="append"><code>append()</code>函数<a class="headerlink" href="#append" title="Permanent link">&para;</a></h2>
+<h3 id="append"><code>append()</code>函数<a class="headerlink" href="#append" title="Permanent link">&para;</a></h3>
 <p>使用<code>append()</code>函数可以在字符串后追加字符串</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
@@ -2764,7 +3486,7 @@
 <a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="n">hello</span><span class="w"> </span><span class="n">world</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator"><code>operator+=()</code>函数（<code>+=</code>运算符重载函数）<a class="headerlink" href="#operator" title="Permanent link">&para;</a></h2>
+<h3 id="operator"><code>operator+=()</code>函数（<code>+=</code>运算符重载函数）<a class="headerlink" href="#operator" title="Permanent link">&para;</a></h3>
 <p>使用<code>operator+=()</code>函数可以达到<code>append()</code>和<code>push_back()</code>的效果</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
@@ -2818,7 +3540,7 @@
 <a id="__codelineno-14-25" name="__codelineno-14-25"></a><span class="n">hello</span><span class="w"> </span><span class="n">world</span>
 <a id="__codelineno-14-26" name="__codelineno-14-26"></a><span class="n">hello</span><span class="w"> </span><span class="n">CPP</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator_1"><code>operator+()</code>函数（+运算符重载函数）<a class="headerlink" href="#operator_1" title="Permanent link">&para;</a></h2>
+<h3 id="operator_1"><code>operator+()</code>函数（+运算符重载函数）<a class="headerlink" href="#operator_1" title="Permanent link">&para;</a></h3>
 <p>使用<code>operator+()</code>函数可以将两个字符串相加（即合并但不改变原来的字符串）</p>
 <table>
 <thead>
@@ -2872,7 +3594,7 @@
 <a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="w"> </span><span class="n">world</span>
 <a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="n">hello</span><span class="w"> </span><span class="n">world</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="assign"><code>assign()</code>函数<a class="headerlink" href="#assign" title="Permanent link">&para;</a></h2>
+<h3 id="assign"><code>assign()</code>函数<a class="headerlink" href="#assign" title="Permanent link">&para;</a></h3>
 <p>使用<code>assign()</code>函数可以将一个对象或者字符串赋值给另一个对象</p>
 <table>
 <thead>
@@ -3052,12 +3774,12 @@
 <a id="__codelineno-16-76" name="__codelineno-16-76"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-16-77" name="__codelineno-16-77"></a><span class="n">CCCCC</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="insert"><code>insert()</code>函数<a class="headerlink" href="#insert" title="Permanent link">&para;</a></h2>
+<h3 id="insert"><code>insert()</code>函数<a class="headerlink" href="#insert" title="Permanent link">&para;</a></h3>
 <p>使用<code>insert()</code>函数可以指定插入某个内容到字符串指定位置中</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在插入过程中会涉及挪动数据以及扩容问题，所以不建议大量使用</p>
-</blockquote>
+</div>
 <table>
 <thead>
 <tr>
@@ -3085,10 +3807,10 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意插入字符串时不会覆盖原来<code>pos</code>位置存在的字符，原来<code>pos</code>位置及以后的字符向后移动</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -3273,7 +3995,7 @@
 <a id="__codelineno-17-91" name="__codelineno-17-91"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-17-92" name="__codelineno-17-92"></a><span class="n">helloc</span><span class="w"> </span><span class="n">world</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="erase"><code>erase()</code>函数<a class="headerlink" href="#erase" title="Permanent link">&para;</a></h2>
+<h3 id="erase"><code>erase()</code>函数<a class="headerlink" href="#erase" title="Permanent link">&para;</a></h3>
 <p>使用<code>erase()</code>函数可以删除指定对象中的内容</p>
 <table>
 <thead>
@@ -3290,10 +4012,10 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>因为删除字符会涉及到挪动数据，所以不推荐大量使用<code>erase()</code>函数</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -3320,40 +4042,37 @@
 <span class="normal"><a href="#__codelineno-18-24">24</a></span>
 <span class="normal"><a href="#__codelineno-18-25">25</a></span>
 <span class="normal"><a href="#__codelineno-18-26">26</a></span>
-<span class="normal"><a href="#__codelineno-18-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a>//删除调用对象pos位置开始len长度的字符
-<a id="__codelineno-18-2" name="__codelineno-18-2"></a>#include &lt;iostream&gt;
-<a id="__codelineno-18-3" name="__codelineno-18-3"></a>using namespace std;
+<span class="normal"><a href="#__codelineno-18-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="c1">//删除调用对象pos位置开始len长度的字符</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4"></a>
-<a id="__codelineno-18-5" name="__codelineno-18-5"></a>int main()
-<a id="__codelineno-18-6" name="__codelineno-18-6"></a>{
-<a id="__codelineno-18-7" name="__codelineno-18-7"></a>    string s1 = &quot;hello world&quot;;
-<a id="__codelineno-18-8" name="__codelineno-18-8"></a>    s1.erase(5, 3);
-<a id="__codelineno-18-9" name="__codelineno-18-9"></a>    cout &lt;&lt; s1 &lt;&lt; endl;
-<a id="__codelineno-18-10" name="__codelineno-18-10"></a>    return 0;
-<a id="__codelineno-18-11" name="__codelineno-18-11"></a>}
-<a id="__codelineno-18-12" name="__codelineno-18-12"></a>输出结果：
-<a id="__codelineno-18-13" name="__codelineno-18-13"></a>hellorld
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="p">{</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello world&quot;</span><span class="p">;</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="n">s1</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="p">}</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="n">hellorld</span>
 <a id="__codelineno-18-14" name="__codelineno-18-14"></a>
-<a id="__codelineno-18-15" name="__codelineno-18-15"></a>//删除迭代器p指向位置的字符
-<a id="__codelineno-18-16" name="__codelineno-18-16"></a>#include &lt;iostream&gt;
-<a id="__codelineno-18-17" name="__codelineno-18-17"></a>using namespace std;
+<a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="c1">//删除迭代器p指向位置的字符</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 <a id="__codelineno-18-18" name="__codelineno-18-18"></a>
-<a id="__codelineno-18-19" name="__codelineno-18-19"></a>int main()
-<a id="__codelineno-18-20" name="__codelineno-18-20"></a>{
-<a id="__codelineno-18-21" name="__codelineno-18-21"></a>    string s1 = &quot;hello world&quot;;
-<a id="__codelineno-18-22" name="__codelineno-18-22"></a>    s1.erase(s1.begin() + 5);
-<a id="__codelineno-18-23" name="__codelineno-18-23"></a>    cout &lt;&lt; s1 &lt;&lt; endl;
-<a id="__codelineno-18-24" name="__codelineno-18-24"></a>    return 0;
-<a id="__codelineno-18-25" name="__codelineno-18-25"></a>}
-<a id="__codelineno-18-26" name="__codelineno-18-26"></a>输出结果：
-<a id="__codelineno-18-27" name="__codelineno-18-27"></a>helloworld
+<a id="__codelineno-18-19" name="__codelineno-18-19"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="p">{</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello world&quot;</span><span class="p">;</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22"></a><span class="w">    </span><span class="n">s1</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<a id="__codelineno-18-23" name="__codelineno-18-23"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-18-24" name="__codelineno-18-24"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-18-25" name="__codelineno-18-25"></a><span class="p">}</span>
+<a id="__codelineno-18-26" name="__codelineno-18-26"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-18-27" name="__codelineno-18-27"></a><span class="n">helloworld</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="replace"><code>replace()</code>函数<a class="headerlink" href="#replace" title="Permanent link">&para;</a></h2>
+<h3 id="replace"><code>replace()</code>函数<a class="headerlink" href="#replace" title="Permanent link">&para;</a></h3>
 <p>使用<code>replace()</code>函数可以替换调用对象的字符串中的字符</p>
-<blockquote>
-<p>[!NOTE]</p>
-<p>因为替换的字符串可能比被替换的字符串长，所以可能涉及到空间的扩容和数据的移动，不推荐大量使用<code>replace()</code>函数</p>
-</blockquote>
+<p>!!! note因为替换的字符串可能比被替换的字符串长，所以可能涉及到空间的扩容和数据的移动，不推荐大量使用<code>replace()</code>函数</p>
 <table>
 <thead>
 <tr>
@@ -3536,7 +4255,7 @@
 <a id="__codelineno-19-78" name="__codelineno-19-78"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-19-79" name="__codelineno-19-79"></a><span class="n">hello</span><span class="w"> </span><span class="n">ccccc</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="find"><code>find()</code>函数<a class="headerlink" href="#find" title="Permanent link">&para;</a></h2>
+<h3 id="find"><code>find()</code>函数<a class="headerlink" href="#find" title="Permanent link">&para;</a></h3>
 <p>使用<code>fine()</code>函数可以在string对象中从前往后找某一个字符或者字符串</p>
 <table>
 <thead>
@@ -3828,14 +4547,14 @@
 <a id="__codelineno-22-25" name="__codelineno-22-25"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-22-26" name="__codelineno-22-26"></a><span class="k">this</span><span class="o">--</span><span class="n">is</span><span class="o">--</span><span class="n">a</span><span class="o">--</span><span class="n">test</span><span class="o">--</span><span class="n">string</span><span class="o">:--</span><span class="n">hello</span><span class="o">--</span><span class="n">world</span><span class="p">.</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="swap"><code>swap()</code>函数<a class="headerlink" href="#swap" title="Permanent link">&para;</a></h2>
+<h3 id="swap"><code>swap()</code>函数<a class="headerlink" href="#swap" title="Permanent link">&para;</a></h3>
 <p>使用<code>swap()</code>函数可以交换调用对象的字符串和另一个对象中的字符串</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>对于任意类型，标准库中还有个全局函数<code>swap()</code>，对比于string类中的<code>swap()</code>来说，类string中的<code>swap()</code>函数执行效率会被全局函数<code>swap()</code>效率更高，因为全局的<code>swap()</code>函数在拷贝过程中会调用对应对象类的拷贝构造函数，此时会有额外的空间和时间消耗</p>
-</blockquote>
+</div>
 <p>全局函数<code>swap()</code>定义：</p>
-<p><a class="glightbox" href="image\image8.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image8.png" align="left"></a></p>
+<p><a class="glightbox" href="image\image8.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image8.png" ></a></p>
 <p>在前面推测过字符串存储的位置可能是数组或者指针，但是不论是那种，实际上都是地址，只要改变指向两个字符串的指针的指向即可完成交换，所以效率会比全局函数的<code>swap()</code>高</p>
 <table>
 <thead>
@@ -3889,7 +4608,7 @@
 <a id="__codelineno-23-18" name="__codelineno-23-18"></a><span class="n">交换后</span><span class="err">：</span><span class="n">hello</span><span class="w"> </span><span class="n">Linux</span>
 <a id="__codelineno-23-19" name="__codelineno-23-19"></a><span class="n">交换后</span><span class="err">：</span><span class="n">hello</span><span class="w"> </span><span class="n">world</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="c_str"><code>c_str()</code>函数<a class="headerlink" href="#c_str" title="Permanent link">&para;</a></h2>
+<h3 id="c_str"><code>c_str()</code>函数<a class="headerlink" href="#c_str" title="Permanent link">&para;</a></h3>
 <p>使用<code>c_str()</code>函数可以按照C语言字符串的形式返回调用对象中的字符串</p>
 <table>
 <thead>
@@ -3971,7 +4690,7 @@
 <a id="__codelineno-25-13" name="__codelineno-25-13"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>需要注意，<code>c_str()</code>函数返回的是一个字符串数组的地址，该数组中的内容和调用对象中的字符串内容相同，但是不能确定后续该字符串数组一直有效，可能调用对象改变会影响字符串数组（甚至在函数调用时不可以返回<code>c_str()</code>），所以为了使用安全，最好将<code>c_str()</code>重新拷贝到一个新数组中</p>
-<h2 id="substr"><code>substr()</code>函数<a class="headerlink" href="#substr" title="Permanent link">&para;</a></h2>
+<h3 id="substr"><code>substr()</code>函数<a class="headerlink" href="#substr" title="Permanent link">&para;</a></h3>
 <p>使用<code>substr()</code>函数可以截取字符串中的某一部分字符串作为子字符串返回</p>
 <table>
 <thead>
@@ -4061,7 +4780,7 @@
 <a id="__codelineno-26-36" name="__codelineno-26-36"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-26-37" name="__codelineno-26-37"></a><span class="n">blog</span><span class="p">.</span><span class="n">csdn</span><span class="p">.</span><span class="n">net</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="rfind"><code>rfind()</code>函数<a class="headerlink" href="#rfind" title="Permanent link">&para;</a></h2>
+<h3 id="rfind"><code>rfind()</code>函数<a class="headerlink" href="#rfind" title="Permanent link">&para;</a></h3>
 <p>使用<code>rfinde()</code>函数可以从字符串的最后一个字符向前找指定字符或字符串</p>
 <table>
 <thead>
@@ -4122,7 +4841,7 @@
 <a id="__codelineno-27-18" name="__codelineno-27-18"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-27-19" name="__codelineno-27-19"></a><span class="p">.</span><span class="n">zip</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="find_first_of"><code>find_first_of()</code>函数<a class="headerlink" href="#find_first_of" title="Permanent link">&para;</a></h2>
+<h3 id="find_first_of"><code>find_first_of()</code>函数<a class="headerlink" href="#find_first_of" title="Permanent link">&para;</a></h3>
 <p>使用<code>find_first_of()</code>函数可以在对象字符串中匹配指定字符串中的内容</p>
 <table>
 <thead>
@@ -4261,7 +4980,7 @@
 <li><code>find_first_not_of()</code>函数：在字符串中找出指定字符串中不存在的字符第一次出现的位置</li>
 <li><code>find_last_not_of()</code>函数：在字符串中找出指定字符串中不存在的字符最后一次在原始字符串中的位置</li>
 </ol>
-<h2 id="relational-operators">relational operators系列函数<a class="headerlink" href="#relational-operators" title="Permanent link">&para;</a></h2>
+<h3 id="relational-operators">relational operators系列函数<a class="headerlink" href="#relational-operators" title="Permanent link">&para;</a></h3>
 <p>比较字符串之间关系的运算符：（底层调用<code>compare()</code>函数）</p>
 <table>
 <thead>
@@ -4345,12 +5064,12 @@
 </tr>
 </tbody>
 </table>
-<h2 id="getline"><code>getline()</code>函数<a class="headerlink" href="#getline" title="Permanent link">&para;</a></h2>
+<h3 id="getline"><code>getline()</code>函数<a class="headerlink" href="#getline" title="Permanent link">&para;</a></h3>
 <p>使用<code>getline()</code>函数可以获取到指定字符（默认<code>'\n'</code>）结尾之前的字符串</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>不同于<code>cin</code>，<code>cin</code>遇到空白字符时就会停止读入，<code>getline()</code>函数遇到<code>'\n'</code>（或者指定字符）才结束</p>
-</blockquote>
+</div>
 <table>
 <thead>
 <tr>
@@ -4406,10 +5125,10 @@
 <a id="__codelineno-29-19" name="__codelineno-29-19"></a><span class="n">hello</span><span class="w"> </span><span class="n">world</span>
 <a id="__codelineno-29-20" name="__codelineno-29-20"></a><span class="n">hello</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>使用<code>getline()</code>函数需要包头文件<code>string</code></p>
-</blockquote>
+</div>
 <p><code>getline()</code>函数的使用练习：<a href="https://www.nowcoder.com/practice/8c949ea5f36f422594b306a2300315da?tpId=37&amp;&amp;tqId=21224&amp;rp=5&amp;ru=/activity/oj&amp;qru=/ta/huawei/question-ranking">字符串最后一个单词的长度_牛客题霸_牛客网 (nowcoder.com)</a></p>
 <p>参考代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
@@ -4454,7 +5173,7 @@
 <a id="__codelineno-30-20" name="__codelineno-30-20"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-30-21" name="__codelineno-30-21"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h1 id="string_5">string类对象的访问及遍历操作<a class="headerlink" href="#string_5" title="Permanent link">&para;</a></h1>
+<h2 id="string_5">string类对象的访问及遍历操作<a class="headerlink" href="#string_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -4481,10 +5200,10 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意迭代器中的<code>end</code>为最后一个字符的下一个位置，一般指向<code>\0</code>，形成左闭右开区间</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
@@ -4566,7 +5285,7 @@
 <p><a class="glightbox" href="image\image9.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image9.png"></a></p>
 <p>范围<code>for</code>：</p>
 <p><a class="glightbox" href="image\image10.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image10.png"></a></p>
-<h2 id="operatorat"><code>operator[]()</code>与<code>at()</code>函数<a class="headerlink" href="#operatorat" title="Permanent link">&para;</a></h2>
+<h3 id="operatorat"><code>operator[]()</code>与<code>at()</code>函数<a class="headerlink" href="#operatorat" title="Permanent link">&para;</a></h3>
 <p>对于string类来说，可以使用下标进行访问</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
@@ -4679,8 +5398,8 @@
 <a id="__codelineno-34-19" name="__codelineno-34-19"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-34-20" name="__codelineno-34-20"></a><span class="n">invalid</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">position</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="string_6">string类迭代器遍历<a class="headerlink" href="#string_6" title="Permanent link">&para;</a></h2>
-<h3 id="_1">正向遍历<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h3 id="string_6">string类迭代器遍历<a class="headerlink" href="#string_6" title="Permanent link">&para;</a></h3>
+<h4 id="_1">正向遍历<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>使用<code>begin</code>和<code>end</code>可以从前往后遍历字符串，使用迭代器<code>iterator</code></li>
 </ul>
@@ -4777,11 +5496,11 @@
 <a id="__codelineno-36-15" name="__codelineno-36-15"></a><span class="n">h</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="n">o</span><span class="w">   </span><span class="n">w</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="n">d</span>
 </code></pre></div></td></tr></table></div>
 <p>在上面的代码中，使用了<code>const</code>类型的迭代器，但是注意该迭代器对于指针来说只是修饰指针指向的内容不可以修改，但是指针可以改变指向</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>对于<code>const</code>修饰的迭代器来说，还可以使用<code>cbegin()</code>和<code>cend()</code></p>
-</blockquote>
-<h3 id="_2">逆向遍历<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+</div>
+<h4 id="_2">逆向遍历<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>
 <li>使用<code>rbegin</code>和<code>rend</code>可以从后往前遍历字符串，此时使用的迭代器为<code>reverse_iterator</code></li>
 </ul>
@@ -4844,10 +5563,10 @@
 <a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>在上面的代码中，使用<code>rbegin()</code>和<code>rend()</code>，返回类型为<code>reverse iterator</code>，故迭代器类型需要选择<code>reverse_iterator</code></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意此时<code>ptr1</code>并不是<code>--</code>，而是<code>++</code>，因为此时的<code>rbegin</code>为字符串最后一个有效字符的前一个位置，而<code>rend</code>为字符串第一个有效字符的前一个位置，形成左闭右开</p>
-</blockquote>
+</div>
 <p>当使用迭代器的对象为<code>const</code>修饰时，迭代器需要同样使用<code>const</code>修饰的迭代器</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
@@ -4880,10 +5599,10 @@
 <a id="__codelineno-38-15" name="__codelineno-38-15"></a><span class="n">d</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">w</span><span class="w">   </span><span class="n">o</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">h</span>
 </code></pre></div></td></tr></table></div>
 <p>在上面的代码中，使用了<code>const</code>类型的迭代器，但是注意该迭代器对于指针来说只是修饰指针指向的内容不可以修改，但是指针可以改变指向</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>对于<code>const</code>修饰的迭代器来说，还可以使用<code>crbegin()</code>和<code>crend()</code></p>
-</blockquote>
+</div>
 
 
 

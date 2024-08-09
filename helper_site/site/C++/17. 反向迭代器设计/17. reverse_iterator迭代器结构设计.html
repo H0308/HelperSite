@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#17-reverse_iterator" class="md-skip">
+        <a href="#reverse_iterator" class="md-skip">
           跳转至
         </a>
       
@@ -1500,7 +1500,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#reverse_iterator" class="md-nav__link">
+  <a href="#reverse_iterator_1" class="md-nav__link">
     <span class="md-ellipsis">
       reverse_iterator迭代器基本结构设计
     </span>
@@ -1584,6 +1584,24 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       测试代码
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#const_reverse_iterator" class="md-nav__link">
+    <span class="md-ellipsis">
+      const_reverse_iterator迭代器设计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reverse_iterator_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      reverse_iterator迭代器结构设计思路改进
     </span>
   </a>
   
@@ -2103,7 +2121,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#reverse_iterator" class="md-nav__link">
+  <a href="#reverse_iterator_1" class="md-nav__link">
     <span class="md-ellipsis">
       reverse_iterator迭代器基本结构设计
     </span>
@@ -2192,6 +2210,24 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#const_reverse_iterator" class="md-nav__link">
+    <span class="md-ellipsis">
+      const_reverse_iterator迭代器设计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reverse_iterator_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      reverse_iterator迭代器结构设计思路改进
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2210,12 +2246,12 @@
   
 
 
-<h1 id="17-reverse_iterator">17. <code>reverse_iterator</code>迭代器结构设计<a class="headerlink" href="#17-reverse_iterator" title="Permanent link">&para;</a></h1>
+<h1 id="reverse_iterator"><code>reverse_iterator</code>迭代器结构设计<a class="headerlink" href="#reverse_iterator" title="Permanent link">&para;</a></h1>
 <p>前面的list类以及vector类设计了正向迭代器，现在考虑设计反向迭代器，常规的设计思路为单独为反向迭代器建一个新类，这个类中所有的函数全部重新设计，这种思路可取但是并不高效，可以考虑下面的设计思路：</p>
 <p>前面了解到了容器适配器，那么是否也可以把正向迭代器设置为反向迭代器的容器适配器从而实现反向迭代器的效果</p>
 <p>对于此时的反向迭代器类设计即为如下：</p>
 <p>以list类为例</p>
-<h2 id="reverse_iterator"><code>reverse_iterator</code>迭代器基本结构设计<a class="headerlink" href="#reverse_iterator" title="Permanent link">&para;</a></h2>
+<h3 id="reverse_iterator_1"><code>reverse_iterator</code>迭代器基本结构设计<a class="headerlink" href="#reverse_iterator_1" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -2242,7 +2278,7 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">     </span><span class="n">Iterator_it</span><span class="p">;</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w"> </span><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator"><code>operator*()</code>函数<a class="headerlink" href="#operator" title="Permanent link">&para;</a></h2>
+<h3 id="operator"><code>operator*()</code>函数<a class="headerlink" href="#operator" title="Permanent link">&para;</a></h3>
 <p>首先是对于<code>operator*()</code>函数来说，解引用操作符获得的结果即为指针当前指向中的内容，而在正向迭代器中，解引用操作符也是同样的作用，所以此处可以复用正向迭代器的解引用操作符，但是此处是<code>Iterator</code>类对象，所以不能使用传统的直接对内置类型解引用的方式，但是可以考虑直接调用<code>Iterator</code>类中的<code>operator*()</code>函数</p>
 <p>对于返回值来说，可以考虑和设计<code>const</code>版本的正向迭代器思路一致，使用模板参数区分传递<code>T&amp;</code>和<code>T*</code></p>
 <p>所以修改原来的类定义为：</p>
@@ -2283,7 +2319,7 @@
 <a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="n">_it</span><span class="p">.</span><span class="k">operator</span><span class="o">*</span><span class="p">();</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w"> </span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator_1">operator++()函数<a class="headerlink" href="#operator_1" title="Permanent link">&para;</a></h2>
+<h3 id="operator_1">operator++()函数<a class="headerlink" href="#operator_1" title="Permanent link">&para;</a></h3>
 <p>对于前置<code>++</code>运算符来说，不同于正向迭代器，因为正向迭代器<code>++</code>是从第一个有效数据节点开始一直到头节点结束，而对于反向迭代器来说，其<code>++</code>是从最后一个有效数据节点开始向前一直到头节点结束，如下图所示：</p>
 <p><a class="glightbox" href="images\Snipaste_2024-05-04_19-54-50.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\Snipaste_2024-05-04_19-54-50.png"></a></p>
 <p>但是可以考虑通过正向迭代器适配出反向迭代器，具体思路如下：</p>
@@ -2301,7 +2337,7 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator-"><code>operator-&gt;()</code>函数<a class="headerlink" href="#operator-" title="Permanent link">&para;</a></h2>
+<h3 id="operator-"><code>operator-&gt;()</code>函数<a class="headerlink" href="#operator-" title="Permanent link">&para;</a></h3>
 <p>同<code>operator*()</code>函数一样，调用<code>Iterator</code>中的<code>operator-&gt;()</code>函数即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
@@ -2313,7 +2349,7 @@
 <a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="n">_it</span><span class="p">.</span><span class="k">operator</span><span class="o">-&gt;</span><span class="p">();</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w"> </span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator_2"><code>operator!=()</code>函数<a class="headerlink" href="#operator_2" title="Permanent link">&para;</a></h2>
+<h3 id="operator_2"><code>operator!=()</code>函数<a class="headerlink" href="#operator_2" title="Permanent link">&para;</a></h3>
 <p>同正向迭代器中的设计思路一致</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
@@ -2325,7 +2361,7 @@
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">_it</span><span class="p">;</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="rbegin"><code>rbegin()</code>函数<a class="headerlink" href="#rbegin" title="Permanent link">&para;</a></h2>
+<h3 id="rbegin"><code>rbegin()</code>函数<a class="headerlink" href="#rbegin" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">3</a></span>
@@ -2338,7 +2374,7 @@
 <a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reverse_iterator</span><span class="p">(</span><span class="o">--</span><span class="n">end</span><span class="p">());</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="rend"><code>rend()</code>函数<a class="headerlink" href="#rend" title="Permanent link">&para;</a></h2>
+<h3 id="rend"><code>rend()</code>函数<a class="headerlink" href="#rend" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
 <span class="normal"><a href="#__codelineno-7-3">3</a></span>
@@ -2349,7 +2385,7 @@
 <a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reverse_iterator</span><span class="p">(</span><span class="n">end</span><span class="p">());</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator-_1"><code>operator--()</code>函数<a class="headerlink" href="#operator-_1" title="Permanent link">&para;</a></h2>
+<h3 id="operator-_1"><code>operator--()</code>函数<a class="headerlink" href="#operator-_1" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
 <span class="normal"><a href="#__codelineno-8-2">2</a></span>
 <span class="normal"><a href="#__codelineno-8-3">3</a></span>
@@ -2362,7 +2398,7 @@
 <a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator_3"><code>operator==()</code>函数<a class="headerlink" href="#operator_3" title="Permanent link">&para;</a></h2>
+<h3 id="operator_3"><code>operator==()</code>函数<a class="headerlink" href="#operator_3" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
 <span class="normal"><a href="#__codelineno-9-3">3</a></span>
@@ -2373,7 +2409,7 @@
 <a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_it</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">_it</span><span class="p">;</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="_1">测试代码<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_1">测试代码<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>此时基本的反向迭代器框架已经搭建完成，下面是测试代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
@@ -2407,7 +2443,7 @@
 <a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h1 id="const_reverse_iterator"><code>const_reverse_iterator</code>迭代器设计<a class="headerlink" href="#const_reverse_iterator" title="Permanent link">&para;</a></h1>
+<h2 id="const_reverse_iterator"><code>const_reverse_iterator</code>迭代器设计<a class="headerlink" href="#const_reverse_iterator" title="Permanent link">&para;</a></h2>
 <p>对于<code>const_reverse_iterator</code>设计来说，不需要更改<code>reverse_iterator</code>迭代器的结构，只需要在list类中重定义一个<code>const</code>版本即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
 <span class="normal"><a href="#__codelineno-11-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">typedef</span><span class="w"> </span><span class="n">_list_reverse_iterator</span><span class="o">&lt;</span><span class="n">iterator</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">reverse_iterator</span><span class="p">;</span><span class="c1">// 反向迭代器——非const版本</span>
@@ -2440,7 +2476,7 @@
 <a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reverse_iterator</span><span class="p">(</span><span class="n">end</span><span class="p">());</span>
 <a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h1 id="reverse_iterator_1"><code>reverse_iterator</code>迭代器结构设计思路改进<a class="headerlink" href="#reverse_iterator_1" title="Permanent link">&para;</a></h1>
+<h2 id="reverse_iterator_2"><code>reverse_iterator</code>迭代器结构设计思路改进<a class="headerlink" href="#reverse_iterator_2" title="Permanent link">&para;</a></h2>
 <p>前面在设计<code>reverse_iterator</code>迭代器时，直接考虑的<code>rbegin()</code>函数的位置在最后一个有效节点的位置，而<code>rend()</code>在则在<code>end()</code>的位置，这样的思路并没有错误，但是参照SGI版本中的设计：</p>
 <p><code>rbegin()</code>和<code>rend()</code>设计</p>
 <p><a class="glightbox" href="images\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image.png"></a></p>

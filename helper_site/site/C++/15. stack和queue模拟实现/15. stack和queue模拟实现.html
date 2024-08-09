@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#15-stackqueue" class="md-skip">
+        <a href="#stackqueue" class="md-skip">
           跳转至
         </a>
       
@@ -1421,6 +1421,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    stack和queue模拟实现
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="15.%20stack%E5%92%8Cqueue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1430,6 +1441,76 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stackqueue_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      stack和queue模拟实现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="stack和queue模拟实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      容器适配器
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deque" class="md-nav__link">
+    <span class="md-ellipsis">
+      双端队列类deque（了解即可）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      stack模拟实现
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      queue模拟实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1976,6 +2057,65 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stackqueue_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      stack和queue模拟实现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="stack和queue模拟实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      容器适配器
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deque" class="md-nav__link">
+    <span class="md-ellipsis">
+      双端队列类deque（了解即可）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      stack模拟实现
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      queue模拟实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1992,12 +2132,12 @@
   
 
 
-<h1 id="15-stackqueue">15. stack和queue模拟实现<a class="headerlink" href="#15-stackqueue" title="Permanent link">&para;</a></h1>
 <h1 id="stackqueue">stack和queue模拟实现<a class="headerlink" href="#stackqueue" title="Permanent link">&para;</a></h1>
+<h2 id="stackqueue_1">stack和queue模拟实现<a class="headerlink" href="#stackqueue_1" title="Permanent link">&para;</a></h2>
 <p>对于stack和queue的模拟实现和前面的vector和list有所不同，stack和queue的实现借助了一个缺省容器deque(双端队列)，这里用到了容器适配器的思路</p>
-<h2 id="_1">容器适配器<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_1">容器适配器<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该种模式是将一个类的接口转换成客户希望的另外一个接口</p>
-<h2 id="deque">双端队列类deque（了解即可）<a class="headerlink" href="#deque" title="Permanent link">&para;</a></h2>
+<h3 id="deque">双端队列类deque（了解即可）<a class="headerlink" href="#deque" title="Permanent link">&para;</a></h3>
 <p>deque名为双端队列，但实际上并不是队列，因为他的主要用途是在对头和队尾插入数据</p>
 <p>对于双端队列来说，为了能够满足下标随机访问，所以需要开辟连续的空间，而如果单单只是开辟连续的空间则和vector没有什么区别，插入数据时依旧需要考虑是否要扩容，所以为了解决这个问题，双端队列中还有另一个做法，开辟多个连续的空间，类似于list的设计，每一个连续的空间各自由一个指针进行维护，最后为了不影响下标的连续访问，还有一个中控数组，负责存储指向每一个连续空间的指针，双端队列的设计方式类似下图所示：</p>
 <p>假设默认每一个数据数组已经存满整型数据</p>
@@ -2027,7 +2167,7 @@
 <li>stack和queue不需要遍历(因此stack和queue没有迭代器)，只需要在固定的一端或者两端进行操作。</li>
 <li>在stack中元素增长时，deque比vector的效率高(扩容时不需要搬移大量数据)；queue中的元素增长时，deque不仅效率高，而且内存使用率高。结合了deque的优点，而完美的避开了其缺陷。</li>
 </ol>
-<h2 id="stack">stack模拟实现<a class="headerlink" href="#stack" title="Permanent link">&para;</a></h2>
+<h3 id="stack">stack模拟实现<a class="headerlink" href="#stack" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -2152,7 +2292,7 @@
 <a id="__codelineno-0-61" name="__codelineno-0-61"></a><span class="w">    </span><span class="p">};</span>
 <a id="__codelineno-0-62" name="__codelineno-0-62"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="queue">queue模拟实现<a class="headerlink" href="#queue" title="Permanent link">&para;</a></h2>
+<h3 id="queue">queue模拟实现<a class="headerlink" href="#queue" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>

@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#12-list" class="md-skip">
+        <a href="#list" class="md-skip">
           跳转至
         </a>
       
@@ -1358,6 +1358,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    list类模拟实现
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="12.%20list%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1367,6 +1378,436 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#list_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类模拟实现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="list类模拟实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类节点结构设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listconst" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类非const迭代器结构设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="list类非const迭代器结构设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器基本结构设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator*()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator!=()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operatorint" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator==()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator-&gt;()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listconst_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类const迭代器结构设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="list类const迭代器结构设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器基本结构设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator*()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator!=()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operatorint_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-int_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator==()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator-&gt;()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#const" class="md-nav__link">
+    <span class="md-ellipsis">
+      const版本的迭代器使用问题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constconst" class="md-nav__link">
+    <span class="md-ellipsis">
+      const版本迭代器和非const版本迭代器合并优化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类无参构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类析构函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类拷贝构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类赋值运算符重载函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#begin" class="md-nav__link">
+    <span class="md-ellipsis">
+      begin()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end" class="md-nav__link">
+    <span class="md-ellipsis">
+      end()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      push_back()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push_front" class="md-nav__link">
+    <span class="md-ellipsis">
+      push_front()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erase" class="md-nav__link">
+    <span class="md-ellipsis">
+      erase()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      pop_back()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_front" class="md-nav__link">
+    <span class="md-ellipsis">
+      pop_front()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    <span class="md-ellipsis">
+      clear()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      额外补充
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      项目代码
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="项目代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类实现文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      测试文件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1976,6 +2417,425 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#list_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类模拟实现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="list类模拟实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类节点结构设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listconst" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类非const迭代器结构设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="list类非const迭代器结构设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器基本结构设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator*()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator!=()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operatorint" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator==()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator-&gt;()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listconst_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类const迭代器结构设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="list类const迭代器结构设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器基本结构设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator*()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator!=()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operatorint_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-int_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--(int)函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator==()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator-&gt;()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#const" class="md-nav__link">
+    <span class="md-ellipsis">
+      const版本的迭代器使用问题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constconst" class="md-nav__link">
+    <span class="md-ellipsis">
+      const版本迭代器和非const版本迭代器合并优化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类无参构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类析构函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类拷贝构造函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类赋值运算符重载函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#begin" class="md-nav__link">
+    <span class="md-ellipsis">
+      begin()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end" class="md-nav__link">
+    <span class="md-ellipsis">
+      end()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      push_back()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push_front" class="md-nav__link">
+    <span class="md-ellipsis">
+      push_front()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erase" class="md-nav__link">
+    <span class="md-ellipsis">
+      erase()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      pop_back()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_front" class="md-nav__link">
+    <span class="md-ellipsis">
+      pop_front()函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    <span class="md-ellipsis">
+      clear()函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      额外补充
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      项目代码
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="项目代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      list类实现文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      测试文件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1992,9 +2852,9 @@
   
 
 
-<h1 id="12-list">12. list类模拟实现<a class="headerlink" href="#12-list" title="Permanent link">&para;</a></h1>
 <h1 id="list">list类模拟实现<a class="headerlink" href="#list" title="Permanent link">&para;</a></h1>
-<h2 id="list_1">list类节点结构设计<a class="headerlink" href="#list_1" title="Permanent link">&para;</a></h2>
+<h2 id="list_1">list类模拟实现<a class="headerlink" href="#list_1" title="Permanent link">&para;</a></h2>
+<h3 id="list_2">list类节点结构设计<a class="headerlink" href="#list_2" title="Permanent link">&para;</a></h3>
 <p>因为list类为本质是带头双向循环链表，所以在设计list类时，需要先设计节点的结构，并且因为每一个节点是一个整体，所以可以考虑将每一个节点的初始化构造放在结构体中，如下代码所示：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
@@ -2026,9 +2886,9 @@
 <a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">    </span><span class="p">{}</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="listconst">list类非<code>const</code>迭代器结构设计<a class="headerlink" href="#listconst" title="Permanent link">&para;</a></h2>
+<h3 id="listconst">list类非<code>const</code>迭代器结构设计<a class="headerlink" href="#listconst" title="Permanent link">&para;</a></h3>
 <p>因为list类是带头双向循环链表，所以迭代器不能单单使用普通指针来代替，因为普通指针可以指针的<code>++</code>/<code>--</code>等操作可以作用到连续空间，链表两个节点空间不一定连续，所以额外重载<code>++</code>/<code>--</code>等运算符</p>
-<h3 id="_1">迭代器基本结构设计<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="_1">迭代器基本结构设计<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
@@ -2047,7 +2907,7 @@
 <a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">_node</span><span class="p">;</span><span class="c1">//迭代器节点</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="_2">迭代器构造函数<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h4 id="_2">迭代器构造函数<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <p>为了可以将普通指针看作迭代器，需要构造函数使用普通指针进行构造</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
@@ -2083,7 +2943,7 @@
 <li><code>++</code>：前置自增运算符</li>
 </ol>
 <p>但是由于<code>it</code>不是原生指针（内置类型的指针），所以需要额外重载这三个运算符</p>
-<h3 id="operator"><code>operator++()</code>函数<a class="headerlink" href="#operator" title="Permanent link">&para;</a></h3>
+<h4 id="operator"><code>operator++()</code>函数<a class="headerlink" href="#operator" title="Permanent link">&para;</a></h4>
 <p>重载前置<code>++</code>运算符的本意是让迭代器可以从当前节点移动到下一个节点，所以只需要移动节点类型的指针指向下一个节点即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
@@ -2097,7 +2957,7 @@
 <a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator_1"><code>operator*()</code>函数<a class="headerlink" href="#operator_1" title="Permanent link">&para;</a></h3>
+<h4 id="operator_1"><code>operator*()</code>函数<a class="headerlink" href="#operator_1" title="Permanent link">&para;</a></h4>
 <p>重载<code>*</code>运算符本意是为了获取当前有效数据节点数据域中的值，所以返回当前节点数据域的值即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
@@ -2109,7 +2969,7 @@
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_node</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator_2"><code>operator!=()</code>函数<a class="headerlink" href="#operator_2" title="Permanent link">&para;</a></h3>
+<h4 id="operator_2"><code>operator!=()</code>函数<a class="headerlink" href="#operator_2" title="Permanent link">&para;</a></h4>
 <p>重载!=运算符本意是为了判断迭代器指向的当前节点是end()迭代器的位置（即是否已经遍历完链表）</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
@@ -2123,7 +2983,7 @@
 <a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_node</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">_node</span><span class="p">;</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operatorint"><code>operator++(int)</code>函数<a class="headerlink" href="#operatorint" title="Permanent link">&para;</a></h3>
+<h4 id="operatorint"><code>operator++(int)</code>函数<a class="headerlink" href="#operatorint" title="Permanent link">&para;</a></h4>
 <p>后置<code>++</code>运算符重载需要满足先使用再自增，所以需要提前记录当前节点再改变当前节点指向为下一个节点</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
@@ -2139,7 +2999,7 @@
 <a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span>
 <a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator-"><code>operator--()</code>函数<a class="headerlink" href="#operator-" title="Permanent link">&para;</a></h3>
+<h4 id="operator-"><code>operator--()</code>函数<a class="headerlink" href="#operator-" title="Permanent link">&para;</a></h4>
 <p>前置<code>--</code>运算符重载直接返回上一个节点的位置即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
 <span class="normal"><a href="#__codelineno-8-2">2</a></span>
@@ -2153,7 +3013,7 @@
 <a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator-int"><code>operator--(int)</code>函数<a class="headerlink" href="#operator-int" title="Permanent link">&para;</a></h3>
+<h4 id="operator-int"><code>operator--(int)</code>函数<a class="headerlink" href="#operator-int" title="Permanent link">&para;</a></h4>
 <p>后置<code>--</code>运算符重载需要满足先使用再自增，所以需要提前记录当前节点再改变当前节点指向为下一个节点</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
@@ -2169,7 +3029,7 @@
 <a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span>
 <a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator_3"><code>operator==()</code>函数<a class="headerlink" href="#operator_3" title="Permanent link">&para;</a></h3>
+<h4 id="operator_3"><code>operator==()</code>函数<a class="headerlink" href="#operator_3" title="Permanent link">&para;</a></h4>
 <p>重载<code>==</code>运算符为了判断当前节点是否等于指定节点</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span>
@@ -2181,7 +3041,7 @@
 <a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">node</span><span class="p">;</span>
 <a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator-_1"><code>operator-&gt;()</code>函数<a class="headerlink" href="#operator-_1" title="Permanent link">&para;</a></h3>
+<h4 id="operator-_1"><code>operator-&gt;()</code>函数<a class="headerlink" href="#operator-_1" title="Permanent link">&para;</a></h4>
 <p>如果模板参数为自定义类型时，访问自定义类型的成员变量时除了可以解引用之后通过<code>.成员变量</code>的方式以外，还有<code>-&gt;成员变量</code>的方式，但是对于list类来说不存在原生指针，只有迭代器，所以迭代器需要重载<code>-&gt;</code>运算符，考虑下面的代码</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
@@ -2232,9 +3092,9 @@
 <span class="normal"><a href="#__codelineno-13-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="k">operator</span><span class="o">-&gt;</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">num1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="k">operator</span><span class="o">-&gt;</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">num2</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="c1">//其中it.operator-&gt;()返回自定义类型变量的地址</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="listconst_1">list类<code>const</code>迭代器结构设计<a class="headerlink" href="#listconst_1" title="Permanent link">&para;</a></h2>
+<h3 id="listconst_1">list类<code>const</code>迭代器结构设计<a class="headerlink" href="#listconst_1" title="Permanent link">&para;</a></h3>
 <p>设计<code>const</code>迭代器的思路和非<code>const</code>迭代器思路基本一致，但是设计<code>const</code>迭代器不可以单单是在已有的<code>iterator</code>前面加上<code>const</code>改为<code>const iterator</code>，这种写法会使编译器认为是<code>T* const</code>，此时实现的效果是，迭代器指向的内容可以修改，但是指向不可以修改，而需要的<code>const</code>迭代器实现的效果是迭代器指向的内容不可以修改，但是指向可以修改，即<code>const T*</code>，所以需要单独设计一个<code>const_iterator</code>类来解决这个问题</p>
-<h3 id="_3">迭代器基本结构设计<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="_3">迭代器基本结构设计<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
 <span class="normal"><a href="#__codelineno-14-2">2</a></span>
 <span class="normal"><a href="#__codelineno-14-3">3</a></span>
@@ -2251,7 +3111,7 @@
 <a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="w">    </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
 <a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="_4">迭代器构造函数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h4 id="_4">迭代器构造函数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
 <span class="normal"><a href="#__codelineno-15-3">3</a></span>
@@ -2262,7 +3122,7 @@
 <a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span><span class="o">:</span><span class="n">_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 <a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="p">{}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator_4"><code>operator++()</code>函数<a class="headerlink" href="#operator_4" title="Permanent link">&para;</a></h3>
+<h4 id="operator_4"><code>operator++()</code>函数<a class="headerlink" href="#operator_4" title="Permanent link">&para;</a></h4>
 <p>因为是改变迭代器指针的指向，所以设计<code>operator++()</code>函数和非<code>const</code>版本的方式相同</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
 <span class="normal"><a href="#__codelineno-16-2">2</a></span>
@@ -2276,7 +3136,7 @@
 <a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator_5"><code>operator*()</code>函数<a class="headerlink" href="#operator_5" title="Permanent link">&para;</a></h3>
+<h4 id="operator_5"><code>operator*()</code>函数<a class="headerlink" href="#operator_5" title="Permanent link">&para;</a></h4>
 <p>因为<code>const</code>版本迭代器不可以通过解引用修改指针指向的内容，所以需要使用<code>const</code>修饰返回值</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
 <span class="normal"><a href="#__codelineno-17-2">2</a></span>
@@ -2288,7 +3148,7 @@
 <a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_node</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
 <a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator_6"><code>operator!=()</code>函数<a class="headerlink" href="#operator_6" title="Permanent link">&para;</a></h3>
+<h4 id="operator_6"><code>operator!=()</code>函数<a class="headerlink" href="#operator_6" title="Permanent link">&para;</a></h4>
 <p>对于<code>!=</code>运算符来说，和非<code>const</code>版本思路相同</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
@@ -2300,7 +3160,7 @@
 <a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_node</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">_node</span><span class="p">;</span>
 <a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operatorint_1"><code>operator++(int)</code>函数<a class="headerlink" href="#operatorint_1" title="Permanent link">&para;</a></h3>
+<h4 id="operatorint_1"><code>operator++(int)</code>函数<a class="headerlink" href="#operatorint_1" title="Permanent link">&para;</a></h4>
 <p>对于后置<code>++</code>来说与<code>const</code>版本同理</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
 <span class="normal"><a href="#__codelineno-19-2">2</a></span>
@@ -2316,7 +3176,7 @@
 <a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span>
 <a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator-_2"><code>operator--()</code>函数<a class="headerlink" href="#operator-_2" title="Permanent link">&para;</a></h3>
+<h4 id="operator-_2"><code>operator--()</code>函数<a class="headerlink" href="#operator-_2" title="Permanent link">&para;</a></h4>
 <p>因为<code>--</code>改变的是迭代器指向的内容，所以与非<code>const</code>版本迭代器思路相同</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
@@ -2328,7 +3188,7 @@
 <a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator-int_1"><code>operator--(int)</code>函数<a class="headerlink" href="#operator-int_1" title="Permanent link">&para;</a></h3>
+<h4 id="operator-int_1"><code>operator--(int)</code>函数<a class="headerlink" href="#operator-int_1" title="Permanent link">&para;</a></h4>
 <p>设计后置<code>--</code>的思路与非<code>const</code>版本相同</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
 <span class="normal"><a href="#__codelineno-21-2">2</a></span>
@@ -2344,7 +3204,7 @@
 <a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span>
 <a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator_7"><code>operator==()</code>函数<a class="headerlink" href="#operator_7" title="Permanent link">&para;</a></h3>
+<h4 id="operator_7"><code>operator==()</code>函数<a class="headerlink" href="#operator_7" title="Permanent link">&para;</a></h4>
 <p>设计<code>==</code>运算符重载函数思路和非<code>const</code>版本相同</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
 <span class="normal"><a href="#__codelineno-22-2">2</a></span>
@@ -2356,7 +3216,7 @@
 <a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">_node</span><span class="p">;</span>
 <a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="operator-_3"><code>operator-&gt;()</code>函数<a class="headerlink" href="#operator-_3" title="Permanent link">&para;</a></h3>
+<h4 id="operator-_3"><code>operator-&gt;()</code>函数<a class="headerlink" href="#operator-_3" title="Permanent link">&para;</a></h4>
 <p>需要满足返回值为<code>const</code>类型即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
 <span class="normal"><a href="#__codelineno-23-2">2</a></span>
@@ -2366,7 +3226,7 @@
 <a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">_node</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="const"><code>const</code>版本的迭代器使用问题<a class="headerlink" href="#const" title="Permanent link">&para;</a></h2>
+<h3 id="const"><code>const</code>版本的迭代器使用问题<a class="headerlink" href="#const" title="Permanent link">&para;</a></h3>
 <p>上面的<code>const</code>版本迭代器实现方式可以应用于对象为<code>const</code>类型时，例如下面的测试代码</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
@@ -2451,13 +3311,11 @@
 </code></pre></div></td></tr></table></div>
 <p>在第二个测试代码中，因为<code>cit</code>为<code>const</code>类型的迭代器，所以不可以使用非<code>const</code>版本的迭代器，但是此时的<code>begin()</code>和<code>end()</code>均为非<code>const</code>版本迭代器，因为对象<code>ls</code>为非<code>const</code>对象</p>
 <p>这里提出两种解决方案：</p>
-<ol>
-<li>将<code>const</code>版本的<code>begin()</code>和<code>end()</code>改为<code>cbegin()</code>和<code>cend()</code>，此时显式使ls调用const版本的<code>cbegin()</code>和<code>cend()</code></li>
-</ol>
-<blockquote>
-<p>[!NOTE]</p>
+<p>1.将<code>const</code>版本的<code>begin()</code>和<code>end()</code>改为<code>cbegin()</code>和<code>cend()</code>，此时显式使ls调用const版本的<code>cbegin()</code>和<code>cend()</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>缺点：没有使用到函数重载的优势</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -2524,13 +3382,11 @@
 <a id="__codelineno-26-32" name="__codelineno-26-32"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
 <a id="__codelineno-26-33" name="__codelineno-26-33"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<ol>
-<li>在<code>const</code>版本的迭代器结构中添加非<code>const</code>对象向<code>const</code>对象转换的构造函数</li>
-</ol>
-<blockquote>
-<p>[!NOTE]</p>
+<p>2.在<code>const</code>版本的迭代器结构中添加非<code>const</code>对象向<code>const</code>对象转换的构造函数</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>缺点：没有调用<code>const</code>版本的迭代器</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1">1</a></span>
 <span class="normal"><a href="#__codelineno-27-2">2</a></span>
 <span class="normal"><a href="#__codelineno-27-3">3</a></span>
@@ -2541,7 +3397,7 @@
 <a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="w">    </span><span class="o">:</span><span class="n">_node</span><span class="p">(</span><span class="n">nonConst</span><span class="p">.</span><span class="n">_node</span><span class="p">)</span><span class="c1">//使用非const对象中的_node值构造const版本的对象中的_node</span>
 <a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="p">{}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="constconst"><code>const</code>版本迭代器和非<code>const</code>版本迭代器合并优化<a class="headerlink" href="#constconst" title="Permanent link">&para;</a></h2>
+<h3 id="constconst"><code>const</code>版本迭代器和非<code>const</code>版本迭代器合并优化<a class="headerlink" href="#constconst" title="Permanent link">&para;</a></h3>
 <p>在实现非<code>const</code>版本的迭代器时，可以很明显感觉到除了<code>operator*()</code>函数和<code>operator-&gt;()</code>函数两个有不同以外，其余均没有不同，而这两个版本中的这两个函数只是返回值类型不同，那么可以考虑通过模板单独控制这两个返回值类型，现在将类型引用<code>T&amp;</code>用模板参数<code>Ref</code>指代，将类型指针<code>T*</code>用模板参数<code>Ptr</code>指代，则<code>const</code>版本迭代器和非<code>const</code>版本迭代器可以合并为下面的代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
@@ -2679,11 +3535,11 @@
 <a id="__codelineno-28-67" name="__codelineno-28-67"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-28-68" name="__codelineno-28-68"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意，此处也需要考虑到非<code>const</code>对象向<code>const</code>对象的转换问题，为了更方便解决，采取上面的第一种解决方案，如果直接是<code>const</code>对象调用则不需要考虑这个问题</p>
-</blockquote>
-<h2 id="list_2">list类无参构造函数<a class="headerlink" href="#list_2" title="Permanent link">&para;</a></h2>
+</div>
+<h3 id="list_3">list类无参构造函数<a class="headerlink" href="#list_3" title="Permanent link">&para;</a></h3>
 <p>对于list类来说，因为只有一个头指针作为成员变量，所以无参构造时只需要考虑创建头结点即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
@@ -2715,7 +3571,7 @@
 <a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="w">    </span><span class="n">empty_init</span><span class="p">();</span>
 <a id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="list_3">list类析构函数<a class="headerlink" href="#list_3" title="Permanent link">&para;</a></h2>
+<h3 id="list_4">list类析构函数<a class="headerlink" href="#list_4" title="Permanent link">&para;</a></h3>
 <p>调用<code>clear()</code>函数后将头节点资源清理并置为空即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
 <span class="normal"><a href="#__codelineno-30-2">2</a></span>
@@ -2733,7 +3589,7 @@
 <a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="w">    </span><span class="n">_head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
 <a id="__codelineno-30-8" name="__codelineno-30-8"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="list_4">list类拷贝构造函数<a class="headerlink" href="#list_4" title="Permanent link">&para;</a></h2>
+<h3 id="list_5">list类拷贝构造函数<a class="headerlink" href="#list_5" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
@@ -2754,7 +3610,7 @@
 <a id="__codelineno-31-9" name="__codelineno-31-9"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-31-10" name="__codelineno-31-10"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="list_5">list类赋值运算符重载函数<a class="headerlink" href="#list_5" title="Permanent link">&para;</a></h2>
+<h3 id="list_6">list类赋值运算符重载函数<a class="headerlink" href="#list_6" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -2781,7 +3637,7 @@
 <a id="__codelineno-32-12" name="__codelineno-32-12"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="begin"><code>begin()</code>函数<a class="headerlink" href="#begin" title="Permanent link">&para;</a></h2>
+<h3 id="begin"><code>begin()</code>函数<a class="headerlink" href="#begin" title="Permanent link">&para;</a></h3>
 <p>返回第一个有效数据节点的位置即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
@@ -2805,7 +3661,7 @@
 <a id="__codelineno-33-10" name="__codelineno-33-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
 <a id="__codelineno-33-11" name="__codelineno-33-11"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="end"><code>end()</code>函数<a class="headerlink" href="#end" title="Permanent link">&para;</a></h2>
+<h3 id="end"><code>end()</code>函数<a class="headerlink" href="#end" title="Permanent link">&para;</a></h3>
 <p>返回最后一个头节点的位置即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
@@ -2829,12 +3685,12 @@
 <a id="__codelineno-34-10" name="__codelineno-34-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_head</span><span class="p">;</span>
 <a id="__codelineno-34-11" name="__codelineno-34-11"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="insert"><code>insert()</code>函数<a class="headerlink" href="#insert" title="Permanent link">&para;</a></h2>
+<h3 id="insert"><code>insert()</code>函数<a class="headerlink" href="#insert" title="Permanent link">&para;</a></h3>
 <p>插入节点思路参考带头双向循环链表</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>可以考虑返回当前节点位置防止迭代器失效问题</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
@@ -2875,7 +3731,7 @@
 <a id="__codelineno-35-19" name="__codelineno-35-19"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">position</span><span class="p">;</span>
 <a id="__codelineno-35-20" name="__codelineno-35-20"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="push_back"><code>push_back()</code>函数<a class="headerlink" href="#push_back" title="Permanent link">&para;</a></h2>
+<h3 id="push_back"><code>push_back()</code>函数<a class="headerlink" href="#push_back" title="Permanent link">&para;</a></h3>
 <p>设计思路参考带头双向循环链表的思路</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
@@ -2913,7 +3769,7 @@
 <a id="__codelineno-36-17" name="__codelineno-36-17"></a><span class="w">    </span><span class="o">++</span><span class="n">_size</span><span class="p">;</span>
 <a id="__codelineno-36-18" name="__codelineno-36-18"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="push_front"><code>push_front()</code>函数<a class="headerlink" href="#push_front" title="Permanent link">&para;</a></h2>
+<h3 id="push_front"><code>push_front()</code>函数<a class="headerlink" href="#push_front" title="Permanent link">&para;</a></h3>
 <p>设计思路参考带头双向循环链表的思路</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
@@ -2951,12 +3807,12 @@
 <a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="w">    </span><span class="o">++</span><span class="n">_size</span><span class="p">;</span>
 <a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="erase"><code>erase()</code>函数<a class="headerlink" href="#erase" title="Permanent link">&para;</a></h2>
+<h3 id="erase"><code>erase()</code>函数<a class="headerlink" href="#erase" title="Permanent link">&para;</a></h3>
 <p>删除节点的思路类似于带头双向链表的删除思路</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意返回删除节点位置的下一个节点的位置防止出现迭代器失效问题</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
@@ -2997,7 +3853,7 @@
 <a id="__codelineno-38-19" name="__codelineno-38-19"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span>
 <a id="__codelineno-38-20" name="__codelineno-38-20"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="pop_back"><code>pop_back()</code>函数<a class="headerlink" href="#pop_back" title="Permanent link">&para;</a></h2>
+<h3 id="pop_back"><code>pop_back()</code>函数<a class="headerlink" href="#pop_back" title="Permanent link">&para;</a></h3>
 <p>直接复用<code>erase()</code>函数即可，但是需要注意删除的位置不是<code>end</code>的位置，而是<code>end</code>前一个位置</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span>
 <span class="normal"><a href="#__codelineno-39-2">2</a></span>
@@ -3009,7 +3865,7 @@
 <a id="__codelineno-39-4" name="__codelineno-39-4"></a><span class="w">    </span><span class="n">erase</span><span class="p">(</span><span class="o">--</span><span class="n">end</span><span class="p">());</span>
 <a id="__codelineno-39-5" name="__codelineno-39-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="pop_front"><code>pop_front()</code>函数<a class="headerlink" href="#pop_front" title="Permanent link">&para;</a></h2>
+<h3 id="pop_front"><code>pop_front()</code>函数<a class="headerlink" href="#pop_front" title="Permanent link">&para;</a></h3>
 <p>直接复用<code>erase()</code>函数即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1">1</a></span>
 <span class="normal"><a href="#__codelineno-40-2">2</a></span>
@@ -3023,7 +3879,7 @@
 <a id="__codelineno-40-5" name="__codelineno-40-5"></a><span class="w">    </span><span class="n">erase</span><span class="p">(</span><span class="n">begin</span><span class="p">());</span>
 <a id="__codelineno-40-6" name="__codelineno-40-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="clear"><code>clear()</code>函数<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h2>
+<h3 id="clear"><code>clear()</code>函数<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h3>
 <p>调用<code>erase()</code>函数循环从头删除即可，但是不可以删除头结点</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1">1</a></span>
 <span class="normal"><a href="#__codelineno-41-2">2</a></span>
@@ -3043,7 +3899,7 @@
 <a id="__codelineno-41-8" name="__codelineno-41-8"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-41-9" name="__codelineno-41-9"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h1 id="_5">额外补充<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h1>
+<h2 id="_5">额外补充<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>打印函数</p>
 <p>当链表中的类型为<code>int</code>时，打印函数中的list模板参数直接设置为<code>int</code>即可，例如下面的代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
@@ -3157,8 +4013,8 @@
 <a id="__codelineno-46-11" name="__codelineno-46-11"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
 <a id="__codelineno-46-12" name="__codelineno-46-12"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h1 id="_6">项目代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h1>
-<h2 id="list_6">list类实现文件<a class="headerlink" href="#list_6" title="Permanent link">&para;</a></h2>
+<h2 id="_6">项目代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="list_7">list类实现文件<a class="headerlink" href="#list_7" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1">  1</a></span>
 <span class="normal"><a href="#__codelineno-47-2">  2</a></span>
 <span class="normal"><a href="#__codelineno-47-3">  3</a></span>
@@ -3947,7 +4803,7 @@
 <a id="__codelineno-47-393" name="__codelineno-47-393"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-47-394" name="__codelineno-47-394"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="_7">测试文件<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_7">测试文件<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1">  1</a></span>
 <span class="normal"><a href="#__codelineno-48-2">  2</a></span>
 <span class="normal"><a href="#__codelineno-48-3">  3</a></span>

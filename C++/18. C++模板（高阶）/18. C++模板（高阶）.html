@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#18-c" class="md-skip">
+        <a href="#c" class="md-skip">
           跳转至
         </a>
       
@@ -1484,6 +1484,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    C++模版（高阶）
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="18.%20C%2B%2B%E6%A8%A1%E6%9D%BF%EF%BC%88%E9%AB%98%E9%98%B6%EF%BC%89.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1493,6 +1504,85 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      非类型模版参数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      模板特化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模板特化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      类模板全特化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      类模板偏特化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      函数模板全特化与偏特化
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      模板分离编译
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1976,6 +2066,74 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      非类型模版参数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      模板特化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模板特化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      类模板全特化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      类模板偏特化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      函数模板全特化与偏特化
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      模板分离编译
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1992,8 +2150,8 @@
   
 
 
-<h1 id="18-c">18. C++模板（高阶）<a class="headerlink" href="#18-c" title="Permanent link">&para;</a></h1>
-<h1 id="_1">非类型模版参数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="c">C++模板（高阶）<a class="headerlink" href="#c" title="Permanent link">&para;</a></h1>
+<h2 id="_1">非类型模版参数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>前面的模版中，使用的都是针对对象类型设计的模版参数，从而便于编译器针对不同类型推演出不同类型的函数或者类</p>
 <p>但是有一种模版参数比较特殊，即非类型模版参数，有以下特点：</p>
 <ol>
@@ -2022,7 +2180,7 @@
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">array</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
 <p>原来的数组是C类型的数组，该数组对越界访问的控制并不严格，甚至有时并不能发现是越界访问，所以针对这个问题，C++11添加了<code>array</code>容器，从而更好地处理越界访问等问题</p>
-<h1 id="_2">模板特化<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<h2 id="_2">模板特化<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>在C++中，除了可以对任意类型使用模板以外，还可以使用模板特化来针对某一种类或者函数提供特殊的模板</p>
 <p>模板特化分为全特化和偏特化，而对于类和函数来说，也分为类模板全特化和偏特化以及函数模板全特化和偏特化</p>
 <p>函数模板的特化步骤：</p>
@@ -2032,7 +2190,7 @@
 <li>函数名后跟一对尖括号，尖括号中指定需要特化的类型</li>
 <li>函数形参表: 必须要和模板函数的基础参数类型完全相同，如果不同编译器可能会报一些奇怪的错误。</li>
 </ol>
-<h2 id="_3">类模板全特化<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_3">类模板全特化<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>所谓全特化，即特化的模板参数类型全部用指定的类型替换普通模板中的类型</p>
 <p>例如下面的代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
@@ -2158,7 +2316,7 @@
 <a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="_4">类模板偏特化<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="_4">类模板偏特化<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>对比全特化，偏特化就是只有一部分是指定的类型，其余的部分还是普通的模板参数类型，例如下面的代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
@@ -2292,7 +2450,7 @@
 <li>偏特化</li>
 <li>普通模板</li>
 </ol>
-<h2 id="_5">函数模板全特化与偏特化<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_5">函数模板全特化与偏特化<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>函数模板的全特化与偏特化方式参考下面的代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
@@ -2335,7 +2493,7 @@
 <a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>但是对于函数模板来说，一般不需要用到特化，只需要用函数重载＋最匹配原则即可</p>
-<h1 id="_6">模板分离编译<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h1>
+<h2 id="_6">模板分离编译<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>在C++中本身是不支持模板的声明和定义分别放在两个文件中，所以一般的处理方式有以下两种：</p>
 <ol>
 <li>不写声明直接定义放在<code>.h</code>文件中</li>

@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#23-mapset" class="md-skip">
+        <a href="#mapset" class="md-skip">
           跳转至
         </a>
       
@@ -1589,6 +1589,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    map和set类模拟实现
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="23.%20map%E5%92%8Cset%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1598,6 +1609,166 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mapset_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set模拟实现介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapset_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set类定义
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapset_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set类的遍历比较规则设计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapset_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set中的常规迭代器设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="map和set中的常规迭代器设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      常规迭代器结构定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator*()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator-&gt;()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator!=()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator==()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapset_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set常规迭代器封装
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapsetconst" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set的const迭代器设计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapsetinsert" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set的insert()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapoperator" class="md-nav__link">
+    <span class="md-ellipsis">
+      map中的operator[]
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1976,6 +2147,155 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mapset_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set模拟实现介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapset_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set类定义
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapset_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set类的遍历比较规则设计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapset_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set中的常规迭代器设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="map和set中的常规迭代器设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      常规迭代器结构定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator*()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator-&gt;()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator!=()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator==()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator++()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      operator--()设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapset_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set常规迭代器封装
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapsetconst" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set的const迭代器设计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapsetinsert" class="md-nav__link">
+    <span class="md-ellipsis">
+      map和set的insert()函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapoperator" class="md-nav__link">
+    <span class="md-ellipsis">
+      map中的operator[]
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1992,10 +2312,10 @@
   
 
 
-<h1 id="23-mapset">23. map和set类模拟实现<a class="headerlink" href="#23-mapset" title="Permanent link">&para;</a></h1>
-<h1 id="mapset">map和set模拟实现介绍<a class="headerlink" href="#mapset" title="Permanent link">&para;</a></h1>
+<h1 id="mapset">map和set类模拟实现<a class="headerlink" href="#mapset" title="Permanent link">&para;</a></h1>
+<h2 id="mapset_1">map和set模拟实现介绍<a class="headerlink" href="#mapset_1" title="Permanent link">&para;</a></h2>
 <p>在C++的STL标准库中，map和set的底层均为红黑树，所以在前面的红黑树实现基础上模拟封装map和set类</p>
-<h1 id="mapset_1">map和set类定义<a class="headerlink" href="#mapset_1" title="Permanent link">&para;</a></h1>
+<h2 id="mapset_2">map和set类定义<a class="headerlink" href="#mapset_2" title="Permanent link">&para;</a></h2>
 <p>首先，通过查看SGI版本的STL中对map和set的设计可以看到不论是map还是set都在红黑树结构传递的是<code>Key</code>和<code>Value</code>，而不是额外设计两种版本的红黑树结构</p>
 <p><a class="glightbox" href="23. map和set类模拟实现.assets\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="23. map和set类模拟实现.assets\image.png"></a></p>
 <p>观察红黑树结构的模版参数设计</p>
@@ -2109,7 +2429,7 @@
 <a id="__codelineno-3-32" name="__codelineno-3-32"></a><span class="w">    </span><span class="n">node</span><span class="o">*</span><span class="w"> </span><span class="n">_root</span><span class="p">;</span>
 <a id="__codelineno-3-33" name="__codelineno-3-33"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h1 id="mapset_2">map和set类的遍历比较规则设计<a class="headerlink" href="#mapset_2" title="Permanent link">&para;</a></h1>
+<h2 id="mapset_3">map和set类的遍历比较规则设计<a class="headerlink" href="#mapset_3" title="Permanent link">&para;</a></h2>
 <p>对于set的<code>insert</code>函数来说，只需要比较<code>key</code>即可，如果使用模版参数中的<code>T</code>类型变量<code>data</code>直接进行比较，此时没有任何问题，但是如果是map，则此时会对<code>pair</code>进行比较，而<code>pair</code>本身支持的比较是先比较<code>first</code>，再比较<code>second</code>，这与本身二叉搜索树的遍历比较规则不符，所以此时需要额外处理</p>
 <p>观察SGI版本中的设计，存在一个<code>KeyOfValue</code>的一个模版参数，该参数的作用是处理遍历比较规则问题</p>
 <p><a class="glightbox" href="23. map和set类模拟实现.assets\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="23. map和set类模拟实现.assets\image2.png"></a></p>
@@ -2193,8 +2513,8 @@
 <a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">    </span><span class="c1">// ...</span>
 <a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h1 id="mapset_3">map和set中的常规迭代器设计<a class="headerlink" href="#mapset_3" title="Permanent link">&para;</a></h1>
-<h2 id="_1">常规迭代器结构定义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="mapset_4">map和set中的常规迭代器设计<a class="headerlink" href="#mapset_4" title="Permanent link">&para;</a></h2>
+<h3 id="_1">常规迭代器结构定义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>因为map和set底层都是红黑树，所以直接设计红黑树的迭代器即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
@@ -2220,7 +2540,7 @@
 <a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">    </span><span class="n">node</span><span class="o">*</span><span class="w"> </span><span class="n">_node</span><span class="p">;</span>
 <a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator"><code>operator*()</code>设计<a class="headerlink" href="#operator" title="Permanent link">&para;</a></h2>
+<h3 id="operator"><code>operator*()</code>设计<a class="headerlink" href="#operator" title="Permanent link">&para;</a></h3>
 <p>该函数直接返回对应节点的数据即可，所以可以设计为：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
@@ -2230,7 +2550,7 @@
 <a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_node</span><span class="o">-&gt;</span><span class="n">_data</span><span class="p">;</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator-"><code>operator-&gt;()</code>设计<a class="headerlink" href="#operator-" title="Permanent link">&para;</a></h2>
+<h3 id="operator-"><code>operator-&gt;()</code>设计<a class="headerlink" href="#operator-" title="Permanent link">&para;</a></h3>
 <p>该函数返回对应节点的地址即可，可以设计为：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
 <span class="normal"><a href="#__codelineno-8-2">2</a></span>
@@ -2240,7 +2560,7 @@
 <a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">_node</span><span class="o">-&gt;</span><span class="n">_data</span><span class="p">;</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator_1"><code>operator!=()</code>设计<a class="headerlink" href="#operator_1" title="Permanent link">&para;</a></h2>
+<h3 id="operator_1"><code>operator!=()</code>设计<a class="headerlink" href="#operator_1" title="Permanent link">&para;</a></h3>
 <p>该函数用于判断两个节点是否相等，只需要判断两个节点的指针位置是否相等即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
@@ -2250,7 +2570,7 @@
 <a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_node</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="n">_node</span><span class="p">;</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator_2"><code>operator==()</code>设计<a class="headerlink" href="#operator_2" title="Permanent link">&para;</a></h2>
+<h3 id="operator_2"><code>operator==()</code>设计<a class="headerlink" href="#operator_2" title="Permanent link">&para;</a></h3>
 <p>该函数用于判断两个节点是否相等，只需要判断两个节点的指针位置是否相等即可</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span>
@@ -2260,7 +2580,7 @@
 <a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_node</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">_node</span><span class="p">;</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator_3"><code>operator++()</code>设计<a class="headerlink" href="#operator_3" title="Permanent link">&para;</a></h2>
+<h3 id="operator_3"><code>operator++()</code>设计<a class="headerlink" href="#operator_3" title="Permanent link">&para;</a></h3>
 <p>该函数用于进行迭代器更新，但是此处需要使用循环进行解决，首先因为二叉搜索树的遍历是中序遍历，所以先走左子树，并且第一个数值是左子树的最左节点，所以可以通过循环先获取到最左节点，该最左节点作为红黑树迭代器的<code>begin()</code>位置</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
@@ -2363,11 +2683,12 @@
 <a id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <a id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operator-_1"><code>operator--()</code>设计<a class="headerlink" href="#operator-_1" title="Permanent link">&para;</a></h2>
+<h3 id="operator-_1"><code>operator--()</code>设计<a class="headerlink" href="#operator-_1" title="Permanent link">&para;</a></h3>
 <p>设计<code>operator--()</code>的思路与<code>operator++()</code>思路基本相反，首先因为正向遍历的中序顺序是左子树-&gt;根-&gt;右子树，所以反向遍历的中序顺序是右子树-&gt;根-&gt;左子树，以当前节点为根节点看待当前子树时，其右子树的值就可以忽略，因为已经越过了右子树，所以反向遍历主要看左子树是否为空，如果左子树不为空，则找其最右节点；如果左子树为空，则代表当前子树已经结束，找到该子树的父亲，如果该子树依旧是其父亲的左子树，那么继续找到父亲的父亲，如此往复直到遇到空。但是需要注意的是，如果当前节点为<code>end()</code>的位置，那么需要进行一次特殊处理，将当前节点更新为整棵树的最右节点</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>此处涉及到遍历整棵树，所以需要传递整棵树的根节点，需要对迭代器进行改动，新增一个<code>_root</code>成员，在<code>Begin()</code>和<code>End()</code>处传递整棵树的根</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -2476,7 +2797,7 @@
 <a id="__codelineno-14-53" name="__codelineno-14-53"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <a id="__codelineno-14-54" name="__codelineno-14-54"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="mapset_4">map和set常规迭代器封装<a class="headerlink" href="#mapset_4" title="Permanent link">&para;</a></h2>
+<h3 id="mapset_5">map和set常规迭代器封装<a class="headerlink" href="#mapset_5" title="Permanent link">&para;</a></h3>
 <p>因为红黑树中实现了<code>begin()</code>和<code>end()</code>，所以对于map和set来说，直接封装即可</p>
 <p>首先在红黑树中声明迭代器</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="k">typedef</span><span class="w"> </span><span class="n">RBTree_iterator</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Iterator</span><span class="p">;</span>
@@ -2513,7 +2834,7 @@
 <a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rb_t</span><span class="p">.</span><span class="n">End</span><span class="p">();</span>
 <a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h1 id="mapsetconst">map和set的<code>const</code>迭代器设计<a class="headerlink" href="#mapsetconst" title="Permanent link">&para;</a></h1>
+<h2 id="mapsetconst">map和set的<code>const</code>迭代器设计<a class="headerlink" href="#mapsetconst" title="Permanent link">&para;</a></h2>
 <p>在前面设计常规迭代器时，对于set来说不能支持修改，所以常规迭代器也需要<code>const</code>进行修饰，但是不考虑对常规迭代器直接使用<code>const</code>版本的迭代器，而是在传递模版参数时直接使用<code>const</code>版本的参数</p>
 <p>首先将引用和指针返回类型定义为迭代器模版参数<code>Ref</code>和<code>Ptr</code>，便于控制非<code>const</code>和<code>const</code>版本</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
@@ -2614,7 +2935,7 @@
 <a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">RBTree</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">setKeyOfT</span><span class="o">&gt;::</span><span class="n">Iterator</span><span class="w"> </span><span class="n">iterator</span><span class="p">;</span>
 <a id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">RBTree</span><span class="o">&lt;</span><span class="n">Key</span><span class="p">,</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Key</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">mapKeyOfV</span><span class="o">&gt;::</span><span class="n">constIterator</span><span class="w"> </span><span class="n">const_iterator</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
-<h1 id="mapsetinsert">map和set的<code>insert()</code>函数<a class="headerlink" href="#mapsetinsert" title="Permanent link">&para;</a></h1>
+<h2 id="mapsetinsert">map和set的<code>insert()</code>函数<a class="headerlink" href="#mapsetinsert" title="Permanent link">&para;</a></h2>
 <p>因为红黑树结构已经实现了<code>insert()</code>函数，所以对应map和set来说可以直接复用红黑树中的<code>insert()</code>函数，需要注意这里的<code>insert()</code>函数的返回值需要设计成<code>pair&lt;iterator, bool&gt;</code>类型，对于set来说没有影响，但是对于map来说，后面需要重载<code>operator[]</code>，所以使用该返回类型</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">  1</a></span>
 <span class="normal"><a href="#__codelineno-23-2">  2</a></span>
@@ -2927,7 +3248,7 @@
 <a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rb_t</span><span class="p">.</span><span class="n">insertNode</span><span class="p">(</span><span class="n">kv</span><span class="p">);</span>
 <a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h1 id="mapoperator">map中的<code>operator[]</code><a class="headerlink" href="#mapoperator" title="Permanent link">&para;</a></h1>
+<h2 id="mapoperator">map中的<code>operator[]</code><a class="headerlink" href="#mapoperator" title="Permanent link">&para;</a></h2>
 <p>因为map中的<code>operator[]</code>函数有插入+修改的功能，所以内部需要调用<code>insert()</code>函数，当插入失败时，返回已经存在节点的迭代器的<code>second</code>即为对应节点的<code>value</code>值，插入成功时，返回成功插入的节点的迭代器的<code>second</code>即为对应节点的<code>value</code>值</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
 <span class="normal"><a href="#__codelineno-25-2">2</a></span>

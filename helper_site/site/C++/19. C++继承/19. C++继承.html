@@ -3236,9 +3236,7 @@
 </code></pre></div></td></tr></table></div>
 <p>2.<strong>类域</strong>：类域是指在类定义中的作用域。类成员的访问取决于它们的访问控制属性（<code>public</code>、<code>protected</code>、<code>private</code>）。在类的成员函数中，可以访问该类的<code>public</code>和<code>protected</code>成员，而在类的外部，只能访问<code>public</code>成员。<br/></p>
 <p>3.<strong>全局域</strong>：在所有函数外部声明的标识符属于全局域。全局域中的标识符可以在整个源文件中访问，除非被局部域或类域中的同名标识符所隐藏。如果展开的命名空间中有与全局域同名的变量，此时编译器会报错为“不明确的符号”<br/></p>
-<ol>
-<li><strong>命名空间域</strong>：命名空间用于组织代码，避免命名冲突。命名空间中的标识符可以在命名空间外部通过命名空间限定符（<code>::</code>）来访问。<strong>如果没有显式指定，编译器不会自动检查命名空间域</strong>。<br/></li>
-</ol>
+<p>4.<strong>命名空间域</strong>：命名空间用于组织代码，避免命名冲突。命名空间中的标识符可以在命名空间外部通过命名空间限定符（<code>::</code>）来访问。<strong>如果没有显式指定，编译器不会自动检查命名空间域</strong>。<br/></p>
 <p>关系如下图所示：</p>
 <p><a class="glightbox" href="19. C++继承.assets/image-20240626152150927-1719386518015-1-1719386536499-3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="19. C++继承.assets/image-20240626152150927-1719386518015-1-1719386536499-3.png" alt="image-20240626152150927" /></a></p>
 <p>因为有类域的存在，所以在继承中，如果子类中存在与父类同名的成员（成员变量和成员函数），则会优先访问子类中的成员，因为子类的成员在子类的类域中，而父类的成员在父类的类域中，这种现象被称为<strong>隐藏或者重定义</strong>（不是同一作用域下的重定义）</p>
@@ -3919,9 +3917,10 @@
 <a id="__codelineno-16-28" name="__codelineno-16-28"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>在C++中，只有类中声明了友元，对应函数才可以访问友元所在类中的成员，所以上述代码中的<code>func</code>函数无法访问<code>student</code>类中的成员</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>因为友元声明早于<code>student</code>类出现，所以需要有<code>student</code>类的前置声明，否则友元函数无法找到<code>student</code>类</p>
-</blockquote>
+</div>
 <h2 id="_11">静态成员与继承<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <p>在C++中，当父类中含有静态成员，子类继承时，父类和子类共用该静态成员</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
@@ -4054,17 +4053,19 @@
 </code></pre></div></td></tr></table></div>
 <p><a class="glightbox" href="19. C++继承.assets/image-20240709104638429.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="19. C++继承.assets/image-20240709104638429.png" alt="image-20240709104638429" /></a></p>
 <p>对于多继承，如果两个父类有同名成员，需要指定类域名，否则编译器无法区分，其余规则可类推</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>需要注意到：</p>
 <p>当子类继承父类后，子类中会有父类中的成员，在多继承中，第一个继承的父类的成员排在第一个，第二个继承的成员排在第二个，以此类推，父类成员排完后才是本类中特有的成员</p>
-</blockquote>
+</div>
 <h3 id="_14">菱形继承<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>菱形继承是多继承的一种特殊情况，如果当前子类继承的多个父类继承自另外一个相同的父类，此时就可能产生菱形继承，如图所示：</p>
 <p><a class="glightbox" href="19. C++继承.assets/image-20240709110002631.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="19. C++继承.assets/image-20240709110002631.png" alt="image-20240709110002631" /></a></p>
 <p>此时的<code>vegetable</code>和<code>fruit</code>继承自一个相同父类<code>plant</code>，而<code>vegetable</code>和<code>fruit</code>又作为父类被<code>tomato</code>继承，形成菱形继承</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>菱形继承不一定继承形状必须满足是个菱形，只要是出现两个或以上的子类继承自相同的父类，并且这两个子类又作为另外类的父类，此时就属于菱形继承</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -4136,9 +4137,10 @@
 <p>对于二义性来说，可以通过指定类域名的方式解决，例如<code>vegetables::_kind</code>和<code>fruits::_kind</code>，但是对于数据冗余来说并不能通过这个方法解决</p>
 <h3 id="_15">虚拟继承<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p>为了解决菱形继承中的数据冗余和二义性，可以在继承权限前方使用<code>virtual</code>关键字修饰<strong>第一层既作为父类又作为子类的类</strong>，修饰后的两个类继承行为就称为<strong>虚拟继承</strong></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>虚拟继承对于数据冗余和二义性的处理方式为：所有子类都共用最高父类的成员</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -4297,14 +4299,22 @@
 <p class="admonition-title">Info</p>
 <p>高内聚，低耦合参考：</p>
 <p><strong>Coupling（耦合）</strong></p>
-<p>Coupling is a measure of how tightly two modules are bound to each other. The more tightly coupled, the less independent they are. Since the objective is to make modules as independent as possible, we want them to be loosely coupled. There are at least three reasons why loose coupling is desirable. 
-- Loosely coupled modules are more likely to be reusable. （低耦合便于代码重用）
-- Loosely coupled modules are less likely to create errors in related modules.（低耦合不容易造成连锁问题） 
-- When the system needs to be modified, loosely coupled modules allow us to modify 
-    only modules that need to be changed without affecting modules that do not need to change. （低耦合便于代码修改）
-<strong>Coupling between modules in a software system must be minimized. </strong>（耦合必须最小化）
-<strong>Cohesion（内聚）</strong>
-Another issue in modularity is cohesion. Cohesion is a measure of how closely the mod-ules in a system are related. We  eed to have maximum possible cohesion between modules in a software system. </p>
+<p>Coupling is a measure of how tightly two modules are bound to each other. The more tightly coupled, the less independent they are. Since the objective is to make modules as independent as possible, we want them to be loosely coupled. There are at least three reasons why loose coupling is desirable. </p>
+<ul>
+<li>
+<p>Loosely coupled modules are more likely to be reusable. （低耦合便于代码重用）</p>
+</li>
+<li>
+<p>Loosely coupled modules are less likely to create errors in related modules.（低耦合不容易造成连锁问题） </p>
+</li>
+<li>
+<p>When the system needs to be modified, loosely coupled modules allow us to modify </p>
+<p>only modules that need to be changed without affecting modules that do not need to change. （低耦合便于代码修改）</p>
+</li>
+</ul>
+<p><strong>Coupling between modules in a software system must be minimized. </strong>（耦合必须最小化）</p>
+<p><strong>Cohesion（内聚）</strong></p>
+<p>Another issue in modularity is cohesion. Cohesion is a measure of how closely the mod-ules in a system are related. We  eed to have maximum possible cohesion between modules in a software system. </p>
 <p><strong>Cohesion between modules in a software system must be maximized. </strong>（内聚必须最大化）</p>
 </div>
 

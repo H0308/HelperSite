@@ -26,3 +26,10 @@ markdown_extensions:
 - pymdownx.inlinehilite
 - pymdownx.snippets
 - pymdownx.superfences
+
+markdown_extensions:
+  - md_in_html
+  
+markdown_extensions:
+- toc:
+    permalink: true

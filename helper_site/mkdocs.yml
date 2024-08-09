@@ -59,6 +59,9 @@ markdown_extensions:
       permalink: true
       baselevel: 1  # 开始级别
       toc_depth: 3  # 最大深度
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
 
 extra_javascript:
   - javascripts/mathjax.js

@@ -13,17 +13,17 @@ theme:
   icon:
     repo: fontawesome/brands/git-alt
   language: zh
-  primary: white
-  accent: light blue
   palette:
+    accent: teal
+    primary: white
     - scheme: default
       toggle:
-        icon: material/brightness-7 
+        icon: material/lightbulb
         name: Switch to dark mode
     - scheme: slate
       toggle:
         icon: material/brightness-4
-        name: Switch to light mode
+        name: material/lightbulb-outline
 
 copyright: Copyright &copy; 2024 EPSDA
 

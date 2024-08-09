@@ -48,15 +48,15 @@ nav:
     - 时间复杂度和空间复杂度: 数据结构/1. 时间复杂度和空间复杂度/1. 时间复杂度与空间复杂度.md
   - C++: 
     - C语言过渡C++基础知识: C++/1. C语言过渡C++基础知识/1. C语言过渡C++基础知识.md
-    - C++类和对象: C++/2. 类和对象/2. 类和对象/md
+    - C++类和对象: C++/2. C++类和对象/2. 类和对象.md
     - C++默认成员函数: C++/3. C++默认成员函数/3. C++默认成员函数.md
     - C++类和对象相关内容: C++/4. C++类和对象相关内容/4. C++类和对象相关内容.md
     - C++内存管理: C++/5. C++内存管理/5. C++内存管理.md
     - C++模版（基础）: C++/6. C++模版（基础）/6. C++模版（基础）.md
-    - C++STL简介与string类: C++/7. C++STL简介与string类.md
+    - C++STL简介与string类: C++/7. C++STL简介与string类/7. C++STL简介与string类.md
     - string类模拟实现: C++/8. string类模拟实现/8. string类的模拟实现.md
     - vector类: C++/9. vector类/9. vector类.md
-    - vector类模拟实现: C++/10. vector模拟实现/10. vector模拟实现.md
+    - vector类模拟实现: C++/10. vector类模拟实现/10. vector模拟实现.md
     - list类: C++/11. list类/11. list类.md
     - list类模拟实现: C++/12. list模拟实现/12. list类模拟实现.md
     - stack类: C++/13. stack类/13. stack类.md

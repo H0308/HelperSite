@@ -3712,10 +3712,10 @@
 <h3 id="_9">析构函数使用<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>析构函数：与构造函数功能相反，对象在销毁时会自动调用析构函数，完成对象中资源的清理工作</p>
 <p>析构函数的特点：</p>
-<p>1.析构函数名是在类名前加上字符 <code>~</code>。 
-2.无参数无返回值类型。 
-3.一个类只能有一个析构函数。若未显式定义，系统会自动生成默认的析构函数。注意：析构函数不能重载
-4.对象生命周期结束时，C++编译系统系统自动调用析构函数。</p>
+<p>1.析构函数名是在类名前加上字符 <code>~</code>。 <br/>
+2.无参数无返回值类型。 <br/>
+3.一个类只能有一个析构函数。若未显式定义，系统会自动生成默认的析构函数。注意：析构函数不能重载<br/>
+4.对象生命周期结束时，C++编译系统系统自动调用析构函数。<br/></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -4392,9 +4392,11 @@
 </code></pre></div></td></tr></table></div>
 <p>在上面的代码中，对于返回对象的引用操作并不是非法引用，尽管<code>this</code>指针的作用域只在成员函数中，但是因为<code>this</code>指向的是实例化的对象，而实例化的对象只有在其所在空间被销毁才会销毁，所以可以理解为<code>this</code>指针并未被销毁，所以可以返回<code>this</code>的引用操作</p>
 <p>拷贝构造函数典型调用场景：</p>
-<p>1.使用已存在对象创建新对象
-2.函数参数类型为类类型对象
-3.函数返回值类型为类类型对象</p>
+<ol>
+<li>使用已存在对象创建新对象</li>
+<li>函数参数类型为类类型对象</li>
+<li>函数返回值类型为类类型对象</li>
+</ol>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>

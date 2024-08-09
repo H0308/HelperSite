@@ -2630,7 +2630,7 @@
 <a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span>
 </code></pre></div></td></tr></table></div>
 <p>上面的代码中，使用vector类的无参构造函数时创建了一个数据类型为<code>int</code>类型的vector类对象，编译器不会自动开辟空间因为没有数据，所以当前的<code>size</code>为0，可以使用<code>push_back()</code>函数进行数据插入，插入数据时会动态分配空间</p>
-<p><a class="glightbox" href="image\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image.png" align="left"></a></p>
+<p><a class="glightbox" href="image\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image.png"></a></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -4169,17 +4169,14 @@
 <table>
 <thead>
 <tr>
-<th></th>
 <th>函数原型</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
 <td><code>iterator erase (iterator position);</code>（删除指定位置的一个数据）</td>
 </tr>
 <tr>
-<td></td>
 <td><code>iterator erase (iterator first, iterator last);</code>（删除迭代器区间中的内容）</td>
 </tr>
 </tbody>
@@ -4463,13 +4460,11 @@
 <table>
 <thead>
 <tr>
-<th></th>
 <th>函数原型</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
 <td><code>template &lt;class InputIterator, class T&gt;   InputIterator find (InputIterator first, InputIterator last, const T&amp; val);</code></td>
 </tr>
 </tbody>

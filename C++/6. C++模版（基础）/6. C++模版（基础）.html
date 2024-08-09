@@ -2528,10 +2528,10 @@
 <h5 id="_5">函数模版原理<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h5>
 <p>函数模板是一个蓝图，它本身并不是函数，是编译器用使用方式产生特定具体类型函数的模具。所以其实模板就是将本来应该我们做的重复的事情交给了编译器</p>
 <p>在函数调用的过程中，直接调试时不论是<code>int</code>类型还是<code>double</code>类型都会走到模版，但是进入反汇编可以看到当形参是<code>int</code>类型时，编译器会进入<code>int</code>类型的函数，同样<code>double</code>类型类似</p>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\C++基础知识总结\6. C++模版（基础）\image\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\C++基础知识总结\6. C++模版（基础）\image\image.png"></a></p>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\C++基础知识总结\6. C++模版（基础）\image\image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\C++基础知识总结\6. C++模版（基础）\image\image1.png"></a></p>
+<p><a class="glightbox" href="image\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image.png"></a></p>
+<p><a class="glightbox" href="image\image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image1.png"></a></p>
 <p>所以，函数模版是告诉编译器应该生成何种类型的函数，如下图所示</p>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\C++基础知识总结\6. C++模版（基础）\image\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\C++基础知识总结\6. C++模版（基础）\image\image2.png"></a></p>
+<p><a class="glightbox" href="image\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image\image2.png"></a></p>
 <p>在编译器编译阶段，对于模板函数的使用，编译器需要根据传入的实参类型来推演生成对应类型的函数以供调用</p>
 <h5 id="_6">函数模版实例化<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h5>
 <p>用不同类型的参数使用函数模板时，称为函数模板的实例化。</p>

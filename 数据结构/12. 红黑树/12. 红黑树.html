@@ -2010,19 +2010,15 @@
 <blockquote>
 <p><code>cur</code>节点可能为新增的红色节点，也可能为上一次调整变为的红色节点</p>
 </blockquote>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\数据结构\12. 红黑树\12. 红黑树.assets\image4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\数据结构\12. 红黑树\12. 红黑树.assets\image4.png" style="zoom:50%;" ></a></p>
-<ol>
-<li>假设a、b、c、d和e为黑色节点个数为0的红黑树，此时<code>cur</code>为新插入节点如下图所示：</li>
-</ol>
+<p><a class="glightbox" href="12. 红黑树.assets\image4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="12. 红黑树.assets\image4.png" style="zoom:50%;" ></a></p>
+<p>1.假设a、b、c、d和e为黑色节点个数为0的红黑树，此时<code>cur</code>为新插入节点如下图所示：</p>
 <p><a class="glightbox" href="12. 红黑树.assets\image5.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="12. 红黑树.assets\image5.png"></a></p>
 <p>因为出现了连续的红色节点，为了恢复红黑树的平衡，此时需要进行调整，因为<code>uncle</code>节点为红色，为了保证每条路径上都有一个黑色节点并且保证没有连续的红色节点出现，将<code>parent</code>节点的颜色改为黑色，将<code>uncle</code>节点的颜色改为黑色，将<code>grandfather</code>节点改为红色（如果<code>grandfather</code>节点为根节点则再处理为黑色），处理完后，<code>cur = grandfather</code>继续向上调整直到遇到根节点：</p>
 <p><a class="glightbox" href="12. 红黑树.assets\image6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="12. 红黑树.assets\image6.png"></a></p>
 <blockquote>
 <p>对于<code>uncle</code>为红色的情况来说，不需要考虑插入位置在<code>parent</code>左或者右、<code>parent</code>在<code>grandfather</code>的左或者右已经<code>uncle</code>在<code>grandfather</code>的左或者右，因为不论是哪种情况，本质都是将<code>uncle</code>和<code>parent</code>变为黑色增加两边路径的黑色节点使其满足规则二和规则三</p>
 </blockquote>
-<ol>
-<li>假设a、b、c、d和e为黑色节点个数大于0，此时<code>cur</code>为上一次调整变成的红色节点，如下图所示：</li>
-</ol>
+<p>2.假设a、b、c、d和e为黑色节点个数大于0，此时<code>cur</code>为上一次调整变成的红色节点，如下图所示：</p>
 <p><a class="glightbox" href="12. 红黑树.assets\image7.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="12. 红黑树.assets\image7.png"></a></p>
 <p>对于当前情况来说，只有<code>cur</code>位置的节点是红色，其余几棵子树已经通过调整变成了符合规则的红黑树，所以也可以归类为上面的情形，处理方式与上面相同</p>
 <h2 id="3uncle">情况3：<code>uncle</code>节点为黑色<a class="headerlink" href="#3uncle" title="Permanent link">&para;</a></h2>

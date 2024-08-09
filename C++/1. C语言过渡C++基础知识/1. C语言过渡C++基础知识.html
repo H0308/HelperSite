@@ -3207,11 +3207,11 @@
 <a id="__codelineno-8-57" name="__codelineno-8-57"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-8-58" name="__codelineno-8-58"></a><span class="mi">10</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!TIP]</p>
-<p>在实际使用过程中，更推荐指定以及部分展开，如果只是自己练习时，更推荐使用全局展开</p>
-<p>注意，使用<code>using namespace N</code>并不代表在函数中不可以指定，部分展开和全局展开都只是改变寻找方式，并不是使用了其中一种方式其他方式不可以再使用，而如果已经全局展开，那么再指定将直接去指定的命名空间找，而不是在全局展开的命名空间中找</p>
-</blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>在实际使用过程中，更推荐指定以及部分展开，如果只是自己练习时，更推荐使用全局展开
+注意，使用<code>using namespace N</code>并不代表在函数中不可以指定，部分展开和全局展开都只是改变寻找方式，并不是使用了其中一种方式其他方式不可以再使用，而如果已经全局展开，那么再指定将直接去指定的命名空间找，而不是在全局展开的命名空间中找</p>
+</div>
 <p>当存在两个相同的命名空间时，会被合并成一个命名空间，而不是直接覆盖，例如</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
@@ -3297,9 +3297,7 @@
 <a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="c1">//此时会提示报错，因为test.cpp和test1.cpp两个文件中都出现了相同的命名空间中的变量，导致变量多次定义</span>
 </code></pre></div></td></tr></table></div>
 <p>正确的解决方案如下</p>
-<ol>
-<li><strong>只有一个源文件</strong>，命名空间放置在头文件，包括声明和定义</li>
-</ol>
+<p>1.<strong>只有一个源文件</strong>，命名空间放置在头文件，包括声明和定义</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -3348,9 +3346,7 @@
 <a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="mi">10</span>
 <a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="mi">10</span>
 </code></pre></div></td></tr></table></div>
-<ol>
-<li><strong>多个源文件</strong>时，声明和定义分离，将命名空间放置在其中一个源文件中，其中的变量只需要声明，不需要定义，其余源文件只需要使用<code>extern</code>引入即可，引入的位置需要对变量进行定义</li>
-</ol>
+<p>2.<strong>多个源文件</strong>时，声明和定义分离，将命名空间放置在其中一个源文件中，其中的变量只需要声明，不需要定义，其余源文件只需要使用<code>extern</code>引入即可，引入的位置需要对变量进行定义</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -3389,9 +3385,7 @@
 <a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="mi">1</span>
 </code></pre></div></td></tr></table></div>
-<ol>
-<li>使用<code>static</code>防止变量多次定义，一般用于需要将命名空间放置在头文件，并且声明和定义不分离</li>
-</ol>
+<p>3.使用<code>static</code>防止变量多次定义，一般用于需要将命名空间放置在头文件，并且声明和定义不分离</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -3461,10 +3455,10 @@
 <p>因为C++中结构体是需要创建对象后才分配空间，所以当只要结构体对象没有重定义，命名空间的结构体就不会发生冲突</p>
 <h2 id="c_2">C++的输入以及输出<a class="headerlink" href="#c_2" title="Permanent link">&para;</a></h2>
 <p>在C++中，可以使用<code>cout</code>和<code>cin</code>配合流插入运算符<code>&lt;&lt;</code>和流提取运算符<code>&gt;&gt;</code>使用，例如：</p>
-<blockquote>
-<p>[!TIP]</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>使用<code>cout</code>和<code>cin</code>时需要包含头文件<code>iostream</code>，注意C++的标准库头文件不带有<code>.h</code>，并且需要引入命名空间<code>std</code>（C++中的标准命名空间）或者直接指定。因此推荐使用<code>&lt;iostream&gt;+std</code>的方式</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -3502,7 +3496,8 @@
 <a id="__codelineno-14-18" name="__codelineno-14-18"></a><span class="mi">10</span>
 </code></pre></div></td></tr></table></div>
 <p>在上面的代码中，定义了一个<code>num</code>变量，通过标准输入对象<code>cin</code>和流提取运算符<code>&gt;&gt;</code>控制变量<code>num</code>的输入，不同于C语言，此处输入可以不需要取地址运算符<code>&amp;</code>，对变量内容的输出使用标准输出对象<code>cout</code>和流插入运算符<code>&lt;&lt;</code>控制内容的输出，而<code>endl</code>表示换行符，作用效果类似<code>'\n'</code></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>对于上面代码中的</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
@@ -3515,7 +3510,7 @@
 <a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
 <p>对于<code>&gt;&gt;</code>运算符也是如此</p>
-</blockquote>
+</div>
 <p>在C++中，输入和输出可以自动识别变量类型，故输出和输入不需要占位符</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
@@ -3551,10 +3546,10 @@
 <a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="mi">1</span><span class="w"> </span><span class="mf">2.5</span><span class="w"> </span><span class="n">c</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>同<code>scanf</code>一样，<code>cin</code>会自动忽略空白字符</p>
-</blockquote>
+</div>
 <ul>
 <li>也可以使用指定的方式使用<code>cout</code>和<code>cin</code></li>
 </ul>
@@ -3591,9 +3586,10 @@
 <p>如果需要输入连续的字符到string对象中，此时可以使用<code>istream</code>中的<code>getline()</code>方法读取包含空格在内的字符串直到遇到<code>\n</code>，<code>getline()</code>函数原型如下</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">getline</span><span class="w"> </span><span class="p">(</span><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">is</span><span class="p">,</span><span class="w"> </span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">str</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
 <p>如果需要正常结束程序时，在Windows下可以使用快捷键<code>Ctrl+d</code></p>
-</blockquote>
+</div>
 <h2 id="c_3">C++中的缺省参数<a class="headerlink" href="#c_3" title="Permanent link">&para;</a></h2>
 <h3 id="_4">缺省参数的介绍<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>在C++中，缺省参数是指在函数的定义以及声明中可以为形式参数赋值，例如</p>
@@ -3709,11 +3705,11 @@
 <a id="__codelineno-23-26" name="__codelineno-23-26"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-23-27" name="__codelineno-23-27"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!IMPORTANT]</p>
-<p><strong>从右往左使用</strong>意思是，当调用函数给函数传递实际参数时，第一个实参对应着第一个第一个形参，第二个实参对应着第二个形参，第三个实参对应着第三个形参。使用缺省参数时，当只传递一个实际参数时，该实际参数对应着第一个形参，此时使用第二个和第三个缺省参数，同理，当传递两个实际参数时，两个实际参数对应的前两个形参，使用第三个缺省参数。总是满足最右边的缺省参数是第一个使用的</p>
-<p><strong>连续使用</strong>意思是，给函数传递实际参数到形参时，必须满足从左往右传递实际参数给形参，从而满足从左往右使用缺省参数</p>
-</blockquote>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<p><strong>从右往左使用</strong>意思是，当调用函数给函数传递实际参数时，第一个实参对应着第一个第一个形参，第二个实参对应着第二个形参，第三个实参对应着第三个形参。使用缺省参数时，当只传递一个实际参数时，该实际参数对应着第一个形参，此时使用第二个和第三个缺省参数，同理，当传递两个实际参数时，两个实际参数对应的前两个形参，使用第三个缺省参数。总是满足最右边的缺省参数是第一个使用的
+<strong>连续使用</strong>意思是，给函数传递实际参数到形参时，必须满足从左往右传递实际参数给形参，从而满足从左往右使用缺省参数</p>
+</div>
 <h3 id="_6">缺省参数的分类<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>在C++中，缺省参数分为</p>
 <ol>
@@ -3924,15 +3920,15 @@
 <a id="__codelineno-28-35" name="__codelineno-28-35"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
 <a id="__codelineno-28-36" name="__codelineno-28-36"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意返回类型不可以作为判断函数是否重载的条件，函数重载只有三种特点：</p>
 <ol>
 <li>参数个数不同</li>
 <li>参数类型不同</li>
 <li>相同个数相互类型不同情况下，不同的参数顺序</li>
 </ol>
-</blockquote>
+</div>
 <p>函数重载一般用于针对不同类型实现相同的功能，例如</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
@@ -4030,20 +4026,20 @@
 <a id="__codelineno-31-10" name="__codelineno-31-10"></a><span class="p">}</span>
 <a id="__codelineno-31-11" name="__codelineno-31-11"></a><span class="c1">//将会报错为add函数重定义</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>了解：</p>
 <p>C++是通过函数名修饰规则来区分，只要参数不同，修饰出来的名字就不一样，就支持了重载</p>
 <p>例如在Linux平台下用g++编译的函数重载后的函数名为<code>_Z3addii</code>（对应两个<code>int</code>类型参数的<code>add</code>函数），<code>_Z3adddd</code>（对应两个<code>double</code>类型参数的<code>add</code>函数），两个函数名中的3为函数本身（不包括类型）的名字长度，例如<code>add</code>函数名字是3个字符的长度</p>
-</blockquote>
+</div>
 <h2 id="c_5">C++中的引用<a class="headerlink" href="#c_5" title="Permanent link">&para;</a></h2>
 <h3 id="_11">引用的介绍<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>在C语言中，为了可以通过其他变量直接改变某一个变量的值由此引出了指针的概念，通过指针类型可以改变该指针指向的空间的内容</p>
 <p>在C++中，使用引用来辅助指针的使用，例如：</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意引用的底层依旧是指针实现</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -4164,10 +4160,10 @@
 <p>在C++中，使用下面的语法创建引用变量</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="n">引用实体的类型</span><span class="w"> </span><span class="o">&amp;</span><span class="n">引用变量名</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">引用实体</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>此处的引用实体可以是任何类型，包括指针类型以及引用类型</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -4562,10 +4558,10 @@
 <h3 id="const">对<code>const</code>的引用（常量引用）<a class="headerlink" href="#const" title="Permanent link">&para;</a></h3>
 <p>在C语言中，可以使用<code>const</code>指针修饰指针变量，并且<code>const</code>可以修饰指针变量整体使得无法通过解引用该指针修改指向空间的内容，也可以放在变量名前方限制指针无法指向其他对象</p>
 <p>在C++中，也存在<code>const</code>修饰的引用，但是<code>const</code>只能放在引用变量整体的前面，即<code>const int&amp; a</code>，<strong>对于引用的<code>const</code>来说都是底层<code>const</code></strong>，例如</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在指针/引用中，指针和引用的权限只可以缩小不可以放大</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
@@ -4598,8 +4594,8 @@
 <a id="__codelineno-36-15" name="__codelineno-36-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
 <p>在强制类型转换的过程中，实际上是创建了一个临时变量，例如</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1">1</a></span>
 <span class="normal"><a href="#__codelineno-37-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.34</span><span class="p">;</span>
@@ -4620,7 +4616,7 @@
 <a id="__codelineno-39-2" name="__codelineno-39-2"></a><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="c1">// 截断</span>
 <a id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
-</blockquote>
+</div>
 <h3 id="_14">引用在实际中的使用<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <h4 id="_15">函数返回值<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
@@ -4742,11 +4738,11 @@
 <a id="__codelineno-41-21" name="__codelineno-41-21"></a><span class="c1">//编译器警告：返回局部变量或临时变量的地址: z</span>
 </code></pre></div></td></tr></table></div>
 <p>因为<code>z</code>是<code>add</code>函数中的局部变量，出了<code>add</code>函数将会被销毁，此时返回z是返回变量z的引用，被<code>ret</code>接收后，<code>ret</code>指向<code>z</code>的位置，当<code>z</code>销毁后，<code>ret</code>依旧指向该位置，但是该位置的值已经不一定是刚才计算出来的结果，因为<code>add</code>函数栈帧空间可能会被覆盖，没被覆盖时该地址的值依旧是计算出来的值，否则就是随机值，具体取决于编译器如何分配空间</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在使用引用作为函数返回值时，注意引用的实体尽量不是临时变量或者局部变量，除非返回作为形式参数的引用变量</p>
 <p>所以，函数返回时，出了函数作用域如果返回对象还在(没还给系统)，则可以使用引用返回，如果已经还给系统了，则必须使用传值返回</p>
-</blockquote>
+</div>
 <h5 id="_16">返回值和返回引用时间消耗对比<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h5>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
@@ -4937,9 +4933,10 @@
 </ol>
 <p>在C++中，为了避免上述问题，经常使用<code>const</code>和<code>enum</code>来表示常量，而使用内联函数代替<code>#define</code>定义的宏函数</p>
 <p>所谓内联函数，即当函数代码量较小时，在汇编代码中直接将函数代码替换掉原来的<code>call</code>+函数名指令，减少函数栈帧开辟时的开销，从而实现直接执行函数，但是缺点也就比较明显，如果代码量太大，将会导致替换后的函数指令很多，为此C++中的内联函数到底是真正的函数还是类似于C语言的宏函数取决于函数代码规模的大小，如果函数代码量大，那么尽管定义为内联函数，还是会被编译器认作普通函数</p>
-<blockquote>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
 <p>需要注意的是，尽管声明为内联函数，具体是否会被当做内联函数取决于编译器，不一定代码量小的就是内联函数，因为<code>inline</code>对于编译器来说只是一个建议，而不是命令</p>
-</blockquote>
+</div>
 <p>在C++中，使用<code>inline</code>关键字修饰定义的函数，语法如下</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="kr">inline</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">普通函数定义</span>
 </code></pre></div></td></tr></table></div>
@@ -4960,10 +4957,10 @@
 <a id="__codelineno-46-7" name="__codelineno-46-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 <a id="__codelineno-46-8" name="__codelineno-46-8"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>不建议将内联函数的声明和定义分开写，二者分离会导致链接错误。因为inline会展开函数，导致函数失去本身的地址，声明的函数就无法被找到</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1">1</a></span>
 <span class="normal"><a href="#__codelineno-47-2">2</a></span>
 <span class="normal"><a href="#__codelineno-47-3">3</a></span>
@@ -5467,10 +5464,10 @@
 <a id="__codelineno-62-22" name="__codelineno-62-22"></a><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">10</span>
 <a id="__codelineno-62-23" name="__codelineno-62-23"></a><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">10</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>与普通循环类似，可以用<code>continue</code>来结束本次循环，也可以用<code>break</code>来跳出整个循环</p>
-</blockquote>
+</div>
 <p>基于范围的<code>for</code>循环也可以使用<code>auto</code>创建循环变量</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-63-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-63-2"> 2</a></span>

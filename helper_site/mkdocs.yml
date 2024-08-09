@@ -20,9 +20,9 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.highlight:
-    anchor_linenums: true
+      anchor_linenums: true
   - toc:
-    permalink: true
+      permalink: true
 
 extra_javascript:
   - javascripts/mathjax.js

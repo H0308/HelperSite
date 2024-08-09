@@ -10,6 +10,7 @@ nav:
   - 主页: index.md
   - C++教程: 
     - list类模拟实现: 12. list模拟实现/12. list类模拟实现.md
+    - 数据结构: 1. 时间复杂度和空间复杂度/1. 时间复杂度与空间复杂度.md
 
 markdown_extensions:
   - pymdownx.arithmatex:
@@ -26,7 +27,7 @@ markdown_extensions:
 markdown_extensions:
 - toc:
     permalink: true
-    
+
 markdown_extensions:
 - pymdownx.highlight:
     anchor_linenums: true

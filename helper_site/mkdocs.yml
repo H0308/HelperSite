@@ -14,16 +14,16 @@ theme:
     repo: fontawesome/brands/git-alt
   language: zh
   palette:
-    accent: teal
-    primary: white
-    - scheme: default
+    - accent: teal
+      primary: white
+      scheme: default
       toggle:
-        icon: material/lightbulb
+        icon: material/lightbulb 
         name: Switch to dark mode
     - scheme: slate
       toggle:
-        icon: material/brightness-4
-        name: material/lightbulb-outline
+        icon: material/lightbulb-outline
+        name: Switch to light mode
 
 copyright: Copyright &copy; 2024 EPSDA
 

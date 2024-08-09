@@ -460,9 +460,9 @@
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="p">}</span>
 </code></pre></div>
 <p>不计算创建变量和打印语句，直观准确来计算时，大概率得出一个公式，即<br/>
-[
+$$
 f(n)=n^2+n+10
-]
+$$
 <br/>但是，时间复杂度计算的是一个估计值，也就是说，我们不需要完全准确地将代码执行次数计算出来，对于上面的表达式，由于<span class="arithmatex">\(n^2\)</span>的增长速度要大于n，当n→+∞时，n对函数整体计算出来的值影响并不大，故取<span class="arithmatex">\(n^2\)</span>，而不是取n，另外在计算时间复杂度时，加法常数一般是忽略不计的</p>
 <p>所以，上面代码在计算时间复杂度时，只需要取出<span class="arithmatex">\(n^2\)</span>即可，即O(<span class="arithmatex">\(N^2\)</span>)</p>
 <h2 id="_17">最坏情况和平均情况<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>

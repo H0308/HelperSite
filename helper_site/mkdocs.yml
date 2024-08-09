@@ -58,7 +58,7 @@ markdown_extensions:
   - toc:
       permalink: true
       baselevel: 1  # 开始级别
-      toc_depth: 3  # 最大深度
+      toc_depth: 6  # 最大深度
   - def_list
   - pymdownx.tasklist:
       custom_checkbox: true

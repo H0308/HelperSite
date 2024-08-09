@@ -81,6 +81,11 @@ nav:
     - set类: C++/21. set类/21. set类.md
     - map类: C++/22. map类/22. map类.md
     - map和set类模拟实现: C++/23. map和set类模拟实现/23. map和set类模拟实现.md
+  - Java:
+    - Java基础知识: Java/1. Java基础知识/Java基础知识.md
+    - Java数组类型: Java/2. Java数组类型/2. Java数组类型.md
+    - Java面向对象与方法: Java/3. Java面向对象与方法/3. Java面向对象与方法.md
+    - Java面向对象与封装: Java/4. Java面向对象与封装/4. Java面向对象与封装.md
   - Linux:
     - Linux常用选项和指令: Linux/1. Linux常用选项和指令/1. Linux常用选项和指令.md
     - Linux权限相关: Linux/2. Linux权限相关/2. Linux权限相关.md

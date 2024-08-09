@@ -13,6 +13,7 @@ nav:
     - 数据结构: 1. 时间复杂度和空间复杂度/1. 时间复杂度与空间复杂度.md
 
 markdown_extensions:
+  - admonition
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences

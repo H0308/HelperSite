@@ -23,6 +23,8 @@ markdown_extensions:
       anchor_linenums: true
   - toc:
       permalink: true
+      baselevel: 1  # 开始级别
+      toc_depth: 3  # 最大深度
 
 extra_javascript:
   - javascripts/mathjax.js

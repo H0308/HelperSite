@@ -5,7 +5,6 @@ theme:
   name: 'material'
   font:
     text: Noto Serif
-    code: Source Code Pro
   features:
     # - header.autohide
     - navigation.tabs

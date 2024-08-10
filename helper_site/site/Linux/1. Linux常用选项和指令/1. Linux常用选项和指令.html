@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-linux" class="md-skip">
+        <a href="#linux" class="md-skip">
           跳转至
         </a>
       
@@ -1821,7 +1821,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#linux" class="md-nav__link">
+  <a href="#linux_1" class="md-nav__link">
     <span class="md-ellipsis">
       Linux指令使用注意
     </span>
@@ -1890,7 +1890,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#linux_1" class="md-nav__link">
+  <a href="#linux_2" class="md-nav__link">
     <span class="md-ellipsis">
       Linux文件系统结构
     </span>
@@ -2517,7 +2517,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#linux" class="md-nav__link">
+  <a href="#linux_1" class="md-nav__link">
     <span class="md-ellipsis">
       Linux指令使用注意
     </span>
@@ -2586,7 +2586,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#linux_1" class="md-nav__link">
+  <a href="#linux_2" class="md-nav__link">
     <span class="md-ellipsis">
       Linux文件系统结构
     </span>
@@ -3038,8 +3038,8 @@
   
 
 
-<h1 id="1-linux">1. Linux常用选项和指令<a class="headerlink" href="#1-linux" title="Permanent link">&para;</a></h1>
-<h2 id="linux">Linux指令使用注意<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<h1 id="linux">Linux常用选项和指令<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h1>
+<h2 id="linux_1">Linux指令使用注意<a class="headerlink" href="#linux_1" title="Permanent link">&para;</a></h2>
 <ol>
 <li>在输入Linux指令时，需要注意指令和选项/地址/内容时需要有空格间隔</li>
 <li>输入Linux指令时，一定要注意指令的大小写，大部分的指令都是小写</li>
@@ -3060,10 +3060,10 @@
 <li>特殊用法（结合通配符<code>*</code>）：</li>
 </ul>
 <p><code>ls 固定内容*</code>：该命令会显示所有可见的匹配固定内容的文件</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>如果当前目录中只有一个目录满足与固定内容相同时，则上面的指令只会显示该目录内的匹配内容，如果该目录为空，那么将不显示任何内容</p>
-</blockquote>
+</div>
 <p>示例：</p>
 <p>当前目录下存在一个<code>file</code>目录，其中有一个<code>file.c</code>的文件，还存在一个<code>test.c</code>文件以及一个test目录，<code>test</code>目录中有一个<code>test.c</code>文件</p>
 <ul>
@@ -3079,10 +3079,10 @@
 <li><code>-l</code>：<code>ls -l</code>可以显示当前路径下的所有可见文件及文件对应的详细信息</li>
 <li><code>-a</code>：<code>ls -a</code>可以显示当前路径下的所有文件（包括可见文件和隐藏文件），但是没有文件的详细信息</li>
 </ol>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在Linux中，以<code>.</code>开头的文件均为隐藏文件</p>
-</blockquote>
+</div>
 <ol>
 <li><code>-d</code>：<code>ls -d</code>(+指定目录或文件)可以显示当前路径下某一个指定文件的</li>
 </ol>
@@ -3092,18 +3092,18 @@
 <li><code>ls -l</code></li>
 </ul>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image5.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image5.jpg" ></a></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在Linux中，文件属性开始的字符，如上图中的<code>-rw-r--r--</code>如果为第一个字符为<code>-</code>代表是普通文件，<code>d</code>开头的文件为目录</p>
-</blockquote>
+</div>
 <ul>
 <li><code>ls -a</code></li>
 </ul>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image6.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image6.jpg"></a></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意，当前在root目录下，所以存在其他文件夹</p>
-</blockquote>
+</div>
 <ul>
 <li><code>ls -d</code>(+指定目录或文件)</li>
 </ul>
@@ -3117,14 +3117,14 @@
 <p>示例：</p>
 <p>当前在root目录下，使用<code>pwd</code>指令</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image9.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image9.jpg" ></a></p>
-<h2 id="linux_1">Linux文件系统结构<a class="headerlink" href="#linux_1" title="Permanent link">&para;</a></h2>
+<h2 id="linux_2">Linux文件系统结构<a class="headerlink" href="#linux_2" title="Permanent link">&para;</a></h2>
 <h3 id="_2">多叉树结构文件系统介绍<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>在Linux系统中，文件系统结构呈现一种多叉树的结构，由磁盘上的文件和目录组成，每一个节点都是目录或者文件，如下图所示：</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image10.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image10.jpg"></a></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在Linux中，路径中的第一个<code>/</code>为根目录</p>
-</blockquote>
+</div>
 <p>对于文件系统结构来说，使用多叉树的结构作为其结构基础的原因是每一个节点都对应一个父亲节点，当当从某一个父亲节点（目录）找某一个孩子节点（目录或文件）的路径是唯一的，而当某一个孩子节点想返回到某一个父亲节点时的路径也是唯一的，即逆向返回，正向查找的路径均唯一</p>
 <p>所以，文件系统结构一般会考虑采用多叉树的结构配合路径来定位（查找）文件</p>
 <h3 id="_3">多叉树结构文件系统的特点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -3136,17 +3136,17 @@
 <h3 id="_4">绝对路径<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>所谓绝对路径，即不论何时路径都是绝对唯一的，所以绝对路径的特点就是从根目录开始，直到目标文件，绝对路径一般应用于编写配置文件时使用</p>
 <p>例如：<code>/root/test/test.c</code></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在Linux中，除了第一个<code>/</code>以外，其余<code>/</code>均为路径分隔符，一般<code>/</code>左侧时目录，右侧时文件或者目录</p>
-</blockquote>
+</div>
 <h3 id="_5">相对路径<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>所谓相对路径，即每一次相对于某一个路径开始查找，因为参考对象不同，所以相对路径一般都不相同，相对路径一般使用命令行操作时使用</p>
 <p>例如：</p>
 <p>当前所在位置为<code>/root/test</code></p>
 <p>从当前位置出发找root目录下的<code>file</code>目录下的<code>file.c</code>为<code>/root/test/../../file/file.c</code></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在Linux中，一般<code>.</code>或<code>./</code>代表当前当前路径，而<code>..</code>或<code>../</code>代表当前路径的上一路径</p>
 <p>在Linux文件系统中，每一个目录都会有<code>.</code>与<code>..</code>，如下图所示：</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image11.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image11.jpg" ></a></p>
@@ -3154,7 +3154,7 @@
 <p>但是注意，如果用户当前处于根目录的位置，则<code>.</code>和<code>..</code>均代表当前目录（即根目录），即根目录没有上一级目录</p>
 <p><code>.</code>限定当前路径的使用场景：</p>
 <p>一般可以使用<code>./可执行程序名</code> 运行可执行程序，例如<code>code</code>为可执行程序，可以使用<code>./code</code>执行程序<code>code</code></p>
-</blockquote>
+</div>
 <h3 id="cd_1"><code>cd</code>指令介绍<a class="headerlink" href="#cd_1" title="Permanent link">&para;</a></h3>
 <p>在Linux中，使用<code>cd</code>指令可以改变当前所在目录</p>
 <p>示例：</p>
@@ -3167,11 +3167,11 @@
 <li>普通用户：对于普通用户来说，其家户目录为<code>/home/用户名</code></li>
 <li>root（超级管理员）用户：对于root用户来说，其家户目录为<code>/root</code></li>
 </ol>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在Linux中，一个用户（包括root用户）在每一次刚登陆进入系统时所在的目录即为家户目录</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image13.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image13.jpg" ></a></p>
-</blockquote>
+</div>
 <p>当用户需要不在家目录想快速返回家户目录时，则可以使用<code>cd ~</code>指令快速返回家户目录</p>
 <p>示例：</p>
 <p>当前处于<code>/root/test</code>下，需要快速返回家户目录</p>
@@ -3181,16 +3181,16 @@
 <p>示例：</p>
 <p>上一次所在目录为<code>/root/test</code>，而当前所在目录为<code>/root</code>，使用<code>cd -</code>快速回到<code>/root/test</code>目录下</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image15.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image15.jpg" ></a></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>系统会提示上一次所在的目录并跳转到上一次的目录</p>
-</blockquote>
+</div>
 <h2 id="touch"><code>touch</code>指令<a class="headerlink" href="#touch" title="Permanent link">&para;</a></h2>
 <p>在Linux中，可以使用<code>touch+文件名</code>创建一个文件，如果<code>touch</code>后面有多个文件时，则可以一次创建多个文件，例如<code>touch test.c test.txt</code>表示在当前目录创建一个名为<code>test.c</code>的文件和<code>test.txt</code>的文件</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意不可以使用<code>touch</code>创建目录</p>
-</blockquote>
+</div>
 <p>示例：</p>
 <p>当前所处位置为<code>/root/test</code>，在当前位置创建一个名为<code>test.c</code>的文件</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image16.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image16.jpg" ></a></p>
@@ -3203,20 +3203,20 @@
 <h2 id="mkdir"><code>mkdir</code>指令<a class="headerlink" href="#mkdir" title="Permanent link">&para;</a></h2>
 <h3 id="mkdir_1"><code>mkdir</code>指令介绍<a class="headerlink" href="#mkdir_1" title="Permanent link">&para;</a></h3>
 <p>在Linux中，可以使用<code>mkdir+目录名</code>创建一个目录，与<code>touch</code>指令同理，可以创建多个目录</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意，在Linux中，同一个目录下不可以创建两个同名的目录</p>
-</blockquote>
+</div>
 <p>示例：</p>
 <p>在当前目录<code>/root/test</code>下，创建一个名为<code>test1</code>的目录</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image18.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image18.jpg" ></a></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>此时不可以再创建一个名为<code>test1</code>的目录</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image19.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image19.jpg" ></a></p>
 <p>但是可以再<code>test1</code>中再创建一个<code>test1</code>的目录</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image20.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image20.jpg" ></a></p>
-</blockquote>
+</div>
 <ul>
 <li>与<code>touch</code>一样，如果不想跳转至某一个目录下再创建目录，可以使用<code>mkdir+路径+目录名</code>，也称递归创建目录</li>
 </ul>
@@ -3225,17 +3225,17 @@
 <p>示例：</p>
 <p>当前在<code>/root/test</code>目录下，使用一次操作创建一个名为<code>test1</code>目录，接着在<code>test1</code>中创建一个名为<code>test2</code>目录</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image21.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image21.jpg"></a></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意，图中的<code>tree</code>指令一般Linux系统默认没有该指令</p>
 <p>对于CentOS系统，可以使用<code>sudo yum install -y tree</code>指令安装<code>tree</code>指令</p>
-</blockquote>
+</div>
 <h2 id="rmdir"><code>rmdir</code>指令<a class="headerlink" href="#rmdir" title="Permanent link">&para;</a></h2>
 <p>在Linux中可以使用<code>rmdir+目录名</code>指令删除目录</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意，当需要删除的目录中有文件或者目录时，此时不可以删除该目录</p>
-</blockquote>
+</div>
 <p>示例：</p>
 <p>当前目录<code>/root/test/test1</code>中有一个<code>test2</code>目录，使用<code>rmdir</code>指令删除<code>test2</code>目录</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image22.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image22.jpg" ></a></p>
@@ -3243,11 +3243,11 @@
 <p>示例：</p>
 <p>在当前目录<code>/root</code>下有一个<code>test</code>，<code>test</code>中只有一个<code>test1</code>文件夹，<code>test1</code>文件夹为空，一次操作删除<code>test</code>目录和<code>test1</code>目录</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image23.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image23.jpg" ></a></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>上面的过程中，如果<code>test</code>或<code>test1</code>其中任何一个目录不为空（存在其他目录或者文件）时，将不可以执行删除</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image24.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image24.jpg"></a></p>
-</blockquote>
+</div>
 <p>为了解决上面的问题，常常使用<code>rm</code>指令代替<code>rmdir</code>指令</p>
 <h2 id="rm"><code>rm</code>指令<a class="headerlink" href="#rm" title="Permanent link">&para;</a></h2>
 <h3 id="rm_1"><code>rm</code>指令介绍<a class="headerlink" href="#rm_1" title="Permanent link">&para;</a></h3>
@@ -3255,36 +3255,36 @@
 <p>示例：</p>
 <p>当前目录<code>/root/test</code>下有一个<code>test.c</code>文件，使用<code>rm</code>指令删除该文件</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image25.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image25.jpg" ></a></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
 <p>对于root用户删除文件，系统会询问用户是否需要执行删除，<code>y</code>/<code>yes</code>代表是，<code>n</code>/<code>no</code>代表否，不区分大小写</p>
-</blockquote>
 <h3 id="rm_2"><code>rm</code>指令常见选项<a class="headerlink" href="#rm_2" title="Permanent link">&para;</a></h3>
 <ol>
-<li><code>-r</code>：递归删除目录</li>
-</ol>
-<blockquote>
-<p>[!NOTE]</p>
+<li>
+<p><code>-r</code>：递归删除目录</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
 <p>不同于<code>rmdir -p</code>，当目录有其他文件或者目录时依旧可以执行删除</p>
-<p><a class="glightbox" href="1. Linux常用选项和指令.assets\image26.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image26.jpg" ></a></p>
-</blockquote>
-<ol>
-<li><code>-f</code>：强制删除</li>
-</ol>
+<p><a class="glightbox" href="1. Linux常用选项和指令.assets\image26.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image26.jpg" ></a>
+2. <code>-f</code>：强制删除</p>
 <p>对于特殊文件如果无法直接删除，可以使用强制删除</p>
-<blockquote>
-<p>[!NOTE]</p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>切忌在root权限下使用<code>rm -rf /*</code></p>
 <p><code>rm -rf/</code>：尝试删除根目录下的所有文件和目录，但是会删除失败</p>
 <p><code>rm-rf /*</code>：删除根目录以下所有的文件，但是会保留根目录本身</p>
-</blockquote>
+</div>
 <p>使用<code>rm -rf *</code>可以删除当前目录下所有的文件和目录</p>
 <h2 id="man"><code>man</code>指令<a class="headerlink" href="#man" title="Permanent link">&para;</a></h2>
 <p>在Linux中，可以使用<code>man</code>指令查看帮助手册，当没有指定章节时，<code>man</code>指令默认从第一章节开始查找</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>部分Linux默认没有<code>man</code>指令，CentOS可以使用<code>sudo yum install -y man-pages</code></p>
-</blockquote>
+</div>
 <p><code>man</code>指令一般分为九类：</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image27.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image27.jpg"></a></p>
 <h2 id="cp"><code>cp</code>指令<a class="headerlink" href="#cp" title="Permanent link">&para;</a></h2>
@@ -3302,14 +3302,14 @@
 <p>新建拷贝文件</p>
 <p>当前处于<code>/root/test</code>目录，<code>test1</code>目录中有一个<code>test.c</code>文件，将<code>test1</code>中的<code>test.c</code>使用<code>cp</code>指令在<code>test1</code>目录下拷贝一个文件名为<code>test1.c</code>的文件</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets/image-20240626201501471.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets/image-20240626201501471.png" alt="image-20240626201501471" /></a></p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意在拷贝文件到指定路径下时，路径一定要写全，否则会出现目标目录在当前目录下被创建了一份，如下图所示：</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image29.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image29.jpg" ></a></p>
 <p>将<code>test.txt</code>拷贝到<code>test3</code>目录下，如果直接执行<code>cp test.txt test3</code>指令，则会出现在<code>test1</code>当前目录重新创建一个<code>test3</code>目录，如下图所示：</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets\image30.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets\image30.jpg" ></a></p>
 <p>出现上面这种情况的原因是<code>test1</code>目录下没有<code>test3</code>目录，系统找不到<code>test3</code>目录所以<code>cp</code>指令创建了一个<code>test3</code>目录</p>
-</blockquote>
+</div>
 <h2 id="mv"><code>mv</code>指令<a class="headerlink" href="#mv" title="Permanent link">&para;</a></h2>
 <p>在Linux中，可以使用<code>mv</code>指令移动文件或者为文件改名，同<code>cp</code>指令一样可以移动多个文件到最后的一个dst目录下</p>
 <p>在<code>mv 选项 src[文件/目录] dst[文件/目录]</code>中</p>
@@ -3344,9 +3344,10 @@
 <p>例如下面的结果：</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets/image-20240626205757458.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets/image-20240626205757458.png" alt="image-20240626205757458" style="zoom:60%;" ></a></p>
 <p>当<code>cat</code>指令后面不接文本文件名时表示回显输入的内容，按下<code>Ctrl+D</code>（按两下）或者<code>Ctrl+C</code>结束输入</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>Ctrl+D</code>用于退出当前用户居多</p>
-</blockquote>
+</div>
 <h2 id="echo"><code>echo</code>指令<a class="headerlink" href="#echo" title="Permanent link">&para;</a></h2>
 <p>在Linux中，使用<code>echo+字符串</code>可以在控制台打印出字符串内容</p>
 <p><a class="glightbox" href="1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.assets/image-20240626210857171.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20240626210857171" src="1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.assets/image-20240626210857171.png" /></a></p>
@@ -3371,9 +3372,10 @@
 <p>使用输出重定向写入数据时会清空原始文件的内容，为了不清空在原有内容之后插入可以使用追加重定向，使用<code>&gt;&gt;</code>表示，使用方法与输出重定向相同</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets/image-20240627092300203-1719451381797-3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets/image-20240627092300203-1719451381797-3.png" alt="image-20240627092300203" ></a></p>
 <p>使用<code>echo</code>配合追加重定向会在原来内容后的下一行进行写入，<strong>不换行追加可以使用printf</strong></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>因为<code>echo</code>本身会给内容自动加一个换行符，所以上一次使用的是<code>echo</code>那么下一次使用<code>printf</code>依旧会在下一行写入，再使用<code>printf</code>就不会换行</p>
-</blockquote>
+</div>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets/image-20240627093533788.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets/image-20240627093533788.png" alt="image-20240627093533788" ></a></p>
 <h3 id="_10">输入重定向<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>对应输出重定向，还有输入重定向，使用<code>&lt;</code>表示，使用<code>cat &lt; + 文件名</code>可以将文件内容打印到控制台</p>
@@ -3421,9 +3423,10 @@
 <p>示例：</p>
 <p>使用<code>date</code>指令以<code>年/月/日 时:分:秒</code>的格式显示时间</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets/image-20240627145500811-1719471305791-1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets/image-20240627145500811-1719471305791-1.png" alt="image-20240627145500811" ></a></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意，空格需要使用<code>\+空格</code>进行转义</p>
-</blockquote>
+</div>
 <p>也可以使用<code>-s + 时间字符串</code>设定时间</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
@@ -3484,9 +3487,10 @@
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets/image-20240627155915454.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets/image-20240627155915454.png" alt="image-20240627155915454" ></a></p>
 <p>不需要该别名时可以使用<code>unalias</code>取消别名</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets/image-20240627160052440.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets/image-20240627160052440.png" alt="image-20240627160052440" ></a></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>取消别名不会导致指令删除，并且我们自己指定的别名在当前用户注销后会自动清除</p>
-</blockquote>
+</div>
 <h2 id="grep"><code>grep</code>指令<a class="headerlink" href="#grep" title="Permanent link">&para;</a></h2>
 <p>使用<code>grep</code>指令可以在<code>Linux</code>下在指定文件中查找指定字符串，默认不忽略大小写</p>
 <p>示例：</p>
@@ -3503,10 +3507,11 @@
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets/image-20240627161200993.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets/image-20240627161200993.png" alt="image-20240627161200993" ></a></p>
 <h2 id="zipunzip"><code>zip</code>指令和<code>unzip</code>指令<a class="headerlink" href="#zipunzip" title="Permanent link">&para;</a></h2>
 <p>在Linux中，可以使用<code>zip</code>指令为文件或者目录进行压缩，使用<code>-r</code>选项将待压缩的目录中的内容同目录一起压缩，<code>unzip</code>即为解压文件</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>压缩目录时，如果不带选项只写目录只会压缩一个空目录，该目录中的内容不会被压缩</p>
 <p>如果没有<code>unzip</code>指令，可以使用<code>sudo yum install -y unzip</code>指令安装<code>unzip</code>指令</p>
-</blockquote>
+</div>
 <p>示例：</p>
 <p>在<code>/root/test</code>目录下有一个<code>test1</code>目录和<code>test2</code>目录，<code>test1</code>目录中有一个<code>test.c</code>文件，将<code>test1</code>目录及其文件使用<code>zip</code>指令进行压缩，并使用<code>unzip</code>指令在<code>test2</code>目录下解压</p>
 <p><a class="glightbox" href="1. Linux常用选项和指令.assets/image-20240627163725245.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. Linux常用选项和指令.assets/image-20240627163725245.png" alt="image-20240627163725245" ></a></p>

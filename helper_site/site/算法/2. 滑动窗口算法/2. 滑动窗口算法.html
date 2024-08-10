@@ -1932,6 +1932,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    滑动窗口算法
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="2.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1941,6 +1952,76 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      滑动窗口练习
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="滑动窗口练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      长度最小的子数组
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      无重复字符的最长子串
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1iii" class="md-nav__link">
+    <span class="md-ellipsis">
+      最长连续1的个数Ⅲ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#x0" class="md-nav__link">
+    <span class="md-ellipsis">
+      将x减到0的最小操作数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1974,6 +2055,65 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      滑动窗口练习
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="滑动窗口练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      长度最小的子数组
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      无重复字符的最长子串
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1iii" class="md-nav__link">
+    <span class="md-ellipsis">
+      最长连续1的个数Ⅲ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#x0" class="md-nav__link">
+    <span class="md-ellipsis">
+      将x减到0的最小操作数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2001,13 +2141,14 @@
 <li>离开窗口</li>
 <li>循环2、3和4步</li>
 </ol>
-<h1 id="_2">滑动窗口练习<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
-<h2 id="_3">长度最小的子数组<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_2">滑动窗口练习<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">长度最小的子数组<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>题目链接：<a href="https://leetcode.cn/problems/minimum-size-subarray-sum/description/">209. 长度最小的子数组 - 力扣（LeetCode）</a></p>
-<blockquote>
-<p>给定一个含有 <code>n</code> 个正整数的数组和一个正整数 <code>target</code> <strong>。</strong></p>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
+<p>给定一个含有 <code>n</code> 个正整数的数组和一个正整数 <code>target</code>。</p>
 <p>找出该数组中满足其总和大于等于 <code>target</code> 的长度最小的<strong>子数组</strong><code>[numsl, numsl+1, ..., numsr-1, numsr]</code> ，并返回其长度<strong>。</strong>如果不存在符合条件的子数组，返回 <code>0</code> 。</p>
-</blockquote>
+</div>
 <p>思路解析：</p>
 <p>以下面的数组为例</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">[</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="w"> </span><span class="p">]</span>
@@ -2070,9 +2211,10 @@
 <li>判断：本题中，因为需要判断<code>sum&gt;=target</code>，所以此为判断条件</li>
 <li>何时出窗口：本题中，根据判断条件<code>sum&gt;=target</code>可以得出，此条件成立时，证明已经得出了一个合理的结果，需要更新<code>sum</code>和子数组长度<code>len</code>，并让<code>left</code>向后移动（移动窗口，即出窗口），这一过程被称为<strong>更新结果</strong>（更新结果一般是贯穿在滑动窗口的解题步骤中，具体在哪一步由题目决定）</li>
 </ol>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>需要注意，本题需要求出子数组长度的最小值，所以<code>len</code>不可以初始化为0，否则最后结果只会为0</p>
-</blockquote>
+</div>
 <p>具体步骤如下：</p>
 <p><a class="glightbox" href="2. 滑动窗口算法.assets/image-20240708212431866.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="2. 滑动窗口算法.assets/image-20240708212431866.png" alt="image-20240708212431866" style="zoom:50%;" /></a></p>
 <p><a class="glightbox" href="2. 滑动窗口算法.assets/image-20240708212444674.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="2. 滑动窗口算法.assets/image-20240708212444674.png" alt="image-20240708212444674" style="zoom:50%;" /></a></p>
@@ -2134,14 +2276,15 @@
 <a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="_4">无重复字符的最长子串<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="_4">无重复字符的最长子串<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>题目链接：<a href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">3. 无重复字符的最长子串 - 力扣（LeetCode）</a></p>
-<blockquote>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
+</div>
 <p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的最长子串的长度。</p>
 <p>输入: <code>s = "abcabcbb"</code></p>
 <p>输出: 3 </p>
 <p>解释: 因为无重复字符的最长子串是<code>"abc"</code>，所以其长度为 3。</p>
-</blockquote>
 <p>思路解析：</p>
 <p>本题的暴力解法为两层<code>for</code>循环遍历+hash判断是否重复，时间复杂度为O(<span class="arithmatex">\(N^2\)</span>)，根据暴力解法可以进一步优化将时间复杂度降低到O(N)</p>
 <p>以示例数组为例</p>
@@ -2196,15 +2339,16 @@
 <a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="1iii">最长连续1的个数Ⅲ<a class="headerlink" href="#1iii" title="Permanent link">&para;</a></h2>
+<h3 id="1iii">最长连续1的个数Ⅲ<a class="headerlink" href="#1iii" title="Permanent link">&para;</a></h3>
 <p>题目链接：<a href="https://leetcode.cn/problems/max-consecutive-ones-iii/">1004. 最大连续1的个数 III - 力扣（LeetCode）</a></p>
-<blockquote>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
 <p>给定一个二进制数组 <code>nums</code> 和一个整数 <code>k</code>，如果可以翻转最多 <code>k</code> 个 <code>0</code> ，则返回 <em>数组中连续 <code>1</code> 的最大个数</em> 。</p>
 <p><strong>示例 1：</strong></p>
 <p>输入：<code>nums = [1,1,1,0,0,0,1,1,1,1,0]</code>,<code>K = 2</code></p>
 <p>输出：6</p>
 <p>解释：[1,1,1,0,0,<strong>1</strong>,1,1,1,1,<strong>1</strong>] 粗体数字从 0 翻转到 1，最长的子数组长度为 6。</p>
-</blockquote>
+</div>
 <p>思路解析：</p>
 <p>题目说明<strong>最多翻转k个0</strong>，代表翻转0的个数可以有[0, k]个，所以有两种情况：</p>
 <ol>
@@ -2264,16 +2408,17 @@
 <a id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="x0">将x减到0的最小操作数<a class="headerlink" href="#x0" title="Permanent link">&para;</a></h2>
+<h3 id="x0">将x减到0的最小操作数<a class="headerlink" href="#x0" title="Permanent link">&para;</a></h3>
 <p>题目链接：<a href="https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/">1658. 将 x 减到 0 的最小操作数 - 力扣（LeetCode）</a></p>
-<blockquote>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
 <p>给你一个整数数组 <code>nums</code> 和一个整数 <code>x</code> 。每一次操作时，你应当移除数组 <code>nums</code> 最左边或最右边的元素，然后从 <code>x</code> 中减去该元素的值。请注意，需要 <strong>修改</strong> 数组以供接下来的操作使用。</p>
 <p>如果可以将 <code>x</code> <strong>恰好</strong> 减到 <code>0</code> ，返回 <strong>最小操作数</strong> ；否则，返回 <code>-1</code> 。</p>
 <p><strong>示例 1：</strong></p>
 <p>输入：<code>nums = [1,1,4,2,3]</code>, <code>x = 5</code></p>
 <p>输出：2</p>
 <p>解释：最佳解决方案是移除后两个元素，将 x 减到 0 。</p>
-</blockquote>
+</div>
 <p>思路解析：</p>
 
 

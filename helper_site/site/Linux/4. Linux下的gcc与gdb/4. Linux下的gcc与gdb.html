@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#4linuxgccgdb" class="md-skip">
+        <a href="#linuxgccgdb" class="md-skip">
           跳转至
         </a>
       
@@ -1992,10 +1992,10 @@
   
 
 
-<h1 id="4linuxgccgdb">4.Linux下的gcc与gdb<a class="headerlink" href="#4linuxgccgdb" title="Permanent link">&para;</a></h1>
+<h1 id="linuxgccgdb">Linux下的gcc与gdb<a class="headerlink" href="#linuxgccgdb" title="Permanent link">&para;</a></h1>
 <h1 id="linuxgcc">Linux下的gcc<a class="headerlink" href="#linuxgcc" title="Permanent link">&para;</a></h1>
 <p>在前面C语言的编译与链接章节中学到了C语言的可执行程序是如何从代码一步一步生成的，下面是前面用到的指令</p>
-<h2 id="_1">代码编译与链接<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_1">代码编译与链接<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>代码编译预处理</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>gcc<span class="w"> </span>-E<span class="w"> </span>test.c<span class="w"> </span>-o<span class="w"> </span>test.i
 </code></pre></div></td></tr></table></div>
@@ -2006,27 +2006,30 @@
 <p>预处理生成汇编</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>gcc<span class="w"> </span>-S<span class="w"> </span>test.c<span class="w"> </span>-o<span class="w"> </span>test.s
 </code></pre></div></td></tr></table></div>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>如果已经在前面执行了编译预处理生成了<code>test.i</code>文件，则可以直接用<code>test.i</code>文件而不是<code>test.c</code>文件</p>
-</blockquote>
+</div>
 <ul>
 <li>用户可以使用<code>-S</code>选项来进行查看,该选项只进行编译而不进行汇编,生成汇编代码</li>
 </ul>
 <p>汇编生成二进制文件</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>gcc<span class="w"> </span>-c<span class="w"> </span>test.c<span class="w"> </span>-o<span class="w"> </span>test.o
 </code></pre></div></td></tr></table></div>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>如果已经在前面执行了编译预处理生成了<code>test.s</code>文件，则可以直接用<code>test.s</code>文件而不是<code>test.c</code>文件</p>
-</blockquote>
+</div>
 <ul>
 <li>使用选项<code>-c</code>就可看到汇编代码已转化为<code>.o</code>的二进制目标代码，<code>.o</code>文件也被称为可重定位目标文件</li>
 </ul>
 <p>二进制文件链接生成可执行程序</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>gcc<span class="w"> </span>test.c<span class="w"> </span>-o<span class="w"> </span><span class="nb">test</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>如果已经在前面执行了编译预处理生成了<code>test.o</code>文件，则可以直接用<code>test.o</code>文件而不是<code>test.c</code>文件</p>
-</blockquote>
+</div>
 <h2 id="_2">函数库<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>函数库一般分为静态库和动态库两种</p>
 <ol>

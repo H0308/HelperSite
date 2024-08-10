@@ -12,8 +12,6 @@ theme:
     - search.suggest
     - search.highlight
     - content.tabs.link
-  icon:
-    repo: fontawesome/brands/git-alt
   language: zh
   palette:
     - scheme: default
@@ -33,72 +31,83 @@ copyright: Copyright &copy; 2024 EPSDA
 
 nav:
   - 主页: index.md
-  - C语言:
-    - C语言基础知识: C语言/1. C语言基础知识/1. C语言基础知识.md
-    - 进制转换与类型在内存的存储方式: C语言/2. 进制转换与类型在内存中存储方式/2. 进制转换与类型在内存中存储方式.md
-    - C语言数据类型与变量: C语言/3. C语言数据类型和变量/3. C语言数据类型和变量.md
-    - C语言操作符: C语言/4. C语言操作符/4. C语言操作符.md
-    - C语言的标准输入函数scanf及标准输出函数printf: C语言/5. C语言的标准输入函数scanf及标准输出函数printf/5. C语言的标准输入函数scanf及标准输出函数printf.md
-    - C语言中的分支语句: C语言/6. C语言中的分支语句/6. C语言中的分支语句.md
-    - C语言中的循环语句: C语言/7. C语言中的循环语句/7. C语言中的循环语句.md
-    - C语言函数: C语言/8. C语言函数/8. C语言函数.md
-    - C语言指针: C语言/9. C语言指针/9. C语言指针.md
-    - C语言字符函数、字符串函数与内存函数: C语言/10. C语言字符函数、字符串函数与内存函数/10. C语言字符函数、字符串函数与内存函数.md
-    - C语言动态内存管理: C语言/11. C语言动态内存管理/11. C语言动态内存管理.md
-    - C语言文件操作: C语言/12. C语言文件操作/12. C语言文件操作.md
-    - C语言编译与链接（基础）: C语言/13. C语言编译与链接（基础）/13. C语言编译与链接（基础）.md
-    - C语言预处理（部分）: C语言/14. C语言预处理（部分）/14. C语言预处理（部分）.md
-  - 数据结构:
-    - 数据结构基础: 数据结构/1. 时间复杂度和空间复杂度/1. 时间复杂度与空间复杂度.md
-    - 顺序结构与顺序表: 数据结构/2. 顺序表/2. 顺序表.md
-    - 链表: 数据结构/3. 链表/3. 链表.md
-    - 栈: 数据结构/4. 栈/4. 栈.md
-    - 队列: 数据结构/5. 队列/5. 队列.md
-    - 树的基本概念: 数据结构/6. 树的基本概念/6. 树的基本结构.md
-    - 二叉树（基础）: 数据结构/7. 二叉树（基础）/7. 二叉树（基础）.md
-    - 堆: 数据结构/8. 堆/8. 堆.md
-    - 排序: 数据结构/9. 排序/9. 排序.md
-    - 二叉搜索树: 数据结构/10. 二叉搜索树/10. 二叉搜索树.md
-    - AVL树: 数据结构/11. AVL树/11. AVL树.md
-    - 红黑树: 数据结构/12. 红黑树/12. 红黑树.md
-    - 哈希表: 数据结构/13. 哈希表/13. 哈希表.md
-  - C++: 
-    - C语言过渡C++基础知识: C++/1. C语言过渡C++基础知识/1. C语言过渡C++基础知识.md
-    - C++类和对象: C++/2. C++类和对象/2. 类和对象.md
-    - C++默认成员函数: C++/3. C++默认成员函数/3. C++默认成员函数.md
-    - C++类和对象相关内容: C++/4. C++类和对象相关内容/4. C++类和对象相关内容.md
-    - C++内存管理: C++/5. C++内存管理/5. C++内存管理.md
-    - C++模版（基础）: C++/6. C++模版（基础）/6. C++模版（基础）.md
-    - C++STL简介与string类: C++/7. C++STL简介与string类/7. C++STL简介与string类.md
-    - string类模拟实现: C++/8. string类模拟实现/8. string类的模拟实现.md
-    - vector类: C++/9. vector类/9. vector类.md
-    - vector类模拟实现: C++/10. vector类模拟实现/10. vector模拟实现.md
-    - list类: C++/11. list类/11. list类.md
-    - list类模拟实现: C++/12. list模拟实现/12. list类模拟实现.md
-    - stack类: C++/13. stack类/13. stack类.md
-    - queue类: C++/14. queue类/14. queue类.md
-    - stack和queue模拟实现: C++/15. stack和queue模拟实现/15. stack和queue模拟实现.md
-    - priority_queue模拟实现: C++/16. priority_queue模拟实现/16. priority_queue模拟实现.md
-    - 反向迭代器设计: C++/17. 反向迭代器设计/17. reverse_iterator迭代器结构设计.md
-    - C++模版（高阶）: C++/18. C++模板（高阶）/18. C++模板（高阶）.md
-    - C++继承: C++/19. C++继承/19. C++继承.md
-    - C++多态: C++/20. C++多态/20. C++多态.md
-    - set类: C++/21. set类/21. set类.md
-    - map类: C++/22. map类/22. map类.md
-    - map和set类模拟实现: C++/23. map和set类模拟实现/23. map和set类模拟实现.md
-  - Java:
-    - Java基础知识: Java/1. Java基础知识/Java基础知识.md
-    - Java数组类型: Java/2. Java数组类型/2. Java数组类型.md
-    - Java面向对象与方法: Java/3. Java面向对象与方法/3. Java面向对象与方法.md
-    - Java面向对象与封装: Java/4. Java面向对象与封装/4. Java面向对象与封装.md
+  - 编程语言:
+    - C语言:
+      - C语言基础知识: C语言/1. C语言基础知识/1. C语言基础知识.md
+      - 进制转换与类型在内存的存储方式: C语言/2. 进制转换与类型在内存中存储方式/2. 进制转换与类型在内存中存储方式.md
+      - C语言数据类型与变量: C语言/3. C语言数据类型和变量/3. C语言数据类型和变量.md
+      - C语言操作符: C语言/4. C语言操作符/4. C语言操作符.md
+      - C语言的标准输入函数scanf及标准输出函数printf: C语言/5. C语言的标准输入函数scanf及标准输出函数printf/5. C语言的标准输入函数scanf及标准输出函数printf.md
+      - C语言中的分支语句: C语言/6. C语言中的分支语句/6. C语言中的分支语句.md
+      - C语言中的循环语句: C语言/7. C语言中的循环语句/7. C语言中的循环语句.md
+      - C语言函数: C语言/8. C语言函数/8. C语言函数.md
+      - C语言指针: C语言/9. C语言指针/9. C语言指针.md
+      - C语言字符函数、字符串函数与内存函数: C语言/10. C语言字符函数、字符串函数与内存函数/10. C语言字符函数、字符串函数与内存函数.md
+      - C语言动态内存管理: C语言/11. C语言动态内存管理/11. C语言动态内存管理.md
+      - C语言文件操作: C语言/12. C语言文件操作/12. C语言文件操作.md
+      - C语言编译与链接（基础）: C语言/13. C语言编译与链接（基础）/13. C语言编译与链接（基础）.md
+      - C语言预处理（部分）: C语言/14. C语言预处理（部分）/14. C语言预处理（部分）.md
+    - C++: 
+      - C语言过渡C++基础知识: C++/1. C语言过渡C++基础知识/1. C语言过渡C++基础知识.md
+      - C++类和对象: C++/2. C++类和对象/2. 类和对象.md
+      - C++默认成员函数: C++/3. C++默认成员函数/3. C++默认成员函数.md
+      - C++类和对象相关内容: C++/4. C++类和对象相关内容/4. C++类和对象相关内容.md
+      - C++内存管理: C++/5. C++内存管理/5. C++内存管理.md
+      - C++模版（基础）: C++/6. C++模版（基础）/6. C++模版（基础）.md
+      - C++STL简介与string类: C++/7. C++STL简介与string类/7. C++STL简介与string类.md
+      - string类模拟实现: C++/8. string类模拟实现/8. string类的模拟实现.md
+      - vector类: C++/9. vector类/9. vector类.md
+      - vector类模拟实现: C++/10. vector类模拟实现/10. vector模拟实现.md
+      - list类: C++/11. list类/11. list类.md
+      - list类模拟实现: C++/12. list模拟实现/12. list类模拟实现.md
+      - stack类: C++/13. stack类/13. stack类.md
+      - queue类: C++/14. queue类/14. queue类.md
+      - stack和queue模拟实现: C++/15. stack和queue模拟实现/15. stack和queue模拟实现.md
+      - priority_queue模拟实现: C++/16. priority_queue模拟实现/16. priority_queue模拟实现.md
+      - 反向迭代器设计: C++/17. 反向迭代器设计/17. reverse_iterator迭代器结构设计.md
+      - C++模版（高阶）: C++/18. C++模板（高阶）/18. C++模板（高阶）.md
+      - C++继承: C++/19. C++继承/19. C++继承.md
+      - C++多态: C++/20. C++多态/20. C++多态.md
+      - set类: C++/21. set类/21. set类.md
+      - map类: C++/22. map类/22. map类.md
+      - map和set类模拟实现: C++/23. map和set类模拟实现/23. map和set类模拟实现.md
+    - Java:
+      - Java基础知识: Java/1. Java基础知识/Java基础知识.md
+      - Java数组类型: Java/2. Java数组类型/2. Java数组类型.md
+      - Java面向对象与方法: Java/3. Java面向对象与方法/3. Java面向对象与方法.md
+      - Java面向对象与封装: Java/4. Java面向对象与封装/4. Java面向对象与封装.md
+  - 数据结构与算法:
+    - 数据结构:
+      - 数据结构基础: 数据结构/1. 时间复杂度和空间复杂度/1. 时间复杂度与空间复杂度.md
+      - 顺序结构与顺序表: 数据结构/2. 顺序表/2. 顺序表.md
+      - 链表: 数据结构/3. 链表/3. 链表.md
+      - 栈: 数据结构/4. 栈/4. 栈.md
+      - 队列: 数据结构/5. 队列/5. 队列.md
+      - 树的基本概念: 数据结构/6. 树的基本概念/6. 树的基本结构.md
+      - 二叉树（基础）: 数据结构/7. 二叉树（基础）/7. 二叉树（基础）.md
+      - 堆: 数据结构/8. 堆/8. 堆.md
+      - 排序: 数据结构/9. 排序/9. 排序.md
+      - 二叉搜索树: 数据结构/10. 二叉搜索树/10. 二叉搜索树.md
+      - AVL树: 数据结构/11. AVL树/11. AVL树.md
+      - 红黑树: 数据结构/12. 红黑树/12. 红黑树.md
+      - 哈希表: 数据结构/13. 哈希表/13. 哈希表.md
+    - 算法:
+      - 双指针算法: 算法/1. 双指针算法/1. 双指针算法.md
+      - 滑动窗口算法: 算法/2. 滑动窗口算法/2. 滑动窗口算法.md
+      - 其他算法:
+        - 波兰表达式与逆波兰表达式: 算法/其他算法/波兰表达式与逆波兰表达式/波兰表达式与逆波兰表达式.md
+        - 霍尔法则: 算法/其他算法/霍尔法则/霍尔法则.md
+        - 数字和与数字根: 算法/其他算法/数字和与数字根/数字和与数字根.md
   - Linux:
     - Linux常用选项和指令: Linux/1. Linux常用选项和指令/1. Linux常用选项和指令.md
     - Linux权限相关: Linux/2. Linux权限相关/2. Linux权限相关.md
     - CentOS软件安装与vim使用: Linux/3. CentOS软件安装与Vim使用/3. CentOS软件安装与Vim使用.md
     - Linux下的gcc与gdb: Linux/4. Linux下的gcc与gdb/4. Linux下的gcc与gdb.md
-  - 算法:
-    - 双指针算法: 算法/1. 双指针算法/1. 双指针算法.md
-    - 滑动窗口算法: 算法/2. 滑动窗口算法/2. 滑动窗口算法.md
+  - 前端:
+    - HTML与CSS: HTML与CSS/HTML与CSS.md
+  - 编程题目练习总结:
+    - 模拟字符串转整数函数: 编程题目练习总结/模拟字符串转整数函数/模拟字符串转整数函数.md
+  - 关于作者: 作者/作者.md
 
 markdown_extensions:
   - admonition
@@ -131,7 +140,10 @@ extra_javascript:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/H0308
+      link: https://github.com
+    - icon: fontawesome/brands/qq
+      link: https://github.com
+  generator: false
 
 plugins:
   - search
@@ -153,5 +165,3 @@ plugins:
       manual: false
   - git-revision-date-localized:
       enable_creation_date: true
-repo_url: https://github.com/H0308/HelperSite
-repo_name: H0308/HelperSite

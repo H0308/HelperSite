@@ -9,7 +9,6 @@ theme:
     # - header.autohide
     - navigation.tabs
     - navigation.top
-    - navigation.instant
     - search.suggest
     - search.highlight
     - content.tabs.link

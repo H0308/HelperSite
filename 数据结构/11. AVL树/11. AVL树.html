@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#11avl" class="md-skip">
+        <a href="#avl" class="md-skip">
           跳转至
         </a>
       
@@ -804,7 +804,7 @@
         
   
   <span class="md-ellipsis">
-    时间复杂度和空间复杂度
+    数据结构基础
   </span>
   
 
@@ -825,7 +825,7 @@
         
   
   <span class="md-ellipsis">
-    顺序表
+    顺序结构与顺序表
   </span>
   
 
@@ -1019,6 +1019,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    AVL树
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="11.%20AVL%E6%A0%91.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1028,6 +1039,121 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#avl_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL树介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avl_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL树平衡因子更新分析
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avl_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL树插入时旋转与平衡因子更新
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AVL树插入时旋转与平衡因子更新">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      左单旋
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      右单旋
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      左右单旋
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      右左单旋
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#avl_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL旋转可行性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avl_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL树节点删除（待补充）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avl_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL树分析
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1976,6 +2102,110 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#avl_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL树介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avl_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL树平衡因子更新分析
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avl_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL树插入时旋转与平衡因子更新
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AVL树插入时旋转与平衡因子更新">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      左单旋
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      右单旋
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      左右单旋
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      右左单旋
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#avl_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL旋转可行性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avl_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL树节点删除（待补充）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avl_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      AVL树分析
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1992,23 +2222,25 @@
   
 
 
-<h1 id="11avl">11.AVL树<a class="headerlink" href="#11avl" title="Permanent link">&para;</a></h1>
-<h1 id="avl">AVL树介绍<a class="headerlink" href="#avl" title="Permanent link">&para;</a></h1>
+<h1 id="avl">AVL树<a class="headerlink" href="#avl" title="Permanent link">&para;</a></h1>
+<h2 id="avl_1">AVL树介绍<a class="headerlink" href="#avl_1" title="Permanent link">&para;</a></h2>
 <p>二叉搜索树在某些极端情况下可能会退化，为了解决这个问题，引入了AVL树（平衡搜索二叉树中的一种）控制二叉搜索树的不平衡情况，<strong>插入一个新节点后，控制每一个节点的左右子树高度差的绝对值不超过1</strong></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>之所以控制绝对值不超过1而不是不超过0是因为只有在满二叉树的情况下才可以满足每一个节点的左右子树高度差的绝对值不超过0，为了满足普遍性，选择绝对值不超过1</p>
-</blockquote>
+</div>
 <p>一棵AVL树具有以下的特点：</p>
 <ol>
 <li>每一个节点的左右子树都是AVL树</li>
 <li>左右子树高度差的绝对值（通过平衡因子判断）不超过1</li>
 </ol>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>绝对值不超过1，包括-1、1和0</p>
-</blockquote>
+</div>
 <p>以右子树高度减左子树高度为例，下面是含有每一个节点的高度的AVL树示意图：</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804233910392.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804233910392.png" alt="image-20240804233910392" /></a></p>
-<h1 id="avl_1">AVL树平衡因子更新分析<a class="headerlink" href="#avl_1" title="Permanent link">&para;</a></h1>
+<h2 id="avl_2">AVL树平衡因子更新分析<a class="headerlink" href="#avl_2" title="Permanent link">&para;</a></h2>
 <p>在AVL树中，平衡因子更新只有两种情况：1. 增加 2. 减少，但是需要考虑什么时候增加什么时候减少</p>
 <ol>
 <li>
@@ -2039,18 +2271,19 @@
 <li>当<strong>插入节点的父亲节点更新为1或者-1</strong>时：插入节点前父亲节点平衡因子为0（<strong>左右子树高度相等</strong>），当更新为1时，插入位置为右子树，右子树变高，起始为-1时，插入位置为左子树，左子树变高（<strong>其中一方变高</strong>），此时需要更新所有祖先节点的平衡因子，因为插入的节点导致了树的总高度发生变化，例如例2插入红色节点树的总高度由4变为5</li>
 <li>当<strong>插入节点的父亲节点更新为2或者-2</strong>时：插入节点前父亲节点平衡因子为1或者-1（<strong>左右子树存在一方高一方矮</strong>），当更新为2时，原父亲节点平衡因子为1，并且插入位置在平衡因子为1的父亲节点的右子树，例如在节点8右子树插入新节点；当更新为-2时，原父亲节点平衡因子为-1，插入位置平衡因子为-1的父亲节点的右子树（<strong>高的一方继续变高，矮的一方没有改变</strong>），此时需要进行旋转处理将平衡因子为2或者-2的节点对应的树进行调整使其恢复AVL树结构</li>
 </ol>
-<h1 id="avl_2">AVL树插入时旋转与平衡因子更新<a class="headerlink" href="#avl_2" title="Permanent link">&para;</a></h1>
-<h2 id="_1">左单旋<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="avl_3">AVL树插入时旋转与平衡因子更新<a class="headerlink" href="#avl_3" title="Permanent link">&para;</a></h2>
+<h3 id="_1">左单旋<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>当插入的节点在平衡因子为1的父亲节点的<strong>右子树</strong>的<strong>右子树</strong>上时，此时父亲节点的平衡因子更新为2，其右孩子节点的平衡因子分别为1和0时需要进行左单旋，例如下面的一种具体情况：</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804234254442.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804234254442.png" alt="image-20240804234254442" style="zoom:50%;" /></a></p>
 <p>为了便于分析，将插入位置进行抽象化，a、b和c分别是高度<code>h&gt;=0</code>的AVL子树，如下图所示：</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804234339525.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804234339525.png" alt="image-20240804234339525" /></a></p>
 <p>此时因为父亲节点10的平衡因子变为了2，需要进行左旋，左旋需要进行的步骤如下：</p>
-<blockquote>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>平衡因子计算：</p>
 <p>h+1<strong><span style="color: red;">(新增节点所在层数)</span></strong>-1=1为20节点的平衡因子</p>
 <p>h+1+1<strong><span style="color: red;">(20节点所在层数)</span></strong>-h=2为10节点的平衡因子</p>
-</blockquote>
+</div>
 <ol>
 <li>
 <p>将20的左孩子给10节点作为其右孩子</p>
@@ -2160,17 +2393,18 @@
 <a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="w">    </span><span class="n">parent</span><span class="o">-&gt;</span><span class="n">_bf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subR</span><span class="o">-&gt;</span><span class="n">_bf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="_2">右单旋<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_2">右单旋<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>当插入的节点在平衡因子为-1的父亲节点的<strong>左子树</strong>的<strong>左子树</strong>上时，此时父亲节点的平衡因子更新为-2，其左孩子节点的平衡因子分别为-1和0时需要进行右单旋，例如下面的一种具体情况：</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804234455250.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804234455250.png" alt="image-20240804234455250" style="zoom:50%;" /></a></p>
 <p>为了便于分析，将插入位置进行抽象化，a、b和c分别是高度<code>h&gt;=0</code>的AVL子树，如下图所示：</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804234510438.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804234510438.png" alt="image-20240804234510438" /></a></p>
 <p>此时因为父亲节点10的平衡因子变为了-2，需要进行右旋，右旋需要进行的步骤如下：</p>
-<blockquote>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>平衡因子计算：</p>
 <p>h-(h+1<strong><span style="color: red;">(新增节点所在层数)</span></strong>)=-1为20节点的平衡因子</p>
 <p>h-(h+1+1<strong><span style="color: red;">(20节点所在层数)</span></strong>)=-2为10节点的平衡因子</p>
-</blockquote>
+</div>
 <ol>
 <li>
 <p>将5的右孩子作为10的左孩子</p>
@@ -2274,44 +2508,56 @@
 <a id="__codelineno-1-42" name="__codelineno-1-42"></a><span class="w">    </span><span class="n">subL</span><span class="o">-&gt;</span><span class="n">_bf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parent</span><span class="o">-&gt;</span><span class="n">_bf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-1-43" name="__codelineno-1-43"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="_3">左右单旋<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_3">左右单旋<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>当插入的节点在平衡因子为-1的父亲节点的<strong>左子树</strong>的<strong>右子树</strong>上时，此时父亲节点的平衡因子更新为-2，其右孩子节点的平衡因子分别为1和0时需要先进行左单旋再进行右单旋，例如下面的一种具体情况：</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804234640507.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804234640507.png" alt="image-20240804234640507" style="zoom:50%;" /></a></p>
 <p>为了便于分析，将插入位置进行抽象化</p>
 <ol>
-<li>a、b和c分别是高度<code>h=0</code>的AVL子树，如下图所示：</li>
-</ol>
+<li>
+<p>a、b和c分别是高度<code>h=0</code>的AVL子树，如下图所示：</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804234705036.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804234705036.png" alt="image-20240804234705036" /></a></p>
 <p>在当前情况下，b位置的节点即为新增节点，a和c位置此时均没有节点，10节点的平衡因子更新为-2，10节点的左孩子节点的平衡因子更新为1</p>
-<blockquote>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>平衡因子计算：</p>
 <p>5节点的平衡因子：h+1<strong><span style="color: red;">(新增节点所在层数)</span></strong>-h=1</p>
 <p>10节点的平衡因子：h-(h+1+1<strong><span style="color: red;">(5节点所在层数)</span></strong>)=-2</p>
-</blockquote>
-<ol>
-<li>a、b、c和d分别是高度<code>h&gt;0</code>的AVL子树，如下图所示：</li>
-</ol>
-<blockquote>
+</div>
+</li>
+<li>
+<p>a、b、c和d分别是高度<code>h&gt;0</code>的AVL子树，如下图所示：</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>h&gt;0</code>在上图的情况下代表已经至少存在一个节点，即5的右子树开始有一个节点存在，所以6位置没有节点时用<code>h-1</code>代替</p>
-</blockquote>
+</div>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804234730408.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804234730408.png" alt="image-20240804234730408" style="zoom:50%;" /></a></p>
 <p>此时插入节点的位置有两种：</p>
-<p>(a) 在b位置插入，此时6节点的平衡因子变为-1，5节点的平衡因子变为1，10节点的平衡因子变为-2</p>
-<blockquote>
+<ol>
+<li>
+<p>在b位置插入，此时6节点的平衡因子变为-1，5节点的平衡因子变为1，10节点的平衡因子变为-2</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>平衡因子的计算：</p>
 <p>6节点的平衡因子：h-1-h<strong><span style="color: red;">(新增节点所在层数)</span></strong>=-1</p>
 <p>5节点的平衡因子：h+1<strong><span style="color: red;">(6节点所在层数)</span></strong>-h=1</p>
 <p>10节点的平衡因子：h-(h+1+1)=-2</p>
-</blockquote>
+</div>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804234756313.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804234756313.png" alt="image-20240804234756313" /></a></p>
-<p>(b) 在d位置插入，此时6节点的平衡因子变为-1，5节点的平衡因子变为1，10节点的平衡因子变为-2</p>
-<blockquote>
+</li>
+<li>
+<p>在d位置插入，此时6节点的平衡因子变为-1，5节点的平衡因子变为1，10节点的平衡因子变为-2</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>平衡因子的计算：</p>
 <p>6节点的平衡因子：h+1-h<strong><span style="color: red;">(新增节点所在层数)</span></strong>=1</p>
 <p>5节点的平衡因子：h+1<strong><span style="color: red;">(6节点所在层数)</span></strong>-h=1</p>
 <p>10节点的平衡因子：h-(h+1+1)=-2</p>
-</blockquote>
+</div>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804234811520.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804234811520.png" alt="image-20240804234811520" /></a></p>
+</li>
+</ol>
+</li>
+</ol>
 <p>尽管左右单旋有两种主要情况，但是实际上影响到的平衡因子的更新，主要思路还是先左旋再右旋，为了更好观察效果，以第二种情况中的第一种情况为例分析先左旋再右旋的步骤：</p>
 <ol>
 <li>
@@ -2443,27 +2689,36 @@
 </code></pre></div></td></tr></table></div>
 </li>
 </ol>
-<h2 id="_4">右左单旋<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="_4">右左单旋<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>当插入的节点在平衡因子为1的父亲节点的<strong>右子树</strong>的<strong>左子树</strong>上时，此时父亲节点的平衡因子更新为2，其右孩子节点的平衡因子分别为-1和0时需要先进行右单旋再进行左单旋，例如下面的一种具体情况：</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804235132887.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804235132887.png" alt="image-20240804235132887" style="zoom:50%;" /></a></p>
 <p>为了便于分析，将插入位置进行抽象化</p>
 <ol>
-<li>a、b和c分别是高度<code>h=0</code>的AVL子树，如下图所示：</li>
-</ol>
+<li>
+<p>a、b和c分别是高度<code>h=0</code>的AVL子树，如下图所示：</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804235153729.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804235153729.png" alt="image-20240804235153729" /></a></p>
 <p>在当前情况下，c位置的节点即为新增节点，a和b位置此时均没有节点，10节点的平衡因子更新为-2，10节点的左孩子节点的平衡因子更新为1</p>
-<ol>
-<li>a、b、c和d分别是高度<code>h&gt;0</code>的AVL子树，如下图所示：</li>
-</ol>
-<blockquote>
+</li>
+<li>
+<p>a、b、c和d分别是高度<code>h&gt;0</code>的AVL子树，如下图所示：</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>h&gt;0</code>在上图的情况下代表已经至少存在一个节点，即20的左子树开始有一个节点存在，所以15位置没有节点时用<code>h-1</code>代替</p>
-</blockquote>
+</div>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804235221333.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804235221333.png" alt="image-20240804235221333" style="zoom:50%;" /></a></p>
 <p>此时插入节点的位置有两种：</p>
-<p>(a)当插入在c位置时，15的平衡因子变为1，20的平衡因子变为-1，10的平衡因子变为2</p>
+<ol>
+<li>
+<p>当插入在c位置时，15的平衡因子变为1，20的平衡因子变为-1，10的平衡因子变为2</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804235244897.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804235244897.png" alt="image-20240804235244897" /></a></p>
-<p>(b)当插入在d位置时，15的平衡因子变为-1，20的平衡因子变为-1，10的平衡因子变为2</p>
+</li>
+<li>
+<p>当插入在d位置时，15的平衡因子变为-1，20的平衡因子变为-1，10的平衡因子变为2</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804235300229.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804235300229.png" alt="image-20240804235300229" /></a></p>
+</li>
+</ol>
+</li>
+</ol>
 <p>尽管右左单旋有两种主要情况，但是实际上影响到的平衡因子的更新，主要思路还是先右旋再左旋，为了更好观察效果，以第二种情况中的第一种情况为例分析先右旋再左旋的步骤：</p>
 <ol>
 <li>
@@ -2595,12 +2850,12 @@
 <a id="__codelineno-3-35" name="__codelineno-3-35"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-36" name="__codelineno-3-36"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="avl_3">AVL旋转可行性<a class="headerlink" href="#avl_3" title="Permanent link">&para;</a></h2>
+<h3 id="avl_4">AVL旋转可行性<a class="headerlink" href="#avl_4" title="Permanent link">&para;</a></h3>
 <p>以左单旋为例，其余类比推理即可</p>
 <p><a class="glightbox" href="11. AVL树.assets/image-20240804234339525.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. AVL树.assets/image-20240804234339525.png" alt="image-20240804234339525" /></a></p>
 <p>在左单旋中，选择b子树作为10节点的右孩子节点是可行的，因为b子树的所有节点满足比10节点大，比20节点小，根据二叉搜索树的规则进行旋转</p>
-<h1 id="avl_4">AVL树节点删除（待补充）<a class="headerlink" href="#avl_4" title="Permanent link">&para;</a></h1>
-<h1 id="avl_5">AVL树分析<a class="headerlink" href="#avl_5" title="Permanent link">&para;</a></h1>
+<h2 id="avl_5">AVL树节点删除（待补充）<a class="headerlink" href="#avl_5" title="Permanent link">&para;</a></h2>
+<h2 id="avl_6">AVL树分析<a class="headerlink" href="#avl_6" title="Permanent link">&para;</a></h2>
 <p>AVL树是一棵绝对平衡的二叉搜索树，其要求每个节点的左右子树高度差的绝对值都不超过1，这样可以保证查询时高效的时间复杂度，即<span class="arithmatex">\(log_2 (N)\)</span>。但是如果要对AVL树做一些结构修改的操作，性能非常低下，比如插入时要维护其绝对平衡，旋转的次数比较多，更差的是在删除时，有可能一直要让旋转持续到根的位置。因此如果需要一种查询高效且有序的数据结构，而且数
 据的个数为静态的(即不会改变)，可以考虑AVL树，但一个结构经常修改，就不太适合</p>
 

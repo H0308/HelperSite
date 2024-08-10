@@ -148,6 +148,7 @@ plugins:
       background: white
       shadow: true
       manual: false
-
+  - git-revision-date-localized:
+      enable_creation_date: true
 repo_url: https://github.com/H0308/HelperSite
 repo_name: H0308/HelperSite

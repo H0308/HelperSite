@@ -3,6 +3,9 @@ use_directory_urls: false
 
 theme:
   name: 'material'
+  font:
+    text: Noto Serif
+    code: Source Code Pro
   features:
     # - header.autohide
     - navigation.tabs
@@ -15,13 +18,15 @@ theme:
     repo: fontawesome/brands/git-alt
   language: zh
   palette:
-    - accent: teal
+    - scheme: default
+      accent: teal
       primary: white
-      scheme: default
       toggle:
         icon: material/lightbulb 
         name: Switch to dark mode
     - scheme: slate
+      accent: teal
+      primary: black
       toggle:
         icon: material/lightbulb-outline
         name: Switch to light mode

@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#11-c" class="md-skip">
+        <a href="#c" class="md-skip">
           跳转至
         </a>
       
@@ -2420,7 +2420,7 @@
   
 
 
-<h1 id="11-c">11. C语言动态内存管理<a class="headerlink" href="#11-c" title="Permanent link">&para;</a></h1>
+<h1 id="c">C语言动态内存管理<a class="headerlink" href="#c" title="Permanent link">&para;</a></h1>
 <h2 id="_1">动态内存管理的优点<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>变量和数组创建的空间固定，有时候需要的空间大小在程序运行的时候才能知道，那数组的编译时开辟空间的方式就不能满足动态内存管理，而动态内存管理可以灵活地申请和释放空间</p>
 <h2 id="cc">C/C++中程序内存区域划分<a class="headerlink" href="#cc" title="Permanent link">&para;</a></h2>
@@ -2465,12 +2465,12 @@
 <a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>上述代码中对应的内容所在空间如下图：</p>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\11. C语言动态内存管理\images\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\11. C语言动态内存管理\images\image.png"></a></p>
+<p><a class="glightbox" href="images\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image.png"></a></p>
 <h2 id="mallocfree"><code>malloc</code>函数与<code>free</code>函数<a class="headerlink" href="#mallocfree" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>使用<code>malloc</code>函数和<code>free</code>函数需要包含头文件<code>stdlib.h</code></p>
-</blockquote>
+</div>
 <h3 id="malloc"><code>malloc</code>函数<a class="headerlink" href="#malloc" title="Permanent link">&para;</a></h3>
 <p>函数作用：向内存申请一块连续可用的空间，并返回指向这块空间的指针</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
@@ -2615,10 +2615,10 @@
 <li>如果参数 <code>ptr</code> 指向的空间不是动态开辟的，那<code>free</code>函数的行为是未定义的</li>
 <li>如果参数 <code>ptr</code> 是<code>NULL</code>指针，则函数不处理任何事务</li>
 </ul>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意<code>free</code>函数不会将接收动态内存开辟函数成功开辟空间后返回的地址的指针置为空，仅仅只是将开辟的空间释放</p>
-</blockquote>
+</div>
 <p>代码实例</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -2669,10 +2669,10 @@
 <a id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="callocrealloc"><code>calloc</code>函数与<code>realloc</code>函数<a class="headerlink" href="#callocrealloc" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>使用<code>calloc</code>函数和<code>realloc</code>函数需要包含头文件<code>stdlib.h</code></p>
-</blockquote>
+</div>
 <h3 id="calloc"><code>calloc</code>函数<a class="headerlink" href="#calloc" title="Permanent link">&para;</a></h3>
 <p>函数作用：向内存申请一块连续可用的空间，并返回指向这块空间的指针，与<code>malloc</code>不同的是，<code>calloc</code>函数会为开辟的空间赋初始值为0</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
@@ -2826,10 +2826,10 @@
 <a id="__codelineno-8-3" name="__codelineno-8-3"></a>
 <a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">realloc</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span><span class="c1">//不要这样做，否则可能导致malloc开辟的空间丢失并且无法free进而导致内存泄漏</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>使用<code>realloc</code>函数时不需要对指向原来的<code>malloc</code>函数和<code>calloc</code>函数开辟的空间的指针进行释放操作，<code>realloc</code>会对原来<code>malloc</code>函数和<code>calloc</code>函数开辟的空间进行管理</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -3044,10 +3044,10 @@
 <a id="__codelineno-10-67" name="__codelineno-10-67"></a><span class="mo">000001</span><span class="n">B3132B3600</span>
 <a id="__codelineno-10-68" name="__codelineno-10-68"></a><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">9</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>当<code>realloc</code>函数的第一个参数为空指针<code>NULL</code>时，实现的效果与<code>malloc</code>函数相同</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -3134,10 +3134,10 @@
 <a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
 <a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>无法保证<code>malloc</code>函数一定能成功开辟空间，所以在对<code>p</code>指针解引用操作之前一定要先判断是否是空指针</p>
-</blockquote>
+</div>
 <h3 id="_3">对动态开辟空间的越界访问<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
@@ -3167,10 +3167,10 @@
 <a id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
 <a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>上述代码中的<code>malloc</code>函数只开辟了10个空间，而在<code>for</code>循环中循环执行了11次，对<code>malloc</code>开辟的空间进行了越界访问</p>
-</blockquote>
+</div>
 <h3 id="free_1">对非动态开辟内存使用<code>free</code>释放<a class="headerlink" href="#free_1" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
 <span class="normal"><a href="#__codelineno-14-2">2</a></span>
@@ -3184,10 +3184,10 @@
 <a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
 <a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>p</code>指向的空间是由变量创建开辟的空间，而不是由动态内存管理函数开辟的空间，不可以用<code>free</code>进行释放</p>
-</blockquote>
+</div>
 <h3 id="free_2">使用<code>free</code>释放一块动态开辟内存的一部分<a class="headerlink" href="#free_2" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
@@ -3201,10 +3201,10 @@
 <a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="c1">//p不再指向动态内存的起始位置 </span>
 <a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>p++</code>使得<code>p</code>指针不再指向动态内存的起始位置，此时进行<code>free</code>操作只对一部分空间进行了释放</p>
-</blockquote>
+</div>
 <h3 id="_4">对同一块动态内存多次释放<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
 <span class="normal"><a href="#__codelineno-16-2">2</a></span>
@@ -3218,10 +3218,10 @@
 <a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="c1">//重复释放 </span>
 <a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>使用<code>free</code>函数对<code>p</code>指向的空间进行了两次释放，但是因为第一个<code>free</code>函数调用就已经释放了<code>malloc</code>开辟的空间，此时不可以使用<code>free</code>对<code>p</code>指向的空间进行释放</p>
-</blockquote>
+</div>
 <h3 id="_5">动态开辟内存忘记释放（内存泄漏）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
@@ -3251,10 +3251,10 @@
 <a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>动态内存管理函数开辟的空间在内存的堆空间上，故如果不对该空间进行手动释放，只能等到程序终止后才会释放，若程序运行时间太长，将会导致内存泄露，故动态内存管理函数开辟的内存空间一定要及时释放，防止内存泄漏</p>
-</blockquote>
+</div>
 <h2 id="_6">柔性数组<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>在C语言C99标准中，结构体中的最后一个元素允许是未知大小的数组，这就叫做柔性数组成员变量</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>

@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#4-c" class="md-skip">
+        <a href="#c" class="md-skip">
           跳转至
         </a>
       
@@ -2972,7 +2972,7 @@
   
 
 
-<h1 id="4-c">4. C语言操作符<a class="headerlink" href="#4-c" title="Permanent link">&para;</a></h1>
+<h1 id="c">C语言操作符<a class="headerlink" href="#c" title="Permanent link">&para;</a></h1>
 <h2 id="_1">操作符分类<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>算术操作符： <code>+</code> 、<code>-</code>  、<code>*</code> 、<code>/</code> 、<code>%</code></li>
@@ -3071,10 +3071,10 @@
 </code></pre></div></td></tr></table></div>
 <h3 id="_3"><code>/</code>运算符<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p><code>/</code>运算符用来计算两个数相除获得的商值</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>/</code>运算符可以计算两个整数相除后的结果，但是如果两个整数相除有余数时，<code>/</code>运算符会丢掉余数只得到商值，如果想要得到余数则需要采用浮点数运算，并且只需要有一个数值是浮点类型即可</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -3135,10 +3135,10 @@
 </code></pre></div></td></tr></table></div>
 <h3 id="_4"><code>%</code>运算符<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p><code>%</code>运算符计算两个整数相除得到的余数，并且<code>%</code>运算符不可以用于浮点数</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>取模操作符本质是找出被除数比除数大的部分，并且余数的数据范围为0 ~ 除数值 - 1</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -3227,10 +3227,10 @@
 <a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="c1">//赋值</span>
 </code></pre></div></td></tr></table></div>
 <p>赋值操作符 <code>=</code> 是⼀个随时可以给变量赋值的操作符</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>赋值运算符的返回值为赋值运算符左侧变量中的值</p>
-</blockquote>
+</div>
 <h3 id="_6">连续赋值<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>赋值运算符可以连续赋值</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
@@ -3475,21 +3475,16 @@
 <a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="mi">4</span>
 <a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>关于<code>size_t</code>类型：</p>
-<p><code>sizeof</code> 运算符的返回值，C语言只规定是无符号整数，并没有规定具体的类型，而是留给</p>
-<p>系统自己去决定， <code>sizeof</code> 到底返回什么类型。不同的系统中，返回值的类型有可能是</p>
-<p><code>unsigned int</code> ，也有可能是 <code>unsigned long</code> ，甚⾄是 <code>unsigned long long</code> ，</p>
-<p>对应的 <code>printf()</code> 占位符分别是 <code>%u</code> 、 <code>%lu</code> 和 <code>%llu</code> 。这样不利于程序的可移植性。</p>
-<p>C语言提供了⼀个解决方法，创造了⼀个类型别名 <code>size_t</code> ，用来统⼀表⽰ <code>sizeof</code> 的返</p>
-<p>回值类型。对应当前系统的 <code>sizeof</code> 的返回值类型，可能是 <code>unsigned int</code> ，也可能是<code>unsigned long long</code></p>
-</blockquote>
+<p><code>sizeof</code> 运算符的返回值，C语言只规定是无符号整数，并没有规定具体的类型，而是留给系统自己去决定， <code>sizeof</code> 到底返回什么类型。不同的系统中，返回值的类型有可能是<code>unsigned int</code> ，也有可能是 <code>unsigned long</code> ，甚⾄是 <code>unsigned long long</code> ，对应的 <code>printf()</code> 占位符分别是 <code>%u</code> 、 <code>%lu</code> 和 <code>%llu</code> 。这样不利于程序的可移植性。C语言提供了⼀个解决方法，创造了⼀个类型别名 <code>size_t</code> ，用来统⼀表⽰ <code>sizeof</code> 的返回值类型。对应当前系统的 <code>sizeof</code> 的返回值类型，可能是 <code>unsigned int</code> ，也可能是<code>unsigned long long</code></p>
+</div>
 <h2 id="_7">移位操作符：<code>&lt;&lt;</code>、<code>&gt;&gt;</code><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>移位操作符的操作数只能是整数，并且都是在数值的补码上进行操作再转成原码</p>
-</blockquote>
+</div>
 <h3 id="_8">左移操作符<code>&lt;&lt;</code><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>移位规则：左边抛弃、右边补0</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
@@ -3524,10 +3519,11 @@
 <a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
 <a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 </code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image.png"></a></p>
-<blockquote>
+<p><a class="glightbox" href="images\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image.png"></a></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>左移快速计算：<span class="arithmatex">\(当前数值\times2^{移位次}\)</span>，例如<code>8 &lt;&lt; 2</code> = <span class="arithmatex">\(8\times2^2\)</span> = 32</p>
-</blockquote>
+</div>
 <h3 id="_9">右移操作符<code>&gt;&gt;</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>移位规则：</p>
 <p>右移运算分两种：</p>
@@ -3537,11 +3533,12 @@
 </li>
 <li>
 <p>算术右移：左边用原该值的符号位填充，右边丢弃（大部分都是算术右移）</p>
-<blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>算术右移快速计算：<span class="arithmatex">\(当前数值 / 2^{移位次}\)</span>，例如<code>8 &gt;&gt; 2</code> = <span class="arithmatex">\(8 / 2^2\)</span> = 2</p>
 <p>如果无法整除，则向下取整</p>
 <p><code>9 &gt;&gt; 2</code> = 2，<code>-9 &gt;&gt; 2</code> = -3</p>
-</blockquote>
+</div>
 </li>
 </ol>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
@@ -3578,7 +3575,7 @@
 <a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="n">n</span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
 <a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="n">num</span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 </code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image1.png"></a></p>
+<p><a class="glightbox" href="images\image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image1.png"></a></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -3613,11 +3610,11 @@
 <a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="n">n</span><span class="o">=</span><span class="w"> </span><span class="mi">-3</span>
 <a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="n">num</span><span class="o">=</span><span class="w"> </span><span class="mi">-5</span>
 </code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image2.png"></a></p>
-<blockquote>
-<p>[!NOTE]</p>
+<p><a class="glightbox" href="images\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image2.png"></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>对于移位运算符，不要移动负数个数的二进制位，这个是标准未定义的</p>
-</blockquote>
+</div>
 <h3 id="_10">循环中的左移和右移<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
@@ -3672,9 +3669,9 @@
 <a id="__codelineno-20-26" name="__codelineno-20-26"></a><span class="mi">32</span><span class="w"> </span><span class="mi">64</span><span class="w"> </span><span class="mi">128</span><span class="w"> </span><span class="mi">256</span><span class="w"> </span><span class="mi">512</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="mi">2048</span><span class="w"> </span><span class="mi">4096</span>
 </code></pre></div></td></tr></table></div>
 <p>循环中的右移分析</p>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image3.png"></a></p>
+<p><a class="glightbox" href="images\image3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image3.png"></a></p>
 <p>循环中的左移分析</p>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image4.png"></a></p>
+<p><a class="glightbox" href="images\image4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image4.png"></a></p>
 <h2 id="_11">关系操作符: <code>&gt;</code> 、<code>&gt;=</code> 、<code>&lt;</code> 、<code>&lt;=</code> 、 <code>==</code> 、 <code>!=</code><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>&gt;</code> 大于运算符</li>
@@ -3871,10 +3868,10 @@
 <a id="__codelineno-25-14" name="__codelineno-25-14"></a><span class="n">在上面的if条件判断中</span><span class="err">，</span><span class="n">如果满足了month</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">12</span><span class="err">，</span><span class="n">那么后面的month</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="n">与month</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="n">将不在判断</span>
 <a id="__codelineno-25-15" name="__codelineno-25-15"></a><span class="n">对于</span><span class="o">||</span><span class="n">操作符来说</span><span class="err">，</span><span class="n">只要最左侧为真时</span><span class="err">，</span><span class="n">右边的表达式将不再执行</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>像这种仅仅根据左操作数的结果就能知道整个表达式的结果，不再对右操作数进行计算的运算称为短路求值</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -3924,10 +3921,10 @@
 <a id="__codelineno-26-24" name="__codelineno-26-24"></a><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="_18">位操作符：<code>&amp;</code>、<code>|</code>、<code>^</code>、<code>~</code><a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>所有位操作符的操作数必须为整数，并且都是在数值的补码上进行操作再转成原码，并且符号位参与运算</p>
-</blockquote>
+</div>
 <h3 id="_19">按位与<code>&amp;</code>操作符<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
 <p>计算规则：同时为1则为1，其余全为0</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
@@ -4502,10 +4499,10 @@
 <a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">3.65</span><span class="p">;</span>
 <a id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="c1">//强制类型转换不会进行四舍五入，此时a中存的值为3</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!Tip]</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>没有必要使用强制转换时尽量不用强制转换</p>
-</blockquote>
+</div>
 <h2 id="_31">操作符属性：优先级与结合性<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h2>
 <h3 id="_32">优先级<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
 <p>在C语言中，优先级表示当⼀个表达式包含多个运算符时的运算顺序</p>
@@ -4591,11 +4588,12 @@
 <a id="__codelineno-39-28" name="__codelineno-39-28"></a><span class="n">由于时无符号整型提升</span><span class="err">，</span><span class="n">高位补0</span>
 <a id="__codelineno-39-29" name="__codelineno-39-29"></a><span class="mi">1</span><span class="n">整型提升</span><span class="err">：</span><span class="mo">00000000000000000000000000000001</span>
 </code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image6.png"></a></p>
+<p><a class="glightbox" href="images\image6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image6.png"></a></p>
 <h3 id="_36">数据存储的整型提升与截断<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
-<blockquote>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
 <p>本部分以具体代码实例对数据存储中的整型提升与截断进行分析</p>
-</blockquote>
+</div>
 <p>代码1</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
@@ -4778,7 +4776,7 @@
 <p>如果某个操作符的各个操作数属于不同的类型，那么除非其中一个操作数的类型转换为另一个操作数的类</p>
 <p>型，否则操作就无法进行</p>
 <h4 id="_38">转换顺序<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h4>
-<p><a class="glightbox" href="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="E:\Markdown_notes\Markdown_notes\C语言基础知识总结\4. C语言操作符\images\image6.png"></a></p>
+<p><a class="glightbox" href="images\image6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image6.png"></a></p>
 
 
 

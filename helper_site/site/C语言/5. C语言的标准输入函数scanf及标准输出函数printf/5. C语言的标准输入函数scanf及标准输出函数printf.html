@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#5-cscanfprintf" class="md-skip">
+        <a href="#cscanfprintf" class="md-skip">
           跳转至
         </a>
       
@@ -2354,7 +2354,7 @@
   
 
 
-<h1 id="5-cscanfprintf">5. C语言的标准输入函数<code>scanf</code>及标准输出函数<code>printf</code><a class="headerlink" href="#5-cscanfprintf" title="Permanent link">&para;</a></h1>
+<h1 id="cscanfprintf">C语言的标准输入函数<code>scanf</code>及标准输出函数<code>printf</code><a class="headerlink" href="#cscanfprintf" title="Permanent link">&para;</a></h1>
 <h2 id="printf"><code>printf</code>函数<a class="headerlink" href="#printf" title="Permanent link">&para;</a></h2>
 <h3 id="_1">基本用法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
@@ -2935,11 +2935,11 @@
 <a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="n">你输入的数字是</span><span class="err">：</span><span class="mi">52496554876465678</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>除了 <code>%c</code> 以外，都会自动忽略起首的空白字符。 <code>%c</code> 不忽略空白字符，总是返回当前第⼀个字符，无论该字符是否为空格</p>
 <p>如果要强制跳过字符前的空白字符，可以写成 <code>scanf(" %c", &amp;ch)</code> ，即 <code>%c</code> 前加上⼀个空格，表示跳过零个或多个空白字符（可以用来处理多次连续读取时上一次输入中的空白字符被读入），对于<code>%s</code>也是同样的效果</p>
-</blockquote>
+</div>
 <p>对于占位符<code>%s</code>，规则是从当前第⼀个非空白字符开始读起，直到遇到<strong>空白字符（即空格、换行符、制表符等）为止</strong>。因为 <code>%s</code> 不会包含空白字符，所以无法用来读取多个单词，<strong>如果需要读取多个字符串，可以使用多个<code>%s</code></strong>。另外， <code>scanf()</code> 遇到 <code>%s</code> 占位符，会在字符串变量末尾存储⼀个空字符 <code>\0</code> </p>
 <p><code>scanf()</code> 将字符串读入<strong>字符数组</strong>时，<strong>不会检测字符串是否超过了数组长度</strong>。所以，储存字符串时，对于可能存在数组的输入越界问题：使用 <code>%s</code> 占位符时，可以指定读⼊字符串的最大长度，即写成 <code>%ms</code> ，其中的 <code>m</code> 是⼀个整数，例如<code>scanf("%10s", name)</code>，表示读取字符串的最大长度，后面的字符将被丢弃。</p>
 <p>代码实例：</p>

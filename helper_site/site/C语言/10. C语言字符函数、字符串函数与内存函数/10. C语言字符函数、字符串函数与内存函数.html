@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#10-c" class="md-skip">
+        <a href="#c" class="md-skip">
           跳转至
         </a>
       
@@ -2438,12 +2438,12 @@
   
 
 
-<h1 id="10-c">10. C语言字符函数、字符串函数与内存函数<a class="headerlink" href="#10-c" title="Permanent link">&para;</a></h1>
+<h1 id="c">C语言字符函数、字符串函数与内存函数<a class="headerlink" href="#c" title="Permanent link">&para;</a></h1>
 <h2 id="_1">字符函数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>使用时字符函数需要包含头文件<code>ctype.h</code></p>
-</blockquote>
+</div>
 <h3 id="_2">字符类型函数<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -2519,10 +2519,10 @@
 </tbody>
 </table>
 <h2 id="_4">字符串函数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>字符串函数使用需要包含头文件<code>string.h</code></p>
-</blockquote>
+</div>
 <h3 id="strlen"><code>strlen</code>函数<a class="headerlink" href="#strlen" title="Permanent link">&para;</a></h3>
 <p>函数作用：计算一个字符串有多少个字符，但是不包含<code>\0</code></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
@@ -2735,17 +2735,17 @@
 <a id="__codelineno-5-27" name="__codelineno-5-27"></a><span class="n">hello</span><span class="w"> </span><span class="n">world</span>
 <a id="__codelineno-5-28" name="__codelineno-5-28"></a><span class="n">xhello</span><span class="w"> </span><span class="n">world</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>尽量不要使用<code>strcat</code>函数自己给自己追加，即目标空间和源空间尽量不要是同一空间，可能会导致未定义的行为</p>
 <p>因为<code>strcat</code>函数在执行时，会首先找到目标字符串的结束位置（即<code>\0</code>字符的位置），然后从这个位置开始，将源字符串的内容复制过来。如果源字符串和目标字符串是同一个字符串，那么在复制过程中，源字符串的内容可能会被目标字符串的新内容覆盖，这就导致了源字符串的内容在复制过程中被改变，从而引发未定义的行为</p>
-</blockquote>
+</div>
 <h3 id="strcmp"><code>strcmp</code>函数<a class="headerlink" href="#strcmp" title="Permanent link">&para;</a></h3>
 <p>函数作用：比较两个字符串的大小</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意此处比较的不是两个字符串的长度，而是两个字符串中的对应字符两两比较</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -3207,10 +3207,10 @@
 </code></pre></div></td></tr></table></div>
 <h3 id="strerror"><code>strerror</code>函数<a class="headerlink" href="#strerror" title="Permanent link">&para;</a></h3>
 <p>函数作用：返回参数部分错误码对应的错误信息的字符串地址</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在不同的系统和C语言标准库的实现中都规定了一些错误码，一般是放在 <code>errno.h</code> 这个头文件中说明的，C语言程序启动的时候就会使用一个全面的变量<code>errno</code>来记录程序的当前错误码，只不过程序启动的时候<code>errno</code>是0，表示没有错误，当我们在使用标准库中的函数的时候发生了某种错误，就会讲对应的错误码，存放在<code>errno</code>中，而一个错误码的数字是整数很难理解是什么意思，所以每一个错误码都是有对应的错误信息的。</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span>
@@ -3297,10 +3297,10 @@
 <a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="n">Error</span><span class="w"> </span><span class="n">opening</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">unexist</span><span class="p">.</span><span class="n">ent</span><span class="o">:</span><span class="w"> </span><span class="n">No</span><span class="w"> </span><span class="n">such</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">directory</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="_5">内存函数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>使用内存函数需要包含头文件<code>string.h</code></p>
-</blockquote>
+</div>
 <h3 id="memcpy">memcpy函数<a class="headerlink" href="#memcpy" title="Permanent link">&para;</a></h3>
 <p>函数作用：将一个空间中的任意类型的数据复制指定大小到另一个空间</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
@@ -3326,10 +3326,10 @@
 <ul>
 <li>如果<code>source</code>和<code>destination</code>有任何的重叠，复制的结果都是未定义的</li>
 </ul>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>与<code>strcpy</code>函数不同的是，<code>memcpy</code>函数在遇到 <code>\0</code> 的时候并不会停下来</p>
-</blockquote>
+</div>
 <p>代码实例</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
@@ -3395,10 +3395,10 @@
 <a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="n">返回类型</span>
 <a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="n">函数返回类型为void</span><span class="o">*</span><span class="n">指针</span><span class="err">，</span><span class="n">指向目标空间的起始位置</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>如果源空间和目标空间出现重叠，尽量使用<code>memmove</code>函数处理</p>
-</blockquote>
+</div>
 <p>代码实例</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>

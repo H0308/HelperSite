@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#13-c" class="md-skip">
+        <a href="#c" class="md-skip">
           跳转至
         </a>
       
@@ -2264,7 +2264,7 @@
   
 
 
-<h1 id="13-c">13. C语言编译与链接（基础）<a class="headerlink" href="#13-c" title="Permanent link">&para;</a></h1>
+<h1 id="c">C语言编译与链接（基础）<a class="headerlink" href="#c" title="Permanent link">&para;</a></h1>
 <p>在ANSIC的任何一种实现中，存在两个不同的环境</p>
 <ol>
 <li>翻译环境：源代码被转换为可执行的机器指令</li>
@@ -2277,15 +2277,17 @@
 <ol>
 <li>多个<code>.c</code>文件单独经过编译器编译处理生成对应的目标文件（目标文件也是二进制文件）</li>
 </ol>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在Windows环境下的目标文件的后缀是 <code>.obj</code> ，Linux环境下目标文件的后缀是 <code>.o</code></p>
-</blockquote>
+</div>
 <ol>
 <li>多个目标文件和链接库⼀起经过链接器处理生成最终的可执行程序。</li>
 </ol>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>链接库是指运行时库(它是支持程序运行的基本函数集合)或者第三方库</p>
-</blockquote>
+</div>
 <p><a class="glightbox" href="images\image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image1.png"></a></p>
 <h3 id="_2">编译过程<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p><a class="glightbox" href="images\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image2.png"></a></p>
@@ -2360,10 +2362,10 @@
 <span class="normal"><a href="#__codelineno-2-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>gcc下生成.s文件的命令
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a>gcc -S test.i -o test.s
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>编译过程本质：将C语言代码翻译成汇编代码</p>
-</blockquote>
+</div>
 <h5 id="_5">词法分析<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h5>
 <p>将源代码程序被输入扫描器，扫描器的任务就是简单的进行词法分析，把代码中的字符分割成一系列的记号（关键字、标识符、字面量、特殊字符等）</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
@@ -2625,10 +2627,10 @@
 </code></pre></div></td></tr></table></div>
 <p>因为每个源文件都是单独经过编译器处理生成对应的目标文件，即<code>test.c</code>文件经过编译器处理生成<code>test.o</code>，<code>add.c</code>文件经过编译器处理生成<code>add.o</code>文件</p>
 <p>重定位：在 <code>test.c</code> 文件中每一次使用 <code>add</code> 函数的时候必须确切的知道 <code>add</code>的地址，但是由于每个⽂件是单独编译的，在编译器编译 <code>test.c</code> 的时候并不知道 <code>add</code> 函数的地址，所以暂时把调用 <code>add</code> 的指令的目标地址搁置（即符号表中的无效地址）。等待最后链接的时候由链接器根据引用的符号 <code>add</code> 在其他模块中查找 <code>add</code> 函数的地址，然后将 <code>test.c</code> 中所有引用到add 的指令重新修正，让他们的目标地址为实际存在的 <code>add</code> 函数的地址</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>如果在连接过程中找不到对应的函数地址，即无效地址无法由有效地址替代时，将会报出“未定义的外部符号”类似的错误</p>
-</blockquote>
+</div>
 <h2 id="_11">运行环境<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <ol>
 <li>程序必须载入内存中。在有操作系统的环境中：一般这个由操作系统完成。在独立的环境中，程序的载入必须由手工安排，也可能是通过可执行代码置入只读内存来完成。</li>

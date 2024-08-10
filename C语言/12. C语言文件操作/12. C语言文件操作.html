@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#12-c" class="md-skip">
+        <a href="#c" class="md-skip">
           跳转至
         </a>
       
@@ -738,7 +738,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#c" class="md-nav__link">
+  <a href="#c_1" class="md-nav__link">
     <span class="md-ellipsis">
       C语言中的流与文件指针
     </span>
@@ -748,7 +748,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#c_1" class="md-nav__link">
+  <a href="#c_2" class="md-nav__link">
     <span class="md-ellipsis">
       C语言中的流
     </span>
@@ -780,7 +780,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#c_2" class="md-nav__link">
+  <a href="#c_3" class="md-nav__link">
     <span class="md-ellipsis">
       C语言中的标准流
     </span>
@@ -790,7 +790,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#c_3" class="md-nav__link">
+  <a href="#c_4" class="md-nav__link">
     <span class="md-ellipsis">
       C语言中的标准流
     </span>
@@ -2346,7 +2346,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#c" class="md-nav__link">
+  <a href="#c_1" class="md-nav__link">
     <span class="md-ellipsis">
       C语言中的流与文件指针
     </span>
@@ -2356,7 +2356,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#c_1" class="md-nav__link">
+  <a href="#c_2" class="md-nav__link">
     <span class="md-ellipsis">
       C语言中的流
     </span>
@@ -2388,7 +2388,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#c_2" class="md-nav__link">
+  <a href="#c_3" class="md-nav__link">
     <span class="md-ellipsis">
       C语言中的标准流
     </span>
@@ -2398,7 +2398,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#c_3" class="md-nav__link">
+  <a href="#c_4" class="md-nav__link">
     <span class="md-ellipsis">
       C语言中的标准流
     </span>
@@ -2696,21 +2696,21 @@
   
 
 
-<h1 id="12-c">12. C语言文件操作<a class="headerlink" href="#12-c" title="Permanent link">&para;</a></h1>
-<h2 id="c">C语言中的流与文件指针<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
-<h3 id="c_1">C语言中的流<a class="headerlink" href="#c_1" title="Permanent link">&para;</a></h3>
+<h1 id="c">C语言文件操作<a class="headerlink" href="#c" title="Permanent link">&para;</a></h1>
+<h2 id="c_1">C语言中的流与文件指针<a class="headerlink" href="#c_1" title="Permanent link">&para;</a></h2>
+<h3 id="c_2">C语言中的流<a class="headerlink" href="#c_2" title="Permanent link">&para;</a></h3>
 <p>在C语言中，流表示任意输入的源或任意输出的目的地</p>
 <p><a class="glightbox" href="image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image.png"></a></p>
 <h3 id="_1">计算机中的读写操作与输入输出操作的关系<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>在计算机中，读/写操作是相对于计算机而言，而输入/输出操作是相对于人而言</p>
 <p>读操作：从键盘/文件中输入数据到输入流中，由计算机从输入流中进行读取</p>
 <p>写操作：由计算机向输出流中写入数据，再通过输出流向屏幕/文件中输出数据</p>
-<blockquote>
-<p>[!TIP]</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>简单理解：</p>
 <p>对于读操作（相对于计算机而言）：用户从键盘/文件中输入数据至流中，CPU需要处理数据首先得有数据，所以计算机需要从流中读取数据</p>
 <p>对于写操作（相对于计算机而言）：计算机当前已经知道需要输出的数据在自己身上以及数据位置，但是人不知道，所以计算要输出数据需要先进行写操作，将数据写入输出流，再输出到屏幕/文件中</p>
-</blockquote>
+</div>
 <h3 id="_2">文件指针<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>在C语言中，对流的访问是通过文件指针实现的。该指针类型为<code>FILE*</code>类型，定义在头文件<code>stdio.h</code></p>
 <p>用文件指针表示的特定的流具有标准的名字，如果需要还可以声明其他的一些文件指针</p>
@@ -2724,13 +2724,13 @@
 <a id="__codelineno-0-4" name="__codelineno-0-4"></a>
 <a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="n">可以使fp1与fp2指向两个文件的文件信息区</span><span class="err">（</span><span class="n">文件信息区是</span><span class="err">⼀</span><span class="n">个结构体变量</span><span class="err">）。</span><span class="n">通过该文件信息区中的信息就能够访问该文件</span><span class="err">。</span><span class="n">也就是说</span><span class="err">，</span><span class="n">通过文件指针变量能够间接找到与它关联的</span><span class="err">⽂</span><span class="n">件</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>尽管操作系统会限制可以同时打开的流的数量，但是程序可以通过声明任意数量的<code>FILE*</code>类型的变量</p>
-</blockquote>
+</div>
 <p><a class="glightbox" href="image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image1.png"></a></p>
-<h2 id="c_2">C语言中的标准流<a class="headerlink" href="#c_2" title="Permanent link">&para;</a></h2>
-<h3 id="c_3">C语言中的标准流<a class="headerlink" href="#c_3" title="Permanent link">&para;</a></h3>
+<h2 id="c_3">C语言中的标准流<a class="headerlink" href="#c_3" title="Permanent link">&para;</a></h2>
+<h3 id="c_4">C语言中的标准流<a class="headerlink" href="#c_4" title="Permanent link">&para;</a></h3>
 <p>在C语言头文件<code>stdio.h</code>中，提供了3个默认流，这三个流的类型是<code>FILE*</code>，并且这3个流可以直接使用，不需要对其进行声明，也不用打开或关闭它们</p>
 <table>
 <thead>
@@ -2775,12 +2775,14 @@
 <h4 id="_7">二进制文件<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <p>所谓二进制文件，即数据在内存中以二进制的形式存储，不加转换输出到外存的文件</p>
 <p>二进制没有文本文件的两种特性，即二进制文件不会分行，也没有行末标记和文件结尾标记，所有字节都是平等对待</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在无法确定文件是文本形式还是二进制形式时，安全的做法是把文件假定为二进制文件</p>
-<p>[!NOTE]</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>字符不论是文本文件还是二进制文件一律以ASCII形式存储于外存，数值型数据根据需要选择其中一种存储于外存</p>
-</blockquote>
+</div>
 <p>例如，在外存中存储数值10000</p>
 <p><a class="glightbox" href="image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image2.png"></a></p>
 <h2 id="_8">文件的打开和关闭<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
@@ -2828,10 +2830,10 @@
 <a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="n">返回类型</span>
 <a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="n">函数返回类型是int类型</span><span class="err">，</span><span class="n">如果文件成功关闭</span><span class="err">，</span><span class="n">则返回0</span><span class="err">，</span><span class="n">否则返回EOF</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!TIP]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在Windows中，用<code>.</code>来表示文件当前路径，用<code>..</code>来表示文件当前路径的上一路径，例如，当前路径下的<code>test.txt</code>文件，表示为<code>./test.txt</code>，当前路径下的上一路径的<code>test.txt</code>文件，表示为<code>./../test.txt</code>。指定具体路径例如：<code>C:\data\test.txt</code>（注意<code>\</code>防止与紧随其后的字母形成转义，写成<code>\\</code>）</p>
-</blockquote>
+</div>
 <h4 id="_9">文件打开模式<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -2993,11 +2995,11 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>所有输入流一般指适用于标准输入流和其他输入流（如文件输入流）</p>
 <p>所有输出流一般指适用于标准输出流和其他输出流（如文件输出流）</p>
-</blockquote>
+</div>
 <h3 id="fgetcfputc">函数<code>fgetc</code>和<code>fputc</code><a class="headerlink" href="#fgetcfputc" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
@@ -3039,10 +3041,10 @@
 <a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="n">返回类型</span>
 <a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="n">函数返回int类型的值</span><span class="err">，</span><span class="n">该值代表成功输出的字符</span><span class="err">，</span><span class="n">根据ASCII码转换为对应的值</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>fgetc</code>与<code>fputc</code>函数针对字符输入和输出，并且<code>fputc</code>函数在输出时不会自动换行</p>
-</blockquote>
+</div>
 <p>代码实例（文件输入流与文件输出流）</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -3218,10 +3220,10 @@
 <a id="__codelineno-6-21" name="__codelineno-6-21"></a><span class="n">返回类型</span>
 <a id="__codelineno-6-22" name="__codelineno-6-22"></a><span class="n">函数返回int类型的值</span><span class="err">，</span><span class="n">该值表示函数是否成功写入</span><span class="err">，</span><span class="n">成功写入返回非负值</span><span class="err">，</span><span class="n">否则返回EOF</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>函数<code>fgets</code>和<code>fputs</code>针对字符串的输入和输出，并且<code>fputs</code>不会自动换行</p>
-</blockquote>
+</div>
 <p>代码实例（文件输入和输出流）</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
@@ -3332,10 +3334,10 @@
 <a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="n">abcdefghi</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>因为<code>fgets</code>函数可以限制读取的字符个数，故在输入字符串至数组中，可以在一定程度上确保不会出现数组越界，而<code>scanf</code>不可以，故可以用<code>fgets</code>函数代替<code>scanf</code>输入字符串</p>
-</blockquote>
+</div>
 <h3 id="fscanffprintf">函数<code>fscanf</code>与<code>fprintf</code><a class="headerlink" href="#fscanffprintf" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
@@ -3583,10 +3585,10 @@
 <a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="n">函数返回size_t类型的值</span><span class="err">，</span><span class="n">该值表示成功写入的数据个数</span>
 </code></pre></div></td></tr></table></div>
 <p>代码实例（文件输入和输出流）</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>函数<code>fread</code>和<code>fwrite</code>只能用于文件的输入和输出流，不可以用于其他输入和输出流</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -4245,10 +4247,10 @@
 <h2 id="_13">文件读取结束后的原因判定<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <h3 id="feof">函数<code>feof</code><a class="headerlink" href="#feof" title="Permanent link">&para;</a></h3>
 <p>函数作用：当文件读取结束的时候（已知文件读取结束），判断是读取结束的原因是否是：遇到文件末尾结束</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在文件读取过程中，不能用<code>feof</code>函数的返回值直接来判断文件的是否结束</p>
-</blockquote>
+</div>
 <h3 id="ferror">函数<code>ferror</code><a class="headerlink" href="#ferror" title="Permanent link">&para;</a></h3>
 <p>函数作用：当文件读取结束的时候（已知文件读取结束），用于检测在读取或写入文件时是否发生错误。如果在进行文件操作时发生错误，<code>ferror</code>函数会返回非零值</p>
 <h3 id="_14">文本文件中的错误判定<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
@@ -4437,11 +4439,11 @@
 <a id="__codelineno-22-56" name="__codelineno-22-56"></a><span class="mf">1.0</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="mf">3.0</span><span class="w"> </span><span class="mf">4.0</span><span class="w"> </span><span class="mf">5.0</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="_16">文件缓冲区<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
-<p>ANSIC标准采用“缓冲文件系统”处理的数据文件的，所谓缓冲文件系统是指系统自动地在内存中为</p>
-<p>程序中每⼀个正在使用的文件开辟一块“文件缓冲区”。从内存向磁盘输出数据会先送到内存中的缓</p>
-<p>冲区，装满缓冲区后才⼀起送到磁盘上。如果从磁盘向计算机读入数据，则从磁盘文件中读取数据输</p>
-<p>入到内存缓冲区（充满缓冲区），然后再从缓冲区逐个地将数据送到程序数据区（程序变量等）。缓</p>
-<p>冲区的大小根据C编译系统决定</p>
+<p>ANSIC标准采用“缓冲文件系统”处理的数据文件的，所谓缓冲文件系统是指系统自动地在内存中为
+程序中每⼀个正在使用的文件开辟一块“文件缓冲区”。从内存向磁盘输出数据会先送到内存中的缓
+冲区，装满缓冲区后才⼀起送到磁盘上。如果从磁盘向计算机读入数据，则从磁盘文件中读取数据输
+入到内存缓冲区（充满缓冲区），然后再从缓冲区逐个地将数据送到程序数据区（程序变量等）。缓
+冲区的大小根据C编译系统决定</p>
 <p><a class="glightbox" href="image7.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image7.png"></a></p>
 <p>代码演示</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
@@ -4492,10 +4494,10 @@
 <p><a class="glightbox" href="image8.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image8.png"></a></p>
 <p>刷新缓冲区之后：</p>
 <p><a class="glightbox" href="image9.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="image9.png"></a></p>
-<blockquote>
-<p>[!TIP]</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>因为有缓冲区的存在，C语言在操作文件的时候，需要做刷新缓冲区或者在文件操作结束的时候使用<code>fclose</code>函数关闭文件来对缓冲区进行刷新</p>
-</blockquote>
+</div>
 
 
 

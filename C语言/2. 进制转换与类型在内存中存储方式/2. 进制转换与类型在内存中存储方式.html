@@ -2473,10 +2473,10 @@
 <p>对于小数值，以二进制为例，其余进制同理，110.11B</p>
 <p><a class="glightbox" href="images\Snipaste_2024-04-27_16-27-35.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\Snipaste_2024-04-27_16-27-35.png"></a></p>
 <h2 id="_2">十进制向二进制、八进制与十六进制转换<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>十进制向其余进制转换需要分两个部分：1.整数部分 2. 小数部分</p>
-</blockquote>
+</div>
 <h3 id="_3">转换整数部分，以二进制为例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>对于十进制数值35转换为二进制步骤如下</p>
 <p><a class="glightbox" href="images\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image.png"></a></p>
@@ -2484,9 +2484,10 @@
 <p>以十进制数值0.625转换为二进制步骤如下</p>
 <p><a class="glightbox" href="images\image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image1.png"></a></p>
 <h3 id="_5">十进制转二进制的巧妙方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>以整数部分为例</p>
-</blockquote>
+</div>
 <p>十进制数值289转二进制为例</p>
 <p>前置知识：</p>
 <table>
@@ -2584,12 +2585,14 @@
 <p>原码：直接将数值按照正负数的形式翻译成二进制得到的就是原码。</p>
 <p>反码：将原码的符号位不变，其他位依次按位取反就可以得到反码。</p>
 <p>补码：反码+1就得到补码</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>补码也可以通过取反+1得到原码</p>
-<p>[!NOTE]</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>对于整型数值来说：数据存放内存中其实存放的是补码</p>
-</blockquote>
+</div>
 <h2 id="_12">计算机中的单位<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <h3 id="_13">位、字节和字<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>位：最小存储单元，单位是<code>bit</code>（比特）</p>
@@ -2757,15 +2760,15 @@
 </code></pre></div></td></tr></table></div>
 <h3 id="_17">浮点数在内存中的存储方式<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <p>根据国际标准IEEE（电⽓和电⼦⼯程协会）754，任意⼀个⼆进制浮点数V可以表⽰成下⾯的形式：</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>V  =  $(-1)^S $∗ M ∗ <span class="arithmatex">\(2^E\)</span>​</p>
 <ul>
 <li><span class="arithmatex">\((-1)^S\)</span>表示符号位，当S=0，V为正数；当S=1，V为负数</li>
 <li>M表示有效数字，M大于等于1但小于2</li>
 <li>2E表示指数位</li>
 </ul>
-</blockquote>
+</div>
 <p>例如：</p>
 <p>十进制的5.0，写成二进制是 101.0 ，相当于 1.01×<span class="arithmatex">\(2^2\)</span>，则S=0，M=1.01，E=2</p>
 <p>十进制的-5.0，写成二进制是 -101.0 ，相当于 -1.01×<span class="arithmatex">\(2^2\)</span> ，则S=1，M=1.01，E=2</p>
@@ -2782,10 +2785,10 @@
 <ul>
 <li>对于指数位E</li>
 </ul>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>E是一个无符号整数类型（<code>unsigned int</code>）</p>
-</blockquote>
+</div>
 <p>如果E为8位，它的取值范围为0~255；如果E为11位，它的取值范围为0~2047。但是，因为科学计数法中的E是可以出现负数的，所以IEEE754规定，存⼊内存时E的真实值必须再加上一个中间数，对于32位浮点数的E，这个中间数是127；对于64位浮点数的E，这个中间数是1023。比如，210的E是10，所以保存成32位浮点数时，必须保存成10+127=137，即10001001</p>
 <h3 id="_19">浮点数的取出过程<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
 <p>指数E从内存中取出分成三种情况：</p>
@@ -2873,10 +2876,10 @@
 <a id="__codelineno-6-26" name="__codelineno-6-26"></a><span class="n">num的值为</span><span class="err">：</span><span class="mi">1091567616</span>
 <a id="__codelineno-6-27" name="__codelineno-6-27"></a><span class="o">*</span><span class="n">pFloat的值为</span><span class="err">：</span><span class="mf">9.000000</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>因为浮点数在内存中的存储方式，导致部分浮点数无法精确表示</p>
-</blockquote>
+</div>
 <p>代码实例</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>

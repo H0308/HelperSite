@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#14-c" class="md-skip">
+        <a href="#c" class="md-skip">
           跳转至
         </a>
       
@@ -2318,7 +2318,7 @@
   
 
 
-<h1 id="14-c">14. C语言预处理（部分）<a class="headerlink" href="#14-c" title="Permanent link">&para;</a></h1>
+<h1 id="c">C语言预处理（部分）<a class="headerlink" href="#c" title="Permanent link">&para;</a></h1>
 <h2 id="_1">预定义符号<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>在C语言中，设置了⼀些预定义符号，可以直接使用，预定义符号同样在预处理期间处理，直接进行替换操作</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
@@ -2369,12 +2369,14 @@
 <span class="normal"><a href="#__codelineno-2-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">使用方法</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="cp">#define name content</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>#define</code>定义中content后面不要带<code>;</code>避免不必要的错误</p>
-<p>[!NOTE]</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>#define</code>定义的表达式在替换过程中不会进行计算</p>
-</blockquote>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">#define PLUS 50 + 5</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="c1">//在替换过程中，不会替换为50 + 5之后的值55，而是直接替换为50 + 5</span>
@@ -2406,13 +2408,18 @@
 <a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="cp">#define name( parament-list ) content</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">其中的</span><span class="w"> </span><span class="n">parament</span><span class="o">-</span><span class="n">list是</span><span class="err">⼀</span><span class="n">个由逗号隔开的符号表</span><span class="err">（</span><span class="n">类似于函数参数列表</span><span class="err">，</span><span class="n">但是没有类型书写和限制</span><span class="err">，</span><span class="n">只有符号</span><span class="err">），</span><span class="n">它们可能出现在content中</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>参数列表的左括号必须与<code>name</code>紧邻，如果两者之间有任何空白存在，参数列表就会被解释为<code>content</code>的一部分</p>
-<p>[!NOTE]</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>在使用<code>#define</code>定义宏时，需要考虑到宏content部分运算符、parament-list部分的运算符以及使用宏时邻近的运算符的优先级和表达式的副作用</p>
+</div>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
 <p>表达式副作用：运算符本身不仅仅是计算出两个操作数的运算结果，而是既会计算出结果，也会改变本身操作数的值，例如<code>a + 1</code>，此时只是计算出<code>a</code>变量加上1之后的值，但是<code>a++</code>不但会计算出<code>a + 1</code>的值，还会改变<code>a</code>本身的值</p>
-</blockquote>
+</div>
 <p>代码实例</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
@@ -2539,10 +2546,10 @@
 <li>把宏名全部大写</li>
 <li>函数名不要全部大写</li>
 </ul>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>存在部分例外，例如宏<code>offsetof</code></p>
-</blockquote>
+</div>
 <h3 id="_3">宏替换规则<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>在程序中扩展<code>#define</code>定义符号和宏时，需要涉及下面的步骤。</p>
 <ol>
@@ -2550,11 +2557,11 @@
 <li>替换文本随后被插入到程序中原来文本的位置。对于宏，参数名被他们的值所替换。</li>
 <li>最后，再次对结果文件进行扫描，看看它是否包含任何由<code>#define</code>定义的符号。如果是，就重复上述处理过程</li>
 </ol>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>宏参数和<code>#define</code>定义中可以出现其他<code>#define</code>定义的符号。但是对于宏，不能出现递归</p>
 <p>当预处理器搜索<code>#define</code>定义的符号的时候，字符串常量的内容并不被搜索</p>
-</blockquote>
+</div>
 <p>代码实例</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
@@ -2729,10 +2736,10 @@
 <h2 id="_5"><code>#</code>与<code>##</code>运算符<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6"><code>#</code>运算符<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p><code>#</code>运算符将宏的一个参数转换为字符串字面量。它仅允许出现在带参数的宏的替换列表中</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>#</code>运算符所执行的操作可以理解为“字符串化”</p>
-</blockquote>
+</div>
 <p>代码实例</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
@@ -3146,10 +3153,10 @@
 <h2 id="include">头文件包含指令<code>#include</code><a class="headerlink" href="#include" title="Permanent link">&para;</a></h2>
 <p>双引号<code>""</code>引用的头文件查找策略：先在源文件所在目录下查找，如果该头文件未找到，编译器就像查找库函数头文件一样在标准位置查找头文件，如果找不到就提示编译错误</p>
 <p>双箭头<code>&lt;&gt;</code>引用的头文件查找策略：查找头文件直接去标准路径下去查找，如果找不到就提示编译错误</p>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>对于库文件也可以使用<code>""</code>的形式，但是这样做查找的效率就低些，因为库文件一般都不在源文件所在目录，但是有需要再原文件所在目录进行查找，浪费一定的时间，并且这样也不容易区分是库文件还是本地文件</p>
-</blockquote>
+</div>
 <h3 id="_9">嵌套文件包含<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>在使用<code>#include</code>指令时，预处理器先删除<code>#include</code>，并用包含文件的内容替换。如果一个头文件被包含10次，那就实际被编译10次，如果重复包含，对编译的压力就比较大</p>
 <p>可以使用条件编译防止头文件被多次包含</p>

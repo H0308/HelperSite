@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-c" class="md-skip">
+        <a href="#c" class="md-skip">
           跳转至
         </a>
       
@@ -507,7 +507,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#c" class="md-nav__link">
+  <a href="#c_1" class="md-nav__link">
     <span class="md-ellipsis">
       C语言介绍
     </span>
@@ -516,7 +516,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#c_1" class="md-nav__link">
+  <a href="#c_2" class="md-nav__link">
     <span class="md-ellipsis">
       C语言基础代码分析
     </span>
@@ -544,7 +544,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#c_2" class="md-nav__link">
+  <a href="#c_3" class="md-nav__link">
     <span class="md-ellipsis">
       C语言关键字介绍
     </span>
@@ -576,7 +576,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#c_3" class="md-nav__link">
+  <a href="#c_4" class="md-nav__link">
     <span class="md-ellipsis">
       C语言语句分类
     </span>
@@ -669,7 +669,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#c_4" class="md-nav__link">
+  <a href="#c_5" class="md-nav__link">
     <span class="md-ellipsis">
       C语言中注释
     </span>
@@ -2208,7 +2208,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#c" class="md-nav__link">
+  <a href="#c_1" class="md-nav__link">
     <span class="md-ellipsis">
       C语言介绍
     </span>
@@ -2217,7 +2217,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#c_1" class="md-nav__link">
+  <a href="#c_2" class="md-nav__link">
     <span class="md-ellipsis">
       C语言基础代码分析
     </span>
@@ -2245,7 +2245,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#c_2" class="md-nav__link">
+  <a href="#c_3" class="md-nav__link">
     <span class="md-ellipsis">
       C语言关键字介绍
     </span>
@@ -2277,7 +2277,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#c_3" class="md-nav__link">
+  <a href="#c_4" class="md-nav__link">
     <span class="md-ellipsis">
       C语言语句分类
     </span>
@@ -2370,7 +2370,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#c_4" class="md-nav__link">
+  <a href="#c_5" class="md-nav__link">
     <span class="md-ellipsis">
       C语言中注释
     </span>
@@ -2420,12 +2420,12 @@
   
 
 
-<h1 id="1-c">1. C语言基础知识<a class="headerlink" href="#1-c" title="Permanent link">&para;</a></h1>
-<h2 id="c">C语言介绍<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
+<h1 id="c">C语言基础知识<a class="headerlink" href="#c" title="Permanent link">&para;</a></h1>
+<h2 id="c_1">C语言介绍<a class="headerlink" href="#c_1" title="Permanent link">&para;</a></h2>
 <p>C语言是一门编译型语言，C语言源代码都是文本文件，但文本文件本身不能运行，必须通过编译器翻译和链接器的链接，生成二进制的可执行文件才可以执行</p>
 <p>在Windows平台下，C语言代码放在后缀为<code>.c</code>文本文件中，通过编译器编译生成后缀为<code>.obj</code>的目标文件，再通过链接器链接目标文件和链接库链接生成后缀为<code>.exe</code>可执行的二进制文件</p>
 <p>在C语言中，把后缀为<code>.h</code>的文件称为头文件</p>
-<h2 id="c_1">C语言基础代码分析<a class="headerlink" href="#c_1" title="Permanent link">&para;</a></h2>
+<h2 id="c_2">C语言基础代码分析<a class="headerlink" href="#c_2" title="Permanent link">&para;</a></h2>
 <p>C语言代码实例：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
@@ -2469,7 +2469,7 @@
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <p>在上面的实例代码中，使用了<code>printf();</code>打印输出函数，使用库函数中函数需要包含特定的头文件，而<code>printf();</code>定义在头文件<code>stdio.h</code>，将该函数中需要打印的内容打印在控制台中，C语言相关函数头文件可在网站中查询：<a href="https://cplusplus.com/reference/clibrary/">C语言头文件查询</a></p>
-<h3 id="c_2">C语言关键字介绍<a class="headerlink" href="#c_2" title="Permanent link">&para;</a></h3>
+<h3 id="c_3">C语言关键字介绍<a class="headerlink" href="#c_3" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
@@ -2573,11 +2573,12 @@
 <li><code>\xdd</code> ：dd中的每一个d表示2个十六进制（0-F）数字（x为固定内容代表十六进制）。如：\x30表示字符0</li>
 <li><code>\0</code> ：null字符，代表没有内容， <code>\0</code>就是<code>\ddd</code>这类转义字符的⼀种，用于字符串的结束标志，其ASCII码值是0</li>
 </ul>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>其中注意转义字符\b，具体效果见博客：<a href="https://blog.csdn.net/m0_73281594/article/details/133838696?spm=1001.2014.3001.5501">转义字符\b解析博客</a></p>
-</blockquote>
+</div>
 <p>C语言中的转义字符参考：<a href="https://zh.cppreference.com/w/c/language/escape">转义字符参考网址</a></p>
-<h2 id="c_3">C语言语句分类<a class="headerlink" href="#c_3" title="Permanent link">&para;</a></h2>
+<h2 id="c_4">C语言语句分类<a class="headerlink" href="#c_4" title="Permanent link">&para;</a></h2>
 <h3 id="_3">空语句<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>只有一个分号的语句即为空语句</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
@@ -2674,7 +2675,7 @@
 <p><code>do while</code>语句、<code>while</code>语句、<code>for</code>语句</p>
 <h4 id="_10">跳转语句<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
 <p><code>break</code>语句、<code>goto</code>语句、<code>continue</code>语句、<code>return</code>语句</p>
-<h2 id="c_4">C语言中注释<a class="headerlink" href="#c_4" title="Permanent link">&para;</a></h2>
+<h2 id="c_5">C语言中注释<a class="headerlink" href="#c_5" title="Permanent link">&para;</a></h2>
 <p>注释：对代码的说明，编译器会忽略注释</p>
 <h3 id="_11">块注释/**/的形式<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>将注释放在<code>/**/</code>中，从第一个<code>/*</code>开始到后面的<code>*/</code>结束</p>
@@ -2693,21 +2694,21 @@
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">fopen</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="cm">/* file name */</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">);</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="cm">/* file name */</span><span class="w"> </span><span class="err">⽤</span><span class="n">来对函数参数进</span><span class="err">⾏</span><span class="n">说明</span><span class="err">，</span><span class="n">跟在它后面的代码依然会有效执</span><span class="err">⾏</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>块注释不支持嵌套注释， <code>/*</code> 开始注释后，遇到后面的第⼀个 <code>*/</code> 就认为注释结束了</p>
-</blockquote>
+</div>
 <h3 id="_12">行注释//的形式<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>将注释放在双斜杠 <code>//</code> 后面，从双斜杠到行尾都属于注释</p>
 <p>行注释只能是单行，可以放在行首，也可以放在一行语句的结尾</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">printf</span><span class="p">(</span><span class="s">&quot;// hello /* world */ &quot;</span><span class="p">);</span><span class="c1">//行注释和块注释均失效</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>[!NOTE]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>不管是哪⼀种注释，都不能放在双引号里面。双引号里面的注释符号，会成为字符串的⼀部分，解释为普通符号，失去注释作用</p>
-<p>[!NOTE]</p>
-<p>编译时，注释会被替换成⼀个空格，所以<code>min/* 这里是注释*/Value</code> 会变成 <code>min Value</code>（<code>min</code>和<code>Value</code>中间有空格） ，而不是 <code>minValue</code>（<code>min</code>和<code>Value</code>中无空格） </p>
-</blockquote>
+</div>
+<p>!!!! note
+    编译时，注释会被替换成⼀个空格，所以<code>min/* 这里是注释*/Value</code> 会变成 <code>min Value</code>（<code>min</code>和<code>Value</code>中间有空格） ，而不是 <code>minValue</code>（<code>min</code>和<code>Value</code>中无空格） </p>
 
 
 

@@ -1,16 +1,17 @@
 # Java基础知识
 
-> 本文档只含有Java和C/C++不同的知识点
+!!! note
+    本文档只含有Java和C/C++不同的知识点
 
-# 1. Java基础知识
+## Java基础知识
 
-## 1.1 JDK和JVM
+### JDK和JVM
 
 在Java中，JDK称为Java开发工具包(Java Development Kit)，包含了Java开发需要使用的工具包，前面的版本中JRE和JDK是分开的两个文件夹，从Java9开始，JDK中还包含了JRE(Java Runtime Environment)，包含了Java运行的虚拟机JVM和其他，而，原因是Java9引入模块化运行，可能不是每一次的代码运行都需要完整的JRE，根据需要加载可以提高运行效率
 
 JVM是Java中的运行虚拟机，所有的Java代码程序都会在JVM上运行，从而达到了Java的跨平台性
 
-## 1.2 Java基础代码演示
+### Java基础代码演示
 
 ```java
 // 此处class后面的名称和当前文件名保持一致
@@ -39,7 +40,7 @@ Hello world!
 // java后的class文件不需要带后缀名
 ```
 
-## 1.3 Java中的注释
+### Java中的注释
 
 在Java中，有下面三种注释方式：
 
@@ -98,7 +99,7 @@ javadoc -d api -author -version -encoding UTF-8 Main.java
 
 需要查看内容可以打开`api`文件夹中的`index.html`文件
 
-## 1.4 Java中的关键字
+### Java中的关键字
 
 Java目前一共有53个关键字，48个关键字+3个特殊直接量+2个保留字
 
@@ -113,7 +114,7 @@ true false null
 goto const
 ```
 
-## 1.5 Java中的`println`和`print`的区别
+### Java中的`println`和`print`的区别
 
 相同点:都是输出语句
 
@@ -147,9 +148,9 @@ public class Main{
 床前明月光疑是地上霜举头望明月低头思故乡
 ```
 
-# 2. Java中的数据类型
+## Java中的数据类型
 
-## 2.1 常量
+### 常量
 
 在Java中，有以下常量（也称字面量）：
 
@@ -160,7 +161,7 @@ public class Main{
 5. 布尔常量
 6. `null`
 
-## 2.2 标识符
+### 标识符
 
 Java中的规定：
 
@@ -173,7 +174,7 @@ Java中的规定：
 1. 给类取名字:遵循大驼峰式 -> 每个单词首字母大写
 2. 给方法和变量取名字:遵循小驼峰式 -> 从第二个单词开始往后首字母大写
 
-## 2.3 变量
+### 变量
 
 在Java中，有下面的变量类型
 
@@ -205,7 +206,7 @@ public class Main {
 }
 ```
 
-## 2.4 类型转换
+### 类型转换
 
 Java中遇到下面两个情况就会出现类型转换
 
@@ -217,7 +218,7 @@ Java中存在两种形式的类型转换
 1. 自动类型转换
 2. 强制类型转换
 
-### 2.5 自动类型转换
+#### 自动类型转换
 
 1. 在对变量初始化时，当赋值符号左侧的类型比右侧的类型范围大时会出现自动类型转换
 
@@ -252,9 +253,10 @@ Java中存在两种形式的类型转换
 
     `byte`, `char`, `short` -> `int` -> `long` -> `float` -> `double`
 
-    > 在C/C++中，boolean类型是整型，可以用0和1代替，但是在Java，boolean是个单独的类型，无法参与运算
+    !!! note
+        在C/C++中，boolean类型是整型，可以用0和1代替，但是在Java，boolean是个单独的类型，无法参与运算
 
-### 2.6 强制类型转换
+#### 强制类型转换
 
 当出现大范围类型向小范围类型转换时，无法进行自动类型转换，如果仍需要操作，则需要用到强制类型转换，语法同C/C++语言
 
@@ -283,39 +285,39 @@ public class Main {
 1.2
 ```
 
-> 特殊地，当`int`类型的常量值赋值给`byte`，`char`，`short`类型时，如果常量值没有超过三种类型的范围就不需要强制类型转换，此时JVM会自动进行转换
->
-> ```java
-> public class Main {
->  	public static void main(String[] args) {
->      		char num1 = 65;// 65在char类型的范围内，不需要强制类型转换
->      		byte num2 = 2;// 2在byte类型的范围内，不需要强制类型转换
->      		short num3 = 3;// 3在short类型的范围内，不需要强制类型转换
->      		// byte num4 = 200;// 超出byte范围，需要强制类型转换
->      		System.out.println((int)num1);
->      		System.out.println(num2);
->     		System.out.println(num3);
->  	}
-> }
-> 输出结果：
-> 65
-> 2
-> 3
-> ```
->
-> 
+!!! note
+    特殊地，当`int`类型的常量值赋值给`byte`，`char`，`short`类型时，如果常量值没有超过三种类型的范围就不需要强制类型转换，此时JVM会自动进行转换
+
+    ```java
+    public class Main {
+        public static void main(String[] args) {
+                char num1 = 65;// 65在char类型的范围内，不需要强制类型转换
+                byte num2 = 2;// 2在byte类型的范围内，不需要强制类型转换
+                short num3 = 3;// 3在short类型的范围内，不需要强制类型转换
+                // byte num4 = 200;// 超出byte范围，需要强制类型转换
+                System.out.println((int)num1);
+                System.out.println(num2);
+                System.out.println(num3);
+        }
+    }
+    输出结果：
+    65
+    2
+    3
+    ```
 
 强制类型转换一般会存在精度丢失问题，所以一般情况下不建议使用
 
-# 3. 运算符
+## 运算符
 
-> 其余运算符与C/C++相同
+!!! note
+    其余运算符与C/C++相同
 
-## 3.1 自增运算符
+### 自增运算符
 
 规则与C/C++相同，但是注意下面的问题
 
-### 3.1.1 赋值给自己后自增（C/C++也有同样的结果）
+#### 赋值给自己后自增（C/C++也有同样的结果）
 
 ```java
 public class test_assignment {
@@ -352,7 +354,7 @@ public class test_assignment {
 
 实际上是创建了一个临时变量`num1`接受改变之前的`num`，再打印临时变量`num1`
 
-### 3.1.2 小范围整型自增和显式加1
+#### 小范围整型自增和显式加1
 
 ```java
 public class test_assignment {
@@ -399,7 +401,7 @@ public class test_assignment {
 
 其余情况类比推理即可
 
-## 3.2 无符号右移
+### 无符号右移
 
 在Java中，除了提供了C/C++中存在的算术右移，还提供了无符号右移，使用`>>>`表示
 
@@ -420,11 +422,11 @@ public class Main {
 8
 ```
 
-## 3.3 运算符优先级
+### 运算符优先级
 
 ![image-20240624104748052](Java基础知识.assets/image-20240624104748052-1719210553597-1.png)
 
-# 4. Java中的包
+## Java中的包
 
 在Java中，可以在模块中创建不同的包，即文件夹，一般一个包代表一种功能或者其他，该包中可以创建多个类
 
@@ -438,7 +440,7 @@ public class Main {
 
 如果需要创建一个与scanner平级的包，则需要右键com.epsda上一级的文件夹，比如src，同样输入com.epsda后面再输入新的包名，例如创建包if_else，写为com.epsda.if_else，创建完成后com.epsda下就会存在两个平级包并且此时会有二级目录，下次再需要创建一个与前两个包平级时只需要右键com.epsda包即可
 
-# 5. Java中的数据输入
+## Java中的数据输入
 
 在Java中，使用`Scanner`类创建`Scanner`对象控制输入，使用`Scanner`类前需要引包，使用`import`关键字进行引包操作，语法如下
 
@@ -461,48 +463,47 @@ Scanner 对象名 = new Scanner(System.in);
 1. 数值型（整型`nextInt()`等）
 2. 字符串型(`next()`, `nextLine()`)
 
-> 对于字符串型的输入来说，next()遇到空白字符就会结束读取输入，和scanf()效果类似，而nextLine()则是遇到换行才结束，所以next()和nextLine()一般不会一起使用
->
-> ```java
-> package com.epsda.scanner;
-> 
-> // 引包
-> import java.util.Scanner;
-> 
-> /**
->  * ClassName: com.epsda.scanner.Test_scanner
->  * Package: PACKAGE_NAME
->  * Description:
->  *
->  * @author 憨八嘎
->  * @version v1.0
->  */
-> public class Test_scanner {
->     public static void main(String[] args) {
->         // 创建scanner对象
->         Scanner sc = new Scanner(System.in);
-> 
->         // 输入整数
->         int num = sc.nextInt();
->         System.out.println("num = " + num);
->         // 输入字符串，next()方法
->         String name = sc.next();
->         System.out.println("name = " + name);
->         // 输入字符串，nextLine()方法
->         name = sc.nextLine();
->         System.out.println("name = " + name);
->     }
-> }
-> 
-> 输出结果：
-> // 2
-> num = 2
-> // 这是一个带空格 的字符串
-> name = 这是一个带空格
-> name =  的字符串
-> ```
->
-> 
+!!! note
+    对于字符串型的输入来说，next()遇到空白字符就会结束读取输入，和scanf()效果类似，而nextLine()则是遇到换行才结束，所以next()和nextLine()一般不会一起使用
+
+    ```java
+    package com.epsda.scanner;
+
+    // 引包
+    import java.util.Scanner;
+
+    /**
+     * ClassName: com.epsda.scanner.Test_scanner
+     * Package: PACKAGE_NAME
+     * Description:
+     *
+     * @author 憨八嘎
+     * @version v1.0
+     */
+    public class Test_scanner {
+        public static void main(String[] args) {
+            // 创建scanner对象
+            Scanner sc = new Scanner(System.in);
+
+            // 输入整数
+            int num = sc.nextInt();
+            System.out.println("num = " + num);
+            // 输入字符串，next()方法
+            String name = sc.next();
+            System.out.println("name = " + name);
+            // 输入字符串，nextLine()方法
+            name = sc.nextLine();
+            System.out.println("name = " + name);
+        }
+    }
+
+    输出结果：
+    // 2
+    num = 2
+    // 这是一个带空格 的字符串
+    name = 这是一个带空格
+    name =  的字符串
+    ```
 
 如果需要同时使用`next()`和`nextLine()`，则`next()`和`nextLine()`中间可以加一个`nextLine()`处理`next`未读取到的空格，再使用`nextLine()`读取新的输入
 
@@ -549,7 +550,7 @@ name = 这是一个带空格
 name = 这是一个带空格的字符串 
 ```
 
-# 6. `Random`类
+## `Random`类
 
 在Java中，如果想要使用系统生成的伪随机数，可以使用Java的伪随机类Random生成伪随机数，同Scanner类，Random类也再java.util包中，所以使用Random类也需要先引包
 
@@ -599,11 +600,12 @@ data1 = 76
 data2 = 648
 ```
 
-# 7. 分支和循环语句
+## 分支和循环语句
 
-> 因为Java中的分支和循环语句与C/C++语法相同，此处不再赘述
->
-> 在IDEA中，快速生成`for`循环可以使用`变量名.fori`
+!!! note
+    因为Java中的分支和循环语句与C/C++语法相同，此处不再赘述
+
+    在IDEA中，快速生成`for`循环可以使用`变量名.fori`
 
 需要注意的是，**Java中没有goto语句**，但是有标签，但是只能配合循环控制语句使用
 
@@ -617,7 +619,7 @@ while(判断表达式){
 
 对于其他两个循环也是如此
 
-## 7.1 猜数字小游戏（结合`Random`类）
+### 猜数字小游戏（结合`Random`类）
 
 ```java
 package com.epsda.guessGame;
@@ -657,4 +659,3 @@ public class GuessGame {
     }
 }
 ```
-

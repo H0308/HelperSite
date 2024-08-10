@@ -1,5 +1,5 @@
 site_name: 日常学习帮助网站
-site-url: www.helper-wiki.com
+site_url: www.helper-wiki.com
 use_directory_urls: false
 
 theme:

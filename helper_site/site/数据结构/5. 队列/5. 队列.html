@@ -1068,12 +1068,7 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       用栈实现队列
@@ -1081,13 +1076,18 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#_17" class="md-nav__link">
     <span class="md-ellipsis">
       设计循环队列
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2313,12 +2313,7 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       用栈实现队列
@@ -2326,13 +2321,18 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#_17" class="md-nav__link">
     <span class="md-ellipsis">
       设计循环队列
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3211,19 +3211,19 @@
 <a id="__codelineno-10-265" name="__codelineno-10-265"></a><span class="cm">*/</span>
 <a id="__codelineno-10-266" name="__codelineno-10-266"></a><span class="c1">// @lc code=end</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="_16">用栈实现队列<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<h3 id="_16">用栈实现队列<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <p>题目链接：<a href="https://leetcode.cn/problems/implement-queue-using-stacks/description/">232. 用栈实现队列 - 力扣（LeetCode）</a></p>
 <div class="admonition quote">
 <p class="admonition-title">Quote</p>
-<p>请你仅使用两个栈实现先入先出队列。队列应当支持一般队列支持的所有操作（<code>push</code>、<code>pop</code>、<code>peek</code>、<code>empty</code>）：
-实现 <code>MyQueue</code> 类：
-<code>void push(int x)</code> 将元素 x 推到队列的末尾
-<code>int pop()</code> 从队列的开头移除并返回元素
-<code>int peek()</code> 返回队列开头的元素
-<code>boolean empty()</code> 如果队列为空，返回 <code>true</code> ；否则，返回 <code>false</code>
-<strong>说明：</strong>
-你 <strong>只能</strong> 使用标准的栈操作 —— 也就是只有 <code>push to top</code>, <code>peek/pop from top</code>, <code>size</code>, 和 <code>is empty</code> 操作是合法的。
-你所使用的语言也许不支持栈。你可以使用 list 或者 deque（双端队列）来模拟一个栈，只要是标准的栈操作即可。</p>
+<p>请你仅使用两个栈实现先入先出队列。队列应当支持一般队列支持的所有操作（<code>push</code>、<code>pop</code>、<code>peek</code>、<code>empty</code>）：</p>
+<p>实现 <code>MyQueue</code> 类：</p>
+<p><code>void push(int x)</code> 将元素 x 推到队列的末尾</p>
+<p><code>int pop()</code> 从队列的开头移除并返回元素</p>
+<p><code>int peek()</code> 返回队列开头的元素</p>
+<p><code>boolean empty()</code> 如果队列为空，返回 <code>true</code> ；否则，返回 <code>false</code></p>
+<p><strong>说明：</strong></p>
+<p>你 <strong>只能</strong> 使用标准的栈操作 —— 也就是只有 <code>push to top</code>, <code>peek/pop from top</code>, <code>size</code>, 和 <code>is empty</code> 操作是合法的。</p>
+<p>你所使用的语言也许不支持栈。你可以使用 list 或者 deque（双端队列）来模拟一个栈，只要是标准的栈操作即可。</p>
 </div>
 <p>思路解析：</p>
 <p>本题和上题思路类似，但是不建议直接照搬上一题的思路，参考以下思路：</p>
@@ -3627,20 +3627,20 @@
 <a id="__codelineno-11-197" name="__codelineno-11-197"></a><span class="cm">*/</span>
 <a id="__codelineno-11-198" name="__codelineno-11-198"></a><span class="c1">// @lc code=end</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="_17">设计循环队列<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
+<h3 id="_17">设计循环队列<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <p>题目链接：<a href="https://leetcode.cn/problems/design-circular-queue/description/">622. 设计循环队列 - 力扣（LeetCode）</a></p>
 <div class="admonition quote">
 <p class="admonition-title">Quote</p>
-<p>设计你的循环队列实现。 循环队列是一种线性数据结构，其操作表现基于 FIFO（先进先出）原则并且队尾被连接在队首之后以形成一个循环。它也被称为“环形缓冲器”。
-循环队列的一个好处是我们可以利用这个队列之前用过的空间。在一个普通队列里，一旦一个队列满了，我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。
-你的实现应该支持如下操作：
-<code>MyCircularQueue(k)</code>: 构造器，设置队列长度为 k 。
-<code>Front</code>: 从队首获取元素。如果队列为空，返回 -1 。
-<code>Rear</code>: 获取队尾元素。如果队列为空，返回 -1 。
-<code>enQueue(value)</code>: 向循环队列插入一个元素。如果成功插入则返回真。
-<code>deQueue()</code>: 从循环队列中删除一个元素。如果成功删除则返回真。
-<code>isEmpty()</code>: 检查循环队列是否为空。
-<code>isFull()</code>: 检查循环队列是否已满。</p>
+<p>设计你的循环队列实现。 循环队列是一种线性数据结构，其操作表现基于 FIFO（先进先出）原则并且队尾被连接在队首之后以形成一个循环。它也被称为“环形缓冲器”。</p>
+<p>循环队列的一个好处是我们可以利用这个队列之前用过的空间。在一个普通队列里，一旦一个队列满了，我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。</p>
+<p>你的实现应该支持如下操作：</p>
+<p><code>MyCircularQueue(k)</code>: 构造器，设置队列长度为 k 。</p>
+<p><code>Front</code>: 从队首获取元素。如果队列为空，返回 -1 。</p>
+<p><code>Rear</code>: 获取队尾元素。如果队列为空，返回 -1 。</p>
+<p><code>enQueue(value)</code>: 向循环队列插入一个元素。如果成功插入则返回真。</p>
+<p><code>deQueue()</code>: 从循环队列中删除一个元素。如果成功删除则返回真。</p>
+<p><code>isEmpty()</code>: 检查循环队列是否为空。</p>
+<p><code>isFull()</code>: 检查循环队列是否已满。</p>
 </div>
 <p>思路解析：</p>
 <p>设计一个循环队列时需要考虑如何区分什么时候代表队列为满和队列为空，因为本题可以用数组来实现，故可以考虑当最后一个数据的位置的下一个位置为第一个元素所在的位置即为队列满状态，同样，可以定义一个记录有效数据的变量，当有效数据值为0时说明循环队列为空（注意不要使用该变量判断是否未满，因为数据在存储到数组中的最后一个有效位置时，还可以因为是循环回到数组的第一个有效位置开始继续存），下面是本题的每一个函数的基本思路：</p>

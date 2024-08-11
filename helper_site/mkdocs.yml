@@ -72,6 +72,7 @@ nav:
       - set类: C++/21. set类/21. set类.md
       - map类: C++/22. map类/22. map类.md
       - map和set类模拟实现: C++/23. map和set类模拟实现/23. map和set类模拟实现.md
+      - unordered_map和unordered_set类模拟实现: C++/24. unordered_map和unordered_set类模拟实现/24. unordered_map和unordered_set类模拟实现.md
     - Java:
       - Java基础知识: Java/1. Java基础知识/Java基础知识.md
       - Java数组类型: Java/2. Java数组类型/2. Java数组类型.md

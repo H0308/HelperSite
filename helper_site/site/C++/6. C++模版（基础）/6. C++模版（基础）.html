@@ -1101,6 +1101,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#class-typename" class="md-nav__link">
+    <span class="md-ellipsis">
+      class 与 typename 在模板参数中的注意事项
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2624,6 +2633,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#class-typename" class="md-nav__link">
+    <span class="md-ellipsis">
+      class 与 typename 在模板参数中的注意事项
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3342,6 +3360,30 @@
 <p class="admonition-title">Note</p>
 <p>注意，类模版的声明和定义不能放在两个文件中（即声明在头文件，定义在源文件中），否则会出现链接错误</p>
 </div>
+<h4 id="class-typename"><code>class</code> 与 <code>typename</code> 在模板参数中的注意事项<a class="headerlink" href="#class-typename" title="Permanent link">&para;</a></h4>
+<p>在模板参数中，<code>class</code>关键字用于声明一个类型参数，这与类定义中的<code>class</code>关键字不同。这里的<code>class</code>并不意味着参数必须是一个类类型；它同样可以是任何类型，包括基本数据类型、指针、引用等。</p>
+<p><code>typename</code>关键字也用于模板参数列表中声明类型参数，但它主要用于依赖类型的情况，即模板内部依赖于模板参数的类型。<code>typename</code>的使用主要是为了解决编译器解析依赖类型名称时的歧义。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span>
+<span class="normal"><a href="#__codelineno-14-4">4</a></span>
+<span class="normal"><a href="#__codelineno-14-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">Container</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">Iterator</span><span class="p">;</span><span class="w"> </span><span class="c1">// 使用typename指定依赖类型</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="w">    </span><span class="p">...</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+<p><code>class</code> 与 <code>typename</code> 的区别</p>
+<ol>
+<li>
+<p><strong>依赖类型</strong>：<code>typename</code>用于指定依赖类型，而<code>class</code>不能用于这种情况。依赖类型是指依赖于模板参数的类型，如<code>T::iterator</code>。</p>
+</li>
+<li>
+<p><strong>关键字用途</strong>：<code>class</code>在模板参数中的用途仅限于声明类型参数，而<code>typename</code>除了这个用途外，还用于其他上下文，如指定依赖类型或模板模板参数中的类型。</p>
+</li>
+<li><strong>语义清晰性</strong>：虽然二者可互换，但在某些情况下使用<code>typename</code>可以提高代码的语义清晰性，尤其是在处理依赖类型时</li>
+</ol>
+<p>具体例子可以参考<a href="https://www.helper-wiki.top/C%2B%2B/12. list模拟实现/12. list类模拟实现.html?h=typen#_5">list模拟实现中的迭代器结构部分</a></p>
 
 
 
@@ -3364,7 +3406,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 9, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 11, 2024</span>
   </span>
 
     

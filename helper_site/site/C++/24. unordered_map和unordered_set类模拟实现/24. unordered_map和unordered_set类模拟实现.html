@@ -2768,7 +2768,7 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="n">HashData</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span><span class="w"> </span><span class="n">_next</span><span class="p">;</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<p>处理哈希表结构的设计，将第二个模版参数V作为HashData的数据类型，第一个参数用于比较和删除</p>
+<p>处理哈希表结构的设计，将第二个模版参数<code>V</code>作为<code>HashData</code>的数据类型，第一个参数用于比较和删除</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -2903,15 +2903,17 @@
 <h3 id="operator"><code>operator++()</code>设计<a class="headerlink" href="#operator" title="Permanent link">&para;</a></h3>
 <p>移动哈希表节点指针一共分为两种情况：</p>
 <ol>
-<li>在哈希桶中</li>
-</ol>
+<li>
+<p>在哈希桶中</p>
 <p><a class="glightbox" href="24. unordered_map和unordered_set类模拟实现.assets\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="24. unordered_map和unordered_set类模拟实现.assets\image.png"></a></p>
-<ol>
-<li>准备移动到下一个哈希桶</li>
-</ol>
+</li>
+<li>
+<p>准备移动到下一个哈希桶</p>
 <p><a class="glightbox" href="24. unordered_map和unordered_set类模拟实现.assets\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="24. unordered_map和unordered_set类模拟实现.assets\image.png"></a></p>
+</li>
+</ol>
 <p>对于第一种情况来说，直接通过节点的<code>_next</code>指针向后移动即可</p>
-<p>对于第二种情况来说，需要使用到哈希表结构，并且在准备向下一个哈希桶移动之前，it所在位置是当前桶的最后一个节点，需要通过哈希函数先计算出当前it所在的桶，从当前桶出发向后查找新桶，此处需要注意计算出的下标是当前所在桶的下标，在循环查找之前需要先向后移动到新的位置，如下图所示：</p>
+<p>对于第二种情况来说，需要使用到哈希表结构，并且在准备向下一个哈希桶移动之前，<code>it</code>所在位置是当前桶的最后一个节点，需要通过哈希函数先计算出当前<code>it</code>所在的桶，从当前桶出发向后查找新桶，此处需要注意计算出的下标是当前所在桶的下标，在循环查找之前需要先向后移动到新的位置，如下图所示：</p>
 <p><a class="glightbox" href="24. unordered_map和unordered_set类模拟实现.assets\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="24. unordered_map和unordered_set类模拟实现.assets\image2.png"></a></p>
 <p>移动后进入循环开始查找新桶，当找到第一个非空的桶时，跳出循环，否则继续查找</p>
 <p>需要注意，例如在本图中，当<code>it</code>在9所在的桶位置时，因为会先计算下一个空的位置，而此时已经到达最后一个桶的位置，所以当<code>it</code>的新位置超出了桶的范围，直接返回空，否则返回新桶的位置防止出现空指针解引用问题</p>
@@ -3274,7 +3276,7 @@
 <a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="n">h</span><span class="p">(</span><span class="n">Key</span><span class="p">);</span><span class="w"> </span><span class="c1">// 返回转换后的结果</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="const"><code>const</code>迭代器<a class="headerlink" href="#const" title="Permanent link">&para;</a></h2>
-<p>对于unordered_map和unordered_set来说，不允许修改已经插入的元素的key，所以此处先对原有的迭代器以及结构进行调整</p>
+<p>对于unordered_map和unordered_set来说，不允许修改已经插入的元素的<code>Key</code>，所以此处先对原有的迭代器以及结构进行调整</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
 <span class="normal"><a href="#__codelineno-21-2">2</a></span>
 <span class="normal"><a href="#__codelineno-21-3">3</a></span>

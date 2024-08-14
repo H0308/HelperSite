@@ -5070,9 +5070,10 @@
 <li>所有变量值传递<code>[=]</code>：将lambda表达式所在作用域中的变量全部以传值的方式传递给lambda表达式，具体传递了哪些值需要看lambda表达式中使用到了哪些值</li>
 <li>所有变量引用传递<code>[&amp;]</code>：将将lambda表达式所在作用域中的变量全部以传址的方式传递给lambda表达式，具体传递了哪些值需要看lambda表达式中使用到了哪些值，如果lambda内部需要进行修改，需要加<code>mutable</code></li>
 </ol>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>对于第二种情况，如果想在lambda表达式内部修改lambda所在作用域的变量的值，可以在lambda表达式的形式参数部分以引用的方式传递实参，此时就可以不需要添加<code>mutable</code>关键字，这个方法与普通函数的思路一致</p>
-</blockquote>
+</div>
 <p>上面4种方法也可以交错使用，例如下面的代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-45-2"> 2</a></span>
@@ -5186,9 +5187,10 @@
 <h2 id="_18">包装器<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
 <h3 id="_19">包装器的基本使用<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
 <p>C++11中引入了<code>function</code>包装器，也叫做适配器，在前面有了lambda表达式后，可以发现如果直接调用lambda表达式的对象，其方式和函数的调用基本相同，但是前面的函数还有可能是仿函数，为了使程序的模版使用效率变高，可以使用包装器</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>使用包装器需要引入头文件<code>&lt;functional&gt;</code></p>
-</blockquote>
+</div>
 <p>包装器可以根据已有的函数、函数指针、lambda表达式进行包装，基本结构如下：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1">1</a></span>
 <span class="normal"><a href="#__codelineno-47-2">2</a></span>
@@ -5202,9 +5204,10 @@
 <a id="__codelineno-47-5" name="__codelineno-47-5"></a><span class="c1">// 其中Ret代表指定的函数的返回值</span>
 <a id="__codelineno-47-6" name="__codelineno-47-6"></a><span class="c1">// Args代表指定的函数的参数</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>需要注意，使用包装器必须保证包装器中的模版参数（返回值和形式参数）与被包装的对象完全相同</p>
-</blockquote>
+</div>
 <p>使用方式如下：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
@@ -5553,10 +5556,11 @@
 <li>改变实参在传参时的顺序</li>
 <li>固定形参中的某一个值</li>
 </ol>
-<blockquote>
-<p>使用<code>bind</code>时需要展开命名空间<code>placeholders</code>，因为要使用其中的<code>_1</code>，<code>_2</code>...
-<code>placeholders</code>中的内容表示调用绑定函数的实际参数，<code>_1</code>代表第一个实际参数，<code>_2</code>代表第二个实际参数，以此类推</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>使用<code>bind</code>时需要展开命名空间<code>placeholders</code>，因为要使用其中的<code>_1</code>，<code>_2</code>...</p>
+<p><code>placeholders</code>中的内容表示调用绑定函数的实际参数，<code>_1</code>代表第一个实际参数，<code>_2</code>代表第二个实际参数，以此类推</p>
+</div>
 <ul>
 <li>改变实参在传参时的顺序</li>
 </ul>
@@ -5610,9 +5614,10 @@
 </code></pre></div></td></tr></table></div>
 <p>传递顺序改变如下图所示：</p>
 <p><a class="glightbox" href="C++ 11相关新特性.assets\image9.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="C++ 11相关新特性.assets\image9.png"></a></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>注意，<code>bind</code>改变的是实际参数的传递顺序，而不是形参的接收顺序，形参接收还是按照从左到右依次接收传递的实际参数，只是写的第一个实际参数（本应该传递给形参a）被<code>bind</code>改变作为第三个实际参数，传递给形参<code>c</code>，依次类推<code>a</code>和<code>b</code></p>
-</blockquote>
+</div>
 <ul>
 <li>固定形参中的某一个值</li>
 </ul>
@@ -5724,7 +5729,7 @@
     <span class="md-icon" title="创建日期">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 14, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 13, 2024</span>
   </span>
 
     

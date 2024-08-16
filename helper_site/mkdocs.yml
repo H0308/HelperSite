@@ -75,6 +75,7 @@ nav:
       - unordered_map和unordered_set类模拟实现: C++/24. unordered_map和unordered_set类模拟实现/24. unordered_map和unordered_set类模拟实现.md
       - C++ 11相关新特性: C++/25. C++11相关新特性/C++ 11相关新特性.md
       - C++ 异常: C++/26. C++异常/26. C++异常.md
+      - C++ 智能指针: C++/27. 智能指针/27. 智能指针.md
     - Java:
       - Java基础知识: Java/1. Java基础知识/Java基础知识.md
       - Java数组类型: Java/2. Java数组类型/2. Java数组类型.md

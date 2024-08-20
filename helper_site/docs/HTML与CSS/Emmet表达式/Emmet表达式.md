@@ -1,13 +1,14 @@
-# Emmet语法简介
+# Emmet表达式
+## Emmet语法简介
 
 Emmet语法的前身是Zen coding,它使用缩写,来提高html/css的编写速度, vscode内部已经集成该语法。
 
-# Emmet作用
+## Emmet作用
 
 1. 快速生成HTML结构语法
 2. 快速生成CSS样式语法
 
-# Emmet在HTML中的使用
+## Emmet在HTML中的使用
 
 - 生成标签 直接输入标签名 按 ++tab++ 键即可比如`div`然后 ++tab++ 键，就可以生成 `<div></div>`
 
@@ -118,7 +119,7 @@ Emmet语法的前身是Zen coding,它使用缩写,来提高html/css的编写速�
 </html>
 ```
 
-# Emmet在CSS中的使用
+## Emmet在CSS中的使用
 
 CSS基本采取简写形式即可
 

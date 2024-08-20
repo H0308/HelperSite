@@ -112,6 +112,7 @@ nav:
     - Linux下的gcc与gdb: Linux/4. Linux下的gcc与gdb/4. Linux下的gcc与gdb.md
   - 前端:
     - HTML与CSS: HTML与CSS/HTML与CSS.md
+    - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md
   - 编程题目练习总结:
     - 模拟字符串转整数函数: 编程题目练习总结/模拟字符串转整数函数/模拟字符串转整数函数.md
   - 常用网站: 常用网站/常用网站.md
@@ -123,6 +124,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.keys
   - md_in_html
   - tables
   - pymdownx.tabbed:

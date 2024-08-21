@@ -2012,11 +2012,11 @@
         <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      开散列解决哈希冲突
+      闭散列解决哈希冲突
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="开散列解决哈希冲突">
+    <nav class="md-nav" aria-label="闭散列解决哈希冲突">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2087,11 +2087,11 @@
         <li class="md-nav__item">
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
-      闭散列解决哈希冲突
+      开散列解决哈希冲突
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="闭散列解决哈希冲突">
+    <nav class="md-nav" aria-label="开散列解决哈希冲突">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2776,11 +2776,11 @@
         <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      开散列解决哈希冲突
+      闭散列解决哈希冲突
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="开散列解决哈希冲突">
+    <nav class="md-nav" aria-label="闭散列解决哈希冲突">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2851,11 +2851,11 @@
         <li class="md-nav__item">
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
-      闭散列解决哈希冲突
+      开散列解决哈希冲突
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="闭散列解决哈希冲突">
+    <nav class="md-nav" aria-label="开散列解决哈希冲突">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2980,10 +2980,10 @@ $$
 <p>对于直接定址法来说，因为<span class="arithmatex">\(key\)</span>的值基本上就是对应的位置，所以根据<span class="arithmatex">\(key\)</span>可以直接找到相对位置，时间复杂度基本上为O(1)，并且每一个<span class="arithmatex">\(key\)</span>只有对应的一个位置，不存在冲突情况，但是这种方法的缺点就是依赖<span class="arithmatex">\(key\)</span>的集中程度，如果<span class="arithmatex">\(key\)</span>值集中程度高，那么所开辟的空间也就相对较小，如果<span class="arithmatex">\(key\)</span>值集中程度低，那么可能会造成开辟的空间很大，但是实际使用的部分却很少</p>
 <p>对于除留余数法来说，因为通过哈希函数<span class="arithmatex">\(hash(key) = key \bmod capacity\)</span>计算存储位置，所以其存储位置不会超过表的大小，但是存在通过哈希函数计算得到的余数相同的情况，所以会有冲突的情况，常见的解决冲突方法有两种：</p>
 <ol>
-<li>开散列：开放定址法，常见的有：线性探测、二次探测</li>
-<li>闭散列：哈希桶/拉链法</li>
+<li>闭散列：开放定址法，常见的有：线性探测、二次探测</li>
+<li>开散列：哈希桶/拉链法</li>
 </ol>
-<h2 id="_5">开散列解决哈希冲突<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_5">闭散列解决哈希冲突<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">思路<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>使用开放定址法中的线性探测方法为例</p>
 <p>线性探测：根据哈希函数<span class="arithmatex">\(hash(key) = key \bmod capacity\)</span>计算出相对位置，如果该位置已经有值，则向后移动一个单位长度，如果后一个位置也存在值，则继续向后移动一个单位，以此类推</p>
@@ -2994,7 +2994,7 @@ $$
 <p>此时如果再想插入新的数据就会因为找不到空位置而插入失败，为了防止在插入过程中出现的容量不足的问题，解决哈希冲突的过程中也会引入负载因子/载荷因子，负载因子/载荷因子<span class="arithmatex">\(α=已经存储的元素个数/哈希表结构的容量\)</span>，如果负载因子的值超过指定的数值，那么就需要进行扩容，对于开放定址法来说，一般负载因子在0.7-0.8以下</p>
 <h3 id="_7">代码设计<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <h4 id="_8">结构设计<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
-<p>每一个插入的数据结构设计，以键值对为例，还需要处理在查找/删除时需要用到的哈希表位置状态，在开散列中，位置一共有三种状态</p>
+<p>每一个插入的数据结构设计，以键值对为例，还需要处理在查找/删除时需要用到的哈希表位置状态，在闭散列中，位置一共有三种状态</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
 <span class="normal"><a href="#__codelineno-2-3">3</a></span>
@@ -3197,8 +3197,8 @@ $$
 <a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 <a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="_12">闭散列解决哈希冲突<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
-<p>前面的开散列最大的问题就是会彼此占用空间，需要多一项规则计算位置，不论是二次探测还是线性探测都是一样的原理，为了解决这种问题，采用闭散列</p>
+<h2 id="_12">开散列解决哈希冲突<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p>前面的闭散列最大的问题就是会彼此占用空间，需要多一项规则计算位置，不论是二次探测还是线性探测都是一样的原理，为了解决这种问题，采用开散列</p>
 <h3 id="_13">思路<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>使用哈希桶/拉链法为例</p>
 <p>哈希桶/拉链法原理：开辟一个指针数组，每一个指针指向存储的键值对</p>
@@ -3252,7 +3252,7 @@ $$
 <p>插入时需要考虑下面的问题：</p>
 <ol>
 <li>因为初始化时，整个数组的每一个元素为空，代表没有头结点。当头插时需要注意防止空指针解引用问题</li>
-<li>在扩容时可以采用与开散列相同的思路进行，但是这种方法在当前情况下会有节点释放和创建的损耗，所以采用额外的逻辑进行扩容：将原来的节点重新挂到新的表中</li>
+<li>在扩容时可以采用与闭散列相同的思路进行，但是这种方法在当前情况下会有节点释放和创建的损耗，所以采用额外的逻辑进行扩容：将原来的节点重新挂到新的表中</li>
 </ol>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
@@ -3345,7 +3345,7 @@ $$
 <a id="__codelineno-10-45" name="__codelineno-10-45"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="_17">数据查找<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
-<p>思路与开散列基本一致，只是闭散列换成了节点</p>
+<p>思路与闭散列基本一致，只是开散列换成了节点</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -3451,7 +3451,7 @@ $$
 <a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="_19">析构函数设计<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
-<p>在开散列时并没有设计析构函数，因为vector会调用自己对应的析构函数，而且vector中的类型也是一个自定义类型会调用对应的析构函数，内置类型不处理，所以可以不用析构函数。但是在闭散列中，每一个哈希数据都是一个在堆上开辟的节点，所以需要额外释放，vector本身的析构函数只能析构<code>_table</code>，不能析构每一个节点</p>
+<p>在闭散列时并没有设计析构函数，因为vector会调用自己对应的析构函数，而且vector中的类型也是一个自定义类型会调用对应的析构函数，内置类型不处理，所以可以不用析构函数。但是在开散列中，每一个哈希数据都是一个在堆上开辟的节点，所以需要额外释放，vector本身的析构函数只能析构<code>_table</code>，不能析构每一个节点</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -3662,7 +3662,7 @@ $$
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 9, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 21, 2024</span>
   </span>
 
     

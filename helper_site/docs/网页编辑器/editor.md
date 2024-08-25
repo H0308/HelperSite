@@ -1,3 +1,6 @@
+!!! note
+    当前编辑器没有保存功能，请谨慎使用
+
 <link
   href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css"
   rel="stylesheet"

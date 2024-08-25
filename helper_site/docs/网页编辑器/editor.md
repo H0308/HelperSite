@@ -1,4 +1,4 @@
-!!! note
+!!! danger
     当前编辑器没有保存功能，请谨慎使用
 
 <link
@@ -50,3 +50,4 @@
     mode: "default", // or 'simple'
   });
 </script>
+

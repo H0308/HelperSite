@@ -159,6 +159,7 @@ extra:
 
 plugins:
   - search
+  - toggle-sidebar
   - glightbox:
       touchNavigation: true
       loop: false

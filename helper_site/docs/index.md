@@ -45,8 +45,6 @@
 
 [Github使用技巧参考](https://quickref.cn/docs/github.html)
 
-[Windows命令行操作参考](https://quickref.cn/docs/cmd.html)
-
 [HTTP状态码参考](https://quickref.cn/docs/http-status-code.html)
 
 [ASCII码参考](https://quickref.cn/docs/ascii-code.html)

@@ -85,6 +85,8 @@ nav:
       - Java面向对象与封装: Java/4. Java面向对象与封装/4. Java面向对象与封装.md
     - JavaScript:
       - JavaScript快速入门: JavaScript基础知识/1. JavaScript快速入门/1. JavaScript快速入门.md
+    - Python:
+      - Python快速入门: Python基础知识/1. Python快速入门/1. Python快速入门.md
   - 数据结构与算法:
     - 数据结构:
       - 数据结构基础: 数据结构/1. 时间复杂度和空间复杂度/1. 时间复杂度与空间复杂度.md
@@ -112,7 +114,7 @@ nav:
     - Linux权限相关: Linux/2. Linux权限相关/2. Linux权限相关.md
     - CentOS软件安装与vim使用: Linux/3. CentOS软件安装与Vim使用/3. CentOS软件安装与Vim使用.md
     - Linux下的gcc与gdb: Linux/4. Linux下的gcc与gdb/4. Linux下的gcc与gdb.md
-  - 前端:
+  - HTML与CSS:
     - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md
     - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md
   - MySQL:

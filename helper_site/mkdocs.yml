@@ -119,6 +119,7 @@ nav:
     - Linux权限相关: Linux/2. Linux权限相关/2. Linux权限相关.md
     - CentOS软件安装与vim使用: Linux/3. CentOS软件安装与Vim使用/3. CentOS软件安装与Vim使用.md
     - Linux下的gcc与gdb: Linux/4. Linux下的gcc与gdb/4. Linux下的gcc与gdb.md
+    - Linux下的Makefile与进度条程序: Linux/5. Linux下的Makefile与进度条程序/5. Linux下的Makefile与进度条程序.md
   - HTML与CSS:
     - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md
     - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md

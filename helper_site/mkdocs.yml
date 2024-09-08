@@ -87,6 +87,8 @@ nav:
       - Java面向对象与接口: Java/6. Java面向对象与接口/6. 面向对象与接口.md
       - Java面向对象与多态: Java/7. Java面向对象与多态/7. Java面向对象与多态.md
       - Java面向对象与权限修饰符、final、代码块及内部类: Java/8. Java面向对象与权限修饰符、final、代码块及内部类/8. Java面向对象与权限修饰符、final、代码块及内部类.md
+      - Java异常类: Java/9. Java异常类/9. Java异常类.md
+      - Java中的Object类和常用方法、经典接口: Java/10. Java中的Object类和常用方法、经典接口/10. Java中的Object类和常用方法、经典接口.md
     - JavaScript:
       - JavaScript快速入门: JavaScript基础知识/1. JavaScript快速入门/1. JavaScript快速入门.md
       - JavaScript与DOM基础: JavaScript基础知识/2. JavaScript与DOM基础/2. JavaScript与DOM基础.md

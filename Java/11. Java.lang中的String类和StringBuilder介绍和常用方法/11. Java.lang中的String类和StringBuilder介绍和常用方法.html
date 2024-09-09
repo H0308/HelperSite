@@ -3447,7 +3447,7 @@
 <a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="string_2">回顾String传址调用问题<a class="headerlink" href="#string_2" title="Permanent link">&para;</a></h3>
+<h3 id="string_2">回顾<code>String</code>传址调用问题<a class="headerlink" href="#string_2" title="Permanent link">&para;</a></h3>
 <p>根据上面的原理，再回顾前面在「传值调用和传址调用」中遇到的<code>String</code>对象通过形参传递</p>
 <p>首先，对于Java中的引用数据类型来说，都是传址调用，这里的传址调用表示在方法中可以修改对应形参的内容，例如形参是数组类型时，可以在方法中修改数组中的内容，此时会影响实参</p>
 <p>对于<code>String</code>类型，因为其也属于引用数据类型，所以传递给形参，在方法中理论上也可以改变其内容，但是实际上因为<code>String</code>类的属性被<code>final</code>修饰，导致无法在方法中修改其对应的内容，进而不会影响到实参字符串中的内容</p>
@@ -3578,7 +3578,7 @@
 <a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="n">bcd</span>
 <a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="n">你</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="string_4">String面试题<a class="headerlink" href="#string_4" title="Permanent link">&para;</a></h2>
+<h2 id="string_4"><code>String</code>面试题<a class="headerlink" href="#string_4" title="Permanent link">&para;</a></h2>
 <h3 id="or">创建对象or不创建对象<a class="headerlink" href="#or" title="Permanent link">&para;</a></h3>
 <p>思考下面代码的结果：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
@@ -3649,7 +3649,7 @@
 </code></pre></div></td></tr></table></div>
 <p>对于第一行代码来说，因为字符串在Java中属于<code>String</code>类的实例，即<code>"abc"</code>属于<code>String</code>类的对象，使<code>s1</code>指向了该对象，因此一共创建了1个对象，共有1个对象</p>
 <p>对于第二行代码来说，首先<code>"hello"</code>会作为对象先创建，但是题目并没有说明在<code>String s2 = new String("hello");</code>之前是否已经创建了<code>"hello"</code>字符串对象，如果未创建，则包括<code>new</code>创建的对象在内一共创建了2个对象，共有2个对象；如果已经创建，根据字符串共享性，则包括<code>new</code>创建的对象在内一共创建了1个对象，共有2个对象</p>
-<h2 id="string_5">String常用方法<a class="headerlink" href="#string_5" title="Permanent link">&para;</a></h2>
+<h2 id="string_5"><code>String</code>常用方法<a class="headerlink" href="#string_5" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>需要注意，<code>String</code>类的方法不仅是对象引用变量可以调用，字符串常量也可以调用，因为字符串常量也是<code>String</code>类的对象</p>
@@ -3878,7 +3878,7 @@
 <p>使用方法：<code>String[] split(String regex)</code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>注意，方法的参数是正则表达式，如果想使用<code>.</code>进行分割，需要对<code>.</code>进行转义：<code>\\.</code></p>
+<p>注意，方法的参数是正则表达式，如果想使用<code>.</code>进行分割，需要对<code>.</code>进行转义：<code>\\\.</code></p>
 </div>
 <p>使用实例如下：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
@@ -4001,7 +4001,7 @@
 <li>如果字符串超出了已有的数组长度，数组会自动扩容，默认扩容大小是原来数组长度的2倍+2，但是如果扩容后的长度依旧不够，则会根据字符串的长度确定数组长度</li>
 </ol>
 <h2 id="stringbuilder_2"><code>StringBuilder</code>的使用<a class="headerlink" href="#stringbuilder_2" title="Permanent link">&para;</a></h2>
-<h3 id="stringbuilder_3">StringBuilder对象创建方式<a class="headerlink" href="#stringbuilder_3" title="Permanent link">&para;</a></h3>
+<h3 id="stringbuilder_3"><code>StringBuilder</code>对象创建方式<a class="headerlink" href="#stringbuilder_3" title="Permanent link">&para;</a></h3>
 <ol>
 <li>无参构造方法：<code>StringBuilder()</code></li>
 <li>使用<code>String</code>构造<code>StringBuilder</code>对象：<code>StringBuilder(String str)</code></li>

@@ -131,7 +131,6 @@ nav:
     - MySQL基础: MySQL/MySQL基础使用/MySQL基础使用.md
   - 编程题目练习总结:
     - 模拟字符串转整数函数: 编程题目练习总结/模拟字符串转整数函数/模拟字符串转整数函数.md
-  - 网页编辑器: 网页编辑器/editor.html
   - 联系作者: 作者/作者.md
 
 markdown_extensions:

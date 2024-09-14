@@ -7,8 +7,6 @@
 !!! abstract "使用指导"
     联系作者请访问[联系作者](https://www.helper-wiki.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html)
 
-    使用在线编辑器请访问[网页编辑器](https://www.helper-wiki.top/%E7%BD%91%E9%A1%B5%E7%BC%96%E8%BE%91%E5%99%A8/editor.html)
-
     阅读内容时，可以进行以下操作：
 
     - 如果需要隐藏左侧文档导航，可以按下键盘中的 ++m++（英文输入法）

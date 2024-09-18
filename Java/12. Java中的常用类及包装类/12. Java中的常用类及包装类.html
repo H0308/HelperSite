@@ -2283,11 +2283,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../14.%20Java%E9%9B%86%E5%90%88%EF%BC%88%E4%B8%80%EF%BC%89/14.%20Java%E9%9B%86%E5%90%88%EF%BC%88%E4%B8%80%EF%BC%89.html" class="md-nav__link">
+      <a href="../14.%20Java%E5%8D%95%E5%88%97%E9%9B%86%E5%90%88/14.%20Java%E5%8D%95%E5%88%97%E9%9B%86%E5%90%88.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Java集合（一）
+    Java单列集合
   </span>
   
 
@@ -5057,6 +5057,7 @@
 <li>数组排序：<code>static void sort(int[] a)</code>，默认升序</li>
 <li>二分查找：<code>static int binarySearch(int[] a, int key)</code>，必须保证数组升序</li>
 <li>数组扩容：<code>static int[] copyOf(int[] original, int newLength)</code></li>
+<li>以类似数组的创建方式将元素依次插入到<code>list</code>接口对应的实现类<code>ArrayList</code>中：<code>static &lt;T&gt; List&lt;T&gt; asList(T...a)</code></li>
 </ol>
 <p>基本使用如下：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
@@ -5087,7 +5088,10 @@
 <span class="normal"><a href="#__codelineno-22-26">26</a></span>
 <span class="normal"><a href="#__codelineno-22-27">27</a></span>
 <span class="normal"><a href="#__codelineno-22-28">28</a></span>
-<span class="normal"><a href="#__codelineno-22-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="normal"><a href="#__codelineno-22-29">29</a></span>
+<span class="normal"><a href="#__codelineno-22-30">30</a></span>
+<span class="normal"><a href="#__codelineno-22-31">31</a></span>
+<span class="normal"><a href="#__codelineno-22-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Test</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">};</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">arr</span><span class="p">));</span>
@@ -5107,15 +5111,18 @@
 <a id="__codelineno-22-18" name="__codelineno-22-18"></a><span class="w">        </span><span class="n">arr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newArr</span><span class="p">;</span>
 <a id="__codelineno-22-19" name="__codelineno-22-19"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">arr2</span><span class="p">));</span>
 <a id="__codelineno-22-20" name="__codelineno-22-20"></a>
-<a id="__codelineno-22-21" name="__codelineno-22-21"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-22-22" name="__codelineno-22-22"></a><span class="p">}</span>
-<a id="__codelineno-22-23" name="__codelineno-22-23"></a>
-<a id="__codelineno-22-24" name="__codelineno-22-24"></a><span class="n">输出结果</span><span class="err">：</span>
-<a id="__codelineno-22-25" name="__codelineno-22-25"></a><span class="o">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="o">]</span>
-<a id="__codelineno-22-26" name="__codelineno-22-26"></a><span class="o">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="o">]</span>
-<a id="__codelineno-22-27" name="__codelineno-22-27"></a><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-22-28" name="__codelineno-22-28"></a><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">]</span>
-<a id="__codelineno-22-29" name="__codelineno-22-29"></a><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">]</span>
+<a id="__codelineno-22-21" name="__codelineno-22-21"></a><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;张三&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;李四&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;王五&quot;</span><span class="p">);</span>
+<a id="__codelineno-22-22" name="__codelineno-22-22"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
+<a id="__codelineno-22-23" name="__codelineno-22-23"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-22-24" name="__codelineno-22-24"></a><span class="p">}</span>
+<a id="__codelineno-22-25" name="__codelineno-22-25"></a>
+<a id="__codelineno-22-26" name="__codelineno-22-26"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-22-27" name="__codelineno-22-27"></a><span class="o">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="o">]</span>
+<a id="__codelineno-22-28" name="__codelineno-22-28"></a><span class="o">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="o">]</span>
+<a id="__codelineno-22-29" name="__codelineno-22-29"></a><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-22-30" name="__codelineno-22-30"></a><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">]</span>
+<a id="__codelineno-22-31" name="__codelineno-22-31"></a><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">]</span>
+<a id="__codelineno-22-32" name="__codelineno-22-32"></a><span class="o">[</span><span class="n">张三</span><span class="p">,</span><span class="w"> </span><span class="n">李四</span><span class="p">,</span><span class="w"> </span><span class="n">王五</span><span class="o">]</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="_12">包装类<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <h3 id="_13">包装类介绍<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
@@ -5562,7 +5569,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 10, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 18, 2024</span>
   </span>
 
     

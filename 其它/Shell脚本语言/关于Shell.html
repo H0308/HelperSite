@@ -5538,7 +5538,7 @@
 </code></pre></div></td></tr></table></div>
 <h2 id="_30">运算符<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h2>
 <h3 id="_31">算术运算符<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
-<p>下表列出了常用的算术运算符，假定变量 x 为 10，变量 y 为 20：</p>
+<p>下表列出了常用的算术运算符，假定变量 <code>x</code> 为 10，变量 <code>y</code> 为 20：</p>
 <table>
 <thead>
 <tr>
@@ -5551,27 +5551,27 @@
 <tr>
 <td><code>+</code></td>
 <td>加法</td>
-<td><code>expr $x + $y</code>结果为 30</td>
+<td><code>expr $x + $y</code>结果为 <code>30</code></td>
 </tr>
 <tr>
 <td><code>-</code></td>
 <td>减法</td>
-<td><code>expr $x - $y</code>结果为 -10</td>
+<td><code>expr $x - $y</code>结果为 <code>-10</code></td>
 </tr>
 <tr>
 <td><code>*</code></td>
 <td>乘法</td>
-<td><code>expr $x * $y</code>结果为 200</td>
+<td><code>expr $x * $y</code>结果为 <code>200</code></td>
 </tr>
 <tr>
 <td><code>/</code></td>
 <td>除法</td>
-<td><code>expr $y / $x</code>结果为 2</td>
+<td><code>expr $y / $x</code>结果为 <code>2</code></td>
 </tr>
 <tr>
 <td><code>%</code></td>
 <td>取余</td>
-<td><code>expr $y % $x</code>结果为 0</td>
+<td><code>expr $y % $x</code>结果为 <code>0</code></td>
 </tr>
 <tr>
 <td><code>=</code></td>
@@ -5590,7 +5590,7 @@
 </tr>
 </tbody>
 </table>
-<p>注意：条件表达式要放在方括号之间，并且要有空格，例如:<code>[y]</code>是错误的，必须写成 <code>[y]</code>。</p>
+<p>注意：条件表达式要放在方括号之间，并且要有空格，例如:<code>[y]</code>是错误的，必须写成 <code>[ y ]</code>。</p>
 <p>例如：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
@@ -5681,32 +5681,32 @@
 <tr>
 <td><code>-eq</code></td>
 <td>检测两个数是否相等，相等返回 <code>true</code></td>
-<td><code>[ $a -eq $b ]</code>返回 <code>false</code></td>
+<td><code>[ $a</code> <code>-eq</code> <code>$b ]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>-ne</code></td>
 <td>检测两个数是否相等，不相等返回 <code>true</code></td>
-<td><code>[ $a -ne $b ]</code>返回 <code>true</code></td>
+<td><code>[ $a</code> <code>-ne</code> <code>$b ]</code>返回 <code>true</code></td>
 </tr>
 <tr>
 <td><code>-gt</code></td>
 <td>检测左边的数是否大于右边的，如果是，则返回 <code>true</code></td>
-<td><code>[ $a -gt $b ]</code>返回 <code>false</code></td>
+<td><code>[ $a</code> <code>-gt</code> <code>$b ]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>-lt</code></td>
 <td>检测左边的数是否小于右边的，如果是，则返回 <code>true</code></td>
-<td><code>[ $a -lt $b ]</code>返回 <code>true</code></td>
+<td><code>[ $a</code> <code>-lt</code> <code>$b ]</code>返回 <code>true</code></td>
 </tr>
 <tr>
 <td><code>-ge</code></td>
 <td>检测左边的数是否大于等于右边的，如果是，则返回 <code>true</code></td>
-<td><code>[ $a -ge $b ]</code>返回 <code>false</code></td>
+<td><code>[ $a</code> <code>-ge</code> <code>$b ]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>-le</code></td>
 <td>检测左边的数是否小于等于右边的，如果是，则返回 <code>true</code></td>
-<td><code>[ $a -le $b ]</code>返回 <code>true</code></td>
+<td><code>[ $a</code> <code>-le</code> <code>$b ]</code>返回 <code>true</code></td>
 </tr>
 </tbody>
 </table>
@@ -5828,12 +5828,12 @@
 <tr>
 <td><code>-o</code></td>
 <td>或运算，有一个表达式为 <code>true</code> 则返回 <code>true</code></td>
-<td><code>[ $a -lt 20 -o $b -gt 100 ]</code>返回 <code>true</code></td>
+<td><code>[ $a</code> <code>-lt</code> <code>20 -o</code> <code>$b</code> <code>-gt</code> <code>100 ]</code>返回 <code>true</code></td>
 </tr>
 <tr>
 <td><code>-a</code></td>
 <td>与运算，两个表达式都为 <code>true</code> 才返回 <code>true</code></td>
-<td><code>[ $a -lt 20 -a $b -gt 100 ]</code>返回 <code>false</code></td>
+<td><code>[ $a</code> <code>-lt</code> <code>20 -a</code> <code>$b</code> <code>-gt</code> <code>100 ]</code>返回 <code>false</code></td>
 </tr>
 </tbody>
 </table>
@@ -5922,12 +5922,12 @@
 <tr>
 <td><code>&amp;&amp;</code></td>
 <td>逻辑的 AND</td>
-<td><code>[[ ${x} -lt 100 &amp;&amp; ${y} -gt 100 ]]</code>返回 false</td>
+<td><code>[[ ${x}</code> <code>-lt</code> <code>100 &amp;&amp; ${y}</code> <code>-gt</code> <code>100 ]]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>||</code></td>
 <td>逻辑的 OR</td>
-<td><code>[[ ${x} -lt 100 || ${y} -gt 100 ]]</code>返回 true</td>
+<td><code>[[ ${x}</code> <code>-lt</code> <code>100 || ${y}</code> <code>-gt</code> <code>100 ]]</code>返回 <code>true</code></td>
 </tr>
 </tbody>
 </table>
@@ -6002,12 +6002,12 @@
 <tr>
 <td><code>-z</code></td>
 <td>检测字符串长度是否为 0，为 0 返回 <code>true</code></td>
-<td><code>[ -z $a ]</code>返回 <code>false</code></td>
+<td><code>[</code> <code>-z</code> <code>$a ]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>-n</code></td>
 <td>检测字符串长度是否为 0，不为 0 返回 <code>true</code></td>
-<td><code>[ -n $a ]</code>返回 <code>true</code></td>
+<td><code>[</code> <code>-n</code> <code>$a ]</code>返回 <code>true</code></td>
 </tr>
 <tr>
 <td><code>str</code></td>
@@ -6116,17 +6116,17 @@
 <tr>
 <td><code>-b</code></td>
 <td>检测文件是否是块设备文件，如果是，则返回 <code>true</code></td>
-<td><code>[ -b $file ]</code>返回 <code>false</code></td>
+<td><code>[</code> <code>-b</code> <code>$file ]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>-c</code></td>
 <td>检测文件是否是字符设备文件，如果是，则返回 <code>true</code></td>
-<td><code>[ -c $file ]</code>返回 <code>false</code></td>
+<td><code>[</code> <code>-c</code> <code>$file ]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>-d</code></td>
 <td>检测文件是否是目录，如果是，则返回 <code>true</code></td>
-<td><code>[ -d $file ]</code>返回 <code>false</code></td>
+<td><code>[</code> <code>-d</code> <code>$file ]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>-f</code></td>
@@ -6136,47 +6136,47 @@
 <tr>
 <td><code>-g</code></td>
 <td>检测文件是否设置了 <code>SGID</code> 位，如果是，则返回 <code>true</code></td>
-<td><code>[ -g $file ]</code>返回 <code>false</code></td>
+<td><code>[</code> <code>-g</code> <code>$file ]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>-k</code></td>
 <td>检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 <code>true</code></td>
-<td><code>[ -k $file ]</code>返回 <code>false</code></td>
+<td><code>[</code> <code>-k</code> <code>$file ]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>-p</code></td>
 <td>检测文件是否是有名管道，如果是，则返回 <code>true</code></td>
-<td><code>[ -p $file ]</code>返回 <code>false</code></td>
+<td><code>[</code> <code>-p</code> <code>$file ]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>-u</code></td>
 <td>检测文件是否设置了 <code>SUID</code> 位，如果是，则返回 <code>true</code></td>
-<td><code>[ -u $file ]</code>返回 <code>false</code></td>
+<td><code>[</code> <code>-u</code> <code>$file ]</code>返回 <code>false</code></td>
 </tr>
 <tr>
 <td><code>-r</code></td>
 <td>检测文件是否可读，如果是，则返回 <code>true</code></td>
-<td><code>[ -r $file ]</code>返回 <code>true</code></td>
+<td><code>[</code> <code>-r</code> <code>$file ]</code>返回 <code>true</code></td>
 </tr>
 <tr>
 <td><code>-w</code></td>
 <td>检测文件是否可写，如果是，则返回 <code>true</code></td>
-<td><code>[ -w $file ]</code>返回 <code>true</code></td>
+<td><code>[</code> <code>-w</code> <code>$file ]</code>返回 <code>true</code></td>
 </tr>
 <tr>
 <td><code>-x</code></td>
 <td>检测文件是否可执行，如果是，则返回 <code>true</code></td>
-<td><code>[ -x $file ]</code>返回 <code>true</code></td>
+<td><code>[</code> <code>-x</code> <code>$file ]</code>返回 <code>true</code></td>
 </tr>
 <tr>
 <td><code>-s</code></td>
 <td>检测文件是否为空（文件大小是否大于 0），不为空返回 <code>true</code></td>
-<td><code>[ -s $file ]</code>返回 <code>true</code></td>
+<td><code>[</code> <code>-s</code> <code>$file ]</code>返回 <code>true</code></td>
 </tr>
 <tr>
 <td><code>-e</code></td>
 <td>检测文件（包括目录）是否存在，如果是，则返回 <code>true</code></td>
-<td><code>[ -e $file ]</code>返回 <code>true</code></td>
+<td><code>[</code> <code>-e</code> <code>$file ]</code>返回 <code>true</code></td>
 </tr>
 </tbody>
 </table>

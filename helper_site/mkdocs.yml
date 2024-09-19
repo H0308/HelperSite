@@ -4,6 +4,8 @@ use_directory_urls: false
 
 theme:
   name: 'material'
+  favicon: images/favicon.png
+  logo: assets/logo.png
   font:
     text: Noto Serif
   features:

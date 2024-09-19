@@ -19,13 +19,13 @@ theme:
   palette:
     - scheme: default
       accent: amber
-      primary: blue-grey
+      primary: grey
       toggle:
         icon: material/toggle-switch 
         name: Switch to dark mode
     - scheme: slate
       accent: amber
-      primary: black
+      primary: grey
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to light mode

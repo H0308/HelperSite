@@ -136,7 +136,6 @@ Shell 语法中，注释是特殊的语句，会被 Shell 解释器忽略。
 ```shell
 #--------------------------------------------
 # Shell 注释示例
-# author：zp
 #--------------------------------------------
 
 # echo '这是单行注释'
@@ -164,16 +163,16 @@ echo "hello, world"
 输出含变量的字符串：
 
 ```shell
-echo "hello, \"zp\""
-# Output: hello, "zp"
+echo "hello, \"shell\""
+# Output: hello, "shell"
 ```
 
 输出含变量的字符串：
 
 ```shell
-name=zp
+name=test
 echo "hello, \"${name}\""
-# Output: hello, "zp"
+# Output: hello, "test"
 ```
 
 输出含换行符的字符串：
@@ -227,13 +226,13 @@ echo "hello, world"
 #  Output: hello, world
 
 # 输出含变量的字符串
-echo "hello, \"zp\""
-#  Output: hello, "zp"
+echo "hello, \"test\""
+#  Output: hello, "test"
 
 # 输出含变量的字符串
-name=zp
+name=test
 echo "hello, \"${name}\""
-#  Output: hello, "zp"
+#  Output: hello, "test"
 
 # 输出含换行符的字符串
 echo "YES\nNO"
@@ -1290,11 +1289,11 @@ done
 例如：
 
 ```shell
-DIR=/home/zp
+DIR=/home/test
 for FILE in ${DIR}/*.sh; do
   mv "$FILE" "${DIR}/scripts"
 done
-# 将 /home/zp 目录下所有 sh 文件拷贝到 /home/zp/scripts
+# 将 /home/test 目录下所有 sh 文件拷贝到 /home/test/scripts
 ```
 
 #### `while` 循环
@@ -1597,7 +1596,7 @@ runner() {
 return 0
 }
 
-name=zp
+name=test
 paramsFunction(){  
 echo "函数第一个入参：$1"  
 echo "函数第二个入参：$2"  
@@ -1612,19 +1611,19 @@ echo "Shell 使用的当前选项：$-"
   runner  
 echo "runner 函数的返回值：$?"
 }
-paramsFunction 1 "abc" "hello, \"zp\""
+paramsFunction 1 "abc" "hello, \"test\""
 #  Output:
 #  函数第一个入参：1
 #  函数第二个入参：abc
 #  传递到脚本的参数个数：3
 #  所有参数：
-#  + 1 abc hello, "zp"
+#  + 1 abc hello, "test"
 #  脚本运行的当前进程 ID 号：26400
 #  后台运行的最后一个进程的 ID 号：
 #  所有参数：
 #  + 1
 #  + abc
-#  + hello, "zp"
+#  + hello, "test"
 #  Shell 使用的当前选项：hB
 #  runner 函数的返回值：0
 ```

@@ -4471,8 +4471,8 @@
 <h3 id="_4">交互模式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>简单来说，你可以将 Shell 的交互模式理解为执行命令行。</p>
+</div>
 <p>看到形如下面的东西，说明 Shell 处于交互模式下：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>user@host:~$
 </code></pre></div></td></tr></table></div>
@@ -4534,21 +4534,19 @@
 <span class="normal"><a href="#__codelineno-8-10">10</a></span>
 <span class="normal"><a href="#__codelineno-8-11">11</a></span>
 <span class="normal"><a href="#__codelineno-8-12">12</a></span>
-<span class="normal"><a href="#__codelineno-8-13">13</a></span>
-<span class="normal"><a href="#__codelineno-8-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1">#--------------------------------------------</span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1">#--------------------------------------------</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="c1"># Shell 注释示例</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="c1"># author：zp</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="c1">#--------------------------------------------</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a>
-<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="c1"># echo &#39;这是单行注释&#39;</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7"></a>
-<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="c1">########## 这是分割线 ##########</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9"></a>
-<a id="__codelineno-8-10" name="__codelineno-8-10"></a>:<span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="c1">#--------------------------------------------</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="c1"># echo &#39;这是单行注释&#39;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="c1">########## 这是分割线 ##########</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a>:<span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="s">echo &#39;这是多行注释&#39;</span>
 <a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="s">echo &#39;这是多行注释&#39;</span>
 <a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="s">echo &#39;这是多行注释&#39;</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="s">echo &#39;这是多行注释&#39;</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="s">EOF</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="s">EOF</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="echo"><code>echo</code><a class="headerlink" href="#echo" title="Permanent link">&para;</a></h3>
 <p><code>echo</code> 用于字符串的输出。</p>
@@ -4559,15 +4557,15 @@
 </code></pre></div></td></tr></table></div>
 <p>输出含变量的字符串：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
-<span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello, \&quot;zp\&quot;&quot;</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="c1"># Output: hello, &quot;zp&quot;</span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello, \&quot;shell\&quot;&quot;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="c1"># Output: hello, &quot;shell&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>输出含变量的字符串：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
 <span class="normal"><a href="#__codelineno-11-2">2</a></span>
-<span class="normal"><a href="#__codelineno-11-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nv">name</span><span class="o">=</span>zp
+<span class="normal"><a href="#__codelineno-11-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nv">name</span><span class="o">=</span><span class="nb">test</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello, \&quot;</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">\&quot;&quot;</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="c1"># Output: hello, &quot;zp&quot;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="c1"># Output: hello, &quot;test&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>输出含换行符的字符串：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
@@ -4663,13 +4661,13 @@
 <a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="c1">#  Output: hello, world</span>
 <a id="__codelineno-16-6" name="__codelineno-16-6"></a>
 <a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="c1"># 输出含变量的字符串</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello, \&quot;zp\&quot;&quot;</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="c1">#  Output: hello, &quot;zp&quot;</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello, \&quot;test\&quot;&quot;</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="c1">#  Output: hello, &quot;test&quot;</span>
 <a id="__codelineno-16-10" name="__codelineno-16-10"></a>
 <a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="c1"># 输出含变量的字符串</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="nv">name</span><span class="o">=</span>zp
+<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="nv">name</span><span class="o">=</span><span class="nb">test</span>
 <a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello, \&quot;</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">\&quot;&quot;</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="c1">#  Output: hello, &quot;zp&quot;</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="c1">#  Output: hello, &quot;test&quot;</span>
 <a id="__codelineno-16-15" name="__codelineno-16-15"></a>
 <a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="c1"># 输出含换行符的字符串</span>
 <a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;YES\nNO&quot;</span>
@@ -5839,7 +5837,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong><em>*</em>*�� “示例源码”：****</strong></p>
+<p>例如：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
@@ -5933,7 +5931,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong><em>*</em>*�� “示例源码”：****</strong></p>
+<p>例如：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
@@ -6423,11 +6421,11 @@
 <span class="normal"><a href="#__codelineno-51-2">2</a></span>
 <span class="normal"><a href="#__codelineno-51-3">3</a></span>
 <span class="normal"><a href="#__codelineno-51-4">4</a></span>
-<span class="normal"><a href="#__codelineno-51-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1"></a><span class="nv">DIR</span><span class="o">=</span>/home/zp
+<span class="normal"><a href="#__codelineno-51-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1"></a><span class="nv">DIR</span><span class="o">=</span>/home/test
 <a id="__codelineno-51-2" name="__codelineno-51-2"></a><span class="k">for</span><span class="w"> </span>FILE<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="si">${</span><span class="nv">DIR</span><span class="si">}</span>/*.sh<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <a id="__codelineno-51-3" name="__codelineno-51-3"></a><span class="w">  </span>mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DIR</span><span class="si">}</span><span class="s2">/scripts&quot;</span>
 <a id="__codelineno-51-4" name="__codelineno-51-4"></a><span class="k">done</span>
-<a id="__codelineno-51-5" name="__codelineno-51-5"></a><span class="c1"># 将 /home/zp 目录下所有 sh 文件拷贝到 /home/zp/scripts</span>
+<a id="__codelineno-51-5" name="__codelineno-51-5"></a><span class="c1"># 将 /home/test 目录下所有 sh 文件拷贝到 /home/test/scripts</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="while"><code>while</code> 循环<a class="headerlink" href="#while" title="Permanent link">&para;</a></h4>
 <p><code>while</code> 循环检测一个条件，只要这个条件为真，就执行一段命令。被检测的条件跟 <code>if..then</code> 中使用的基元并无二异。因此一个 <code>while</code> 循环看起来会是这样：</p>
@@ -6511,7 +6509,7 @@
 <a id="__codelineno-55-4" name="__codelineno-55-4"></a><span class="k">done</span>
 </code></pre></div></td></tr></table></div>
 <p><code>select</code> 会打印 <code>elem1..elemN</code> 以及它们的序列号到屏幕上，之后会提示用户输入。通常看到的是 <code>$?</code>（PS3 变量）。用户的选择结果会被保存到 <code>answer</code> 中。如果 <code>answer</code> 是一个在 <code>1..N</code> 之间的数字，那么语句会被执行，紧接着会进行下一次迭代 —— 如果不想这样的话我们可以使用 <code>break</code> 语句。</p>
-<p><strong><em>*</em>*�� “示例源码”：****</strong></p>
+<p>例如：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-56-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-56-3"> 3</a></span>
@@ -6620,13 +6618,13 @@
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>说明：</p>
 <p>函数定义时，<code>function</code> 关键字可有可无。</p>
 <p>函数返回值：</p>
 <p><code>return</code> 返回函数返回值，返回值类型只能为整数（0-255）。如果不加 <code>return</code> 语句，Shell 默认将以最后一条命令的运行结果，作为函数返回值。</p>
 <p>函数返回值在调用该函数后通过 <code>$?</code> 来获得。</p>
 <p>所有函数在使用前必须定义。这意味着必须将函数放在脚本开始部分，直至 Shell 解释器首次发现它时，才可以使用。调用函数仅使用其函数名即可。</p>
+</div>
 <p>例如：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-61-2"> 2</a></span>
@@ -6859,7 +6857,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong><em>*</em>*�� “示例源码”：****</strong></p>
+<p>例如：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-65-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-65-3"> 3</a></span>
@@ -6897,7 +6895,7 @@
 <a id="__codelineno-65-2" name="__codelineno-65-2"></a><span class="k">return</span><span class="w"> </span><span class="m">0</span>
 <a id="__codelineno-65-3" name="__codelineno-65-3"></a><span class="o">}</span>
 <a id="__codelineno-65-4" name="__codelineno-65-4"></a>
-<a id="__codelineno-65-5" name="__codelineno-65-5"></a><span class="nv">name</span><span class="o">=</span>zp
+<a id="__codelineno-65-5" name="__codelineno-65-5"></a><span class="nv">name</span><span class="o">=</span><span class="nb">test</span>
 <a id="__codelineno-65-6" name="__codelineno-65-6"></a>paramsFunction<span class="o">(){</span><span class="w">  </span>
 <a id="__codelineno-65-7" name="__codelineno-65-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;函数第一个入参：</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w">  </span>
 <a id="__codelineno-65-8" name="__codelineno-65-8"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;函数第二个入参：</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w">  </span>
@@ -6912,19 +6910,19 @@
 <a id="__codelineno-65-17" name="__codelineno-65-17"></a><span class="w">  </span>runner<span class="w">  </span>
 <a id="__codelineno-65-18" name="__codelineno-65-18"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;runner 函数的返回值：</span><span class="nv">$?</span><span class="s2">&quot;</span>
 <a id="__codelineno-65-19" name="__codelineno-65-19"></a><span class="o">}</span>
-<a id="__codelineno-65-20" name="__codelineno-65-20"></a>paramsFunction<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;abc&quot;</span><span class="w"> </span><span class="s2">&quot;hello, \&quot;zp\&quot;&quot;</span>
+<a id="__codelineno-65-20" name="__codelineno-65-20"></a>paramsFunction<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;abc&quot;</span><span class="w"> </span><span class="s2">&quot;hello, \&quot;test\&quot;&quot;</span>
 <a id="__codelineno-65-21" name="__codelineno-65-21"></a><span class="c1">#  Output:</span>
 <a id="__codelineno-65-22" name="__codelineno-65-22"></a><span class="c1">#  函数第一个入参：1</span>
 <a id="__codelineno-65-23" name="__codelineno-65-23"></a><span class="c1">#  函数第二个入参：abc</span>
 <a id="__codelineno-65-24" name="__codelineno-65-24"></a><span class="c1">#  传递到脚本的参数个数：3</span>
 <a id="__codelineno-65-25" name="__codelineno-65-25"></a><span class="c1">#  所有参数：</span>
-<a id="__codelineno-65-26" name="__codelineno-65-26"></a><span class="c1">#  + 1 abc hello, &quot;zp&quot;</span>
+<a id="__codelineno-65-26" name="__codelineno-65-26"></a><span class="c1">#  + 1 abc hello, &quot;test&quot;</span>
 <a id="__codelineno-65-27" name="__codelineno-65-27"></a><span class="c1">#  脚本运行的当前进程 ID 号：26400</span>
 <a id="__codelineno-65-28" name="__codelineno-65-28"></a><span class="c1">#  后台运行的最后一个进程的 ID 号：</span>
 <a id="__codelineno-65-29" name="__codelineno-65-29"></a><span class="c1">#  所有参数：</span>
 <a id="__codelineno-65-30" name="__codelineno-65-30"></a><span class="c1">#  + 1</span>
 <a id="__codelineno-65-31" name="__codelineno-65-31"></a><span class="c1">#  + abc</span>
-<a id="__codelineno-65-32" name="__codelineno-65-32"></a><span class="c1">#  + hello, &quot;zp&quot;</span>
+<a id="__codelineno-65-32" name="__codelineno-65-32"></a><span class="c1">#  + hello, &quot;test&quot;</span>
 <a id="__codelineno-65-33" name="__codelineno-65-33"></a><span class="c1">#  Shell 使用的当前选项：hB</span>
 <a id="__codelineno-65-34" name="__codelineno-65-34"></a><span class="c1">#  runner 函数的返回值：0</span>
 </code></pre></div></td></tr></table></div>

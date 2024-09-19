@@ -19,13 +19,13 @@ theme:
       accent: amber
       primary: blue-grey
       toggle:
-        icon: material/lightbulb 
+        icon: material/toggle-switch 
         name: Switch to dark mode
     - scheme: slate
       accent: amber
       primary: black
       toggle:
-        icon: material/lightbulb-outline
+        icon: material/toggle-switch-off-outline
         name: Switch to light mode
 
 copyright: Copyright &copy; 2024 EPSDA

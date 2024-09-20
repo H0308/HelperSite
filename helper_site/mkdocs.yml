@@ -22,13 +22,13 @@ theme:
       primary: grey
       toggle:
         icon: material/toggle-switch 
-        name: Switch to dark mode
+        name: 黑黑的天空
     - scheme: slate
       accent: amber
       primary: grey
       toggle:
         icon: material/toggle-switch-off-outline
-        name: Switch to light mode
+        name: 亮亮的繁星
 
 copyright: Copyright &copy; 2024 EPSDA
 

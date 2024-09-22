@@ -52,8 +52,3 @@
 [Emmet表达式参考](https://quickref.cn/docs/emmet.html)
 
 [正则表达式参考](https://quickref.cn/docs/regex.html)
-
-## 放松
-??? info "放松一下心情吧(*￣︶￣)"
-    
-    <video src="jealousy.mp4" controls playsinline></video>

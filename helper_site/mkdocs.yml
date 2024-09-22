@@ -131,7 +131,7 @@ nav:
     - Linux下的gcc与gdb: Linux/4. Linux下的gcc与gdb/4. Linux下的gcc与gdb.md
     - Linux下的Makefile与进度条程序: Linux/5. Linux下的Makefile与进度条程序/5. Linux下的Makefile与进度条程序.md
     - 操作系统基础知识: Linux/6. 操作系统基础知识/6. 操作系统基础知识.md
-    - Linux进程: Linux/7. Linux进程/7. Linux进程.md
+    - Linux进程基础: Linux/7. Linux进程/7. Linux进程.md
   - HTML与CSS:
     - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md
     - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md

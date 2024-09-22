@@ -56,4 +56,4 @@
 ## 放松
 ??? info "放松一下心情吧(*￣︶￣)"
     
-    <video src="wish.mp4" controls playsinline></video>
+    <video src="jealousy.mp4" controls playsinline></video>

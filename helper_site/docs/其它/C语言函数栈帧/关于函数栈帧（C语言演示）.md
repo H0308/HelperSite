@@ -65,7 +65,7 @@ lea：加载有效地址
 
 !!! note
     本次为了演示和理解方便，将采用上面是低地址，上面是高地址
-    <img src="关于函数栈帧（C语言演示）.assets\image.png">
+    <img src="关于函数栈帧（C语言演示）.assets\image.png" style="zoom:50%;" >
 
 ## 函数栈帧基础剖析
 
@@ -177,7 +177,7 @@ int main()
 
 对于上述汇编指令来说，首先`push`表示压栈操作，压入`ebp`中的数据，并使`esp`指向栈低该位置，如下图所示
 
-<img src="关于函数栈帧（C语言演示）.assets\image3.png">
+<img src="关于函数栈帧（C语言演示）.assets\image3.png" style="zoom:50%;" >
 
 当前`ebp`和`esp`中的值：
 
@@ -189,7 +189,7 @@ int main()
 
 接下来执行`mov`指令，该指令表示，将`esp`中的内容给`ebp`
 
-<img src="关于函数栈帧（C语言演示）.assets\image5.png">
+<img src="关于函数栈帧（C语言演示）.assets\image5.png" style="zoom:40%;" >
 
 对于上述两句汇编代码，VS2013的效果如下：
 
@@ -209,7 +209,7 @@ int main()
 
 接下来执行`sub`指令，`sub`指令代表相减，该指令表示将`esp`指令中的值减去`0E4h`（h为16进制后缀），如下图所示
 
-<img src="关于函数栈帧（C语言演示）.assets\image8.png">
+<img src="关于函数栈帧（C语言演示）.assets\image8.png" style="zoom:33%;" >
 
 当前`ebp`和`esp`中的值：
 
@@ -229,7 +229,7 @@ int main()
 00F81419  push        ebx 
 ```
 
-<img src="关于函数栈帧（C语言演示）.assets\image10.png">
+<img src="关于函数栈帧（C语言演示）.assets\image10.png" style="zoom:33%;" >
 
 <img src="关于函数栈帧（C语言演示）.assets\image11.png">
 
@@ -241,7 +241,7 @@ int main()
 00F8141A  push        esi
 ```
 
-<img src="关于函数栈帧（C语言演示）.assets\image13.png">
+<img src="关于函数栈帧（C语言演示）.assets\image13.png" style="zoom:33%;" >
 
 <img src="关于函数栈帧（C语言演示）.assets\image14.png">
 
@@ -253,7 +253,7 @@ int main()
 00F8141B  push        edi
 ```
 
-<img src="关于函数栈帧（C语言演示）.assets\image16.png">
+<img src="关于函数栈帧（C语言演示）.assets\image16.png" style="zoom:33%;" >
 
 <img src="关于函数栈帧（C语言演示）.assets\image17.png">
 
@@ -270,7 +270,7 @@ int main()
 
 接下来执行`lea`指令，`lea`指令表示加载有效地址，上述汇编代码中表示将`ebp-0E4h`的地址加载到`edi`中，因为刚才`esp`中所指的地址为`ebp-0E4h`，故`ebp-0E4h`则就是`esp`未压入`edi`、esi和`ebx`之前的地址
 
-<img src="关于函数栈帧（C语言演示）.assets\image19.png">
+<img src="关于函数栈帧（C语言演示）.assets\image19.png" style="zoom:33%;" >
 
 当前`edi`中的地址
 
@@ -461,7 +461,7 @@ int a = 10;
 
 执行`mov`指令，将`0Ah`值放到地址`ebp-8`处
 
-<img src="关于函数栈帧（C语言演示）.assets\image29.png">
+<img src="关于函数栈帧（C语言演示）.assets\image29.png" style="zoom:33%;" >
 
 当前`ebp`中的地址为：
 
@@ -480,7 +480,7 @@ int b = 20;
 
 接下来执行`mov`指令，将`14h`值放到`ebp-14h`（即`ebp-20`）地址处
 
-<img src="关于函数栈帧（C语言演示）.assets\image32.png">
+<img src="关于函数栈帧（C语言演示）.assets\image32.png" style="zoom:33%;" >
 
 当前`ebp`中的地址为：
 
@@ -499,7 +499,7 @@ int ret = 0;
 
 接下来执行`mov`指令，将数值0放置到`ebp-20h`（`ebp-32`）的地址上
 
-<img src="关于函数栈帧（C语言演示）.assets\image35.png">
+<img src="关于函数栈帧（C语言演示）.assets\image35.png" style="zoom:33%;" >
 
 当前`ebp`中的地址为：
 
@@ -535,7 +535,7 @@ int ret = 0;
 
 接下来执行`push`指令，将`eax`值压入栈顶，并使`esp`指针指向该位置
 
-<img src="关于函数栈帧（C语言演示）.assets\image40.png">
+<img src="关于函数栈帧（C语言演示）.assets\image40.png" style="zoom:33%;" >
 
 执行`push`之后的`esp`地址：
 
@@ -559,7 +559,7 @@ int ret = 0;
 
 接下来执行`push`指令，将`ecx`值压入栈顶，并使`esp`指针指向该位置
 
-<img src="关于函数栈帧（C语言演示）.assets\image44.png">
+<img src="关于函数栈帧（C语言演示）.assets\image44.png" style="zoom:33%;" >
 
 执行`push`之后的`esp`地址：
 
@@ -579,7 +579,7 @@ int ret = 0;
 
 首先执行`call`指令，进行函数调用，在执行`call`指令之前先会把`call`指令的下一条指令的地址进行压栈操作，这个操作是为了解决当函数调用结束后要回到`call`指令的下一条指令的地方，继续往后执行
 
-<img src="关于函数栈帧（C语言演示）.assets\image47.png">
+<img src="关于函数栈帧（C语言演示）.assets\image47.png" style="zoom:33%;" >
 
 执行`call`指令后的`esp`的地址和值：
 
@@ -645,7 +645,7 @@ int Add(int x, int y)
 
 移动`esp`和`ebp`地址，使其开始维护`Add`函数的栈帧空间
 
-<img src="关于函数栈帧（C语言演示）.assets\image50.png">
+<img src="关于函数栈帧（C语言演示）.assets\image50.png" style="zoom: 50%;" >
 
 <img src="关于函数栈帧（C语言演示）.assets\image51.png">
 
@@ -653,7 +653,7 @@ int Add(int x, int y)
 
 栈帧空间开辟结果图
 
-<img src="关于函数栈帧（C语言演示）.assets\image52.png">
+<img src="关于函数栈帧（C语言演示）.assets\image52.png" style="zoom: 67%;" >
 
 <img src="关于函数栈帧（C语言演示）.assets\image53.png">
 
@@ -730,7 +730,7 @@ int z = 0;
 
 执行过程与`main`函数相同，不再介绍，结果如图
 
-<img src="关于函数栈帧（C语言演示）.assets\image54.png">
+<img src="关于函数栈帧（C语言演示）.assets\image54.png" style="zoom:50%;" >
 
 ##### 执行加法
 
@@ -743,11 +743,11 @@ z = x + y;
 
 接下来执行`z = x + y`，首先执行`mov`指令，将`ebp+8`位置的值放到`eax`寄存器中，如下图所示
 
-<img src="关于函数栈帧（C语言演示）.assets\image55.png">
+<img src="关于函数栈帧（C语言演示）.assets\image55.png" style="zoom: 50%;" >
 
 再执行`add`指令，将`ebp+0ch`（即`ebp+12`）位置的值与`eax`中的值相加放置到`eax`中
 
-<img src="关于函数栈帧（C语言演示）.assets\image56.png">
+<img src="关于函数栈帧（C语言演示）.assets\image56.png" style="zoom:50%;" >
 
 执行完`add`指令后`eax`当前值为30
 
@@ -759,7 +759,7 @@ z = x + y;
 
 最后执行`mov`指令，将`eax`中的值移动到`ebp-8`（即变量`z`）的地址处
 
-<img src="关于函数栈帧（C语言演示）.assets\image60.png">
+<img src="关于函数栈帧（C语言演示）.assets\image60.png" style="zoom:50%;" >
 
 ##### 返回计算结果
 
@@ -786,7 +786,7 @@ return z;
 
 执行三次`pop`指令，依次使`edi`、`esi`、`ebx`出栈，同时使`esp`指针指向`ebp-0CCh`位置处
 
-<img src="关于函数栈帧（C语言演示）.assets\image61.png">
+<img src="关于函数栈帧（C语言演示）.assets\image61.png" style="zoom:50%;" >
 
 ```assembly
 000913F4  mov         esp,ebp 
@@ -794,7 +794,7 @@ return z;
 
 接下来执行`mov`指令，将初始的`ebp`地址给`esp`，使函数栈帧空间释放
 
-<img src="关于函数栈帧（C语言演示）.assets\image62.png">
+<img src="关于函数栈帧（C语言演示）.assets\image62.png" style="zoom:50%;" >
 
 初始时`esp`和`ebp`的地址
 
@@ -812,7 +812,7 @@ return z;
 
 接下来执行`pop`指令，使开始`push`的`ebp`出栈，并且移动`ebp`至`main`函数的`ebp`位置
 
-<img src="关于函数栈帧（C语言演示）.assets\image65.png">
+<img src="关于函数栈帧（C语言演示）.assets\image65.png" style="zoom: 67%;" >
 
 <img src="关于函数栈帧（C语言演示）.assets\image66.png">
 
@@ -832,7 +832,7 @@ return z;
 
 执行`add`指令，将8加至`esp`中并使`esp`移动到`main`函数的栈顶
 
-<img src="关于函数栈帧（C语言演示）.assets\image68.png">
+<img src="关于函数栈帧（C语言演示）.assets\image68.png" style="zoom:50%;" >
 
 ```assembly
 00091453  mov         dword ptr [ebp-20h],eax  

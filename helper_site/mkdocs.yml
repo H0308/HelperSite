@@ -136,6 +136,7 @@ nav:
     - 操作系统基础知识: Linux/6. 操作系统基础知识/6. 操作系统基础知识.md
     - Linux进程基础: Linux/7. Linux进程/7. Linux进程.md
     - Linux进程状态与进程优先级: Linux/8. Linux进程状态与进程优先级/8. Linux进程状态与进程优先级.md
+    - Linux进程切换以及调度算法: Linux/9. Linux进程切换以及调度算法/9. Linux进程切换以及调度算法.md
   - HTML与CSS:
     - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md
     - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md

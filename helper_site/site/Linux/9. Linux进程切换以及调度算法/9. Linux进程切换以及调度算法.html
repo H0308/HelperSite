@@ -3555,9 +3555,10 @@
 <p>在<code>runqueue</code>结构中，<code>curr</code>即为前面提到过的<code>head</code>指针，<code>idle</code>即为前面提到的<code>tail</code>指针，本次主要关注<code>prio_array_t</code>类型的三个变量，分别代表CPU当前的调度队列结构、已经执行的进程所在的队列（过期队列）结构和包含两个调度队列结构的数组</p>
 <p><code>prio_array_t</code>本质是<code>prio_array</code>结构，以下是该结构的介绍：</p>
 <p><code>prio_array</code>结构中存在一个<code>nr_active</code>变量，该变量表示当前处于运行状态的进程数量，而<code>bitmap</code>是一个用于映射下标的数组，而<code>queue</code>即为调度队列，每一个<code>queue</code>元素即为一个有前驱指针和后驱指针的节点，<code>MAX_PRIO</code>即为140（前面提到的调度队列的大小），而<code>BITMAP_SIZE</code>通过计算后得到值为5</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>long</code>类型在C语言中占4个字节，与<code>int</code>类型一致</p>
-</blockquote>
+</div>
 <p>所以上面结构可以转化为下面的直观形式：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>

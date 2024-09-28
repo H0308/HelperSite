@@ -14,7 +14,7 @@
         <link rel="prev" href="../7.%20Linux%E8%BF%9B%E7%A8%8B/7.%20Linux%E8%BF%9B%E7%A8%8B.html">
       
       
-        <link rel="next" href="../../HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html">
+        <link rel="next" href="../9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95.html">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -3072,6 +3072,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux进程切换以及调度算法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3666,9 +3687,9 @@
 <p>进程在被创建之后，此时根据操作系统「先描述，再组织」的管理方式，在创建进程时，会形成对应进程的PCB（例如Linux下的<code>task_struct</code>），此时「描述」已经完成</p>
 <p>接着程序进入就绪状态，此时操作系统会将进程对应的PCB加载到就绪队列中，在Linux下是一般是使用双向链表结构对每一个PCB进行连接，示意图如下，其中<code>current</code>指针表示当前正在被执行的进程：</p>
 <p><a class="glightbox" href="8. Linux进程状态与进程优先级.assets\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="8. Linux进程状态与进程优先级.assets\image2.png"></a></p>
-<p>每一个CPU需要执行进程，就需要一个与就绪队列有关的结构，该结构中存在当前进程的相关信息，例如进程状态等，一般结构中还会存在一个指针，该指针指向正在运行的进程，此时<code>head</code>指针指向的就是当前进程</p>
+<p>每一个CPU需要执行进程，就需要一个与就绪队列有关的结构，这个结构在Linux下被称为运行队列（具体见<a href="#">调度算法部分</a>），一般该结构中会存在一个指针，该指针指向正在运行的进程，例如下面的简化图中的<code>head</code>指针指向的就是当前进程，而<code>tail</code>表示当前闲置（idle）的进程</p>
 <p>如果此时程序需要进行I/O操作，因为I/O操作速度远小于CPU的执行速度，在分时操作系统中，会尽可能提高CPU的利用率，所以此时当前进程就会被操作系统切换到指定设备的等待队列（例如键盘），而CPU继续执行其他存在于就绪队列中的进程。等待队列与就绪队列结构基本一致，也是一个双向链表结构。进程进入等待队列中链接后，对应进程状态更改为等待状态，等待I/O操作完成。</p>
-<p>等待队列和运行队列示意图如下：</p>
+<p>等待队列和就绪队列示意图如下：</p>
 <p><a class="glightbox" href="8. Linux进程状态与进程优先级.assets\image3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="8. Linux进程状态与进程优先级.assets\image3.png"></a></p>
 <p>当I/O操作完成，继续进入就绪队列等待被调度执行进入运行状态</p>
 <p>综上所述：等待的本质就是进入对应设备的等待队列进行执行，只是不会执行对应的代码，而等待和运行的切换就是进程PCB在不同的双向链表结构中连接</p>
@@ -3696,7 +3717,7 @@
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>在Linux下，就绪状态和运行状态一般不作区分，所以就绪队列也可以认为就是运行队列</p>
+<p>在Linux下，就绪状态和运行状态一般不作区分，所以就绪队列也可以认为就是调度队列，处于调度队列的进程对应的状态即为运行状态</p>
 </div>
 <h3 id="runningsleeping">运行状态（Running）与等待状态（Sleeping）<a class="headerlink" href="#runningsleeping" title="Permanent link">&para;</a></h3>
 <p>运行状态：表示程序正在就绪队列或者正在被CPU执行，包括前台运行和后台运行</p>
@@ -3993,7 +4014,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 27, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 28, 2024</span>
   </span>
 
     

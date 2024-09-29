@@ -3853,7 +3853,7 @@
 <h2 id="jdbc_3">JDBC搭建步骤<a class="headerlink" href="#jdbc_3" title="Permanent link">&para;</a></h2>
 <ol>
 <li>准备数据库。</li>
-<li>官网下载数据库连接驱动jar包。<a href="https://downloads.mysql.com/archives/c-j/">驱动下载</a></li>
+<li>官网下载数据库连接驱动<code>jar</code>包：<a href="https://downloads.mysql.com/archives/c-j/">驱动下载</a></li>
 <li>创建Java项目，在项目下创建<code>lib</code>文件夹，将下载的驱动<code>jar</code>包复制到文件夹里。</li>
 <li>选中<code>lib</code>文件夹右键-&gt;Add as Library，与项目集成。</li>
 <li>编写代码</li>
@@ -3947,7 +3947,8 @@
 <p>在 Java 中，当使用 JDBC（Java Database Connectivity）连接数据库时，需要加载数据库特定的驱动程序，以便与数据库进行通信。加载驱动程序的目的是为了注册驱动程序，使得 JDBC API 能够识别并与特定的数据库进行交互。从JDK6开始，不再需要显式地调用 <code>Class.forName()</code> 来加载 JDBC 驱动程序，只要在类路径中集成了对应的<code>jar</code>文件，会自动在初始化时注册驱动程序。</p>
 <h3 id="_1">获取数据库连接<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p><code>Connection</code>接口是JDBC API的重要接口，用于建立与数据库的通信通道。换而言之，<code>Connection</code>对象不为空，则代表一次数据库连接。</p>
-<p>在建立连接时，需要指定数据库URL、用户名、密码参数。如果连接的是本机的数据库，则可以省略URL写为：<code>jdbc:mysql:///数据库名</code></p>
+<p>在建立连接时，需要指定数据库URL、用户名、密码参数。如果连接的是本机的数据库，则可以省略URL写为：<code>jdbc:mysql:///数据库名</code>。
+如果对应的URL中有参数，则需要使用<code>?</code>分隔数据库名和参数，每一个参数之间用<code>&amp;</code>链接：<code>jdbc:mysql://IP地址:端口号/数据库名称?参数键值对1&amp;参数键值对2</code></p>
 <p><code>Connection</code> 接口还负责管理事务，<code>Connection</code> 接口提供了 <code>commit</code> 和 <code>rollback</code> 方法，用于提交事务和回滚事务。可以创建 <code>Statement</code> 对象，用于执行 SQL 语句并与数据库进行交互。</p>
 <p>在使用JDBC技术时，必须要先获取<code>Connection</code>对象，在使用完毕后，要释放资源，避免资源占用浪费及泄漏。</p>
 <h3 id="statementpreparedstatement">创建<code>Statement</code>对象（使用<code>PreparedStatement</code>替换）<a class="headerlink" href="#statementpreparedstatement" title="Permanent link">&para;</a></h3>

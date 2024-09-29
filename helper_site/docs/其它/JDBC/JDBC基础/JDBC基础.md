@@ -349,7 +349,7 @@ public class UpdateExisted {
 public class DeleteExisted {
     @Test
     public void test() throws Exception{
-        Connection connection = DriverManager.getConnection("jdbc:mysql:///atguigu", "root", "037477..");
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///databaseTest", "root", "123456");
         PreparedStatement preparedStatement = connection.prepareStatement("delete from t_emp where emp_name = '张三'");
         int i = preparedStatement.executeUpdate();
 

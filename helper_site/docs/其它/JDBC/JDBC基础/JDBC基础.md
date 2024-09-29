@@ -25,7 +25,7 @@ JDBC：Java Database Connectivity，意为Java数据库连接。JDBC是Java提�
 ## JDBC搭建步骤
 
 1. 准备数据库。
-2. 官网下载数据库连接驱动jar包。[驱动下载](https://downloads.mysql.com/archives/c-j/)
+2. 官网下载数据库连接驱动`jar`包：[驱动下载](https://downloads.mysql.com/archives/c-j/)
 3. 创建Java项目，在项目下创建`lib`文件夹，将下载的驱动`jar`包复制到文件夹里。
 4. 选中`lib`文件夹右键->Add as Library，与项目集成。
 5. 编写代码
@@ -94,7 +94,8 @@ public class QuickIn {
 
 `Connection`接口是JDBC API的重要接口，用于建立与数据库的通信通道。换而言之，`Connection`对象不为空，则代表一次数据库连接。
 
-在建立连接时，需要指定数据库URL、用户名、密码参数。如果连接的是本机的数据库，则可以省略URL写为：`jdbc:mysql:///数据库名`
+在建立连接时，需要指定数据库URL、用户名、密码参数。如果连接的是本机的数据库，则可以省略URL写为：`jdbc:mysql:///数据库名`。
+如果对应的URL中有参数，则需要使用`?`分隔数据库名和参数，每一个参数之间用`&`链接：`jdbc:mysql://IP地址:端口号/数据库名称?参数键值对1&参数键值对2`
 
 `Connection` 接口还负责管理事务，`Connection` 接口提供了 `commit` 和 `rollback` 方法，用于提交事务和回滚事务。可以创建 `Statement` 对象，用于执行 SQL 语句并与数据库进行交互。
 

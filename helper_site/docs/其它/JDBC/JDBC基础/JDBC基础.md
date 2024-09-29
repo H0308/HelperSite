@@ -25,7 +25,7 @@ JDBC：Java Database Connectivity，意为Java数据库连接。JDBC是Java提�
 ## JDBC搭建步骤
 
 1. 准备数据库。
-2. 官网下载数据库连接驱动jar包。[https://downloads.mysql.com/archives/c-j/](驱动下载)
+2. 官网下载数据库连接驱动jar包。[驱动下载](https://downloads.mysql.com/archives/c-j/)
 3. 创建Java项目，在项目下创建`lib`文件夹，将下载的驱动`jar`包复制到文件夹里。
 4. 选中`lib`文件夹右键->Add as Library，与项目集成。
 5. 编写代码

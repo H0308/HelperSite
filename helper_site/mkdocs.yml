@@ -150,6 +150,7 @@ nav:
     - 关于函数栈帧（C语言演示）: 其它/C语言函数栈帧/关于函数栈帧（C语言演示）.md
     - 关于JDBC:
       - JDBC基础: 其它/JDBC/JDBC基础/JDBC基础.md
+      - JDBC进阶: 其它/JDBC/JDBC进阶/JDBC进阶.md
   - 联系作者: 作者/作者.md
 
 markdown_extensions:

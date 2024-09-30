@@ -417,7 +417,7 @@ public class HikariConnectionPool {
 
 配置文件：
 
-```java
+```properties
 driverClassName=com.mysql.jdbc.Driver
 url=jdbc:mysql:///databaseTest
 username=root
@@ -451,7 +451,7 @@ public void softCode() throws Exception{
 
 配置文件：
 
-```java
+```properties
 driverClassName=com.mysql.jdbc.Driver
 jdbcUrl=jdbc:mysql:///databaseTest
 username=root

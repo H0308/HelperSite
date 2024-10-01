@@ -304,31 +304,31 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         5. 释放资源
         6. 返回对应的行数
 
-示例代码：
+    示例代码：
 
-```java
-// 修改、新增和删除
-public static int modify(String sql, Object...params) throws Exception{
-    // 获取连接对象
-    Connection connection = JDBCUtil.getConnection();
-    // 执行SQL语句
-    PreparedStatement preparedStatement = connection.prepareStatement(sql);
-    // 判断是否有参数
-    for (int i = 0; params != null &&  i < params.length ; i++) {
-        preparedStatement.setObject(i + 1, params[i]);
+    ```java
+    // 修改、新增和删除
+    public static int modify(String sql, Object...params) throws Exception{
+        // 获取连接对象
+        Connection connection = JDBCUtil.getConnection();
+        // 执行SQL语句
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        // 判断是否有参数
+        for (int i = 0; params != null &&  i < params.length ; i++) {
+            preparedStatement.setObject(i + 1, params[i]);
+        }
+
+        int i = preparedStatement.executeUpdate();
+        // 关闭连接
+        JDBCUtil.release();
+        preparedStatement.close();
+
+        return i;
     }
+    ```
 
-    int i = preparedStatement.executeUpdate();
-    // 关闭连接
-    JDBCUtil.release();
-    preparedStatement.close();
-
-    return i;
-}
-```
-
-!!! note
-    需要注意：因为不确定SQL语句中每一个可用占位符对应的类型，所以此处只能使用`setObject()`方法，因为`i`从0开始，而占位符从1开始，所以需要传入`i + 1`，在函数返回影响的行数之前，需要进行资源释放防止资源泄漏
+    !!! note
+        需要注意：因为不确定SQL语句中每一个可用占位符对应的类型，所以此处只能使用`setObject()`方法，因为`i`从0开始，而占位符从1开始，所以需要传入`i + 1`，在函数返回影响的行数之前，需要进行资源释放防止资源泄漏
 
 2. 查询：查询存在三种情况：1. 单行单列 2. 单行多列 3. 多行多列。对于这三种情况来说，可以返回一个`List`集合：单行单列，集合中只有一个值（可以通过`List`集合的`getFirst()`方法获取，也可以通过`get(0)`获取）；单行多列，集合中只有一个对象（可以通过`List`集合的`getFirst()`方法获取，也可以通过`get(0)`获取）；多行多列，集合中有多个对象。考虑到将来可能查询的不只是一种类型（例如员工类、学生类或者老师类等），所以返回的`List`集合对应的泛型位置不可以是具体的类型，此时需要用到泛型方法
     1. 参数3：单行单列、单行多列和多行多列都有可能涉及到占位符，所以需要使用到可变参数
@@ -346,50 +346,50 @@ public static int modify(String sql, Object...params) throws Exception{
         9. 释放资源
         10. 返回`List`集合
 
-示例代码：
+    示例代码：
 
-```java
-// 查询
-public static <T> List<T> select(Class<T> classType, String sql, Object...params) throws Exception{
-    Connection connection = JDBCUtil.getConnection();
-    PreparedStatement preparedStatement = connection.prepareStatement(sql);
-    for (int i = 0; params != null && i < params.length; i++) {
-        preparedStatement.setObject(i + 1, params[i]);
-    }
-    ArrayList<T> ts = new ArrayList<>();
-    ResultSet resultSet = preparedStatement.executeQuery();
-    // 获取结果集元数据
-    ResultSetMetaData metaData = resultSet.getMetaData();
-    // 获取列
-    int columnCount = metaData.getColumnCount();
-    while (resultSet.next()) {
-        // 反射创建一个对象
-        T t = classType.newInstance();
+    ```java
+    // 查询
+    public static <T> List<T> select(Class<T> classType, String sql, Object...params) throws Exception{
+        Connection connection = JDBCUtil.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        for (int i = 0; params != null && i < params.length; i++) {
+            preparedStatement.setObject(i + 1, params[i]);
+        }
+        ArrayList<T> ts = new ArrayList<>();
+        ResultSet resultSet = preparedStatement.executeQuery();
+        // 获取结果集元数据
+        ResultSetMetaData metaData = resultSet.getMetaData();
+        // 获取列
+        int columnCount = metaData.getColumnCount();
+        while (resultSet.next()) {
+            // 反射创建一个对象
+            T t = classType.newInstance();
 
-        // 遍历列
-        for (int i = 0; i < columnCount; i++) {
-            Object object = resultSet.getObject(i + 1);
-            // 获取列名
-            String columnLabel = metaData.getColumnLabel(i + 1);
-            // 反射获取字段
-            Field declaredField = classType.getDeclaredField(columnLabel);
-            declaredField.setAccessible(true);
-            // 通过反射赋值
-            declaredField.set(t, object);
+            // 遍历列
+            for (int i = 0; i < columnCount; i++) {
+                Object object = resultSet.getObject(i + 1);
+                // 获取列名
+                String columnLabel = metaData.getColumnLabel(i + 1);
+                // 反射获取字段
+                Field declaredField = classType.getDeclaredField(columnLabel);
+                declaredField.setAccessible(true);
+                // 通过反射赋值
+                declaredField.set(t, object);
+            }
+
+            ts.add(t);
         }
 
-        ts.add(t);
+        // 释放资源
+        resultSet.close();
+        preparedStatement.close();
+        JDBCUtil.release();
+
+        // 返回结果
+        return ts;
     }
-
-    // 释放资源
-    resultSet.close();
-    preparedStatement.close();
-    JDBCUtil.release();
-
-    // 返回结果
-    return ts;
-}
-```
+    ```
 
 ## DAO实现类与BaseDao结合（测试）
 

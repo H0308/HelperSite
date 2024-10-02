@@ -1,6 +1,7 @@
 site_name: 日常学习帮助网站
 site_url: https://www.helper-wiki.top
 use_directory_urls: false
+edit_uri: https://github.com/H0308/HelperSite/tree/main/helper_site/docs
 
 theme:
   name: 'material'
@@ -14,7 +15,7 @@ theme:
     - navigation.top
     - search.suggest
     - search.highlight
-    - content.tabs.link
+    # - content.tabs.link
   language: zh
   palette:
     - scheme: default
@@ -29,6 +30,8 @@ theme:
       toggle:
         icon: material/toggle-switch-off-outline
         name: 亮亮的繁星相随
+  icon:
+    edit: material/pencil
 
 copyright: Copyright &copy; 2024 EPSDA
 
@@ -104,9 +107,12 @@ nav:
       - 入门:
         - JavaScript快速入门: JavaScript基础知识/1. JavaScript快速入门/1. JavaScript快速入门.md
         - JavaScript与DOM基础: JavaScript基础知识/2. JavaScript与DOM基础/2. JavaScript与DOM基础.md
-      - JavaScript基本语法: JavaScript基础知识/1. JavaScript基础/JavaScript基础.md
+      - 全面文档（待更新）:
+        - JavaScript基本语法: JavaScript基础知识/1. JavaScript基础/JavaScript基础.md
     - Python:
-      - Python快速入门: Python基础知识/1. Python快速入门/1. Python快速入门.md
+      - 入门:
+        - Python快速入门: Python基础知识/1. Python快速入门/1. Python快速入门.md
+      - 全面文档（待更新）: Python基础知识/暂无.md
   - 数据结构与算法:
     - 数据结构:
       - 数据结构基础: 数据结构/1. 时间复杂度和空间复杂度/1. 时间复杂度与空间复杂度.md
@@ -196,6 +202,7 @@ extra:
 plugins:
   - search
   - toggle-sidebar
+  - git-authors
   - glightbox:
       touchNavigation: true
       loop: false

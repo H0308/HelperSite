@@ -104,7 +104,7 @@ nav:
       - 入门:
         - JavaScript快速入门: JavaScript基础知识/1. JavaScript快速入门/1. JavaScript快速入门.md
         - JavaScript与DOM基础: JavaScript基础知识/2. JavaScript与DOM基础/2. JavaScript与DOM基础.md
-      - JavaScript基本语法: JavaScript基础知识/1. JavaScript基础/1. JavaScript基础.md
+      - JavaScript基本语法: JavaScript基础知识/1. JavaScript基础/JavaScript基础.md
     - Python:
       - Python快速入门: Python基础知识/1. Python快速入门/1. Python快速入门.md
   - 数据结构与算法:

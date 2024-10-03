@@ -20,13 +20,13 @@ theme:
   palette:
     - scheme: default
       accent: amber
-      primary: grey
+      primary: white
       toggle:
         icon: material/toggle-switch 
         name: 黑黑的天空低垂
     - scheme: slate
       accent: amber
-      primary: grey
+      primary: black
       toggle:
         icon: material/toggle-switch-off-outline
         name: 亮亮的繁星相随

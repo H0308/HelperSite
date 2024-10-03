@@ -8,7 +8,8 @@ theme:
   favicon: images/favicon.png
   logo: assets/logo.png
   font:
-    text: Noto Serif
+    text: Noto Sans Simplified Chinese
+    code: JetBrains Mono
   features:
     # - header.autohide
     - navigation.tabs
@@ -22,14 +23,14 @@ theme:
       accent: amber
       primary: white
       toggle:
-        icon: material/toggle-switch 
-        name: 黑黑的天空低垂
+        icon: material/toggle-switch-off-outline
+        name: 黑黑的天空低垂（切换为暗色模式）
     - scheme: slate
       accent: amber
       primary: black
       toggle:
-        icon: material/toggle-switch-off-outline
-        name: 亮亮的繁星相随
+        icon: material/toggle-switch 
+        name: 亮亮的繁星相随（切换为亮色模式）
   icon:
     edit: material/pencil
 

@@ -4601,7 +4601,7 @@
 <p>给定一个包含非负整数的数组 <code>nums</code> ，返回其中可以组成三角形三条边的三元组个数。</p>
 </div>
 <p>思路解析：</p>
-<p>本题最直观的解法就是通过三层<code>for</code>循环一次枚举出所有有效的三角形组合，但是此时的时间复杂度为O(N3)，另外在判断是否能构成三角形时使用的三次判断，那么时间复杂度准确来说是O(3N3)，如果此时对原数组进行排序，那么时间复杂度可以变为O(NlogN+N3)，比前面的O(3N3)</p>
+<p>本题最直观的解法就是通过三层<code>for</code>循环一次枚举出所有有效的三角形组合，但是此时的时间复杂度为<span class="arithmatex">\(O(N^3)\)</span>，另外在判断是否能构成三角形时使用的三次判断，那么时间复杂度准确来说是<span class="arithmatex">\(O(3N^3)\)</span>，如果此时对原数组进行排序，那么时间复杂度可以变为<span class="arithmatex">\(O(Nlog_{2}{N}+N^3)\)</span>，比前面的<span class="arithmatex">\(O(3N^3)\)</span></p>
 <p>之所以对数组排序后可以减小时间复杂度是因为下面的原因：</p>
 <p>在判断三个整数是否可以构成三角形时，假设三边分别为a、b和c，此时需要判断任意两边之和是否大于第三边，即<code>a + b &gt; c &amp;&amp; a +c &gt; b &amp;&amp; b + c &gt; a</code>。如果此时确定一个最大的数值，假设此处c最大，那么只需要判断<code>a + b &gt; c</code>，对于其余两种情况来说，因为c已经大于b和a，那么c + b或者c + a均会大于其余两边。对于排序之后的数组来说可以很容易确定最大值的位置，将最大值作为第三边后就只需要判断其余两边之和是否大于这个最大值即可</p>
 <p>因为数组已经进行了排序，此时可以采用二分算法进行求解，但是使用双指针的算法会更优</p>
@@ -5451,7 +5451,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 10, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 3, 2024</span>
   </span>
 
     

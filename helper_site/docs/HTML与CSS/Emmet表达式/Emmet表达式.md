@@ -1,7 +1,7 @@
 # Emmet表达式
 ## Emmet语法简介
 
-Emmet语法的前身是Zen coding,它使用缩写,来提高html/css的编写速度, vscode内部已经集成该语法。
+Emmet语法的前身是Zen coding,它使用缩写,来提高HTML/CSS的编写速度, vscode内部已经集成该语法。
 
 ## Emmet作用
 

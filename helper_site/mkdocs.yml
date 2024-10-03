@@ -104,12 +104,6 @@ nav:
       - Java网络编程、正则表达式、设计模式与Lombok: Java/17. Java网络编程、正则表达式、设计模式与Lombok/17. Java网络编程、正则表达式、设计模式与Lombok.md
       - Java中的JDK8及后续的重要新特性: Java/18. Java中的JDK8及后续的重要新特性/18. Java中的JDK8及后续的重要新特性.md
       - Java中的Junit、类加载时机与机制、反射、注解及枚举: Java/19. Java中的Junit、类加载时机与机制、反射、注解及枚举/19. Java中的Junit、类加载时机与机制、反射、注解及枚举.md
-    - JavaScript:
-      - 入门:
-        - JavaScript快速入门: JavaScript基础知识/1. JavaScript快速入门/1. JavaScript快速入门.md
-        - JavaScript与DOM基础: JavaScript基础知识/2. JavaScript与DOM基础/2. JavaScript与DOM基础.md
-      - 全面文档（待更新）:
-        - JavaScript基本语法: JavaScript基础知识/1. JavaScript基础/JavaScript基础.md
     - Python:
       - 入门:
         - Python快速入门: Python基础知识/1. Python快速入门/1. Python快速入门.md
@@ -147,9 +141,16 @@ nav:
     - Linux进程基础: Linux/7. Linux进程/7. Linux进程.md
     - Linux进程状态与进程优先级: Linux/8. Linux进程状态与进程优先级/8. Linux进程状态与进程优先级.md
     - Linux进程切换以及调度算法: Linux/9. Linux进程切换以及调度算法/9. Linux进程切换以及调度算法.md
-  - HTML与CSS:
-    - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md
-    - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md
+  - 前端:
+    - HTML与CSS:
+      - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md
+      - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md
+    - JavaScript:
+      - 入门:
+        - JavaScript快速入门: JavaScript基础知识/1. JavaScript快速入门/1. JavaScript快速入门.md
+        - JavaScript与DOM基础: JavaScript基础知识/2. JavaScript与DOM基础/2. JavaScript与DOM基础.md
+      - 全面文档（待更新）:
+        - JavaScript基本语法: JavaScript基础知识/1. JavaScript基础/JavaScript基础.md
   - MySQL:
     - MySQL基础: MySQL/MySQL基础使用/MySQL基础使用.md
   - 编程题目练习总结:

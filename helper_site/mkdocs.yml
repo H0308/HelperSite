@@ -8,7 +8,7 @@ theme:
   favicon: images/favicon.png
   logo: assets/logo.png
   font:
-    text: Noto Sans Simplified Chinese
+    text: JetBrains Mono
     code: JetBrains Mono
   features:
     # - header.autohide

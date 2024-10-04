@@ -104,7 +104,7 @@ int main()
 !!! note
     上述内容了解即可，在不同的编译器下调用可能不同，在下面的分析中不包括调用`main`函数的函数
 
-    关于其中的`argc`、`argv`和`envp`见[Linux部分讲解](#)
+    关于其中的`argc`、`argv`和`envp`见[Linux部分讲解](https://www.helper-wiki.top/Linux/10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.html)
 
 ### 函数栈帧分析
 

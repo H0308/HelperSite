@@ -6511,6 +6511,7 @@
 <a id="__codelineno-54-2" name="__codelineno-54-2"></a><span class="w">   </span><span class="n">Function</span><span class="w"> </span><span class="n">for_each</span><span class="w"> </span><span class="p">(</span><span class="n">InputIterator</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">InputIterator</span><span class="w"> </span><span class="n">last</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="w"> </span><span class="n">fn</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 第一个参数和第二个参数都是容器的迭代器，因为是<code>InputIterator</code>，所以可以传递单向、双向和随机迭代器，第三个参数可以传递仿函数或者lambda表达式</p>
+<p>第三个参数中一般是指定在循环遍历中对遍历容器元素的操作，例如遍历容器元素等</p>
 <p>例如下面的代码：
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-55-2"> 2</a></span>

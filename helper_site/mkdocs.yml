@@ -16,6 +16,7 @@ theme:
     - navigation.top
     - search.suggest
     - search.highlight
+    - content.code.copy
     # - content.tabs.link
   language: zh
   palette:

@@ -3027,7 +3027,7 @@
         <li class="md-nav__item">
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
-      进程地址空间结构初始化时机
+      缺页中断与写时拷贝
     </span>
   </a>
   
@@ -3035,6 +3035,15 @@
       
         <li class="md-nav__item">
   <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      进程地址空间结构初始化时机
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       总结
     </span>
@@ -3838,7 +3847,7 @@
         <li class="md-nav__item">
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
-      进程地址空间结构初始化时机
+      缺页中断与写时拷贝
     </span>
   </a>
   
@@ -3846,6 +3855,15 @@
       
         <li class="md-nav__item">
   <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      进程地址空间结构初始化时机
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       总结
     </span>
@@ -4082,10 +4100,32 @@
 <p>此刻也便可以解释为什么程序会有野指针的概念，在语言层面，野指针表示指针中的地址对应的空间已经被释放并归还给操作系统进行管理，此时不可以通过这个指针访问对应的地址。在此时的系统层面，之所以可以限制野指针写入就是通过<code>RWX</code>属性，因为虚拟地址对应的物理地址具有的属性已经是<code>R</code></p>
 <p><code>isExists</code>属性：代表虚拟地址对应的物理地址是否存在有效数据。在操作系统加载进程时，会创建对应的进程地址空间和页表，在页表中将虚拟地址和物理地址进行映射。然而，这个过程中某些进程的代码可能特别多，导致正文代码区占用的空间变得很大，而实际使用时，可能有很大一部分的代码长时间不会被执行，造成资源浪费。为了解决这个问题，操作系统通常采用按需加载（惰性加载，Lazy Loading）策略。操作系统会先加载一部分内容，在运行过程中，通过检查页表中的有效位（Valid Bit）来判断虚拟地址访问的物理地址是否已经加载。如果没有加载，则触发缺页中断（Page Fault），操作系统会从磁盘加载相应的数据到内存中，再继续执行。这一过程也适用于交换分区（Swap Partition），决定何时将数据换入或换出内存</p>
 <p>结合前面的两个属性，操作系统就实现先告诉进程自己已经开辟好了空间，这个空间的地址由多个虚拟地址组成，但是实际上可能物理地址并没有全部与指定的虚拟地址对应，当程序运行到指定的部分再进行开辟映射，这个操作就可以实现将内存空间利用率最大化</p>
-<h2 id="_8">进程地址空间结构初始化时机<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h2 id="_8">缺页中断与写时拷贝<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>前面提到，当子进程修改了父进程的共享变量就会发生写时拷贝，实际上，在这之前需要进行一系列的操作检测</p>
+<p>当父进程开始运行，子进程还未被创建之前，父进程的代码区为只读，但是数据区是默认为读写的，当子进程创建后，代码区依旧是只读，但是二者的数据区均变为只读，子进程从创建的位置开始执行代码，因为子进程会拷贝<code>task_struct</code>中有关程序计数器部分的内容，此时父子进程都只是读取对应代码区和数据区的数据，实现数据和代码共享</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>此处之所以子进程不额外直接拷贝父进程的数据，尽管将来可能要对数据进行修改，是因为可能父进程的数据很大，但是子进程需要修改的数据很小，如果在创建子进程时就将数据拷贝，此时就会导致空间的浪费</p>
+</div>
+<p>当子进程准备修改数据时，因为数据区已经变为只读，子进程想要修改就会修改失败，此时就会触发缺页中断错误。但是因为缺页中断错误发生的原因不只有一种，还有可能是野指针写入等情况，所以此时系统需要检测是否是误操作。当系统检测到数据区本身是读写的，但是现在被设置为只读时，就会认为需要发生写时拷贝</p>
+<p>判定完需要进行写时拷贝时，系统就会在物理内存中申请空间，将原始数据拷贝到新空间，并对父进程和子进程的数据区修改为只读，父进程和子进程代码继续执行</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>这个过程中涉及到原始数据拷贝而不是简单开辟空间使用等待子进程使用新数据进行覆盖是因为可能子进程对数据的修改是基于原数据的，例如变量自增行为等</p>
+</div>
+<p>上述过程简略示意图如下：</p>
+<ul>
+<li>子进程创建但未修改数据</li>
+</ul>
+<p><a class="glightbox" href="11. 进程地址空间.assets\image7.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. 进程地址空间.assets\image7.png"></a></p>
+<ul>
+<li>子进程修改数据</li>
+</ul>
+<p><a class="glightbox" href="11. 进程地址空间.assets\image8.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="11. 进程地址空间.assets\image8.png"></a></p>
+<h2 id="_9">进程地址空间结构初始化时机<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>任何一个结构体在创建时一定要进行初始化，而进程地址空间也是由一个结构进行描述，这个结构的初始化由操作系统在可执行程序加载到内存时完成，可执行程序加载到内存变成进程时，操作系统可以获取到部分区域的起始值和终止值，例如正文代码区、数据区（包括全局变量区、常量区、静态变量区）和命令行与环境变量区。所以这就可以解释为什么静态变量、全局变量和常量一直持续到进程结束</p>
 <p>但是这其中有两个不同的区域：栈区和堆区，栈区在函数创建时会开辟对应的栈帧，堆区在申请时会在已有的堆区上额外开辟需要的空间，所以这两个区域在程序刚加载到内存时是不存在的</p>
-<h2 id="_9">总结<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h2 id="_10">总结<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>之所以需要存在页表和进程地址空间有以下三个原因：</p>
 <ol>
 <li>保护内存：如果让进程直接访问物理内存，会导致在物理层面的野指针情况，并且这个情况在物理层面并不容易被发现和阻止</li>
@@ -4118,7 +4158,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 5, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 6, 2024</span>
   </span>
 
     

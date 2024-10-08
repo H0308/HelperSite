@@ -145,6 +145,7 @@ nav:
     - Linux进程切换以及调度算法: Linux/9. Linux进程切换以及调度算法/9. Linux进程切换以及调度算法.md
     - Linux命令行与环境变量: Linux/10. Linux命令行与环境变量/10. Linux命令行与环境变量.md
     - Linux进程地址空间: Linux/11. Linux进程地址空间/11. 进程地址空间.md
+    - Linux进程控制: Linux/12. Linux进程控制/12. Linux进程控制.md
   - 前端:
     - HTML与CSS:
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md

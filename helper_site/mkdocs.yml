@@ -167,6 +167,8 @@ nav:
       - JDBC基础: 其它/JDBC/JDBC基础/JDBC基础.md
       - JDBC进阶: 其它/JDBC/JDBC进阶/JDBC进阶.md
       - JDBC高级: 其它/JDBC/JDBC高级/JDBC高级.md
+  - 工具帮助:
+      - vscode中添加代码片段: 工具帮助/vscode中添加代码片段/vscode中添加代码片段.md
   - 联系作者: 作者/作者.md
 
 markdown_extensions:

@@ -80,6 +80,7 @@ nav:
       - map类: C++/22. map类/22. map类.md
       - map和set类模拟实现: C++/23. map和set类模拟实现/23. map和set类模拟实现.md
       - unordered_map和unordered_set类模拟实现: C++/24. unordered_map和unordered_set类模拟实现/24. unordered_map和unordered_set类模拟实现.md
+      - bitset类: C++/31. bitset类/31. bitset类.md
       - C++ 11相关新特性: C++/25. C++11相关新特性/C++ 11相关新特性.md
       - C++ 异常: C++/26. C++异常/26. C++异常.md
       - C++ 智能指针: C++/27. 智能指针/27. 智能指针.md
@@ -125,6 +126,7 @@ nav:
       - AVL树: 数据结构/11. AVL树/11. AVL树.md
       - 红黑树: 数据结构/12. 红黑树/12. 红黑树.md
       - 哈希表: 数据结构/13. 哈希表/13. 哈希表.md
+      - 位图: 数据结构/14. 位图/14. 位图.md
     - 算法:
       - 双指针算法: 算法/1. 双指针算法/1. 双指针算法.md
       - 滑动窗口算法: 算法/2. 滑动窗口算法/2. 滑动窗口算法.md

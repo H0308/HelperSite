@@ -6989,7 +6989,7 @@
 <a id="__codelineno-49-13" name="__codelineno-49-13"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>但是<code>typedef</code>也有别的问题，考虑下面的问题</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1">1</a></span>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1">1</a></span>
 <span class="normal"><a href="#__codelineno-50-2">2</a></span>
 <span class="normal"><a href="#__codelineno-50-3">3</a></span>
 <span class="normal"><a href="#__codelineno-50-4">4</a></span>
@@ -6998,67 +6998,59 @@
 <span class="normal"><a href="#__codelineno-50-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1"></a><span class="k">typedef</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">pstring</span><span class="p">;</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
 <a id="__codelineno-50-3" name="__codelineno-50-3"></a><span class="p">{</span>
-<a id="__codelineno-50-4" name="__codelineno-50-4"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">pstring</span><span class="w"> </span><span class="n">p1</span><span class="p">;</span><span class="w">    </span><span class="c1">// 编译失败，展开后为char* const p1，作为const修饰的变量为常量，只有一次赋值的机会，故需要初始化</span>
+<a id="__codelineno-50-4" name="__codelineno-50-4"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">pstring</span><span class="w"> </span><span class="n">p1</span><span class="p">;</span><span class="w">    </span><span class="c1">// 编译失败</span>
 <a id="__codelineno-50-5" name="__codelineno-50-5"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">pstring</span><span class="o">*</span><span class="w"> </span><span class="n">p2</span><span class="p">;</span><span class="w">   </span><span class="c1">// 编译通过</span>
 <a id="__codelineno-50-6" name="__codelineno-50-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-50-7" name="__codelineno-50-7"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+在上面的代码中，<code>p1</code>中因为const修饰的<code>p1</code>本身，所以展开后为<code>char* const p1</code>，作为<code>const</code>修饰的变量为常量，只有一次赋值的机会，故需要初始化，而<code>const pstring* p2</code>展开后为<code>const (char*)* p2</code>，所以本质<code>p2</code>就是一个指向<code>char*</code>的二级指针，其本身并不是常量，所以编译不会报错</p>
+<p>所以上面的代码可以理解为如下：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-51-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-51-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-51-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-51-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-51-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-51-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-51-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-51-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-51-10">10</a></span>
+<span class="normal"><a href="#__codelineno-51-11">11</a></span>
+<span class="normal"><a href="#__codelineno-51-12">12</a></span>
+<span class="normal"><a href="#__codelineno-51-13">13</a></span>
+<span class="normal"><a href="#__codelineno-51-14">14</a></span>
+<span class="normal"><a href="#__codelineno-51-15">15</a></span>
+<span class="normal"><a href="#__codelineno-51-16">16</a></span>
+<span class="normal"><a href="#__codelineno-51-17">17</a></span>
+<span class="normal"><a href="#__codelineno-51-18">18</a></span>
+<span class="normal"><a href="#__codelineno-51-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-51-2" name="__codelineno-51-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<a id="__codelineno-51-3" name="__codelineno-51-3"></a><span class="k">typedef</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">pstring</span><span class="p">;</span>
+<a id="__codelineno-51-4" name="__codelineno-51-4"></a>
+<a id="__codelineno-51-5" name="__codelineno-51-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-51-6" name="__codelineno-51-6"></a><span class="p">{</span>
+<a id="__codelineno-51-7" name="__codelineno-51-7"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-51-8" name="__codelineno-51-8"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="c1">// char* const</span>
+<a id="__codelineno-51-9" name="__codelineno-51-9"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">);</span>
+<a id="__codelineno-51-10" name="__codelineno-51-10"></a>
+<a id="__codelineno-51-11" name="__codelineno-51-11"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">pstring</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"> </span><span class="c1">// char* const</span>
+<a id="__codelineno-51-12" name="__codelineno-51-12"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">pstring</span><span class="o">*</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p</span><span class="p">;</span><span class="w"> </span><span class="c1">// const (char*)* p2</span>
+<a id="__codelineno-51-13" name="__codelineno-51-13"></a>
+<a id="__codelineno-51-14" name="__codelineno-51-14"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">p2</span><span class="p">));</span><span class="w"> </span><span class="c1">// p2指向的地址与i地址相同</span>
+<a id="__codelineno-51-15" name="__codelineno-51-15"></a><span class="w">    </span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">p2</span><span class="p">)</span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<a id="__codelineno-51-16" name="__codelineno-51-16"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">p2</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-51-17" name="__codelineno-51-17"></a>
+<a id="__codelineno-51-18" name="__codelineno-51-18"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-51-19" name="__codelineno-51-19"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
 <h3 id="auto_1"><code>auto</code>关键字的使用<a class="headerlink" href="#auto_1" title="Permanent link">&para;</a></h3>
 <h4 id="auto_2"><code>auto</code>关键字基本使用<a class="headerlink" href="#auto_2" title="Permanent link">&para;</a></h4>
 <p>在早期C/C++中<code>auto</code>的含义是：使用<code>auto</code>修饰的变量，是具有自动存储器的局部变量</p>
 <p>在C++11标准中，标准委员会赋予了<code>auto</code>全新的含义即：<code>auto</code>不再是一个存储类型指示符，而是作为一个新的类型指示符来指示编译器，<code>auto</code>声明的变量必须由编译器在编译时期推导而得</p>
 <p>使用<code>auto</code>关键字创建变量的语法如下：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1"></a><span class="k">auto</span><span class="w"> </span><span class="n">变量名</span><span class="p">;</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1"></a><span class="k">auto</span><span class="w"> </span><span class="n">变量名</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
 <p><code>auto</code>创建的变量有自动推导类型的特点，例如下面的代码中</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-52-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-52-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-52-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-52-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-52-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-52-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-52-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-52-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-52-10">10</a></span>
-<span class="normal"><a href="#__codelineno-52-11">11</a></span>
-<span class="normal"><a href="#__codelineno-52-12">12</a></span>
-<span class="normal"><a href="#__codelineno-52-13">13</a></span>
-<span class="normal"><a href="#__codelineno-52-14">14</a></span>
-<span class="normal"><a href="#__codelineno-52-15">15</a></span>
-<span class="normal"><a href="#__codelineno-52-16">16</a></span>
-<span class="normal"><a href="#__codelineno-52-17">17</a></span>
-<span class="normal"><a href="#__codelineno-52-18">18</a></span>
-<span class="normal"><a href="#__codelineno-52-19">19</a></span>
-<span class="normal"><a href="#__codelineno-52-20">20</a></span>
-<span class="normal"><a href="#__codelineno-52-21">21</a></span>
-<span class="normal"><a href="#__codelineno-52-22">22</a></span>
-<span class="normal"><a href="#__codelineno-52-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1"></a><span class="c1">//auto关键字</span>
-<a id="__codelineno-52-2" name="__codelineno-52-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<a id="__codelineno-52-3" name="__codelineno-52-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
-<a id="__codelineno-52-4" name="__codelineno-52-4"></a>
-<a id="__codelineno-52-5" name="__codelineno-52-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-52-6" name="__codelineno-52-6"></a><span class="p">{</span>
-<a id="__codelineno-52-7" name="__codelineno-52-7"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-52-8" name="__codelineno-52-8"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="c1">//b自动推导为int类型</span>
-<a id="__codelineno-52-9" name="__codelineno-52-9"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
-<a id="__codelineno-52-10" name="__codelineno-52-10"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="c1">//c自动推导为double类型</span>
-<a id="__codelineno-52-11" name="__codelineno-52-11"></a>
-<a id="__codelineno-52-12" name="__codelineno-52-12"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a变量的类型为：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="n">a</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-52-13" name="__codelineno-52-13"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;b变量的类型为：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="n">b</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-52-14" name="__codelineno-52-14"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;c变量的类型为：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="n">c</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-52-15" name="__codelineno-52-15"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;d变量的类型为：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="n">d</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-52-16" name="__codelineno-52-16"></a>
-<a id="__codelineno-52-17" name="__codelineno-52-17"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-52-18" name="__codelineno-52-18"></a><span class="p">}</span>
-<a id="__codelineno-52-19" name="__codelineno-52-19"></a><span class="n">输出结果</span><span class="err">：</span>
-<a id="__codelineno-52-20" name="__codelineno-52-20"></a><span class="n">a变量的类型为</span><span class="err">：</span><span class="kt">int</span>
-<a id="__codelineno-52-21" name="__codelineno-52-21"></a><span class="n">b变量的类型为</span><span class="err">：</span><span class="kt">int</span>
-<a id="__codelineno-52-22" name="__codelineno-52-22"></a><span class="n">c变量的类型为</span><span class="err">：</span><span class="kt">double</span>
-<a id="__codelineno-52-23" name="__codelineno-52-23"></a><span class="n">d变量的类型为</span><span class="err">：</span><span class="kt">double</span>
-</code></pre></div></td></tr></table></div>
-<p>在上面的代码中，创建了两个普通对象<code>a</code>和<code>c</code>，使用<code>auto</code>关键字创建了两个对象<code>b</code>和<code>d</code>，分别自动匹配了<code>a</code>和<code>c</code>的类型为<code>int</code>和<code>double</code>，使用<code>typeid.name()</code>查看变量类型</p>
-<p>需要注意的是，使用<code>auto</code>创建的变量一定要初始化，否则编译器无法推导该变量的类型从而报错</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-53-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-53-3"> 3</a></span>
@@ -7070,21 +7062,43 @@
 <span class="normal"><a href="#__codelineno-53-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-53-10">10</a></span>
 <span class="normal"><a href="#__codelineno-53-11">11</a></span>
-<span class="normal"><a href="#__codelineno-53-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1"></a><span class="c1">//auto关键字</span>
+<span class="normal"><a href="#__codelineno-53-12">12</a></span>
+<span class="normal"><a href="#__codelineno-53-13">13</a></span>
+<span class="normal"><a href="#__codelineno-53-14">14</a></span>
+<span class="normal"><a href="#__codelineno-53-15">15</a></span>
+<span class="normal"><a href="#__codelineno-53-16">16</a></span>
+<span class="normal"><a href="#__codelineno-53-17">17</a></span>
+<span class="normal"><a href="#__codelineno-53-18">18</a></span>
+<span class="normal"><a href="#__codelineno-53-19">19</a></span>
+<span class="normal"><a href="#__codelineno-53-20">20</a></span>
+<span class="normal"><a href="#__codelineno-53-21">21</a></span>
+<span class="normal"><a href="#__codelineno-53-22">22</a></span>
+<span class="normal"><a href="#__codelineno-53-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1"></a><span class="c1">//auto关键字</span>
 <a id="__codelineno-53-2" name="__codelineno-53-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <a id="__codelineno-53-3" name="__codelineno-53-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 <a id="__codelineno-53-4" name="__codelineno-53-4"></a>
 <a id="__codelineno-53-5" name="__codelineno-53-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
 <a id="__codelineno-53-6" name="__codelineno-53-6"></a><span class="p">{</span>
-<a id="__codelineno-53-7" name="__codelineno-53-7"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="c1">// 报错</span>
-<a id="__codelineno-53-8" name="__codelineno-53-8"></a>
-<a id="__codelineno-53-9" name="__codelineno-53-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-53-10" name="__codelineno-53-10"></a><span class="p">}</span>
-<a id="__codelineno-53-11" name="__codelineno-53-11"></a><span class="n">报错信息</span><span class="err">：</span>
-<a id="__codelineno-53-12" name="__codelineno-53-12"></a><span class="err">“</span><span class="n">e</span><span class="err">”</span><span class="o">:</span><span class="w"> </span><span class="n">类型包含</span><span class="err">“</span><span class="k">auto</span><span class="err">”</span><span class="n">的符号必须具有初始值设定项</span>
+<a id="__codelineno-53-7" name="__codelineno-53-7"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-53-8" name="__codelineno-53-8"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="c1">//b自动推导为int类型</span>
+<a id="__codelineno-53-9" name="__codelineno-53-9"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<a id="__codelineno-53-10" name="__codelineno-53-10"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="c1">//c自动推导为double类型</span>
+<a id="__codelineno-53-11" name="__codelineno-53-11"></a>
+<a id="__codelineno-53-12" name="__codelineno-53-12"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a变量的类型为：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="n">a</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-53-13" name="__codelineno-53-13"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;b变量的类型为：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="n">b</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-53-14" name="__codelineno-53-14"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;c变量的类型为：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="n">c</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-53-15" name="__codelineno-53-15"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;d变量的类型为：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="n">d</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-53-16" name="__codelineno-53-16"></a>
+<a id="__codelineno-53-17" name="__codelineno-53-17"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-53-18" name="__codelineno-53-18"></a><span class="p">}</span>
+<a id="__codelineno-53-19" name="__codelineno-53-19"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-53-20" name="__codelineno-53-20"></a><span class="n">a变量的类型为</span><span class="err">：</span><span class="kt">int</span>
+<a id="__codelineno-53-21" name="__codelineno-53-21"></a><span class="n">b变量的类型为</span><span class="err">：</span><span class="kt">int</span>
+<a id="__codelineno-53-22" name="__codelineno-53-22"></a><span class="n">c变量的类型为</span><span class="err">：</span><span class="kt">double</span>
+<a id="__codelineno-53-23" name="__codelineno-53-23"></a><span class="n">d变量的类型为</span><span class="err">：</span><span class="kt">double</span>
 </code></pre></div></td></tr></table></div>
-<p>所以，<code>auto</code>并非是一种“类型”的声明，而是一个类型声明时的“占位符”，编译器在编译期会将<code>auto</code>替换为变量实际的类型</p>
-<p>使用<code>auto</code>关键字可以同时创建多个变量，但是必须保证一个<code>auto</code>关键字创建的多个变量匹配一种类型，不可以<code>auto</code>匹配多个类型</p>
+<p>在上面的代码中，创建了两个普通对象<code>a</code>和<code>c</code>，使用<code>auto</code>关键字创建了两个对象<code>b</code>和<code>d</code>，分别自动匹配了<code>a</code>和<code>c</code>的类型为<code>int</code>和<code>double</code>，使用<code>typeid.name()</code>查看变量类型</p>
+<p>需要注意的是，使用<code>auto</code>创建的变量一定要初始化，否则编译器无法推导该变量的类型从而报错</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-54-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-54-3"> 3</a></span>
@@ -7096,21 +7110,21 @@
 <span class="normal"><a href="#__codelineno-54-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-54-10">10</a></span>
 <span class="normal"><a href="#__codelineno-54-11">11</a></span>
-<span class="normal"><a href="#__codelineno-54-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<a id="__codelineno-54-2" name="__codelineno-54-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
-<a id="__codelineno-54-3" name="__codelineno-54-3"></a>
-<a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-54-5" name="__codelineno-54-5"></a><span class="p">{</span>
-<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="c1">//所有变量匹配为int类型</span>
-<a id="__codelineno-54-7" name="__codelineno-54-7"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="c1">//不可以同时匹配多个类型</span>
+<span class="normal"><a href="#__codelineno-54-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="c1">//auto关键字</span>
+<a id="__codelineno-54-2" name="__codelineno-54-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<a id="__codelineno-54-4" name="__codelineno-54-4"></a>
+<a id="__codelineno-54-5" name="__codelineno-54-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="p">{</span>
+<a id="__codelineno-54-7" name="__codelineno-54-7"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="c1">// 报错</span>
 <a id="__codelineno-54-8" name="__codelineno-54-8"></a>
 <a id="__codelineno-54-9" name="__codelineno-54-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-54-10" name="__codelineno-54-10"></a><span class="p">}</span>
 <a id="__codelineno-54-11" name="__codelineno-54-11"></a><span class="n">报错信息</span><span class="err">：</span>
-<a id="__codelineno-54-12" name="__codelineno-54-12"></a><span class="n">在声明符列表中</span><span class="err">，“</span><span class="k">auto</span><span class="err">”</span><span class="n">必须始终推导为同一类型</span>
+<a id="__codelineno-54-12" name="__codelineno-54-12"></a><span class="err">“</span><span class="n">e</span><span class="err">”</span><span class="o">:</span><span class="w"> </span><span class="n">类型包含</span><span class="err">“</span><span class="k">auto</span><span class="err">”</span><span class="n">的符号必须具有初始值设定项</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="auto_3"><code>auto</code>关键字配合指针和引用<a class="headerlink" href="#auto_3" title="Permanent link">&para;</a></h4>
-<p><code>auto</code>关键字创建的变量也可以自动推导为指针和引用类型，也可以直接将<code>auto</code>关键字创建的变量指定为指针和引用类型，用<code>auto</code>声明指针类型时，用<code>auto</code>和<code>auto*</code>没有任何区别，但用<code>auto</code>声明引用类型时则必须加<code>&amp;</code>，如下</p>
+<p>所以，<code>auto</code>并非是一种“类型”的声明，而是一个类型声明时的“占位符”，编译器在编译期会将<code>auto</code>替换为变量实际的类型</p>
+<p>使用<code>auto</code>关键字可以同时创建多个变量，但是必须保证一个<code>auto</code>关键字创建的多个变量匹配一种类型，不可以<code>auto</code>匹配多个类型</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-55-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-55-3"> 3</a></span>
@@ -7122,33 +7136,21 @@
 <span class="normal"><a href="#__codelineno-55-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-55-10">10</a></span>
 <span class="normal"><a href="#__codelineno-55-11">11</a></span>
-<span class="normal"><a href="#__codelineno-55-12">12</a></span>
-<span class="normal"><a href="#__codelineno-55-13">13</a></span>
-<span class="normal"><a href="#__codelineno-55-14">14</a></span>
-<span class="normal"><a href="#__codelineno-55-15">15</a></span>
-<span class="normal"><a href="#__codelineno-55-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1"></a><span class="c1">//auto关键字配合指针和引用</span>
-<a id="__codelineno-55-2" name="__codelineno-55-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<a id="__codelineno-55-3" name="__codelineno-55-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
-<a id="__codelineno-55-4" name="__codelineno-55-4"></a>
-<a id="__codelineno-55-5" name="__codelineno-55-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-55-6" name="__codelineno-55-6"></a><span class="p">{</span>
-<a id="__codelineno-55-7" name="__codelineno-55-7"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-55-8" name="__codelineno-55-8"></a><span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
-<a id="__codelineno-55-9" name="__codelineno-55-9"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="c1">//自动推导为int*类型</span>
-<a id="__codelineno-55-10" name="__codelineno-55-10"></a><span class="w">    </span><span class="k">auto</span><span class="o">*</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="c1">//指定为int*类型</span>
-<a id="__codelineno-55-11" name="__codelineno-55-11"></a><span class="w">    </span><span class="c1">//auto* p3 = a;//不可以推导</span>
-<a id="__codelineno-55-12" name="__codelineno-55-12"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="c1">//自动推导为int类型</span>
-<a id="__codelineno-55-13" name="__codelineno-55-13"></a><span class="w">    </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="c1">//指定为引用类型</span>
-<a id="__codelineno-55-14" name="__codelineno-55-14"></a>
-<a id="__codelineno-55-15" name="__codelineno-55-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-55-16" name="__codelineno-55-16"></a><span class="p">}</span>
+<span class="normal"><a href="#__codelineno-55-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-55-2" name="__codelineno-55-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<a id="__codelineno-55-3" name="__codelineno-55-3"></a>
+<a id="__codelineno-55-4" name="__codelineno-55-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-55-5" name="__codelineno-55-5"></a><span class="p">{</span>
+<a id="__codelineno-55-6" name="__codelineno-55-6"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="c1">//所有变量匹配为int类型</span>
+<a id="__codelineno-55-7" name="__codelineno-55-7"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="c1">//不可以同时匹配多个类型</span>
+<a id="__codelineno-55-8" name="__codelineno-55-8"></a>
+<a id="__codelineno-55-9" name="__codelineno-55-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-55-10" name="__codelineno-55-10"></a><span class="p">}</span>
+<a id="__codelineno-55-11" name="__codelineno-55-11"></a><span class="n">报错信息</span><span class="err">：</span>
+<a id="__codelineno-55-12" name="__codelineno-55-12"></a><span class="n">在声明符列表中</span><span class="err">，“</span><span class="k">auto</span><span class="err">”</span><span class="n">必须始终推导为同一类型</span>
 </code></pre></div></td></tr></table></div>
-<p>编译器指示如下：</p>
-<p><a class="glightbox" href="images\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image.png"></a></p>
-<h3 id="auto_4"><code>auto</code>关键字不可以推导的场景<a class="headerlink" href="#auto_4" title="Permanent link">&para;</a></h3>
-<ol>
-<li><code>auto</code>关键字创建的变量不可以作为函数形参</li>
-</ol>
+<h4 id="auto_3"><code>auto</code>关键字配合指针和引用<a class="headerlink" href="#auto_3" title="Permanent link">&para;</a></h4>
+<p><code>auto</code>关键字创建的变量也可以自动推导为指针和引用类型，也可以直接将<code>auto</code>关键字创建的变量指定为指针和引用类型，用<code>auto</code>声明指针类型时，用<code>auto</code>和<code>auto*</code>没有任何区别，但用<code>auto</code>声明引用类型时则必须加<code>&amp;</code>，如下</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-56-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-56-3"> 3</a></span>
@@ -7163,24 +7165,29 @@
 <span class="normal"><a href="#__codelineno-56-12">12</a></span>
 <span class="normal"><a href="#__codelineno-56-13">13</a></span>
 <span class="normal"><a href="#__codelineno-56-14">14</a></span>
-<span class="normal"><a href="#__codelineno-56-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-56-2" name="__codelineno-56-2"></a><span class="p">{</span>
-<a id="__codelineno-56-3" name="__codelineno-56-3"></a>
-<a id="__codelineno-56-4" name="__codelineno-56-4"></a><span class="p">}</span>
-<a id="__codelineno-56-5" name="__codelineno-56-5"></a>
-<a id="__codelineno-56-6" name="__codelineno-56-6"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
-<a id="__codelineno-56-8" name="__codelineno-56-8"></a>
-<a id="__codelineno-56-9" name="__codelineno-56-9"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="p">{</span>
-<a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="p">}</span>
-<a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="n">报错信息</span><span class="err">：</span>
-<a id="__codelineno-56-15" name="__codelineno-56-15"></a><span class="n">参数不能为包含</span><span class="err">“</span><span class="k">auto</span><span class="err">”</span><span class="n">的类型</span>
+<span class="normal"><a href="#__codelineno-56-15">15</a></span>
+<span class="normal"><a href="#__codelineno-56-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1"></a><span class="c1">//auto关键字配合指针和引用</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-56-3" name="__codelineno-56-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<a id="__codelineno-56-4" name="__codelineno-56-4"></a>
+<a id="__codelineno-56-5" name="__codelineno-56-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-56-6" name="__codelineno-56-6"></a><span class="p">{</span>
+<a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-56-9" name="__codelineno-56-9"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="c1">//自动推导为int*类型</span>
+<a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="w">    </span><span class="k">auto</span><span class="o">*</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="c1">//指定为int*类型</span>
+<a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="w">    </span><span class="c1">//auto* p3 = a;//不可以推导</span>
+<a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="c1">//自动推导为int类型</span>
+<a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="w">    </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="c1">//指定为引用类型</span>
+<a id="__codelineno-56-14" name="__codelineno-56-14"></a>
+<a id="__codelineno-56-15" name="__codelineno-56-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-56-16" name="__codelineno-56-16"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+<p>编译器指示如下：</p>
+<p><a class="glightbox" href="images\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image.png"></a></p>
+<h3 id="auto_4"><code>auto</code>关键字不可以推导的场景<a class="headerlink" href="#auto_4" title="Permanent link">&para;</a></h3>
 <ol>
-<li><code>auto</code>不能直接用于声明数组</li>
+<li><code>auto</code>关键字创建的变量不可以作为函数形参</li>
 </ol>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-57-2"> 2</a></span>
@@ -7193,20 +7200,28 @@
 <span class="normal"><a href="#__codelineno-57-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-57-10">10</a></span>
 <span class="normal"><a href="#__codelineno-57-11">11</a></span>
-<span class="normal"><a href="#__codelineno-57-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<a id="__codelineno-57-2" name="__codelineno-57-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="normal"><a href="#__codelineno-57-12">12</a></span>
+<span class="normal"><a href="#__codelineno-57-13">13</a></span>
+<span class="normal"><a href="#__codelineno-57-14">14</a></span>
+<span class="normal"><a href="#__codelineno-57-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-57-2" name="__codelineno-57-2"></a><span class="p">{</span>
 <a id="__codelineno-57-3" name="__codelineno-57-3"></a>
-<a id="__codelineno-57-4" name="__codelineno-57-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-57-5" name="__codelineno-57-5"></a><span class="p">{</span>
-<a id="__codelineno-57-6" name="__codelineno-57-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
-<a id="__codelineno-57-7" name="__codelineno-57-7"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">arr1</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w"> </span><span class="p">};</span><span class="c1">//不可以直接用来创建数组</span>
+<a id="__codelineno-57-4" name="__codelineno-57-4"></a><span class="p">}</span>
+<a id="__codelineno-57-5" name="__codelineno-57-5"></a>
+<a id="__codelineno-57-6" name="__codelineno-57-6"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-57-7" name="__codelineno-57-7"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 <a id="__codelineno-57-8" name="__codelineno-57-8"></a>
-<a id="__codelineno-57-9" name="__codelineno-57-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-57-10" name="__codelineno-57-10"></a><span class="p">}</span>
-<a id="__codelineno-57-11" name="__codelineno-57-11"></a><span class="n">报错信息</span><span class="err">：</span>
-<a id="__codelineno-57-12" name="__codelineno-57-12"></a><span class="err">“</span><span class="k">auto</span><span class="err">”</span><span class="n">类型不能出现在顶级数组类型中</span>
+<a id="__codelineno-57-9" name="__codelineno-57-9"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-57-10" name="__codelineno-57-10"></a><span class="p">{</span>
+<a id="__codelineno-57-11" name="__codelineno-57-11"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-57-12" name="__codelineno-57-12"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-57-13" name="__codelineno-57-13"></a><span class="p">}</span>
+<a id="__codelineno-57-14" name="__codelineno-57-14"></a><span class="n">报错信息</span><span class="err">：</span>
+<a id="__codelineno-57-15" name="__codelineno-57-15"></a><span class="n">参数不能为包含</span><span class="err">“</span><span class="k">auto</span><span class="err">”</span><span class="n">的类型</span>
 </code></pre></div></td></tr></table></div>
-<p>但是可以获取到数组的地址</p>
+<ol>
+<li><code>auto</code>不能直接用于声明数组</li>
+</ol>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-58-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-58-3"> 3</a></span>
@@ -7218,42 +7233,20 @@
 <span class="normal"><a href="#__codelineno-58-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-58-10">10</a></span>
 <span class="normal"><a href="#__codelineno-58-11">11</a></span>
-<span class="normal"><a href="#__codelineno-58-12">12</a></span>
-<span class="normal"><a href="#__codelineno-58-13">13</a></span>
-<span class="normal"><a href="#__codelineno-58-14">14</a></span>
-<span class="normal"><a href="#__codelineno-58-15">15</a></span>
-<span class="normal"><a href="#__codelineno-58-16">16</a></span>
-<span class="normal"><a href="#__codelineno-58-17">17</a></span>
-<span class="normal"><a href="#__codelineno-58-18">18</a></span>
-<span class="normal"><a href="#__codelineno-58-19">19</a></span>
-<span class="normal"><a href="#__codelineno-58-20">20</a></span>
-<span class="normal"><a href="#__codelineno-58-21">21</a></span>
-<span class="normal"><a href="#__codelineno-58-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="normal"><a href="#__codelineno-58-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <a id="__codelineno-58-2" name="__codelineno-58-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 <a id="__codelineno-58-3" name="__codelineno-58-3"></a>
 <a id="__codelineno-58-4" name="__codelineno-58-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
 <a id="__codelineno-58-5" name="__codelineno-58-5"></a><span class="p">{</span>
 <a id="__codelineno-58-6" name="__codelineno-58-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
-<a id="__codelineno-58-7" name="__codelineno-58-7"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">arr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">;</span><span class="c1">//可以将已经创建的数组给auto创建的变量，自动匹配为int*</span>
-<a id="__codelineno-58-8" name="__codelineno-58-8"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;arr1：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="n">arr1</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-58-9" name="__codelineno-58-9"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<a id="__codelineno-58-10" name="__codelineno-58-10"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-58-11" name="__codelineno-58-11"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;arr1[i]：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-58-12" name="__codelineno-58-12"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-58-13" name="__codelineno-58-13"></a>
-<a id="__codelineno-58-14" name="__codelineno-58-14"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-58-15" name="__codelineno-58-15"></a><span class="p">}</span>
-<a id="__codelineno-58-16" name="__codelineno-58-16"></a><span class="n">输出结果</span><span class="err">：</span>
-<a id="__codelineno-58-17" name="__codelineno-58-17"></a><span class="n">arr1</span><span class="err">：</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">__ptr64</span>
-<a id="__codelineno-58-18" name="__codelineno-58-18"></a><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">：</span><span class="mi">1</span>
-<a id="__codelineno-58-19" name="__codelineno-58-19"></a><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">：</span><span class="mi">2</span>
-<a id="__codelineno-58-20" name="__codelineno-58-20"></a><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">：</span><span class="mi">3</span>
-<a id="__codelineno-58-21" name="__codelineno-58-21"></a><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">：</span><span class="mi">4</span>
-<a id="__codelineno-58-22" name="__codelineno-58-22"></a><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">：</span><span class="mi">5</span>
+<a id="__codelineno-58-7" name="__codelineno-58-7"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">arr1</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w"> </span><span class="p">};</span><span class="c1">//不可以直接用来创建数组</span>
+<a id="__codelineno-58-8" name="__codelineno-58-8"></a>
+<a id="__codelineno-58-9" name="__codelineno-58-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-58-10" name="__codelineno-58-10"></a><span class="p">}</span>
+<a id="__codelineno-58-11" name="__codelineno-58-11"></a><span class="n">报错信息</span><span class="err">：</span>
+<a id="__codelineno-58-12" name="__codelineno-58-12"></a><span class="err">“</span><span class="k">auto</span><span class="err">”</span><span class="n">类型不能出现在顶级数组类型中</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="forc11">基于范围的<code>for</code>循环（C++11标准支持）<a class="headerlink" href="#forc11" title="Permanent link">&para;</a></h2>
-<h3 id="for">基于范围的<code>for</code>循环基础使用<a class="headerlink" href="#for" title="Permanent link">&para;</a></h3>
-<p>在C++98中需要按照常规方式进行数组的遍历，例如</p>
+<p>但是可以获取到数组的地址</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-59-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-59-3"> 3</a></span>
@@ -7268,23 +7261,39 @@
 <span class="normal"><a href="#__codelineno-59-12">12</a></span>
 <span class="normal"><a href="#__codelineno-59-13">13</a></span>
 <span class="normal"><a href="#__codelineno-59-14">14</a></span>
-<span class="normal"><a href="#__codelineno-59-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="normal"><a href="#__codelineno-59-15">15</a></span>
+<span class="normal"><a href="#__codelineno-59-16">16</a></span>
+<span class="normal"><a href="#__codelineno-59-17">17</a></span>
+<span class="normal"><a href="#__codelineno-59-18">18</a></span>
+<span class="normal"><a href="#__codelineno-59-19">19</a></span>
+<span class="normal"><a href="#__codelineno-59-20">20</a></span>
+<span class="normal"><a href="#__codelineno-59-21">21</a></span>
+<span class="normal"><a href="#__codelineno-59-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <a id="__codelineno-59-2" name="__codelineno-59-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 <a id="__codelineno-59-3" name="__codelineno-59-3"></a>
 <a id="__codelineno-59-4" name="__codelineno-59-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
 <a id="__codelineno-59-5" name="__codelineno-59-5"></a><span class="p">{</span>
 <a id="__codelineno-59-6" name="__codelineno-59-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
-<a id="__codelineno-59-7" name="__codelineno-59-7"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<a id="__codelineno-59-8" name="__codelineno-59-8"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-59-9" name="__codelineno-59-9"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
-<a id="__codelineno-59-10" name="__codelineno-59-10"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-59-11" name="__codelineno-59-11"></a>
-<a id="__codelineno-59-12" name="__codelineno-59-12"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-59-13" name="__codelineno-59-13"></a><span class="p">}</span>
-<a id="__codelineno-59-14" name="__codelineno-59-14"></a><span class="n">输出结果</span><span class="err">：</span>
-<a id="__codelineno-59-15" name="__codelineno-59-15"></a><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span>
+<a id="__codelineno-59-7" name="__codelineno-59-7"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">arr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">;</span><span class="c1">//可以将已经创建的数组给auto创建的变量，自动匹配为int*</span>
+<a id="__codelineno-59-8" name="__codelineno-59-8"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;arr1：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="n">arr1</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-59-9" name="__codelineno-59-9"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-59-10" name="__codelineno-59-10"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-59-11" name="__codelineno-59-11"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;arr1[i]：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-59-12" name="__codelineno-59-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-59-13" name="__codelineno-59-13"></a>
+<a id="__codelineno-59-14" name="__codelineno-59-14"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-59-15" name="__codelineno-59-15"></a><span class="p">}</span>
+<a id="__codelineno-59-16" name="__codelineno-59-16"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-59-17" name="__codelineno-59-17"></a><span class="n">arr1</span><span class="err">：</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">__ptr64</span>
+<a id="__codelineno-59-18" name="__codelineno-59-18"></a><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">：</span><span class="mi">1</span>
+<a id="__codelineno-59-19" name="__codelineno-59-19"></a><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">：</span><span class="mi">2</span>
+<a id="__codelineno-59-20" name="__codelineno-59-20"></a><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">：</span><span class="mi">3</span>
+<a id="__codelineno-59-21" name="__codelineno-59-21"></a><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">：</span><span class="mi">4</span>
+<a id="__codelineno-59-22" name="__codelineno-59-22"></a><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">：</span><span class="mi">5</span>
 </code></pre></div></td></tr></table></div>
-<p>但是在C++11中可以按照下面的方式进行遍历</p>
+<h2 id="forc11">基于范围的<code>for</code>循环（C++11标准支持）<a class="headerlink" href="#forc11" title="Permanent link">&para;</a></h2>
+<h3 id="for">基于范围的<code>for</code>循环基础使用<a class="headerlink" href="#for" title="Permanent link">&para;</a></h3>
+<p>在C++98中需要按照常规方式进行数组的遍历，例如</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-60-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-60-3"> 3</a></span>
@@ -7298,23 +7307,24 @@
 <span class="normal"><a href="#__codelineno-60-11">11</a></span>
 <span class="normal"><a href="#__codelineno-60-12">12</a></span>
 <span class="normal"><a href="#__codelineno-60-13">13</a></span>
-<span class="normal"><a href="#__codelineno-60-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="normal"><a href="#__codelineno-60-14">14</a></span>
+<span class="normal"><a href="#__codelineno-60-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 <a id="__codelineno-60-3" name="__codelineno-60-3"></a>
 <a id="__codelineno-60-4" name="__codelineno-60-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
 <a id="__codelineno-60-5" name="__codelineno-60-5"></a><span class="p">{</span>
 <a id="__codelineno-60-6" name="__codelineno-60-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
-<a id="__codelineno-60-7" name="__codelineno-60-7"></a>
-<a id="__codelineno-60-8" name="__codelineno-60-8"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
-<a id="__codelineno-60-9" name="__codelineno-60-9"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-60-10" name="__codelineno-60-10"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
-<a id="__codelineno-60-11" name="__codelineno-60-11"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-60-12" name="__codelineno-60-12"></a>
-<a id="__codelineno-60-13" name="__codelineno-60-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-60-14" name="__codelineno-60-14"></a><span class="p">}</span>
+<a id="__codelineno-60-7" name="__codelineno-60-7"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-60-8" name="__codelineno-60-8"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-60-9" name="__codelineno-60-9"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<a id="__codelineno-60-10" name="__codelineno-60-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-60-11" name="__codelineno-60-11"></a>
+<a id="__codelineno-60-12" name="__codelineno-60-12"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-60-13" name="__codelineno-60-13"></a><span class="p">}</span>
+<a id="__codelineno-60-14" name="__codelineno-60-14"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-60-15" name="__codelineno-60-15"></a><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span>
 </code></pre></div></td></tr></table></div>
-<p>在上面的<code>for</code>循环中，创建了一个<code>num</code>变量，将数组中的元素给<code>num</code>变量，再打印<code>num</code>变量</p>
-<p>鉴于上面的过程说明，如果想用上面的方式修改数组中的元素则不会成功</p>
+<p>但是在C++11中可以按照下面的方式进行遍历</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-61-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-61-3"> 3</a></span>
@@ -7328,16 +7338,7 @@
 <span class="normal"><a href="#__codelineno-61-11">11</a></span>
 <span class="normal"><a href="#__codelineno-61-12">12</a></span>
 <span class="normal"><a href="#__codelineno-61-13">13</a></span>
-<span class="normal"><a href="#__codelineno-61-14">14</a></span>
-<span class="normal"><a href="#__codelineno-61-15">15</a></span>
-<span class="normal"><a href="#__codelineno-61-16">16</a></span>
-<span class="normal"><a href="#__codelineno-61-17">17</a></span>
-<span class="normal"><a href="#__codelineno-61-18">18</a></span>
-<span class="normal"><a href="#__codelineno-61-19">19</a></span>
-<span class="normal"><a href="#__codelineno-61-20">20</a></span>
-<span class="normal"><a href="#__codelineno-61-21">21</a></span>
-<span class="normal"><a href="#__codelineno-61-22">22</a></span>
-<span class="normal"><a href="#__codelineno-61-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="normal"><a href="#__codelineno-61-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <a id="__codelineno-61-2" name="__codelineno-61-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 <a id="__codelineno-61-3" name="__codelineno-61-3"></a>
 <a id="__codelineno-61-4" name="__codelineno-61-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
@@ -7346,22 +7347,14 @@
 <a id="__codelineno-61-7" name="__codelineno-61-7"></a>
 <a id="__codelineno-61-8" name="__codelineno-61-8"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
 <a id="__codelineno-61-9" name="__codelineno-61-9"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-61-10" name="__codelineno-61-10"></a><span class="w">        </span><span class="n">num</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<a id="__codelineno-61-11" name="__codelineno-61-11"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
-<a id="__codelineno-61-12" name="__codelineno-61-12"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-61-13" name="__codelineno-61-13"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-61-14" name="__codelineno-61-14"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
-<a id="__codelineno-61-15" name="__codelineno-61-15"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-61-16" name="__codelineno-61-16"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
-<a id="__codelineno-61-17" name="__codelineno-61-17"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-61-18" name="__codelineno-61-18"></a>
-<a id="__codelineno-61-19" name="__codelineno-61-19"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-61-20" name="__codelineno-61-20"></a><span class="p">}</span>
-<a id="__codelineno-61-21" name="__codelineno-61-21"></a><span class="n">输出结果</span><span class="err">：</span>
-<a id="__codelineno-61-22" name="__codelineno-61-22"></a><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">10</span>
-<a id="__codelineno-61-23" name="__codelineno-61-23"></a><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span>
+<a id="__codelineno-61-10" name="__codelineno-61-10"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<a id="__codelineno-61-11" name="__codelineno-61-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-61-12" name="__codelineno-61-12"></a>
+<a id="__codelineno-61-13" name="__codelineno-61-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-61-14" name="__codelineno-61-14"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<p>此时可以配合引用进行原数组内容的修改</p>
+<p>在上面的<code>for</code>循环中，创建了一个<code>num</code>变量，将数组中的元素给<code>num</code>变量，再打印<code>num</code>变量</p>
+<p>鉴于上面的过程说明，如果想用上面的方式修改数组中的元素则不会成功</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-62-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-62-3"> 3</a></span>
@@ -7391,7 +7384,7 @@
 <a id="__codelineno-62-5" name="__codelineno-62-5"></a><span class="p">{</span>
 <a id="__codelineno-62-6" name="__codelineno-62-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
 <a id="__codelineno-62-7" name="__codelineno-62-7"></a>
-<a id="__codelineno-62-8" name="__codelineno-62-8"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
+<a id="__codelineno-62-8" name="__codelineno-62-8"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
 <a id="__codelineno-62-9" name="__codelineno-62-9"></a><span class="w">    </span><span class="p">{</span>
 <a id="__codelineno-62-10" name="__codelineno-62-10"></a><span class="w">        </span><span class="n">num</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <a id="__codelineno-62-11" name="__codelineno-62-11"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
@@ -7406,13 +7399,9 @@
 <a id="__codelineno-62-20" name="__codelineno-62-20"></a><span class="p">}</span>
 <a id="__codelineno-62-21" name="__codelineno-62-21"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-62-22" name="__codelineno-62-22"></a><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">10</span>
-<a id="__codelineno-62-23" name="__codelineno-62-23"></a><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">10</span>
+<a id="__codelineno-62-23" name="__codelineno-62-23"></a><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span>
 </code></pre></div></td></tr></table></div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>与普通循环类似，可以用<code>continue</code>来结束本次循环，也可以用<code>break</code>来跳出整个循环</p>
-</div>
-<p>基于范围的<code>for</code>循环也可以使用<code>auto</code>创建循环变量</p>
+<p>此时可以配合引用进行原数组内容的修改</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-63-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-63-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-63-3"> 3</a></span>
@@ -7442,25 +7431,28 @@
 <a id="__codelineno-63-5" name="__codelineno-63-5"></a><span class="p">{</span>
 <a id="__codelineno-63-6" name="__codelineno-63-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
 <a id="__codelineno-63-7" name="__codelineno-63-7"></a>
-<a id="__codelineno-63-8" name="__codelineno-63-8"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
+<a id="__codelineno-63-8" name="__codelineno-63-8"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
 <a id="__codelineno-63-9" name="__codelineno-63-9"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-63-10" name="__codelineno-63-10"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
-<a id="__codelineno-63-11" name="__codelineno-63-11"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-63-12" name="__codelineno-63-12"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-63-13" name="__codelineno-63-13"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
-<a id="__codelineno-63-14" name="__codelineno-63-14"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-63-15" name="__codelineno-63-15"></a><span class="w">        </span><span class="n">num</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<a id="__codelineno-63-10" name="__codelineno-63-10"></a><span class="w">        </span><span class="n">num</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<a id="__codelineno-63-11" name="__codelineno-63-11"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<a id="__codelineno-63-12" name="__codelineno-63-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-63-13" name="__codelineno-63-13"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-63-14" name="__codelineno-63-14"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
+<a id="__codelineno-63-15" name="__codelineno-63-15"></a><span class="w">    </span><span class="p">{</span>
 <a id="__codelineno-63-16" name="__codelineno-63-16"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
 <a id="__codelineno-63-17" name="__codelineno-63-17"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-63-18" name="__codelineno-63-18"></a>
 <a id="__codelineno-63-19" name="__codelineno-63-19"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-63-20" name="__codelineno-63-20"></a><span class="p">}</span>
 <a id="__codelineno-63-21" name="__codelineno-63-21"></a><span class="n">输出结果</span><span class="err">：</span>
-<a id="__codelineno-63-22" name="__codelineno-63-22"></a><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span>
+<a id="__codelineno-63-22" name="__codelineno-63-22"></a><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">10</span>
 <a id="__codelineno-63-23" name="__codelineno-63-23"></a><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">10</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="for_1">基于范围的<code>for</code>循环使用条件<a class="headerlink" href="#for_1" title="Permanent link">&para;</a></h3>
-<p><code>for</code>循环迭代的范围必须是确定的</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>与普通循环类似，可以用<code>continue</code>来结束本次循环，也可以用<code>break</code>来跳出整个循环</p>
+</div>
+<p>基于范围的<code>for</code>循环也可以使用<code>auto</code>创建循环变量</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-64-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-64-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-64-3"> 3</a></span>
@@ -7476,100 +7468,103 @@
 <span class="normal"><a href="#__codelineno-64-13">13</a></span>
 <span class="normal"><a href="#__codelineno-64-14">14</a></span>
 <span class="normal"><a href="#__codelineno-64-15">15</a></span>
-<span class="normal"><a href="#__codelineno-64-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="normal"><a href="#__codelineno-64-16">16</a></span>
+<span class="normal"><a href="#__codelineno-64-17">17</a></span>
+<span class="normal"><a href="#__codelineno-64-18">18</a></span>
+<span class="normal"><a href="#__codelineno-64-19">19</a></span>
+<span class="normal"><a href="#__codelineno-64-20">20</a></span>
+<span class="normal"><a href="#__codelineno-64-21">21</a></span>
+<span class="normal"><a href="#__codelineno-64-22">22</a></span>
+<span class="normal"><a href="#__codelineno-64-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <a id="__codelineno-64-2" name="__codelineno-64-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
-<a id="__codelineno-64-3" name="__codelineno-64-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
-<a id="__codelineno-64-4" name="__codelineno-64-4"></a><span class="p">{</span>
-<a id="__codelineno-64-5" name="__codelineno-64-5"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
-<a id="__codelineno-64-6" name="__codelineno-64-6"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-64-7" name="__codelineno-64-7"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="c1">//不可以遍历（数组名不再是整个数组，而是第一个元素的地址指针），因为无法确定范围，数组在传参时只会传递第一个元素的地址</span>
-<a id="__codelineno-64-8" name="__codelineno-64-8"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-64-9" name="__codelineno-64-9"></a><span class="p">}</span>
-<a id="__codelineno-64-10" name="__codelineno-64-10"></a>
-<a id="__codelineno-64-11" name="__codelineno-64-11"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-64-12" name="__codelineno-64-12"></a><span class="p">{</span>
-<a id="__codelineno-64-13" name="__codelineno-64-13"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
-<a id="__codelineno-64-14" name="__codelineno-64-14"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span>
-<a id="__codelineno-64-15" name="__codelineno-64-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-64-16" name="__codelineno-64-16"></a><span class="p">}</span>
+<a id="__codelineno-64-3" name="__codelineno-64-3"></a>
+<a id="__codelineno-64-4" name="__codelineno-64-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-64-5" name="__codelineno-64-5"></a><span class="p">{</span>
+<a id="__codelineno-64-6" name="__codelineno-64-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-64-7" name="__codelineno-64-7"></a>
+<a id="__codelineno-64-8" name="__codelineno-64-8"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
+<a id="__codelineno-64-9" name="__codelineno-64-9"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-64-10" name="__codelineno-64-10"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<a id="__codelineno-64-11" name="__codelineno-64-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-64-12" name="__codelineno-64-12"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-64-13" name="__codelineno-64-13"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
+<a id="__codelineno-64-14" name="__codelineno-64-14"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-64-15" name="__codelineno-64-15"></a><span class="w">        </span><span class="n">num</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<a id="__codelineno-64-16" name="__codelineno-64-16"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<a id="__codelineno-64-17" name="__codelineno-64-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-64-18" name="__codelineno-64-18"></a>
+<a id="__codelineno-64-19" name="__codelineno-64-19"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-64-20" name="__codelineno-64-20"></a><span class="p">}</span>
+<a id="__codelineno-64-21" name="__codelineno-64-21"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-64-22" name="__codelineno-64-22"></a><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span>
+<a id="__codelineno-64-23" name="__codelineno-64-23"></a><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">10</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="for_1">基于范围的<code>for</code>循环使用条件<a class="headerlink" href="#for_1" title="Permanent link">&para;</a></h3>
+<p><code>for</code>循环迭代的范围必须是确定的</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-65-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-65-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-65-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-65-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-65-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-65-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-65-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-65-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-65-10">10</a></span>
+<span class="normal"><a href="#__codelineno-65-11">11</a></span>
+<span class="normal"><a href="#__codelineno-65-12">12</a></span>
+<span class="normal"><a href="#__codelineno-65-13">13</a></span>
+<span class="normal"><a href="#__codelineno-65-14">14</a></span>
+<span class="normal"><a href="#__codelineno-65-15">15</a></span>
+<span class="normal"><a href="#__codelineno-65-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-65-2" name="__codelineno-65-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<a id="__codelineno-65-3" name="__codelineno-65-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
+<a id="__codelineno-65-4" name="__codelineno-65-4"></a><span class="p">{</span>
+<a id="__codelineno-65-5" name="__codelineno-65-5"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
+<a id="__codelineno-65-6" name="__codelineno-65-6"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-65-7" name="__codelineno-65-7"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="c1">//不可以遍历（数组名不再是整个数组，而是第一个元素的地址指针），因为无法确定范围，数组在传参时只会传递第一个元素的地址</span>
+<a id="__codelineno-65-8" name="__codelineno-65-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-65-9" name="__codelineno-65-9"></a><span class="p">}</span>
+<a id="__codelineno-65-10" name="__codelineno-65-10"></a>
+<a id="__codelineno-65-11" name="__codelineno-65-11"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-65-12" name="__codelineno-65-12"></a><span class="p">{</span>
+<a id="__codelineno-65-13" name="__codelineno-65-13"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-65-14" name="__codelineno-65-14"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span>
+<a id="__codelineno-65-15" name="__codelineno-65-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-65-16" name="__codelineno-65-16"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="c11">空指针值（C++11标准支持）<a class="headerlink" href="#c11" title="Permanent link">&para;</a></h2>
 <p>在良好的C/C++编程习惯中，声明一个变量时最好给该变量一个合适的初始值，否则可能会出现不可预料的错误，比如未初始化的指针。如果一个指针没有合法的指向，基本都是按照如下方式对其进行初始化：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1">1</a></span>
-<span class="normal"><a href="#__codelineno-65-2">2</a></span>
-<span class="normal"><a href="#__codelineno-65-3">3</a></span>
-<span class="normal"><a href="#__codelineno-65-4">4</a></span>
-<span class="normal"><a href="#__codelineno-65-5">5</a></span>
-<span class="normal"><a href="#__codelineno-65-6">6</a></span>
-<span class="normal"><a href="#__codelineno-65-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">TestPtr</span><span class="p">()</span>
-<a id="__codelineno-65-2" name="__codelineno-65-2"></a><span class="p">{</span>
-<a id="__codelineno-65-3" name="__codelineno-65-3"></a><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
-<a id="__codelineno-65-4" name="__codelineno-65-4"></a><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-65-5" name="__codelineno-65-5"></a>
-<a id="__codelineno-65-6" name="__codelineno-65-6"></a><span class="w"> </span><span class="c1">// ……</span>
-<a id="__codelineno-65-7" name="__codelineno-65-7"></a><span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-<p><code>NULL</code>实际是一个宏，在传统的C头文件(<code>stddef.h</code>)中，可以看到如下代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-66-1">1</a></span>
 <span class="normal"><a href="#__codelineno-66-2">2</a></span>
 <span class="normal"><a href="#__codelineno-66-3">3</a></span>
 <span class="normal"><a href="#__codelineno-66-4">4</a></span>
 <span class="normal"><a href="#__codelineno-66-5">5</a></span>
 <span class="normal"><a href="#__codelineno-66-6">6</a></span>
-<span class="normal"><a href="#__codelineno-66-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1"></a><span class="cp">#ifndef NULL</span>
-<a id="__codelineno-66-2" name="__codelineno-66-2"></a><span class="cp">#ifdef __cplusplus</span>
-<a id="__codelineno-66-3" name="__codelineno-66-3"></a><span class="cp">#define NULL    0</span>
-<a id="__codelineno-66-4" name="__codelineno-66-4"></a><span class="cp">#else</span>
-<a id="__codelineno-66-5" name="__codelineno-66-5"></a><span class="cp">#define NULL    ((void *)0)</span>
-<a id="__codelineno-66-6" name="__codelineno-66-6"></a><span class="cp">#endif</span>
-<a id="__codelineno-66-7" name="__codelineno-66-7"></a><span class="cp">#endif</span>
+<span class="normal"><a href="#__codelineno-66-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">TestPtr</span><span class="p">()</span>
+<a id="__codelineno-66-2" name="__codelineno-66-2"></a><span class="p">{</span>
+<a id="__codelineno-66-3" name="__codelineno-66-3"></a><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<a id="__codelineno-66-4" name="__codelineno-66-4"></a><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-66-5" name="__codelineno-66-5"></a>
+<a id="__codelineno-66-6" name="__codelineno-66-6"></a><span class="w"> </span><span class="c1">// ……</span>
+<a id="__codelineno-66-7" name="__codelineno-66-7"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>NULL</code>实际是一个宏，在传统的C头文件(<code>stddef.h</code>)中，可以看到如下代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-67-1">1</a></span>
+<span class="normal"><a href="#__codelineno-67-2">2</a></span>
+<span class="normal"><a href="#__codelineno-67-3">3</a></span>
+<span class="normal"><a href="#__codelineno-67-4">4</a></span>
+<span class="normal"><a href="#__codelineno-67-5">5</a></span>
+<span class="normal"><a href="#__codelineno-67-6">6</a></span>
+<span class="normal"><a href="#__codelineno-67-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1"></a><span class="cp">#ifndef NULL</span>
+<a id="__codelineno-67-2" name="__codelineno-67-2"></a><span class="cp">#ifdef __cplusplus</span>
+<a id="__codelineno-67-3" name="__codelineno-67-3"></a><span class="cp">#define NULL    0</span>
+<a id="__codelineno-67-4" name="__codelineno-67-4"></a><span class="cp">#else</span>
+<a id="__codelineno-67-5" name="__codelineno-67-5"></a><span class="cp">#define NULL    ((void *)0)</span>
+<a id="__codelineno-67-6" name="__codelineno-67-6"></a><span class="cp">#endif</span>
+<a id="__codelineno-67-7" name="__codelineno-67-7"></a><span class="cp">#endif</span>
 </code></pre></div></td></tr></table></div>
 <p>在上面的宏定义中，<code>NULL</code>可能被定义为字面常量0，或者被定义为无类型指针(<code>void*</code>)的常量，不论采取何种定义，在使用空值的指针时，都不可避免的会遇到一些麻烦，比如在函数重载中可能会使编译器匹配参数为整型的函数，而不是参数为指针类型的函数：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-67-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-67-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-67-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-67-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-67-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-67-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-67-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-67-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-67-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-67-10">10</a></span>
-<span class="normal"><a href="#__codelineno-67-11">11</a></span>
-<span class="normal"><a href="#__codelineno-67-12">12</a></span>
-<span class="normal"><a href="#__codelineno-67-13">13</a></span>
-<span class="normal"><a href="#__codelineno-67-14">14</a></span>
-<span class="normal"><a href="#__codelineno-67-15">15</a></span>
-<span class="normal"><a href="#__codelineno-67-16">16</a></span>
-<span class="normal"><a href="#__codelineno-67-17">17</a></span>
-<span class="normal"><a href="#__codelineno-67-18">18</a></span>
-<span class="normal"><a href="#__codelineno-67-19">19</a></span>
-<span class="normal"><a href="#__codelineno-67-20">20</a></span>
-<span class="normal"><a href="#__codelineno-67-21">21</a></span>
-<span class="normal"><a href="#__codelineno-67-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<a id="__codelineno-67-2" name="__codelineno-67-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
-<a id="__codelineno-67-3" name="__codelineno-67-3"></a>
-<a id="__codelineno-67-4" name="__codelineno-67-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-67-5" name="__codelineno-67-5"></a><span class="p">{</span>
-<a id="__codelineno-67-6" name="__codelineno-67-6"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-67-7" name="__codelineno-67-7"></a><span class="p">}</span>
-<a id="__codelineno-67-8" name="__codelineno-67-8"></a>
-<a id="__codelineno-67-9" name="__codelineno-67-9"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-67-10" name="__codelineno-67-10"></a><span class="p">{</span>
-<a id="__codelineno-67-11" name="__codelineno-67-11"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int*类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-67-12" name="__codelineno-67-12"></a><span class="p">}</span>
-<a id="__codelineno-67-13" name="__codelineno-67-13"></a>
-<a id="__codelineno-67-14" name="__codelineno-67-14"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-67-15" name="__codelineno-67-15"></a><span class="p">{</span>
-<a id="__codelineno-67-16" name="__codelineno-67-16"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<a id="__codelineno-67-17" name="__codelineno-67-17"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
-<a id="__codelineno-67-18" name="__codelineno-67-18"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-67-19" name="__codelineno-67-19"></a><span class="p">}</span>
-<a id="__codelineno-67-20" name="__codelineno-67-20"></a><span class="n">输出结果</span><span class="err">：</span>
-<a id="__codelineno-67-21" name="__codelineno-67-21"></a><span class="n">匹配int类型形参</span>
-<a id="__codelineno-67-22" name="__codelineno-67-22"></a><span class="n">匹配int类型形参</span>
-</code></pre></div></td></tr></table></div>
-<p>此时为了使形参匹配到指针类型，必须将<code>NULL</code>或者<code>0</code>强制转换为(<code>void*</code>)类型</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-68-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-68-3"> 3</a></span>
@@ -7585,24 +7580,36 @@
 <span class="normal"><a href="#__codelineno-68-13">13</a></span>
 <span class="normal"><a href="#__codelineno-68-14">14</a></span>
 <span class="normal"><a href="#__codelineno-68-15">15</a></span>
-<span class="normal"><a href="#__codelineno-68-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-68-2" name="__codelineno-68-2"></a><span class="p">{</span>
-<a id="__codelineno-68-3" name="__codelineno-68-3"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-68-4" name="__codelineno-68-4"></a><span class="p">}</span>
-<a id="__codelineno-68-5" name="__codelineno-68-5"></a>
-<a id="__codelineno-68-6" name="__codelineno-68-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-68-7" name="__codelineno-68-7"></a><span class="p">{</span>
-<a id="__codelineno-68-8" name="__codelineno-68-8"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int*类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-68-9" name="__codelineno-68-9"></a><span class="p">}</span>
-<a id="__codelineno-68-10" name="__codelineno-68-10"></a>
-<a id="__codelineno-68-11" name="__codelineno-68-11"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-68-12" name="__codelineno-68-12"></a><span class="p">{</span>
-<a id="__codelineno-68-13" name="__codelineno-68-13"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<a id="__codelineno-68-14" name="__codelineno-68-14"></a><span class="w">    </span><span class="n">test</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="nb">NULL</span><span class="p">);</span>
-<a id="__codelineno-68-15" name="__codelineno-68-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-68-16" name="__codelineno-68-16"></a><span class="p">}</span>
+<span class="normal"><a href="#__codelineno-68-16">16</a></span>
+<span class="normal"><a href="#__codelineno-68-17">17</a></span>
+<span class="normal"><a href="#__codelineno-68-18">18</a></span>
+<span class="normal"><a href="#__codelineno-68-19">19</a></span>
+<span class="normal"><a href="#__codelineno-68-20">20</a></span>
+<span class="normal"><a href="#__codelineno-68-21">21</a></span>
+<span class="normal"><a href="#__codelineno-68-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<a id="__codelineno-68-3" name="__codelineno-68-3"></a>
+<a id="__codelineno-68-4" name="__codelineno-68-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-68-5" name="__codelineno-68-5"></a><span class="p">{</span>
+<a id="__codelineno-68-6" name="__codelineno-68-6"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-68-7" name="__codelineno-68-7"></a><span class="p">}</span>
+<a id="__codelineno-68-8" name="__codelineno-68-8"></a>
+<a id="__codelineno-68-9" name="__codelineno-68-9"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-68-10" name="__codelineno-68-10"></a><span class="p">{</span>
+<a id="__codelineno-68-11" name="__codelineno-68-11"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int*类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-68-12" name="__codelineno-68-12"></a><span class="p">}</span>
+<a id="__codelineno-68-13" name="__codelineno-68-13"></a>
+<a id="__codelineno-68-14" name="__codelineno-68-14"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-68-15" name="__codelineno-68-15"></a><span class="p">{</span>
+<a id="__codelineno-68-16" name="__codelineno-68-16"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<a id="__codelineno-68-17" name="__codelineno-68-17"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+<a id="__codelineno-68-18" name="__codelineno-68-18"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-68-19" name="__codelineno-68-19"></a><span class="p">}</span>
+<a id="__codelineno-68-20" name="__codelineno-68-20"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-68-21" name="__codelineno-68-21"></a><span class="n">匹配int类型形参</span>
+<a id="__codelineno-68-22" name="__codelineno-68-22"></a><span class="n">匹配int类型形参</span>
 </code></pre></div></td></tr></table></div>
-<p>为了解决上面的问题，C++11标准中提出了<code>nullptr</code>用于指定指针空值</p>
+<p>此时为了使形参匹配到指针类型，必须将<code>NULL</code>或者<code>0</code>强制转换为(<code>void*</code>)类型</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-69-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-69-3"> 3</a></span>
@@ -7618,43 +7625,24 @@
 <span class="normal"><a href="#__codelineno-69-13">13</a></span>
 <span class="normal"><a href="#__codelineno-69-14">14</a></span>
 <span class="normal"><a href="#__codelineno-69-15">15</a></span>
-<span class="normal"><a href="#__codelineno-69-16">16</a></span>
-<span class="normal"><a href="#__codelineno-69-17">17</a></span>
-<span class="normal"><a href="#__codelineno-69-18">18</a></span>
-<span class="normal"><a href="#__codelineno-69-19">19</a></span>
-<span class="normal"><a href="#__codelineno-69-20">20</a></span>
-<span class="normal"><a href="#__codelineno-69-21">21</a></span>
-<span class="normal"><a href="#__codelineno-69-22">22</a></span>
-<span class="normal"><a href="#__codelineno-69-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<a id="__codelineno-69-2" name="__codelineno-69-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
-<a id="__codelineno-69-3" name="__codelineno-69-3"></a>
-<a id="__codelineno-69-4" name="__codelineno-69-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-69-5" name="__codelineno-69-5"></a><span class="p">{</span>
-<a id="__codelineno-69-6" name="__codelineno-69-6"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-69-7" name="__codelineno-69-7"></a><span class="p">}</span>
-<a id="__codelineno-69-8" name="__codelineno-69-8"></a>
-<a id="__codelineno-69-9" name="__codelineno-69-9"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-69-10" name="__codelineno-69-10"></a><span class="p">{</span>
-<a id="__codelineno-69-11" name="__codelineno-69-11"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int*类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-69-12" name="__codelineno-69-12"></a><span class="p">}</span>
-<a id="__codelineno-69-13" name="__codelineno-69-13"></a>
-<a id="__codelineno-69-14" name="__codelineno-69-14"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-69-15" name="__codelineno-69-15"></a><span class="p">{</span>
-<a id="__codelineno-69-16" name="__codelineno-69-16"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<a id="__codelineno-69-17" name="__codelineno-69-17"></a><span class="w">    </span><span class="c1">//test((void*)NULL);</span>
-<a id="__codelineno-69-18" name="__codelineno-69-18"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
-<a id="__codelineno-69-19" name="__codelineno-69-19"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-69-20" name="__codelineno-69-20"></a><span class="p">}</span>
-<a id="__codelineno-69-21" name="__codelineno-69-21"></a><span class="n">输出结果</span><span class="err">：</span>
-<a id="__codelineno-69-22" name="__codelineno-69-22"></a><span class="n">匹配int类型形参</span>
-<a id="__codelineno-69-23" name="__codelineno-69-23"></a><span class="n">匹配int</span><span class="o">*</span><span class="n">类型形参</span>
+<span class="normal"><a href="#__codelineno-69-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-69-2" name="__codelineno-69-2"></a><span class="p">{</span>
+<a id="__codelineno-69-3" name="__codelineno-69-3"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-69-4" name="__codelineno-69-4"></a><span class="p">}</span>
+<a id="__codelineno-69-5" name="__codelineno-69-5"></a>
+<a id="__codelineno-69-6" name="__codelineno-69-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-69-7" name="__codelineno-69-7"></a><span class="p">{</span>
+<a id="__codelineno-69-8" name="__codelineno-69-8"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int*类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-69-9" name="__codelineno-69-9"></a><span class="p">}</span>
+<a id="__codelineno-69-10" name="__codelineno-69-10"></a>
+<a id="__codelineno-69-11" name="__codelineno-69-11"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-69-12" name="__codelineno-69-12"></a><span class="p">{</span>
+<a id="__codelineno-69-13" name="__codelineno-69-13"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<a id="__codelineno-69-14" name="__codelineno-69-14"></a><span class="w">    </span><span class="n">test</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="nb">NULL</span><span class="p">);</span>
+<a id="__codelineno-69-15" name="__codelineno-69-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-69-16" name="__codelineno-69-16"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<p>在使用<code>nullptr</code>时注意下面的三点：</p>
-<ol>
-<li>在使用<code>nullptr</code>表示指针空值时，不需要包含头文件，因为<code>nullptr</code>是C++11作为新关键字引入的。</li>
-<li>在C++11中，<code>sizeof(nullptr)</code> 与 <code>sizeof((void*)0)</code>所占的字节数相同。</li>
-<li>为了提高代码的健壮性，在后续表示指针空值时建议最好使用<code>nullptr</code>。</li>
-</ol>
+<p>为了解决上面的问题，C++11标准中提出了<code>nullptr</code>用于指定指针空值</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-70-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-70-3"> 3</a></span>
@@ -7668,20 +7656,72 @@
 <span class="normal"><a href="#__codelineno-70-11">11</a></span>
 <span class="normal"><a href="#__codelineno-70-12">12</a></span>
 <span class="normal"><a href="#__codelineno-70-13">13</a></span>
-<span class="normal"><a href="#__codelineno-70-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="normal"><a href="#__codelineno-70-14">14</a></span>
+<span class="normal"><a href="#__codelineno-70-15">15</a></span>
+<span class="normal"><a href="#__codelineno-70-16">16</a></span>
+<span class="normal"><a href="#__codelineno-70-17">17</a></span>
+<span class="normal"><a href="#__codelineno-70-18">18</a></span>
+<span class="normal"><a href="#__codelineno-70-19">19</a></span>
+<span class="normal"><a href="#__codelineno-70-20">20</a></span>
+<span class="normal"><a href="#__codelineno-70-21">21</a></span>
+<span class="normal"><a href="#__codelineno-70-22">22</a></span>
+<span class="normal"><a href="#__codelineno-70-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <a id="__codelineno-70-2" name="__codelineno-70-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 <a id="__codelineno-70-3" name="__codelineno-70-3"></a>
-<a id="__codelineno-70-4" name="__codelineno-70-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-70-4" name="__codelineno-70-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
 <a id="__codelineno-70-5" name="__codelineno-70-5"></a><span class="p">{</span>
-<a id="__codelineno-70-6" name="__codelineno-70-6"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;sizeof(NULL)：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-70-7" name="__codelineno-70-7"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;sizeof(nullptr)：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-70-8" name="__codelineno-70-8"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;sizeof((void*)0)：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-70-9" name="__codelineno-70-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-70-10" name="__codelineno-70-10"></a><span class="p">}</span>
-<a id="__codelineno-70-11" name="__codelineno-70-11"></a><span class="n">输出结果</span><span class="err">：</span>
-<a id="__codelineno-70-12" name="__codelineno-70-12"></a><span class="k">sizeof</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span><span class="err">：</span><span class="mi">4</span>
-<a id="__codelineno-70-13" name="__codelineno-70-13"></a><span class="k">sizeof</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span><span class="err">：</span><span class="mi">8</span>
-<a id="__codelineno-70-14" name="__codelineno-70-14"></a><span class="k">sizeof</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">)</span><span class="err">：</span><span class="mi">8</span>
+<a id="__codelineno-70-6" name="__codelineno-70-6"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-70-7" name="__codelineno-70-7"></a><span class="p">}</span>
+<a id="__codelineno-70-8" name="__codelineno-70-8"></a>
+<a id="__codelineno-70-9" name="__codelineno-70-9"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-70-10" name="__codelineno-70-10"></a><span class="p">{</span>
+<a id="__codelineno-70-11" name="__codelineno-70-11"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;匹配int*类型形参&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-70-12" name="__codelineno-70-12"></a><span class="p">}</span>
+<a id="__codelineno-70-13" name="__codelineno-70-13"></a>
+<a id="__codelineno-70-14" name="__codelineno-70-14"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-70-15" name="__codelineno-70-15"></a><span class="p">{</span>
+<a id="__codelineno-70-16" name="__codelineno-70-16"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<a id="__codelineno-70-17" name="__codelineno-70-17"></a><span class="w">    </span><span class="c1">//test((void*)NULL);</span>
+<a id="__codelineno-70-18" name="__codelineno-70-18"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+<a id="__codelineno-70-19" name="__codelineno-70-19"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-70-20" name="__codelineno-70-20"></a><span class="p">}</span>
+<a id="__codelineno-70-21" name="__codelineno-70-21"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-70-22" name="__codelineno-70-22"></a><span class="n">匹配int类型形参</span>
+<a id="__codelineno-70-23" name="__codelineno-70-23"></a><span class="n">匹配int</span><span class="o">*</span><span class="n">类型形参</span>
+</code></pre></div></td></tr></table></div>
+<p>在使用<code>nullptr</code>时注意下面的三点：</p>
+<ol>
+<li>在使用<code>nullptr</code>表示指针空值时，不需要包含头文件，因为<code>nullptr</code>是C++11作为新关键字引入的。</li>
+<li>在C++11中，<code>sizeof(nullptr)</code> 与 <code>sizeof((void*)0)</code>所占的字节数相同。</li>
+<li>为了提高代码的健壮性，在后续表示指针空值时建议最好使用<code>nullptr</code>。</li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-71-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-71-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-71-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-71-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-71-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-71-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-71-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-71-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-71-10">10</a></span>
+<span class="normal"><a href="#__codelineno-71-11">11</a></span>
+<span class="normal"><a href="#__codelineno-71-12">12</a></span>
+<span class="normal"><a href="#__codelineno-71-13">13</a></span>
+<span class="normal"><a href="#__codelineno-71-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-71-2" name="__codelineno-71-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<a id="__codelineno-71-3" name="__codelineno-71-3"></a>
+<a id="__codelineno-71-4" name="__codelineno-71-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-71-5" name="__codelineno-71-5"></a><span class="p">{</span>
+<a id="__codelineno-71-6" name="__codelineno-71-6"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;sizeof(NULL)：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-71-7" name="__codelineno-71-7"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;sizeof(nullptr)：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-71-8" name="__codelineno-71-8"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;sizeof((void*)0)：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-71-9" name="__codelineno-71-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-71-10" name="__codelineno-71-10"></a><span class="p">}</span>
+<a id="__codelineno-71-11" name="__codelineno-71-11"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-71-12" name="__codelineno-71-12"></a><span class="k">sizeof</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span><span class="err">：</span><span class="mi">4</span>
+<a id="__codelineno-71-13" name="__codelineno-71-13"></a><span class="k">sizeof</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span><span class="err">：</span><span class="mi">8</span>
+<a id="__codelineno-71-14" name="__codelineno-71-14"></a><span class="k">sizeof</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">)</span><span class="err">：</span><span class="mi">8</span>
 </code></pre></div></td></tr></table></div>
 
 
@@ -7705,7 +7745,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 3, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 11, 2024</span>
   </span>
 
     

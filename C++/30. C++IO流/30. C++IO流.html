@@ -4197,7 +4197,9 @@
 <p>在使用上面的标准输入输出流时需要注意：</p>
 <ol>
 <li><code>cin</code>为缓冲流。所谓缓冲流，就是会等待键盘输入数据然后保存在缓冲区中，当要提取时，是从缓冲区中拿。如果一次输入过多，则只会提取需要的部分；如果输入错误，必须在回车之前修改，否则就会出现相关错误问题。因为存在缓冲区，所以只有把输入缓冲区中的数据取完后，在使用<code>cin</code>对象才会要求输入新的数据。对于出错时（例如用于接收输入的变量类型与输入的数据类型不匹配），则会设置对应的状态位为1进行标记，除非错误标记被清除，否则一旦有错误标记，<code>cin</code>无法继续读取</li>
-<li>空格和回车都作为数据之间的默认分隔符，分隔符不会被读入，所以多个数据可以在一行输入，也可以分行输入。但如果是字符型和字符串，则空格（ASCII码为32）无法用<code>cin</code>输入，字符串中也不能有空格，对于需要读取带空格的字符串可以使用<code>cin</code>对象中的<code>getline</code>函数一次获取一行数据并以回车为结束标记</li>
+<li>空格和回车都作为数据之间的默认分隔符，分隔符不会被读入，所以多个数据可以在一行输入，也可以分行输入。但如果是字符型和字符串，则空格（ASCII码为32）无法用<code>cin</code>输入，字符串中也不能有空白字符（空格、制表符或者换行换行符），对于需要读取带空格的字符串可以使用<code>cin</code>对象中的<code>getline</code>函数一次获取一行数据并以回车为结束标记
+    !!! note
+        需要注意，此处提到的<code>getline</code>函数是iostream中的成员函数，而不是string类中的友元函数</li>
 <li>在C++标准库中，已经重载了内置类型的流提取和流插入运算符，但是对于自定义类型来说，如果需要使用标准输入输出就必须对流提取和流插入运算符做重载</li>
 </ol>
 <h2 id="c-io_1">C++ IO流的错误状态<a class="headerlink" href="#c-io_1" title="Permanent link">&para;</a></h2>
@@ -4425,8 +4427,7 @@
 </code></pre></div></td></tr></table></div>
 <p>上面的代码中，可以不需要写<code>cout.tie(nullptr)</code>，因为<code>cout</code>与<code>cin</code>是绑定的，当使用<code>cin</code>时，它会自动刷新<code>cout</code>，解除这种绑定的目的是防止这种自动刷新以提高输入输出效率，所以一般情况下只需要使用一个<code>tie</code>函数即可</p>
 <h2 id="c_2">C++文件读取写入流<a class="headerlink" href="#c_2" title="Permanent link">&para;</a></h2>
-<p>C++根据文件内容的数据格式分为二进制文件和文本文件。采用文件流对象操作文件的一般步</p>
-<p>骤：</p>
+<p>C++根据文件内容的数据格式分为二进制文件和文本文件。采用文件流对象操作文件的一般步骤：</p>
 <ol>
 <li>定义一个文件流对象，有两种主要方式：<ul>
 <li>单独创建读取和写入对象：使用<code>ifstream</code>创建读取对象：<code>ifstream ifile</code>（只输入用）；使用<code>ofstream</code>创建写入对象：<code>ofstream ofile</code>（只输出用）</li>
@@ -4535,16 +4536,69 @@
 <a id="__codelineno-6-47" name="__codelineno-6-47"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-6-48" name="__codelineno-6-48"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>可以通过<code>gcount</code>函数获取到<code>getline</code>函数读取到的实际字符个数</p>
+</div>
 <p>上面的代码中，因为文件的写入读取流<code>fstream</code>是<code>iostream</code>的子类，所以也可以使用对应的流提取和流插入运算符，但是需要注意的是，在读取过程中，读取的是一个字符串时，必须确保字符串中没有默认分隔符，否则流提取运算符无法读取到分隔符后面的内容（例如上面代码中的<code>hello world\n</code>使用流提取只会读取到<code>hello</code>）</p>
-<p>需要注意<code>getline</code>函数的使用，该函数有两种形式：</p>
+<p>需要注意上面代码中使用的是iostream中的<code>getline</code>函数的使用，该函数有两种形式：</p>
 <ol>
 <li><code>istream&amp; getline (char* s, streamsize n)</code>：这一种形式默认读取<code>n</code>个字符到字符串<code>s</code>中，并且默认分隔符为<code>\n</code>，即读取到<code>\n</code>就不会继续读取。所以上面的代码中<code>hello world\n</code>的<code>\n</code>无法被读取</li>
 <li><code>istream&amp; getline (char* s, streamsize n, char delim )</code>：这一种形式前面的两个参数与第一种形式一致，但是分隔符为指定的<code>delim</code>字符，如果在读取到的字符串中遇到了<code>delim</code>时就直接停止并且不添加<code>delim</code>到字符串中</li>
 </ol>
-<p>上面两种形式，当读取的内容小于用于接收读取内容的容器大小，则会提前结束并设置<code>eofbit</code>位。默认情况下，如果<code>n</code>大于0，则会自动在存储的字符串后自动添加一个空字符<code>\0</code>，即使提取的是空字符串也是如此</p>
+<p>上面<code>getline</code>的两种形式，当读取的内容小于用于接收读取内容的容器大小，则会提前结束并设置<code>eofbit</code>位。默认情况下，如果<code>n</code>大于0，则会自动在存储的字符串后自动添加一个空字符<code>\0</code>，即使提取的是空字符串也是如此</p>
+<p>在istream头文件中，<code>get</code>函数一共有四个版本，上面的代码只使用了其中的一个版本，四个版本原型如下：</p>
+<ol>
+<li><code>int get()</code>：一次获取一个字符，返回对应字符的ASCII码值，否则返回<code>eof</code></li>
+<li><code>istream&amp; get( char_type&amp; ch )</code>：一个获取一个字符存储到<code>char</code>类型的变量中，返回一个<code>istream</code>对象</li>
+<li><code>istream&amp; get (char* s, streamsize n)</code>：获取<code>n</code>个字符存储到<code>s</code>数组中，返回一个<code>istream</code>对象，默认情况下，本函数的结束标志为<code>\n</code></li>
+<li><code>istream&amp; get (char* s, streamsize n, char delim)</code>：获取<code>n</code>个字符存储到<code>s</code>数组中，返回一个<code>istream</code>对象，默认情况下，本函数的结束标志为<code>delim</code></li>
+</ol>
+<p>与<code>getline</code>函数一致，当读取的内容小于用于接收读取内容的容器大小，则会提前结束并设置<code>eofbit</code>位。默认情况下，如果<code>n</code>大于0，则会自动在存储的字符串后自动添加一个空字符<code>\0</code>，即使提取的是空字符串也是如此</p>
+<p>如果是string类的友元函数，则<code>getline</code>函数的原型如下：</p>
+<ol>
+<li><code>istream&amp; getline (istream&amp; is, string&amp; str, char delim)</code>：获取以字符<code>delim</code>结尾之前的字符串放入对象<code>str</code>中</li>
+<li><code>istream&amp; getline (istream&amp; is, string&amp; str)</code>：获取以字符<code>'\n'</code>结尾之前的字符串放入对象<code>str</code>中</li>
+</ol>
+<p>使用string类的<code>getline</code>函数则上面的代码可以修改为：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="p">{</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">str</span><span class="p">;</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getline</span><span class="p">(</span><span class="n">ifs</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">).</span><span class="n">gcount</span><span class="p">();</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+需要注意此时的<code>gcount</code>函数不会返回字符串的内容长度，不同于iostream中的<code>getline</code>函数，string的友元<code>getline</code>函数因为存储的对象是string，所以<code>getline</code>函数不会在字符串末尾自动添加<code>\0</code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>可以通过<code>gcount</code>函数获取到<code>getline</code>函数读取到的实际字符个数</p>
+<p>这里需要注意，C++中的string底层因为本质还是字符串数组，而之所以<code>getline</code>函数不会添加<code>\0</code>，是因为string类本质上是通过内部的成员记录插入字符的个数进行字符管理，根据有效字符个数显示字符串</p>
 </div>
 <p>对于同一个流读取，与C语言相同，在第一次读取后如果还有其他读取，其他读取会从第一次读取时的光标位置继续读取，如果想指定具体位置，可以使用<code>seekg</code>函数设置光标位置，该函数也存在两个版本：</p>
 <ol>
@@ -4554,26 +4608,26 @@
 <h3 id="_3">二进制文件<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>二进制文件与文本文件读取的方式基本一致，只是在打开文件或者创建读取/写入对象时需要指定使用<code>binary</code>的方式打开</p>
 <p>读取流构造定义如下：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
-<span class="normal"><a href="#__codelineno-7-2">2</a></span>
-<span class="normal"><a href="#__codelineno-7-3">3</a></span>
-<span class="normal"><a href="#__codelineno-7-4">4</a></span>
-<span class="normal"><a href="#__codelineno-7-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1">// 字符串作为文件名</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="k">explicit</span><span class="w"> </span><span class="n">ifstream</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">openmode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">in</span><span class="p">);</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="c1">// string类型对象作为文件名</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="k">explicit</span><span class="w"> </span><span class="n">ifstream</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">openmode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">in</span><span class="p">);</span>
-</code></pre></div></td></tr></table></div>
-<p>写入流构造定义如下：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
 <span class="normal"><a href="#__codelineno-8-2">2</a></span>
 <span class="normal"><a href="#__codelineno-8-3">3</a></span>
 <span class="normal"><a href="#__codelineno-8-4">4</a></span>
 <span class="normal"><a href="#__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1">// 字符串作为文件名</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="k">explicit</span><span class="w"> </span><span class="n">ifstream</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">openmode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="k">explicit</span><span class="w"> </span><span class="n">ifstream</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">openmode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">in</span><span class="p">);</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3"></a>
 <a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="c1">// string类型对象作为文件名</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="k">explicit</span><span class="w"> </span><span class="n">ifstream</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">openmode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="k">explicit</span><span class="w"> </span><span class="n">ifstream</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">openmode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">in</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p>写入流构造定义如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1">// 字符串作为文件名</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="k">explicit</span><span class="w"> </span><span class="n">ifstream</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">openmode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="c1">// string类型对象作为文件名</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="k">explicit</span><span class="w"> </span><span class="n">ifstream</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">openmode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <p>如果是文本文件，则第二个参数<code>mode</code>可以不传递而直接使用缺省值，但是如果是二进制文件，就需要传递对应的模式，写入流：<code>out | binary</code>，读取流：<code>in | binary</code></p>
 <p>除了有<code>binary</code>模式，还有下面的几种模式：</p>
@@ -4583,42 +4637,6 @@
 <li><code>trunc</code>：覆写模式</li>
 </ol>
 <p>基本使用如下（实现文件复制）：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-9-10">10</a></span>
-<span class="normal"><a href="#__codelineno-9-11">11</a></span>
-<span class="normal"><a href="#__codelineno-9-12">12</a></span>
-<span class="normal"><a href="#__codelineno-9-13">13</a></span>
-<span class="normal"><a href="#__codelineno-9-14">14</a></span>
-<span class="normal"><a href="#__codelineno-9-15">15</a></span>
-<span class="normal"><a href="#__codelineno-9-16">16</a></span>
-<span class="normal"><a href="#__codelineno-9-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="p">{</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">    </span><span class="n">ifstream</span><span class="w"> </span><span class="n">is</span><span class="p">(</span><span class="s">&quot;C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">18483</span><span class="se">\\</span><span class="s">Music</span><span class="se">\\</span><span class="s">conan-1.mp3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ios</span><span class="o">::</span><span class="n">in</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">    </span><span class="n">ofstream</span><span class="w"> </span><span class="n">os</span><span class="p">(</span><span class="s">&quot;conan-2.mp3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ios</span><span class="o">::</span><span class="n">out</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">    </span><span class="c1">// 每一次读取一个字符写入到指定位置</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">is</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="w">        </span><span class="n">os</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15"></a>
-<a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-<h3 id="_4">向文件中写入/读取对象内容（深浅拷贝问题）<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>以自定义<code>Date</code>类为例：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -4635,149 +4653,116 @@
 <span class="normal"><a href="#__codelineno-10-14">14</a></span>
 <span class="normal"><a href="#__codelineno-10-15">15</a></span>
 <span class="normal"><a href="#__codelineno-10-16">16</a></span>
-<span class="normal"><a href="#__codelineno-10-17">17</a></span>
-<span class="normal"><a href="#__codelineno-10-18">18</a></span>
-<span class="normal"><a href="#__codelineno-10-19">19</a></span>
-<span class="normal"><a href="#__codelineno-10-20">20</a></span>
-<span class="normal"><a href="#__codelineno-10-21">21</a></span>
-<span class="normal"><a href="#__codelineno-10-22">22</a></span>
-<span class="normal"><a href="#__codelineno-10-23">23</a></span>
-<span class="normal"><a href="#__codelineno-10-24">24</a></span>
-<span class="normal"><a href="#__codelineno-10-25">25</a></span>
-<span class="normal"><a href="#__codelineno-10-26">26</a></span>
-<span class="normal"><a href="#__codelineno-10-27">27</a></span>
-<span class="normal"><a href="#__codelineno-10-28">28</a></span>
-<span class="normal"><a href="#__codelineno-10-29">29</a></span>
-<span class="normal"><a href="#__codelineno-10-30">30</a></span>
-<span class="normal"><a href="#__codelineno-10-31">31</a></span>
-<span class="normal"><a href="#__codelineno-10-32">32</a></span>
-<span class="normal"><a href="#__codelineno-10-33">33</a></span>
-<span class="normal"><a href="#__codelineno-10-34">34</a></span>
-<span class="normal"><a href="#__codelineno-10-35">35</a></span>
-<span class="normal"><a href="#__codelineno-10-36">36</a></span>
-<span class="normal"><a href="#__codelineno-10-37">37</a></span>
-<span class="normal"><a href="#__codelineno-10-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Date</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="p">{</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Date</span><span class="o">&amp;</span><span class="w"> </span><span class="n">d</span><span class="p">);</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Date</span><span class="o">&amp;</span><span class="w"> </span><span class="n">d</span><span class="p">);</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5"></a>
-<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="k">public</span><span class="o">:</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">    </span><span class="n">Date</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">day</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">        </span><span class="o">:</span><span class="n">_year</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">_month</span><span class="p">(</span><span class="n">month</span><span class="p">)</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">_day</span><span class="p">(</span><span class="n">day</span><span class="p">)</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">    </span><span class="p">{}</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12"></a>
-<a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">    </span><span class="k">operator</span><span class="w"> </span><span class="kt">bool</span><span class="p">()</span>
-<a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">        </span><span class="c1">// 这里是随意写的，假设输入_year为0，则结束</span>
-<a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_year</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="w">        </span><span class="k">else</span>
-<a id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
-<a id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="k">private</span><span class="o">:</span>
-<a id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_year</span><span class="p">;</span>
-<a id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_month</span><span class="p">;</span>
-<a id="__codelineno-10-24" name="__codelineno-10-24"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_day</span><span class="p">;</span>
-<a id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="p">};</span>
-<a id="__codelineno-10-26" name="__codelineno-10-26"></a>
-<a id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="c1">// 重载流插入和流提取</span>
-<a id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Date</span><span class="o">&amp;</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
-<a id="__codelineno-10-29" name="__codelineno-10-29"></a><span class="p">{</span>
-<a id="__codelineno-10-30" name="__codelineno-10-30"></a><span class="w">    </span><span class="n">in</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_year</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_month</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_day</span><span class="p">;</span>
-<a id="__codelineno-10-31" name="__codelineno-10-31"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">in</span><span class="p">;</span>
-<a id="__codelineno-10-32" name="__codelineno-10-32"></a><span class="p">}</span>
-<a id="__codelineno-10-33" name="__codelineno-10-33"></a>
-<a id="__codelineno-10-34" name="__codelineno-10-34"></a><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Date</span><span class="o">&amp;</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
-<a id="__codelineno-10-35" name="__codelineno-10-35"></a><span class="p">{</span>
-<a id="__codelineno-10-36" name="__codelineno-10-36"></a><span class="w">    </span><span class="n">out</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_year</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_month</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_day</span><span class="w"> </span><span class="p">;</span>
-<a id="__codelineno-10-37" name="__codelineno-10-37"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">out</span><span class="p">;</span>
-<a id="__codelineno-10-38" name="__codelineno-10-38"></a><span class="p">}</span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="p">{</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">    </span><span class="n">ifstream</span><span class="w"> </span><span class="n">is</span><span class="p">(</span><span class="s">&quot;C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">18483</span><span class="se">\\</span><span class="s">Music</span><span class="se">\\</span><span class="s">conan-1.mp3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ios</span><span class="o">::</span><span class="n">in</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">    </span><span class="n">ofstream</span><span class="w"> </span><span class="n">os</span><span class="p">(</span><span class="s">&quot;conan-2.mp3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ios</span><span class="o">::</span><span class="n">out</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">    </span><span class="c1">// 每一次读取一个字符写入到指定位置</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">is</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">        </span><span class="n">os</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a>
+<a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_4">向文件中写入/读取对象内容（深浅拷贝问题）<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>以自定义<code>Date</code>类为例：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span>
+<span class="normal"><a href="#__codelineno-11-12">12</a></span>
+<span class="normal"><a href="#__codelineno-11-13">13</a></span>
+<span class="normal"><a href="#__codelineno-11-14">14</a></span>
+<span class="normal"><a href="#__codelineno-11-15">15</a></span>
+<span class="normal"><a href="#__codelineno-11-16">16</a></span>
+<span class="normal"><a href="#__codelineno-11-17">17</a></span>
+<span class="normal"><a href="#__codelineno-11-18">18</a></span>
+<span class="normal"><a href="#__codelineno-11-19">19</a></span>
+<span class="normal"><a href="#__codelineno-11-20">20</a></span>
+<span class="normal"><a href="#__codelineno-11-21">21</a></span>
+<span class="normal"><a href="#__codelineno-11-22">22</a></span>
+<span class="normal"><a href="#__codelineno-11-23">23</a></span>
+<span class="normal"><a href="#__codelineno-11-24">24</a></span>
+<span class="normal"><a href="#__codelineno-11-25">25</a></span>
+<span class="normal"><a href="#__codelineno-11-26">26</a></span>
+<span class="normal"><a href="#__codelineno-11-27">27</a></span>
+<span class="normal"><a href="#__codelineno-11-28">28</a></span>
+<span class="normal"><a href="#__codelineno-11-29">29</a></span>
+<span class="normal"><a href="#__codelineno-11-30">30</a></span>
+<span class="normal"><a href="#__codelineno-11-31">31</a></span>
+<span class="normal"><a href="#__codelineno-11-32">32</a></span>
+<span class="normal"><a href="#__codelineno-11-33">33</a></span>
+<span class="normal"><a href="#__codelineno-11-34">34</a></span>
+<span class="normal"><a href="#__codelineno-11-35">35</a></span>
+<span class="normal"><a href="#__codelineno-11-36">36</a></span>
+<span class="normal"><a href="#__codelineno-11-37">37</a></span>
+<span class="normal"><a href="#__codelineno-11-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Date</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Date</span><span class="o">&amp;</span><span class="w"> </span><span class="n">d</span><span class="p">);</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Date</span><span class="o">&amp;</span><span class="w"> </span><span class="n">d</span><span class="p">);</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">    </span><span class="n">Date</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">day</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">        </span><span class="o">:</span><span class="n">_year</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">_month</span><span class="p">(</span><span class="n">month</span><span class="p">)</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">_day</span><span class="p">(</span><span class="n">day</span><span class="p">)</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">    </span><span class="p">{}</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">    </span><span class="k">operator</span><span class="w"> </span><span class="kt">bool</span><span class="p">()</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">        </span><span class="c1">// 这里是随意写的，假设输入_year为0，则结束</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_year</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">        </span><span class="k">else</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="k">private</span><span class="o">:</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_year</span><span class="p">;</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_month</span><span class="p">;</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_day</span><span class="p">;</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="p">};</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26"></a>
+<a id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="c1">// 重载流插入和流提取</span>
+<a id="__codelineno-11-28" name="__codelineno-11-28"></a><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Date</span><span class="o">&amp;</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
+<a id="__codelineno-11-29" name="__codelineno-11-29"></a><span class="p">{</span>
+<a id="__codelineno-11-30" name="__codelineno-11-30"></a><span class="w">    </span><span class="n">in</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_year</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_month</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_day</span><span class="p">;</span>
+<a id="__codelineno-11-31" name="__codelineno-11-31"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">in</span><span class="p">;</span>
+<a id="__codelineno-11-32" name="__codelineno-11-32"></a><span class="p">}</span>
+<a id="__codelineno-11-33" name="__codelineno-11-33"></a>
+<a id="__codelineno-11-34" name="__codelineno-11-34"></a><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Date</span><span class="o">&amp;</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
+<a id="__codelineno-11-35" name="__codelineno-11-35"></a><span class="p">{</span>
+<a id="__codelineno-11-36" name="__codelineno-11-36"></a><span class="w">    </span><span class="n">out</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_year</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_month</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">_day</span><span class="w"> </span><span class="p">;</span>
+<a id="__codelineno-11-37" name="__codelineno-11-37"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">out</span><span class="p">;</span>
+<a id="__codelineno-11-38" name="__codelineno-11-38"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>模拟配置文件属性：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
-<span class="normal"><a href="#__codelineno-11-2">2</a></span>
-<span class="normal"><a href="#__codelineno-11-3">3</a></span>
-<span class="normal"><a href="#__codelineno-11-4">4</a></span>
-<span class="normal"><a href="#__codelineno-11-5">5</a></span>
-<span class="normal"><a href="#__codelineno-11-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">ServerInfo</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="p">{</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">_address</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_port</span><span class="p">;</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span><span class="n">Date</span><span class="w"> </span><span class="n">_date</span><span class="p">;</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="p">};</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span>
+<span class="normal"><a href="#__codelineno-12-5">5</a></span>
+<span class="normal"><a href="#__codelineno-12-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">ServerInfo</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">_address</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_port</span><span class="p">;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="n">Date</span><span class="w"> </span><span class="n">_date</span><span class="p">;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
 <p>写入对象内容到配置文件/读取对象内容到配置文件工具类：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-12-10">10</a></span>
-<span class="normal"><a href="#__codelineno-12-11">11</a></span>
-<span class="normal"><a href="#__codelineno-12-12">12</a></span>
-<span class="normal"><a href="#__codelineno-12-13">13</a></span>
-<span class="normal"><a href="#__codelineno-12-14">14</a></span>
-<span class="normal"><a href="#__codelineno-12-15">15</a></span>
-<span class="normal"><a href="#__codelineno-12-16">16</a></span>
-<span class="normal"><a href="#__codelineno-12-17">17</a></span>
-<span class="normal"><a href="#__codelineno-12-18">18</a></span>
-<span class="normal"><a href="#__codelineno-12-19">19</a></span>
-<span class="normal"><a href="#__codelineno-12-20">20</a></span>
-<span class="normal"><a href="#__codelineno-12-21">21</a></span>
-<span class="normal"><a href="#__codelineno-12-22">22</a></span>
-<span class="normal"><a href="#__codelineno-12-23">23</a></span>
-<span class="normal"><a href="#__codelineno-12-24">24</a></span>
-<span class="normal"><a href="#__codelineno-12-25">25</a></span>
-<span class="normal"><a href="#__codelineno-12-26">26</a></span>
-<span class="normal"><a href="#__codelineno-12-27">27</a></span>
-<span class="normal"><a href="#__codelineno-12-28">28</a></span>
-<span class="normal"><a href="#__codelineno-12-29">29</a></span>
-<span class="normal"><a href="#__codelineno-12-30">30</a></span>
-<span class="normal"><a href="#__codelineno-12-31">31</a></span>
-<span class="normal"><a href="#__codelineno-12-32">32</a></span>
-<span class="normal"><a href="#__codelineno-12-33">33</a></span>
-<span class="normal"><a href="#__codelineno-12-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">ConfigManager</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="p">{</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="k">public</span><span class="o">:</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">    </span><span class="n">ConfigManager</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">        </span><span class="o">:</span><span class="n">_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">    </span><span class="p">{}</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7"></a>
-<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">WriteBin</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ServerInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">        </span><span class="n">ofstream</span><span class="w"> </span><span class="nf">ofs</span><span class="p">(</span><span class="n">_filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">out</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">        </span><span class="n">ofs</span><span class="p">.</span><span class="n">write</span><span class="p">((</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">info</span><span class="p">));</span>
-<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-12-13" name="__codelineno-12-13"></a>
-<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">ReadBin</span><span class="p">(</span><span class="n">ServerInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
-<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">        </span><span class="n">ifstream</span><span class="w"> </span><span class="nf">ifs</span><span class="p">(</span><span class="n">_filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">in</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
-<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">        </span><span class="n">ifs</span><span class="p">.</span><span class="n">read</span><span class="p">((</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">info</span><span class="p">));</span>
-<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-12-19" name="__codelineno-12-19"></a>
-<a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">WriteText</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ServerInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
-<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="w">        </span><span class="n">ofstream</span><span class="w"> </span><span class="nf">ofs</span><span class="p">(</span><span class="n">_filename</span><span class="p">);</span>
-<a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="w">        </span><span class="n">ofs</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">_address</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">_port</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="o">&lt;&lt;</span><span class="n">info</span><span class="p">.</span><span class="n">_date</span><span class="p">;</span>
-<a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-12-25" name="__codelineno-12-25"></a>
-<a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">ReadText</span><span class="p">(</span><span class="n">ServerInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
-<a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="w">        </span><span class="n">ifstream</span><span class="w"> </span><span class="nf">ifs</span><span class="p">(</span><span class="n">_filename</span><span class="p">);</span>
-<a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="w">        </span><span class="n">ifs</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">_address</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">_port</span><span class="o">&gt;&gt;</span><span class="n">info</span><span class="p">.</span><span class="n">_date</span><span class="p">;</span>
-<a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-12-31" name="__codelineno-12-31"></a>
-<a id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="k">private</span><span class="o">:</span>
-<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">_filename</span><span class="p">;</span><span class="w"> </span><span class="c1">// 配置文件</span>
-<a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="p">};</span>
-</code></pre></div></td></tr></table></div>
-<p>测试代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -4795,34 +4780,58 @@
 <span class="normal"><a href="#__codelineno-13-15">15</a></span>
 <span class="normal"><a href="#__codelineno-13-16">16</a></span>
 <span class="normal"><a href="#__codelineno-13-17">17</a></span>
-<span class="normal"><a href="#__codelineno-13-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="normal"><a href="#__codelineno-13-18">18</a></span>
+<span class="normal"><a href="#__codelineno-13-19">19</a></span>
+<span class="normal"><a href="#__codelineno-13-20">20</a></span>
+<span class="normal"><a href="#__codelineno-13-21">21</a></span>
+<span class="normal"><a href="#__codelineno-13-22">22</a></span>
+<span class="normal"><a href="#__codelineno-13-23">23</a></span>
+<span class="normal"><a href="#__codelineno-13-24">24</a></span>
+<span class="normal"><a href="#__codelineno-13-25">25</a></span>
+<span class="normal"><a href="#__codelineno-13-26">26</a></span>
+<span class="normal"><a href="#__codelineno-13-27">27</a></span>
+<span class="normal"><a href="#__codelineno-13-28">28</a></span>
+<span class="normal"><a href="#__codelineno-13-29">29</a></span>
+<span class="normal"><a href="#__codelineno-13-30">30</a></span>
+<span class="normal"><a href="#__codelineno-13-31">31</a></span>
+<span class="normal"><a href="#__codelineno-13-32">32</a></span>
+<span class="normal"><a href="#__codelineno-13-33">33</a></span>
+<span class="normal"><a href="#__codelineno-13-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">ConfigManager</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="p">{</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">    </span><span class="n">ServerInfo</span><span class="w"> </span><span class="n">winfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;192.0.0.1&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4"></a>
-<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="w">    </span><span class="c1">// 二进制读写</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">    </span><span class="n">ConfigManager</span><span class="w"> </span><span class="n">cf_bin</span><span class="p">(</span><span class="s">&quot;test.bin&quot;</span><span class="p">);</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">    </span><span class="n">cf_bin</span><span class="p">.</span><span class="n">WriteBin</span><span class="p">(</span><span class="n">winfo</span><span class="p">);</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="n">ServerInfo</span><span class="w"> </span><span class="n">rbinfo</span><span class="p">;</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">    </span><span class="n">cf_bin</span><span class="p">.</span><span class="n">ReadBin</span><span class="p">(</span><span class="n">rbinfo</span><span class="p">);</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rbinfo</span><span class="p">.</span><span class="n">_address</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rbinfo</span><span class="p">.</span><span class="n">_port</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rbinfo</span><span class="p">.</span><span class="n">_date</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">    </span><span class="c1">// 文本读写</span>
-<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">    </span><span class="n">ConfigManager</span><span class="w"> </span><span class="n">cf_text</span><span class="p">(</span><span class="s">&quot;test.text&quot;</span><span class="p">);</span>
-<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="w">    </span><span class="n">cf_text</span><span class="p">.</span><span class="n">WriteText</span><span class="p">(</span><span class="n">winfo</span><span class="p">);</span>
-<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="w">    </span><span class="n">ServerInfo</span><span class="w"> </span><span class="n">rtinfo</span><span class="p">;</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">    </span><span class="n">cf_text</span><span class="p">.</span><span class="n">ReadText</span><span class="p">(</span><span class="n">rtinfo</span><span class="p">);</span>
-<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rtinfo</span><span class="p">.</span><span class="n">_address</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rtinfo</span><span class="p">.</span><span class="n">_port</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rtinfo</span><span class="p">.</span><span class="n">_date</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="p">}</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="w">    </span><span class="n">ConfigManager</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="w">        </span><span class="o">:</span><span class="n">_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">    </span><span class="p">{}</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">WriteBin</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ServerInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="w">        </span><span class="n">ofstream</span><span class="w"> </span><span class="nf">ofs</span><span class="p">(</span><span class="n">_filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">out</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">        </span><span class="n">ofs</span><span class="p">.</span><span class="n">write</span><span class="p">((</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">info</span><span class="p">));</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">ReadBin</span><span class="p">(</span><span class="n">ServerInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="w">        </span><span class="n">ifstream</span><span class="w"> </span><span class="nf">ifs</span><span class="p">(</span><span class="n">_filename</span><span class="p">,</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">in</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ios_base</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="w">        </span><span class="n">ifs</span><span class="p">.</span><span class="n">read</span><span class="p">((</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">info</span><span class="p">));</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19"></a>
+<a id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">WriteText</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ServerInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22"></a><span class="w">        </span><span class="n">ofstream</span><span class="w"> </span><span class="nf">ofs</span><span class="p">(</span><span class="n">_filename</span><span class="p">);</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23"></a><span class="w">        </span><span class="n">ofs</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">_address</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">_port</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="o">&lt;&lt;</span><span class="n">info</span><span class="p">.</span><span class="n">_date</span><span class="p">;</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25"></a>
+<a id="__codelineno-13-26" name="__codelineno-13-26"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">ReadText</span><span class="p">(</span><span class="n">ServerInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
+<a id="__codelineno-13-27" name="__codelineno-13-27"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-13-28" name="__codelineno-13-28"></a><span class="w">        </span><span class="n">ifstream</span><span class="w"> </span><span class="nf">ifs</span><span class="p">(</span><span class="n">_filename</span><span class="p">);</span>
+<a id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="w">        </span><span class="n">ifs</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">_address</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">_port</span><span class="o">&gt;&gt;</span><span class="n">info</span><span class="p">.</span><span class="n">_date</span><span class="p">;</span>
+<a id="__codelineno-13-30" name="__codelineno-13-30"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-31" name="__codelineno-13-31"></a>
+<a id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="k">private</span><span class="o">:</span>
+<a id="__codelineno-13-33" name="__codelineno-13-33"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">_filename</span><span class="p">;</span><span class="w"> </span><span class="c1">// 配置文件</span>
+<a id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<p>上面的代码中，如果将配置文件中的<code>char</code>数组改为<code>string</code>类型，此时就可能会出现深浅拷贝问题，因为存储的字符串中的字符个数大于<code>string</code>底层的<code>buffer</code>缓冲区之后，<code>string</code>就会在堆区开辟空间存储字符串，此时直接向文件中进行写入时，写入的就是对应指向堆区空间的指针，如果是读取和写入时两个单独的程序进程处理，那么此时写入时的堆区位置在程序结束就被销毁了，此时读取时读到的是一个就是一个野指针，从而导致读取失败程序崩溃</p>
-<h2 id="stringstream"><code>stringstream</code>流简单介绍<a class="headerlink" href="#stringstream" title="Permanent link">&para;</a></h2>
-<p>在C++中，可以使用<code>stringstream</code>类对象来处理字符串与其他类型的转化问题</p>
-<p>在程序中如果想要使用<code>stringstream</code>，必须要包含头文件。在该头文件下，标准库三个类：<code>istringstream</code>、<code>ostringstream</code> 和 <code>stringstream</code>，分别用来进行流的输入、输出和输入输出操</p>
-<p>作，下面主要介绍<code>stringstream</code></p>
-<p>一般情况下<code>stringstream</code>可以用来做如下的事情：</p>
-<ol>
-<li>
-<p>将数值类型数据格式化为字符串</p>
+<p>测试代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -4840,43 +4849,34 @@
 <span class="normal"><a href="#__codelineno-14-15">15</a></span>
 <span class="normal"><a href="#__codelineno-14-16">16</a></span>
 <span class="normal"><a href="#__codelineno-14-17">17</a></span>
-<span class="normal"><a href="#__codelineno-14-18">18</a></span>
-<span class="normal"><a href="#__codelineno-14-19">19</a></span>
-<span class="normal"><a href="#__codelineno-14-20">20</a></span>
-<span class="normal"><a href="#__codelineno-14-21">21</a></span>
-<span class="normal"><a href="#__codelineno-14-22">22</a></span>
-<span class="normal"><a href="#__codelineno-14-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="normal"><a href="#__codelineno-14-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="p">{</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="n">ServerInfo</span><span class="w"> </span><span class="n">winfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;192.0.0.1&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4"></a>
-<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="p">{</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12345678</span><span class="p">;</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">sa</span><span class="p">;</span>
-<a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="w">    </span><span class="c1">// 将一个整形变量转化为字符串，存储到string类对象中</span>
-<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="w">    </span><span class="n">stringstream</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-<a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">sa</span><span class="p">;</span>
-<a id="__codelineno-14-13" name="__codelineno-14-13"></a>
-<a id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="n">str</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 清空底层string对象（将s中的内容用空字符串替换）</span>
-<a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w">   </span><span class="c1">// 清空s, 不清空会转化失败</span>
-<a id="__codelineno-14-16" name="__codelineno-14-16"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.34</span><span class="p">;</span>
-<a id="__codelineno-14-17" name="__codelineno-14-17"></a><span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
-<a id="__codelineno-14-18" name="__codelineno-14-18"></a><span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">sa</span><span class="p">;</span>
-<a id="__codelineno-14-19" name="__codelineno-14-19"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">sValue</span><span class="p">;</span>
-<a id="__codelineno-14-20" name="__codelineno-14-20"></a><span class="w">    </span><span class="n">sValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">str</span><span class="p">();</span><span class="w">   </span><span class="c1">// str()方法：返回stringsteam中管理的string类型</span>
-<a id="__codelineno-14-21" name="__codelineno-14-21"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sValue</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-14-22" name="__codelineno-14-22"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-14-23" name="__codelineno-14-23"></a><span class="p">}</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">    </span><span class="c1">// 二进制读写</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">    </span><span class="n">ConfigManager</span><span class="w"> </span><span class="n">cf_bin</span><span class="p">(</span><span class="s">&quot;test.bin&quot;</span><span class="p">);</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="w">    </span><span class="n">cf_bin</span><span class="p">.</span><span class="n">WriteBin</span><span class="p">(</span><span class="n">winfo</span><span class="p">);</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="w">    </span><span class="n">ServerInfo</span><span class="w"> </span><span class="n">rbinfo</span><span class="p">;</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="w">    </span><span class="n">cf_bin</span><span class="p">.</span><span class="n">ReadBin</span><span class="p">(</span><span class="n">rbinfo</span><span class="p">);</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rbinfo</span><span class="p">.</span><span class="n">_address</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rbinfo</span><span class="p">.</span><span class="n">_port</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rbinfo</span><span class="p">.</span><span class="n">_date</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="w">    </span><span class="c1">// 文本读写</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="w">    </span><span class="n">ConfigManager</span><span class="w"> </span><span class="n">cf_text</span><span class="p">(</span><span class="s">&quot;test.text&quot;</span><span class="p">);</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="w">    </span><span class="n">cf_text</span><span class="p">.</span><span class="n">WriteText</span><span class="p">(</span><span class="n">winfo</span><span class="p">);</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="w">    </span><span class="n">ServerInfo</span><span class="w"> </span><span class="n">rtinfo</span><span class="p">;</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="w">    </span><span class="n">cf_text</span><span class="p">.</span><span class="n">ReadText</span><span class="p">(</span><span class="n">rtinfo</span><span class="p">);</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rtinfo</span><span class="p">.</span><span class="n">_address</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rtinfo</span><span class="p">.</span><span class="n">_port</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rtinfo</span><span class="p">.</span><span class="n">_date</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<p>上面的代码中，需要使用<code>clear</code>函数，因为<code>stringstream</code>在进行一次内容写入时（例如<code>s&gt;&gt;sa</code>），会将其内部状态设置为<code>badbit</code>，因此下一次转换是必须调用<code>clear</code>函数将状态重置为<code>goodbit</code>才可以转换，但是<code>clear</code>不会将<code>stringstream</code>对象底层字符串清空掉，如果不清空，在多次转换时，会将结果全部累积在底层<code>string</code>对象中，所以需要使用<code>void str (const string&amp; s)</code>方法清空字符串</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>如果<code>str</code>函数不传递任何参数，则原型为：<code>string str() const;</code>，相当于获取<code>stringstream</code>存储的字符串</p>
-</div>
-</li>
+<p>上面的代码中，如果将配置文件中的<code>char</code>数组改为<code>string</code>类型，此时就可能会出现深浅拷贝问题，因为存储的字符串中的字符个数大于<code>string</code>底层的<code>buffer</code>缓冲区之后，<code>string</code>就会在堆区开辟空间存储字符串，此时直接向文件中进行写入时，写入的就是对应指向堆区空间的指针，如果是读取和写入时两个单独的程序进程处理，那么此时写入时的堆区位置在程序结束就被销毁了，此时读取时读到的是一个就是一个野指针，从而导致读取失败程序崩溃</p>
+<h2 id="stringstream"><code>stringstream</code>流简单介绍<a class="headerlink" href="#stringstream" title="Permanent link">&para;</a></h2>
+<p>在C++中，可以使用<code>stringstream</code>类对象来处理字符串与其他类型的转化问题</p>
+<p>在程序中如果想要使用<code>stringstream</code>，必须要包含头文件。在该头文件下，标准库三个类：<code>istringstream</code>、<code>ostringstream</code> 和 <code>stringstream</code>，分别用来进行流的输入、输出和输入输出操</p>
+<p>作，下面主要介绍<code>stringstream</code></p>
+<p>一般情况下<code>stringstream</code>可以用来做如下的事情：</p>
+<ol>
 <li>
-<p>字符串拼接</p>
+<p>将数值类型数据格式化为字符串</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -4893,32 +4893,44 @@
 <span class="normal"><a href="#__codelineno-15-14">14</a></span>
 <span class="normal"><a href="#__codelineno-15-15">15</a></span>
 <span class="normal"><a href="#__codelineno-15-16">16</a></span>
-<span class="normal"><a href="#__codelineno-15-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="normal"><a href="#__codelineno-15-17">17</a></span>
+<span class="normal"><a href="#__codelineno-15-18">18</a></span>
+<span class="normal"><a href="#__codelineno-15-19">19</a></span>
+<span class="normal"><a href="#__codelineno-15-20">20</a></span>
+<span class="normal"><a href="#__codelineno-15-21">21</a></span>
+<span class="normal"><a href="#__codelineno-15-22">22</a></span>
+<span class="normal"><a href="#__codelineno-15-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4"></a>
 <a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
 <a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="p">{</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="w">    </span><span class="n">stringstream</span><span class="w"> </span><span class="n">sstream</span><span class="p">;</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="w">    </span><span class="c1">// 将多个字符串放入 sstream 中</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="w">    </span><span class="n">sstream</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;first&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;string,&quot;</span><span class="p">;</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="w">    </span><span class="n">sstream</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; second string&quot;</span><span class="p">;</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;strResult is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sstream</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="w">    </span><span class="c1">// 清空 sstream</span>
-<a id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="w">    </span><span class="n">sstream</span><span class="p">.</span><span class="n">str</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
-<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="w">    </span><span class="n">sstream</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;third string&quot;</span><span class="p">;</span>
-<a id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;After clear, strResult is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sstream</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="p">}</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12345678</span><span class="p">;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">sa</span><span class="p">;</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="w">    </span><span class="c1">// 将一个整形变量转化为字符串，存储到string类对象中</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="w">    </span><span class="n">stringstream</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">sa</span><span class="p">;</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13"></a>
+<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="n">str</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 清空底层string对象（将s中的内容用空字符串替换）</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w">   </span><span class="c1">// 清空s, 不清空会转化失败</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.34</span><span class="p">;</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">sa</span><span class="p">;</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">sValue</span><span class="p">;</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="w">    </span><span class="n">sValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">str</span><span class="p">();</span><span class="w">   </span><span class="c1">// str()方法：返回stringsteam中管理的string类型</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sValue</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-</li>
-<li>
-<p>序列化和反序列化结构数据</p>
+<p>上面的代码中，需要使用<code>clear</code>函数，因为<code>stringstream</code>在进行一次内容写入时（例如<code>s&gt;&gt;sa</code>），会将其内部状态设置为<code>badbit</code>，因此下一次转换是必须调用<code>clear</code>函数将状态重置为<code>goodbit</code>才可以转换，但是<code>clear</code>不会将<code>stringstream</code>对象底层字符串清空掉，如果不清空，在多次转换时，会将结果全部累积在底层<code>string</code>对象中，所以需要使用<code>void str (const string&amp; s)</code>方法清空字符串</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>序列化：输出对象内容</p>
-<p>反序列化：读取对象内容</p>
+<p>如果<code>str</code>函数不传递任何参数，则原型为：<code>string str() const;</code>，相当于获取<code>stringstream</code>存储的字符串</p>
 </div>
+</li>
+<li>
+<p>字符串拼接</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -4935,43 +4947,85 @@
 <span class="normal"><a href="#__codelineno-16-14">14</a></span>
 <span class="normal"><a href="#__codelineno-16-15">15</a></span>
 <span class="normal"><a href="#__codelineno-16-16">16</a></span>
-<span class="normal"><a href="#__codelineno-16-17">17</a></span>
-<span class="normal"><a href="#__codelineno-16-18">18</a></span>
-<span class="normal"><a href="#__codelineno-16-19">19</a></span>
-<span class="normal"><a href="#__codelineno-16-20">20</a></span>
-<span class="normal"><a href="#__codelineno-16-21">21</a></span>
-<span class="normal"><a href="#__codelineno-16-22">22</a></span>
-<span class="normal"><a href="#__codelineno-16-23">23</a></span>
-<span class="normal"><a href="#__codelineno-16-24">24</a></span>
-<span class="normal"><a href="#__codelineno-16-25">25</a></span>
-<span class="normal"><a href="#__codelineno-16-26">26</a></span>
-<span class="normal"><a href="#__codelineno-16-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">ChatInfo</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="p">{</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">_name</span><span class="p">;</span><span class="w"> </span><span class="c1">// 名字</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_id</span><span class="p">;</span><span class="w">      </span><span class="c1">// id</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="n">Date</span><span class="w"> </span><span class="n">_date</span><span class="p">;</span><span class="w">   </span><span class="c1">// 时间</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">_msg</span><span class="p">;</span><span class="w">  </span><span class="c1">// 聊天信息</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="p">};</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="p">{</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">    </span><span class="c1">// 结构信息序列化为字符串</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="w">    </span><span class="n">ChatInfo</span><span class="w"> </span><span class="n">winfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;张三&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">135246</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="s">&quot;晚上一起看电影吧&quot;</span><span class="w"> </span>
-<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="p">};</span>
-<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="w">    </span><span class="n">ostringstream</span><span class="w"> </span><span class="n">oss</span><span class="p">;</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">    </span><span class="n">oss</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">winfo</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">winfo</span><span class="p">.</span><span class="n">_id</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">winfo</span><span class="p">.</span><span class="n">_date</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">winfo</span><span class="p">.</span><span class="n">_msg</span><span class="p">;</span>
-<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
-<a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-16-17" name="__codelineno-16-17"></a>
-<a id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="w">    </span><span class="n">ChatInfo</span><span class="w"> </span><span class="n">rInfo</span><span class="p">;</span>
-<a id="__codelineno-16-19" name="__codelineno-16-19"></a><span class="w">    </span><span class="n">istringstream</span><span class="w"> </span><span class="n">iss</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
-<a id="__codelineno-16-20" name="__codelineno-16-20"></a><span class="w">    </span><span class="n">iss</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_id</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_date</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_msg</span><span class="p">;</span>
-<a id="__codelineno-16-21" name="__codelineno-16-21"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-------------------------------------------------------&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-16-22" name="__codelineno-16-22"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;姓名：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;(&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_id</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;) &quot;</span><span class="p">;</span>
-<a id="__codelineno-16-23" name="__codelineno-16-23"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">rInfo</span><span class="p">.</span><span class="n">_date</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-16-24" name="__codelineno-16-24"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;:&gt;&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_msg</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-16-25" name="__codelineno-16-25"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-------------------------------------------------------&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<a id="__codelineno-16-26" name="__codelineno-16-26"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-16-27" name="__codelineno-16-27"></a><span class="p">}</span>
+<span class="normal"><a href="#__codelineno-16-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="p">{</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">    </span><span class="n">stringstream</span><span class="w"> </span><span class="n">sstream</span><span class="p">;</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="c1">// 将多个字符串放入 sstream 中</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">    </span><span class="n">sstream</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;first&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;string,&quot;</span><span class="p">;</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">    </span><span class="n">sstream</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; second string&quot;</span><span class="p">;</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;strResult is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sstream</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="w">    </span><span class="c1">// 清空 sstream</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="w">    </span><span class="n">sstream</span><span class="p">.</span><span class="n">str</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">    </span><span class="n">sstream</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;third string&quot;</span><span class="p">;</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;After clear, strResult is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sstream</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>序列化和反序列化结构数据</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>序列化：输出对象内容</p>
+<p>反序列化：读取对象内容</p>
+</div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-17-10">10</a></span>
+<span class="normal"><a href="#__codelineno-17-11">11</a></span>
+<span class="normal"><a href="#__codelineno-17-12">12</a></span>
+<span class="normal"><a href="#__codelineno-17-13">13</a></span>
+<span class="normal"><a href="#__codelineno-17-14">14</a></span>
+<span class="normal"><a href="#__codelineno-17-15">15</a></span>
+<span class="normal"><a href="#__codelineno-17-16">16</a></span>
+<span class="normal"><a href="#__codelineno-17-17">17</a></span>
+<span class="normal"><a href="#__codelineno-17-18">18</a></span>
+<span class="normal"><a href="#__codelineno-17-19">19</a></span>
+<span class="normal"><a href="#__codelineno-17-20">20</a></span>
+<span class="normal"><a href="#__codelineno-17-21">21</a></span>
+<span class="normal"><a href="#__codelineno-17-22">22</a></span>
+<span class="normal"><a href="#__codelineno-17-23">23</a></span>
+<span class="normal"><a href="#__codelineno-17-24">24</a></span>
+<span class="normal"><a href="#__codelineno-17-25">25</a></span>
+<span class="normal"><a href="#__codelineno-17-26">26</a></span>
+<span class="normal"><a href="#__codelineno-17-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">ChatInfo</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="p">{</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">_name</span><span class="p">;</span><span class="w"> </span><span class="c1">// 名字</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_id</span><span class="p">;</span><span class="w">      </span><span class="c1">// id</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="n">Date</span><span class="w"> </span><span class="n">_date</span><span class="p">;</span><span class="w">   </span><span class="c1">// 时间</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">_msg</span><span class="p">;</span><span class="w">  </span><span class="c1">// 聊天信息</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="p">};</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="p">{</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="c1">// 结构信息序列化为字符串</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="n">ChatInfo</span><span class="w"> </span><span class="n">winfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;张三&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">135246</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="s">&quot;晚上一起看电影吧&quot;</span><span class="w"> </span>
+<a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="p">};</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="n">ostringstream</span><span class="w"> </span><span class="n">oss</span><span class="p">;</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="n">oss</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">winfo</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">winfo</span><span class="p">.</span><span class="n">_id</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">winfo</span><span class="p">.</span><span class="n">_date</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">winfo</span><span class="p">.</span><span class="n">_msg</span><span class="p">;</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17"></a>
+<a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="w">    </span><span class="n">ChatInfo</span><span class="w"> </span><span class="n">rInfo</span><span class="p">;</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="w">    </span><span class="n">istringstream</span><span class="w"> </span><span class="n">iss</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="w">    </span><span class="n">iss</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_id</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_date</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_msg</span><span class="p">;</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-------------------------------------------------------&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;姓名：&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;(&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_id</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;) &quot;</span><span class="p">;</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">rInfo</span><span class="p">.</span><span class="n">_date</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-17-24" name="__codelineno-17-24"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;:&gt;&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rInfo</span><span class="p">.</span><span class="n">_msg</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-------------------------------------------------------&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-17-27" name="__codelineno-17-27"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>需要注意，在上面的代码中，因为流插入和流提取默认分隔符为空格和换行，所以序列化和反序列化时可以不用保证流提取时和流插入时格式一致，但是需要保证流插入和流提取对应的变量顺序必须相同</p>
 </li>
@@ -4999,7 +5053,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 8, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 11, 2024</span>
   </span>
 
     

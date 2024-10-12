@@ -143,6 +143,26 @@
         return 0;
     }
     ```
+=== "C++ 11"
+    ```c++
+    #include <fstream>
+    #include <string>
+
+    int main() {
+        // 使用原始字符串
+        const std::string _if = R"(括号内部填写源代码文件路径)";
+        const std::string _of = R"(括号内部填写目标代码文件路径（注意不要与源代码文件路径一致）)";
+        std::ifstream inputFile(_if);
+        std::ofstream outputFile(_of);
+
+        std::string line;
+        while (std::getline(inputFile, line)) {
+            outputFile << "\"" << line << "\",\n";
+        }
+
+        return 0;
+    }
+    ```
 === "Java"
     ```java
     public class Test {

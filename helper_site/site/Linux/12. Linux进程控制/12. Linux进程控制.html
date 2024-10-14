@@ -3184,11 +3184,104 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#shell" class="md-nav__link">
+  <a href="#shell1" class="md-nav__link">
     <span class="md-ellipsis">
-      手撕一个简单的Shell
+      手撕一个简单的shell（版本1）
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="手撕一个简单的shell（版本1）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出提示内容
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取用户输入
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      拆分用户输入
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      执行对应程序
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      内建命令处理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="内建命令处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cd" class="md-nav__link">
+    <span class="md-ellipsis">
+      cd命令处理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    <span class="md-ellipsis">
+      export命令处理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#env" class="md-nav__link">
+    <span class="md-ellipsis">
+      env命令处理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      优化
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4157,11 +4250,104 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#shell" class="md-nav__link">
+  <a href="#shell1" class="md-nav__link">
     <span class="md-ellipsis">
-      手撕一个简单的Shell
+      手撕一个简单的shell（版本1）
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="手撕一个简单的shell（版本1）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出提示内容
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取用户输入
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      拆分用户输入
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      执行对应程序
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      内建命令处理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="内建命令处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cd" class="md-nav__link">
+    <span class="md-ellipsis">
+      cd命令处理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    <span class="md-ellipsis">
+      export命令处理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#env" class="md-nav__link">
+    <span class="md-ellipsis">
+      env命令处理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      优化
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -5447,8 +5633,494 @@
 <li>内存空间独立：<code>exec</code>调用后，新程序运行在独立的内存空间中，之前的内存内容被清除，新程序的运行不受之前程序的内存内容的影响</li>
 <li>进程控制：调用<code>exec</code>后，原进程的执行流被终止，新程序开始执行。控制权完全交给新程序，使得新程序在执行和资源管理上是独立的</li>
 </ol>
-<h2 id="shell">手撕一个简单的Shell<a class="headerlink" href="#shell" title="Permanent link">&para;</a></h2>
-<p>待更新</p>
+<h2 id="shell1">手撕一个简单的shell（版本1）<a class="headerlink" href="#shell1" title="Permanent link">&para;</a></h2>
+<p>在写一个shell之前，需要了解本次实现的shell在系统中做的事情：</p>
+<ol>
+<li>从硬盘中读取环境变量存储到自己的环境变量表（本次以拷贝系统shell的环境变量到模拟实现程序中为例）</li>
+<li>当在shell运行的过程中，如果用户输入一个指令且该指令可以对应到一个程序，则该程序会正常运行</li>
+</ol>
+<p>根据上面的描述以及系统shell的直观感受，可以将本次模拟的shell需要做的内容分为下面的几个步骤：</p>
+<ol>
+<li>输出提示内容，例如：<code>[epsda@ham-carrier ~]$</code>，后面紧跟用户输入的指令</li>
+<li>获取用户输入</li>
+<li>将用户的输入拆分成单独的有效的字符串存入命令行参数表</li>
+<li>创建子进程调用<code>exec</code>家族函数调用用户输入的指令执行指定的程序</li>
+</ol>
+<h3 id="_10">输出提示内容<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>根据系统shell的样式<code>[epsda@ham-carrier ~]$</code>，可以看出包括下面的内容：</p>
+<ol>
+<li>用户名</li>
+<li><code>@</code></li>
+<li>主机名</li>
+<li>当前路径</li>
+<li>用户提示符<code>$</code>或者<code>#</code></li>
+</ol>
+<p>基本设计思路如下：</p>
+<p>在系统环境变量中，存储着当前环境的用户名、主机名和当前路径，对于用户提示符，可以考虑判断是否是root用户，如果是则打印<code>#</code>，否则打印<code>$</code></p>
+<p>示例代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span>
+<span class="normal"><a href="#__codelineno-22-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">printfCommandHint</span><span class="p">()</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="p">{</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="w">    </span><span class="c1">// 获取用户名</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;USER&quot;</span><span class="p">);</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="w">    </span><span class="c1">// 获取主机名</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;HOSTNAME&quot;</span><span class="p">);</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="w">    </span><span class="c1">// 获取当前工作路径</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">pwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;PWD&quot;</span><span class="p">);</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="w">    </span><span class="c1">// 打印信息</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[%s@%s %s]%c&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">hostname</span><span class="p">,</span><span class="w"> </span><span class="n">pwd</span><span class="p">,</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="w">            </span><span class="n">strcmp</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;root&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="sc">&#39;#&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="sc">&#39;$&#39;</span><span class="p">);</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_11">获取用户输入<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>获取用户输入可以有很多方法，但是如果直接使用<code>scanf</code>或者<code>cin</code>则无法一次性获取到用户输入的指令和选项，所以直接使用<code>scanf</code>和<code>cin</code>是不妥的，可以考虑使用使用<code>fgets</code>或者<code>getline</code>来代替</p>
+<p>另外，因为不论是<code>fgets</code>还是<code>getline</code>，都默认以<code>\n</code>作为结束标志，但是需要注意，<code>fgets</code>尽管以<code>\n</code>结束，但是依旧会被读取到目标字符串中，但是<code>getline</code>不会，所以使用<code>fgets</code>一定要清除<code>\n</code></p>
+<p>需要注意的是，为了保证其他函数可以获取到输入的内容，可以定义一个数组存储输入的内容，但是这个数组不可以是一个局部变量，除非作为参数传递而不作为返回值，防止出现野指针问题</p>
+<p>下面给出两种版本：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1"><code>fgets</code>版本</label><label for="__tabbed_1_2"><code>getline</code>版本</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span>
+<span class="normal"><a href="#__codelineno-23-19">19</a></span>
+<span class="normal"><a href="#__codelineno-23-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">BaseSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="c1">// 存储用户的输入的数组</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="kt">char</span><span class="w"> </span><span class="n">input_arr</span><span class="p">[</span><span class="n">BaseSize</span><span class="p">];</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="nf">getInput</span><span class="p">()</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="p">{</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="w">    </span><span class="c1">// fgets以\n结束，但是会读取\n</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">    </span><span class="n">fgets</span><span class="p">(</span><span class="n">input_arr</span><span class="p">,</span><span class="w"> </span><span class="n">BaseSize</span><span class="p">,</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">    </span><span class="c1">// 尽管可能没有输入指令。但是输入指令存在\n</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">sz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">input_arr</span><span class="p">);</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">    </span><span class="c1">// 消除\n</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">    </span><span class="n">input_arr</span><span class="p">[</span><span class="n">sz</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">    </span><span class="c1">// 如果没有输入则直接返回空</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">sz</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18"></a>
+<a id="__codelineno-23-19" name="__codelineno-23-19"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input_arr</span><span class="p">;</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-24-10">10</a></span>
+<span class="normal"><a href="#__codelineno-24-11">11</a></span>
+<span class="normal"><a href="#__codelineno-24-12">12</a></span>
+<span class="normal"><a href="#__codelineno-24-13">13</a></span>
+<span class="normal"><a href="#__codelineno-24-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">BaseSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="c1">// 存储用户的输入的数组</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="kt">char</span><span class="w"> </span><span class="n">input_arr</span><span class="p">[</span><span class="n">BaseSize</span><span class="p">];</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a>
+<a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="nf">getInput</span><span class="p">()</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="p">{</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">.</span><span class="n">getline</span><span class="p">(</span><span class="n">input_arr</span><span class="p">,</span><span class="w"> </span><span class="n">BaseSize</span><span class="p">);</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">input_arr</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12"></a>
+<a id="__codelineno-24-13" name="__codelineno-24-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input_arr</span><span class="p">;</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h3 id="_12">拆分用户输入<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>所谓拆分用户输入，就是为了将用户输入的指令转换成单个字符串，因为指令和选项都是以空格分隔，所以可以考虑将空格作为分隔符，此处因为前面是使用字符数组作为存储字符串的载体，所以考虑使用C语言的<code>strtok</code>函数拆分</p>
+<p>拆分出来的内容即为命令行参数，所以还需要一张命令行参数表，该表需要被子进程拿到，所以需要定义为全局变量</p>
+<p>最后，因为是持续等待用户输入，所以下一次用户输入新的指令，需要覆盖前面的指令，所以需要对命令行参数个数和命令行参数列表全部重置</p>
+<p>示例代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
+<span class="normal"><a href="#__codelineno-25-2">2</a></span>
+<span class="normal"><a href="#__codelineno-25-3">3</a></span>
+<span class="normal"><a href="#__codelineno-25-4">4</a></span>
+<span class="normal"><a href="#__codelineno-25-5">5</a></span>
+<span class="normal"><a href="#__codelineno-25-6">6</a></span>
+<span class="normal"><a href="#__codelineno-25-7">7</a></span>
+<span class="normal"><a href="#__codelineno-25-8">8</a></span>
+<span class="normal"><a href="#__codelineno-25-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">parseInput</span><span class="p">()</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="p">{</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="w">    </span><span class="c1">// 清空上一次的命令行参数和个数</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="w">    </span><span class="n">memset</span><span class="p">(</span><span class="n">global_argv</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">BaseSize</span><span class="p">);</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="w">    </span><span class="n">global_argc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6"></a><span class="w">    </span><span class="c1">// 拆分读取的字符串</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strtok</span><span class="p">(</span><span class="n">input_arr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="p">)</span><span class="n">ch</span><span class="p">;</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strtok</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">))</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="w">       </span><span class="n">global_argv</span><span class="p">[</span><span class="n">global_argc</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch</span><span class="p">;</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_13">执行对应程序<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>对于外部命令，需要创建一个子进程来执行，所以基本流程就是创建子进程，让子进程调用exec家族函数执行对应程序，这里推荐选用<code>execvp</code>函数，而对于父进程来说，只需要等待子进程执行结束回收子进程即可</p>
+<p>示例代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-26-10">10</a></span>
+<span class="normal"><a href="#__codelineno-26-11">11</a></span>
+<span class="normal"><a href="#__codelineno-26-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">executeProgram</span><span class="p">()</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="p">{</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="w">    </span><span class="kt">pid_t</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fork</span><span class="p">();</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="w">        </span><span class="n">execvp</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">global_argv</span><span class="p">);</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7"></a><span class="w">        </span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9"></a>
+<a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="w">    </span><span class="c1">// 父进程等待</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11"></a><span class="w">    </span><span class="n">waitpid</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_14">内建命令处理<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>前面四个步骤已经完成了一个基本的shell，在Linux中，绝大部分的命令都是外部命令，但是前面提到除了外部命令还有内建命令，例如<code>cd</code>、<code>echo</code>、<code>export</code>等，而内建命令是不可以交给子进程处理的，因为子进程处理只是改变子进程的状态，不会影响父进程，而<code>cd</code>、<code>echo</code>、<code>export</code>这些命令本质修改的就是当前父进程的属性，所以为了保证这些内建命令生效，需要单独对这些命令进行处理</p>
+<p>最简单的处理方式就是在子进程执行前进行判断，如果是内建命令就直接由当前进程执行，而不交给子进程，本次分别处理下面的内建命令：</p>
+<ol>
+<li><code>cd</code>命令</li>
+<li><code>export</code>命令</li>
+<li><code>env</code>命令</li>
+</ol>
+<h4 id="cd"><code>cd</code>命令处理<a class="headerlink" href="#cd" title="Permanent link">&para;</a></h4>
+<p><code>cd</code>命令的主要作用是更改当前的工作路径，所以当用户执行<code>cd</code>命令时，程序内部需要执行<code>chdir</code>函数来更改当前的工作路径<code>cwd</code>，示例代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-27-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-27-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-27-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-27-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-27-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-27-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-27-10">10</a></span>
+<span class="normal"><a href="#__codelineno-27-11">11</a></span>
+<span class="normal"><a href="#__codelineno-27-12">12</a></span>
+<span class="normal"><a href="#__codelineno-27-13">13</a></span>
+<span class="normal"><a href="#__codelineno-27-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="kt">bool</span><span class="w"> </span><span class="nf">checkIfBuiltInAndExecute</span><span class="p">()</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="p">{</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="w">   </span><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;cd&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="w">   </span><span class="p">{</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="w">       </span><span class="c1">// 判断是否有两个参数防止越界访问</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="w">       </span><span class="k">if</span><span class="p">(</span><span class="n">global_argc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="w">       </span><span class="p">{</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="w">           </span><span class="n">chdir</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9"></a><span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="w">       </span><span class="p">}</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="w">   </span><span class="p">}</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12"></a>
+<a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>处理完<code>cd</code>命令可以发现尽管更改了工作路径，但是终端提示内容没有改变，原因是当前终端提示内容是程序加载时从父进程（系统<code>shell</code>）继承的环境变量，此时不论多少次获取，都只会读取到程序启动时的继承环境变量，所以<code>pwd</code>的值自始至终都是最开始启动的值，为了解决这个问题，可以将<code>getenv</code>函数换成<code>getcwd</code>函数</p>
+<p>示例代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-28-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-28-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-28-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-28-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-28-10">10</a></span>
+<span class="normal"><a href="#__codelineno-28-11">11</a></span>
+<span class="normal"><a href="#__codelineno-28-12">12</a></span>
+<span class="normal"><a href="#__codelineno-28-13">13</a></span>
+<span class="normal"><a href="#__codelineno-28-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">printfCommandHint</span><span class="p">()</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="p">{</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="w">    </span><span class="c1">// 存储当前工作路径</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">current_wd</span><span class="p">[</span><span class="n">BaseSize</span><span class="p">];</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="w">    </span><span class="c1">// 获取用户名</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;USER&quot;</span><span class="p">);</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="w">    </span><span class="c1">// 获取主机名</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;HOSTNAME&quot;</span><span class="p">);</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9"></a><span class="w">    </span><span class="c1">// 获取当前工作路径</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="w">    </span><span class="n">getcwd</span><span class="p">(</span><span class="n">current_wd</span><span class="p">,</span><span class="w"> </span><span class="n">BaseSize</span><span class="p">);</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="w">    </span><span class="c1">// 打印信息</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[%s@%s %s]%c &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">hostname</span><span class="p">,</span><span class="w"> </span><span class="n">current_wd</span><span class="p">,</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13"></a><span class="w">            </span><span class="n">strcmp</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;root&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="sc">&#39;#&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="sc">&#39;$&#39;</span><span class="p">);</span>
+<a id="__codelineno-28-14" name="__codelineno-28-14"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>单独处理回到家目录的情况：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-29-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-29-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-29-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-29-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-29-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-29-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-29-10">10</a></span>
+<span class="normal"><a href="#__codelineno-29-11">11</a></span>
+<span class="normal"><a href="#__codelineno-29-12">12</a></span>
+<span class="normal"><a href="#__codelineno-29-13">13</a></span>
+<span class="normal"><a href="#__codelineno-29-14">14</a></span>
+<span class="normal"><a href="#__codelineno-29-15">15</a></span>
+<span class="normal"><a href="#__codelineno-29-16">16</a></span>
+<span class="normal"><a href="#__codelineno-29-17">17</a></span>
+<span class="normal"><a href="#__codelineno-29-18">18</a></span>
+<span class="normal"><a href="#__codelineno-29-19">19</a></span>
+<span class="normal"><a href="#__codelineno-29-20">20</a></span>
+<span class="normal"><a href="#__codelineno-29-21">21</a></span>
+<span class="normal"><a href="#__codelineno-29-22">22</a></span>
+<span class="normal"><a href="#__codelineno-29-23">23</a></span>
+<span class="normal"><a href="#__codelineno-29-24">24</a></span>
+<span class="normal"><a href="#__codelineno-29-25">25</a></span>
+<span class="normal"><a href="#__codelineno-29-26">26</a></span>
+<span class="normal"><a href="#__codelineno-29-27">27</a></span>
+<span class="normal"><a href="#__codelineno-29-28">28</a></span>
+<span class="normal"><a href="#__codelineno-29-29">29</a></span>
+<span class="normal"><a href="#__codelineno-29-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="kt">bool</span><span class="w"> </span><span class="nf">checkIfBuiltInAndExecute</span><span class="p">()</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="p">{</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="w">   </span><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;cd&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">   </span><span class="p">{</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="w">       </span><span class="c1">// 判断是否有两个参数防止越界访问</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6"></a><span class="w">       </span><span class="k">if</span><span class="p">(</span><span class="n">global_argc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="w">       </span><span class="p">{</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8"></a><span class="w">           </span><span class="c1">// 处理cd ~</span>
+<a id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="w">           </span><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;~&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="w">           </span><span class="p">{</span>
+<a id="__codelineno-29-11" name="__codelineno-29-11"></a><span class="w">               </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">user</span><span class="p">(</span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;USER&quot;</span><span class="p">));</span>
+<a id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="w">               </span><span class="k">if</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;root&quot;</span><span class="p">)</span>
+<a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="w">               </span><span class="p">{</span>
+<a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="w">                    </span><span class="n">chdir</span><span class="p">(</span><span class="s">&quot;/root&quot;</span><span class="p">);</span>
+<a id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="w">               </span><span class="p">}</span>
+<a id="__codelineno-29-16" name="__codelineno-29-16"></a><span class="w">               </span><span class="k">else</span><span class="w"> </span>
+<a id="__codelineno-29-17" name="__codelineno-29-17"></a><span class="w">               </span><span class="p">{</span>
+<a id="__codelineno-29-18" name="__codelineno-29-18"></a><span class="w">                    </span><span class="n">chdir</span><span class="p">(</span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;HOME&quot;</span><span class="p">));</span>
+<a id="__codelineno-29-19" name="__codelineno-29-19"></a><span class="w">               </span><span class="p">}</span>
+<a id="__codelineno-29-20" name="__codelineno-29-20"></a><span class="w">           </span><span class="p">}</span>
+<a id="__codelineno-29-21" name="__codelineno-29-21"></a><span class="w">           </span><span class="k">else</span><span class="w"> </span>
+<a id="__codelineno-29-22" name="__codelineno-29-22"></a><span class="w">           </span><span class="p">{</span>
+<a id="__codelineno-29-23" name="__codelineno-29-23"></a><span class="w">                </span><span class="n">chdir</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<a id="__codelineno-29-24" name="__codelineno-29-24"></a><span class="w">           </span><span class="p">}</span>
+<a id="__codelineno-29-25" name="__codelineno-29-25"></a><span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-29-26" name="__codelineno-29-26"></a><span class="w">       </span><span class="p">}</span>
+<a id="__codelineno-29-27" name="__codelineno-29-27"></a><span class="w">   </span><span class="p">}</span>
+<a id="__codelineno-29-28" name="__codelineno-29-28"></a>
+<a id="__codelineno-29-29" name="__codelineno-29-29"></a><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<a id="__codelineno-29-30" name="__codelineno-29-30"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="export"><code>export</code>命令处理<a class="headerlink" href="#export" title="Permanent link">&para;</a></h4>
+<p><code>export</code>命令是将指定的环境变量导入到当前进程对应的环境变量表，所以也不可以交给子进程处理，当前模拟的shell所有的环境变量均是与系统shell共享的，因为并没有修改，一旦修改，就会发生写时拷贝，为了让模拟的shell拥有自己的环境变量，可以在程序启动时，加载父进程的环境变量到当前的模拟shell程序中，再处理<code>export</code>命令</p>
+<p>模拟的shell复制系统shell的环境变量示例代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span>
+<span class="normal"><a href="#__codelineno-30-11">11</a></span>
+<span class="normal"><a href="#__codelineno-30-12">12</a></span>
+<span class="normal"><a href="#__codelineno-30-13">13</a></span>
+<span class="normal"><a href="#__codelineno-30-14">14</a></span>
+<span class="normal"><a href="#__codelineno-30-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="c1">// 环境变量表</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">global_env</span><span class="p">[</span><span class="n">BaseSize</span><span class="p">];</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="c1">// 声明父进程的环境变量表</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="k">extern</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">environ</span><span class="p">;</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5"></a>
+<a id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">initShell</span><span class="p">()</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="p">{</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8"></a><span class="w">    </span><span class="c1">// 拷贝父进程的环境变量表</span>
+<a id="__codelineno-30-9" name="__codelineno-30-9"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">environ</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="w">        </span><span class="n">global_env</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">environ</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<a id="__codelineno-30-12" name="__codelineno-30-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-30-13" name="__codelineno-30-13"></a><span class="w">    </span><span class="c1">// 最后一个位置置为空</span>
+<a id="__codelineno-30-14" name="__codelineno-30-14"></a><span class="w">    </span><span class="n">global_env</span><span class="p">[</span><span class="n">strlen</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">environ</span><span class="p">))]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-30-15" name="__codelineno-30-15"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>处理<code>export</code>命令如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-31-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-31-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-31-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-31-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-31-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-31-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-31-10">10</a></span>
+<span class="normal"><a href="#__codelineno-31-11">11</a></span>
+<span class="normal"><a href="#__codelineno-31-12">12</a></span>
+<span class="normal"><a href="#__codelineno-31-13">13</a></span>
+<span class="normal"><a href="#__codelineno-31-14">14</a></span>
+<span class="normal"><a href="#__codelineno-31-15">15</a></span>
+<span class="normal"><a href="#__codelineno-31-16">16</a></span>
+<span class="normal"><a href="#__codelineno-31-17">17</a></span>
+<span class="normal"><a href="#__codelineno-31-18">18</a></span>
+<span class="normal"><a href="#__codelineno-31-19">19</a></span>
+<span class="normal"><a href="#__codelineno-31-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="kt">bool</span><span class="w"> </span><span class="nf">checkIfBuiltInAndExecute</span><span class="p">()</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="p">{</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="w">   </span><span class="c1">// ...</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="w">   </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;export&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="w">   </span><span class="p">{</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6"></a><span class="w">       </span><span class="k">if</span><span class="p">(</span><span class="n">global_argc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="w">       </span><span class="p">{</span>
+<a id="__codelineno-31-8" name="__codelineno-31-8"></a><span class="w">           </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9"></a><span class="w">           </span><span class="c1">// 先找到环境变量表为空位置</span>
+<a id="__codelineno-31-10" name="__codelineno-31-10"></a><span class="w">           </span><span class="k">for</span><span class="p">(;</span><span class="w"> </span><span class="n">global_env</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">);</span>
+<a id="__codelineno-31-11" name="__codelineno-31-11"></a><span class="w">           </span><span class="c1">// 添加新的环境变量，不考虑重复，理论上不会出现空间不足导致越界</span>
+<a id="__codelineno-31-12" name="__codelineno-31-12"></a><span class="w">           </span><span class="n">global_env</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])));</span>
+<a id="__codelineno-31-13" name="__codelineno-31-13"></a><span class="w">           </span><span class="n">strncpy</span><span class="p">(</span><span class="n">global_env</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">global_argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<a id="__codelineno-31-14" name="__codelineno-31-14"></a><span class="w">           </span><span class="n">global_env</span><span class="p">[</span><span class="o">++</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-31-15" name="__codelineno-31-15"></a><span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-31-16" name="__codelineno-31-16"></a><span class="w">       </span><span class="p">}</span>
+<a id="__codelineno-31-17" name="__codelineno-31-17"></a><span class="w">   </span><span class="p">}</span>
+<a id="__codelineno-31-18" name="__codelineno-31-18"></a>
+<a id="__codelineno-31-19" name="__codelineno-31-19"></a><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<a id="__codelineno-31-20" name="__codelineno-31-20"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="env"><code>env</code>命令处理<a class="headerlink" href="#env" title="Permanent link">&para;</a></h4>
+<p><code>env</code>本质就是遍历当前进程的环境变量，因为当前模拟的shell进程的环境变量表已经拷贝完成，所以只需要遍历拷贝后的环境变量表</p>
+<p>示例代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-32-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-32-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-32-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-32-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-32-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-32-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-32-10">10</a></span>
+<span class="normal"><a href="#__codelineno-32-11">11</a></span>
+<span class="normal"><a href="#__codelineno-32-12">12</a></span>
+<span class="normal"><a href="#__codelineno-32-13">13</a></span>
+<span class="normal"><a href="#__codelineno-32-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="kt">bool</span><span class="w"> </span><span class="nf">checkIfBuiltInAndExecute</span><span class="p">()</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="p">{</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="w">   </span><span class="c1">// ...</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="w">   </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;env&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="w">   </span><span class="p">{</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">       </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">global_env</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="w">       </span><span class="p">{</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="w">           </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">global_env</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="w">       </span><span class="p">}</span>
+<a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-32-11" name="__codelineno-32-11"></a><span class="w">   </span><span class="p">}</span>
+<a id="__codelineno-32-12" name="__codelineno-32-12"></a>
+<a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_15">优化<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>修改了父进程的环境变量后，子进程应该拿到的是当前父进程的环境变量，所以将开始的execvp函数改为<code>execvpe</code>函数：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span>
+<span class="normal"><a href="#__codelineno-33-2">2</a></span>
+<span class="normal"><a href="#__codelineno-33-3">3</a></span>
+<span class="normal"><a href="#__codelineno-33-4">4</a></span>
+<span class="normal"><a href="#__codelineno-33-5">5</a></span>
+<span class="normal"><a href="#__codelineno-33-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">executeProgram</span><span class="p">()</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="p">{</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="w">    </span><span class="n">execvpe</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">global_argv</span><span class="p">,</span><span class="w"> </span><span class="n">global_env</span><span class="p">);</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>观察终端提示符可以发现，模拟的shell程序会显示从根路径一直到当前路径，为了尽可能还原，可以考虑将获取到的字符串按照<code>/</code>进行截取，一共分为两种情况：</p>
+<ol>
+<li>在根目录：路径只有一个<code>/</code></li>
+<li>不在根目录：最后一个目录是所需</li>
+</ol>
+<p>所以可以考虑将最后一个<code>/</code>作为标志，反向取出字符，直到遇到最后一个<code>/</code>，单独处理根目录的情况即可，示例代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-34-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-34-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-34-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-34-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-34-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-34-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-34-10">10</a></span>
+<span class="normal"><a href="#__codelineno-34-11">11</a></span>
+<span class="normal"><a href="#__codelineno-34-12">12</a></span>
+<span class="normal"><a href="#__codelineno-34-13">13</a></span>
+<span class="normal"><a href="#__codelineno-34-14">14</a></span>
+<span class="normal"><a href="#__codelineno-34-15">15</a></span>
+<span class="normal"><a href="#__codelineno-34-16">16</a></span>
+<span class="normal"><a href="#__codelineno-34-17">17</a></span>
+<span class="normal"><a href="#__codelineno-34-18">18</a></span>
+<span class="normal"><a href="#__codelineno-34-19">19</a></span>
+<span class="normal"><a href="#__codelineno-34-20">20</a></span>
+<span class="normal"><a href="#__codelineno-34-21">21</a></span>
+<span class="normal"><a href="#__codelineno-34-22">22</a></span>
+<span class="normal"><a href="#__codelineno-34-23">23</a></span>
+<span class="normal"><a href="#__codelineno-34-24">24</a></span>
+<span class="normal"><a href="#__codelineno-34-25">25</a></span>
+<span class="normal"><a href="#__codelineno-34-26">26</a></span>
+<span class="normal"><a href="#__codelineno-34-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getCwd</span><span class="p">()</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2"></a><span class="p">{</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">current_wd</span><span class="p">[</span><span class="n">BaseSize</span><span class="p">];</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="w">    </span><span class="n">getcwd</span><span class="p">(</span><span class="n">current_wd</span><span class="p">,</span><span class="w"> </span><span class="n">BaseSize</span><span class="p">);</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">s1</span><span class="p">(</span><span class="n">current_wd</span><span class="p">);</span>
+<a id="__codelineno-34-6" name="__codelineno-34-6"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-34-8" name="__codelineno-34-8"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">s1</span><span class="p">;</span>
+<a id="__codelineno-34-9" name="__codelineno-34-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-34-10" name="__codelineno-34-10"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<a id="__codelineno-34-11" name="__codelineno-34-11"></a><span class="w">    </span><span class="c1">// 反向遍历字符串，直到遇到第一个/</span>
+<a id="__codelineno-34-12" name="__codelineno-34-12"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">rit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="n">rbegin</span><span class="p">();</span>
+<a id="__codelineno-34-13" name="__codelineno-34-13"></a><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">rit</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="n">rend</span><span class="p">())</span>
+<a id="__codelineno-34-14" name="__codelineno-34-14"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-34-15" name="__codelineno-34-15"></a><span class="w">        </span><span class="k">if</span><span class="p">((</span><span class="o">*</span><span class="n">rit</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;/&#39;</span><span class="p">)</span>
+<a id="__codelineno-34-16" name="__codelineno-34-16"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-34-17" name="__codelineno-34-17"></a><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<a id="__codelineno-34-18" name="__codelineno-34-18"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-34-19" name="__codelineno-34-19"></a><span class="w">        </span><span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">((</span><span class="o">*</span><span class="n">rit</span><span class="p">));</span>
+<a id="__codelineno-34-20" name="__codelineno-34-20"></a><span class="w">        </span><span class="o">++</span><span class="n">rit</span><span class="p">;</span>
+<a id="__codelineno-34-21" name="__codelineno-34-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-34-22" name="__codelineno-34-22"></a>
+<a id="__codelineno-34-23" name="__codelineno-34-23"></a><span class="w">    </span><span class="c1">// 反转字符串</span>
+<a id="__codelineno-34-24" name="__codelineno-34-24"></a><span class="w">    </span><span class="n">reverse</span><span class="p">(</span><span class="n">ret</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">ret</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="w"> </span>
+<a id="__codelineno-34-25" name="__codelineno-34-25"></a>
+<a id="__codelineno-34-26" name="__codelineno-34-26"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<a id="__codelineno-34-27" name="__codelineno-34-27"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 
 
 
@@ -5471,7 +6143,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 8, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 14, 2024</span>
   </span>
 
     

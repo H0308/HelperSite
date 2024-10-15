@@ -3266,6 +3266,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#echo" class="md-nav__link">
+    <span class="md-ellipsis">
+      echo命令处理
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4327,6 +4336,15 @@
   <a href="#env" class="md-nav__link">
     <span class="md-ellipsis">
       env命令处理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#echo" class="md-nav__link">
+    <span class="md-ellipsis">
+      echo命令处理
     </span>
   </a>
   
@@ -6047,19 +6065,158 @@
 <a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 <a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+<h4 id="echo"><code>echo</code>命令处理<a class="headerlink" href="#echo" title="Permanent link">&para;</a></h4>
+<p>本次修改的echo主要考虑两种情况：</p>
+<ol>
+<li><code>echo $?</code>：打印上一次进程的退出信息码</li>
+<li><code>echo 字符串</code>：打印指定字符串</li>
+</ol>
+<p>对于第一种，考虑创建一个全局变量接收每一个指令执行后的退出码，对于内建命令使用自定义退出码，对于外部命令通过<code>status</code>变量和相关的宏操作获取</p>
+<p>对于第二种，考虑直接打印字符串即可</p>
+<p>示例代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-33-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-33-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-33-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-33-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-33-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-33-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-33-10">10</a></span>
+<span class="normal"><a href="#__codelineno-33-11">11</a></span>
+<span class="normal"><a href="#__codelineno-33-12">12</a></span>
+<span class="normal"><a href="#__codelineno-33-13">13</a></span>
+<span class="normal"><a href="#__codelineno-33-14">14</a></span>
+<span class="normal"><a href="#__codelineno-33-15">15</a></span>
+<span class="normal"><a href="#__codelineno-33-16">16</a></span>
+<span class="normal"><a href="#__codelineno-33-17">17</a></span>
+<span class="normal"><a href="#__codelineno-33-18">18</a></span>
+<span class="normal"><a href="#__codelineno-33-19">19</a></span>
+<span class="normal"><a href="#__codelineno-33-20">20</a></span>
+<span class="normal"><a href="#__codelineno-33-21">21</a></span>
+<span class="normal"><a href="#__codelineno-33-22">22</a></span>
+<span class="normal"><a href="#__codelineno-33-23">23</a></span>
+<span class="normal"><a href="#__codelineno-33-24">24</a></span>
+<span class="normal"><a href="#__codelineno-33-25">25</a></span>
+<span class="normal"><a href="#__codelineno-33-26">26</a></span>
+<span class="normal"><a href="#__codelineno-33-27">27</a></span>
+<span class="normal"><a href="#__codelineno-33-28">28</a></span>
+<span class="normal"><a href="#__codelineno-33-29">29</a></span>
+<span class="normal"><a href="#__codelineno-33-30">30</a></span>
+<span class="normal"><a href="#__codelineno-33-31">31</a></span>
+<span class="normal"><a href="#__codelineno-33-32">32</a></span>
+<span class="normal"><a href="#__codelineno-33-33">33</a></span>
+<span class="normal"><a href="#__codelineno-33-34">34</a></span>
+<span class="normal"><a href="#__codelineno-33-35">35</a></span>
+<span class="normal"><a href="#__codelineno-33-36">36</a></span>
+<span class="normal"><a href="#__codelineno-33-37">37</a></span>
+<span class="normal"><a href="#__codelineno-33-38">38</a></span>
+<span class="normal"><a href="#__codelineno-33-39">39</a></span>
+<span class="normal"><a href="#__codelineno-33-40">40</a></span>
+<span class="normal"><a href="#__codelineno-33-41">41</a></span>
+<span class="normal"><a href="#__codelineno-33-42">42</a></span>
+<span class="normal"><a href="#__codelineno-33-43">43</a></span>
+<span class="normal"><a href="#__codelineno-33-44">44</a></span>
+<span class="normal"><a href="#__codelineno-33-45">45</a></span>
+<span class="normal"><a href="#__codelineno-33-46">46</a></span>
+<span class="normal"><a href="#__codelineno-33-47">47</a></span>
+<span class="normal"><a href="#__codelineno-33-48">48</a></span>
+<span class="normal"><a href="#__codelineno-33-49">49</a></span>
+<span class="normal"><a href="#__codelineno-33-50">50</a></span>
+<span class="normal"><a href="#__codelineno-33-51">51</a></span>
+<span class="normal"><a href="#__codelineno-33-52">52</a></span>
+<span class="normal"><a href="#__codelineno-33-53">53</a></span>
+<span class="normal"><a href="#__codelineno-33-54">54</a></span>
+<span class="normal"><a href="#__codelineno-33-55">55</a></span>
+<span class="normal"><a href="#__codelineno-33-56">56</a></span>
+<span class="normal"><a href="#__codelineno-33-57">57</a></span>
+<span class="normal"><a href="#__codelineno-33-58">58</a></span>
+<span class="normal"><a href="#__codelineno-33-59">59</a></span>
+<span class="normal"><a href="#__codelineno-33-60">60</a></span>
+<span class="normal"><a href="#__codelineno-33-61">61</a></span>
+<span class="normal"><a href="#__codelineno-33-62">62</a></span>
+<span class="normal"><a href="#__codelineno-33-63">63</a></span>
+<span class="normal"><a href="#__codelineno-33-64">64</a></span>
+<span class="normal"><a href="#__codelineno-33-65">65</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="c1">// 添加退出码位置与echo命令设置</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="kt">bool</span><span class="w"> </span><span class="nf">checkIfBuiltInAndExecute</span><span class="p">()</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="p">{</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="w">   </span><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;cd&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">   </span><span class="p">{</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="w">       </span><span class="c1">// ...</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7"></a><span class="w">       </span><span class="n">exitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NORMAL</span><span class="p">;</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9"></a><span class="w">   </span><span class="p">}</span>
+<a id="__codelineno-33-10" name="__codelineno-33-10"></a><span class="w">   </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;export&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-33-11" name="__codelineno-33-11"></a><span class="w">   </span><span class="p">{</span>
+<a id="__codelineno-33-12" name="__codelineno-33-12"></a><span class="w">       </span><span class="c1">// ...</span>
+<a id="__codelineno-33-13" name="__codelineno-33-13"></a><span class="w">       </span><span class="n">exitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NORMAL</span><span class="p">;</span>
+<a id="__codelineno-33-14" name="__codelineno-33-14"></a><span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-33-15" name="__codelineno-33-15"></a><span class="w">   </span><span class="p">}</span>
+<a id="__codelineno-33-16" name="__codelineno-33-16"></a><span class="w">   </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;env&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-33-17" name="__codelineno-33-17"></a><span class="w">   </span><span class="p">{</span>
+<a id="__codelineno-33-18" name="__codelineno-33-18"></a><span class="w">       </span><span class="c1">// ...</span>
+<a id="__codelineno-33-19" name="__codelineno-33-19"></a><span class="w">       </span><span class="n">exitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NORMAL</span><span class="p">;</span>
+<a id="__codelineno-33-20" name="__codelineno-33-20"></a><span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-33-21" name="__codelineno-33-21"></a><span class="w">   </span><span class="p">}</span>
+<a id="__codelineno-33-22" name="__codelineno-33-22"></a><span class="w">   </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;echo&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-33-23" name="__codelineno-33-23"></a><span class="w">   </span><span class="p">{</span>
+<a id="__codelineno-33-24" name="__codelineno-33-24"></a><span class="w">       </span><span class="c1">// 获取第二个参数的第一个字符和第二个字符</span>
+<a id="__codelineno-33-25" name="__codelineno-33-25"></a><span class="w">       </span><span class="k">if</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;$&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">global_argv</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-33-26" name="__codelineno-33-26"></a><span class="w">       </span><span class="p">{</span>
+<a id="__codelineno-33-27" name="__codelineno-33-27"></a><span class="w">           </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">exitCode</span><span class="p">);</span>
+<a id="__codelineno-33-28" name="__codelineno-33-28"></a><span class="w">       </span><span class="p">}</span>
+<a id="__codelineno-33-29" name="__codelineno-33-29"></a><span class="w">       </span><span class="k">else</span><span class="w"> </span>
+<a id="__codelineno-33-30" name="__codelineno-33-30"></a><span class="w">       </span><span class="p">{</span>
+<a id="__codelineno-33-31" name="__codelineno-33-31"></a><span class="w">           </span><span class="c1">// 直接输出字符串</span>
+<a id="__codelineno-33-32" name="__codelineno-33-32"></a><span class="w">           </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">global_argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<a id="__codelineno-33-33" name="__codelineno-33-33"></a><span class="w">       </span><span class="p">}</span>
+<a id="__codelineno-33-34" name="__codelineno-33-34"></a><span class="w">       </span><span class="c1">// 将上一次的退出码置为0</span>
+<a id="__codelineno-33-35" name="__codelineno-33-35"></a><span class="w">       </span><span class="n">exitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NORMAL</span><span class="p">;</span>
+<a id="__codelineno-33-36" name="__codelineno-33-36"></a><span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-33-37" name="__codelineno-33-37"></a><span class="w">   </span><span class="p">}</span>
+<a id="__codelineno-33-38" name="__codelineno-33-38"></a><span class="w">   </span><span class="n">exitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FAILED</span><span class="p">;</span>
+<a id="__codelineno-33-39" name="__codelineno-33-39"></a><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<a id="__codelineno-33-40" name="__codelineno-33-40"></a><span class="p">}</span>
+<a id="__codelineno-33-41" name="__codelineno-33-41"></a>
+<a id="__codelineno-33-42" name="__codelineno-33-42"></a><span class="c1">// 其他位置</span>
+<a id="__codelineno-33-43" name="__codelineno-33-43"></a><span class="kt">void</span><span class="w"> </span><span class="nf">executeProgram</span><span class="p">()</span>
+<a id="__codelineno-33-44" name="__codelineno-33-44"></a><span class="p">{</span>
+<a id="__codelineno-33-45" name="__codelineno-33-45"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-33-46" name="__codelineno-33-46"></a>
+<a id="__codelineno-33-47" name="__codelineno-33-47"></a><span class="w">    </span><span class="c1">// 存储进程退出码</span>
+<a id="__codelineno-33-48" name="__codelineno-33-48"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-33-49" name="__codelineno-33-49"></a><span class="w">    </span><span class="c1">// 父进程等待</span>
+<a id="__codelineno-33-50" name="__codelineno-33-50"></a><span class="w">    </span><span class="kt">pid_t</span><span class="w"> </span><span class="n">rid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">waitpid</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<a id="__codelineno-33-51" name="__codelineno-33-51"></a><span class="w">    </span><span class="c1">// 正常回收情况下</span>
+<a id="__codelineno-33-52" name="__codelineno-33-52"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">rid</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-33-53" name="__codelineno-33-53"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-33-54" name="__codelineno-33-54"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">WIFEXITED</span><span class="p">(</span><span class="n">status</span><span class="p">))</span>
+<a id="__codelineno-33-55" name="__codelineno-33-55"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-33-56" name="__codelineno-33-56"></a><span class="w">            </span><span class="c1">// 正常退出码</span>
+<a id="__codelineno-33-57" name="__codelineno-33-57"></a><span class="w">            </span><span class="n">exitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WEXITSTATUS</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+<a id="__codelineno-33-58" name="__codelineno-33-58"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-33-59" name="__codelineno-33-59"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">WIFSIGNALED</span><span class="p">(</span><span class="n">status</span><span class="p">))</span><span class="w"> </span>
+<a id="__codelineno-33-60" name="__codelineno-33-60"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-33-61" name="__codelineno-33-61"></a><span class="w">            </span><span class="c1">// 被信号终止</span>
+<a id="__codelineno-33-62" name="__codelineno-33-62"></a><span class="w">            </span><span class="n">exitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WTERMSIG</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+<a id="__codelineno-33-63" name="__codelineno-33-63"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-33-64" name="__codelineno-33-64"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-33-65" name="__codelineno-33-65"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <h3 id="_15">优化<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p>修改了父进程的环境变量后，子进程应该拿到的是当前父进程的环境变量，所以将开始的execvp函数改为<code>execvpe</code>函数：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span>
-<span class="normal"><a href="#__codelineno-33-2">2</a></span>
-<span class="normal"><a href="#__codelineno-33-3">3</a></span>
-<span class="normal"><a href="#__codelineno-33-4">4</a></span>
-<span class="normal"><a href="#__codelineno-33-5">5</a></span>
-<span class="normal"><a href="#__codelineno-33-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">executeProgram</span><span class="p">()</span>
-<a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="p">{</span>
-<a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="w">    </span><span class="c1">// ...</span>
-<a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="w">    </span><span class="n">execvpe</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">global_argv</span><span class="p">,</span><span class="w"> </span><span class="n">global_env</span><span class="p">);</span>
-<a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">    </span><span class="c1">// ...</span>
-<a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span>
+<span class="normal"><a href="#__codelineno-34-2">2</a></span>
+<span class="normal"><a href="#__codelineno-34-3">3</a></span>
+<span class="normal"><a href="#__codelineno-34-4">4</a></span>
+<span class="normal"><a href="#__codelineno-34-5">5</a></span>
+<span class="normal"><a href="#__codelineno-34-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">executeProgram</span><span class="p">()</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2"></a><span class="p">{</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="w">    </span><span class="n">execvpe</span><span class="p">(</span><span class="n">global_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">global_argv</span><span class="p">,</span><span class="w"> </span><span class="n">global_env</span><span class="p">);</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-34-6" name="__codelineno-34-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>观察终端提示符可以发现，模拟的shell程序会显示从根路径一直到当前路径，为了尽可能还原，可以考虑将获取到的字符串按照<code>/</code>进行截取，一共分为两种情况：</p>
 <ol>
@@ -6067,60 +6224,100 @@
 <li>不在根目录：最后一个目录是所需</li>
 </ol>
 <p>所以可以考虑将最后一个<code>/</code>作为标志，反向取出字符，直到遇到最后一个<code>/</code>，单独处理根目录的情况即可，示例代码如下：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-34-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-34-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-34-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-34-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-34-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-34-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-34-10">10</a></span>
-<span class="normal"><a href="#__codelineno-34-11">11</a></span>
-<span class="normal"><a href="#__codelineno-34-12">12</a></span>
-<span class="normal"><a href="#__codelineno-34-13">13</a></span>
-<span class="normal"><a href="#__codelineno-34-14">14</a></span>
-<span class="normal"><a href="#__codelineno-34-15">15</a></span>
-<span class="normal"><a href="#__codelineno-34-16">16</a></span>
-<span class="normal"><a href="#__codelineno-34-17">17</a></span>
-<span class="normal"><a href="#__codelineno-34-18">18</a></span>
-<span class="normal"><a href="#__codelineno-34-19">19</a></span>
-<span class="normal"><a href="#__codelineno-34-20">20</a></span>
-<span class="normal"><a href="#__codelineno-34-21">21</a></span>
-<span class="normal"><a href="#__codelineno-34-22">22</a></span>
-<span class="normal"><a href="#__codelineno-34-23">23</a></span>
-<span class="normal"><a href="#__codelineno-34-24">24</a></span>
-<span class="normal"><a href="#__codelineno-34-25">25</a></span>
-<span class="normal"><a href="#__codelineno-34-26">26</a></span>
-<span class="normal"><a href="#__codelineno-34-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getCwd</span><span class="p">()</span>
-<a id="__codelineno-34-2" name="__codelineno-34-2"></a><span class="p">{</span>
-<a id="__codelineno-34-3" name="__codelineno-34-3"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">current_wd</span><span class="p">[</span><span class="n">BaseSize</span><span class="p">];</span>
-<a id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="w">    </span><span class="n">getcwd</span><span class="p">(</span><span class="n">current_wd</span><span class="p">,</span><span class="w"> </span><span class="n">BaseSize</span><span class="p">);</span>
-<a id="__codelineno-34-5" name="__codelineno-34-5"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">s1</span><span class="p">(</span><span class="n">current_wd</span><span class="p">);</span>
-<a id="__codelineno-34-6" name="__codelineno-34-6"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-34-8" name="__codelineno-34-8"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">s1</span><span class="p">;</span>
-<a id="__codelineno-34-9" name="__codelineno-34-9"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-34-10" name="__codelineno-34-10"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
-<a id="__codelineno-34-11" name="__codelineno-34-11"></a><span class="w">    </span><span class="c1">// 反向遍历字符串，直到遇到反向第一个/</span>
-<a id="__codelineno-34-12" name="__codelineno-34-12"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">rit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="n">rbegin</span><span class="p">();</span>
-<a id="__codelineno-34-13" name="__codelineno-34-13"></a><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">rit</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="n">rend</span><span class="p">())</span>
-<a id="__codelineno-34-14" name="__codelineno-34-14"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-34-15" name="__codelineno-34-15"></a><span class="w">        </span><span class="k">if</span><span class="p">((</span><span class="o">*</span><span class="n">rit</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;/&#39;</span><span class="p">)</span>
-<a id="__codelineno-34-16" name="__codelineno-34-16"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-34-17" name="__codelineno-34-17"></a><span class="w">            </span><span class="k">break</span><span class="p">;</span>
-<a id="__codelineno-34-18" name="__codelineno-34-18"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-34-19" name="__codelineno-34-19"></a><span class="w">        </span><span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">((</span><span class="o">*</span><span class="n">rit</span><span class="p">));</span>
-<a id="__codelineno-34-20" name="__codelineno-34-20"></a><span class="w">        </span><span class="o">++</span><span class="n">rit</span><span class="p">;</span>
-<a id="__codelineno-34-21" name="__codelineno-34-21"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-34-22" name="__codelineno-34-22"></a>
-<a id="__codelineno-34-23" name="__codelineno-34-23"></a><span class="w">    </span><span class="c1">// 反转字符串</span>
-<a id="__codelineno-34-24" name="__codelineno-34-24"></a><span class="w">    </span><span class="n">reverse</span><span class="p">(</span><span class="n">ret</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">ret</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="w"> </span>
-<a id="__codelineno-34-25" name="__codelineno-34-25"></a>
-<a id="__codelineno-34-26" name="__codelineno-34-26"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
-<a id="__codelineno-34-27" name="__codelineno-34-27"></a><span class="p">}</span>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">反向迭代器+反转字符串</label><label for="__tabbed_2_2">反向查找+查找子串</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-35-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-35-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-35-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-35-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-35-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-35-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-35-10">10</a></span>
+<span class="normal"><a href="#__codelineno-35-11">11</a></span>
+<span class="normal"><a href="#__codelineno-35-12">12</a></span>
+<span class="normal"><a href="#__codelineno-35-13">13</a></span>
+<span class="normal"><a href="#__codelineno-35-14">14</a></span>
+<span class="normal"><a href="#__codelineno-35-15">15</a></span>
+<span class="normal"><a href="#__codelineno-35-16">16</a></span>
+<span class="normal"><a href="#__codelineno-35-17">17</a></span>
+<span class="normal"><a href="#__codelineno-35-18">18</a></span>
+<span class="normal"><a href="#__codelineno-35-19">19</a></span>
+<span class="normal"><a href="#__codelineno-35-20">20</a></span>
+<span class="normal"><a href="#__codelineno-35-21">21</a></span>
+<span class="normal"><a href="#__codelineno-35-22">22</a></span>
+<span class="normal"><a href="#__codelineno-35-23">23</a></span>
+<span class="normal"><a href="#__codelineno-35-24">24</a></span>
+<span class="normal"><a href="#__codelineno-35-25">25</a></span>
+<span class="normal"><a href="#__codelineno-35-26">26</a></span>
+<span class="normal"><a href="#__codelineno-35-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getCwd</span><span class="p">()</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2"></a><span class="p">{</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">current_wd</span><span class="p">[</span><span class="n">BaseSize</span><span class="p">];</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4"></a><span class="w">    </span><span class="n">getcwd</span><span class="p">(</span><span class="n">current_wd</span><span class="p">,</span><span class="w"> </span><span class="n">BaseSize</span><span class="p">);</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">s1</span><span class="p">(</span><span class="n">current_wd</span><span class="p">);</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">s1</span><span class="p">;</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-35-10" name="__codelineno-35-10"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<a id="__codelineno-35-11" name="__codelineno-35-11"></a><span class="w">    </span><span class="c1">// 反向遍历字符串，直到遇到反向第一个/</span>
+<a id="__codelineno-35-12" name="__codelineno-35-12"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">rit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="n">rbegin</span><span class="p">();</span>
+<a id="__codelineno-35-13" name="__codelineno-35-13"></a><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">rit</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="n">rend</span><span class="p">())</span>
+<a id="__codelineno-35-14" name="__codelineno-35-14"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-35-15" name="__codelineno-35-15"></a><span class="w">        </span><span class="k">if</span><span class="p">((</span><span class="o">*</span><span class="n">rit</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;/&#39;</span><span class="p">)</span>
+<a id="__codelineno-35-16" name="__codelineno-35-16"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-35-17" name="__codelineno-35-17"></a><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<a id="__codelineno-35-18" name="__codelineno-35-18"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-35-19" name="__codelineno-35-19"></a><span class="w">        </span><span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">((</span><span class="o">*</span><span class="n">rit</span><span class="p">));</span>
+<a id="__codelineno-35-20" name="__codelineno-35-20"></a><span class="w">        </span><span class="o">++</span><span class="n">rit</span><span class="p">;</span>
+<a id="__codelineno-35-21" name="__codelineno-35-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-35-22" name="__codelineno-35-22"></a>
+<a id="__codelineno-35-23" name="__codelineno-35-23"></a><span class="w">    </span><span class="c1">// 反转字符串</span>
+<a id="__codelineno-35-24" name="__codelineno-35-24"></a><span class="w">    </span><span class="n">reverse</span><span class="p">(</span><span class="n">ret</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">ret</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="w"> </span>
+<a id="__codelineno-35-25" name="__codelineno-35-25"></a>
+<a id="__codelineno-35-26" name="__codelineno-35-26"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<a id="__codelineno-35-27" name="__codelineno-35-27"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-36-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-36-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-36-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-36-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-36-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-36-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-36-10">10</a></span>
+<span class="normal"><a href="#__codelineno-36-11">11</a></span>
+<span class="normal"><a href="#__codelineno-36-12">12</a></span>
+<span class="normal"><a href="#__codelineno-36-13">13</a></span>
+<span class="normal"><a href="#__codelineno-36-14">14</a></span>
+<span class="normal"><a href="#__codelineno-36-15">15</a></span>
+<span class="normal"><a href="#__codelineno-36-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getCwd</span><span class="p">()</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="p">{</span><span class="w">    </span>
+<a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">current_wd</span><span class="p">[</span><span class="n">BaseSize</span><span class="p">];</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4"></a><span class="w">    </span><span class="n">getcwd</span><span class="p">(</span><span class="n">current_wd</span><span class="p">,</span><span class="w"> </span><span class="n">BaseSize</span><span class="p">);</span>
+<a id="__codelineno-36-5" name="__codelineno-36-5"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">user</span><span class="p">(</span><span class="n">current_wd</span><span class="p">);</span>
+<a id="__codelineno-36-6" name="__codelineno-36-6"></a><span class="w">    </span><span class="c1">// 如果是根目录，直接返回/</span>
+<a id="__codelineno-36-7" name="__codelineno-36-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-36-8" name="__codelineno-36-8"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-36-9" name="__codelineno-36-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">user</span><span class="p">;</span>
+<a id="__codelineno-36-10" name="__codelineno-36-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-36-11" name="__codelineno-36-11"></a>
+<a id="__codelineno-36-12" name="__codelineno-36-12"></a><span class="w">    </span><span class="c1">// 否则从末尾向前找倒数第一个/</span>
+<a id="__codelineno-36-13" name="__codelineno-36-13"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">);</span>
+<a id="__codelineno-36-14" name="__codelineno-36-14"></a><span class="w">    </span><span class="c1">// 返回找到后的字符串进行截取</span>
+<a id="__codelineno-36-15" name="__codelineno-36-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">pos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 
 
 
@@ -6143,7 +6340,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 14, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 15, 2024</span>
   </span>
 
     

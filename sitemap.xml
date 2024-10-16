@@ -131,6 +131,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://www.helper-wiki.top/C%2B%2B/32.%20initializer_list%E7%B1%BB/32.%20initializer_list%E7%B1%BB.html</loc>
+         <lastmod>2024-10-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://www.helper-wiki.top/C%2B%2B/4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9.html</loc>
          <lastmod>2024-10-16</lastmod>
          <changefreq>daily</changefreq>
@@ -546,12 +551,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://www.helper-wiki.top/%E7%AE%97%E6%B3%95/1.%20%E5%8F%8C%E6%8C%87%E9%92%88%E7%AE%97%E6%B3%95/1.%20%E5%8F%8C%E6%8C%87%E9%92%88%E7%AE%97%E6%B3%95.html</loc>
-         <lastmod>2024-10-16</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://www.helper-wiki.top/%E7%AE%97%E6%B3%95/2.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/2.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95.html</loc>
+         <loc>https://www.helper-wiki.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87.html</loc>
          <lastmod>2024-10-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -572,6 +572,16 @@
     </url>
     <url>
          <loc>https://www.helper-wiki.top/%E7%AE%97%E6%B3%95/%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/%E9%9C%8D%E5%B0%94%E6%B3%95%E5%88%99/%E9%9C%8D%E5%B0%94%E6%B3%95%E5%88%99.html</loc>
+         <lastmod>2024-10-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://www.helper-wiki.top/%E7%AE%97%E6%B3%95/%E5%BD%92%E6%A1%A3/1.%20%E5%8F%8C%E6%8C%87%E9%92%88%E7%AE%97%E6%B3%95/1.%20%E5%8F%8C%E6%8C%87%E9%92%88%E7%AE%97%E6%B3%95.html</loc>
+         <lastmod>2024-10-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://www.helper-wiki.top/%E7%AE%97%E6%B3%95/%E5%BD%92%E6%A1%A3/2.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/2.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95.html</loc>
          <lastmod>2024-10-16</lastmod>
          <changefreq>daily</changefreq>
     </url>

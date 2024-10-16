@@ -6,9 +6,10 @@
 - 本网站不提供英文版
 
 !!! info "网站通知"
-    Python快速入门、JavaScript快速入门和JavaScript与DOM基础会在2024年底下线，取而代之的是更全面的文档
+    1. Python快速入门、JavaScript快速入门和JavaScript与DOM基础会在2024年底下线，取而代之的是更全面的文档
+    2. 算法部分内容调整
     
-    -- 2024年10月2日
+    -- 2024年10月16日
 
 !!! abstract "使用指导"
     联系作者请访问[联系作者](https://www.helper-wiki.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html)

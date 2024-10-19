@@ -4755,7 +4755,7 @@
 </code></pre></div></td></tr></table></div>
 有前面的铺垫，现在思考为什么C++中的<code>const</code>全局变量叫常量，但是C语言很少这么说？</p>
 <p>其实在C语言中，如果声明了一个<code>const</code>变量，并且这个变量有外部链接（external linkage），那么它会在链接阶段进行符号解析。这意味着，如果你在一个源文件中声明了一个<code>const</code>变量，并在另一个源文件中引用它，那么编译器会在每个源文件中分别处理这些声明，然后链接器会确保它们指向相同的内存位置。因此，虽然它的值在编译期间是已知的，但是它的地址可能不是，直到链接期间才能确定。而在C++中，声明具有内部链接（internal linkage）的<code>const</code>变量，这种情况下，变量通常是在编译期就确定的，而且不会出现在符号表中供链接器处理。这使得这样的<code>const</code>变量更像一个真正的常量，因为它不需要在多个源文件之间共享</p>
-<p>所以，C语言的<code>const</code>修饰的全局变量严格来说不能算编译时期可确定的变量，但是C++中的<code>const</code>修饰的全局变量可以算</p>
+<p>所以，C语言的<code>const</code>修饰的全局变量严格来说不能算编译时期可确定的变量，但是C++中的<code>const</code>修饰的全局变量如果在其值为字面量或者在编译期可以确定的值可以算</p>
 <h2 id="c_1">C++内存管理<a class="headerlink" href="#c_1" title="Permanent link">&para;</a></h2>
 <h3 id="c_2">C++内存管理介绍<a class="headerlink" href="#c_2" title="Permanent link">&para;</a></h3>
 <p>在C语言中，使用<code>malloc/calloc/realloc</code>进行动态内存空间的开辟，但是这三种方式中只有<code>calloc</code>会对数据区域进行初始化，并且初始化值为0，并且使用<code>free</code>宏对动态分配的空间进行释放</p>

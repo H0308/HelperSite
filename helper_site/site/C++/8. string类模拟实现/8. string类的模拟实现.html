@@ -4671,7 +4671,7 @@
 在前面提到，类内定义为<code>static</code>的变量初始化必须在类外赋值，但是此时使用<code>const</code>就可以在类内初始化，之所以这个行为可行，是因为在C++中，被<code>const</code>修饰的变量具有内部链接属性，所以其修饰的变量在值为字面量或者是编译期可以确定值时，可以作为在编译期确定值的常量，而因为是常量，则必须要初始化。但是现在就有第二个问题，为什么<code>const</code>修饰的变量都具有常量属性了，还需要再用<code>static</code>修饰一遍，这里是因为<code>const</code>修饰的变量只是其值可以在编译期确定，但是其生命周期还是跟随对象的，而<code>static</code>变量在类加载时就创建了，而不需要等到创建对象，如果在创建类对象时，某一个成员使用到了<code>const</code>变量，但是这个变量创建的顺序在使用到<code>const</code>变量的成员之前，此时就会出现成员属性链接错误，所以为了防止这个问题出现，就需要使用<code>static</code>修饰</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>上面的说法只能适用于常量类型为整型，所以为了更加强调上面的情况，在C++11中引出了<code>constexpr</code>关键字，更加强调某一个变量的值是可以在编译时期计算的，具体见C++11新特性</p>
+<p>上面的说法只能适用于常量类型为整型，所以为了更加强调上面的情况，在C++11中引出了<code>constexpr</code>关键字，更加强调某一个变量的值是可以在编译时期计算的，具体见C++11新特性，此时上面的代码就可以修改为<code>constexpr size_t npos = -1</code></p>
 </div>
 <h3 id="string_3">string类的构造函数<a class="headerlink" href="#string_3" title="Permanent link">&para;</a></h3>
 <p>在设计string类的构造函数时，需要考虑到下面三个问题：</p>

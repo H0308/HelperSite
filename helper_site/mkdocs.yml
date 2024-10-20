@@ -154,6 +154,7 @@ nav:
     - Linux进程地址空间: Linux/11. Linux进程地址空间/11. 进程地址空间.md
     - Linux进程控制: Linux/12. Linux进程控制/12. Linux进程控制.md
     - Linux文件操作基础: Linux/13. Linux文件操作基础/13. Linux文件操作基础.md
+    - Linux中输入和输出基本过程: Linux/14. Linux中输入和输出基本过程/14. Linux中输入和输出基本过程.md
   - 前端:
     - HTML与CSS:
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md

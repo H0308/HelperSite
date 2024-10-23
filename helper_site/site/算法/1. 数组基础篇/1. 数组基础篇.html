@@ -2722,6 +2722,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      滑动窗口练习
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="滑动窗口练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      长度最小的子数组
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4242,6 +4266,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      滑动窗口练习
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="滑动窗口练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      长度最小的子数组
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5586,6 +5634,156 @@
 </div>
 </div>
 <h2 id="_5">滑动窗口专题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>所谓滑动窗口，即为<strong>同向双指针</strong>移动过程中形成的间隔区域，并且这两个指针在移动的过程中不会回退</p>
+<p>对于滑动窗口的题目可以抽象为下面的步骤：</p>
+<ol>
+<li>定义窗口两端指针<code>left</code>和<code>right</code></li>
+<li>进入窗口</li>
+<li>判断</li>
+<li>离开窗口</li>
+<li>循环2、3和4步</li>
+</ol>
+<h2 id="_6">滑动窗口练习<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">长度最小的子数组<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>题目链接：<a href="https://leetcode.cn/problems/minimum-size-subarray-sum/description/">209. 长度最小的子数组 - 力扣（LeetCode）</a></p>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
+<p>给定一个含有 <code>n</code> 个正整数的数组和一个正整数 <code>target</code>。</p>
+<p>找出该数组中满足其总和大于等于 <code>target</code> 的长度最小的<strong>子数组</strong><code>[numsl, numsl+1, ..., numsr-1, numsr]</code> ，并返回其长度<strong>。</strong>如果不存在符合条件的子数组，返回 <code>0</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">输入</span><span class="err">：</span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="n">输出</span><span class="err">：</span><span class="mi">2</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="n">解释</span><span class="err">：</span><span class="n">子数组</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="n">是该条件下的长度最小的子数组</span><span class="err">。</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>示例 2：</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
+<span class="normal"><a href="#__codelineno-22-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">输入</span><span class="err">：</span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="n">输出</span><span class="err">：</span><span class="mi">1</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
+<span class="normal"><a href="#__codelineno-23-2">2</a></span>
+<span class="normal"><a href="#__codelineno-23-3">3</a></span>
+<span class="normal"><a href="#__codelineno-23-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="o">**</span><span class="n">示例</span><span class="w"> </span><span class="mi">3</span><span class="err">：</span><span class="o">**</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="n">输入</span><span class="err">：</span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="n">输出</span><span class="err">：</span><span class="mi">0</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>思路解析：</p>
+<p>以下面的数组为例</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="p">[</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="w"> </span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+<p>本题首先想到的就是暴力解法，暴力解法的思路很简单，第一层<code>for</code>循环遍历，选出区间左端点，第二层<code>for</code>循环遍历，选出区间右端点，最后一次遍历，将左右区间中的值全部相加求和，标记此时子数组的长度，如此往复直到找到子数组长度最小且子数组中元素之和<code>&gt;=target</code>。根据这个暴力思路得出其时间复杂度为O(<span class="arithmatex">\(N^3\)</span>)</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-25-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-25-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-25-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-25-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-25-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-25-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-25-10">10</a></span>
+<span class="normal"><a href="#__codelineno-25-11">11</a></span>
+<span class="normal"><a href="#__codelineno-25-12">12</a></span>
+<span class="normal"><a href="#__codelineno-25-13">13</a></span>
+<span class="normal"><a href="#__codelineno-25-14">14</a></span>
+<span class="normal"><a href="#__codelineno-25-15">15</a></span>
+<span class="normal"><a href="#__codelineno-25-16">16</a></span>
+<span class="normal"><a href="#__codelineno-25-17">17</a></span>
+<span class="normal"><a href="#__codelineno-25-18">18</a></span>
+<span class="normal"><a href="#__codelineno-25-19">19</a></span>
+<span class="normal"><a href="#__codelineno-25-20">20</a></span>
+<span class="normal"><a href="#__codelineno-25-21">21</a></span>
+<span class="normal"><a href="#__codelineno-25-22">22</a></span>
+<span class="normal"><a href="#__codelineno-25-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="c1">// 暴力解法</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">minSubArrayLen</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INT_MAX</span><span class="p">;</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6"></a><span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="w">            </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10"></a><span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11"></a><span class="w">                </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12"></a><span class="w">                </span><span class="p">{</span>
+<a id="__codelineno-25-13" name="__codelineno-25-13"></a><span class="w">                    </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14"></a><span class="w">                    </span><span class="k">if</span><span class="p">(</span><span class="n">sum</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">target</span><span class="p">)</span>
+<a id="__codelineno-25-15" name="__codelineno-25-15"></a><span class="w">                    </span><span class="p">{</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16"></a><span class="w">                        </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17"></a><span class="w">                    </span><span class="p">}</span>
+<a id="__codelineno-25-18" name="__codelineno-25-18"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-25-19" name="__codelineno-25-19"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-25-20" name="__codelineno-25-20"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-25-21" name="__codelineno-25-21"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">INT_MAX</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">len</span><span class="p">;</span>
+<a id="__codelineno-25-22" name="__codelineno-25-22"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-25-23" name="__codelineno-25-23"></a><span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+<p>在暴力思路的基础上思考如何降低时间复杂度</p>
+<p>单调性：因为题目给出了一个条件<strong>正整数的数组</strong>，在正整数范围内求和可以得到一个单调性的规律：<strong>加的数字越多和越大</strong>，所以如果第一次找到了一个和满足<code>&gt;=target</code>，则该下标后的数值即可不需要遍历，例如下图中的4和3即可不需要遍历</p>
+<p><a class="glightbox" href="1. 数组基础篇.assets/image-20240708195838540.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. 数组基础篇.assets/image-20240708195838540.png" alt="image-20240708195838540" style="zoom:50%;" /></a></p>
+<p>正向性：因为在上一次的遍历过程中，已经找到了一组子数组和满足<code>&gt;=target</code>，并且根据单调性可以得出<code>right</code>不需要再向后移动，接下来需要更新<code>left</code>寻找下一组此时<code>left++</code>，那么此时<code>right</code>是否需要回退到<code>left</code>的位置重新再来一次遍历呢？<strong>答案是不需要</strong>，因为<code>left</code>在移动的过程中，区间<code>[left, right]</code>是开始时<code>(left=0)[left, right]</code>区间的子区间，所以此时的区间<code>(left=1)[left, right]</code>中的元素和即为<code>(left=0)[left,right]区间和-left(left=1)=0时的值</code></p>
+<p>由以上两个性质，可以将暴力解法优化到O(N)，即只需要一次遍历，而结合上面两种优化方式，可以得出滑动窗口算法</p>
+<p>在本题中，滑动窗口的两端即为<code>left</code>和<code>right</code>，而滑动窗口中所维护的信息即为子数组之和<code>sum</code>，根据滑动窗口的基本解题步骤可以得出现在需要找到何时进窗口、判断以及何时出窗口</p>
+<ol>
+<li>何时进窗口：本题中，因为窗口中维护的信息是<code>sum</code>，所以当开始求和时即为进窗口</li>
+<li>判断：本题中，因为需要判断<code>sum&gt;=target</code>，所以此为判断条件</li>
+<li>何时出窗口：本题中，根据判断条件<code>sum&gt;=target</code>可以得出，此条件成立时，证明已经得出了一个合理的结果，需要更新<code>sum</code>和子数组长度<code>len</code>，并让<code>left</code>向后移动（移动窗口，即出窗口），这一过程被称为<strong>更新结果</strong>（更新结果一般是贯穿在滑动窗口的解题步骤中，具体在哪一步由题目决定）</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>需要注意，本题需要求出子数组长度的最小值，所以<code>len</code>不可以初始化为0，否则最后结果只会为0</p>
+</div>
+<p>具体步骤如下：</p>
+<p><a class="glightbox" href="2. 滑动窗口算法.assets\长度最小的子串.gif" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="2. 滑动窗口算法.assets\长度最小的子串.gif"></a></p>
+<p>参考代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-26-10">10</a></span>
+<span class="normal"><a href="#__codelineno-26-11">11</a></span>
+<span class="normal"><a href="#__codelineno-26-12">12</a></span>
+<span class="normal"><a href="#__codelineno-26-13">13</a></span>
+<span class="normal"><a href="#__codelineno-26-14">14</a></span>
+<span class="normal"><a href="#__codelineno-26-15">15</a></span>
+<span class="normal"><a href="#__codelineno-26-16">16</a></span>
+<span class="normal"><a href="#__codelineno-26-17">17</a></span>
+<span class="normal"><a href="#__codelineno-26-18">18</a></span>
+<span class="normal"><a href="#__codelineno-26-19">19</a></span>
+<span class="normal"><a href="#__codelineno-26-20">20</a></span>
+<span class="normal"><a href="#__codelineno-26-21">21</a></span>
+<span class="normal"><a href="#__codelineno-26-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">minSubArrayLen</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INT_MAX</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7"></a><span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">right</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="w">            </span><span class="c1">// 进窗口</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="w">            </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">right</span><span class="p">];</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11"></a><span class="w">            </span><span class="c1">// 判断</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12"></a><span class="w">            </span><span class="k">while</span><span class="p">(</span><span class="n">sum</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">target</span><span class="p">)</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="w">                </span><span class="c1">// 更新结果，出窗口</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="w">                </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="w">                </span><span class="n">sum</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="o">++</span><span class="p">];</span>
+<a id="__codelineno-26-17" name="__codelineno-26-17"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-26-18" name="__codelineno-26-18"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-26-19" name="__codelineno-26-19"></a>
+<a id="__codelineno-26-20" name="__codelineno-26-20"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">INT_MAX</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">len</span><span class="p">;</span>
+<a id="__codelineno-26-21" name="__codelineno-26-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-26-22" name="__codelineno-26-22"></a><span class="p">};</span>
+</code></pre></div></td></tr></table></div>
 
 
 
@@ -5608,7 +5806,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 22, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 23, 2024</span>
   </span>
 
     

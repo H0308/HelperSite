@@ -13,7 +13,7 @@ theme:
   features:
     # - header.autohide
     # - navigation.tabs
-    - navigation.top
+    # - navigation.top
     - search.suggest
     - search.highlight
     - content.code.copy
@@ -21,7 +21,7 @@ theme:
   language: zh
   palette:
     - scheme: default
-      accent: amber
+      accent: teal
       primary: white
       toggle:
         icon: material/toggle-switch-off-outline
@@ -217,6 +217,7 @@ markdown_extensions:
 
 extra_javascript:
   - javascripts/mathjax.js
+  - javascripts/particles.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 

@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'MiSans';
+    src: url('../assets/fonts/MiSans-Regular.ttf') format('truetype');
+}
+
+:root {
+    --md-text-font: "MiSans"; 
+    --code-font-color: #e96900;
+}
+
+blockquote {
+    font-style: normal;
+    /* border-left: 5px solid rgb(13, 197, 0); */
+    padding-left: 2em;
+    /* 文字离左边框的距离 */
+    padding-right: 2em;
+    /* 左边框离页面边的距离 */
+    padding-bottom: 2px;
+    margin-left: 0;
+    /* background-color: rgba(175, 255, 135, 0.443); */
+    border-left: 4px solid #275796;
+    background-color: #e5f4fd;
+    border-radius: 5px;
+}

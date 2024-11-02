@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'OPPOSans';
+    src: url('../assets/fonts/OPPOSans-Regular.ttf') format('truetype');
+}
+
+:root {
+    --md-text-font: "OPPOSans"; 
+}

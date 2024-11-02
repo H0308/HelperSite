@@ -11,7 +11,7 @@ theme:
     text: JetBrains Mono
     code: JetBrains Mono
   features:
-    - header.autohide
+    # - header.autohide
     # - navigation.tabs
     - navigation.top
     - search.suggest

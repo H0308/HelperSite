@@ -113,16 +113,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* 设置行内代码的颜色为橙色，但排除代码块 */
 :not(pre) > code {
-  color: #ff7043 !important; /* 橙色 */
-  font-weight: normal;
+    color: #ff7043 !important; /* 橙色 */
+    font-weight: normal;
 }
 
 /* 保持代码块样式不变 */
 pre code {
-  color: var(--md-code-fg-color) !important;
+    color: var(--md-code-fg-color) !important;
 }
 
 /* 确保代码块背景色保持原样 */
 .highlight pre {
-  background-color: var(--md-code-bg-color) !important;
+    background-color: var(--md-code-bg-color) !important;
 }

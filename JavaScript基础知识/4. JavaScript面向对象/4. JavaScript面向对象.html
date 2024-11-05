@@ -14,7 +14,7 @@
         <link rel="prev" href="../3.%20JavaScript%E5%87%BD%E6%95%B0/3.%20JavaScript%E5%87%BD%E6%95%B0.html">
       
       
-        <link rel="next" href="../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html">
+        <link rel="next" href="../5.%20JavaScript%E6%95%B0%E7%BB%84/5.%20JavaScript%E6%95%B0%E7%BB%84.html">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -3542,16 +3542,76 @@
         <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
+      对象的结构与原型对象
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="对象的结构与原型对象">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
       对象的结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      访问原型对象
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      原型对象的作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改原型对象
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instanceofhasown" class="md-nav__link">
+    <span class="md-ellipsis">
+      instanceof和hasOwn
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
-      访问原型对象
+      旧版本创建类的方式（了解）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    <span class="md-ellipsis">
+      了解new运算符的过程
     </span>
   </a>
   
@@ -3561,6 +3621,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.%20JavaScript%E6%95%B0%E7%BB%84/5.%20JavaScript%E6%95%B0%E7%BB%84.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JavaScript数组
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -4146,16 +4227,76 @@
         <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
+      对象的结构与原型对象
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="对象的结构与原型对象">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
       对象的结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      访问原型对象
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      原型对象的作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改原型对象
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instanceofhasown" class="md-nav__link">
+    <span class="md-ellipsis">
+      instanceof和hasOwn
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
-      访问原型对象
+      旧版本创建类的方式（了解）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    <span class="md-ellipsis">
+      了解new运算符的过程
     </span>
   </a>
   
@@ -4818,7 +4959,8 @@
 <p class="admonition-title">Note</p>
 <p>同样，因为父类中的成员都是私有化的，所以子类无法直接访问父类的成员</p>
 </div>
-<h2 id="_6">对象的结构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_6">对象的结构与原型对象<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">对象的结构<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>在JavaScript中，对象属性一共有两个存储位置：</p>
 <ol>
 <li>对象自身：存在于实例对象空间中，这种属性一般都是通过赋值的方式进行创建</li>
@@ -4894,11 +5036,12 @@
 <a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>对于赋值形式添加的方法来说，其不能访问类内的私有成员，并且他是作为类对象成员属性而不是原型对象的成员属性，而对于直接创建的函数来说，其可以访问类内的私有成员，并且会存在于原型对象中</p>
-<h2 id="_7">访问原型对象<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>在JavaScript中，访问原型对象一共有两种方式：</p>
+<h3 id="_8">访问原型对象<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>在JavaScript中，访问原型对象一共有三种方式：</p>
 <ol>
 <li>对象访问：因为对象中存在一个<code>__proto__</code>属性，并且该属性并不是私有属性，所以可以通过<code>.</code>直接访问</li>
 <li>方法访问：<code>Object.getPrototypeOf(实例对象)</code></li>
+<li>类属性：<code>Person.prototype</code></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -4978,6 +5121,291 @@
 </code></pre></div></td></tr></table></div>
 <p>在控制台打印的结果如下：</p>
 <p><a class="glightbox" href="4. JavaScript面向对象.assets\Snipaste_2024-11-04_23-19-15.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="4. JavaScript面向对象.assets\Snipaste_2024-11-04_23-19-15.png"></a></p>
+<p>当可以访问原型对象后，就会产生一个原型链，对于由类创建的对象来说，其原型链如下：</p>
+<p>对象 -&gt; 对应类的原型对象 -&gt; Object类对应的原型对象 -&gt; <code>null</code></p>
+<p>如果是下面的方式创建的对象：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
+<span class="normal"><a href="#__codelineno-18-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p>则其原型链就是：</p>
+<p><code>obj</code> -&gt; Object类对应的原型对象 -&gt; <code>null</code></p>
+<p>原型链的作用就是决定对象查找属性的方式：</p>
+<p>在当前对象中查找 -&gt; 在当前对象对应的原型对象中查找 -&gt; 在Object类对象对应的原型对象中查找 -&gt; 找到<code>null</code>为止</p>
+<p>如果在找到<code>null</code>时依旧没找到指定的属性，就会返回<code>undefined</code></p>
+<p>对比一下作用域链和原型链：</p>
+<ul>
+<li>作用域链：决定查找变量的方式，找不到就报错</li>
+<li>原型链：决定查找属性的方式，找不到返回<code>undefined</code></li>
+</ul>
+<h3 id="_9">原型对象的作用<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>原型对象存在的意义可以理解为C++和Java中的常量区、代码区等，因为对象中有些属性是不需要多次重复创建的，重复创建也只会浪费空间，对于这种情况下的属性来说，就只需要放在一个位置便于所有同类的对象访问。在JavaScript中，同一个类对象的原型对象都是同一个，根据原型链决定查找方式，对象自身中没有的属性就都会去对应的原型对象中，所以原型对象也就相当于一个公共区域</p>
+<p>在JavaScript中，继承也是通过原型对象实现的，继承的本质就是子类可以访问父类中可以访问的内容，而根据原型链，尽管子类对象中没有父类中的属性，但是只需要满足子类的原型链有父类的对象就可以实现子类访问到父类中的属性。例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-19-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-19-10">10</a></span>
+<span class="normal"><a href="#__codelineno-19-11">11</a></span>
+<span class="normal"><a href="#__codelineno-19-12">12</a></span>
+<span class="normal"><a href="#__codelineno-19-13">13</a></span>
+<span class="normal"><a href="#__codelineno-19-14">14</a></span>
+<span class="normal"><a href="#__codelineno-19-15">15</a></span>
+<span class="normal"><a href="#__codelineno-19-16">16</a></span>
+<span class="normal"><a href="#__codelineno-19-17">17</a></span>
+<span class="normal"><a href="#__codelineno-19-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="kd">class</span><span class="w"> </span><span class="nx">Animal</span><span class="p">{</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="p">}</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="kd">class</span><span class="w"> </span><span class="nx">Cat</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Animal</span><span class="p">{</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="p">}</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a>
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="kd">class</span><span class="w"> </span><span class="nx">TomCat</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Cat</span><span class="p">{</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10"></a>
+<a id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="p">}</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12"></a>
+<a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="kd">const</span><span class="w"> </span><span class="nx">cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Cat</span><span class="p">()</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14"></a>
+<a id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">)</span><span class="w"> </span><span class="c1">// Animal实例对象</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">)</span><span class="w"> </span><span class="c1">// Animal类的原型对象 -&gt; Object</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">)</span><span class="w"> </span><span class="c1">// Object类的原型对象</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">)</span><span class="w"> </span><span class="c1">// null</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_10">修改原型对象<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>因为JavaScript允许用户访问对应对象的原型对象，所以理论上也是可以修改原型对象的内容，但是在现代的JavaScript编程中，不建议修改原型对象的内容，前面提到JavaScript中的继承就是通过原型对象实现的，所以之所以可以修改原型对象的内容，就是因为早期为了实现继承就是通过修改原型对象</p>
+<p>修改原型对象的方式与修改普通对象的方式一致，此处不再赘述</p>
+<h2 id="instanceofhasown"><code>instanceof</code>和<code>hasOwn</code><a class="headerlink" href="#instanceofhasown" title="Permanent link">&para;</a></h2>
+<p>在前面已经使用过一次<code>instanceof</code>，其使用方式与Java中一致，现在将其与<code>hashOwn</code>方法进行对比</p>
+<ul>
+<li><code>instanceof</code>关键字：<code>instanceof</code>检查的是对象的原型链上是否有该类实例，只要原型链上有该类实例，就会返回<code>true</code>。有了原型对象的基础，实际上对于<code>instanceof</code>关键字来说，其原理就是利用原型对象，而因为<code>Object</code>是所有对象的原型，所以任何对象和<code>Object</code>进行<code>instanceof</code>运算都会返回<code>true</code></li>
+<li><code>hasOwn</code>方法：<code>hasOwn</code>方法是Object类的静态方法，其需要传递两个参数，第一个是指定被查找的对象，第二个参数是指定要查找的属性，如果属性再对象自身，返回<code>true</code>，否则返回<code>false</code></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>除了<code>hasOwn</code>方法外，还有一个<code>hasOwnProperty</code>方法，但是这个方法是一个对象方法，其参数只需要传递要查找的属性即可，也可以使用<code>in</code>关键字，第一个操作符是要查找的属性，第二个操作符就是被查找的对象</p>
+</div>
+<p>例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-20-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-20-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-20-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-20-10">10</a></span>
+<span class="normal"><a href="#__codelineno-20-11">11</a></span>
+<span class="normal"><a href="#__codelineno-20-12">12</a></span>
+<span class="normal"><a href="#__codelineno-20-13">13</a></span>
+<span class="normal"><a href="#__codelineno-20-14">14</a></span>
+<span class="normal"><a href="#__codelineno-20-15">15</a></span>
+<span class="normal"><a href="#__codelineno-20-16">16</a></span>
+<span class="normal"><a href="#__codelineno-20-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;孙悟空&quot;</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">    </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">18</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4"></a>
+<a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">    </span><span class="n">sayHello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">        </span><span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Hello，我是&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="p">}</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9"></a>
+<a id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="k">const</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">()</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11"></a>
+<a id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="n">instanceof</span><span class="w"> </span><span class="n">Person</span><span class="p">)</span><span class="w"> </span><span class="c1">// true</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13"></a>
+<a id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;sayHello&quot;</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="c1">// true</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">hasOwnProperty</span><span class="p">(</span><span class="s">&quot;sayHello&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// false</span>
+<a id="__codelineno-20-16" name="__codelineno-20-16"></a><span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">__proto__</span><span class="p">.</span><span class="n">__proto__</span><span class="p">.</span><span class="n">hasOwnProperty</span><span class="p">(</span><span class="s">&quot;hasOwnProperty&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// true</span>
+<a id="__codelineno-20-17" name="__codelineno-20-17"></a><span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">Object</span><span class="p">.</span><span class="n">hasOwn</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sayHello&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// false</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="_11">旧版本创建类的方式（了解）<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p>在ES6版本之前JavaScript创建类是通过函数来进行创建的，一个函数如果通过函数调用的方式调用就是「调用函数」，例如无参函数<code>show</code>调用即为<code>show()</code>，而如果函数是通过<code>new关键字＋函数名()</code>调用，则此时就是创建类对象，此时函数就相当于一个类的构造函数</p>
+<p>例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-21-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-21-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-21-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-21-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-21-10">10</a></span>
+<span class="normal"><a href="#__codelineno-21-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">    </span><span class="c1">// 在构造函数中，this表示新建的对象</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">name</span><span class="p">;</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">age</span><span class="p">;</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5"></a>
+<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">sayHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(){</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="p">}</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10"></a>
+<a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Person</span><span class="p">(</span><span class="s2">&quot;Mark&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">18</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p>但是上面创建类的方式没有封装性，并且为了保证类不会被重复创建，可以将其放在一个立即执行函数中，代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span>
+<span class="normal"><a href="#__codelineno-22-12">12</a></span>
+<span class="normal"><a href="#__codelineno-22-13">13</a></span>
+<span class="normal"><a href="#__codelineno-22-14">14</a></span>
+<span class="normal"><a href="#__codelineno-22-15">15</a></span>
+<span class="normal"><a href="#__codelineno-22-16">16</a></span>
+<span class="normal"><a href="#__codelineno-22-17">17</a></span>
+<span class="normal"><a href="#__codelineno-22-18">18</a></span>
+<span class="normal"><a href="#__codelineno-22-19">19</a></span>
+<span class="normal"><a href="#__codelineno-22-20">20</a></span>
+<span class="normal"><a href="#__codelineno-22-21">21</a></span>
+<span class="normal"><a href="#__codelineno-22-22">22</a></span>
+<span class="normal"><a href="#__codelineno-22-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="w">        </span><span class="c1">// 在构造函数中，this表示新建的对象</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">name</span><span class="p">;</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">age</span><span class="p">;</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a>
+<a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sayHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(){</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11"></a>
+<a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="w">    </span><span class="c1">// 向原型中添加属性（方法）</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="w">    </span><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-22-16" name="__codelineno-22-16"></a>
+<a id="__codelineno-22-17" name="__codelineno-22-17"></a><span class="w">    </span><span class="c1">// 静态属性</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18"></a><span class="w">    </span><span class="nx">Person</span><span class="p">.</span><span class="nx">staticProperty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;xxx&quot;</span><span class="p">;</span>
+<a id="__codelineno-22-19" name="__codelineno-22-19"></a><span class="w">    </span><span class="c1">// 静态方法</span>
+<a id="__codelineno-22-20" name="__codelineno-22-20"></a><span class="w">    </span><span class="nx">Person</span><span class="p">.</span><span class="nx">staticMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<a id="__codelineno-22-21" name="__codelineno-22-21"></a>
+<a id="__codelineno-22-22" name="__codelineno-22-22"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">Person</span><span class="p">;</span>
+<a id="__codelineno-22-23" name="__codelineno-22-23"></a><span class="p">})();</span>
+</code></pre></div></td></tr></table></div>
+<p>为了使外界可以接受到这个立即执行函数的返回值，常会通过一个变量来接受，例如上面的<code>Person</code>变量，此时如果通过new关键字按照下面的方式，就是在创建一个<code>Person</code>类对象</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span>
+<span class="normal"><a href="#__codelineno-23-19">19</a></span>
+<span class="normal"><a href="#__codelineno-23-20">20</a></span>
+<span class="normal"><a href="#__codelineno-23-21">21</a></span>
+<span class="normal"><a href="#__codelineno-23-22">22</a></span>
+<span class="normal"><a href="#__codelineno-23-23">23</a></span>
+<span class="normal"><a href="#__codelineno-23-24">24</a></span>
+<span class="normal"><a href="#__codelineno-23-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="w">        </span><span class="c1">// 在构造函数中，this表示新建的对象</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">name</span><span class="p">;</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">age</span><span class="p">;</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a>
+<a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sayHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(){</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11"></a>
+<a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">    </span><span class="c1">// 为了保证所有对象共用一个方法，减少空间消耗，考虑向函数原型中添加属性（方法）</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">    </span><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-16" name="__codelineno-23-16"></a>
+<a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="w">    </span><span class="c1">// 静态属性</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18"></a><span class="w">    </span><span class="nx">Person</span><span class="p">.</span><span class="nx">staticProperty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;xxx&quot;</span><span class="p">;</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19"></a><span class="w">    </span><span class="c1">// 静态方法</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20"></a><span class="w">    </span><span class="nx">Person</span><span class="p">.</span><span class="nx">staticMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<a id="__codelineno-23-21" name="__codelineno-23-21"></a>
+<a id="__codelineno-23-22" name="__codelineno-23-22"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">Person</span><span class="p">;</span>
+<a id="__codelineno-23-23" name="__codelineno-23-23"></a><span class="p">})();</span>
+<a id="__codelineno-23-24" name="__codelineno-23-24"></a>
+<a id="__codelineno-23-25" name="__codelineno-23-25"></a><span class="kd">let</span><span class="w"> </span><span class="nx">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Person</span><span class="p">(</span><span class="s2">&quot;Mark&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">18</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p>在这种创建对象的方式中，如果想实现继承，就必须修改原型对象，例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-24-10">10</a></span>
+<span class="normal"><a href="#__codelineno-24-11">11</a></span>
+<span class="normal"><a href="#__codelineno-24-12">12</a></span>
+<span class="normal"><a href="#__codelineno-24-13">13</a></span>
+<span class="normal"><a href="#__codelineno-24-14">14</a></span>
+<span class="normal"><a href="#__codelineno-24-15">15</a></span>
+<span class="normal"><a href="#__codelineno-24-16">16</a></span>
+<span class="normal"><a href="#__codelineno-24-17">17</a></span>
+<span class="normal"><a href="#__codelineno-24-18">18</a></span>
+<span class="normal"><a href="#__codelineno-24-19">19</a></span>
+<span class="normal"><a href="#__codelineno-24-20">20</a></span>
+<span class="normal"><a href="#__codelineno-24-21">21</a></span>
+<span class="normal"><a href="#__codelineno-24-22">22</a></span>
+<span class="normal"><a href="#__codelineno-24-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Animal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">Animal</span><span class="p">(){</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5"></a>
+<a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">Animal</span><span class="p">;</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="p">})();</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8"></a>
+<a id="__codelineno-24-9" name="__codelineno-24-9"></a>
+<a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">Cat</span><span class="p">(){</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12"></a>
+<a id="__codelineno-24-13" name="__codelineno-24-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14"></a>
+<a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="w">    </span><span class="c1">// 继承Animal</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="w">    </span><span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Animal</span><span class="p">();</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17"></a>
+<a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">Cat</span><span class="p">;</span>
+<a id="__codelineno-24-19" name="__codelineno-24-19"></a><span class="p">})();</span>
+<a id="__codelineno-24-20" name="__codelineno-24-20"></a>
+<a id="__codelineno-24-21" name="__codelineno-24-21"></a><span class="kd">var</span><span class="w"> </span><span class="nx">cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Cat</span><span class="p">();</span>
+<a id="__codelineno-24-22" name="__codelineno-24-22"></a>
+<a id="__codelineno-24-23" name="__codelineno-24-23"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p>在控制台查看输出结果如下：</p>
+<p><a class="glightbox" href="4. JavaScript面向对象.assets\Snipaste_2024-11-05_22-26-40.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="4. JavaScript面向对象.assets\Snipaste_2024-11-05_22-26-40.png"></a></p>
+<h2 id="new">了解new运算符的过程<a class="headerlink" href="#new" title="Permanent link">&para;</a></h2>
+<p>资料来源：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new">new operator</a></p>
+<p>当使用<code>new</code>去调用一个函数时，这个函数将会作为构造函数调用，使用<code>new</code>调用函数时，将会执行下面的过程：</p>
+<ol>
+<li>创建一个普通的JavaScript对象（Object对象：<code>{}</code>）, 为了方便，称其为新对象</li>
+<li>将构造函数的<code>prototype</code>属性设置为新对象的原型</li>
+<li>使用实参来执行构造函数，并且将新对象设置为函数中的<code>this</code></li>
+<li>如果构造函数返回的是一个非原始值，则该值会作为<code>new</code>运算的返回值返回（此时相当于没有创建类对应的对象），如果构造函数的返回值是一个原始值或者没有指定返回值，则新的对象将会作为返回值返回，所以通常不会为构造函数指定返回值</li>
+</ol>
 
 
 
@@ -5000,7 +5428,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 4, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 5, 2024</span>
   </span>
 
     
@@ -5020,11 +5448,12 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="贡献者">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.536 5.536 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13v-1.75M0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20H0m24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9V20Z"/></svg>
       
     </span>
     <nav>
       
+        <a href="mailto:74664113+h0308@users.noreply.github.com">EPSDA</a>, 
         <a href="mailto:1848312235@qq.com">H0308</a>
     </nav>
   </span>

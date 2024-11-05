@@ -3641,6 +3641,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/5.%20JavaScript%E6%95%B0%E7%BB%84/5.%20JavaScript%E6%95%B0%E7%BB%84.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JavaScript数组
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5822,7 +5843,7 @@
 <p>使用哈希表映射时，在<code>tempSum</code>添加到哈希表和比较<code>tempSum == sum[i] - k</code>两个步骤之间，一定要先进行比较，而不是先添加，因为要保证<code>sum[i] - k</code>和<code>k</code>两个区间的数量关系是1:1，所以在求<code>sum[i] - k</code>时，至少要保证<code>k</code>所在的区间至少有一个元素，所以实际上在求<code>sum[i] - k</code>所在的区间时<code>i</code>的范围为<code>[0, i - 1]</code>。如果先让<code>tempSum</code>添加到哈希表，此时就会出现哈希表本来之前没有出现过<code>sum[i] - k</code>的前缀和，但是因为<code>tempSum</code>先进入了哈希表，导致<code>tempSum == sum[i] - k</code>成立从而更新了计数器。最典型的例子就是原数组为<code>nums = [1], k = 0</code>，如果先添加<code>tempSum</code>，就会导致<code>sum[i] - k</code>值为1，但是这个值原先并不存在，先添加到哈希表并更新计数器就会错误得得到结果为1</p>
 </li>
 <li>
-<p>如果整个数组的和为<code>k</code>，此时就会<code>出现sum[i] - k</code>值为0，但是哈希表存储的实际上是当前<code>[0, i - 1]</code>位置的前缀和，所以如果整个数组和为<code>k</code>，则说明<code>[0, i - 1]</code>区间中的所有值的和都是<code>k</code>，此时就意味着<code>sum[i] - k</code>的区间就是<code>[0, i - 1]</code>以外的区间，即一个不存在的区间，所以为了避免这种特殊情况，先在哈希表中存储前缀和为0计数器为1的映射关系</p>
+<p>如果整个数组的和为<code>k</code>，此时就会出现<code>sum[i] - k</code>值为0，但是哈希表存储的实际上是当前<code>[0, i - 1]</code>位置的前缀和，所以如果整个数组和为<code>k</code>，则说明<code>[0, i - 1]</code>区间中的所有值的和都是<code>k</code>，此时就意味着<code>sum[i] - k</code>的区间就是<code>[0, i - 1]</code>以外的区间，即一个不存在的区间，所以为了避免这种特殊情况，先在哈希表中存储前缀和为0计数器为1的映射关系</p>
 </li>
 </ol>
 <p><strong>思考问题：</strong></p>

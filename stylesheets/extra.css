@@ -127,6 +127,13 @@ pre code {
     background-color: var(--md-code-bg-color) !important;
 }
 
+.highlight .c1, /* 单行注释 */
+.highlight .cm  /* 多行注释 */ {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    /* font-style: italic; 可选：让注释变为斜体 */
+    color: #6a737d; /* 注释颜色 */
+}
+
 /* 为html元素添加平滑滚动效果 */
 html {
     scroll-behavior: smooth !important;

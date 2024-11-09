@@ -3,6 +3,11 @@
     src: url('../assets/fonts/MiSans-Regular.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'LXGWZhenKai';
+    src: url('../assets/fonts/LXGWZhenKai-Regular.ttf') format('truetype');
+}
+
 :root {
     --md-text-font: "MiSans"; 
     --code-font-color: #e96900;
@@ -24,8 +29,8 @@ blockquote {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'MiSans', sans-serif;
-    color: #21416c;
+    font-family: 'LXGWZhenKai', sans-serif;
+    color: #4da6da;
 }
 
 .particle {

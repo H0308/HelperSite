@@ -4,6 +4,10 @@
 这是一个学习内容记录网站，主要记录了作者学习的内容笔记，网站会根据使用情况进行修改，如果发现错误或者存在疑问请联系作者
 
 - 本网站不提供英文版
+- 本网站使用下面的几种字体：
+    1. 标题：[霞鹜臻楷](https://github.com/lxgw/LxgwZhenKai)
+    2. 内容（非代码）：[小米官方字体MiSans](https://hyperos.mi.com/font/zh/)
+    3. 代码：[JetBrains Mono](https://www.jetbrains.com/lp/mono/)
 
 !!! info "网站通知"
     1. Python快速入门、JavaScript快速入门和JavaScript与DOM基础会在2024年底下线，取而代之的是更全面的文档

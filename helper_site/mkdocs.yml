@@ -171,15 +171,19 @@ nav:
       - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md
     - JavaScript:
       - 入门:
-        - JavaScript快速入门: JavaScript基础知识/1. JavaScript快速入门/1. JavaScript快速入门.md
         - JavaScript与DOM基础: JavaScript基础知识/2. JavaScript与DOM基础/2. JavaScript与DOM基础.md
-      - 全面文档（待更新）:
+      - JavaScript语法基础:
         - JavaScript基本语法: JavaScript基础知识/1. JavaScript基础/JavaScript基础.md
         - JavaScript对象基础: JavaScript基础知识/2. JavaScript对象基础/2. JavaScript对象基础.md
         - JavaScript函数: JavaScript基础知识/3. JavaScript函数/3. JavaScript函数.md
         - JavaScript面向对象: JavaScript基础知识/4. JavaScript面向对象/4. JavaScript面向对象.md
         - JavaScript数组: JavaScript基础知识/5. JavaScript数组/5. JavaScript数组.md
         - JavaScript内建对象: JavaScript基础知识/6. JavaScript内建对象/6. JavaScript内建对象.md
+      - JavaScript与DOM和BOM操作:
+        - DOM和BOM介绍: JavaScript基础知识/7. DOM和BOM介绍/7. DOM和BOM介绍.md
+        - DOM操作: JavaScript基础知识/8. JavaScript与DOM操作/8. JavaScript与DOM操作.md
+        - BOM操作: JavaScript基础知识/9. JavaScript与BOM操作/9. JavaScript与BOM操作.md
+        - 贪吃蛇案例: JavaScript基础知识/10. 贪吃蛇案例/10. 贪吃蛇案例.md
   - MySQL:
     - MySQL基础: MySQL/MySQL基础使用/MySQL基础使用.md
   - 编程题目练习总结:

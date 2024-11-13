@@ -18,6 +18,10 @@
     
         -- 2024年10月16日
 
+    3. JavaScript快速入门文档下线，语法内容查看JavaScript语法基础
+
+        -- 2024年11月13日
+
 !!! abstract "使用指导"
     联系作者请访问[联系作者](https://www.helper-wiki.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html)
 

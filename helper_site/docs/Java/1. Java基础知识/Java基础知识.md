@@ -384,7 +384,8 @@ num = 11
 
 对于其余两个运算符`char`和`short`，`float`和`double`来说也是如此
 
-> 注意浮点数类型和整型相加不存在该问题
+!!! note
+    注意浮点数类型和整型相加不存在该问题
 
 ```java
 public class test_assignment {

@@ -3760,6 +3760,66 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      DOM的修改
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DOM的修改">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      在网页中添加元素节点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      在网页中删除元素节点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      替换网页中的元素节点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      元素节点的复制
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      样式修改
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4397,6 +4457,66 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      DOM的修改
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DOM的修改">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      在网页中添加元素节点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      在网页中删除元素节点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      替换网页中的元素节点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      元素节点的复制
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      样式修改
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4682,6 +4802,7 @@
 </div>
 <p>输出结果如下：</p>
 <p><a class="glightbox" href="8. JavaScript与DOM操作.assets/image-20241113164334356.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="8. JavaScript与DOM操作.assets/image-20241113164334356.png"/></a></p>
+<p>对于删除元素节点，可以调用元素节点对象的<code>remove()</code>方法，该方法没有参数，具体见<a href="">在页面中删除元素节点</a></p>
 <h2 id="_2">文本节点<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>在DOM中，网页中所有的文本内容都是文本节点对象，可以通过元素来获取其中的文本节点对象，但是通常不会这么做。在JavaScript中，可以直接通过元素去修改其中的文本，一般有三个属性用于修改文本：</p>
 <ol>
@@ -5118,6 +5239,311 @@
 <li>使用外部引入的标签<code>script.src</code>，并将标签放置到<code>body</code>标签的下方</li>
 <li>使用外部引入的标签<code>script.src</code>并加上<code>defer</code>属性，将标签放置到<code>head</code>标签内部</li>
 </ol>
+<h2 id="dom">DOM的修改<a class="headerlink" href="#dom" title="Permanent link">&para;</a></h2>
+<h3 id="_6">在网页中添加元素节点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>前面的操作都是针对网页中已有的节点，但是修改网页的内容不仅仅涉及到修改已有的内容，还包括新增新的内容，而新增内容就被称为DOM的修改</p>
+<p>在元素节点处提到，在DOM中可以通过<code>document</code>对象方法：<code>createElement()</code>创建元素节点，但是这个创建并不会将指定的节点添加到网页中，所以接下来就主要考虑如何将新增的元素节点插入到网页中</p>
+<p>在DOM中，有下面的方法可以将指定的元素节点添加到网页中：</p>
+<ol>
+<li><code>appendChild(待插入的新节点)</code>：元素对象方法，调用对象为父亲节点，表示在一个父亲节点中的最后一个孩子节点之后添加一个新的节点</li>
+<li><code>insertAdjacentElement()</code>：元素对象方法，表示在指定元素节点的指定位置添加一个新的节点，该方法有两个参数，第一个参数表示需要添加的位置，一共有四个值：</li>
+<li><code>beforeend</code>表示指定元素的尾标签的前方（即作为最后一个孩子节点）</li>
+<li><code>afterbegin</code>表示指定元素的开始标签的后方（即作为第一个孩子节点）</li>
+<li><code>beforebegin</code>表示指定元素的开始标签前方（即出现在指定元素前方作为其兄弟节点）</li>
+<li><code>afterend</code>表示指定元素的开始标签后方（即出现在指定元素后方作为其兄弟节点）</li>
+</ol>
+<p>第二个参数表示需要插入的新节点</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>需要注意，同一个新建的元素节点不可以同时插入到多个位置，如果插入到多个位置，则后设定的位置会作为最终位置，先前位置上相应的元素节点会被移除</p>
+</div>
+<p>例如下面的代码：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTML</label><label for="__tabbed_8_2">JavaScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-18-10">10</a></span>
+<span class="normal"><a href="#__codelineno-18-11">11</a></span>
+<span class="normal"><a href="#__codelineno-18-12">12</a></span>
+<span class="normal"><a href="#__codelineno-18-13">13</a></span>
+<span class="normal"><a href="#__codelineno-18-14">14</a></span>
+<span class="normal"><a href="#__codelineno-18-15">15</a></span>
+<span class="normal"><a href="#__codelineno-18-16">16</a></span>
+<span class="normal"><a href="#__codelineno-18-17">17</a></span>
+<span class="normal"><a href="#__codelineno-18-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;box&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9"></a>        <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;list&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>4<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14"></a>        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;test.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-19-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-19-10">10</a></span>
+<span class="normal"><a href="#__codelineno-19-11">11</a></span>
+<span class="normal"><a href="#__codelineno-19-12">12</a></span>
+<span class="normal"><a href="#__codelineno-19-13">13</a></span>
+<span class="normal"><a href="#__codelineno-19-14">14</a></span>
+<span class="normal"><a href="#__codelineno-19-15">15</a></span>
+<span class="normal"><a href="#__codelineno-19-16">16</a></span>
+<span class="normal"><a href="#__codelineno-19-17">17</a></span>
+<span class="normal"><a href="#__codelineno-19-18">18</a></span>
+<span class="normal"><a href="#__codelineno-19-19">19</a></span>
+<span class="normal"><a href="#__codelineno-19-20">20</a></span>
+<span class="normal"><a href="#__codelineno-19-21">21</a></span>
+<span class="normal"><a href="#__codelineno-19-22">22</a></span>
+<span class="normal"><a href="#__codelineno-19-23">23</a></span>
+<span class="normal"><a href="#__codelineno-19-24">24</a></span>
+<span class="normal"><a href="#__codelineno-19-25">25</a></span>
+<span class="normal"><a href="#__codelineno-19-26">26</a></span>
+<span class="normal"><a href="#__codelineno-19-27">27</a></span>
+<span class="normal"><a href="#__codelineno-19-28">28</a></span>
+<span class="normal"><a href="#__codelineno-19-29">29</a></span>
+<span class="normal"><a href="#__codelineno-19-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="c1">// appendChild</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="kd">let</span><span class="w"> </span><span class="nx">div</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">);</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="kd">let</span><span class="w"> </span><span class="nx">div1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="nx">div1</span><span class="p">.</span><span class="nx">innerText</span><span class="o">=</span><span class="s2">&quot;this is a span&quot;</span><span class="p">;</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="nx">div</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">div1</span><span class="p">);</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="c1">// insertAdjacentElement</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="kd">let</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;list&quot;</span><span class="p">);</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="kd">let</span><span class="w"> </span><span class="nx">li</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">);</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="c1">// 获取到最后一个节点的数值</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="kd">let</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Number</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">lastElementChild</span><span class="p">.</span><span class="nx">innerText</span><span class="p">);</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="nx">li</span><span class="p">.</span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="o">++</span><span class="nx">number</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="c1">// 作为最后一个孩子节点</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="nx">list</span><span class="p">.</span><span class="nx">insertAdjacentElement</span><span class="p">(</span><span class="s2">&quot;beforeend&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">li</span><span class="p">);</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15"></a>
+<a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="c1">// 作为第一个孩子节点</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="kd">let</span><span class="w"> </span><span class="nx">li1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">);</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="nx">li1</span><span class="p">.</span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="o">++</span><span class="nx">number</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="nx">list</span><span class="p">.</span><span class="nx">insertAdjacentElement</span><span class="p">(</span><span class="s2">&quot;afterbegin&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">li1</span><span class="p">);</span>
+<a id="__codelineno-19-20" name="__codelineno-19-20"></a>
+<a id="__codelineno-19-21" name="__codelineno-19-21"></a><span class="c1">// 作为ul的兄弟节点</span>
+<a id="__codelineno-19-22" name="__codelineno-19-22"></a><span class="kd">let</span><span class="w"> </span><span class="nx">span1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;span&quot;</span><span class="p">);</span>
+<a id="__codelineno-19-23" name="__codelineno-19-23"></a><span class="nx">span1</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;a href=&#39;javascript:;&#39;&gt;this is a link&lt;/a&gt;&quot;</span>
+<a id="__codelineno-19-24" name="__codelineno-19-24"></a><span class="c1">// 前方</span>
+<a id="__codelineno-19-25" name="__codelineno-19-25"></a><span class="nx">list</span><span class="p">.</span><span class="nx">insertAdjacentElement</span><span class="p">(</span><span class="s2">&quot;beforebegin&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">span1</span><span class="p">);</span>
+<a id="__codelineno-19-26" name="__codelineno-19-26"></a>
+<a id="__codelineno-19-27" name="__codelineno-19-27"></a><span class="c1">// 后方</span>
+<a id="__codelineno-19-28" name="__codelineno-19-28"></a><span class="kd">let</span><span class="w"> </span><span class="nx">span2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;span&quot;</span><span class="p">);</span>
+<a id="__codelineno-19-29" name="__codelineno-19-29"></a><span class="nx">span2</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">span1</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">;</span>
+<a id="__codelineno-19-30" name="__codelineno-19-30"></a><span class="nx">list</span><span class="p">.</span><span class="nx">insertAdjacentElement</span><span class="p">(</span><span class="s2">&quot;afterend&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">span2</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>添加结果如下：</p>
+<p><a class="glightbox" href="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_16-15-30.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_16-15-30.png" style="zoom:50%"></a></p>
+<h3 id="_7">在网页中删除元素节点<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>删除元素节点就需要用到元素节点对象的<code>remove()</code>方法</p>
+<p>例如下面的代码：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTML</label><label for="__tabbed_9_2">JavaScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-20-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-20-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-20-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-20-10">10</a></span>
+<span class="normal"><a href="#__codelineno-20-11">11</a></span>
+<span class="normal"><a href="#__codelineno-20-12">12</a></span>
+<span class="normal"><a href="#__codelineno-20-13">13</a></span>
+<span class="normal"><a href="#__codelineno-20-14">14</a></span>
+<span class="normal"><a href="#__codelineno-20-15">15</a></span>
+<span class="normal"><a href="#__codelineno-20-16">16</a></span>
+<span class="normal"><a href="#__codelineno-20-17">17</a></span>
+<span class="normal"><a href="#__codelineno-20-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;box&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9"></a>        <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;list&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>4<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-20-14" name="__codelineno-20-14"></a>        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-20-16" name="__codelineno-20-16"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-20-17" name="__codelineno-20-17"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;test.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a id="__codelineno-20-18" name="__codelineno-20-18"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;list&quot;</span><span class="p">);</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="kd">let</span><span class="w"> </span><span class="nx">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">list</span><span class="p">.</span><span class="nx">firstElementChild</span><span class="p">;</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="nx">child</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>删除结果如下：</p>
+<p><a class="glightbox" href="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_16-44-22.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_16-44-22.png" style="zoom:70%"></a></p>
+<h3 id="_8">替换网页中的元素节点<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>替换网页中的元素节点可以使用元素节点对象方法：<code>replaceWith()</code>，该方法有一个参数，表示用于替换的元素节点对象，表示使用参数中的元素节点替换调用元素节点对象</p>
+<p>例如下面的代码：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">HTML</label><label for="__tabbed_10_2">JavaScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span>
+<span class="normal"><a href="#__codelineno-22-12">12</a></span>
+<span class="normal"><a href="#__codelineno-22-13">13</a></span>
+<span class="normal"><a href="#__codelineno-22-14">14</a></span>
+<span class="normal"><a href="#__codelineno-22-15">15</a></span>
+<span class="normal"><a href="#__codelineno-22-16">16</a></span>
+<span class="normal"><a href="#__codelineno-22-17">17</a></span>
+<span class="normal"><a href="#__codelineno-22-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;box&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9"></a>        <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;list&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>4<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14"></a>        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-22-16" name="__codelineno-22-16"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-22-17" name="__codelineno-22-17"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;test.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
+<span class="normal"><a href="#__codelineno-23-2">2</a></span>
+<span class="normal"><a href="#__codelineno-23-3">3</a></span>
+<span class="normal"><a href="#__codelineno-23-4">4</a></span>
+<span class="normal"><a href="#__codelineno-23-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">div</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">);</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="kd">let</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">div</span><span class="p">.</span><span class="nx">firstElementChild</span><span class="p">;</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="kd">let</span><span class="w"> </span><span class="nx">para</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">);</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="nx">para</span><span class="p">.</span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;this is a paragraph, using to replace unordered list&quot;</span><span class="p">;</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="nx">list</span><span class="p">.</span><span class="nx">replaceWith</span><span class="p">(</span><span class="nx">para</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>替换结果如下：</p>
+<p><a class="glightbox" href="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_17-40-48.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_17-40-48.png"></a></p>
+<h3 id="_9">元素节点的复制<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>在DOM中，如果想对某一个节点进行赋值，可以使用元素节点对象方法：<code>cloneNode()</code>，该函数有一个参数，该参数值为<code>true</code>或者<code>false</code>，表示是否复制当前元素节点对象的子节点对象</p>
+<p>例如下面的代码：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">HTML</label><label for="__tabbed_11_2">JavaScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-24-10">10</a></span>
+<span class="normal"><a href="#__codelineno-24-11">11</a></span>
+<span class="normal"><a href="#__codelineno-24-12">12</a></span>
+<span class="normal"><a href="#__codelineno-24-13">13</a></span>
+<span class="normal"><a href="#__codelineno-24-14">14</a></span>
+<span class="normal"><a href="#__codelineno-24-15">15</a></span>
+<span class="normal"><a href="#__codelineno-24-16">16</a></span>
+<span class="normal"><a href="#__codelineno-24-17">17</a></span>
+<span class="normal"><a href="#__codelineno-24-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;box&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9"></a>        <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;list&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>4<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14"></a>        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;test.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
+<span class="normal"><a href="#__codelineno-25-2">2</a></span>
+<span class="normal"><a href="#__codelineno-25-3">3</a></span>
+<span class="normal"><a href="#__codelineno-25-4">4</a></span>
+<span class="normal"><a href="#__codelineno-25-5">5</a></span>
+<span class="normal"><a href="#__codelineno-25-6">6</a></span>
+<span class="normal"><a href="#__codelineno-25-7">7</a></span>
+<span class="normal"><a href="#__codelineno-25-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;list&quot;</span><span class="p">);</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="kd">let</span><span class="w"> </span><span class="nx">list1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">list</span><span class="p">.</span><span class="nx">firstElementChild</span><span class="p">;</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="c1">// 不包含节点内部的内容，因为文本节点属于该节点的子节点</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="kd">let</span><span class="w"> </span><span class="nx">newNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">list1</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">();</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="nx">list</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">newNode</span><span class="p">);</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6"></a><span class="c1">// 包含节点内部的内容</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="kd">let</span><span class="w"> </span><span class="nx">newNode1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">list1</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="nx">list</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">newNode1</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>复制结果如下：</p>
+<p><a class="glightbox" href="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_17-47-17.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_17-47-17.png" style="zoom:70%"></a></p>
+<h2 id="_10">样式修改<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 
 
 

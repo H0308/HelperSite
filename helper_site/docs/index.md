@@ -22,6 +22,10 @@
 
         -- 2024年11月13日
 
+    4. JavaScript与DOM基础文档下线，具体内容见JavaScript与DOM和BOM操作系列文档
+
+        -- 2024年11月15日
+
 !!! abstract "使用指导"
     联系作者请访问[联系作者](https://www.helper-wiki.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html)
 

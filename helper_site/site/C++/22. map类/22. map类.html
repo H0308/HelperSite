@@ -4743,178 +4743,7 @@
 <p>基本使用与map类和multiset类似，不再做演示</p>
 <h3 id="_1">题目练习<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <h4 id="_2">随机链表的复制<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
-<p>题目链接：<a href="https://leetcode.cn/problems/copy-list-with-random-pointer/description/">138. 随机链表的复制 - 力扣（LeetCode）</a></p>
-<div class="admonition quote">
-<p class="admonition-title">Quote</p>
-<p>给你一个长度为 <code>n</code> 的链表，每个节点包含一个额外增加的随机指针 <code>random</code> ，该指针可以指向链表中的任何节点或空节点。
-构造这个链表的<a href="https://baike.baidu.com/item/深拷贝/22785317?fr=aladdin"><strong>深拷贝</strong></a>。 深拷贝应该正好由 <code>n</code> 个<strong>全新</strong>节点组成，其中每个新节点的值都设为其对应的原节点的值。新节点的 <code>next</code> 指针和 <code>random</code> 指针也都应指向复制链表中的新节点，并使原链表和复制链表中的这些指针能够表示相同的链表状态。<strong>复制链表中的指针都不应指向原链表中的节点</strong>。例如，如果原链表中有 <code>X</code> 和 <code>Y</code> 两个节点，其中 <code>X.random --&gt; Y</code> 。那么在复制链表中对应的两个节点 <code>x</code> 和 <code>y</code> ，同样有 <code>x.random --&gt; y</code> 。
-返回复制链表的头节点。
-用一个由 <code>n</code> 个节点组成的链表来表示输入/输出中的链表。每个节点用一个 <code>[val, random_index]</code> 表示：
-<code>val</code>：一个表示 <code>Node.val</code> 的整数。
-<code>random_index</code>：随机指针指向的节点索引（范围从 <code>0</code> 到 <code>n-1</code>）；如果不指向任何节点，则为  <code>null</code> 。
-你的代码<strong>只</strong>接受原链表的头节点 <code>head</code> 作为传入参数。</p>
-</div>
-<p>思路解析：</p>
-<p>原来的思路是拷贝每一个节点，将拷贝节点链接到对应原节点的后方，再通过拷贝节点和原节点之间的规律进行链接构造一个新的链表，最后将新的链表从原链表中切除下来，示意图如下：</p>
-<p><a class="glightbox" href="22. map类.assets/image-20240801222539165.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="22. map类.assets/image-20240801222539165.png" alt="image-20240801222539165" /></a></p>
-<p>有了map之后，可以考虑构建原节点和新节点之间的对应关系，即通过原节点（key）找对应的拷贝节点（value），基本思路没有改变</p>
-<p>参考代码：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-7-10">10</a></span>
-<span class="normal"><a href="#__codelineno-7-11">11</a></span>
-<span class="normal"><a href="#__codelineno-7-12">12</a></span>
-<span class="normal"><a href="#__codelineno-7-13">13</a></span>
-<span class="normal"><a href="#__codelineno-7-14">14</a></span>
-<span class="normal"><a href="#__codelineno-7-15">15</a></span>
-<span class="normal"><a href="#__codelineno-7-16">16</a></span>
-<span class="normal"><a href="#__codelineno-7-17">17</a></span>
-<span class="normal"><a href="#__codelineno-7-18">18</a></span>
-<span class="normal"><a href="#__codelineno-7-19">19</a></span>
-<span class="normal"><a href="#__codelineno-7-20">20</a></span>
-<span class="normal"><a href="#__codelineno-7-21">21</a></span>
-<span class="normal"><a href="#__codelineno-7-22">22</a></span>
-<span class="normal"><a href="#__codelineno-7-23">23</a></span>
-<span class="normal"><a href="#__codelineno-7-24">24</a></span>
-<span class="normal"><a href="#__codelineno-7-25">25</a></span>
-<span class="normal"><a href="#__codelineno-7-26">26</a></span>
-<span class="normal"><a href="#__codelineno-7-27">27</a></span>
-<span class="normal"><a href="#__codelineno-7-28">28</a></span>
-<span class="normal"><a href="#__codelineno-7-29">29</a></span>
-<span class="normal"><a href="#__codelineno-7-30">30</a></span>
-<span class="normal"><a href="#__codelineno-7-31">31</a></span>
-<span class="normal"><a href="#__codelineno-7-32">32</a></span>
-<span class="normal"><a href="#__codelineno-7-33">33</a></span>
-<span class="normal"><a href="#__codelineno-7-34">34</a></span>
-<span class="normal"><a href="#__codelineno-7-35">35</a></span>
-<span class="normal"><a href="#__codelineno-7-36">36</a></span>
-<span class="normal"><a href="#__codelineno-7-37">37</a></span>
-<span class="normal"><a href="#__codelineno-7-38">38</a></span>
-<span class="normal"><a href="#__codelineno-7-39">39</a></span>
-<span class="normal"><a href="#__codelineno-7-40">40</a></span>
-<span class="normal"><a href="#__codelineno-7-41">41</a></span>
-<span class="normal"><a href="#__codelineno-7-42">42</a></span>
-<span class="normal"><a href="#__codelineno-7-43">43</a></span>
-<span class="normal"><a href="#__codelineno-7-44">44</a></span>
-<span class="normal"><a href="#__codelineno-7-45">45</a></span>
-<span class="normal"><a href="#__codelineno-7-46">46</a></span>
-<span class="normal"><a href="#__codelineno-7-47">47</a></span>
-<span class="normal"><a href="#__codelineno-7-48">48</a></span>
-<span class="normal"><a href="#__codelineno-7-49">49</a></span>
-<span class="normal"><a href="#__codelineno-7-50">50</a></span>
-<span class="normal"><a href="#__codelineno-7-51">51</a></span>
-<span class="normal"><a href="#__codelineno-7-52">52</a></span>
-<span class="normal"><a href="#__codelineno-7-53">53</a></span>
-<span class="normal"><a href="#__codelineno-7-54">54</a></span>
-<span class="normal"><a href="#__codelineno-7-55">55</a></span>
-<span class="normal"><a href="#__codelineno-7-56">56</a></span>
-<span class="normal"><a href="#__codelineno-7-57">57</a></span>
-<span class="normal"><a href="#__codelineno-7-58">58</a></span>
-<span class="normal"><a href="#__codelineno-7-59">59</a></span>
-<span class="normal"><a href="#__codelineno-7-60">60</a></span>
-<span class="normal"><a href="#__codelineno-7-61">61</a></span>
-<span class="normal"><a href="#__codelineno-7-62">62</a></span>
-<span class="normal"><a href="#__codelineno-7-63">63</a></span>
-<span class="normal"><a href="#__codelineno-7-64">64</a></span>
-<span class="normal"><a href="#__codelineno-7-65">65</a></span>
-<span class="normal"><a href="#__codelineno-7-66">66</a></span>
-<span class="normal"><a href="#__codelineno-7-67">67</a></span>
-<span class="normal"><a href="#__codelineno-7-68">68</a></span>
-<span class="normal"><a href="#__codelineno-7-69">69</a></span>
-<span class="normal"><a href="#__codelineno-7-70">70</a></span>
-<span class="normal"><a href="#__codelineno-7-71">71</a></span>
-<span class="normal"><a href="#__codelineno-7-72">72</a></span>
-<span class="normal"><a href="#__codelineno-7-73">73</a></span>
-<span class="normal"><a href="#__codelineno-7-74">74</a></span>
-<span class="normal"><a href="#__codelineno-7-75">75</a></span>
-<span class="normal"><a href="#__codelineno-7-76">76</a></span>
-<span class="normal"><a href="#__codelineno-7-77">77</a></span>
-<span class="normal"><a href="#__codelineno-7-78">78</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="cm">/*</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="cm"> * @lc app=leetcode.cn id=138 lang=cpp</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="cm"> *</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="cm"> * [138] 随机链表的复制</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="cm"> */</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6"></a>
-<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="c1">// @lc code=start</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="cm">/*</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="cm">/*</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="cm">// Definition for a Node.</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="cm">class Node {</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="cm">public:</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="cm">    int val;</span>
-<a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="cm">    Node* next;</span>
-<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="cm">    Node* random;</span>
-<a id="__codelineno-7-16" name="__codelineno-7-16"></a>
-<a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="cm">    Node(int _val) {</span>
-<a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="cm">        val = _val;</span>
-<a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="cm">        next = NULL;</span>
-<a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="cm">        random = NULL;</span>
-<a id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="cm">    }</span>
-<a id="__codelineno-7-22" name="__codelineno-7-22"></a><span class="cm">};</span>
-<a id="__codelineno-7-23" name="__codelineno-7-23"></a><span class="cm">*/</span>
-<a id="__codelineno-7-24" name="__codelineno-7-24"></a>
-<a id="__codelineno-7-25" name="__codelineno-7-25"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span>
-<a id="__codelineno-7-26" name="__codelineno-7-26"></a><span class="p">{</span>
-<a id="__codelineno-7-27" name="__codelineno-7-27"></a><span class="k">public</span><span class="o">:</span>
-<a id="__codelineno-7-28" name="__codelineno-7-28"></a><span class="w">    </span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">copyRandomList</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">head</span><span class="p">)</span>
-<a id="__codelineno-7-29" name="__codelineno-7-29"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-7-30" name="__codelineno-7-30"></a><span class="w">        </span><span class="c1">// 创建对应关系的map</span>
-<a id="__codelineno-7-31" name="__codelineno-7-31"></a><span class="w">        </span><span class="n">map</span><span class="o">&lt;</span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">nodeCopy</span><span class="p">;</span>
-<a id="__codelineno-7-32" name="__codelineno-7-32"></a><span class="w">        </span><span class="c1">// 拷贝节点</span>
-<a id="__codelineno-7-33" name="__codelineno-7-33"></a><span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
-<a id="__codelineno-7-34" name="__codelineno-7-34"></a><span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">copyHead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<a id="__codelineno-7-35" name="__codelineno-7-35"></a><span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">copyTail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<a id="__codelineno-7-36" name="__codelineno-7-36"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
-<a id="__codelineno-7-37" name="__codelineno-7-37"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-7-38" name="__codelineno-7-38"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">copyHead</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span>
-<a id="__codelineno-7-39" name="__codelineno-7-39"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-7-40" name="__codelineno-7-40"></a><span class="w">                </span><span class="c1">// 头结点为空证明没有节点</span>
-<a id="__codelineno-7-41" name="__codelineno-7-41"></a><span class="w">                </span><span class="n">copyHead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copyTail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
-<a id="__codelineno-7-42" name="__codelineno-7-42"></a><span class="w">            </span><span class="p">}</span>
-<a id="__codelineno-7-43" name="__codelineno-7-43"></a><span class="w">            </span><span class="k">else</span>
-<a id="__codelineno-7-44" name="__codelineno-7-44"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-7-45" name="__codelineno-7-45"></a><span class="w">                </span><span class="c1">// 否则将copyTail链接到当前节点</span>
-<a id="__codelineno-7-46" name="__codelineno-7-46"></a><span class="w">                </span><span class="n">copyTail</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
-<a id="__codelineno-7-47" name="__codelineno-7-47"></a><span class="w">                </span><span class="n">copyTail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copyTail</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-<a id="__codelineno-7-48" name="__codelineno-7-48"></a><span class="w">            </span><span class="p">}</span>
-<a id="__codelineno-7-49" name="__codelineno-7-49"></a>
-<a id="__codelineno-7-50" name="__codelineno-7-50"></a><span class="w">            </span><span class="c1">// 建立原节点和拷贝节点的键值对</span>
-<a id="__codelineno-7-51" name="__codelineno-7-51"></a><span class="w">            </span><span class="n">nodeCopy</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copyTail</span><span class="p">;</span>
-<a id="__codelineno-7-52" name="__codelineno-7-52"></a>
-<a id="__codelineno-7-53" name="__codelineno-7-53"></a><span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-<a id="__codelineno-7-54" name="__codelineno-7-54"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-7-55" name="__codelineno-7-55"></a>
-<a id="__codelineno-7-56" name="__codelineno-7-56"></a><span class="w">        </span><span class="c1">// 处理random</span>
-<a id="__codelineno-7-57" name="__codelineno-7-57"></a><span class="w">        </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
-<a id="__codelineno-7-58" name="__codelineno-7-58"></a><span class="w">        </span><span class="n">copyTail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copyHead</span><span class="p">;</span>
-<a id="__codelineno-7-59" name="__codelineno-7-59"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
-<a id="__codelineno-7-60" name="__codelineno-7-60"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-7-61" name="__codelineno-7-61"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">random</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span>
-<a id="__codelineno-7-62" name="__codelineno-7-62"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-7-63" name="__codelineno-7-63"></a><span class="w">                </span><span class="n">copyTail</span><span class="o">-&gt;</span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<a id="__codelineno-7-64" name="__codelineno-7-64"></a><span class="w">            </span><span class="p">}</span>
-<a id="__codelineno-7-65" name="__codelineno-7-65"></a><span class="w">            </span><span class="k">else</span>
-<a id="__codelineno-7-66" name="__codelineno-7-66"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-7-67" name="__codelineno-7-67"></a><span class="w">                </span><span class="c1">// 将拷贝节点的random链接到当前节点的random指向的节点的拷贝节点</span>
-<a id="__codelineno-7-68" name="__codelineno-7-68"></a><span class="w">                </span><span class="n">copyTail</span><span class="o">-&gt;</span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nodeCopy</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">random</span><span class="p">];</span>
-<a id="__codelineno-7-69" name="__codelineno-7-69"></a><span class="w">            </span><span class="p">}</span>
-<a id="__codelineno-7-70" name="__codelineno-7-70"></a>
-<a id="__codelineno-7-71" name="__codelineno-7-71"></a><span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-<a id="__codelineno-7-72" name="__codelineno-7-72"></a><span class="w">            </span><span class="n">copyTail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copyTail</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-<a id="__codelineno-7-73" name="__codelineno-7-73"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-7-74" name="__codelineno-7-74"></a>
-<a id="__codelineno-7-75" name="__codelineno-7-75"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">copyHead</span><span class="p">;</span>
-<a id="__codelineno-7-76" name="__codelineno-7-76"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-7-77" name="__codelineno-7-77"></a><span class="p">};</span>
-<a id="__codelineno-7-78" name="__codelineno-7-78"></a><span class="c1">// @lc code=end</span>
-</code></pre></div></td></tr></table></div>
+<p>本题可以使用map进行优化，具体见<a href="">链表算法部分</a></p>
 <h4 id="k">前K个高频元素<a class="headerlink" href="#k" title="Permanent link">&para;</a></h4>
 <p>题目链接：<a href="https://leetcode.cn/problems/top-k-frequent-elements/description/">347. 前 K 个高频元素 - 力扣（LeetCode）</a></p>
 <div class="admonition note">
@@ -4924,148 +4753,148 @@
 <p>思路解析：</p>
 <p>首先理解题目，<strong>出现频率前<code>k</code>高的元素</strong>表示在所有数字出现的频率中，排在前<code>k</code>个高频率对应的元素（例如出现频率有9、8、5、2、1，则前2个高频率就是出现频率9和8对应的元素），<strong>注意不是找出现的频率大于<code>k</code>的元素（出现频率高于<code>k</code>）</strong></p>
 <p>接着分析题目，首先可以考虑使用map对数组中的数值及出现频率进行统计，因为map可以去重+排序，所以插入到<code>map</code>中的数值为<code>pair</code>类型的键值对，第一个元素为出现的数字，第二个元素为出现的频率。</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
-<span class="normal"><a href="#__codelineno-8-2">2</a></span>
-<span class="normal"><a href="#__codelineno-8-3">3</a></span>
-<span class="normal"><a href="#__codelineno-8-4">4</a></span>
-<span class="normal"><a href="#__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="p">{</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="n">m</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">++</span><span class="p">;</span><span class="c1">// 插入并计数</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span>
+<span class="normal"><a href="#__codelineno-7-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="p">{</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">    </span><span class="n">m</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">++</span><span class="p">;</span><span class="c1">// 插入并计数</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>因为要求出出现频率前<code>k</code>高的元素，所以需要按照出现频率对map中的元素进行排序，但是map不能直接使用<code>sort</code>进行排序，因为<code>sort</code>只支持随机访问迭代器，可以考虑将map中的键值对插入到vector中再进行排序，排序时需要按照指定的方式进行排序</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-9-10">10</a></span>
-<span class="normal"><a href="#__codelineno-9-11">11</a></span>
-<span class="normal"><a href="#__codelineno-9-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1">// 比较仿函数</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="k">struct</span><span class="w"> </span><span class="nc">Compare</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="p">{</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">p2</span><span class="p">)</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="p">};</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="c1">// 插入到vector中排序</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Compare</span><span class="p">());</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1">// 比较仿函数</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="k">struct</span><span class="w"> </span><span class="nc">Compare</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="p">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">p2</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="p">};</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="c1">// 插入到vector中排序</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Compare</span><span class="p">());</span>
 </code></pre></div></td></tr></table></div>
 <p>此时<code>v</code>中存储的就是按照出现频率由高到低的顺序的键值对，求出前<code>k</code>个只需要遍历<code>v</code>，并且遍历次数满足<code>k</code>次即可</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
-<span class="normal"><a href="#__codelineno-10-2">2</a></span>
-<span class="normal"><a href="#__codelineno-10-3">3</a></span>
-<span class="normal"><a href="#__codelineno-10-4">4</a></span>
-<span class="normal"><a href="#__codelineno-10-5">5</a></span>
-<span class="normal"><a href="#__codelineno-10-6">6</a></span>
-<span class="normal"><a href="#__codelineno-10-7">7</a></span>
-<span class="normal"><a href="#__codelineno-10-8">8</a></span>
-<span class="normal"><a href="#__codelineno-10-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="k">while</span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="p">{</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">    </span><span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">);</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">    </span><span class="n">it</span><span class="o">++</span><span class="p">;</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">    </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#__codelineno-9-6">6</a></span>
+<span class="normal"><a href="#__codelineno-9-7">7</a></span>
+<span class="normal"><a href="#__codelineno-9-8">8</a></span>
+<span class="normal"><a href="#__codelineno-9-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="k">while</span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="p">{</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span><span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">);</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">    </span><span class="n">it</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">    </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>参考代码：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-11-10">10</a></span>
-<span class="normal"><a href="#__codelineno-11-11">11</a></span>
-<span class="normal"><a href="#__codelineno-11-12">12</a></span>
-<span class="normal"><a href="#__codelineno-11-13">13</a></span>
-<span class="normal"><a href="#__codelineno-11-14">14</a></span>
-<span class="normal"><a href="#__codelineno-11-15">15</a></span>
-<span class="normal"><a href="#__codelineno-11-16">16</a></span>
-<span class="normal"><a href="#__codelineno-11-17">17</a></span>
-<span class="normal"><a href="#__codelineno-11-18">18</a></span>
-<span class="normal"><a href="#__codelineno-11-19">19</a></span>
-<span class="normal"><a href="#__codelineno-11-20">20</a></span>
-<span class="normal"><a href="#__codelineno-11-21">21</a></span>
-<span class="normal"><a href="#__codelineno-11-22">22</a></span>
-<span class="normal"><a href="#__codelineno-11-23">23</a></span>
-<span class="normal"><a href="#__codelineno-11-24">24</a></span>
-<span class="normal"><a href="#__codelineno-11-25">25</a></span>
-<span class="normal"><a href="#__codelineno-11-26">26</a></span>
-<span class="normal"><a href="#__codelineno-11-27">27</a></span>
-<span class="normal"><a href="#__codelineno-11-28">28</a></span>
-<span class="normal"><a href="#__codelineno-11-29">29</a></span>
-<span class="normal"><a href="#__codelineno-11-30">30</a></span>
-<span class="normal"><a href="#__codelineno-11-31">31</a></span>
-<span class="normal"><a href="#__codelineno-11-32">32</a></span>
-<span class="normal"><a href="#__codelineno-11-33">33</a></span>
-<span class="normal"><a href="#__codelineno-11-34">34</a></span>
-<span class="normal"><a href="#__codelineno-11-35">35</a></span>
-<span class="normal"><a href="#__codelineno-11-36">36</a></span>
-<span class="normal"><a href="#__codelineno-11-37">37</a></span>
-<span class="normal"><a href="#__codelineno-11-38">38</a></span>
-<span class="normal"><a href="#__codelineno-11-39">39</a></span>
-<span class="normal"><a href="#__codelineno-11-40">40</a></span>
-<span class="normal"><a href="#__codelineno-11-41">41</a></span>
-<span class="normal"><a href="#__codelineno-11-42">42</a></span>
-<span class="normal"><a href="#__codelineno-11-43">43</a></span>
-<span class="normal"><a href="#__codelineno-11-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="cm">/*</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="cm"> * @lc app=leetcode.cn id=347 lang=cpp</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="cm"> *</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="cm"> * [347] 前 K 个高频元素</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="cm"> */</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6"></a>
-<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="c1">// @lc code=start</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="p">{</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="k">public</span><span class="o">:</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">    </span><span class="c1">// 比较仿函数</span>
-<a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Compare</span>
-<a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p2</span><span class="p">)</span>
-<a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
-<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">topKFrequent</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nums</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
-<a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">        </span><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
-<a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span>
-<a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">            </span><span class="n">m</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-<a id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-11-26" name="__codelineno-11-26"></a>
-<a id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="w">        </span><span class="c1">// 插入到vector中排序</span>
-<a id="__codelineno-11-28" name="__codelineno-11-28"></a><span class="w">        </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-<a id="__codelineno-11-29" name="__codelineno-11-29"></a><span class="w">        </span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Compare</span><span class="p">());</span>
-<a id="__codelineno-11-30" name="__codelineno-11-30"></a>
-<a id="__codelineno-11-31" name="__codelineno-11-31"></a><span class="w">        </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
-<a id="__codelineno-11-32" name="__codelineno-11-32"></a><span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-<a id="__codelineno-11-33" name="__codelineno-11-33"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-11-34" name="__codelineno-11-34"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
-<a id="__codelineno-11-35" name="__codelineno-11-35"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-11-36" name="__codelineno-11-36"></a><span class="w">            </span><span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">);</span>
-<a id="__codelineno-11-37" name="__codelineno-11-37"></a><span class="w">            </span><span class="n">it</span><span class="o">++</span><span class="p">;</span>
-<a id="__codelineno-11-38" name="__codelineno-11-38"></a><span class="w">            </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
-<a id="__codelineno-11-39" name="__codelineno-11-39"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-11-40" name="__codelineno-11-40"></a>
-<a id="__codelineno-11-41" name="__codelineno-11-41"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
-<a id="__codelineno-11-42" name="__codelineno-11-42"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-11-43" name="__codelineno-11-43"></a><span class="p">};</span>
-<a id="__codelineno-11-44" name="__codelineno-11-44"></a><span class="c1">// @lc code=end</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span>
+<span class="normal"><a href="#__codelineno-10-18">18</a></span>
+<span class="normal"><a href="#__codelineno-10-19">19</a></span>
+<span class="normal"><a href="#__codelineno-10-20">20</a></span>
+<span class="normal"><a href="#__codelineno-10-21">21</a></span>
+<span class="normal"><a href="#__codelineno-10-22">22</a></span>
+<span class="normal"><a href="#__codelineno-10-23">23</a></span>
+<span class="normal"><a href="#__codelineno-10-24">24</a></span>
+<span class="normal"><a href="#__codelineno-10-25">25</a></span>
+<span class="normal"><a href="#__codelineno-10-26">26</a></span>
+<span class="normal"><a href="#__codelineno-10-27">27</a></span>
+<span class="normal"><a href="#__codelineno-10-28">28</a></span>
+<span class="normal"><a href="#__codelineno-10-29">29</a></span>
+<span class="normal"><a href="#__codelineno-10-30">30</a></span>
+<span class="normal"><a href="#__codelineno-10-31">31</a></span>
+<span class="normal"><a href="#__codelineno-10-32">32</a></span>
+<span class="normal"><a href="#__codelineno-10-33">33</a></span>
+<span class="normal"><a href="#__codelineno-10-34">34</a></span>
+<span class="normal"><a href="#__codelineno-10-35">35</a></span>
+<span class="normal"><a href="#__codelineno-10-36">36</a></span>
+<span class="normal"><a href="#__codelineno-10-37">37</a></span>
+<span class="normal"><a href="#__codelineno-10-38">38</a></span>
+<span class="normal"><a href="#__codelineno-10-39">39</a></span>
+<span class="normal"><a href="#__codelineno-10-40">40</a></span>
+<span class="normal"><a href="#__codelineno-10-41">41</a></span>
+<span class="normal"><a href="#__codelineno-10-42">42</a></span>
+<span class="normal"><a href="#__codelineno-10-43">43</a></span>
+<span class="normal"><a href="#__codelineno-10-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cm">/*</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="cm"> * @lc app=leetcode.cn id=347 lang=cpp</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="cm"> *</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="cm"> * [347] 前 K 个高频元素</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="cm"> */</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="c1">// @lc code=start</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="p">{</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">    </span><span class="c1">// 比较仿函数</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Compare</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p2</span><span class="p">)</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="w">    </span><span class="p">};</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">topKFrequent</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nums</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="w">        </span><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24"></a><span class="w">            </span><span class="n">m</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26"></a>
+<a id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="w">        </span><span class="c1">// 插入到vector中排序</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="w">        </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29"></a><span class="w">        </span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Compare</span><span class="p">());</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30"></a>
+<a id="__codelineno-10-31" name="__codelineno-10-31"></a><span class="w">        </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32"></a><span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-10-34" name="__codelineno-10-34"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36"></a><span class="w">            </span><span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">);</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37"></a><span class="w">            </span><span class="n">it</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-10-38" name="__codelineno-10-38"></a><span class="w">            </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-10-39" name="__codelineno-10-39"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-10-40" name="__codelineno-10-40"></a>
+<a id="__codelineno-10-41" name="__codelineno-10-41"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<a id="__codelineno-10-42" name="__codelineno-10-42"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-43" name="__codelineno-10-43"></a><span class="p">};</span>
+<a id="__codelineno-10-44" name="__codelineno-10-44"></a><span class="c1">// @lc code=end</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="k_1">前K个高频单词<a class="headerlink" href="#k_1" title="Permanent link">&para;</a></h4>
 <p>题目链接：<a href="https://leetcode.cn/problems/top-k-frequent-words/description/">692. 前K个高频单词 - 力扣（LeetCode）</a></p>
@@ -5076,102 +4905,102 @@
 </div>
 <p>思路解析：</p>
 <p>本题和上一题的思路基本一致，但是需要注意一个题目要求<strong>如果不同的单词有相同出现频率，按字典顺序排序</strong>，如果本题直接照搬前一题的思路，最后会出现一个问题：当出现相同出现频率的单词时，会因为<code>sort</code>的不稳定性导致排序之后的出现相同出现频率的单词顺序发生了改变，在map插入统计的过程中其实已经按照了字典顺序排序，只是因为排序的不稳定导致，所以可以考虑两种方案：1. 使用稳定的排序函数<code>stable_sort()</code> 2. 改变排序的逻辑：按照出现频率进行比较，出现频率大的排在前面，如果出现频率相同，则按照ASCII码进行比较排序</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
-<span class="normal"><a href="#__codelineno-12-2">2</a></span>
-<span class="normal"><a href="#__codelineno-12-3">3</a></span>
-<span class="normal"><a href="#__codelineno-12-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="kt">bool</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">p2</span><span class="p">)</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="p">{</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">first</span><span class="p">);</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="kt">bool</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">p2</span><span class="p">)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">first</span><span class="p">);</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>参考代码：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-13-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-13-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-13-10">10</a></span>
-<span class="normal"><a href="#__codelineno-13-11">11</a></span>
-<span class="normal"><a href="#__codelineno-13-12">12</a></span>
-<span class="normal"><a href="#__codelineno-13-13">13</a></span>
-<span class="normal"><a href="#__codelineno-13-14">14</a></span>
-<span class="normal"><a href="#__codelineno-13-15">15</a></span>
-<span class="normal"><a href="#__codelineno-13-16">16</a></span>
-<span class="normal"><a href="#__codelineno-13-17">17</a></span>
-<span class="normal"><a href="#__codelineno-13-18">18</a></span>
-<span class="normal"><a href="#__codelineno-13-19">19</a></span>
-<span class="normal"><a href="#__codelineno-13-20">20</a></span>
-<span class="normal"><a href="#__codelineno-13-21">21</a></span>
-<span class="normal"><a href="#__codelineno-13-22">22</a></span>
-<span class="normal"><a href="#__codelineno-13-23">23</a></span>
-<span class="normal"><a href="#__codelineno-13-24">24</a></span>
-<span class="normal"><a href="#__codelineno-13-25">25</a></span>
-<span class="normal"><a href="#__codelineno-13-26">26</a></span>
-<span class="normal"><a href="#__codelineno-13-27">27</a></span>
-<span class="normal"><a href="#__codelineno-13-28">28</a></span>
-<span class="normal"><a href="#__codelineno-13-29">29</a></span>
-<span class="normal"><a href="#__codelineno-13-30">30</a></span>
-<span class="normal"><a href="#__codelineno-13-31">31</a></span>
-<span class="normal"><a href="#__codelineno-13-32">32</a></span>
-<span class="normal"><a href="#__codelineno-13-33">33</a></span>
-<span class="normal"><a href="#__codelineno-13-34">34</a></span>
-<span class="normal"><a href="#__codelineno-13-35">35</a></span>
-<span class="normal"><a href="#__codelineno-13-36">36</a></span>
-<span class="normal"><a href="#__codelineno-13-37">37</a></span>
-<span class="normal"><a href="#__codelineno-13-38">38</a></span>
-<span class="normal"><a href="#__codelineno-13-39">39</a></span>
-<span class="normal"><a href="#__codelineno-13-40">40</a></span>
-<span class="normal"><a href="#__codelineno-13-41">41</a></span>
-<span class="normal"><a href="#__codelineno-13-42">42</a></span>
-<span class="normal"><a href="#__codelineno-13-43">43</a></span>
-<span class="normal"><a href="#__codelineno-13-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cm">/*</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="cm"> * @lc app=leetcode.cn id=692 lang=cpp</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="cm"> *</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="cm"> * [692] 前K个高频单词</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="cm"> */</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6"></a>
-<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="c1">// @lc code=start</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="p">{</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="k">public</span><span class="o">:</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Compare</span>
-<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p2</span><span class="p">)</span>
-<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">first</span><span class="p">);</span>
-<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">topKFrequent</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">words</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
-<a id="__codelineno-13-19" name="__codelineno-13-19"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="w">        </span><span class="c1">// 插入到map中统计每个单词出现的次数</span>
-<a id="__codelineno-13-21" name="__codelineno-13-21"></a><span class="w">        </span><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
-<a id="__codelineno-13-22" name="__codelineno-13-22"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">words</span><span class="p">)</span>
-<a id="__codelineno-13-23" name="__codelineno-13-23"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-13-24" name="__codelineno-13-24"></a><span class="w">            </span><span class="n">m</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-<a id="__codelineno-13-25" name="__codelineno-13-25"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-13-26" name="__codelineno-13-26"></a>
-<a id="__codelineno-13-27" name="__codelineno-13-27"></a><span class="w">        </span><span class="c1">// 将元素插入到vector中进行排序</span>
-<a id="__codelineno-13-28" name="__codelineno-13-28"></a><span class="w">        </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-<a id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="w">        </span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Compare</span><span class="p">());</span>
-<a id="__codelineno-13-30" name="__codelineno-13-30"></a>
-<a id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="w">        </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
-<a id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-<a id="__codelineno-13-33" name="__codelineno-13-33"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
-<a id="__codelineno-13-35" name="__codelineno-13-35"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-13-36" name="__codelineno-13-36"></a><span class="w">            </span><span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">);</span>
-<a id="__codelineno-13-37" name="__codelineno-13-37"></a><span class="w">            </span><span class="o">++</span><span class="n">it</span><span class="p">;</span>
-<a id="__codelineno-13-38" name="__codelineno-13-38"></a><span class="w">            </span><span class="o">++</span><span class="n">i</span><span class="p">;</span>
-<a id="__codelineno-13-39" name="__codelineno-13-39"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-13-40" name="__codelineno-13-40"></a>
-<a id="__codelineno-13-41" name="__codelineno-13-41"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
-<a id="__codelineno-13-42" name="__codelineno-13-42"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-13-43" name="__codelineno-13-43"></a><span class="p">};</span>
-<a id="__codelineno-13-44" name="__codelineno-13-44"></a><span class="c1">// @lc code=end</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span>
+<span class="normal"><a href="#__codelineno-12-22">22</a></span>
+<span class="normal"><a href="#__codelineno-12-23">23</a></span>
+<span class="normal"><a href="#__codelineno-12-24">24</a></span>
+<span class="normal"><a href="#__codelineno-12-25">25</a></span>
+<span class="normal"><a href="#__codelineno-12-26">26</a></span>
+<span class="normal"><a href="#__codelineno-12-27">27</a></span>
+<span class="normal"><a href="#__codelineno-12-28">28</a></span>
+<span class="normal"><a href="#__codelineno-12-29">29</a></span>
+<span class="normal"><a href="#__codelineno-12-30">30</a></span>
+<span class="normal"><a href="#__codelineno-12-31">31</a></span>
+<span class="normal"><a href="#__codelineno-12-32">32</a></span>
+<span class="normal"><a href="#__codelineno-12-33">33</a></span>
+<span class="normal"><a href="#__codelineno-12-34">34</a></span>
+<span class="normal"><a href="#__codelineno-12-35">35</a></span>
+<span class="normal"><a href="#__codelineno-12-36">36</a></span>
+<span class="normal"><a href="#__codelineno-12-37">37</a></span>
+<span class="normal"><a href="#__codelineno-12-38">38</a></span>
+<span class="normal"><a href="#__codelineno-12-39">39</a></span>
+<span class="normal"><a href="#__codelineno-12-40">40</a></span>
+<span class="normal"><a href="#__codelineno-12-41">41</a></span>
+<span class="normal"><a href="#__codelineno-12-42">42</a></span>
+<span class="normal"><a href="#__codelineno-12-43">43</a></span>
+<span class="normal"><a href="#__codelineno-12-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cm">/*</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="cm"> * @lc app=leetcode.cn id=692 lang=cpp</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="cm"> *</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="cm"> * [692] 前K个高频单词</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="cm"> */</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="c1">// @lc code=start</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="p">{</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Compare</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p2</span><span class="p">)</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">first</span><span class="p">);</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">    </span><span class="p">};</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">topKFrequent</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">words</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">        </span><span class="c1">// 插入到map中统计每个单词出现的次数</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="w">        </span><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">words</span><span class="p">)</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="w">            </span><span class="n">m</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26"></a>
+<a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="w">        </span><span class="c1">// 将元素插入到vector中进行排序</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="w">        </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="w">        </span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Compare</span><span class="p">());</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30"></a>
+<a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="w">        </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="w">            </span><span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">);</span>
+<a id="__codelineno-12-37" name="__codelineno-12-37"></a><span class="w">            </span><span class="o">++</span><span class="n">it</span><span class="p">;</span>
+<a id="__codelineno-12-38" name="__codelineno-12-38"></a><span class="w">            </span><span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<a id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-12-40" name="__codelineno-12-40"></a>
+<a id="__codelineno-12-41" name="__codelineno-12-41"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<a id="__codelineno-12-42" name="__codelineno-12-42"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-43" name="__codelineno-12-43"></a><span class="p">};</span>
+<a id="__codelineno-12-44" name="__codelineno-12-44"></a><span class="c1">// @lc code=end</span>
 </code></pre></div></td></tr></table></div>
 
 
@@ -5195,7 +5024,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 9, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 17, 2024</span>
   </span>
 
     

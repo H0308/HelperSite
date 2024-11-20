@@ -86,5 +86,139 @@
     2. 对于`prefix`和`suffix`之所以可以找出最长相等前后缀的长度，本质是因为`suffix`指向的是后缀字符串最后一个字符的位置，`prefix`指向的是前缀字符串最后一个字符的位置，如果两个指针走到了某一个位置，说明前面的字符已经进行了比较并且相等才能走到当前这一步，而因为`prefix`代表的是前缀字符串的最后一个位置，前缀字符串是从第一个字符开始计算的，所以其值（下标+1）也就是当前字符串的长度
     3. 注意`prefix`值填充的位置，第一次填充时，`prefix`值填充到第二个元素的位置，依次往后，因为如果只有一个字符构成子字符串时，其既没有前缀也没有后缀，所以最长相等前后缀长度为0，即`next[0] = 0`，第二个元素的位置也就是后缀字符串最后一个字符的位置，所以填充的位置为`next[suffix]`
 
-- `suffix = 1, prefix = 0`，当前`s[prefix] == s[suffix]`，所以存在最长相等前后缀，前缀为`a`，后缀为`a`，其长度为1；更新`prefix`为1；更新`next`数组第二个元素的值为1（注意不是更新`next`数组的第一个元素，因为对于第一个元素来说，其既没有前缀也没有后缀，所以最长相等前后缀长度为0）；向后移动`suffix`
-- `suffix = 2, prefix = 1`，当前`s[prefix] != s[suffix]`，因为`prefix`和`suffix`分别代表的是前缀最后一个字符的位置和后缀最后一个字符的位置，所以当前字符不相同就说明遇到了不相等前缀字符串和后缀字符串；因为KMP算法的比较逻辑是根据最长相等前后缀的长度决定回退位置，再从回退位置继续向后比较，所以当出现不相同时，需要让某一个下标回退到上一个最长相等前后缀的长度代表的下标位置，该位置就是相等前缀字符串和后缀字符串最后一个字符的下一个位置。
+- 前后缀相同的情况：`suffix = 1, prefix = 0`，当前`s[prefix] == s[suffix]`，所以存在最长相等前后缀，前缀为`a`，后缀为`a`，其长度为1；更新`prefix`为1；更新`next`数组第二个元素的值为1（注意不是更新`next`数组的第一个元素，因为对于第一个元素来说，其既没有前缀也没有后缀，所以最长相等前后缀长度为0）；向后移动`suffix`
+- 前后缀不相同的情况：`suffix = 2, prefix = 1`，当前`s[prefix] != s[suffix]`，因为`prefix`和`suffix`分别代表的是前缀最后一个字符的位置和后缀最后一个字符的位置，所以当前字符不相同就说明遇到了不相等前缀字符串和后缀字符串，需要让`prefix`回退，即`prefix = next[prefix - 1]`（注意需要持续进行回退，因为不能保证回退一次之后的值与当前位置匹配）；如果`prefix-1`小于0时都无法匹配，此时说明没有相等的前缀和后缀，更新`next[suffix]`为0
+
+## KMP算法求`next`数组代码
+
+根据前面的代码，可以写出下面的求`next`数组的代码：
+
+```C++
+void getNext(vector<int> &next, string &needle)
+{
+    // 初始化相关变量
+    int prefixEnd = 0;
+    // 遍历
+    // 后缀从1开始，形成比较
+    for (int suffixEnd = 1; suffixEnd < needle.size(); suffixEnd++)
+    {
+        // 如果后缀字符和前缀字符不相等，说明遇到了不相等的子串
+        // 此时prefixEnd就要向前移动找重新相同的位置
+        // 如果字符串找到开始都没有找到说明此时没有最长相等前后缀
+        while (prefixEnd - 1 >= 0 && needle[prefixEnd] != needle[suffixEnd])
+        {
+            prefixEnd = next[prefixEnd - 1];
+        }
+
+        // 如果二者相等，说明此时新增了最长相等前后缀
+        // 更改最长相等前后缀的长度
+        if (needle[prefixEnd] == needle[suffixEnd])
+        {
+            prefixEnd++;
+        }
+
+        // 更新当前next数组
+        next[suffixEnd] = prefixEnd;
+    }
+}
+```
+
+## 力扣28.找出字符串中第一个匹配项的下标
+
+[力扣28.找出字符串中第一个匹配项的下标](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/description/)
+
+**问题描述：**
+
+!!! quote
+    给你两个字符串`haystack`和`needle`，请你在`haystack`字符串中找出`needle`字符串的第一个匹配项的下标（下标从 0 开始）。如果`needle`不是`haystack`的一部分，则返回-1。
+
+    示例 1：
+
+    ```c++
+    输入：haystack = "sadbutsad", needle = "sad"
+    输出：0
+    解释："sad" 在下标 0 和 6 处匹配。
+    第一个匹配项的下标是 0 ，所以返回 0 。
+    ```
+
+    示例 2：
+
+    ```c++
+    输入：haystack = "leetcode", needle = "leeto"
+    输出：-1
+    解释："leeto" 没有在 "leetcode" 中出现，所以返回 -1 。
+    ```
+
+**思路分析：**
+
+本题就可以利用到KMP算法优化暴力搜索
+
+**参考代码：**
+
+```c++
+class Solution
+{
+public:
+    void getNext(vector<int> &next, string &needle)
+    {
+        // 初始化相关变量
+        int prefixEnd = 0;
+        // 遍历
+        // 后缀从1开始，形成比较
+        for (int suffixEnd = 1; suffixEnd < needle.size(); suffixEnd++)
+        {
+            // 如果后缀字符和前缀字符不相等，说明遇到了不相等的子串
+            // 此时prefixEnd就要向前移动找重新相同的位置
+            // 如果字符串找到开始都没有找到说明此时没有最长相等前后缀
+            while (prefixEnd - 1 >= 0 && needle[prefixEnd] != needle[suffixEnd])
+            {
+                // prefixEnd回到上一次的具有相等前后缀的位置
+                prefixEnd = next[prefixEnd - 1];
+            }
+
+            // 如果二者相等，说明此时新增了最长相等前后缀
+            // 更改最长相等前后缀的长度
+            if (needle[prefixEnd] == needle[suffixEnd])
+            {
+                prefixEnd++;
+            }
+
+            // 更新当前next数组
+            next[suffixEnd] = prefixEnd;
+        }
+    }
+
+    int strStr(string haystack, string needle)
+    {
+        // 构建next数组
+        vector<int> next(needle.size());
+        // 填充next值
+        getNext(next, needle);
+
+        int j = 0;
+        // 遍历文本串
+        for (int i = 0; i < haystack.size(); i++)
+        {
+            // 如果出现不同，说明此时要找到最长相等前后缀的长度
+            // 回退到长度对应的位置值重新比较
+            while (j - 1 >= 0 && haystack[i] != needle[j])
+            {
+                j = next[j - 1];
+            }
+
+            // 如果相同，说明需要继续匹配
+            if (haystack[i] == needle[j])
+                j++;
+
+            // 如果j此时走到了模式串的结尾，则i一定在下一个待匹配字符的位置
+            // 此时要求的匹配的子串的起始位置，与当前的i构成的区间就是左闭右闭
+            // 所以返回i - needle.size() + 1
+            if (j == needle.size())
+                return i - needle.size() + 1;
+        }
+
+        // 找不到返回-1
+        return -1;
+    }
+};
+```

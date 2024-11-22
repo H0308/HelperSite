@@ -4793,7 +4793,7 @@
 <p>那么再来看一下map ，在map是一个<code>key-value</code>的数据结构，map中，对<code>key</code>是有限制，对<code>value</code>没有限制的，因为<code>key</code>的存储方式使用红黑树实现的。</p>
 <p>虽然set和multiset 的底层实现基于红黑树而非哈希表，它们通过红黑树来索引和存储数据。不过给我们的使用方式，还是哈希法的使用方式，即依靠键（<code>key</code>）来访问值（<code>value</code>）。所以使用这些数据结构来解决映射问题的方法，依然称之为哈希法。map也是一样的道理。</p>
 <p>这里在说一下，一些C++的经典书籍上 例如STL源码剖析，说到了hash_set或者hash_map，这个与unordered_set，unordered_map又有什么关系呢？</p>
-<p>实际上功能都是一样一样的， 但是unordered_set在C++11的时候被引入标准库了，而hash_set并没有，所以建议还是使用unordered_set比较好，这就好比一个是官方认证的，hash_set，hash_map 是C++11标准之前民间高手自发造的轮子。</p>
+<p>实际上功能都是一样一样的， 但是unordered_set在C++11的时候被引入标准库了，而hash_set并没有，所以建议还是使用unordered_set比较好，这就好比一个是官方认证的，hash_set，hash_map是C++11标准之前民间高手自发造的轮子。</p>
 <h2 id="_8">总结<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>总结一下，<strong>当遇到了要快速判断一个元素是否出现集合里的时候，就要考虑哈希法</strong>。</p>
 <p>但是哈希法也是<strong>牺牲了空间换取了时间</strong>，因为要使用额外的数组，set或者是map来存放数据，才能实现快速的查找。</p>

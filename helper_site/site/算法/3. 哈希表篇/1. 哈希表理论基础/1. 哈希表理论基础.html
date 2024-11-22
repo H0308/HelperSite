@@ -84,6 +84,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -2711,6 +2716,19 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    哈希表理论基础
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="1.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html" class="md-nav__link md-nav__link--active">
         
@@ -2721,6 +2739,94 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      哈希表
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      哈希函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="哈希函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      哈希碰撞
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      拉链法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      线性探测法
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      常见的三种哈希结构
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -4454,6 +4560,85 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      哈希表
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      哈希函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="哈希函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      哈希碰撞
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      拉链法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      线性探测法
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      常见的三种哈希结构
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -4471,9 +4656,148 @@
   
 
 
-  <h1>哈希表理论基础</h1>
-
-
+<h1 id="_1">哈希表理论基础<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">哈希表<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>首先什么是哈希表，哈希表（英文名字为Hash table，国内也有一些算法书籍翻译为散列表，大家看到这两个名称知道都是指hash table就可以了）。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>哈希表是根据关键码的值而直接进行访问的数据结构。</p>
+</div>
+<p>这么官方的解释可能有点懵，其实直白来讲其实数组就是一张哈希表。</p>
+<p>哈希表中关键码就是数组的索引下标，然后通过下标直接访问数组中的元素，如下图所示：</p>
+<p><a class="glightbox" href="1. 哈希表理论基础.assets/image-20241122190826976.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. 哈希表理论基础.assets/image-20241122190826976.png"></a></p>
+<p>那么哈希表能解决什么问题呢，<strong>一般哈希表都是用来快速判断一个元素是否出现集合里。</strong></p>
+<p>例如要查询一个名字是否在这所学校里。</p>
+<p>要枚举的话时间复杂度是O(n)，但如果使用哈希表的话， 只需要O(1)就可以做到。</p>
+<p>我们只需要初始化把这所学校里学生的名字都存在哈希表里，在查询的时候通过索引直接就可以知道这位同学在不在这所学校里了。</p>
+<p>将学生姓名映射到哈希表上就涉及到了<strong>hash function ，也就是哈希函数</strong>。</p>
+<h2 id="_3">哈希函数<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>哈希函数，把学生的姓名直接映射为哈希表上的索引，然后就可以通过查询索引下标快速知道这位同学是否在这所学校里了。</p>
+<p>哈希函数如下图所示，通过<code>hashCode</code>把名字转化为数值，一般<code>hashCode</code>是通过特定编码方式，可以将其他数据格式转化为不同的数值，这样就把学生名字映射为哈希表上的索引数字了。</p>
+<p><a class="glightbox" href="1. 哈希表理论基础.assets/image-20241122190916092.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. 哈希表理论基础.assets/image-20241122190916092.png" alt="image-20241122190916092" /></a></p>
+<p>如果<code>hashCode</code>得到的数值大于 哈希表的大小了，也就是大于<code>tableSize</code>了，怎么办呢？</p>
+<p>此时为了保证映射出来的索引数值都落在哈希表上，我们会在再次对数值做一个取模的操作，这样我们就保证了学生姓名一定可以映射到哈希表上了。</p>
+<p>此时问题又来了，哈希表我们刚刚说过，就是一个数组。</p>
+<p>如果学生的数量大于哈希表的大小怎么办，此时就算哈希函数计算的再均匀，也避免不了会有几位学生的名字同时映射到哈希表 同一个索引下标的位置。</p>
+<p>接下来<strong>哈希碰撞</strong>登场</p>
+<h3 id="_4">哈希碰撞<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>如图所示，小李和小王都映射到了索引下标 1 的位置，<strong>这一现象叫做哈希碰撞</strong>。</p>
+<p><a class="glightbox" href="1. 哈希表理论基础.assets\image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. 哈希表理论基础.assets\image.png"></a></p>
+<p>一般哈希碰撞有两种解决方法， 拉链法和线性探测法。</p>
+<h3 id="_5">拉链法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>刚刚小李和小王在索引1的位置发生了冲突，发生冲突的元素都被存储在链表中。 这样我们就可以通过索引找到小李和小王了</p>
+<p><a class="glightbox" href="1. 哈希表理论基础.assets\image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. 哈希表理论基础.assets\image1.png"></a></p>
+<p>（数据规模是<code>dataSize</code>， 哈希表的大小为<code>tableSize</code>）</p>
+<p>其实拉链法就是要选择适当的哈希表的大小，这样既不会因为数组空值而浪费大量内存，也不会因为链表太长而在查找上浪费太多时间。</p>
+<h3 id="_6">线性探测法<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>使用线性探测法，一定要保证tableSize大于dataSize。 我们需要依靠哈希表中的空位来解决碰撞问题。</p>
+<p>例如冲突的位置，放了小李，那么就向下找一个空位放置小王的信息。所以要求tableSize一定要大于dataSize ，要不然哈希表上就没有空置的位置来存放 冲突的数据了。如图所示：</p>
+<p><a class="glightbox" href="1. 哈希表理论基础.assets\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="1. 哈希表理论基础.assets\image2.png"></a></p>
+<p>其实关于哈希碰撞还有非常多的细节，感兴趣的同学可以再好好研究一下，这里我就不再赘述了。</p>
+<h2 id="_7">常见的三种哈希结构<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>当我们想使用哈希法来解决问题的时候，我们一般会选择如下三种数据结构。</p>
+<ul>
+<li>数组</li>
+<li>set（集合）</li>
+<li>map（映射）</li>
+</ul>
+<p>本次主要考虑后两个</p>
+<p>在C++中，set和map分别提供以下三种数据结构，其底层实现以及优劣如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>集合</th>
+<th>底层实现</th>
+<th>是否有序</th>
+<th>数值是否可以重复</th>
+<th>能否更改数值</th>
+<th>查询效率</th>
+<th>增删效率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>set</td>
+<td>红黑树</td>
+<td>有序</td>
+<td>否</td>
+<td>否</td>
+<td><span class="arithmatex">\(O(log_{2}{n})\)</span></td>
+<td><span class="arithmatex">\(O(log_{2}{n})\)</span></td>
+</tr>
+<tr>
+<td>multiset</td>
+<td>红黑树</td>
+<td>有序</td>
+<td>是</td>
+<td>否</td>
+<td><span class="arithmatex">\(O(log_{2}{n})\)</span></td>
+<td><span class="arithmatex">\(O(log_{2}{n})\)</span></td>
+</tr>
+<tr>
+<td>unordered_set</td>
+<td>哈希表</td>
+<td>无序</td>
+<td>否</td>
+<td>否</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>unordered_set底层实现为哈希表，set和multiset 的底层实现是红黑树，红黑树是一种平衡二叉搜索树，所以<code>key</code>值是有序的，但<code>key</code>不可以修改，改动<code>key</code>值会导致整棵树的错乱，所以只能删除和增加。</p>
+<table>
+<thead>
+<tr>
+<th>映射</th>
+<th>底层实现</th>
+<th>是否有序</th>
+<th>数值是否可以重复</th>
+<th>能否更改数值</th>
+<th>查询效率</th>
+<th>增删效率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>map</td>
+<td>红黑树</td>
+<td><code>key</code>有序</td>
+<td><code>key</code>不可重复</td>
+<td>key不可修改</td>
+<td><span class="arithmatex">\(O(log_{2}{n})\)</span></td>
+<td><span class="arithmatex">\(O(log_{2}{n})\)</span></td>
+</tr>
+<tr>
+<td>multimap</td>
+<td>红黑树</td>
+<td><code>key</code>有序</td>
+<td><code>key</code>可重复</td>
+<td>key不可修改</td>
+<td><span class="arithmatex">\(O(log_{2}{n})\)</span></td>
+<td><span class="arithmatex">\(O(log_{2}{n})\)</span></td>
+</tr>
+<tr>
+<td>unordered_map</td>
+<td>哈希表</td>
+<td><code>key</code>无序</td>
+<td><code>key</code>不可重复</td>
+<td>key不可修改</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>unordered_map底层实现为哈希表，map 和multimap 的底层实现是红黑树。同理，map 和multimap 的key也是有序的（这个问题也经常作为面试题，考察对语言容器底层的理解）。</p>
+<p>当要使用集合来解决哈希问题的时候，优先使用unordered_set，因为它的查询和增删效率是最优的，如果需要集合是有序的，那么就用set，如果要求不仅有序还要有重复数据的话，那么就用multiset。</p>
+<p>那么再来看一下map ，在map是一个<code>key-value</code>的数据结构，map中，对<code>key</code>是有限制，对<code>value</code>没有限制的，因为<code>key</code>的存储方式使用红黑树实现的。</p>
+<p>虽然set和multiset 的底层实现基于红黑树而非哈希表，它们通过红黑树来索引和存储数据。不过给我们的使用方式，还是哈希法的使用方式，即依靠键（<code>key</code>）来访问值（<code>value</code>）。所以使用这些数据结构来解决映射问题的方法，依然称之为哈希法。map也是一样的道理。</p>
+<p>这里在说一下，一些C++的经典书籍上 例如STL源码剖析，说到了hash_set或者hash_map，这个与unordered_set，unordered_map又有什么关系呢？</p>
+<p>实际上功能都是一样一样的， 但是unordered_set在C++11的时候被引入标准库了，而hash_set并没有，所以建议还是使用unordered_set比较好，这就好比一个是官方认证的，hash_set，hash_map 是C++11标准之前民间高手自发造的轮子。</p>
+<h2 id="_8">总结<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>总结一下，<strong>当遇到了要快速判断一个元素是否出现集合里的时候，就要考虑哈希法</strong>。</p>
+<p>但是哈希法也是<strong>牺牲了空间换取了时间</strong>，因为要使用额外的数组，set或者是map来存放数据，才能实现快速的查找。</p>
+<p>如果在做面试题目的时候遇到需要判断一个元素是否出现过的场景也应该第一时间想到哈希法</p>
 
 
 
@@ -4496,7 +4820,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 20, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 22, 2024</span>
   </span>
 
     
@@ -4516,11 +4840,12 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="贡献者">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.536 5.536 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13v-1.75M0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20H0m24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9V20Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>
       
     </span>
     <nav>
       
+        <a href="mailto:1848312235@qq.com">H0308</a>
     </nav>
   </span>
 

@@ -5547,8 +5547,10 @@
 <p><strong>思路分析：</strong></p>
 <ol>
 <li>解法1：暴力解法</li>
-<li>解法2：滑动窗口
-    分析本题前需要先理解何为「异位词」，所谓「异位」就是不同位置，所以「异位词」就代表不同字母在不同位置所组成的单词，并且中间不可以有其他字母。所以本题的题意中，在<code>s</code>中找<code>p</code>的异位词说明<code>s</code>中包含<code>p</code>的异位词，而根据异位词的特点「中间不可以有其他字母」，所以可以推出<code>s</code>中涵盖<code>p</code>的每一个异位词长度等于<code>p</code>字符串的长度，利用这个特点就可以使用长度为<code>p</code>字符串长度的定长滑动窗口</li>
+<li>
+<p>解法2：滑动窗口</p>
+<p>分析本题前需要先理解何为「异位词」，所谓「异位」就是不同位置，所以「字母异位词」就代表一个只有字母构成的字符串中的所有字母重新打乱，并且每个字母只能使用一次构成的新字符串。所以本题的题意中，在<code>s</code>中找<code>p</code>的异位词说明<code>s</code>中包含<code>p</code>的异位词，而根据异位词的特点「重新打乱」可以推出构成字母异位词的新字符串中不可以有原字符串不存在的字母，所以可以推出<code>s</code>中涵盖<code>p</code>的每一个异位词长度等于<code>p</code>字符串的长度，利用这个特点就可以使用长度为<code>p</code>字符串长度的定长滑动窗口</p>
+</li>
 </ol>
 <p><strong>关键步骤：</strong></p>
 <p>首先要考虑的就是如何判断<code>s</code>中存在<code>p</code>的异位词，最直观的想法就是通过两个哈希表，假设为<code>ori</code>和<code>sub</code>，其中<code>ori</code>哈希表统计<code>s</code>中的字符出现的个数，<code>sub</code>中记录<code>p</code>中的字符出现的个数，在启动窗口前，先统计<code>p</code>中字符出现的个数，题目并没有提到<code>p</code>中的字符不重复，所以通过比较个数是最合理且有效的。在比较过程中，进窗口就是将当前的字符插入到<code>ori</code>哈希表中，如果<code>ori</code>哈希表中和<code>sub</code>哈希表中对应的字符个数相同，说明出现了一个异位词，此时就需要更新一次结果，接下来如果<code>right</code>再继续向后移动导致窗口长度大于固定长度就需要出窗口，本题出窗口的本质就是让<code>left</code>位置的字母的在哈希表中的个数减少1，再更新<code>left</code></p>
@@ -6433,7 +6435,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 3, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 23, 2024</span>
   </span>
 
     

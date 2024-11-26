@@ -2113,6 +2113,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#match" class="md-nav__link">
+    <span class="md-ellipsis">
+      match匹配
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pass" class="md-nav__link">
     <span class="md-ellipsis">
       Pass语句
@@ -4914,6 +4923,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#match" class="md-nav__link">
+    <span class="md-ellipsis">
+      match匹配
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pass" class="md-nav__link">
     <span class="md-ellipsis">
       Pass语句
@@ -5585,24 +5603,129 @@
 <a id="__codelineno-24-19" name="__codelineno-24-19"></a><span class="o">-</span><span class="mi">1</span><span class="n">是负数</span>
 <a id="__codelineno-24-20" name="__codelineno-24-20"></a><span class="n">不论是if还是else都会执行</span>
 </code></pre></div></td></tr></table></div>
+<h3 id="match"><code>match</code>匹配<a class="headerlink" href="#match" title="Permanent link">&para;</a></h3>
+<p>在Python中没有<code>switch</code>语句，但是有功能类似的<code>match</code>语句，其基本写法如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-25-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-25-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-25-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-25-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-25-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-25-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-25-10">10</a></span>
+<span class="normal"><a href="#__codelineno-25-11">11</a></span>
+<span class="normal"><a href="#__codelineno-25-12">12</a></span>
+<span class="normal"><a href="#__codelineno-25-13">13</a></span>
+<span class="normal"><a href="#__codelineno-25-14">14</a></span>
+<span class="normal"><a href="#__codelineno-25-15">15</a></span>
+<span class="normal"><a href="#__codelineno-25-16">16</a></span>
+<span class="normal"><a href="#__codelineno-25-17">17</a></span>
+<span class="normal"><a href="#__codelineno-25-18">18</a></span>
+<span class="normal"><a href="#__codelineno-25-19">19</a></span>
+<span class="normal"><a href="#__codelineno-25-20">20</a></span>
+<span class="normal"><a href="#__codelineno-25-21">21</a></span>
+<span class="normal"><a href="#__codelineno-25-22">22</a></span>
+<span class="normal"><a href="#__codelineno-25-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="c1"># if</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="n">score</span> <span class="o">=</span> <span class="s1">&#39;B&#39;</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="k">if</span> <span class="n">score</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;score is A.&#39;</span><span class="p">)</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="k">elif</span> <span class="n">score</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;score is B.&#39;</span><span class="p">)</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="k">elif</span> <span class="n">score</span> <span class="o">==</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;score is C.&#39;</span><span class="p">)</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;invalid score.&#39;</span><span class="p">)</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11"></a>
+<a id="__codelineno-25-12" name="__codelineno-25-12"></a><span class="c1"># match</span>
+<a id="__codelineno-25-13" name="__codelineno-25-13"></a><span class="n">score</span> <span class="o">=</span> <span class="s1">&#39;B&#39;</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14"></a>
+<a id="__codelineno-25-15" name="__codelineno-25-15"></a><span class="k">match</span> <span class="n">score</span><span class="p">:</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16"></a>    <span class="k">case</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;score is A.&#39;</span><span class="p">)</span>
+<a id="__codelineno-25-18" name="__codelineno-25-18"></a>    <span class="k">case</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span>
+<a id="__codelineno-25-19" name="__codelineno-25-19"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;score is B.&#39;</span><span class="p">)</span>
+<a id="__codelineno-25-20" name="__codelineno-25-20"></a>    <span class="k">case</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span>
+<a id="__codelineno-25-21" name="__codelineno-25-21"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;score is C.&#39;</span><span class="p">)</span>
+<a id="__codelineno-25-22" name="__codelineno-25-22"></a>    <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span> <span class="c1"># _表示匹配到其他任何情况</span>
+<a id="__codelineno-25-23" name="__codelineno-25-23"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;score is ???.&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>不同于其他语言的<code>switch</code>语句，Python中的match还可以用于复杂匹配：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-26-10">10</a></span>
+<span class="normal"><a href="#__codelineno-26-11">11</a></span>
+<span class="normal"><a href="#__codelineno-26-12">12</a></span>
+<span class="normal"><a href="#__codelineno-26-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">age</span> <span class="o">=</span> <span class="mi">15</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="k">match</span> <span class="n">age</span><span class="p">:</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4"></a>    <span class="k">case</span> <span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&lt; 10 years old: </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6"></a>    <span class="k">case</span> <span class="mi">10</span><span class="p">:</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;10 years old.&#39;</span><span class="p">)</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8"></a>    <span class="k">case</span> <span class="mi">11</span> <span class="o">|</span> <span class="mi">12</span> <span class="o">|</span> <span class="mi">13</span> <span class="o">|</span> <span class="mi">14</span> <span class="o">|</span> <span class="mi">15</span> <span class="o">|</span> <span class="mi">16</span> <span class="o">|</span> <span class="mi">17</span> <span class="o">|</span> <span class="mi">18</span><span class="p">:</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;11~18 years old.&#39;</span><span class="p">)</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10"></a>    <span class="k">case</span> <span class="mi">19</span><span class="p">:</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;19 years old.&#39;</span><span class="p">)</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12"></a>    <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;not sure.&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>在上面这个示例中，第一个<code>case x if x &lt; 10</code>表示当<code>age &lt; 10</code>成立时匹配，且赋值给变量<code>x</code>，第二个<code>case 10</code>仅匹配单个值，第三个<code>case 11|12|...|18</code>能匹配多个值，多个值中间用<code>|</code>分隔</p>
+<p>除此之外，match还可以用于匹配列表：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-27-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-27-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-27-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-27-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-27-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-27-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-27-10">10</a></span>
+<span class="normal"><a href="#__codelineno-27-11">11</a></span>
+<span class="normal"><a href="#__codelineno-27-12">12</a></span>
+<span class="normal"><a href="#__codelineno-27-13">13</a></span>
+<span class="normal"><a href="#__codelineno-27-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;gcc&#39;</span><span class="p">,</span> <span class="s1">&#39;hello.c&#39;</span><span class="p">,</span> <span class="s1">&#39;world.c&#39;</span><span class="p">]</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a>
+<a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="k">match</span> <span class="n">args</span><span class="p">:</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a>    <span class="c1"># 如果列表只有gcc一个元素</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a>    <span class="k">case</span> <span class="p">[</span><span class="s1">&#39;gcc&#39;</span><span class="p">]:</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;gcc: missing source file(s).&#39;</span><span class="p">)</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7"></a>    <span class="c1"># 出现gcc和一个文件</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8"></a>    <span class="k">case</span> <span class="p">[</span><span class="s1">&#39;gcc&#39;</span><span class="p">,</span> <span class="n">file1</span><span class="p">]:</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;gcc compile: &#39;</span> <span class="o">+</span> <span class="n">file1</span><span class="p">)</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10"></a>    <span class="c1"># 仅出现clean:</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11"></a>    <span class="k">case</span> <span class="p">[</span><span class="s1">&#39;clean&#39;</span><span class="p">]:</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;clean&#39;</span><span class="p">)</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13"></a>    <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span> <span class="c1"># 以上情况都不满足时，执行默认匹配</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;invalid command.&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
 <h3 id="pass"><code>Pass</code>语句<a class="headerlink" href="#pass" title="Permanent link">&para;</a></h3>
 <p>在Python中，<code>pass</code>语句表示空语句，一般用于占位</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
-<span class="normal"><a href="#__codelineno-25-2">2</a></span>
-<span class="normal"><a href="#__codelineno-25-3">3</a></span>
-<span class="normal"><a href="#__codelineno-25-4">4</a></span>
-<span class="normal"><a href="#__codelineno-25-5">5</a></span>
-<span class="normal"><a href="#__codelineno-25-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="c1"># pass语句</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="n">num</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-<a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<a id="__codelineno-25-4" name="__codelineno-25-4"></a>    <span class="k">pass</span>
-<a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-25-6" name="__codelineno-25-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;num小于0&quot;</span><span class="p">)</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1">1</a></span>
+<span class="normal"><a href="#__codelineno-28-2">2</a></span>
+<span class="normal"><a href="#__codelineno-28-3">3</a></span>
+<span class="normal"><a href="#__codelineno-28-4">4</a></span>
+<span class="normal"><a href="#__codelineno-28-5">5</a></span>
+<span class="normal"><a href="#__codelineno-28-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="c1"># pass语句</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="n">num</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a>    <span class="k">pass</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;num小于0&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>上面的代码等价于：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
-<span class="normal"><a href="#__codelineno-26-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;num小于0&quot;</span><span class="p">)</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span>
+<span class="normal"><a href="#__codelineno-29-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;num小于0&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="_13">循环语句<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
@@ -5611,32 +5734,32 @@
 </div>
 <h3 id="while"><code>while</code>循环<a class="headerlink" href="#while" title="Permanent link">&para;</a></h3>
 <p>在Python中，while循环的基本结构如下：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1">1</a></span>
-<span class="normal"><a href="#__codelineno-27-2">2</a></span>
-<span class="normal"><a href="#__codelineno-27-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="k">while</span> <span class="n">循环判断条件</span><span class="p">:</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2"></a>    <span class="n">循环执行语句1</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3"></a>    <span class="n">循环执行语句2</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
+<span class="normal"><a href="#__codelineno-30-2">2</a></span>
+<span class="normal"><a href="#__codelineno-30-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="k">while</span> <span class="n">循环判断条件</span><span class="p">:</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2"></a>    <span class="n">循环执行语句1</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a>    <span class="n">循环执行语句2</span>
 </code></pre></div></td></tr></table></div>
 <p>例如实例：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1">1</a></span>
-<span class="normal"><a href="#__codelineno-28-2">2</a></span>
-<span class="normal"><a href="#__codelineno-28-3">3</a></span>
-<span class="normal"><a href="#__codelineno-28-4">4</a></span>
-<span class="normal"><a href="#__codelineno-28-5">5</a></span>
-<span class="normal"><a href="#__codelineno-28-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="c1"># 打印1 - 10</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5"></a>    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;while循环同样遵循缩进规则，循环体内的代码要缩进。&quot;</span><span class="p">)</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
+<span class="normal"><a href="#__codelineno-31-2">2</a></span>
+<span class="normal"><a href="#__codelineno-31-3">3</a></span>
+<span class="normal"><a href="#__codelineno-31-4">4</a></span>
+<span class="normal"><a href="#__codelineno-31-5">5</a></span>
+<span class="normal"><a href="#__codelineno-31-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="c1"># 打印1 - 10</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5"></a>    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;while循环同样遵循缩进规则，循环体内的代码要缩进。&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="for"><code>for</code>循环<a class="headerlink" href="#for" title="Permanent link">&para;</a></h3>
 <p>在Python中，<code>for</code>循环的基本结构和C++差别比较大，下面是基本结构：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span>
-<span class="normal"><a href="#__codelineno-29-2">2</a></span>
-<span class="normal"><a href="#__codelineno-29-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="k">for</span> <span class="n">迭代变量</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">起始值</span><span class="p">,</span> <span class="n">终止值</span><span class="p">,</span> <span class="p">(</span><span class="n">可选</span><span class="p">)</span><span class="n">步长</span><span class="p">)</span><span class="o">/</span><span class="n">可迭代对象</span><span class="p">:</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2"></a>    <span class="n">循环执行语句1</span>
-<a id="__codelineno-29-3" name="__codelineno-29-3"></a>    <span class="n">循环执行语句2</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
+<span class="normal"><a href="#__codelineno-32-2">2</a></span>
+<span class="normal"><a href="#__codelineno-32-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="k">for</span> <span class="n">迭代变量</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">起始值</span><span class="p">,</span> <span class="n">终止值</span><span class="p">,</span> <span class="p">(</span><span class="n">可选</span><span class="p">)</span><span class="n">步长</span><span class="p">)</span><span class="o">/</span><span class="n">可迭代对象</span><span class="p">:</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2"></a>    <span class="n">循环执行语句1</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3"></a>    <span class="n">循环执行语句2</span>
 </code></pre></div></td></tr></table></div>
 <ul>
 <li>迭代变量：相当于C++中的循环变量，用于控制循环</li>
@@ -5645,20 +5768,20 @@
 <li>步长：可以理解为增量，起始值每一次循环需要加步长，默认情况下步长为1，步长也可以为负数</li>
 </ul>
 <p>例如实例：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
-<span class="normal"><a href="#__codelineno-30-2">2</a></span>
-<span class="normal"><a href="#__codelineno-30-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="c1"># 打印0 - 11中的偶数</span>
-<a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-<a id="__codelineno-30-3" name="__codelineno-30-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span>
+<span class="normal"><a href="#__codelineno-33-2">2</a></span>
+<span class="normal"><a href="#__codelineno-33-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="c1"># 打印0 - 11中的偶数</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ul>
 <li>对于<code>range</code>部分来说，也可以选择迭代对象为其他类型，例如字符串</li>
 </ul>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
-<span class="normal"><a href="#__codelineno-31-2">2</a></span>
-<span class="normal"><a href="#__codelineno-31-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="c1"># 使用可迭代对象</span>
-<a id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">:</span>
-<a id="__codelineno-31-3" name="__codelineno-31-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span>
+<span class="normal"><a href="#__codelineno-34-2">2</a></span>
+<span class="normal"><a href="#__codelineno-34-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="c1"># 使用可迭代对象</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">:</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>上面的代码中，使用字符串作为可迭代对象，此时打印的即为每一个字符串中的每一个字符</p>
 <div class="admonition note">
@@ -5672,35 +5795,35 @@
 </div>
 <h3 id="else">循环与<code>else</code>语句<a class="headerlink" href="#else" title="Permanent link">&para;</a></h3>
 <p>在Python中，循环可以结合<code>else</code>语句，执行逻辑为：当循环未执行完毕时，正常执行循环不执行<code>else</code>语句，否则执行<code>else</code>语句，格式如下：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-32-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-32-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-32-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-32-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-32-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-32-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-32-10">10</a></span>
-<span class="normal"><a href="#__codelineno-32-11">11</a></span>
-<span class="normal"><a href="#__codelineno-32-12">12</a></span>
-<span class="normal"><a href="#__codelineno-32-13">13</a></span>
-<span class="normal"><a href="#__codelineno-32-14">14</a></span>
-<span class="normal"><a href="#__codelineno-32-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="c1"># while和else</span>
-<a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="k">while</span> <span class="n">循环条件</span><span class="p">:</span>
-<a id="__codelineno-32-3" name="__codelineno-32-3"></a>    <span class="n">循环语句1</span>
-<a id="__codelineno-32-4" name="__codelineno-32-4"></a>    <span class="n">循环语句2</span>
-<a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="k">else</span>
-<a id="__codelineno-32-6" name="__codelineno-32-6"></a>    <span class="n">分支语句1</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7"></a>    <span class="n">分支语句2</span>
-<a id="__codelineno-32-8" name="__codelineno-32-8"></a>
-<a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="c1"># for和else</span>
-<a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="k">for</span> <span class="n">迭代变量</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">起始值</span><span class="p">,</span> <span class="n">终止值</span><span class="p">,</span> <span class="p">(</span><span class="n">可选</span><span class="p">)</span><span class="n">步长</span><span class="p">):</span>
-<a id="__codelineno-32-11" name="__codelineno-32-11"></a>    <span class="n">循环语句1</span>
-<a id="__codelineno-32-12" name="__codelineno-32-12"></a>    <span class="n">循环语句2</span>
-<a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="k">else</span>
-<a id="__codelineno-32-14" name="__codelineno-32-14"></a>    <span class="n">分支语句1</span>
-<a id="__codelineno-32-15" name="__codelineno-32-15"></a>    <span class="n">分支语句2</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-35-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-35-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-35-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-35-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-35-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-35-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-35-10">10</a></span>
+<span class="normal"><a href="#__codelineno-35-11">11</a></span>
+<span class="normal"><a href="#__codelineno-35-12">12</a></span>
+<span class="normal"><a href="#__codelineno-35-13">13</a></span>
+<span class="normal"><a href="#__codelineno-35-14">14</a></span>
+<span class="normal"><a href="#__codelineno-35-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="c1"># while和else</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2"></a><span class="k">while</span> <span class="n">循环条件</span><span class="p">:</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3"></a>    <span class="n">循环语句1</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4"></a>    <span class="n">循环语句2</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5"></a><span class="k">else</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6"></a>    <span class="n">分支语句1</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7"></a>    <span class="n">分支语句2</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8"></a>
+<a id="__codelineno-35-9" name="__codelineno-35-9"></a><span class="c1"># for和else</span>
+<a id="__codelineno-35-10" name="__codelineno-35-10"></a><span class="k">for</span> <span class="n">迭代变量</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">起始值</span><span class="p">,</span> <span class="n">终止值</span><span class="p">,</span> <span class="p">(</span><span class="n">可选</span><span class="p">)</span><span class="n">步长</span><span class="p">):</span>
+<a id="__codelineno-35-11" name="__codelineno-35-11"></a>    <span class="n">循环语句1</span>
+<a id="__codelineno-35-12" name="__codelineno-35-12"></a>    <span class="n">循环语句2</span>
+<a id="__codelineno-35-13" name="__codelineno-35-13"></a><span class="k">else</span>
+<a id="__codelineno-35-14" name="__codelineno-35-14"></a>    <span class="n">分支语句1</span>
+<a id="__codelineno-35-15" name="__codelineno-35-15"></a>    <span class="n">分支语句2</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -5728,7 +5851,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 26, 2024</span>
   </span>
 
     

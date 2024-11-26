@@ -5044,7 +5044,7 @@
 <p>对于输入来说，在Python中可以使用<code>input</code>函数进行输入，其可以传递一个字符串，表示提示文字。需要注意，在Python中，<code>input</code>函数的返回值始终是一个字符串，如果输入的数值并且这个数值后面需要做算术运算，那么必须要进行强制类型转换</p>
 <p>对于输出来说，在Python中可以使用<code>print</code>函数进行输出，默认情况下，<code>print</code>函数在输出完参数内容后会自动换行，如果不希望进行默认的换行，可以使用<code>end=""</code>指定结尾转义字符，默认情况下是<code>end="\n"</code></p>
 <p>如果使用<code>print</code>函数一次性输出多个内容，则这些内容需要使用逗号<code>,</code>进行分隔，在输出结果中，每一个由逗号隔开的内容中间会多一个逗号，原因就是<code>print</code>中的一个参数<code>sep=' '</code>决定的，如果不希望该空格替换逗号，则可以考虑将空格替换为空字符串，即<code>sep=''</code></p>
-<p>与C语言/C++一样，可以在<code>print</code>函数中使用格式化输出，对应的格式化字符与C语言/C++一致，但是对于包含格式化字符的字符串和待输出的值来说，二者中间的分隔符号为<code>%</code></p>
+<p>与C语言/C++一样，可以在<code>print</code>函数中使用格式化输出，对应的格式化字符与C语言/C++一致，但是对于包含格式化字符的字符串和待输出的值来说，二者中间的分隔符号为<code>%</code>，<strong>对于待输出的值如果有多个，则需要使用括号包裹</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>注意，不同于C语言/C++，在Python中不可以在结尾添加<code>;</code>作为语句结尾符号</p>

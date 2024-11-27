@@ -112,6 +112,7 @@ nav:
       - 入门:
         - Python快速入门: Python基础知识/1. Python快速入门/1. Python快速入门.md
       - Python基础知识: Python基础知识/1. Python基础知识/1. Python基础知识.md
+      - Python组合数据类型: Python基础知识/2. Python组合数据类型/2. Python组合数据类型.md
   - 数据结构与算法:
     - 数据结构:
       - 数据结构基础: 数据结构/1. 时间复杂度和空间复杂度/1. 时间复杂度与空间复杂度.md

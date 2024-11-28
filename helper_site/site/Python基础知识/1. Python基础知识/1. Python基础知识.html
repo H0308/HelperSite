@@ -5590,7 +5590,8 @@
 <p>但是在Python中支持链式法则，即按照数学方式进行书写：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="c1"># 表示a在1和2之间</span>
 </code></pre></div></td></tr></table></div>
-<p>除了名字不同以及链式法则，使用和其他编程语言一样，但是注意，在Python中没有条件运算符<code>? :</code></p>
+<p>另外，Python的逻辑运算符运算结果参考JavaScript逻辑运算符的运算方式，二者完全相同</p>
+<p>除了名字不同、计算结果和链式法则，使用和其他编程语言基本一样，但是注意，在Python中没有条件运算符<code>? :</code></p>
 <h3 id="_10">位运算符<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>与C语言/C++一样，此处不再赘述</p>
 <h3 id="_11">成员运算符和身份运算符<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
@@ -5613,9 +5614,13 @@
 </code></pre></div></td></tr></table></div>
 <p>身份运算符用于比较两个对象的内存地址是否相同。Python提供了两个身份运算符：</p>
 <ol>
-<li><code>is</code>：判断两个变量是否引用自同一个对象</li>
+<li><code>is</code>：判断两个变量是否引用自同一个对象（）</li>
 <li><code>is not</code>：判断两个变量是否引用自不同的对象</li>
 </ol>
+<div class="admonition info">
+<p class="admonition-title"><code>is</code>和<code>==</code>的区别</p>
+<p>如果使用的是<code>==</code>在比较时，比较的是内容，<code>is</code>则比较的是地址</p>
+</div>
 <p>在Python中，可以使用<code>id()</code>函数查看变量的编号，可以理解为变量的地址，对于值范围在[-5, 256]中的整数来说，存在「小整数优化」</p>
 <div class="admonition info">
 <p class="admonition-title">小整数优化</p>

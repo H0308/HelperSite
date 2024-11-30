@@ -2079,6 +2079,84 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="类和对象">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建类和实例化对象
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      类属性和类方法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      类的静态方法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      封装性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      继承性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      多态性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      生成器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -4615,6 +4693,84 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="类和对象">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建类和实例化对象
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      类属性和类方法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      类的静态方法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      封装性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      继承性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      多态性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      生成器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -4660,6 +4816,1028 @@
 <p>“可直接访问”的意思是，该文本区域内的名称在被非限定引用（不需要使用<code>.</code>进行访问）时，查找名称的范围，是包括该命名空间在内的</p>
 </div>
 <h2 id="_1">类和对象<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">创建类和实例化对象<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>在Python中，创建类的格式如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">class</span> <span class="nc">ClassName</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="o">&lt;</span><span class="n">语句</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>    <span class="o">.</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>    <span class="o">.</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>    <span class="o">.</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>    <span class="o">&lt;</span><span class="n">语句</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>当进入类定义时，将创建一个新的命名空间，并将其用作局部作用域，因此，所有对局部变量的赋值都是在这个新命名空间之内</p>
+<p>例如有下面的类：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello, my name is&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>在上面的类中，为了创建类的实例对象，需要使用到魔法方法<code>__init__</code>（这个方法也被称为类的构造方法），类中所有的成员方法第一个参数表示调用本方法的对象的引用（相当于C++、Java中的<code>this</code>），一般情况下将其命名为<code>self</code>，也可以命名为其他名称（但是不推荐）</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>注意，因为<code>__init__</code>是构造函数，所以创建对象时会自动调用，如果需要传递实参，对于<code>self</code>来说不需要传递，传递的实参分别对应于第二个参数开始的后面的形参</p>
+</div>
+<p>在构造方法<code>__init__</code>中，第二个参数开始都是为成员属性赋值的变量，注意，在Python中，类的成员属性不可以定义在<code>__init__</code>方法外，在该方法内部，使用<code>self.成员属性 = 形式参数</code>新增成员属性并使用形参进行赋值，例如上述例子中的<code>name</code>和<code>age</code></p>
+<p>接着在类内定义了一个方法<code>say_hello</code>，这个方法属于成员方法，需要类的实例对象去调用</p>
+<p>在Python中，创建类的实例对象可以使用下面的方法：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">变量名</span> <span class="o">=</span> <span class="n">类名</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>例如对于前面定义的<code>Person</code>类来说，创建其对象的方式如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&quot;Marry&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>注意，因为在<code>__init__</code>方法中给了参数，所以在创建对象时就需要传递实参，如果想创建一个空对象，可以不写<code>__init__</code>方法，或者给<code>__init__</code>方法中的参数默认值创建一个由默认值实例化的对象，所以可以将类修改为如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># 创建一个空类对象</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>    <span class="k">pass</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">()</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="c1"># 构造方法中的参数赋予默认值</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;zhangsan&quot;</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">19</span><span class="p">):</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, my name is&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="c1"># 创建一个名字为zhangsan，年龄为19岁的person对象</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">()</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="c1"># 创建一个名字为lisi，年龄为18岁的person1对象</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="n">person1</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&quot;lisi&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>有了类对象后，就可以通过该对象去调用其中的方法，例如同样是前面的<code>Person</code>类：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">person</span><span class="o">.</span><span class="n">say_hello</span><span class="p">()</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">Hello</span><span class="p">,</span> <span class="n">my</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">zhangsan</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_3">类属性和类方法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>所谓类属性就是属于整个类的变量，其数据供所有当前类对象共享，一般定义在<code>__init__</code>方法的上面（实际上可以写在类的任何位置），例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">lass</span> <span class="n">Person</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>    <span class="c1"># 类属性</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>    <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;zhangsan&quot;</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">19</span><span class="p">):</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a>    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello, my name is&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>当需要访问类属性时，需要用类名进行调用，例如需求：每创建一个<code>Person</code>类对象，<code>number</code>就加1：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="c1"># 类属性</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a>    <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;zhangsan&quot;</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">19</span><span class="p">):</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a>        <span class="c1"># 创建一次对象，类属性number加1</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a>        <span class="n">Person</span><span class="o">.</span><span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a>    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a>        <span class="c1"># 在方法中访问类属性需要使用类名调用</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, my name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, I am No.</span><span class="si">{</span><span class="n">Person</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>因为是类属性，所以在类外访问时也需要通过类名来调用而不建议使用对象调用，例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span>
+<span class="normal"><a href="#__codelineno-8-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">()</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="c1"># 可以使用对象访问类属性，但是不推荐</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>  <span class="c1"># 1</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="c1"># 可以使用类名访问类属性，推荐</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">Person</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>  <span class="c1"># 1</span>
+</code></pre></div></td></tr></table></div>
+<p>除了有类属性外，还有类方法，与对象方法不同，类方法默认第一个参数传递的是<code>cls</code>，代表当前类，并且在定义类方法时，需要使用到装饰器<code>@classmethod</code>，例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>    <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;zhangsan&quot;</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">19</span><span class="p">):</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a>        <span class="c1"># 创建一次对象，类属性number加1</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a>        <span class="n">Person</span><span class="o">.</span><span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a>    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, my name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, I am No.</span><span class="si">{</span><span class="n">Person</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a>    <span class="c1"># 类方法</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a>    <span class="nd">@classmethod</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a>    <span class="k">def</span> <span class="nf">get_number</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a>        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">number</span>
+</code></pre></div></td></tr></table></div>
+<p>在上面的代码中，定义了一个<code>get_number</code>方法，该方法因为使用了装饰器<code>@classmethod</code>，所以是属于整个类的方法，第一个参数是<code>cls</code>，因为其代表的是当前类，所以调用类属性时就只需要用该参数调用即可</p>
+<p>在使用类方法时，需要使用类进行调用，也可以使用类对象调用，同样不推荐，例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">()</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="c1"># 可以使用对象访问类方法，但是不推荐</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">get_number</span><span class="p">())</span> <span class="c1"># 1</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="c1"># 可以使用类名访问类方法，推荐</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">Person</span><span class="o">.</span><span class="n">get_number</span><span class="p">())</span> <span class="c1"># 1</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_4">类的静态方法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>在Python中，除了有类方法以外，还有静态方法，与类方法非常类似，但是不同的是，其使用装饰器<code>@staticmethod</code>，并且默认情况下没有参数，例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span>
+<span class="normal"><a href="#__codelineno-11-12">12</a></span>
+<span class="normal"><a href="#__codelineno-11-13">13</a></span>
+<span class="normal"><a href="#__codelineno-11-14">14</a></span>
+<span class="normal"><a href="#__codelineno-11-15">15</a></span>
+<span class="normal"><a href="#__codelineno-11-16">16</a></span>
+<span class="normal"><a href="#__codelineno-11-17">17</a></span>
+<span class="normal"><a href="#__codelineno-11-18">18</a></span>
+<span class="normal"><a href="#__codelineno-11-19">19</a></span>
+<span class="normal"><a href="#__codelineno-11-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a>    <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;zhangsan&quot;</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">19</span><span class="p">):</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a>        <span class="c1"># 创建一次对象，类属性number加1</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a>        <span class="n">Person</span><span class="o">.</span><span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a>    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, my name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, I am No.</span><span class="si">{</span><span class="n">Person</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13"></a>    <span class="nd">@classmethod</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14"></a>    <span class="k">def</span> <span class="nf">get_number</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15"></a>        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">number</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16"></a>
+<a id="__codelineno-11-17" name="__codelineno-11-17"></a>    <span class="c1"># 静态方法</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18"></a>    <span class="nd">@staticmethod</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19"></a>    <span class="k">def</span> <span class="nf">print_info</span><span class="p">():</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;这是一个静态方法&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>调用类方法时，同样可以使用类或者该类对象调用，但是不推荐使用类对象进行调用，一般情况下静态方法且该类不创建对象时可以使该类成为一个工具类，所以大部分情况下都是使用类名调用静态方法，例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">Person</span><span class="o">.</span><span class="n">print_info</span><span class="p">()</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="n">这是一个静态方法</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_5">封装性<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>面向对象三大特性：封装、继承和多态，Python作为面向对象的编程语言，同样具有该三大特性，下面介绍Python中的封装性</p>
+<p>在Python中，虽然不像Java或C++那样严格地支持访问控制修饰符（如<code>public</code>, <code>private</code>, <code>protected</code>），但仍然可以通过一些约定来实现封装性，一般情况下使用下面的习惯：</p>
+<ol>
+<li>使用单下划线前缀<code>_</code>来表示该成员变量或方法是受保护的，但是这种方法依旧可以在类外访问，不会出现运行报错，但是不建议外部直接访问</li>
+<li>使用双下划线前缀<code>__</code>来表示该成员变量是私有的，这种方法会产生名称改写，在类外访问类中的某私有变量就会报错，这使得属性难以从类外部直接访问到</li>
+</ol>
+<p>例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-13-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-13-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-13-10">10</a></span>
+<span class="normal"><a href="#__codelineno-13-11">11</a></span>
+<span class="normal"><a href="#__codelineno-13-12">12</a></span>
+<span class="normal"><a href="#__codelineno-13-13">13</a></span>
+<span class="normal"><a href="#__codelineno-13-14">14</a></span>
+<span class="normal"><a href="#__codelineno-13-15">15</a></span>
+<span class="normal"><a href="#__codelineno-13-16">16</a></span>
+<span class="normal"><a href="#__codelineno-13-17">17</a></span>
+<span class="normal"><a href="#__codelineno-13-18">18</a></span>
+<span class="normal"><a href="#__codelineno-13-19">19</a></span>
+<span class="normal"><a href="#__codelineno-13-20">20</a></span>
+<span class="normal"><a href="#__codelineno-13-21">21</a></span>
+<span class="normal"><a href="#__codelineno-13-22">22</a></span>
+<span class="normal"><a href="#__codelineno-13-23">23</a></span>
+<span class="normal"><a href="#__codelineno-13-24">24</a></span>
+<span class="normal"><a href="#__codelineno-13-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a>    <span class="c1"># 类属性</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a>    <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;zhangsan&quot;</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span> <span class="n">money</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a>        <span class="c1"># 保护属性</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a>        <span class="c1"># 私有属性</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__money</span> <span class="o">=</span> <span class="n">money</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a>        <span class="c1"># 创建一次对象，类属性number加1</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a>        <span class="n">Person</span><span class="o">.</span><span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14"></a>    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, my name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s1">, I am No.</span><span class="si">{</span><span class="n">Person</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a>
+<a id="__codelineno-13-17" name="__codelineno-13-17"></a>    <span class="c1"># 类方法</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18"></a>    <span class="nd">@classmethod</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19"></a>    <span class="k">def</span> <span class="nf">get_number</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20"></a>        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">number</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21"></a>
+<a id="__codelineno-13-22" name="__codelineno-13-22"></a>    <span class="c1"># 静态方法</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23"></a>    <span class="nd">@staticmethod</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24"></a>    <span class="k">def</span> <span class="nf">print_info</span><span class="p">():</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;这是一个静态方法&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>对于命名前有<code>_</code>的保护属性来说，访问时依旧不会受到限制，但是不推荐在类外直接访问保护属性，而对于命名前有<code>__</code>的私有属性来说，访问会报错<code>AttributeError</code>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span>
+<span class="normal"><a href="#__codelineno-14-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">()</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span> <span class="c1"># zhangsan</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">__money</span><span class="p">)</span> <span class="c1"># AttributeError: &#39;Person&#39; object has no attribute &#39;__money&#39;</span>
+</code></pre></div></td></tr></table></div>
+<p>之所以访问不到<code>__money</code>是因为Python对私有属性进行了名称改写，通过实例对象的<code>__dict__</code>属性可以查看到当前类对象所有的成员，如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="p">{</span><span class="s1">&#39;_name&#39;</span><span class="p">:</span> <span class="s1">&#39;zhangsan&#39;</span><span class="p">,</span> <span class="s1">&#39;_age&#39;</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span> <span class="s1">&#39;_Person__money&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>可以看到除了保护属性以外，私有属性被改写为了<code>_Person__money</code>，如果访问这个名称就可以访问到类中的私有属性（不推荐），例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">_Person__money</span><span class="p">)</span> <span class="c1"># 100</span>
+</code></pre></div></td></tr></table></div>
+<p>注意，因为类中<code>__money</code>被Python进行了名称改写，如果这种情况下直接对<code>__money</code>进行赋值相当于相当于向类中添加了一个变量<code>__money</code>，而不是访问其中的<code>__money</code>属性，这一点和JavaScript是一致的</p>
+<p>既然对变量进行了保护或者私有，那么根据封装性，除了私有成员还需要对外提供相应的获取和修改接口，这也就是<code>getter</code>和<code>setter</code>，所以上面的类可以修改为：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-17-10">10</a></span>
+<span class="normal"><a href="#__codelineno-17-11">11</a></span>
+<span class="normal"><a href="#__codelineno-17-12">12</a></span>
+<span class="normal"><a href="#__codelineno-17-13">13</a></span>
+<span class="normal"><a href="#__codelineno-17-14">14</a></span>
+<span class="normal"><a href="#__codelineno-17-15">15</a></span>
+<span class="normal"><a href="#__codelineno-17-16">16</a></span>
+<span class="normal"><a href="#__codelineno-17-17">17</a></span>
+<span class="normal"><a href="#__codelineno-17-18">18</a></span>
+<span class="normal"><a href="#__codelineno-17-19">19</a></span>
+<span class="normal"><a href="#__codelineno-17-20">20</a></span>
+<span class="normal"><a href="#__codelineno-17-21">21</a></span>
+<span class="normal"><a href="#__codelineno-17-22">22</a></span>
+<span class="normal"><a href="#__codelineno-17-23">23</a></span>
+<span class="normal"><a href="#__codelineno-17-24">24</a></span>
+<span class="normal"><a href="#__codelineno-17-25">25</a></span>
+<span class="normal"><a href="#__codelineno-17-26">26</a></span>
+<span class="normal"><a href="#__codelineno-17-27">27</a></span>
+<span class="normal"><a href="#__codelineno-17-28">28</a></span>
+<span class="normal"><a href="#__codelineno-17-29">29</a></span>
+<span class="normal"><a href="#__codelineno-17-30">30</a></span>
+<span class="normal"><a href="#__codelineno-17-31">31</a></span>
+<span class="normal"><a href="#__codelineno-17-32">32</a></span>
+<span class="normal"><a href="#__codelineno-17-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a>    <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;zhangsan&quot;</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span> <span class="n">money</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a>        <span class="c1"># 保护属性</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8"></a>        <span class="c1"># 私有属性</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__money</span> <span class="o">=</span> <span class="n">money</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10"></a>        <span class="n">Person</span><span class="o">.</span><span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11"></a>
+<a id="__codelineno-17-12" name="__codelineno-17-12"></a>    <span class="c1"># getter方法</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13"></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15"></a>    <span class="k">def</span> <span class="nf">get_age</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_age</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17"></a>
+<a id="__codelineno-17-18" name="__codelineno-17-18"></a>    <span class="c1"># setter方法</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19"></a>    <span class="k">def</span> <span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21"></a>    <span class="k">def</span> <span class="nf">set_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23"></a>
+<a id="__codelineno-17-24" name="__codelineno-17-24"></a>    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, my name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s1">, I am No.</span><span class="si">{</span><span class="n">Person</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26"></a>
+<a id="__codelineno-17-27" name="__codelineno-17-27"></a>    <span class="nd">@classmethod</span>
+<a id="__codelineno-17-28" name="__codelineno-17-28"></a>    <span class="k">def</span> <span class="nf">get_number</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<a id="__codelineno-17-29" name="__codelineno-17-29"></a>        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">number</span>
+<a id="__codelineno-17-30" name="__codelineno-17-30"></a>
+<a id="__codelineno-17-31" name="__codelineno-17-31"></a>    <span class="nd">@staticmethod</span>
+<a id="__codelineno-17-32" name="__codelineno-17-32"></a>    <span class="k">def</span> <span class="nf">print_info</span><span class="p">():</span>
+<a id="__codelineno-17-33" name="__codelineno-17-33"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;这是一个静态方法&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>注意，有时可以看到一些变量<code>__变量名__</code>（不但前面有双下划线，后面也有双下划线），这种不是私有变量，而是特殊变量</p>
+<h3 id="_6">继承性<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>在Python中，要表示一个类继承自另外一个类，可以在类名后使用<code>(父类)</code>表示当前类继承自括号中的父类，例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-18-10">10</a></span>
+<span class="normal"><a href="#__codelineno-18-11">11</a></span>
+<span class="normal"><a href="#__codelineno-18-12">12</a></span>
+<span class="normal"><a href="#__codelineno-18-13">13</a></span>
+<span class="normal"><a href="#__codelineno-18-14">14</a></span>
+<span class="normal"><a href="#__codelineno-18-15">15</a></span>
+<span class="normal"><a href="#__codelineno-18-16">16</a></span>
+<span class="normal"><a href="#__codelineno-18-17">17</a></span>
+<span class="normal"><a href="#__codelineno-18-18">18</a></span>
+<span class="normal"><a href="#__codelineno-18-19">19</a></span>
+<span class="normal"><a href="#__codelineno-18-20">20</a></span>
+<span class="normal"><a href="#__codelineno-18-21">21</a></span>
+<span class="normal"><a href="#__codelineno-18-22">22</a></span>
+<span class="normal"><a href="#__codelineno-18-23">23</a></span>
+<span class="normal"><a href="#__codelineno-18-24">24</a></span>
+<span class="normal"><a href="#__codelineno-18-25">25</a></span>
+<span class="normal"><a href="#__codelineno-18-26">26</a></span>
+<span class="normal"><a href="#__codelineno-18-27">27</a></span>
+<span class="normal"><a href="#__codelineno-18-28">28</a></span>
+<span class="normal"><a href="#__codelineno-18-29">29</a></span>
+<span class="normal"><a href="#__codelineno-18-30">30</a></span>
+<span class="normal"><a href="#__codelineno-18-31">31</a></span>
+<span class="normal"><a href="#__codelineno-18-32">32</a></span>
+<span class="normal"><a href="#__codelineno-18-33">33</a></span>
+<span class="normal"><a href="#__codelineno-18-34">34</a></span>
+<span class="normal"><a href="#__codelineno-18-35">35</a></span>
+<span class="normal"><a href="#__codelineno-18-36">36</a></span>
+<span class="normal"><a href="#__codelineno-18-37">37</a></span>
+<span class="normal"><a href="#__codelineno-18-38">38</a></span>
+<span class="normal"><a href="#__codelineno-18-39">39</a></span>
+<span class="normal"><a href="#__codelineno-18-40">40</a></span>
+<span class="normal"><a href="#__codelineno-18-41">41</a></span>
+<span class="normal"><a href="#__codelineno-18-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="c1"># 父类</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a>    <span class="c1"># 类属性</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a>    <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a>
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;zhangsan&quot;</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span> <span class="n">money</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a>        <span class="c1"># 保护属性</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10"></a>        <span class="c1"># 私有属性</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__money</span> <span class="o">=</span> <span class="n">money</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12"></a>        <span class="c1"># 创建一次对象，类属性number加1</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13"></a>        <span class="n">Person</span><span class="o">.</span><span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14"></a>
+<a id="__codelineno-18-15" name="__codelineno-18-15"></a>    <span class="c1"># getter方法</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16"></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18"></a>    <span class="k">def</span> <span class="nf">get_age</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_age</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20"></a>
+<a id="__codelineno-18-21" name="__codelineno-18-21"></a>    <span class="c1"># setter方法</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22"></a>    <span class="k">def</span> <span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<a id="__codelineno-18-23" name="__codelineno-18-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-18-24" name="__codelineno-18-24"></a>    <span class="k">def</span> <span class="nf">set_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+<a id="__codelineno-18-25" name="__codelineno-18-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+<a id="__codelineno-18-26" name="__codelineno-18-26"></a>
+<a id="__codelineno-18-27" name="__codelineno-18-27"></a>    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-18-28" name="__codelineno-18-28"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, my name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s1">, I am No.</span><span class="si">{</span><span class="n">Person</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-18-29" name="__codelineno-18-29"></a>
+<a id="__codelineno-18-30" name="__codelineno-18-30"></a>    <span class="c1"># 类方法</span>
+<a id="__codelineno-18-31" name="__codelineno-18-31"></a>    <span class="nd">@classmethod</span>
+<a id="__codelineno-18-32" name="__codelineno-18-32"></a>    <span class="k">def</span> <span class="nf">get_number</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<a id="__codelineno-18-33" name="__codelineno-18-33"></a>        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">number</span>
+<a id="__codelineno-18-34" name="__codelineno-18-34"></a>
+<a id="__codelineno-18-35" name="__codelineno-18-35"></a>    <span class="c1"># 静态方法</span>
+<a id="__codelineno-18-36" name="__codelineno-18-36"></a>    <span class="nd">@staticmethod</span>
+<a id="__codelineno-18-37" name="__codelineno-18-37"></a>    <span class="k">def</span> <span class="nf">print_info</span><span class="p">():</span>
+<a id="__codelineno-18-38" name="__codelineno-18-38"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;这是一个静态方法&quot;</span><span class="p">)</span>
+<a id="__codelineno-18-39" name="__codelineno-18-39"></a>
+<a id="__codelineno-18-40" name="__codelineno-18-40"></a><span class="c1"># 子类</span>
+<a id="__codelineno-18-41" name="__codelineno-18-41"></a><span class="k">class</span> <span class="nc">Teacher</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+<a id="__codelineno-18-42" name="__codelineno-18-42"></a>    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+<p>在上面的代码中，创建了一个Teacher对象并继承自Person类</p>
+<p>在Python中，默认情况下所有类继承自<code>object</code>，只是在继承自<code>object</code>类时可以省略不写，既然说<code>Teacher</code>类是<code>Person</code>类的子类，那么肯定有办法判断Teacher对象就是<code>Person</code>类的子类对象，这时就需要使用到<code>isinstance</code>函数：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
+<span class="normal"><a href="#__codelineno-19-2">2</a></span>
+<span class="normal"><a href="#__codelineno-19-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">teacher</span> <span class="o">=</span> <span class="n">Teacher</span><span class="p">()</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">teacher</span><span class="p">,</span> <span class="n">Teacher</span><span class="p">))</span> <span class="c1"># True</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">teacher</span><span class="p">,</span> <span class="n">Person</span><span class="p">))</span> <span class="c1"># True</span>
+</code></pre></div></td></tr></table></div>
+<p>可以看到，<code>teacher</code>类对象根据<code>isinstance</code>函数的返回值可以判断出，其既是<code>Teacher</code>类的本类对象，也是<code>Person</code>类的子类对象，所以二者都返回<code>True</code></p>
+<p>除了使用<code>isinstance</code>以外，还可以使用<code>issubclass()</code>函数来判断类是否是某个类的子类：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nb">print</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">Teacher</span><span class="p">,</span> <span class="n">Person</span><span class="p">))</span> <span class="c1"># True</span>
+</code></pre></div></td></tr></table></div>
+<p>既然是继承，就代表子类对象可以访问父类中所有的方法和属性，Python中的继承也不例外，但是对于私有属性和保护属性来说，尽管子类拥有，但是同样不推荐直接访问</p>
+<p>除了拥有父类的属性和方法外，子类也可以定义自己的属性和方法或者重写父类的方法，如果子类需要访问父类的方法或者属性时，可以使用<code>super()</code>，例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-21-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-21-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-21-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-21-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-21-10">10</a></span>
+<span class="normal"><a href="#__codelineno-21-11">11</a></span>
+<span class="normal"><a href="#__codelineno-21-12">12</a></span>
+<span class="normal"><a href="#__codelineno-21-13">13</a></span>
+<span class="normal"><a href="#__codelineno-21-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="k">class</span> <span class="nc">Teacher</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;zhangsan&quot;</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span> <span class="n">money</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">salary</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">):</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a>        <span class="c1"># 调用父类的构造方法，初始化父类的属性</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">money</span><span class="p">)</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5"></a>        <span class="c1"># 初始化子类的属性</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_salary</span> <span class="o">=</span> <span class="n">salary</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a>
+<a id="__codelineno-21-8" name="__codelineno-21-8"></a>    <span class="c1"># 重写父类的方法</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9"></a>    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, my name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s1">, I am No.</span><span class="si">{</span><span class="n">Person</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s1">, I am a teacher&#39;</span><span class="p">)</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11"></a>
+<a id="__codelineno-21-12" name="__codelineno-21-12"></a>    <span class="c1"># 子类的方法</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13"></a>    <span class="k">def</span> <span class="nf">teach</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-21-14" name="__codelineno-21-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s1"> is teaching&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_7">多态性<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>有了继承，就可以考虑实现多态，实现多态的前提条件如下：</p>
+<ol>
+<li>当前类继承另外一个类</li>
+<li>重写父类的方法</li>
+<li>父类引用指向子类对象</li>
+</ol>
+<p>但是，由于Python中没有变量类型限制，所以多态性更多还是体现在传递参数上，例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span>
+<span class="normal"><a href="#__codelineno-22-12">12</a></span>
+<span class="normal"><a href="#__codelineno-22-13">13</a></span>
+<span class="normal"><a href="#__codelineno-22-14">14</a></span>
+<span class="normal"><a href="#__codelineno-22-15">15</a></span>
+<span class="normal"><a href="#__codelineno-22-16">16</a></span>
+<span class="normal"><a href="#__codelineno-22-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a>    <span class="k">pass</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="c1"># 多态性</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="k">def</span> <span class="nf">who_am_i</span><span class="p">(</span><span class="n">person</span><span class="p">):</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a>    <span class="n">person</span><span class="o">.</span><span class="n">say_hello</span><span class="p">()</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7"></a>
+<a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="c1"># 本类</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">()</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="c1"># 子类</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="n">teacher</span> <span class="o">=</span> <span class="n">Teacher</span><span class="p">()</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="c1"># 其他类</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="n">dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14"></a>
+<a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="n">who_am_i</span><span class="p">(</span><span class="n">person</span><span class="p">)</span> <span class="c1"># Hello, my name is zhangsan, I am No.2</span>
+<a id="__codelineno-22-16" name="__codelineno-22-16"></a><span class="n">who_am_i</span><span class="p">(</span><span class="n">teacher</span><span class="p">)</span> <span class="c1"># Hello, my name is zhangsan, I am No.2, I am a teacher</span>
+<a id="__codelineno-22-17" name="__codelineno-22-17"></a><span class="n">who_am_i</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span> <span class="c1"># AttributeError: &#39;Dog&#39; object has no attribute &#39;say_hello&#39;</span>
+</code></pre></div></td></tr></table></div>
+<p>如果<code>Dog</code>类中存在<code>say_hello()</code>方法，那么尽管函数中的<code>person.say_hello()</code>可以被调用，但是此时并不是多态，为了保证是多态，可以将函数改成：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
+<span class="normal"><a href="#__codelineno-23-2">2</a></span>
+<span class="normal"><a href="#__codelineno-23-3">3</a></span>
+<span class="normal"><a href="#__codelineno-23-4">4</a></span>
+<span class="normal"><a href="#__codelineno-23-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="k">def</span> <span class="nf">who_am_i</span><span class="p">(</span><span class="n">person</span><span class="p">):</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a>    <span class="k">if</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">Person</span><span class="p">)):</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a>        <span class="n">person</span><span class="o">.</span><span class="n">say_hello</span><span class="p">()</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;不是Person类的对象或者子类的对象&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>此时再执行上面的代码，结果就会不一样：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-24-10">10</a></span>
+<span class="normal"><a href="#__codelineno-24-11">11</a></span>
+<span class="normal"><a href="#__codelineno-24-12">12</a></span>
+<span class="normal"><a href="#__codelineno-24-13">13</a></span>
+<span class="normal"><a href="#__codelineno-24-14">14</a></span>
+<span class="normal"><a href="#__codelineno-24-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="c1"># 本类</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">()</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="c1"># 子类</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="n">teacher</span> <span class="o">=</span> <span class="n">Teacher</span><span class="p">()</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="c1"># 其他类</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="n">dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7"></a>
+<a id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="n">who_am_i</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="n">who_am_i</span><span class="p">(</span><span class="n">teacher</span><span class="p">)</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="n">who_am_i</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11"></a>
+<a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13"></a><span class="n">Hello</span><span class="p">,</span> <span class="n">my</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">zhangsan</span><span class="p">,</span> <span class="n">I</span> <span class="n">am</span> <span class="n">No</span><span class="mf">.2</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="n">Hello</span><span class="p">,</span> <span class="n">my</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">zhangsan</span><span class="p">,</span> <span class="n">I</span> <span class="n">am</span> <span class="n">No</span><span class="mf">.2</span><span class="p">,</span> <span class="n">I</span> <span class="n">am</span> <span class="n">a</span> <span class="n">teacher</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="n">不是Person类的对象或者子类的对象</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_8">迭代器<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>前面多次提到可迭代对象，也对可迭代对象作了介绍，但是可能还是不清楚为什么可以实现<code>for</code>循环的那种遍历方式，实际上这就是因为迭代器的存在。回顾一下前面使用<code>for</code>循环遍历可迭代对象：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-25-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-25-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-25-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-25-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-25-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-25-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-25-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;one&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}:</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="s2">&quot;123&quot;</span><span class="p">:</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;myfile.txt&quot;</span><span class="p">):</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>在Python中，这种<code>for</code>的底层就是调用<code>iter()</code>函数，这个方法返回一个定义了<code>__next__()</code>方法的迭代器对象，这个方法将逐一访问容器中的元素，当遍历完最后一个元素时，<code>__next__()</code>将引发<code>StopIteration</code>异常来通知终止<code>for</code>循环</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>所谓可迭代对象就是实现了<code>__iter__()</code>魔法方法的对象，当调用<code>iter()</code>函数时，会转向调用对象的<code>__iter__()</code>方法，如果对象没有实现该方法会报错为<code>'type' object is not iterable</code>，如果对象实现了<code>__getitem__()</code>方法，Python会尝试创建一个迭代器来按索引访问元素</p>
+</div>
+<p>在Python中，可以通过<code>next()</code>内置函数，让该函数调用<code>__next__()</code>方法来了解其运作过程：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-26-10">10</a></span>
+<span class="normal"><a href="#__codelineno-26-11">11</a></span>
+<span class="normal"><a href="#__codelineno-26-12">12</a></span>
+<span class="normal"><a href="#__codelineno-26-13">13</a></span>
+<span class="normal"><a href="#__codelineno-26-14">14</a></span>
+<span class="normal"><a href="#__codelineno-26-15">15</a></span>
+<span class="normal"><a href="#__codelineno-26-16">16</a></span>
+<span class="normal"><a href="#__codelineno-26-17">17</a></span>
+<span class="normal"><a href="#__codelineno-26-18">18</a></span>
+<span class="normal"><a href="#__codelineno-26-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span> <span class="c1"># 1</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span> <span class="c1"># 2</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span> <span class="c1"># 3</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span> <span class="c1"># 4</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7"></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span> <span class="c1"># 5</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span> <span class="c1"># StopIteration</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;迭代结束&quot;</span><span class="p">)</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12"></a>
+<a id="__codelineno-26-13" name="__codelineno-26-13"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="mi">1</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="mi">2</span>
+<a id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="mi">3</span>
+<a id="__codelineno-26-17" name="__codelineno-26-17"></a><span class="mi">4</span>
+<a id="__codelineno-26-18" name="__codelineno-26-18"></a><span class="mi">5</span>
+<a id="__codelineno-26-19" name="__codelineno-26-19"></a><span class="n">迭代结束</span>
+</code></pre></div></td></tr></table></div>
+<p>而使用<code>for</code>循环直接遍历可迭代对象就可以模拟为：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-27-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-27-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-27-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-27-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-27-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-27-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-27-10">10</a></span>
+<span class="normal"><a href="#__codelineno-27-11">11</a></span>
+<span class="normal"><a href="#__codelineno-27-12">12</a></span>
+<span class="normal"><a href="#__codelineno-27-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="n">err</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="k">while</span><span class="p">(</span><span class="n">err</span><span class="p">):</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a>        <span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a>    <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6"></a>        <span class="n">err</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7"></a>
+<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9"></a><span class="mi">1</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="mi">2</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="mi">3</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="mi">4</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="mi">5</span>
+</code></pre></div></td></tr></table></div>
+<p>接下来，为了更细致的了解<code>__iter__()</code>方法和<code>__next__()</code>方法分别在做什么，就需要看看官方是如何对他们进行定义的：</p>
+<p><strong><code>__iter__()</code></strong></p>
+<p>返回<code>iterator</code>对象本身。这是同时允许容器和迭代器配合<code>for</code>和<code>in</code>语句使用所必须的</p>
+<p><strong><code>__next__()</code></strong></p>
+<p><code>iterator</code>中返回下一项。 如果已经没有可返回的项，则会引发<code>StopIteration</code>异常</p>
+<p>从上面的概念可以得知，<code>__iter__()</code>方法本质就是返回迭代器对象本身，也就是说，如果当前类是个迭代器类，那么就直接返回<code>self</code>即可，而对于<code>__next__()</code>方法来说，因为其返回的是<code>iterator</code>的下一项，也就是说获取到下一个内容</p>
+<p>根据上面的概念，下面实现一个链表来详细描述这两个方法：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-28-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-28-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-28-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-28-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-28-10">10</a></span>
+<span class="normal"><a href="#__codelineno-28-11">11</a></span>
+<span class="normal"><a href="#__codelineno-28-12">12</a></span>
+<span class="normal"><a href="#__codelineno-28-13">13</a></span>
+<span class="normal"><a href="#__codelineno-28-14">14</a></span>
+<span class="normal"><a href="#__codelineno-28-15">15</a></span>
+<span class="normal"><a href="#__codelineno-28-16">16</a></span>
+<span class="normal"><a href="#__codelineno-28-17">17</a></span>
+<span class="normal"><a href="#__codelineno-28-18">18</a></span>
+<span class="normal"><a href="#__codelineno-28-19">19</a></span>
+<span class="normal"><a href="#__codelineno-28-20">20</a></span>
+<span class="normal"><a href="#__codelineno-28-21">21</a></span>
+<span class="normal"><a href="#__codelineno-28-22">22</a></span>
+<span class="normal"><a href="#__codelineno-28-23">23</a></span>
+<span class="normal"><a href="#__codelineno-28-24">24</a></span>
+<span class="normal"><a href="#__codelineno-28-25">25</a></span>
+<span class="normal"><a href="#__codelineno-28-26">26</a></span>
+<span class="normal"><a href="#__codelineno-28-27">27</a></span>
+<span class="normal"><a href="#__codelineno-28-28">28</a></span>
+<span class="normal"><a href="#__codelineno-28-29">29</a></span>
+<span class="normal"><a href="#__codelineno-28-30">30</a></span>
+<span class="normal"><a href="#__codelineno-28-31">31</a></span>
+<span class="normal"><a href="#__codelineno-28-32">32</a></span>
+<span class="normal"><a href="#__codelineno-28-33">33</a></span>
+<span class="normal"><a href="#__codelineno-28-34">34</a></span>
+<span class="normal"><a href="#__codelineno-28-35">35</a></span>
+<span class="normal"><a href="#__codelineno-28-36">36</a></span>
+<span class="normal"><a href="#__codelineno-28-37">37</a></span>
+<span class="normal"><a href="#__codelineno-28-38">38</a></span>
+<span class="normal"><a href="#__codelineno-28-39">39</a></span>
+<span class="normal"><a href="#__codelineno-28-40">40</a></span>
+<span class="normal"><a href="#__codelineno-28-41">41</a></span>
+<span class="normal"><a href="#__codelineno-28-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="c1"># 单链表头结点</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="k">class</span> <span class="nc">LinkedListNode</span><span class="p">:</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a>
+<a id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="c1"># 单链表迭代器</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="k">class</span> <span class="nc">LinkedListNodeIterable</span><span class="p">:</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_node</span> <span class="o">=</span> <span class="n">node</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11"></a>
+<a id="__codelineno-28-12" name="__codelineno-28-12"></a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-28-14" name="__codelineno-28-14"></a>            <span class="k">raise</span> <span class="ne">StopIteration</span>
+<a id="__codelineno-28-15" name="__codelineno-28-15"></a>        <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node</span>
+<a id="__codelineno-28-16" name="__codelineno-28-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node</span><span class="o">.</span><span class="n">next</span>
+<a id="__codelineno-28-17" name="__codelineno-28-17"></a>        <span class="k">return</span> <span class="n">cur</span>
+<a id="__codelineno-28-18" name="__codelineno-28-18"></a>
+<a id="__codelineno-28-19" name="__codelineno-28-19"></a><span class="c1"># 单链表</span>
+<a id="__codelineno-28-20" name="__codelineno-28-20"></a><span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
+<a id="__codelineno-28-21" name="__codelineno-28-21"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span><span class="n">LinkedListNode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<a id="__codelineno-28-22" name="__codelineno-28-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="n">head</span>
+<a id="__codelineno-28-23" name="__codelineno-28-23"></a>
+<a id="__codelineno-28-24" name="__codelineno-28-24"></a>    <span class="c1"># 插入元素</span>
+<a id="__codelineno-28-25" name="__codelineno-28-25"></a>    <span class="k">def</span> <span class="nf">push_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+<a id="__codelineno-28-26" name="__codelineno-28-26"></a>        <span class="c1"># 创建新节点</span>
+<a id="__codelineno-28-27" name="__codelineno-28-27"></a>        <span class="n">new_node</span> <span class="o">=</span> <span class="n">LinkedListNode</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+<a id="__codelineno-28-28" name="__codelineno-28-28"></a>        <span class="c1"># 如果头结点的下一个位置为空，链接到头结点的后方</span>
+<a id="__codelineno-28-29" name="__codelineno-28-29"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">next</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-28-30" name="__codelineno-28-30"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">new_node</span>
+<a id="__codelineno-28-31" name="__codelineno-28-31"></a>            <span class="k">return</span> <span class="kc">None</span>
+<a id="__codelineno-28-32" name="__codelineno-28-32"></a>
+<a id="__codelineno-28-33" name="__codelineno-28-33"></a>        <span class="c1"># 如果不为空，则链接到最后一个节点的下一个位置</span>
+<a id="__codelineno-28-34" name="__codelineno-28-34"></a>        <span class="n">cur</span><span class="p">:</span><span class="n">LinkedListNode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">next</span>
+<a id="__codelineno-28-35" name="__codelineno-28-35"></a>        <span class="k">while</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-28-36" name="__codelineno-28-36"></a>            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
+<a id="__codelineno-28-37" name="__codelineno-28-37"></a>        <span class="c1"># 尾部插入新节点</span>
+<a id="__codelineno-28-38" name="__codelineno-28-38"></a>        <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">new_node</span>
+<a id="__codelineno-28-39" name="__codelineno-28-39"></a>
+<a id="__codelineno-28-40" name="__codelineno-28-40"></a>    <span class="c1"># 创建迭代器对象</span>
+<a id="__codelineno-28-41" name="__codelineno-28-41"></a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-28-42" name="__codelineno-28-42"></a>        <span class="k">return</span> <span class="n">LinkedListNodeIterable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>重点看上面代码中涉及到迭代器的部分：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-29-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-29-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-29-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-29-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-29-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-29-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-29-10">10</a></span>
+<span class="normal"><a href="#__codelineno-29-11">11</a></span>
+<span class="normal"><a href="#__codelineno-29-12">12</a></span>
+<span class="normal"><a href="#__codelineno-29-13">13</a></span>
+<span class="normal"><a href="#__codelineno-29-14">14</a></span>
+<span class="normal"><a href="#__codelineno-29-15">15</a></span>
+<span class="normal"><a href="#__codelineno-29-16">16</a></span>
+<span class="normal"><a href="#__codelineno-29-17">17</a></span>
+<span class="normal"><a href="#__codelineno-29-18">18</a></span>
+<span class="normal"><a href="#__codelineno-29-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="c1"># 单链表迭代器类</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="k">class</span> <span class="nc">LinkedListNodeIterable</span><span class="p">:</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_node</span> <span class="o">=</span> <span class="n">node</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5"></a>
+<a id="__codelineno-29-6" name="__codelineno-29-6"></a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8"></a>            <span class="k">raise</span> <span class="ne">StopIteration</span>
+<a id="__codelineno-29-9" name="__codelineno-29-9"></a>        <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node</span><span class="o">.</span><span class="n">next</span>
+<a id="__codelineno-29-11" name="__codelineno-29-11"></a>        <span class="k">return</span> <span class="n">cur</span>
+<a id="__codelineno-29-12" name="__codelineno-29-12"></a>
+<a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="c1"># 单链表类</span>
+<a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
+<a id="__codelineno-29-15" name="__codelineno-29-15"></a>    <span class="o">...</span>
+<a id="__codelineno-29-16" name="__codelineno-29-16"></a>
+<a id="__codelineno-29-17" name="__codelineno-29-17"></a>    <span class="c1"># 创建迭代器对象</span>
+<a id="__codelineno-29-18" name="__codelineno-29-18"></a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-29-19" name="__codelineno-29-19"></a>        <span class="k">return</span> <span class="n">LinkedListNodeIterable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>在单链表中，实现了<code>__iter__()</code>方法，将头结点的下一个节点作为第一个节点创建单链表迭代器对象，因为最后遍历的是单链表，所以单链表类一定要实现<code>__iter__()</code>方法，接着进入单链表迭代器类中，因为需要一个节点记录下一次需要走向的位置，所以在<code>__init__()</code>方法中传入了一个参数<code>node</code>，接着要使单链表能够正常向后遍历，就需要使用到<code>__next__()</code>方法用于获取到下一个节点，使用<code>cur</code>变量记录当前节点并作为返回值，返回之前更新<code>node</code>到下一个节点的位置，如果<code>node</code>变量变为<code>None</code>，说明走到了链表结尾，此时就触发<code>StopIteration</code>异常即可</p>
+<p>上面的代码在下面的测试用例下是没有问题的：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span>
+<span class="normal"><a href="#__codelineno-30-11">11</a></span>
+<span class="normal"><a href="#__codelineno-30-12">12</a></span>
+<span class="normal"><a href="#__codelineno-30-13">13</a></span>
+<span class="normal"><a href="#__codelineno-30-14">14</a></span>
+<span class="normal"><a href="#__codelineno-30-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="n">head</span> <span class="o">=</span> <span class="n">LinkedListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="n">linked_list</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="n">linked_list</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="n">linked_list</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="n">linked_list</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="n">linked_list</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7"></a>
+<a id="__codelineno-30-8" name="__codelineno-30-8"></a><span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">linked_list</span><span class="p">:</span>
+<a id="__codelineno-30-9" name="__codelineno-30-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10"></a>
+<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-30-12" name="__codelineno-30-12"></a><span class="mi">1</span>
+<a id="__codelineno-30-13" name="__codelineno-30-13"></a><span class="mi">2</span>
+<a id="__codelineno-30-14" name="__codelineno-30-14"></a><span class="mi">3</span>
+<a id="__codelineno-30-15" name="__codelineno-30-15"></a><span class="mi">4</span>
+</code></pre></div></td></tr></table></div>
+<p>但是如果使用下面的测试用例，就会出现报错：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-31-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-31-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-31-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-31-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-31-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-31-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-31-10">10</a></span>
+<span class="normal"><a href="#__codelineno-31-11">11</a></span>
+<span class="normal"><a href="#__codelineno-31-12">12</a></span>
+<span class="normal"><a href="#__codelineno-31-13">13</a></span>
+<span class="normal"><a href="#__codelineno-31-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="n">head</span> <span class="o">=</span> <span class="n">LinkedListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="n">linked_list</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="n">linked_list</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="n">linked_list</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="n">linked_list</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6"></a><span class="n">linked_list</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="c1"># 创建迭代器对象</span>
+<a id="__codelineno-31-8" name="__codelineno-31-8"></a><span class="n">lni</span> <span class="o">=</span> <span class="n">LinkedListNodeIterable</span><span class="p">(</span><span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9"></a><span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">lni</span><span class="p">)</span>
+<a id="__codelineno-31-10" name="__codelineno-31-10"></a><span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+<a id="__codelineno-31-11" name="__codelineno-31-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+<a id="__codelineno-31-12" name="__codelineno-31-12"></a>
+<a id="__codelineno-31-13" name="__codelineno-31-13"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-31-14" name="__codelineno-31-14"></a><span class="ne">TypeError</span><span class="p">:</span> <span class="s1">&#39;LinkedListNodeIterable&#39;</span> <span class="nb">object</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">iterable</span>
+</code></pre></div></td></tr></table></div>
+<p>可以看到，提示<code>LinkedListNodeIterable</code>并不是一个可迭代对象，原因就是<code>LinkedListNodeIterable</code>没有实现<code>__iter__()</code>方法，而因为<code>LinkedListNodeIterable</code>本身就是迭代器类，所以对于<code>__iter__()</code>方法来说直接返回当前类对象<code>self</code>即可，即：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
+<span class="normal"><a href="#__codelineno-32-2">2</a></span>
+<span class="normal"><a href="#__codelineno-32-3">3</a></span>
+<span class="normal"><a href="#__codelineno-32-4">4</a></span>
+<span class="normal"><a href="#__codelineno-32-5">5</a></span>
+<span class="normal"><a href="#__codelineno-32-6">6</a></span>
+<span class="normal"><a href="#__codelineno-32-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="k">class</span> <span class="nc">LinkedListNodeIterable</span><span class="p">:</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2"></a>    <span class="o">...</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3"></a>
+<a id="__codelineno-32-4" name="__codelineno-32-4"></a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5"></a>        <span class="k">return</span> <span class="bp">self</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6"></a>
+<a id="__codelineno-32-7" name="__codelineno-32-7"></a>    <span class="o">...</span>
+</code></pre></div></td></tr></table></div>
+<p>再次测试即可得到正常遍历结果，此处不再演示</p>
+<p>通过上面的例子，可以说明如果一个类想要是可迭代对象，就必须实现<code>__init__()</code>方法，而为了可以获取到下一个元素，就需要实现<code>__next__()</code>方法，至于这个方法是否需要实现到一个单独的迭代器类中就完全取决于每个人的习惯</p>
+<h3 id="_9">生成器<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>前面在设计迭代器时，既需要实现<code>__iter__()</code>方法，也需要实现<code>__next__()</code>方法，为了简化这个过程，可以使用生成器辅助创建迭代器</p>
+<p>Python中的生成器是一种特殊的迭代器，它允许程序员声明一个函数，该函数可以保存其状态并在多次调用之间保持这个状态。生成器是通过使用<code>yield</code>语句来实现的，而不是传统的<code>return</code>语句，即在一个函数体内使用<code>yield</code>表达式会使这个函数变成一个生成器函数</p>
+<p>例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-33-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-33-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-33-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-33-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-33-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-33-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-33-10">10</a></span>
+<span class="normal"><a href="#__codelineno-33-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="k">def</span> <span class="nf">simple_generator</span><span class="p">():</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2"></a>    <span class="k">yield</span> <span class="mi">1</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3"></a>    <span class="k">yield</span> <span class="mi">2</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4"></a>    <span class="k">yield</span> <span class="mi">3</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5"></a>
+<a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="c1"># 使用生成器</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7"></a><span class="n">gen</span> <span class="o">=</span> <span class="n">simple_generator</span><span class="p">()</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>  <span class="c1"># 输出 1</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9"></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>  <span class="c1"># 输出 2</span>
+<a id="__codelineno-33-10" name="__codelineno-33-10"></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>  <span class="c1"># 输出 3</span>
+<a id="__codelineno-33-11" name="__codelineno-33-11"></a><span class="c1"># print(next(gen))  # 这里会抛出 StopIteration 异常</span>
+</code></pre></div></td></tr></table></div>
+<p>在这个例子中，<code>simple_generator</code>函数是一个生成器函数，每次调用<code>next()</code>都会从上次离开的地方继续执行，直到没有更多的<code>yield</code>语句为止</p>
+<p>现在考虑使用生成器简化前面的链表迭代器的实现：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-34-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-34-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-34-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-34-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-34-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-34-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-34-10">10</a></span>
+<span class="normal"><a href="#__codelineno-34-11">11</a></span>
+<span class="normal"><a href="#__codelineno-34-12">12</a></span>
+<span class="normal"><a href="#__codelineno-34-13">13</a></span>
+<span class="normal"><a href="#__codelineno-34-14">14</a></span>
+<span class="normal"><a href="#__codelineno-34-15">15</a></span>
+<span class="normal"><a href="#__codelineno-34-16">16</a></span>
+<span class="normal"><a href="#__codelineno-34-17">17</a></span>
+<span class="normal"><a href="#__codelineno-34-18">18</a></span>
+<span class="normal"><a href="#__codelineno-34-19">19</a></span>
+<span class="normal"><a href="#__codelineno-34-20">20</a></span>
+<span class="normal"><a href="#__codelineno-34-21">21</a></span>
+<span class="normal"><a href="#__codelineno-34-22">22</a></span>
+<span class="normal"><a href="#__codelineno-34-23">23</a></span>
+<span class="normal"><a href="#__codelineno-34-24">24</a></span>
+<span class="normal"><a href="#__codelineno-34-25">25</a></span>
+<span class="normal"><a href="#__codelineno-34-26">26</a></span>
+<span class="normal"><a href="#__codelineno-34-27">27</a></span>
+<span class="normal"><a href="#__codelineno-34-28">28</a></span>
+<span class="normal"><a href="#__codelineno-34-29">29</a></span>
+<span class="normal"><a href="#__codelineno-34-30">30</a></span>
+<span class="normal"><a href="#__codelineno-34-31">31</a></span>
+<span class="normal"><a href="#__codelineno-34-32">32</a></span>
+<span class="normal"><a href="#__codelineno-34-33">33</a></span>
+<span class="normal"><a href="#__codelineno-34-34">34</a></span>
+<span class="normal"><a href="#__codelineno-34-35">35</a></span>
+<span class="normal"><a href="#__codelineno-34-36">36</a></span>
+<span class="normal"><a href="#__codelineno-34-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="c1"># 单链表头结点</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2"></a><span class="k">class</span> <span class="nc">LinkedListNode</span><span class="p">:</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+<a id="__codelineno-34-6" name="__codelineno-34-6"></a>
+<a id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="c1"># 单链表</span>
+<a id="__codelineno-34-8" name="__codelineno-34-8"></a><span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
+<a id="__codelineno-34-9" name="__codelineno-34-9"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span><span class="n">LinkedListNode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<a id="__codelineno-34-10" name="__codelineno-34-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="n">head</span>
+<a id="__codelineno-34-11" name="__codelineno-34-11"></a>
+<a id="__codelineno-34-12" name="__codelineno-34-12"></a>    <span class="c1"># 插入元素</span>
+<a id="__codelineno-34-13" name="__codelineno-34-13"></a>    <span class="k">def</span> <span class="nf">push_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+<a id="__codelineno-34-14" name="__codelineno-34-14"></a>        <span class="c1"># 创建新节点</span>
+<a id="__codelineno-34-15" name="__codelineno-34-15"></a>        <span class="n">new_node</span> <span class="o">=</span> <span class="n">LinkedListNode</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+<a id="__codelineno-34-16" name="__codelineno-34-16"></a>        <span class="c1"># 如果头结点的下一个位置为空，链接到头结点的后方</span>
+<a id="__codelineno-34-17" name="__codelineno-34-17"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">next</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-34-18" name="__codelineno-34-18"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">new_node</span>
+<a id="__codelineno-34-19" name="__codelineno-34-19"></a>            <span class="k">return</span> <span class="kc">None</span>
+<a id="__codelineno-34-20" name="__codelineno-34-20"></a>
+<a id="__codelineno-34-21" name="__codelineno-34-21"></a>        <span class="c1"># 如果不为空，则链接到最后一个节点的下一个位置</span>
+<a id="__codelineno-34-22" name="__codelineno-34-22"></a>        <span class="n">cur</span><span class="p">:</span><span class="n">LinkedListNode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">next</span>
+<a id="__codelineno-34-23" name="__codelineno-34-23"></a>        <span class="k">while</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-34-24" name="__codelineno-34-24"></a>            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
+<a id="__codelineno-34-25" name="__codelineno-34-25"></a>        <span class="c1"># 尾部插入新节点</span>
+<a id="__codelineno-34-26" name="__codelineno-34-26"></a>        <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">new_node</span>
+<a id="__codelineno-34-27" name="__codelineno-34-27"></a>
+<a id="__codelineno-34-28" name="__codelineno-34-28"></a>    <span class="c1"># 创建迭代器对象</span>
+<a id="__codelineno-34-29" name="__codelineno-34-29"></a>    <span class="c1"># def __iter__(self):</span>
+<a id="__codelineno-34-30" name="__codelineno-34-30"></a>    <span class="c1">#     return LinkedListNodeIterable(self._head.next)</span>
+<a id="__codelineno-34-31" name="__codelineno-34-31"></a>
+<a id="__codelineno-34-32" name="__codelineno-34-32"></a>    <span class="c1"># 生成器函数</span>
+<a id="__codelineno-34-33" name="__codelineno-34-33"></a>    <span class="k">def</span> <span class="nf">genertor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-34-34" name="__codelineno-34-34"></a>        <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">next</span>
+<a id="__codelineno-34-35" name="__codelineno-34-35"></a>        <span class="k">while</span> <span class="n">cur</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-34-36" name="__codelineno-34-36"></a>            <span class="k">yield</span> <span class="n">cur</span>
+<a id="__codelineno-34-37" name="__codelineno-34-37"></a>            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
+</code></pre></div></td></tr></table></div>
+<p>有了生成器函数<code>generator</code>就只需要用类对象调用这个生成器函数就可以创建一个可迭代对象，执行步骤如下：</p>
+<ol>
+<li>初始化：方法开始时，<code>cur</code>被设置为<code>_head.next</code>，即链表的第一个实际节点</li>
+<li>循环遍历：通过<code>while cur is not None:</code>循环，从第一个实际节点开始遍历整个链表</li>
+<li><code>yield</code>语句：每当遇到<code>yield cur</code>时，当前的<code>cur</code>节点被返回给调用者，并且生成器函数会暂停执行。这意味着每次调用<code>next()</code>或在<code>for</code>循环中迭代时都会得到下一个节点</li>
+<li>状态保存：生成器在每次<code>yield</code>后会保存其内部状态，包括<code>cur</code>变量的值。当下一次需要继续迭代时，它将从上次暂停的地方继续执行</li>
+<li>移动到下一个节点：在<code>yield</code>之后，<code>cur = cur.next</code>将指针移到下一个节点，准备下一次迭代</li>
+</ol>
 
 
 

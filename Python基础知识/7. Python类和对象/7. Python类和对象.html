@@ -5521,10 +5521,14 @@
 <a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="mi">5</span>
 </code></pre></div></td></tr></table></div>
 <p>接下来，为了更细致的了解<code>__iter__()</code>方法和<code>__next__()</code>方法分别在做什么，就需要看看官方是如何对他们进行定义的：</p>
-<p><strong><code>__iter__()</code></strong></p>
+<div class="admonition info">
+<p class="admonition-title"><strong><code>__iter__()</code></strong></p>
 <p>返回<code>iterator</code>对象本身。这是同时允许容器和迭代器配合<code>for</code>和<code>in</code>语句使用所必须的</p>
-<p><strong><code>__next__()</code></strong></p>
+</div>
+<div class="admonition info">
+<p class="admonition-title"><strong><code>__next__()</code></strong></p>
 <p><code>iterator</code>中返回下一项。 如果已经没有可返回的项，则会引发<code>StopIteration</code>异常</p>
+</div>
 <p>从上面的概念可以得知，<code>__iter__()</code>方法本质就是返回迭代器对象本身，也就是说，如果当前类是个迭代器类，那么就直接返回<code>self</code>即可，而对于<code>__next__()</code>方法来说，因为其返回的是<code>iterator</code>的下一项，也就是说获取到下一个内容</p>
 <p>根据上面的概念，下面实现一个链表来详细描述这两个方法：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>

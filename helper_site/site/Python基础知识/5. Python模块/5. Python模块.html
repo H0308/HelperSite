@@ -2096,6 +2096,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python类和对象
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4739,41 +4760,50 @@
 <p>例如下面的代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">test_module</span>
 </code></pre></div></td></tr></table></div>
-<p>模块包含可执行语句及函数定义。这些语句用于初始化模块，且仅在<code>import</code>语句第一次遇到模块名时执行，也就是说，如果一个模块被导入，那么这个模块中所有的代码在当前文件执行时遇到<code>import</code>关键字都会被执行一遍，例如下面的代码：</p>
+<p>注意，当在函数内部使用<code>import</code>导入模块或者定义新的函数时，这些新引入的名字（导入的模块名、函数名等）默认情况下也是在局部作用域中定义的。这意味着它们仅在当前函数内可见</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
-<span class="normal"><a href="#__codelineno-1-4">4</a></span>
-<span class="normal"><a href="#__codelineno-1-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># test_module.py中</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;导入时就被执行了&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="c1"># test1.py中</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="kn">import</span> <span class="nn">test_module</span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>    <span class="kn">import</span> <span class="nn">math</span>  <span class="c1"># math 是局部于 my_function 的</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span> <span class="k">pass</span>  <span class="c1"># inner 函数也是局部于 my_function 的</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>    <span class="o">...</span>
+</code></pre></div></td></tr></table></div>
+<p>模块包含可执行语句及函数定义。这些语句用于初始化模块，且仅在<code>import</code>语句第一次遇到模块名时执行，也就是说，如果一个模块被导入，那么这个模块中所有的代码在当前文件执行时遇到<code>import</code>关键字都会被执行一遍，例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># test_module.py中</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;导入时就被执行了&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="c1"># test1.py中</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="kn">import</span> <span class="nn">test_module</span>
 </code></pre></div></td></tr></table></div>
 <p>在上面的代码中，在<code>test1.py</code>文件下运行，就可以看到尽管<code>test1.py</code>文件没有任何内容，但是因为<code>test_module.py</code>文件有一句打印语句，所以最后的输出结果应该是：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">导入时就被执行了</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">导入时就被执行了</span>
 </code></pre></div></td></tr></table></div>
 <p>如果需要为引入的模块取别名，可以使用<code>as</code>关键字，有了别名之后，在当前文件就只需要使用别名访问对应模块中的内容即可，例如下面的代码：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
-<span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># 将test_module取别名为tm</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="kn">import</span> <span class="nn">test_module</span> <span class="k">as</span> <span class="nn">tm</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># 将test_module取别名为tm</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="kn">import</span> <span class="nn">test_module</span> <span class="k">as</span> <span class="nn">tm</span>
 </code></pre></div></td></tr></table></div>
 <p>在Python中，每个模块都有自己的私有命名空间，它会被用作模块中定义的所有函数的全局命名空间。因此，模块作者可以在模块内使用全局变量而不必担心与用户的全局变量发生意外冲突，例如下面的代码：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
-<span class="normal"><a href="#__codelineno-4-2">2</a></span>
-<span class="normal"><a href="#__codelineno-4-3">3</a></span>
-<span class="normal"><a href="#__codelineno-4-4">4</a></span>
-<span class="normal"><a href="#__codelineno-4-5">5</a></span>
-<span class="normal"><a href="#__codelineno-4-6">6</a></span>
-<span class="normal"><a href="#__codelineno-4-7">7</a></span>
-<span class="normal"><a href="#__codelineno-4-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># test_module中的变量</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="c1"># test中的变量a</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">20</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># 20</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="c1"># test_module中的变量a</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">test_module</span><span class="o">.</span><span class="n">a</span><span class="p">)</span> <span class="c1"># 10</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span>
+<span class="normal"><a href="#__codelineno-5-6">6</a></span>
+<span class="normal"><a href="#__codelineno-5-7">7</a></span>
+<span class="normal"><a href="#__codelineno-5-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1"># test_module中的变量</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="c1"># test中的变量a</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">20</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># 20</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="c1"># test_module中的变量a</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">test_module</span><span class="o">.</span><span class="n">a</span><span class="p">)</span> <span class="c1"># 10</span>
 </code></pre></div></td></tr></table></div>
 <p>在一个文件中如果想访问已经导入的文件中的内容时，可以使用<code>模块名.模块内容</code>的方式引入已经导入的文件中的内容，例如上面代码中的<code>test_module.a</code>就是访问<code>test_module</code>中的变量<code>a</code></p>
 <p>如果模块中有多个内容，但是又只想在当前文件中引入指定的内容，就可以使用<code>from...import...</code>语句，<code>from</code>后面跟着模块名或者包名：
@@ -4784,30 +4814,30 @@
 <p>如果使用第一种方式引入模块中的内容，则<code>import</code>关键字后面可以加上<code>*</code>表示引入指定模块中的所有不以下划线<code>_</code>开头的名称，但是不要用这个功能，这种方式向解释器导入了一批未知的名称，可能会覆盖已经定义的名称，并且这项操作经常让代码变得难以理解</p>
 </div>
 <p>例如下面的代码：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
-<span class="normal"><a href="#__codelineno-5-2">2</a></span>
-<span class="normal"><a href="#__codelineno-5-3">3</a></span>
-<span class="normal"><a href="#__codelineno-5-4">4</a></span>
-<span class="normal"><a href="#__codelineno-5-5">5</a></span>
-<span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">test_module</span> <span class="kn">import</span> <span class="n">a</span><span class="p">,</span> <span class="n">add</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="c1"># 直接访问test_module中的变量a</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># 10</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="c1"># 直接访问test_module中的函数add</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="c1"># 30</span>
-</code></pre></div></td></tr></table></div>
-<p>如果需要为导入的内容取别名，则可以在对应的内容后面使用<code>as</code>为其取别名，例如下面的代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">3</a></span>
 <span class="normal"><a href="#__codelineno-6-4">4</a></span>
 <span class="normal"><a href="#__codelineno-6-5">5</a></span>
-<span class="normal"><a href="#__codelineno-6-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="kn">from</span> <span class="nn">test_module</span> <span class="kn">import</span> <span class="n">a</span> <span class="k">as</span> <span class="n">value</span><span class="p">,</span> <span class="n">add</span> <span class="k">as</span> <span class="n">func</span>
+<span class="normal"><a href="#__codelineno-6-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="kn">from</span> <span class="nn">test_module</span> <span class="kn">import</span> <span class="n">a</span><span class="p">,</span> <span class="n">add</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c1"># 直接访问test_module中的变量a（别名为value）</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1"># 10</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="c1"># 直接访问test_module中的函数add（别名为func）</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="c1"># 30</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c1"># 直接访问test_module中的变量a</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># 10</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="c1"># 直接访问test_module中的函数add</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="c1"># 30</span>
+</code></pre></div></td></tr></table></div>
+<p>如果需要为导入的内容取别名，则可以在对应的内容后面使用<code>as</code>为其取别名，例如下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span>
+<span class="normal"><a href="#__codelineno-7-5">5</a></span>
+<span class="normal"><a href="#__codelineno-7-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">test_module</span> <span class="kn">import</span> <span class="n">a</span> <span class="k">as</span> <span class="n">value</span><span class="p">,</span> <span class="n">add</span> <span class="k">as</span> <span class="n">func</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="c1"># 直接访问test_module中的变量a（别名为value）</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1"># 10</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="c1"># 直接访问test_module中的函数add（别名为func）</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="c1"># 30</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="_2">主函数<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
@@ -4816,24 +4846,24 @@
 </div>
 <p>在Python中，主函数（通常称为 <code>main</code> 函数）并不是一个内置的概念，不像C或C++那样有一个明确的 <code>main</code> 函数作为程序的入口点。然而，Python程序员通常会定义一个名为 <code>main</code> 的函数来组织和执行主要的逻辑代码，并使用 <code>if __name__ == "__main__":</code> 语句来确保该函数只在脚本直接运行时被调用（相当于PyCharm右键直接运行）</p>
 <p>主函数通常是一个普通函数，名称可以是 <code>main</code> 或其他任何名称。这个函数包含了程序的主要逻辑</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
-<span class="normal"><a href="#__codelineno-7-2">2</a></span>
-<span class="normal"><a href="#__codelineno-7-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is the main function.&quot;</span><span class="p">)</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3"></a>    <span class="c1"># 其他主要逻辑代码</span>
-</code></pre></div></td></tr></table></div>
-<p>为了确保 <code>main</code> 函数只在脚本直接运行时被调用，而不是在模块被导入时被调用，可以使用 <code>if __name__ == "__main__":</code> 语句。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
 <span class="normal"><a href="#__codelineno-8-2">2</a></span>
-<span class="normal"><a href="#__codelineno-8-3">3</a></span>
-<span class="normal"><a href="#__codelineno-8-4">4</a></span>
-<span class="normal"><a href="#__codelineno-8-5">5</a></span>
-<span class="normal"><a href="#__codelineno-8-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is the main function.&quot;</span><span class="p">)</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3"></a>    <span class="c1"># 其他主要逻辑代码</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6"></a>    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>为了确保 <code>main</code> 函数只在脚本直接运行时被调用，而不是在模块被导入时被调用，可以使用 <code>if __name__ == "__main__":</code> 语句。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#__codelineno-9-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is the main function.&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>    <span class="c1"># 其他主要逻辑代码</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 <p>使用这种方式的优点：</p>
 <ol>
@@ -4842,48 +4872,48 @@
 <li><strong>清晰性</strong>：将主要逻辑封装在一个 <code>main</code> 函数中，并通过 <code>if __name__ == "__main__":</code> 调用它，可以使代码结构更清晰，便于维护</li>
 </ol>
 <p>以下是一个完整的示例，展示了如何定义和使用 <code>main</code> 函数：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-9-10">10</a></span>
-<span class="normal"><a href="#__codelineno-9-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Program started.&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a>    <span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter your name: &quot;</span><span class="p">)</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a>    <span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Program finished.&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11"></a>    <span class="n">main</span><span class="p">()</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Program started.&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>    <span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter your name: &quot;</span><span class="p">)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>    <span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Program finished.&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 <p>当直接运行这个脚本（在PyCharm中直接右键当前文件）时，输出将是：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
-<span class="normal"><a href="#__codelineno-10-2">2</a></span>
-<span class="normal"><a href="#__codelineno-10-3">3</a></span>
-<span class="normal"><a href="#__codelineno-10-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">Program</span> <span class="n">started</span><span class="o">.</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="n">Enter</span> <span class="n">your</span> <span class="n">name</span><span class="p">:</span> <span class="n">Alice</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="n">Hello</span><span class="p">,</span> <span class="n">Alice</span><span class="err">!</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="n">Program</span> <span class="n">finished</span><span class="o">.</span>
-</code></pre></div></td></tr></table></div>
-<p>如果将这个脚本保存为 <code>my_script.py</code> 并从另一个脚本中导入它，例如：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
 <span class="normal"><a href="#__codelineno-11-2">2</a></span>
 <span class="normal"><a href="#__codelineno-11-3">3</a></span>
-<span class="normal"><a href="#__codelineno-11-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="c1"># another_script.py</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="kn">import</span> <span class="nn">my_script</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3"></a>
-<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Importing my_script&quot;</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">Program</span> <span class="n">started</span><span class="o">.</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">Enter</span> <span class="n">your</span> <span class="n">name</span><span class="p">:</span> <span class="n">Alice</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="n">Hello</span><span class="p">,</span> <span class="n">Alice</span><span class="err">!</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="n">Program</span> <span class="n">finished</span><span class="o">.</span>
+</code></pre></div></td></tr></table></div>
+<p>如果将这个脚本保存为 <code>my_script.py</code> 并从另一个脚本中导入它，例如：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># another_script.py</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="kn">import</span> <span class="nn">my_script</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Importing my_script&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>当运行 <code>another_script.py</code> 时，输出将是：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">Importing</span> <span class="n">my_script</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="n">Importing</span> <span class="n">my_script</span>
 </code></pre></div></td></tr></table></div>
 <p>注意，<code>main</code> 函数中的代码没有被执行，因为 <code>my_script</code> 是作为一个模块被导入的，而不是直接运行的</p>
 <h2 id="_3">列出导入模块的内容<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -4892,65 +4922,65 @@
 <p class="admonition-title">Note</p>
 <p>如果<code>dir()</code>函数不传递实参，则默认查看到的是当前文件中的内容</p>
 </div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-13-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-13-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-13-10">10</a></span>
-<span class="normal"><a href="#__codelineno-13-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="kn">import</span> <span class="nn">test_module</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="kn">import</span> <span class="nn">test_module2</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3"></a>
-<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">())</span> <span class="c1"># 返回当前模块的所有内容</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">test_module</span><span class="p">))</span> <span class="c1"># 返回test_module模块的所有内容</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">test_module2</span><span class="p">))</span> <span class="c1"># 返回test_module2模块的所有内容</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7"></a>
-<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="n">输出结果</span><span class="err">：</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">,</span> <span class="s1">&#39;__loader__&#39;</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;__package__&#39;</span><span class="p">,</span> <span class="s1">&#39;__spec__&#39;</span><span class="p">,</span> <span class="s1">&#39;test_module&#39;</span><span class="p">,</span> <span class="s1">&#39;test_module2&#39;</span><span class="p">]</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">,</span> <span class="s1">&#39;__cached__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">,</span> <span class="s1">&#39;__loader__&#39;</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;__package__&#39;</span><span class="p">,</span> <span class="s1">&#39;__spec__&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;sub&#39;</span><span class="p">]</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">,</span> <span class="s1">&#39;__cached__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">,</span> <span class="s1">&#39;__loader__&#39;</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;__package__&#39;</span><span class="p">,</span> <span class="s1">&#39;__spec__&#39;</span><span class="p">,</span> <span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="s1">&#39;mul&#39;</span><span class="p">]</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kn">import</span> <span class="nn">test_module</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="kn">import</span> <span class="nn">test_module2</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">())</span> <span class="c1"># 返回当前模块的所有内容</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">test_module</span><span class="p">))</span> <span class="c1"># 返回test_module模块的所有内容</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">test_module2</span><span class="p">))</span> <span class="c1"># 返回test_module2模块的所有内容</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">,</span> <span class="s1">&#39;__loader__&#39;</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;__package__&#39;</span><span class="p">,</span> <span class="s1">&#39;__spec__&#39;</span><span class="p">,</span> <span class="s1">&#39;test_module&#39;</span><span class="p">,</span> <span class="s1">&#39;test_module2&#39;</span><span class="p">]</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">,</span> <span class="s1">&#39;__cached__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">,</span> <span class="s1">&#39;__loader__&#39;</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;__package__&#39;</span><span class="p">,</span> <span class="s1">&#39;__spec__&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;sub&#39;</span><span class="p">]</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">,</span> <span class="s1">&#39;__cached__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">,</span> <span class="s1">&#39;__loader__&#39;</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;__package__&#39;</span><span class="p">,</span> <span class="s1">&#39;__spec__&#39;</span><span class="p">,</span> <span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="s1">&#39;mul&#39;</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>注意<code>dir()</code>函数不会列出内置函数和变量的名称。这些内容的定义在标准模块<code>builtins</code>中</p>
 <h2 id="_4">包<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>在Python中，所谓包就是有着<code>__init__.py</code>文件的文件夹，而这个<code>__init__.py</code>文件可以为空也可以设置<code>__all__</code>变量，这个文件夹下的所有<code>.py</code>文件就是隶属于当前包的模块</p>
 <p>在Python中，可以使用<code>from...import...</code>导入包和指定模块，例如下面的代码：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
-<span class="normal"><a href="#__codelineno-14-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="c1"># 导入pack包下的test_module模块</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="kn">from</span> <span class="nn">pack</span> <span class="kn">import</span> <span class="n">test_module</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="c1"># 导入pack包下的test_module模块</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="kn">from</span> <span class="nn">pack</span> <span class="kn">import</span> <span class="n">test_module</span>
 </code></pre></div></td></tr></table></div>
 <p>如果需要使用模块中的内容，有下面几种方式（注意使用其中内容的方式不同）：</p>
 <ol>
 <li>
 <p>导入指定模块，通过模块调用</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
-<span class="normal"><a href="#__codelineno-15-2">2</a></span>
-<span class="normal"><a href="#__codelineno-15-3">3</a></span>
-<span class="normal"><a href="#__codelineno-15-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">pack</span> <span class="kn">import</span> <span class="n">test_module</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="c1"># 1. 导入指定模块，通过模块调用</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">test_module</span><span class="o">.</span><span class="n">c</span><span class="p">)</span> <span class="c1"># 100</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
+<span class="normal"><a href="#__codelineno-16-2">2</a></span>
+<span class="normal"><a href="#__codelineno-16-3">3</a></span>
+<span class="normal"><a href="#__codelineno-16-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="kn">from</span> <span class="nn">pack</span> <span class="kn">import</span> <span class="n">test_module</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="c1"># 1. 导入指定模块，通过模块调用</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">test_module</span><span class="o">.</span><span class="n">c</span><span class="p">)</span> <span class="c1"># 100</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
 <p>导入包和模块，引入指定内容</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
-<span class="normal"><a href="#__codelineno-16-2">2</a></span>
-<span class="normal"><a href="#__codelineno-16-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="kn">from</span> <span class="nn">pack.test_module</span> <span class="kn">import</span> <span class="n">c</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="c1"># 2. 导入指定包中的模块，通过包名.模块名调用</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1"># 100</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<span class="normal"><a href="#__codelineno-17-2">2</a></span>
+<span class="normal"><a href="#__codelineno-17-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="kn">from</span> <span class="nn">pack.test_module</span> <span class="kn">import</span> <span class="n">c</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="c1"># 2. 导入指定包中的模块，通过包名.模块名调用</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1"># 100</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
 <p>直接引入单个模块</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
-<span class="normal"><a href="#__codelineno-17-2">2</a></span>
-<span class="normal"><a href="#__codelineno-17-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="kn">import</span> <span class="nn">pack.test_module</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="c1"># 3. 直接引入单个模块</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">pack</span><span class="o">.</span><span class="n">test_module</span><span class="o">.</span><span class="n">c</span><span class="p">)</span> <span class="c1"># 100</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
+<span class="normal"><a href="#__codelineno-18-2">2</a></span>
+<span class="normal"><a href="#__codelineno-18-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="kn">import</span> <span class="nn">pack.test_module</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="c1"># 3. 直接引入单个模块</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">pack</span><span class="o">.</span><span class="n">test_module</span><span class="o">.</span><span class="n">c</span><span class="p">)</span> <span class="c1"># 100</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -4961,59 +4991,25 @@
 <p>注意，前面在模块中提到如果使用<code>import</code>关键字后面跟着的是<code>*</code>就会导入该模块中所有的内容，但是在包这里就不建议这么做，因为包中可能还有大量的模块，直接使用<code>*</code>可能会导致花费很长的时间，并且可能会产生不想要的副作用，如果这种副作用被设计为只有在导入某个特定的子模块时才应该发生</p>
 <p>解决上面这个问题的办法就是提供包的显示索引，在<code>__init__.py</code>文件中为变量<code>__all__</code>赋值为一个列表，列表中的元素就是指定的模块名，此时使用<code>import *</code>时就会导入<code>__all__</code>列表中指定的模块</p>
 <p>例如下面的代码：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
-<span class="normal"><a href="#__codelineno-18-2">2</a></span>
-<span class="normal"><a href="#__codelineno-18-3">3</a></span>
-<span class="normal"><a href="#__codelineno-18-4">4</a></span>
-<span class="normal"><a href="#__codelineno-18-5">5</a></span>
-<span class="normal"><a href="#__codelineno-18-6">6</a></span>
-<span class="normal"><a href="#__codelineno-18-7">7</a></span>
-<span class="normal"><a href="#__codelineno-18-8">8</a></span>
-<span class="normal"><a href="#__codelineno-18-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="c1"># __init__.py文件</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test_module1&quot;</span><span class="p">]</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3"></a>
-<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="c1"># test_module1.py文件</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="n">d</span> <span class="o">=</span> <span class="mi">200</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6"></a>
-<a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="c1"># test1.py文件</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="kn">from</span> <span class="nn">pack</span> <span class="kn">import</span> <span class="o">*</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">test_module1</span><span class="o">.</span><span class="n">d</span><span class="p">)</span> <span class="c1"># 200</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
+<span class="normal"><a href="#__codelineno-19-2">2</a></span>
+<span class="normal"><a href="#__codelineno-19-3">3</a></span>
+<span class="normal"><a href="#__codelineno-19-4">4</a></span>
+<span class="normal"><a href="#__codelineno-19-5">5</a></span>
+<span class="normal"><a href="#__codelineno-19-6">6</a></span>
+<span class="normal"><a href="#__codelineno-19-7">7</a></span>
+<span class="normal"><a href="#__codelineno-19-8">8</a></span>
+<span class="normal"><a href="#__codelineno-19-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="c1"># __init__.py文件</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test_module1&quot;</span><span class="p">]</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="c1"># test_module1.py文件</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="n">d</span> <span class="o">=</span> <span class="mi">200</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="c1"># test1.py文件</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="kn">from</span> <span class="nn">pack</span> <span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">test_module1</span><span class="o">.</span><span class="n">d</span><span class="p">)</span> <span class="c1"># 200</span>
 </code></pre></div></td></tr></table></div>
 <p>需要注意，如果在<code>__init__.py</code>文件中有与某个模块名重名的内容，那么此时再<code>__all__</code>列表中写的模块名就会指向对应的函数而不是模块，例如下面的代码：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-19-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-19-10">10</a></span>
-<span class="normal"><a href="#__codelineno-19-11">11</a></span>
-<span class="normal"><a href="#__codelineno-19-12">12</a></span>
-<span class="normal"><a href="#__codelineno-19-13">13</a></span>
-<span class="normal"><a href="#__codelineno-19-14">14</a></span>
-<span class="normal"><a href="#__codelineno-19-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="c1"># add.py文件</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;导入时就执行&quot;</span><span class="p">)</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3"></a>
-<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="c1"># __init__.py文件</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test_module1&quot;</span><span class="p">,</span> <span class="s2">&quot;add&quot;</span><span class="p">]</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6"></a>
-<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8"></a>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9"></a>
-<a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="c1"># test1.py文件</span>
-<a id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="kn">from</span> <span class="nn">pack</span> <span class="kn">import</span> <span class="o">*</span>
-<a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="c1"># 30</span>
-<a id="__codelineno-19-13" name="__codelineno-19-13"></a>
-<a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="n">输出结果</span>
-<a id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="mi">30</span>
-</code></pre></div></td></tr></table></div>
-<p>在上面的代码中，并没有执行到<code>add.py</code>文件中的<code>print("导入时就执行")</code>，说明<code>add.py</code>并没有被导入到<code>test1.py</code>文件，原因就是<code>__init__.py</code>文件中的<code>add</code>函数覆盖了<code>__all__</code>列表中的<code>add</code>模块</p>
-<h2 id="_5">包的相对导入<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>如果包中还有许多子包，则可以考虑使用相对导入的方式</p>
-<p>假设当前包的结构如下：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -5028,84 +5024,118 @@
 <span class="normal"><a href="#__codelineno-20-12">12</a></span>
 <span class="normal"><a href="#__codelineno-20-13">13</a></span>
 <span class="normal"><a href="#__codelineno-20-14">14</a></span>
-<span class="normal"><a href="#__codelineno-20-15">15</a></span>
-<span class="normal"><a href="#__codelineno-20-16">16</a></span>
-<span class="normal"><a href="#__codelineno-20-17">17</a></span>
-<span class="normal"><a href="#__codelineno-20-18">18</a></span>
-<span class="normal"><a href="#__codelineno-20-19">19</a></span>
-<span class="normal"><a href="#__codelineno-20-20">20</a></span>
-<span class="normal"><a href="#__codelineno-20-21">21</a></span>
-<span class="normal"><a href="#__codelineno-20-22">22</a></span>
-<span class="normal"><a href="#__codelineno-20-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a>sound/                          最高层级的包
-<a id="__codelineno-20-2" name="__codelineno-20-2"></a>      __init__.py               初始化 sound 包
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a>      formats/                  用于文件格式转换的子包
-<a id="__codelineno-20-4" name="__codelineno-20-4"></a>              __init__.py
-<a id="__codelineno-20-5" name="__codelineno-20-5"></a>              wavread.py
-<a id="__codelineno-20-6" name="__codelineno-20-6"></a>              wavwrite.py
-<a id="__codelineno-20-7" name="__codelineno-20-7"></a>              aiffread.py
-<a id="__codelineno-20-8" name="__codelineno-20-8"></a>              aiffwrite.py
-<a id="__codelineno-20-9" name="__codelineno-20-9"></a>              auread.py
-<a id="__codelineno-20-10" name="__codelineno-20-10"></a>              auwrite.py
-<a id="__codelineno-20-11" name="__codelineno-20-11"></a>              ...
-<a id="__codelineno-20-12" name="__codelineno-20-12"></a>      effects/                  用于音效的子包
-<a id="__codelineno-20-13" name="__codelineno-20-13"></a>              __init__.py
-<a id="__codelineno-20-14" name="__codelineno-20-14"></a>              echo.py
-<a id="__codelineno-20-15" name="__codelineno-20-15"></a>              surround.py
-<a id="__codelineno-20-16" name="__codelineno-20-16"></a>              reverse.py
-<a id="__codelineno-20-17" name="__codelineno-20-17"></a>              ...
-<a id="__codelineno-20-18" name="__codelineno-20-18"></a>      filters/                  用于过滤器的子包
-<a id="__codelineno-20-19" name="__codelineno-20-19"></a>              __init__.py
-<a id="__codelineno-20-20" name="__codelineno-20-20"></a>              equalizer.py
-<a id="__codelineno-20-21" name="__codelineno-20-21"></a>              vocoder.py
-<a id="__codelineno-20-22" name="__codelineno-20-22"></a>              karaoke.py
-<a id="__codelineno-20-23" name="__codelineno-20-23"></a>              ...
+<span class="normal"><a href="#__codelineno-20-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="c1"># add.py文件</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;导入时就执行&quot;</span><span class="p">)</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="c1"># __init__.py文件</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test_module1&quot;</span><span class="p">,</span> <span class="s2">&quot;add&quot;</span><span class="p">]</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6"></a>
+<a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8"></a>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9"></a>
+<a id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="c1"># test1.py文件</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="kn">from</span> <span class="nn">pack</span> <span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="c1"># 30</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13"></a>
+<a id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="n">输出结果</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="mi">30</span>
+</code></pre></div></td></tr></table></div>
+<p>在上面的代码中，并没有执行到<code>add.py</code>文件中的<code>print("导入时就执行")</code>，说明<code>add.py</code>并没有被导入到<code>test1.py</code>文件，原因就是<code>__init__.py</code>文件中的<code>add</code>函数覆盖了<code>__all__</code>列表中的<code>add</code>模块</p>
+<h2 id="_5">包的相对导入<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>如果包中还有许多子包，则可以考虑使用相对导入的方式</p>
+<p>假设当前包的结构如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-21-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-21-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-21-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-21-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-21-10">10</a></span>
+<span class="normal"><a href="#__codelineno-21-11">11</a></span>
+<span class="normal"><a href="#__codelineno-21-12">12</a></span>
+<span class="normal"><a href="#__codelineno-21-13">13</a></span>
+<span class="normal"><a href="#__codelineno-21-14">14</a></span>
+<span class="normal"><a href="#__codelineno-21-15">15</a></span>
+<span class="normal"><a href="#__codelineno-21-16">16</a></span>
+<span class="normal"><a href="#__codelineno-21-17">17</a></span>
+<span class="normal"><a href="#__codelineno-21-18">18</a></span>
+<span class="normal"><a href="#__codelineno-21-19">19</a></span>
+<span class="normal"><a href="#__codelineno-21-20">20</a></span>
+<span class="normal"><a href="#__codelineno-21-21">21</a></span>
+<span class="normal"><a href="#__codelineno-21-22">22</a></span>
+<span class="normal"><a href="#__codelineno-21-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a>sound/                          最高层级的包
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a>      __init__.py               初始化 sound 包
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a>      formats/                  用于文件格式转换的子包
+<a id="__codelineno-21-4" name="__codelineno-21-4"></a>              __init__.py
+<a id="__codelineno-21-5" name="__codelineno-21-5"></a>              wavread.py
+<a id="__codelineno-21-6" name="__codelineno-21-6"></a>              wavwrite.py
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a>              aiffread.py
+<a id="__codelineno-21-8" name="__codelineno-21-8"></a>              aiffwrite.py
+<a id="__codelineno-21-9" name="__codelineno-21-9"></a>              auread.py
+<a id="__codelineno-21-10" name="__codelineno-21-10"></a>              auwrite.py
+<a id="__codelineno-21-11" name="__codelineno-21-11"></a>              ...
+<a id="__codelineno-21-12" name="__codelineno-21-12"></a>      effects/                  用于音效的子包
+<a id="__codelineno-21-13" name="__codelineno-21-13"></a>              __init__.py
+<a id="__codelineno-21-14" name="__codelineno-21-14"></a>              echo.py
+<a id="__codelineno-21-15" name="__codelineno-21-15"></a>              surround.py
+<a id="__codelineno-21-16" name="__codelineno-21-16"></a>              reverse.py
+<a id="__codelineno-21-17" name="__codelineno-21-17"></a>              ...
+<a id="__codelineno-21-18" name="__codelineno-21-18"></a>      filters/                  用于过滤器的子包
+<a id="__codelineno-21-19" name="__codelineno-21-19"></a>              __init__.py
+<a id="__codelineno-21-20" name="__codelineno-21-20"></a>              equalizer.py
+<a id="__codelineno-21-21" name="__codelineno-21-21"></a>              vocoder.py
+<a id="__codelineno-21-22" name="__codelineno-21-22"></a>              karaoke.py
+<a id="__codelineno-21-23" name="__codelineno-21-23"></a>              ...
 </code></pre></div></td></tr></table></div>
 <p>则可以在<code>surround.py</code>文件中按照下面的方式导入指定的包：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
-<span class="normal"><a href="#__codelineno-21-2">2</a></span>
-<span class="normal"><a href="#__codelineno-21-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">echo</span> <span class="c1"># 导入当前包下的echo.py文件</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">formats</span> <span class="c1"># 导入当前包的上一级路径下的formats包</span>
-<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="kn">from</span> <span class="nn">..filters</span> <span class="kn">import</span> <span class="n">equalizer</span> <span class="c1"># 导入当前包的上一级路径下filters包中的equalizer.py模块</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
+<span class="normal"><a href="#__codelineno-22-2">2</a></span>
+<span class="normal"><a href="#__codelineno-22-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">echo</span> <span class="c1"># 导入当前包下的echo.py文件</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">formats</span> <span class="c1"># 导入当前包的上一级路径下的formats包</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="kn">from</span> <span class="nn">..filters</span> <span class="kn">import</span> <span class="n">equalizer</span> <span class="c1"># 导入当前包的上一级路径下filters包中的equalizer.py模块</span>
 </code></pre></div></td></tr></table></div>
 <p>注意，相对导入基于当前模块名。因为主模块名永远是<code>__main__</code>，所以如果计划将一个模块用作Python应用程序的主模块，那么该模块内的导入语句必须始终使用绝对导入</p>
 <p>假设当前项目结构如下：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
-<span class="normal"><a href="#__codelineno-22-2">2</a></span>
-<span class="normal"><a href="#__codelineno-22-3">3</a></span>
-<span class="normal"><a href="#__codelineno-22-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a>my_package/
-<a id="__codelineno-22-2" name="__codelineno-22-2"></a>├── __init__.py
-<a id="__codelineno-22-3" name="__codelineno-22-3"></a>├── module_a.py
-<a id="__codelineno-22-4" name="__codelineno-22-4"></a>└── module_b.py
-</code></pre></div></td></tr></table></div>
-<p>在 <code>module_a.py</code> 中，有以下相对导入：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
 <span class="normal"><a href="#__codelineno-23-2">2</a></span>
 <span class="normal"><a href="#__codelineno-23-3">3</a></span>
-<span class="normal"><a href="#__codelineno-23-4">4</a></span>
-<span class="normal"><a href="#__codelineno-23-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="c1"># module_a.py</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">module_b</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3"></a>
-<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="k">def</span> <span class="nf">func_a</span><span class="p">():</span>
-<a id="__codelineno-23-5" name="__codelineno-23-5"></a>    <span class="n">module_b</span><span class="o">.</span><span class="n">func_b</span><span class="p">()</span>
+<span class="normal"><a href="#__codelineno-23-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a>my_package/
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a>├── __init__.py
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a>├── module_a.py
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a>└── module_b.py
+</code></pre></div></td></tr></table></div>
+<p>在 <code>module_a.py</code> 中，有以下相对导入：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
+<span class="normal"><a href="#__codelineno-24-2">2</a></span>
+<span class="normal"><a href="#__codelineno-24-3">3</a></span>
+<span class="normal"><a href="#__codelineno-24-4">4</a></span>
+<span class="normal"><a href="#__codelineno-24-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="c1"># module_a.py</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">module_b</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="k">def</span> <span class="nf">func_a</span><span class="p">():</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5"></a>    <span class="n">module_b</span><span class="o">.</span><span class="n">func_b</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 <p>如果直接运行 <code>module_a.py</code>：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a>python<span class="w"> </span>module_a.py
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a>python<span class="w"> </span>module_a.py
 </code></pre></div></td></tr></table></div>
 <p>会出现错误：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a>ImportError: attempted relative import with no known parent package
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a>ImportError: attempted relative import with no known parent package
 </code></pre></div></td></tr></table></div>
 <p>这是因为当直接运行 <code>module_a.py</code> 时，其 <code>__name__</code> 等于 <code>'__main__'</code>，相对导入无法解析</p>
 <p><strong>解决方法</strong>：使用绝对导入</p>
 <p>修改 <code>module_a.py</code>：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
-<span class="normal"><a href="#__codelineno-26-2">2</a></span>
-<span class="normal"><a href="#__codelineno-26-3">3</a></span>
-<span class="normal"><a href="#__codelineno-26-4">4</a></span>
-<span class="normal"><a href="#__codelineno-26-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="c1"># module_a.py</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="kn">from</span> <span class="nn">my_package</span> <span class="kn">import</span> <span class="n">module_b</span>
-<a id="__codelineno-26-3" name="__codelineno-26-3"></a>
-<a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="k">def</span> <span class="nf">func_a</span><span class="p">():</span>
-<a id="__codelineno-26-5" name="__codelineno-26-5"></a>    <span class="n">module_b</span><span class="o">.</span><span class="n">func_b</span><span class="p">()</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1">1</a></span>
+<span class="normal"><a href="#__codelineno-27-2">2</a></span>
+<span class="normal"><a href="#__codelineno-27-3">3</a></span>
+<span class="normal"><a href="#__codelineno-27-4">4</a></span>
+<span class="normal"><a href="#__codelineno-27-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="c1"># module_a.py</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="kn">from</span> <span class="nn">my_package</span> <span class="kn">import</span> <span class="n">module_b</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="k">def</span> <span class="nf">func_a</span><span class="p">():</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a>    <span class="n">module_b</span><span class="o">.</span><span class="n">func_b</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 <p>这样，无论模块是被导入还是直接运行，绝对导入都能正常工作</p>
 
@@ -5130,7 +5160,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 29, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 30, 2024</span>
   </span>
 
     

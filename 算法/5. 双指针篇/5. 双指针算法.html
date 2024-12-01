@@ -5240,7 +5240,7 @@
 <li>
 <p>解法2：双指针算法</p>
 <p>本题也是双指针算法优化暴力算法最典型的例子，通过双指针算法结合规律就可以在保证空间复杂度不变的情况下，将暴力解法的时间复杂度降到O(N)</p>
-<p>根据体积的计算公式<span class="arithmatex">\(V = height * width\)</span>以及单调递减性可以得出两种使得v减小的情况：</p>
+<p>根据体积的计算公式<span class="arithmatex">\(V = height \times width\)</span>以及单调递减性可以得出两种使得v减小的情况：</p>
 <ol>
 <li>当<span class="arithmatex">\(height\)</span>固定时，<span class="arithmatex">\(width\)</span>减小，则<span class="arithmatex">\(V\)</span>就会减小</li>
 <li>当<span class="arithmatex">\(width\)</span>固定时，<span class="arithmatex">\(height\)</span>减小，则<span class="arithmatex">\(V\)</span>就会减小</li>
@@ -5249,12 +5249,11 @@
 <p><a class="glightbox" href="5. 双指针算法.assets/image9.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="5. 双指针算法.assets/image9.png"></a></p>
 <p>根据上面的规律可以得出，因为遍历数组的过程中一定会出现<span class="arithmatex">\(width\)</span>在减小的情况，为了使最后的<span class="arithmatex">\(V\)</span>不变或者变大，只有改变<span class="arithmatex">\(height\)</span>，如果出现一侧高度比另一侧高度小时，为了使<span class="arithmatex">\(height\)</span>增大，需要移动小的一侧高度从而找到更高的高度，此时可以考虑使用双指针算法，左指针<code>left</code>代表左侧高度，右侧<code>right</code>代表右侧高度，当<span class="arithmatex">\(width\)</span>（<code>left</code>与<code>right</code>的距离）不断减小时，通过两个指针控制高度<span class="arithmatex">\(height\)</span>的取值，直到找到最大的体积</p>
 <p>根据上面的规律就可以得到下面的过程：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>1. 固定`left`指针指向起始位置，固定`right`指针指向终止位置
-2. 固定高度：当`height[left]&lt;=height[right]`时，因为此时体积会随着宽度的减小而减小，所以可以让left++，但是每一次改变`left`前需要先计算最大体积，更新`left`可以是一个持续的过程，因为在找到下一个`height[left] &gt; height[right]`之前，宽度一直在减小
-3. 固定宽度：当`height[left]&gt;height[right]`时，因为此时体积会随着高度的减小而减小，此时可以循环`right--`直到找到`height[left]&lt;=height[right]`，同样，更新`right`之前也需要计算最大体积
-</code></pre></div></td></tr></table></div>
+<ol>
+<li>固定<code>left</code>指针指向起始位置，固定<code>right</code>指针指向终止位置</li>
+<li>固定高度：当<code>height[left]&lt;=height[right]</code>时，因为此时体积会随着宽度的减小而减小，所以可以让left++，但是每一次改变<code>left</code>前需要先计算最大体积，更新<code>left</code>可以是一个持续的过程，因为在找到下一个<code>height[left] &gt; height[right]</code>之前，宽度一直在减小</li>
+<li>固定宽度：当<code>height[left]&gt;height[right]</code>时，因为此时体积会随着高度的减小而减小，此时可以循环<code>right--</code>直到找到<code>height[left]&lt;=height[right]</code>，同样，更新<code>right</code>之前也需要计算最大体积</li>
+</ol>
 </li>
 </ol>
 <p><strong>参考代码：</strong></p>
@@ -5712,7 +5711,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 30, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 1, 2024</span>
   </span>
 
     

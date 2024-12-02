@@ -110,8 +110,6 @@ nav:
       - Java中的Junit、类加载时机与机制、反射、注解及枚举: Java/19. Java中的Junit、类加载时机与机制、反射、注解及枚举/19. Java中的Junit、类加载时机与机制、反射、注解及枚举.md
       - （补充）JSON在后端的应用: Java/20. （补充）JSON在后端的应用/20. （补充）JSON在后端的应用.md
     - Python:
-      - 入门:
-        - Python快速入门: Python基础知识/1. Python快速入门/1. Python快速入门.md
       - Python基础知识: Python基础知识/1. Python基础知识/1. Python基础知识.md
       - Python组合数据类型: Python基础知识/2. Python组合数据类型/2. Python组合数据类型.md
       - Python异常处理: Python基础知识/3. Python异常处理/3. Python异常处理.md

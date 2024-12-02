@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://www.helper-wiki.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/14.%20%E4%BD%8D%E5%9B%BE/14.%20%E4%BD%8D%E5%9B%BE.html">
+        <link rel="canonical" href="https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/14.%20%E4%BD%8D%E5%9B%BE/14.%20%E4%BD%8D%E5%9B%BE.html">
       
       
         <link rel="prev" href="../13.%20%E5%93%88%E5%B8%8C%E8%A1%A8/13.%20%E5%93%88%E5%B8%8C%E8%A1%A8.html">
@@ -4958,7 +4958,7 @@
 </div>
 <p>有了映射位置，就证明该数值已经有了对应的标记位置，接下来要处理的就是如何标记</p>
 <p>所谓的标记，实际上就是将数值对应的映射位置置为1，最大的前提就是不能修改其他位置的标记，可以考虑下面的思路：</p>
-<p>假设已经标记的整数二进制为<code>00000100 01110000 00011000 00000000</code>（左低右高），现在要标记第23个比特位，为了保证不改变其他比特位，可以考虑使用保留原值情况最多的<a href="https://www.helper-wiki.top/C语言/4. C语言操作符/4. C语言操作符.html?h=运#_20">或运算</a>，假设将原二进制与1进行与运算，就可以得到下面的结果：</p>
+<p>假设已经标记的整数二进制为<code>00000100 01110000 00011000 00000000</code>（左低右高），现在要标记第23个比特位，为了保证不改变其他比特位，可以考虑使用保留原值情况最多的<a href="https://www.help-doc.top/C语言/4. C语言操作符/4. C语言操作符.html?h=运#_20">或运算</a>，假设将原二进制与1进行与运算，就可以得到下面的结果：</p>
 <p><a class="glightbox" href="14. 位图.assets\image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="14. 位图.assets\image1.png"></a></p>
 <p>现在需要在第23个比特位处将0置为1，就需要在获取一个在第23个比特位为1其余比特位为0的整型数值，如果直接考虑这种数值，则根据计算器可以得到该数值：</p>
 <p><a class="glightbox" href="14. 位图.assets\image2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="14. 位图.assets\image2.png"></a></p>
@@ -4966,7 +4966,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>这一步可能会考虑到一个问题：大小端字节序
-在模拟移位过程中需要使用左移，在C语言/C++数组中，存储一个数值是从数组的低位开始存储，而一个数值存储到内存中在小端机器是按照小端字节序存储，大端机器按照大端字节序存储（具体内容见<a href="https://www.helper-wiki.top/C语言/2. 进制转换与类型在内存中存储方式/2. 进制转换与类型在内存中存储方式.html?h=大#_15">C语言部分讲解大端与小端字节序</a>），此时就会出现既需要考虑数组的最低位以及数值的最低位，以考虑数值的最低位为例，可能会考虑到的效果：</p>
+在模拟移位过程中需要使用左移，在C语言/C++数组中，存储一个数值是从数组的低位开始存储，而一个数值存储到内存中在小端机器是按照小端字节序存储，大端机器按照大端字节序存储（具体内容见<a href="https://www.help-doc.top/C语言/2. 进制转换与类型在内存中存储方式/2. 进制转换与类型在内存中存储方式.html?h=大#_15">C语言部分讲解大端与小端字节序</a>），此时就会出现既需要考虑数组的最低位以及数值的最低位，以考虑数值的最低位为例，可能会考虑到的效果：</p>
 <p><a class="glightbox" href="14. 位图.assets\image3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="14. 位图.assets\image3.png"></a></p>
 </div>
 <p>但是实际上，可以不用考虑上面到底哪一侧是低位哪一侧是高位，因为在标准底层实现左移和右移时已经考虑到对应的机器的字节序了，所以左移真正的定义是「从低位向高位移动」，而不是「向左边移动」，右移则是「从高位向低位移动」，而不是「向右边移动」，所以正确的思路图如下，以左移为例：</p>
@@ -4980,13 +4980,13 @@
 <h3 id="_5">位图如何取消标记<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>解决了如何实现标记，接下来考虑如何取消标记，以<code>10000100 01110000 00011000 00000000</code>为例，假设要取消从左往右数的第11个1，就要将第11个比特位的1置为0，而此时如果再使用或运算与1进行计算就无法达到需要的效果，剩下三种位运算：<code>&amp;</code>、<code>^</code>和<code>~</code></p>
 <h4 id="_6">与运算和取反运算结合<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
-<p>考虑<a href="https://www.helper-wiki.top/C语言/4. C语言操作符/4. C语言操作符.html?h=运#_19">与运算</a>的特点：同1为1，有0则0，如果进行与运算则结果如下：</p>
+<p>考虑<a href="https://www.help-doc.top/C语言/4. C语言操作符/4. C语言操作符.html?h=运#_19">与运算</a>的特点：同1为1，有0则0，如果进行与运算则结果如下：</p>
 <p><a class="glightbox" href="14. 位图.assets\image5.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="14. 位图.assets\image5.png"></a></p>
-<p>可以发现，直接使用与运算符将原数值二进制和1相与会导致除了均为1的位以外其他全变成了0，违背了「不改变其他位的原则」，既然如此那么就反着来：「把1中比特位为1的变为0，把比特位为0的变成1」，所以考虑在与运算之前对1先进行<a href="https://www.helper-wiki.top/C语言/4. C语言操作符/4. C语言操作符.html?h=运#_22">取反运算</a>，可以看到下面的效果：</p>
+<p>可以发现，直接使用与运算符将原数值二进制和1相与会导致除了均为1的位以外其他全变成了0，违背了「不改变其他位的原则」，既然如此那么就反着来：「把1中比特位为1的变为0，把比特位为0的变成1」，所以考虑在与运算之前对1先进行<a href="https://www.help-doc.top/C语言/4. C语言操作符/4. C语言操作符.html?h=运#_22">取反运算</a>，可以看到下面的效果：</p>
 <p><a class="glightbox" href="14. 位图.assets\image6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="14. 位图.assets\image6.png"></a></p>
 <p>可以看到原来全为1时的结果由1变成了0，其他位没有改变，所以本思路可行</p>
 <h4 id="_7">异或运算<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
-<p>在使用「与运算和取反运算结合」结合时可以发现一个特点，需要的结果是「相同的为0（取消标记），不同为1（不改变标记）」，这个结果与<a href="https://www.helper-wiki.top/C语言/4. C语言操作符/4. C语言操作符.html?h=运#_21">异或运算</a>的特点：异1同0，完全一致，以同样的二进制数值与1进行异或运算，下面是运算过程：</p>
+<p>在使用「与运算和取反运算结合」结合时可以发现一个特点，需要的结果是「相同的为0（取消标记），不同为1（不改变标记）」，这个结果与<a href="https://www.help-doc.top/C语言/4. C语言操作符/4. C语言操作符.html?h=运#_21">异或运算</a>的特点：异1同0，完全一致，以同样的二进制数值与1进行异或运算，下面是运算过程：</p>
 <p><a class="glightbox" href="14. 位图.assets\image7.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="14. 位图.assets\image7.png"></a></p>
 <p>可以看到原来全为1时的结果由1变成了0，其他位没有改变，所以本思路也可行</p>
 <h4 id="_8">结合左移运算符取消标记<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
@@ -5347,7 +5347,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 9, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 2, 2024</span>
   </span>
 
     
@@ -5422,7 +5422,7 @@
       
       
     
-    <a href="https://github.com" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/H0308" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
     </a>
   

@@ -2035,11 +2035,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1.html" class="md-nav__link">
+      <a href="../../Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Python类和对象
+    Python类和对象基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/8.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/8.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python类和对象进阶
   </span>
   
 
@@ -5527,12 +5548,11 @@
 </div>
 <p>因为双指针可以取出连个数值，所以需要一层循环用于固定第三个数作为基数，假设为<code>target</code>，而两个指针计算的和为<code>sum</code>，因为三个数计算的结果为0，所以有<code>nums[i]+nums[j]+nums[k] = 0</code>，将<code>nums[i]</code>移动到等式的右侧后变为<code>nums[j]+nums[k] = -nums[i]</code>，所以可以考虑定义一个<code>left</code>指针代表<code>nums[j]</code>的位置，一个<code>right</code>指针代表<code>nums[k]</code>的位置，定义一个<code>target = -nums[i]</code>，接下来就是判断<code>nums[left] + nums[right]</code>是否等于<code>target</code>。而因为数组已经经过了排序，所以可以参考<a href="#">力扣LCR179.查找总价格为目标值的两个商品</a>中的思路，此处不再赘述</p>
 <p>因为本题还需要进行去重操作，下面考虑去重的思路：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>1. `left`和`right`在向中间移动时结束条件是`left&gt;=right`而不只是`left&gt;right`
-2. 对于`left`和`right`中遇到重复的情况，因为当前数组已经有序，所以相同的组合中的相同数值也会在数组中连续出现，如果左右指针均指向相同的数值，说明此时遇到了相同的组合，可以考虑当遇到和上一次数据相同时一直更新`left`和`right`直到二者各自遇到不同的数字再重复前面的步骤
-3. 对于基数`target`出现重复的情况，如果当前作为基数的数字和上一次作为基数的数字相同时，那么更新生成基数的下标`i`，直到当前基数与上一次基数不同为止。此处需要注意，如果下标`i`是`for`循环中存在的循环下标更新的表达式，那么会出现两次下标`i`更新，所以需要去掉`for`循环中的下标更新表达式
-</code></pre></div></td></tr></table></div>
+<ol>
+<li><code>left</code>和<code>right</code>在向中间移动时结束条件是<code>left&gt;=right</code>而不只是<code>left&gt;right</code></li>
+<li>对于<code>left</code>和<code>right</code>中遇到重复的情况，因为当前数组已经有序，所以相同的组合中的相同数值也会在数组中连续出现，如果左右指针均指向相同的数值，说明此时遇到了相同的组合，可以考虑当遇到和上一次数据相同时一直更新<code>left</code>和<code>right</code>直到二者各自遇到不同的数字再重复前面的步骤</li>
+<li>对于基数<code>target</code>出现重复的情况，如果当前作为基数的数字和上一次作为基数的数字相同时，那么更新生成基数的下标<code>i</code>，直到当前基数与上一次基数不同为止。此处需要注意，如果下标<code>i</code>是<code>for</code>循环中存在的循环下标更新的表达式，那么会出现两次下标<code>i</code>更新，所以需要去掉<code>for</code>循环中的下标更新表达式</li>
+</ol>
 </li>
 </ol>
 <p><strong>参考代码：</strong></p>
@@ -5656,8 +5676,10 @@
 </li>
 </ol>
 <p>本题与上题基本一致，根据表达式<code>nums[a]+nums[b]+nums[c]+nums[d] = target</code>，所以可以得出算式<code>nums[c]+nums[d] = target-nums[a]-nums[b]</code>，所以先确定两个基数<code>nums[a]</code>和<code>nums[b]</code>，再通过双指针算法得到<code>nums[c]和nums[d]</code></p>
-<p>!!! note
-    注意本题有数据溢出的情况</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>注意本题有数据溢出的情况</p>
+</div>
 <p><strong>参考代码：</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>

@@ -2310,11 +2310,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1.html" class="md-nav__link">
+      <a href="../../Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Python类和对象
+    Python类和对象基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/8.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/8.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python类和对象进阶
   </span>
   
 
@@ -5302,10 +5323,13 @@
 <li>对于第三种情况，释放目标字符串空间，再为目标字符串重新开辟空间，将源字符串空间的内容拷贝到目标字符串空间</li>
 </ol>
 <p>但是，上面的解决方式过于复杂，所以考虑下面的思路：</p>
-<p>不论是哪一种情况，先以目标字符串空间为基础开辟新的空间，再将源字符串中的内容直接拷贝到新的空间，这一步可以确保如果空间开辟失败不会影响源字符串中的内容，释放源字符串的空间，接着使源字符串的指针指向新的空间，</p>
+<p>不论是哪一种情况，先以目标字符串空间为基础开辟新的空间，再将源字符串中的内容直接拷贝到新的空间，这一步可以确保如果空间开辟失败不会影响源字符串中的内容，释放源字符串的空间，接着使源字符串的指针指向新的空间</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>注意处理自己给自己赋值的情况</p>
+<ol>
+<li>注意处理自己给自己赋值的情况</li>
+<li>至于为什么要「释放源字符串的空间」，因为<code>this</code>当前指向的是赋值运算符左侧的变量，该变量在赋值之前还指向着原来开辟的空间，如果不进行释放就会出现原来开辟的空间因为赋值覆盖失去了唯一的变量指向导致空间持续占用产生的内存泄漏问题</li>
+</ol>
 </div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
@@ -7518,7 +7542,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 20, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 2, 2024</span>
   </span>
 
     

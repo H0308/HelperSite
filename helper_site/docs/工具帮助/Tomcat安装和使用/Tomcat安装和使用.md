@@ -295,7 +295,7 @@ JavaWeb项目部署一般有三种方式：
 
     <img src="Tomcat安装和使用.assets/1681462247973.png" alt="1681462247973" style="zoom:85%;" />
 
-## 运行JavaWeb项目
+### 运行JavaWeb项目
 
 1. 检查IDEA是否识别`modules`为Web项目并存在将项目构建成发布结构的配置
 

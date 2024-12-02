@@ -5057,7 +5057,7 @@
 <a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">gender</span><span class="p">)</span> <span class="c1"># male</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="property">使用<code>@property</code>装饰器<a class="headerlink" href="#property" title="Permanent link">&para;</a></h2>
-<p>前面在<a href="#">类和对象基础：封装性</a>中提到为了满足封装性需要提供<code>getter</code>和<code>setter</code>方法，而在通过对象获取对应的属性以及设置对应的属性就需要调用这两个方法，这个过程就会存在割裂感。为了简化这个过程，就可以使用<code>@property</code>装饰器，该装饰器的作用就是将原来通过方法调用获取对应的属性的方式转换为正常访问属性的方式（即<code>对象.属性名</code>），将原来通过方法调用设置对应的属性的方式转换为给属性赋值的方式（即<code>对象.属性名 = 值</code>）</p>
+<p>前面在<a href="https://www.help-doc.top/Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80.html#_5">类和对象基础：封装性</a>中提到为了满足封装性需要提供<code>getter</code>和<code>setter</code>方法，而在通过对象获取对应的属性以及设置对应的属性就需要调用这两个方法，这个过程就会存在割裂感。为了简化这个过程，就可以使用<code>@property</code>装饰器，该装饰器的作用就是将原来通过方法调用获取对应的属性的方式转换为正常访问属性的方式（即<code>对象.属性名</code>），将原来通过方法调用设置对应的属性的方式转换为给属性赋值的方式（即<code>对象.属性名 = 值</code>）</p>
 <p>例如下面的代码：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>

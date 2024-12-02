@@ -4851,10 +4851,10 @@
 </code></pre></div></td></tr></table></div>
 </div>
 <p><strong>思路分析：</strong></p>
-<p>所谓的字母异位词，就是一个只有字母构成的字符串中的所有字母重新打乱，并且每个字母只能使用一次构成的新字符串，这个新的字符串就是原字符串的字母异位词。在前面<a href="https://www.helper-wiki.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/4.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/4.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.html#438">滑动窗口部分也有一个关于字母异位词的题目</a>，两个地方的意思是一样的。根据字母异位词的意思，可以想到如果<code>s</code>中的字符都出现在<code>t</code>中，则证明<code>s</code>是<code>t</code>的字母异位词，如果<code>s</code>中存在一个字符不是<code>t</code>中的字符，则说明<code>s</code>不是<code>t</code>的字母异位词。根据提到的思路，可以考虑使用数组哈希表，只需要判断<code>s</code>中的字符是否全部存在于<code>t</code>中即可</p>
+<p>所谓的字母异位词，就是一个只有字母构成的字符串中的所有字母重新打乱，并且每个字母只能使用一次构成的新字符串，这个新的字符串就是原字符串的字母异位词。在前面<a href="https://www.help-doc.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/4.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/4.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.html#438">滑动窗口部分也有一个关于字母异位词的题目</a>，两个地方的意思是一样的。根据字母异位词的意思，可以想到如果<code>s</code>中的字符都出现在<code>t</code>中，则证明<code>s</code>是<code>t</code>的字母异位词，如果<code>s</code>中存在一个字符不是<code>t</code>中的字符，则说明<code>s</code>不是<code>t</code>的字母异位词。根据提到的思路，可以考虑使用数组哈希表，只需要判断<code>s</code>中的字符是否全部存在于<code>t</code>中即可</p>
 <p>注意，<code>s</code>中的字符除了可能比<code>t</code>中多了某些字母，有可能缺失<code>t</code>中的某些字母，此时<code>s</code>也不算<code>t</code>的字母异位词，这种情况下，<code>s</code>的长度一定小于<code>t</code>，所以如果<code>s.size() &lt; t.size()</code>直接返回<code>false</code>即可</p>
 <p><strong>写法拓展：</strong></p>
-<p>在前面思路分析部分提到「如果<code>s.size() &lt; t.size()</code>直接返回<code>false</code>即可」，如果<code>s.size() &gt; t.size()</code>是否也可以直接返回<code>false</code>？答案是<strong>可以的</strong>（根据<a href="https://www.helper-wiki.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/7.%20%E4%BD%8D%E8%BF%90%E7%AE%97/7.%20%E4%BD%8D%E8%BF%90%E7%AE%97.html?h=%E9%B8%BD%E5%B7%A2#0101">鸽巢原理</a>），但是一定注意，如果<code>s.size() == t.size()</code>时可能是<code>true</code>也可能是<code>false</code>（例如<code>s="cat", t = "car"</code>）。根据大于和等于这两点，可以直接放在一起处理，因为如果是大于，则其中的某一些字母一定不存在于<code>t</code>中，同样相等也可能是某一个字母不存在于<code>t</code>中，所以既然都是某一个字母不存在于<code>t</code>中，就可以一起处理而没有必要分开处理</p>
+<p>在前面思路分析部分提到「如果<code>s.size() &lt; t.size()</code>直接返回<code>false</code>即可」，如果<code>s.size() &gt; t.size()</code>是否也可以直接返回<code>false</code>？答案是<strong>可以的</strong>（根据<a href="https://www.help-doc.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/7.%20%E4%BD%8D%E8%BF%90%E7%AE%97/7.%20%E4%BD%8D%E8%BF%90%E7%AE%97.html?h=%E9%B8%BD%E5%B7%A2#0101">鸽巢原理</a>），但是一定注意，如果<code>s.size() == t.size()</code>时可能是<code>true</code>也可能是<code>false</code>（例如<code>s="cat", t = "car"</code>）。根据大于和等于这两点，可以直接放在一起处理，因为如果是大于，则其中的某一些字母一定不存在于<code>t</code>中，同样相等也可能是某一个字母不存在于<code>t</code>中，所以既然都是某一个字母不存在于<code>t</code>中，就可以一起处理而没有必要分开处理</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>上面提到的是写法上的不同，没有必要不代表不能写，取决于习惯</p>
@@ -5617,7 +5617,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 30, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 2, 2024</span>
   </span>
 
     

@@ -5008,11 +5008,11 @@
 <li>删除的是第一个有效数据节点</li>
 <li>删除的是非第一个有效数据节点</li>
 </ol>
-<p>但是为了可以实现统一处理，这里引入一个虚拟头结点<code>dummy</code>，使其指向第一个有效数据节点，这个做法在后面涉及到与链表的数据删除或者更改时非常常见。这样做可以保证第一个有效数据节点的删除逻辑和非第一个有效数据节点一致。剩余的逻辑就是链表的元素删除了，力扣中的链表大部分默认都是单链表，具体可以参考<a href="https://www.helper-wiki.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%20%E9%93%BE%E8%A1%A8/3.%20%E9%93%BE%E8%A1%A8.html#_12">单链表数据结构头删部分</a>和<a href="https://www.helper-wiki.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%20%E9%93%BE%E8%A1%A8/3.%20%E9%93%BE%E8%A1%A8.html#_13">单链表数据结构尾删部分</a></p>
+<p>但是为了可以实现统一处理，这里引入一个虚拟头结点<code>dummy</code>，使其指向第一个有效数据节点，这个做法在后面涉及到与链表的数据删除或者更改时非常常见。这样做可以保证第一个有效数据节点的删除逻辑和非第一个有效数据节点一致。剩余的逻辑就是链表的元素删除了，力扣中的链表大部分默认都是单链表，具体可以参考<a href="https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%20%E9%93%BE%E8%A1%A8/3.%20%E9%93%BE%E8%A1%A8.html#_12">单链表数据结构头删部分</a>和<a href="https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%20%E9%93%BE%E8%A1%A8/3.%20%E9%93%BE%E8%A1%A8.html#_13">单链表数据结构尾删部分</a></p>
 </li>
 <li>
 <p>解法2：异地处理</p>
-<p>异地处理就不是删除的逻辑，而是尾插的逻辑，具体可见<a href="https://www.helper-wiki.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%20%E9%93%BE%E8%A1%A8/3.%20%E9%93%BE%E8%A1%A8.html#_11">单链表数据结构尾插</a>，为了方便插入，这里同样需要引入一个虚拟头结点<code>dummy</code></p>
+<p>异地处理就不是删除的逻辑，而是尾插的逻辑，具体可见<a href="https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%20%E9%93%BE%E8%A1%A8/3.%20%E9%93%BE%E8%A1%A8.html#_11">单链表数据结构尾插</a>，为了方便插入，这里同样需要引入一个虚拟头结点<code>dummy</code></p>
 </li>
 </ol>
 <p><strong>参考代码：</strong></p>
@@ -8907,7 +8907,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 23, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 2, 2024</span>
   </span>
 
     

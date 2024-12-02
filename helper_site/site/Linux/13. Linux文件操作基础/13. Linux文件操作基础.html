@@ -4894,7 +4894,7 @@
 
 <h1 id="linux">Linux文件操作基础<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h1>
 <h2 id="_1">引入<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>在Linux第一章提到过，<a href="https://www.helper-wiki.top/Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html?h=%E7%9A%86#_8">在Linux中，一切皆文件</a>，而文件由文件内容和文件属性组成，在C语言中可以使用相应的接口打开文件，例如<code>fopen</code>函数</p>
+<p>在Linux第一章提到过，<a href="https://www.help-doc.top/Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html?h=%E7%9A%86#_8">在Linux中，一切皆文件</a>，而文件由文件内容和文件属性组成，在C语言中可以使用相应的接口打开文件，例如<code>fopen</code>函数</p>
 <p>文件最开始在磁盘中，但是因为磁盘的速度远低于CPU的执行速度，根据冯诺依曼体系结构，CPU与内存进行交互，所以可以推出文件要被程序读取，就需要与程序加载到内存变成进程一样，文件也需要加载到内存，而加载到内存中的文件包括其内容和属性，内容可以类比为进程的代码和数据，而因为操作系统也需要管理加载到内存的文件，所以文件属性也被存储到一个结构中，可以类比为进程的PCB</p>
 <p>所以，在研究Linux文件系统部分主要研究两种文件：</p>
 <ol>
@@ -4961,7 +4961,7 @@
 <li><code>stderr</code>：标准输出流，一般认为是写入日志文件或者写入显示器</li>
 </ol>
 <h2 id="_2">系统调用接口<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>在<a href="https://www.helper-wiki.top/Linux/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html#_3">操作系统基础</a>部分提到过，操作系统上层存在一个系统调用接口部分，实际上C语言提供的文件操作函数都是语言级的函数，对于不同的操作系统，系统调用接口部分也会提供不同的函数供上层调用，为了更加便捷，C语言针对操作系统封装了对应的系统接口形成对应的函数，例如在Linux中，C语言的<code>fopen</code>实际上封装的就是Linux系统接口<code>open</code>函数</p>
+<p>在<a href="https://www.help-doc.top/Linux/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html#_3">操作系统基础</a>部分提到过，操作系统上层存在一个系统调用接口部分，实际上C语言提供的文件操作函数都是语言级的函数，对于不同的操作系统，系统调用接口部分也会提供不同的函数供上层调用，为了更加便捷，C语言针对操作系统封装了对应的系统接口形成对应的函数，例如在Linux中，C语言的<code>fopen</code>实际上封装的就是Linux系统接口<code>open</code>函数</p>
 <h3 id="open"><code>open</code>函数<a class="headerlink" href="#open" title="Permanent link">&para;</a></h3>
 <p>根据Linux的操作手册，下面是<code>open</code>函数的两种函数原型：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
@@ -4993,7 +4993,7 @@
 <p class="admonition-title">Note</p>
 <p>注意，上面的所有模式只有给出的文字描述中的一种效果，没有其他效果</p>
 </div>
-<p>在给<code>open</code>函数的<code>flags</code>参数传递实参时，如果只传递五种模式的其中一种，一个参数完全可以胜任，但是如果想一次传递多个模式，比如以只写并且文件不存在时创建文件模式打开，此时就涉及到两个模式，一个形参如果通过直接赋值的形式，则无法同时识别两个模式。为了解决这个问题，实际上在Linux中，这个<code>flags</code>是个32个比特位的<a href="https://www.helper-wiki.top/数据结构/14. 位图/14. 位图.html#_1">位图</a>结构，此时传递参数就可以按照位运算的方式传递，在<code>open</code>函数中，只需要判断位图中为1的部分就可以知道指定了哪些模式，下面以一个例子帮助理解这一个思路：</p>
+<p>在给<code>open</code>函数的<code>flags</code>参数传递实参时，如果只传递五种模式的其中一种，一个参数完全可以胜任，但是如果想一次传递多个模式，比如以只写并且文件不存在时创建文件模式打开，此时就涉及到两个模式，一个形参如果通过直接赋值的形式，则无法同时识别两个模式。为了解决这个问题，实际上在Linux中，这个<code>flags</code>是个32个比特位的<a href="https://www.help-doc.top/数据结构/14. 位图/14. 位图.html#_1">位图</a>结构，此时传递参数就可以按照位运算的方式传递，在<code>open</code>函数中，只需要判断位图中为1的部分就可以知道指定了哪些模式，下面以一个例子帮助理解这一个思路：</p>
 <ol>
 <li>
 <p>定义一些宏模拟上面的模式</p>
@@ -5298,7 +5298,7 @@
 </li>
 </ul>
 <h3 id="open_1"><code>open</code>函数与文件权限<a class="headerlink" href="#open_1" title="Permanent link">&para;</a></h3>
-<p>前面使用到了<code>open</code>函数的第一个版本，现在考虑<code>open</code>函数第二个版本，这个函数可以传递第三个参数，该参数表示文件创建时拥有的权限，传递<a href="https://www.helper-wiki.top/Linux/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html#_3">权限八进制值</a></p>
+<p>前面使用到了<code>open</code>函数的第一个版本，现在考虑<code>open</code>函数第二个版本，这个函数可以传递第三个参数，该参数表示文件创建时拥有的权限，传递<a href="https://www.help-doc.top/Linux/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html#_3">权限八进制值</a></p>
 <p>先观察使用第一个版本创建出的文件拥有的权限：
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
@@ -5365,7 +5365,7 @@
 </code></pre></div></td></tr></table></div>
 运行程序结果如下：
 <a class="glightbox" href="13. Linux文件操作基础.assets\image6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="13. Linux文件操作基础.assets\image6.png"></a></p>
-<p>可以看到此时文件权限就是正常的，但是因为存在<a href="https://www.helper-wiki.top/Linux/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html#_8">文件权限掩码<code>umask</code></a>，所以其值并不是代码中设置的0666（对应为-rw-rw-rw-），当前系统的文件权限掩码可以通过<code>umask</code>指令查看，默认为0002</p>
+<p>可以看到此时文件权限就是正常的，但是因为存在<a href="https://www.help-doc.top/Linux/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html#_8">文件权限掩码<code>umask</code></a>，所以其值并不是代码中设置的0666（对应为-rw-rw-rw-），当前系统的文件权限掩码可以通过<code>umask</code>指令查看，默认为0002</p>
 <p>如果不希望在程序中创建的文件所拥有的权限受到系统umask影响，可以在创建文件之前使用<code>umask</code>函数设置初始的文件权限掩码为0：
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
@@ -5505,7 +5505,7 @@
 <p>所以，之所以显式打开的文件对应的文件描述符为3是因为默认打开的三个文件占用了<code>fd_array</code>数组前面三个空间</p>
 <h2 id="linux_1">如何理解Linux下一切皆文件<a class="headerlink" href="#linux_1" title="Permanent link">&para;</a></h2>
 <p>前面提到多次「在Linux下一切皆文件」，对于保存在计算机硬盘中的文件来说，说其是文件再合适不过，但是对于硬件来说，如果再说硬件是文件难免有些不妥，但是如果硬件不属于文件，那么就不会出现「在Linux下一切皆文件」的表述，所以硬件为什么在Linux下硬件也算文件</p>
-<p>要理解为什么在Linux下硬件也算文件，需要先回顾操作系统的作用。在开始进程部分之前，提到过<a href="https://www.helper-wiki.top/Linux/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html#_3">操作系统实际上是一个管理者的身份</a>，上层提供调用接口，下层通过调用接口中的具体实现操控硬件，此处为了理解硬件也算文件，就需要研究下层中接口的实现</p>
+<p>要理解为什么在Linux下硬件也算文件，需要先回顾操作系统的作用。在开始进程部分之前，提到过<a href="https://www.help-doc.top/Linux/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html#_3">操作系统实际上是一个管理者的身份</a>，上层提供调用接口，下层通过调用接口中的具体实现操控硬件，此处为了理解硬件也算文件，就需要研究下层中接口的实现</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>此处不讨论接口中具体的代码实现，只讨论这整个过程是如何形成的</p>
@@ -5721,7 +5721,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 18, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 2, 2024</span>
   </span>
 
     

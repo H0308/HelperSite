@@ -343,7 +343,7 @@ JavaWeb项目部署一般有三种方式：
 
     <img src="Tomcat安装和使用.assets/1681463361795.png" alt="1681463361795" style="zoom:100%;" />
 
-    浏览器自动打开并自动访问了index.html欢迎页
+    浏览器自动打开并自动访问了`index.html`欢迎页
 
     <img src="Tomcat安装和使用.assets/1681520068936.png" alt="1681520068936" style="zoom:50%;" />
 

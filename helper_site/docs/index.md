@@ -31,7 +31,7 @@
         -- 2024年11月30日
 
 !!! abstract "使用指导"
-    联系作者请访问[联系作者](https://www.helper-wiki.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html)
+    联系作者请访问[联系作者](https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html)
 
     阅读内容时，可以进行以下操作：
     
@@ -64,7 +64,7 @@
 
 [vim使用技巧参考](https://quickref.cn/docs/vim.html)
 !!! note
-    vim使用也可以直接看[Linux部分关于vim的笔记](https://www.helper-wiki.top/Linux/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E4%B8%8EVim%E4%BD%BF%E7%94%A8/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E4%B8%8EVim%E4%BD%BF%E7%94%A8.html)
+    vim使用也可以直接看[Linux部分关于vim的笔记](https://www.help-doc.top/Linux/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E4%B8%8EVim%E4%BD%BF%E7%94%A8/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E4%B8%8EVim%E4%BD%BF%E7%94%A8.html)
 
 [git使用指令参考](https://quickref.cn/docs/git.html)
 

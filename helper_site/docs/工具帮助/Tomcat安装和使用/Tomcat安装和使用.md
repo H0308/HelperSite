@@ -15,7 +15,7 @@ Tomcat是Apache软件基金会（Apache Software Foundation）的Jakarta项目�
 
 Tomcat版本、JDK版本和Servlet版本对照表：
 
-| **Servlet** Version | **Tomcat ** Version | **JDK** Version                         |
+| Servlet Version | Tomcat  Version | JDK Version                         |
 | :------------------ | :------------------ | :-------------------------------------- |
 | 6.1                 | 11.0.x              | 17 and later                            |
 | 6.0                 | 10.1.x              | 11 and later                            |

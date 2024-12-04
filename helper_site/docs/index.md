@@ -6,7 +6,7 @@
 - 本网站不提供英文版
 - 本网站使用下面的几种字体：
     1. 标题：[霞鹜臻楷](https://github.com/lxgw/LxgwZhenKai)
-    2. 内容（非代码）：[小米官方字体MiSans](https://hyperos.mi.com/font/zh/)
+    2. 内容（非代码）：[OPPO官方字体OPPO Sans](https://www.coloros.com/article/A00000050/)
     3. 代码：[JetBrains Mono](https://www.jetbrains.com/lp/mono/)
 
 !!! info "网站通知"

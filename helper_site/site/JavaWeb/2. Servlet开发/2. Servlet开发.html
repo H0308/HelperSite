@@ -4183,6 +4183,75 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#webservlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用@WebServlet注解
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#servlet_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servlet生命周期
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#servlet_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servlet继承结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Servlet继承结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#servlet_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servlet接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genericservlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      GenericServlet抽象类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpservlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      HttpServlet抽象类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      继承结构结论
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4816,6 +4885,75 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#webservlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用@WebServlet注解
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#servlet_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servlet生命周期
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#servlet_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servlet继承结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Servlet继承结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#servlet_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servlet接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genericservlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      GenericServlet抽象类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpservlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      HttpServlet抽象类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      继承结构结论
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5177,12 +5315,821 @@
 <a id="__codelineno-9-3" name="__codelineno-9-3"></a>...
 </code></pre></div></td></tr></table></div>
 <p>除了可以使用<code>setHeader()</code>方法以外，还可以直接使用响应对象的<code>setContentType()</code>方法，参数传递对应的值即可</p>
-<h2 id="url-pattern">url-pattern的特殊写法<a class="headerlink" href="#url-pattern" title="Permanent link">&para;</a></h2>
+<h2 id="url-pattern"><code>url-pattern</code>的特殊写法<a class="headerlink" href="#url-pattern" title="Permanent link">&para;</a></h2>
 <p>前面在配置<code>&lt;servlet-mapping&gt;&lt;/servlet-mapping&gt;</code>时提到请求映射地址，对应的标签就是<code>&lt;url-pattern&gt;&lt;/url-pattern&gt;</code>，但是当时只是简单的给出了最基本的格式，实际上，这个格式的写法根据需要的匹配模式决定，分为两种匹配模式：</p>
 <ol>
-<li>精准匹配：每一个字符都必须完全一样</li>
-<li>模糊匹配：部分字符一样，其他的字符随意</li>
+<li>精准匹配：每一个字符都必须完全一样，例如：<code>/servlet1</code></li>
+<li>
+<p>模糊匹配：部分字符一样，其他的字符随意，主要用到通配符<code>*</code>，常见有三种形式：</p>
+<ol>
+<li><code>/</code>：表示匹配全部，但是不包括JSP文件</li>
+<li><code>/*</code>：表示匹配全部且包括JSP文件</li>
+<li><code>/任意内容/*</code>：表示精确匹配「任意内容」，但是其斜线后面的内容可以随意</li>
+<li><code>*.后缀名</code>：表示匹配所有满足指定后缀的内容</li>
 </ol>
+</li>
+</ol>
+<p><code>url-pattern</code>存在两个特点：</p>
+<ol>
+<li>一个Servlet可以对应多个<code>url-pattern</code>，但是这些<code>url-pattern</code>不能相同</li>
+<li>多个Servlet中的<code>url-pattern</code>彼此不能相同</li>
+</ol>
+<p>尽管<code>url-pattern</code>可以进行模糊匹配，但是大部分情况下还是使用精准匹配，并且一般情况下一个Servlet会对应一个<code>url-pattern</code>。因为当前的前后端文件是自己进行编写，所以自己可以自定义，但是在实际开发中，因为前后端分离，所以需要前后端相互约定该路径</p>
+<h2 id="webservlet">使用<code>@WebServlet</code>注解<a class="headerlink" href="#webservlet" title="Permanent link">&para;</a></h2>
+<p>前面在Servlet初使用时在<code>web.xml</code>进行了Servlet请求映射地址，但是如果有多个Servlet，这个过程难免会有些繁琐并且如果有太多的Servlet也有可能存在忘记配置某一个Servlet的情况，为了解决这个问题，可以使用<code>@WebServlet</code>注解</p>
+<p>下面是使用注解的方式指定<code>UserServlet</code>的请求映射路径示例：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span>
+<span class="normal"><a href="#__codelineno-10-18">18</a></span>
+<span class="normal"><a href="#__codelineno-10-19">19</a></span>
+<span class="normal"><a href="#__codelineno-10-20">20</a></span>
+<span class="normal"><a href="#__codelineno-10-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c1">// 使用@WebServlet注解配置请求映射地址</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/userServlet&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">        </span><span class="c1">// 获取req中的内容</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">);</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt;h1&gt;Correct Username&lt;/h1&gt;&quot;</span><span class="p">;</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">        </span><span class="c1">// 业务处理</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">username</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;admin&quot;</span><span class="p">)){</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">            </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt;h1&gt;Wrong Username&lt;/h1&gt;&quot;</span><span class="p">;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">        </span><span class="c1">// 设置Content-Type</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">setHeader</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;text/html&quot;</span><span class="p">);</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16"></a>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="w">        </span><span class="c1">// 将内容转换为写入响应报文中</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="w">        </span><span class="n">PrintWriter</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resp</span><span class="p">.</span><span class="na">getWriter</span><span class="p">();</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="w">        </span><span class="n">writer</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">ret</span><span class="p">);</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>在<code>@WebServlet</code>中，直接写的值就相当于<code>&lt;url-pattern&gt;&lt;/url-pattern&gt;</code>中的内容，格式和规则也是相同的（参考上面的<code>url-pattern</code>的格式），除了写映射路径，还可以指定Servlet的别名<code>name</code>值以及<code>loadOnStartup</code>的值，下面是<code>@WebServlet</code>的部分源码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">WebServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">name</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="nf">value</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="nf">urlPatterns</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">loadOnStartup</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>其中：</p>
+<ol>
+<li><code>name</code>：表示Servlet别名</li>
+<li><code>value</code>和<code>urlPatterns</code>：表示Servlet请求映射地址，因为一个Servlet可以配置多个映射地址，所以此处是一个<code>String</code>数组。注意，如果设置了<code>value</code>值，就不要设置<code>urlPatterns</code>的值，二者相互排斥，每一次只会有一个生效。之所以会有value是因为<a href="https://www.help-doc.top/Java/19.%20Java%E4%B8%AD%E7%9A%84Junit%E3%80%81%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%97%B6%E6%9C%BA%E4%B8%8E%E6%9C%BA%E5%88%B6%E3%80%81%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E5%8F%8A%E6%9E%9A%E4%B8%BE/19.%20Java%E4%B8%AD%E7%9A%84Junit%E3%80%81%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%97%B6%E6%9C%BA%E4%B8%8E%E6%9C%BA%E5%88%B6%E3%80%81%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E5%8F%8A%E6%9E%9A%E4%B8%BE.html#_15"><code>value</code>是存在默认值的，所以使用该注解给<code>value</code>赋值时，可以不用写<code>value</code>属性名，并且因为<code>value</code>被设计成可以不写属性名直接赋值</a></li>
+<li><code>loadonStartup</code>：表示Servlet是否在项目加载时实例化，如果其值为负数，则表示否，否则表示是，并且此时的值表示初始化的顺序（在下面Servlet声明周期会提到）</li>
+</ol>
+<h2 id="servlet_3">Servlet生命周期<a class="headerlink" href="#servlet_3" title="Permanent link">&para;</a></h2>
+<p>对象生命周期：应用程序中的对象不仅在空间上有层次结构的关系，在时间上也会因为处于程序运行过程中的不同阶段而表现出不同状态和不同行为</p>
+<p>Servlet容器：Servlet对象是Servlet容器创建的，生命周期方法都是由容器（目前我们使用的是Tomcat）调用的。这一点和之前所编写的代码有很大不同，在之后越来越多的对象交给容器或框架来创建，越来越多的方法由容器或框架来调用，开发人员要尽可能多的将精力放在业务逻辑的实现上</p>
+<p>Servlet主要的生命周期执行特点</p>
+<table>
+<thead>
+<tr>
+<th>生命周期</th>
+<th>对应方法</th>
+<th>执行时机</th>
+<th>执行次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构造对象</td>
+<td>构造器</td>
+<td>第一次请求或者容器启动</td>
+<td>1</td>
+</tr>
+<tr>
+<td>初始化</td>
+<td><code>init()</code></td>
+<td>构造完毕后</td>
+<td>1</td>
+</tr>
+<tr>
+<td>处理服务</td>
+<td><code>service(HttpServletRequest req,HttpServletResponse resp)</code></td>
+<td>每次请求</td>
+<td>多次（具体次数取决于请求次数）</td>
+</tr>
+<tr>
+<td>销毁</td>
+<td><code>destory()</code></td>
+<td>容器关闭</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>可以使用下面的代码测试Servlet的生命周期问题：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/s1&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ServletLifeCycle</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ServletLifeCycle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">ServletConfig</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Servlet--init&quot;</span><span class="p">);</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Servlet--service&quot;</span><span class="p">);</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16"></a>
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Servlet--destroy&quot;</span><span class="p">);</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>在地址栏中的URL后输入<code>s1</code>即可访问到<code>ServletLifeCycle</code>，可以看到第一次访问时打印下面的内容：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a>Servlet--init
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a>Servlet--service
+</code></pre></div></td></tr></table></div>
+<p>在进行六次对该页面进行刷新的步骤后，可以看到下面的内容：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span>
+<span class="normal"><a href="#__codelineno-14-4">4</a></span>
+<span class="normal"><a href="#__codelineno-14-5">5</a></span>
+<span class="normal"><a href="#__codelineno-14-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a>Servlet--service
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a>Servlet--service
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a>Servlet--service
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a>Servlet--service
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a>Servlet--service
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a>Servlet--service
+</code></pre></div></td></tr></table></div>
+<p>点击结束Tomcat按钮后，可以看到下面的内容：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>Servlet--destroy
+</code></pre></div></td></tr></table></div>
+<p>从上面的过程可以看出初始化方法和销毁方法都只会执行一次，并且执行时机分别在第一次访问页面以及结束Tomcat服务器，只有<code>service</code>方法在多次请求后会执行多次，与表中的结果对应</p>
+<p>根据这个结果可以推出一个结论，一个Servlet类的对象在一次进程中是单例的，所有线程共享，如果当前Servlet类中有一个成员变量，并且在<code>service</code>方法中对该变量进行修改，这就可能会出现并发请求时的线程安全问题。如果加锁进行同步，那么就会出现延迟问题导致用户体验效果差，所以解决这个问题的关键还是尽可能不在<code>service</code>方法中对Servlet类中的成员变量进行修改</p>
+<p>前面提到初始化方法会在第一次请求页面时进行，那么是否存在一种方式可以使得Servlet在启动Tomcat服务时就创建好？<strong>的确存在，就是使用<code>@WebSerlet</code>中的<code>loadOnStartup</code></strong>，默认情况下<code>laodOnStartup</code>的值为-1，表示第一次请求时创建Servlet对象，如果希望在启动Tomcat服务时创建好Servlet对象，那么就建议将该参数的值设置为6及以后</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>理论上来说，<code>loadOnstartup</code>的值可以设置为1及以后的数，并且就算是出现冲突，Tomcat也会权衡哪一个对象先创建，但是还是建议不要与默认的<code>laodOnStartup</code>值冲突，具体可以看<code>web.xml</code>文件中的<code>&lt;load-on-startup&gt;&lt;/laod-on-otartup&gt;</code>中有多少个。在当前Tomcat10中，一共占用了1、2、3、4、5，所以建议将<code>loadOnStartup</code>参数设置为6及以后</p>
+</div>
+<p>下面提供两种设置<code>loadOnStartup</code>值的方式：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">在web.xml中配置</label><label for="__tabbed_1_2">在@WebServlet中配置</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-16-10">10</a></span>
+<span class="normal"><a href="#__codelineno-16-11">11</a></span>
+<span class="normal"><a href="#__codelineno-16-12">12</a></span>
+<span class="normal"><a href="#__codelineno-16-13">13</a></span>
+<span class="normal"><a href="#__codelineno-16-14">14</a></span>
+<span class="normal"><a href="#__codelineno-16-15">15</a></span>
+<span class="normal"><a href="#__codelineno-16-16">16</a></span>
+<span class="normal"><a href="#__codelineno-16-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="nt">&lt;web-app</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;https://jakarta.ee/xml/ns/jakartaee&quot;</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">        </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">        </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd&quot;</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">        </span><span class="na">version=</span><span class="s">&quot;6.0&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">    </span><span class="nt">&lt;servlet&gt;</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>servletLifeCycle<span class="nt">&lt;/servlet-name&gt;</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">        </span><span class="nt">&lt;servlet-class&gt;</span>ServletLifeCycle<span class="nt">&lt;/servlet-class&gt;</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">        </span><span class="cm">&lt;!-- 配置Servlet对象实例化的顺序 --&gt;</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">        </span><span class="nt">&lt;load-on-startup&gt;</span>6<span class="nt">&lt;/load-on-startup&gt;</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="w">    </span><span class="nt">&lt;/servlet&gt;</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12"></a>
+<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>servletLifeCycle<span class="nt">&lt;/servlet-name&gt;</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>s1<span class="nt">&lt;/url-pattern&gt;</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="nt">&lt;/web-app&gt;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-17-10">10</a></span>
+<span class="normal"><a href="#__codelineno-17-11">11</a></span>
+<span class="normal"><a href="#__codelineno-17-12">12</a></span>
+<span class="normal"><a href="#__codelineno-17-13">13</a></span>
+<span class="normal"><a href="#__codelineno-17-14">14</a></span>
+<span class="normal"><a href="#__codelineno-17-15">15</a></span>
+<span class="normal"><a href="#__codelineno-17-16">16</a></span>
+<span class="normal"><a href="#__codelineno-17-17">17</a></span>
+<span class="normal"><a href="#__codelineno-17-18">18</a></span>
+<span class="normal"><a href="#__codelineno-17-19">19</a></span>
+<span class="normal"><a href="#__codelineno-17-20">20</a></span>
+<span class="normal"><a href="#__codelineno-17-21">21</a></span>
+<span class="normal"><a href="#__codelineno-17-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="c1">// 配置Servlet对象实例化的顺序和请求映射地址</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/s1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">loadOnStartup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ServletLifeCycle</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a>
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ServletLifeCycle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7"></a>
+<a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">ServletConfig</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Servlet--init&quot;</span><span class="p">);</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12"></a>
+<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Servlet--service&quot;</span><span class="p">);</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17"></a>
+<a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Servlet--destroy&quot;</span><span class="p">);</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>使用其中一种方式进行前面的执行步骤，先启动Tomcat服务而不请求<code>s1</code>时，当前控制台输出结果如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a>Servlet--init
+</code></pre></div></td></tr></table></div>
+<p>接着请求6次s1，输出如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
+<span class="normal"><a href="#__codelineno-19-2">2</a></span>
+<span class="normal"><a href="#__codelineno-19-3">3</a></span>
+<span class="normal"><a href="#__codelineno-19-4">4</a></span>
+<span class="normal"><a href="#__codelineno-19-5">5</a></span>
+<span class="normal"><a href="#__codelineno-19-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a>Servlet--service
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a>Servlet--service
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a>Servlet--service
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a>Servlet--service
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a>Servlet--service
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a>Servlet--service
+</code></pre></div></td></tr></table></div>
+<p>结束Tomcat服务，输出如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a>Servlet--destroy
+</code></pre></div></td></tr></table></div>
+<p>需要注意，接下来的问题联系到后面的SpringMVC框架。观察<code>web.xml</code>文件中<code>&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</code>，这个意味着别名为<code>default</code>的<code>Servlet</code>类（后面称为<code>default-servlet</code>）在Tomcat启动时第一个被实例化，对应的<code>url-pattern</code>如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span>
+<span class="normal"><a href="#__codelineno-21-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="nt">&lt;servlet-mapping&gt;</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">    </span><span class="nt">&lt;servlet-name&gt;</span>default<span class="nt">&lt;/servlet-name&gt;</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">    </span><span class="nt">&lt;url-pattern&gt;</span>/<span class="nt">&lt;/url-pattern&gt;</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="nt">&lt;/servlet-mapping&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>可以看到，其值为<code>/</code>，这个与请求的资源是动态还是静态有关。如果请求的资源是静态资源，则可能不存在一个动态资源对应的自定义<code>Servlet</code>类，如果不存在，此时就会走到<code>default-servlet</code>，而这个<code>Servlet</code>类就会去找指定的静态资源，接着使用IO流将该静态资源读取到响应对象中，再设置好需要的内容，最后转换成报文发送给客户端。而这里之所以和SpringMVC有关是因为SpringMVC默认会提供一个<code>Servlet</code>类，此时会把Tomcat提供的<code>default-servlet</code>给覆盖掉，导致<code>default-servlet</code>的功能失效，此时再请求静态资源，就会出现找不到静态资源的问题。所以在后面的SpringMVC中，如果没有进行前后端分离，就需要额外配置使<code>default-servlet</code>重新生效</p>
+<h2 id="servlet_4">Servlet继承结构<a class="headerlink" href="#servlet_4" title="Permanent link">&para;</a></h2>
+<h3 id="servlet_5"><code>Servlet</code>接口<a class="headerlink" href="#servlet_5" title="Permanent link">&para;</a></h3>
+<details class="quote">
+<summary><code>Servlet</code>源码</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Servlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">ServletConfig</span><span class="w"> </span><span class="n">var1</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">;</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">    </span><span class="n">ServletConfig</span><span class="w"> </span><span class="nf">getServletConfig</span><span class="p">();</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a>
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">var1</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">var2</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7"></a>
+<a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">getServletInfo</span><span class="p">();</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9"></a>
+<a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">();</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>接口及方法说明：</p>
+<p>Servlet 规范接口，所有的Servlet必须实现 </p>
+<ol>
+<li>
+<p><code>public void init(ServletConfig config) throws ServletException;</code>：初始化方法，容器在构造<code>Servlet</code>对象后，自动调用的方法，容器负责实例化一个<code>ServletConfig</code>对象，并在调用该方法时传入，其中<code>ServletConfig</code>对象可以为<code>Servlet</code>提供初始化参数</p>
+</li>
+<li>
+<p><code>public ServletConfig getServletConfig();</code>：获取<code>ServletConfig</code>对象的方法，后续可以通过该对象获取<code>Servlet</code>初始化参数</p>
+</li>
+<li>
+<p><code>public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException;</code>：处理请求并做出响应的服务方法，每次请求产生时由容器调用。容器创建一个<code>ServletRequest</code>对象和<code>ServletResponse</code>对象，容器在调用<code>service</code>方法时，传入这两个对象</p>
+</li>
+<li>
+<p><code>public String getServletInfo();</code>：获取<code>ServletInfo</code>信息的方法</p>
+</li>
+<li>
+<p><code>public void destroy();</code>：<code>Servlet</code>实例在销毁之前调用的方法</p>
+</li>
+</ol>
+<h3 id="genericservlet"><code>GenericServlet</code>抽象类<a class="headerlink" href="#genericservlet" title="Permanent link">&para;</a></h3>
+<details class="quote">
+<summary><code>GenericServlet</code>源码</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span>
+<span class="normal"><a href="#__codelineno-23-19">19</a></span>
+<span class="normal"><a href="#__codelineno-23-20">20</a></span>
+<span class="normal"><a href="#__codelineno-23-21">21</a></span>
+<span class="normal"><a href="#__codelineno-23-22">22</a></span>
+<span class="normal"><a href="#__codelineno-23-23">23</a></span>
+<span class="normal"><a href="#__codelineno-23-24">24</a></span>
+<span class="normal"><a href="#__codelineno-23-25">25</a></span>
+<span class="normal"><a href="#__codelineno-23-26">26</a></span>
+<span class="normal"><a href="#__codelineno-23-27">27</a></span>
+<span class="normal"><a href="#__codelineno-23-28">28</a></span>
+<span class="normal"><a href="#__codelineno-23-29">29</a></span>
+<span class="normal"><a href="#__codelineno-23-30">30</a></span>
+<span class="normal"><a href="#__codelineno-23-31">31</a></span>
+<span class="normal"><a href="#__codelineno-23-32">32</a></span>
+<span class="normal"><a href="#__codelineno-23-33">33</a></span>
+<span class="normal"><a href="#__codelineno-23-34">34</a></span>
+<span class="normal"><a href="#__codelineno-23-35">35</a></span>
+<span class="normal"><a href="#__codelineno-23-36">36</a></span>
+<span class="normal"><a href="#__codelineno-23-37">37</a></span>
+<span class="normal"><a href="#__codelineno-23-38">38</a></span>
+<span class="normal"><a href="#__codelineno-23-39">39</a></span>
+<span class="normal"><a href="#__codelineno-23-40">40</a></span>
+<span class="normal"><a href="#__codelineno-23-41">41</a></span>
+<span class="normal"><a href="#__codelineno-23-42">42</a></span>
+<span class="normal"><a href="#__codelineno-23-43">43</a></span>
+<span class="normal"><a href="#__codelineno-23-44">44</a></span>
+<span class="normal"><a href="#__codelineno-23-45">45</a></span>
+<span class="normal"><a href="#__codelineno-23-46">46</a></span>
+<span class="normal"><a href="#__codelineno-23-47">47</a></span>
+<span class="normal"><a href="#__codelineno-23-48">48</a></span>
+<span class="normal"><a href="#__codelineno-23-49">49</a></span>
+<span class="normal"><a href="#__codelineno-23-50">50</a></span>
+<span class="normal"><a href="#__codelineno-23-51">51</a></span>
+<span class="normal"><a href="#__codelineno-23-52">52</a></span>
+<span class="normal"><a href="#__codelineno-23-53">53</a></span>
+<span class="normal"><a href="#__codelineno-23-54">54</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GenericServlet</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Servlet</span><span class="p">,</span><span class="w"> </span><span class="n">ServletConfig</span><span class="p">,</span><span class="w"> </span><span class="n">Serializable</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">transient</span><span class="w"> </span><span class="n">ServletConfig</span><span class="w"> </span><span class="n">config</span><span class="p">;</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">GenericServlet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7"></a>
+<a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10"></a>
+<a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getInitParameter</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getServletConfig</span><span class="p">().</span><span class="na">getInitParameter</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14"></a>
+<a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Enumeration</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getInitParameterNames</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getServletConfig</span><span class="p">().</span><span class="na">getInitParameterNames</span><span class="p">();</span>
+<a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18"></a>
+<a id="__codelineno-23-19" name="__codelineno-23-19"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ServletConfig</span><span class="w"> </span><span class="nf">getServletConfig</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">config</span><span class="p">;</span>
+<a id="__codelineno-23-21" name="__codelineno-23-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-22" name="__codelineno-23-22"></a>
+<a id="__codelineno-23-23" name="__codelineno-23-23"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ServletContext</span><span class="w"> </span><span class="nf">getServletContext</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-24" name="__codelineno-23-24"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getServletConfig</span><span class="p">().</span><span class="na">getServletContext</span><span class="p">();</span>
+<a id="__codelineno-23-25" name="__codelineno-23-25"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-26" name="__codelineno-23-26"></a>
+<a id="__codelineno-23-27" name="__codelineno-23-27"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getServletInfo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-28" name="__codelineno-23-28"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<a id="__codelineno-23-29" name="__codelineno-23-29"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-30" name="__codelineno-23-30"></a>
+<a id="__codelineno-23-31" name="__codelineno-23-31"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">ServletConfig</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-32" name="__codelineno-23-32"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">;</span>
+<a id="__codelineno-23-33" name="__codelineno-23-33"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">init</span><span class="p">();</span>
+<a id="__codelineno-23-34" name="__codelineno-23-34"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-35" name="__codelineno-23-35"></a>
+<a id="__codelineno-23-36" name="__codelineno-23-36"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-37" name="__codelineno-23-37"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-38" name="__codelineno-23-38"></a>
+<a id="__codelineno-23-39" name="__codelineno-23-39"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-40" name="__codelineno-23-40"></a><span class="w">        </span><span class="n">ServletContext</span><span class="w"> </span><span class="n">var10000</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getServletContext</span><span class="p">();</span>
+<a id="__codelineno-23-41" name="__codelineno-23-41"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">var10001</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getServletName</span><span class="p">();</span>
+<a id="__codelineno-23-42" name="__codelineno-23-42"></a><span class="w">        </span><span class="n">var10000</span><span class="p">.</span><span class="na">log</span><span class="p">(</span><span class="n">var10001</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+<a id="__codelineno-23-43" name="__codelineno-23-43"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-44" name="__codelineno-23-44"></a>
+<a id="__codelineno-23-45" name="__codelineno-23-45"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">Throwable</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-46" name="__codelineno-23-46"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">getServletContext</span><span class="p">().</span><span class="na">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getServletName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+<a id="__codelineno-23-47" name="__codelineno-23-47"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-48" name="__codelineno-23-48"></a>
+<a id="__codelineno-23-49" name="__codelineno-23-49"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">var1</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">var2</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+<a id="__codelineno-23-50" name="__codelineno-23-50"></a>
+<a id="__codelineno-23-51" name="__codelineno-23-51"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getServletName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-52" name="__codelineno-23-52"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">config</span><span class="p">.</span><span class="na">getServletName</span><span class="p">();</span>
+<a id="__codelineno-23-53" name="__codelineno-23-53"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-54" name="__codelineno-23-54"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>解释如下：</p>
+<p><code>GenericServlet</code>抽象类是对Servlet接口一些固定功能的粗糙实现，以及对<code>service</code>方法的再次抽象声明，并定义了一些其他相关功能方法：</p>
+<ol>
+<li><code>private transient ServletConfig config;</code>：初始化配置对象作为属性</li>
+<li><code>public GenericServlet() {}</code>：构造器，为了满足继承而准备</li>
+<li><code>public void destroy() {}</code>：销毁方法的平庸实现（无方法体实现抽象方法）</li>
+<li><code>public String getInitParameter(String name)</code>：获取初始参数的快捷方法</li>
+<li><code>public Enumeration&lt;String&gt; getInitParameterNames()</code>：返回所有初始化参数名的方法</li>
+<li><code>public ServletConfig getServletConfig()</code>：获取初始Servlet初始配置对象<code>ServletConfig</code>的方法</li>
+<li><code>public ServletContext getServletContext()</code>：获取上下文对象<code>ServletContext</code>的方法</li>
+<li><code>public String getServletInfo()</code>：获取<code>Servlet</code>信息的平庸实现</li>
+<li><code>public void init(ServletConfig config) throws ServletException()</code>：初始化方法的实现,并在此调用了<code>init</code>的重载方法</li>
+<li><code>public void init() throws ServletException</code>：重载<code>init</code>方法,为了让我们自己定义初始化功能的方法</li>
+<li><code>public void log(String msg)</code>与<code>public void log(String message, Throwable t)</code>：打印日志的方法及重载</li>
+<li><code>public abstract void service(ServletRequest req, ServletResponse res) throws ServletException, IOException;</code>：服务方法再次声明</li>
+<li><code>public String getServletName()</code> ：获取<code>ServletName</code>的方法</li>
+</ol>
+<h3 id="httpservlet"><code>HttpServlet</code>抽象类<a class="headerlink" href="#httpservlet" title="Permanent link">&para;</a></h3>
+<details class="quote">
+<summary><code>HTTPServlet</code>部分源码</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">  1</a></span>
+<span class="normal"><a href="#__codelineno-24-2">  2</a></span>
+<span class="normal"><a href="#__codelineno-24-3">  3</a></span>
+<span class="normal"><a href="#__codelineno-24-4">  4</a></span>
+<span class="normal"><a href="#__codelineno-24-5">  5</a></span>
+<span class="normal"><a href="#__codelineno-24-6">  6</a></span>
+<span class="normal"><a href="#__codelineno-24-7">  7</a></span>
+<span class="normal"><a href="#__codelineno-24-8">  8</a></span>
+<span class="normal"><a href="#__codelineno-24-9">  9</a></span>
+<span class="normal"><a href="#__codelineno-24-10"> 10</a></span>
+<span class="normal"><a href="#__codelineno-24-11"> 11</a></span>
+<span class="normal"><a href="#__codelineno-24-12"> 12</a></span>
+<span class="normal"><a href="#__codelineno-24-13"> 13</a></span>
+<span class="normal"><a href="#__codelineno-24-14"> 14</a></span>
+<span class="normal"><a href="#__codelineno-24-15"> 15</a></span>
+<span class="normal"><a href="#__codelineno-24-16"> 16</a></span>
+<span class="normal"><a href="#__codelineno-24-17"> 17</a></span>
+<span class="normal"><a href="#__codelineno-24-18"> 18</a></span>
+<span class="normal"><a href="#__codelineno-24-19"> 19</a></span>
+<span class="normal"><a href="#__codelineno-24-20"> 20</a></span>
+<span class="normal"><a href="#__codelineno-24-21"> 21</a></span>
+<span class="normal"><a href="#__codelineno-24-22"> 22</a></span>
+<span class="normal"><a href="#__codelineno-24-23"> 23</a></span>
+<span class="normal"><a href="#__codelineno-24-24"> 24</a></span>
+<span class="normal"><a href="#__codelineno-24-25"> 25</a></span>
+<span class="normal"><a href="#__codelineno-24-26"> 26</a></span>
+<span class="normal"><a href="#__codelineno-24-27"> 27</a></span>
+<span class="normal"><a href="#__codelineno-24-28"> 28</a></span>
+<span class="normal"><a href="#__codelineno-24-29"> 29</a></span>
+<span class="normal"><a href="#__codelineno-24-30"> 30</a></span>
+<span class="normal"><a href="#__codelineno-24-31"> 31</a></span>
+<span class="normal"><a href="#__codelineno-24-32"> 32</a></span>
+<span class="normal"><a href="#__codelineno-24-33"> 33</a></span>
+<span class="normal"><a href="#__codelineno-24-34"> 34</a></span>
+<span class="normal"><a href="#__codelineno-24-35"> 35</a></span>
+<span class="normal"><a href="#__codelineno-24-36"> 36</a></span>
+<span class="normal"><a href="#__codelineno-24-37"> 37</a></span>
+<span class="normal"><a href="#__codelineno-24-38"> 38</a></span>
+<span class="normal"><a href="#__codelineno-24-39"> 39</a></span>
+<span class="normal"><a href="#__codelineno-24-40"> 40</a></span>
+<span class="normal"><a href="#__codelineno-24-41"> 41</a></span>
+<span class="normal"><a href="#__codelineno-24-42"> 42</a></span>
+<span class="normal"><a href="#__codelineno-24-43"> 43</a></span>
+<span class="normal"><a href="#__codelineno-24-44"> 44</a></span>
+<span class="normal"><a href="#__codelineno-24-45"> 45</a></span>
+<span class="normal"><a href="#__codelineno-24-46"> 46</a></span>
+<span class="normal"><a href="#__codelineno-24-47"> 47</a></span>
+<span class="normal"><a href="#__codelineno-24-48"> 48</a></span>
+<span class="normal"><a href="#__codelineno-24-49"> 49</a></span>
+<span class="normal"><a href="#__codelineno-24-50"> 50</a></span>
+<span class="normal"><a href="#__codelineno-24-51"> 51</a></span>
+<span class="normal"><a href="#__codelineno-24-52"> 52</a></span>
+<span class="normal"><a href="#__codelineno-24-53"> 53</a></span>
+<span class="normal"><a href="#__codelineno-24-54"> 54</a></span>
+<span class="normal"><a href="#__codelineno-24-55"> 55</a></span>
+<span class="normal"><a href="#__codelineno-24-56"> 56</a></span>
+<span class="normal"><a href="#__codelineno-24-57"> 57</a></span>
+<span class="normal"><a href="#__codelineno-24-58"> 58</a></span>
+<span class="normal"><a href="#__codelineno-24-59"> 59</a></span>
+<span class="normal"><a href="#__codelineno-24-60"> 60</a></span>
+<span class="normal"><a href="#__codelineno-24-61"> 61</a></span>
+<span class="normal"><a href="#__codelineno-24-62"> 62</a></span>
+<span class="normal"><a href="#__codelineno-24-63"> 63</a></span>
+<span class="normal"><a href="#__codelineno-24-64"> 64</a></span>
+<span class="normal"><a href="#__codelineno-24-65"> 65</a></span>
+<span class="normal"><a href="#__codelineno-24-66"> 66</a></span>
+<span class="normal"><a href="#__codelineno-24-67"> 67</a></span>
+<span class="normal"><a href="#__codelineno-24-68"> 68</a></span>
+<span class="normal"><a href="#__codelineno-24-69"> 69</a></span>
+<span class="normal"><a href="#__codelineno-24-70"> 70</a></span>
+<span class="normal"><a href="#__codelineno-24-71"> 71</a></span>
+<span class="normal"><a href="#__codelineno-24-72"> 72</a></span>
+<span class="normal"><a href="#__codelineno-24-73"> 73</a></span>
+<span class="normal"><a href="#__codelineno-24-74"> 74</a></span>
+<span class="normal"><a href="#__codelineno-24-75"> 75</a></span>
+<span class="normal"><a href="#__codelineno-24-76"> 76</a></span>
+<span class="normal"><a href="#__codelineno-24-77"> 77</a></span>
+<span class="normal"><a href="#__codelineno-24-78"> 78</a></span>
+<span class="normal"><a href="#__codelineno-24-79"> 79</a></span>
+<span class="normal"><a href="#__codelineno-24-80"> 80</a></span>
+<span class="normal"><a href="#__codelineno-24-81"> 81</a></span>
+<span class="normal"><a href="#__codelineno-24-82"> 82</a></span>
+<span class="normal"><a href="#__codelineno-24-83"> 83</a></span>
+<span class="normal"><a href="#__codelineno-24-84"> 84</a></span>
+<span class="normal"><a href="#__codelineno-24-85"> 85</a></span>
+<span class="normal"><a href="#__codelineno-24-86"> 86</a></span>
+<span class="normal"><a href="#__codelineno-24-87"> 87</a></span>
+<span class="normal"><a href="#__codelineno-24-88"> 88</a></span>
+<span class="normal"><a href="#__codelineno-24-89"> 89</a></span>
+<span class="normal"><a href="#__codelineno-24-90"> 90</a></span>
+<span class="normal"><a href="#__codelineno-24-91"> 91</a></span>
+<span class="normal"><a href="#__codelineno-24-92"> 92</a></span>
+<span class="normal"><a href="#__codelineno-24-93"> 93</a></span>
+<span class="normal"><a href="#__codelineno-24-94"> 94</a></span>
+<span class="normal"><a href="#__codelineno-24-95"> 95</a></span>
+<span class="normal"><a href="#__codelineno-24-96"> 96</a></span>
+<span class="normal"><a href="#__codelineno-24-97"> 97</a></span>
+<span class="normal"><a href="#__codelineno-24-98"> 98</a></span>
+<span class="normal"><a href="#__codelineno-24-99"> 99</a></span>
+<span class="normal"><a href="#__codelineno-24-100">100</a></span>
+<span class="normal"><a href="#__codelineno-24-101">101</a></span>
+<span class="normal"><a href="#__codelineno-24-102">102</a></span>
+<span class="normal"><a href="#__codelineno-24-103">103</a></span>
+<span class="normal"><a href="#__codelineno-24-104">104</a></span>
+<span class="normal"><a href="#__codelineno-24-105">105</a></span>
+<span class="normal"><a href="#__codelineno-24-106">106</a></span>
+<span class="normal"><a href="#__codelineno-24-107">107</a></span>
+<span class="normal"><a href="#__codelineno-24-108">108</a></span>
+<span class="normal"><a href="#__codelineno-24-109">109</a></span>
+<span class="normal"><a href="#__codelineno-24-110">110</a></span>
+<span class="normal"><a href="#__codelineno-24-111">111</a></span>
+<span class="normal"><a href="#__codelineno-24-112">112</a></span>
+<span class="normal"><a href="#__codelineno-24-113">113</a></span>
+<span class="normal"><a href="#__codelineno-24-114">114</a></span>
+<span class="normal"><a href="#__codelineno-24-115">115</a></span>
+<span class="normal"><a href="#__codelineno-24-116">116</a></span>
+<span class="normal"><a href="#__codelineno-24-117">117</a></span>
+<span class="normal"><a href="#__codelineno-24-118">118</a></span>
+<span class="normal"><a href="#__codelineno-24-119">119</a></span>
+<span class="normal"><a href="#__codelineno-24-120">120</a></span>
+<span class="normal"><a href="#__codelineno-24-121">121</a></span>
+<span class="normal"><a href="#__codelineno-24-122">122</a></span>
+<span class="normal"><a href="#__codelineno-24-123">123</a></span>
+<span class="normal"><a href="#__codelineno-24-124">124</a></span>
+<span class="normal"><a href="#__codelineno-24-125">125</a></span>
+<span class="normal"><a href="#__codelineno-24-126">126</a></span>
+<span class="normal"><a href="#__codelineno-24-127">127</a></span>
+<span class="normal"><a href="#__codelineno-24-128">128</a></span>
+<span class="normal"><a href="#__codelineno-24-129">129</a></span>
+<span class="normal"><a href="#__codelineno-24-130">130</a></span>
+<span class="normal"><a href="#__codelineno-24-131">131</a></span>
+<span class="normal"><a href="#__codelineno-24-132">132</a></span>
+<span class="normal"><a href="#__codelineno-24-133">133</a></span>
+<span class="normal"><a href="#__codelineno-24-134">134</a></span>
+<span class="normal"><a href="#__codelineno-24-135">135</a></span>
+<span class="normal"><a href="#__codelineno-24-136">136</a></span>
+<span class="normal"><a href="#__codelineno-24-137">137</a></span>
+<span class="normal"><a href="#__codelineno-24-138">138</a></span>
+<span class="normal"><a href="#__codelineno-24-139">139</a></span>
+<span class="normal"><a href="#__codelineno-24-140">140</a></span>
+<span class="normal"><a href="#__codelineno-24-141">141</a></span>
+<span class="normal"><a href="#__codelineno-24-142">142</a></span>
+<span class="normal"><a href="#__codelineno-24-143">143</a></span>
+<span class="normal"><a href="#__codelineno-24-144">144</a></span>
+<span class="normal"><a href="#__codelineno-24-145">145</a></span>
+<span class="normal"><a href="#__codelineno-24-146">146</a></span>
+<span class="normal"><a href="#__codelineno-24-147">147</a></span>
+<span class="normal"><a href="#__codelineno-24-148">148</a></span>
+<span class="normal"><a href="#__codelineno-24-149">149</a></span>
+<span class="normal"><a href="#__codelineno-24-150">150</a></span>
+<span class="normal"><a href="#__codelineno-24-151">151</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HttpServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">GenericServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lStrings</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;http.method_get_not_supported&quot;</span><span class="p">);</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sendMethodNotAllowed</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7"></a>
+<a id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doHead</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">DispatcherType</span><span class="p">.</span><span class="na">INCLUDE</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="na">getDispatcherType</span><span class="p">())</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">cachedUseLegacyDoHead</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="w">            </span><span class="n">NoBodyResponse</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoBodyResponse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">doGet</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="na">isAsyncStarted</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13"></a><span class="w">                </span><span class="n">req</span><span class="p">.</span><span class="na">getAsyncContext</span><span class="p">().</span><span class="na">addListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">NoBodyAsyncContextListener</span><span class="p">(</span><span class="n">response</span><span class="p">));</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="w">                </span><span class="n">response</span><span class="p">.</span><span class="na">setContentLength</span><span class="p">();</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">doGet</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-24-19" name="__codelineno-24-19"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-24-20" name="__codelineno-24-20"></a>
+<a id="__codelineno-24-21" name="__codelineno-24-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-22" name="__codelineno-24-22"></a>
+<a id="__codelineno-24-23" name="__codelineno-24-23"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doPost</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-24" name="__codelineno-24-24"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lStrings</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;http.method_post_not_supported&quot;</span><span class="p">);</span>
+<a id="__codelineno-24-25" name="__codelineno-24-25"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sendMethodNotAllowed</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<a id="__codelineno-24-26" name="__codelineno-24-26"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-27" name="__codelineno-24-27"></a>
+<a id="__codelineno-24-28" name="__codelineno-24-28"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doPut</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-29" name="__codelineno-24-29"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lStrings</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;http.method_put_not_supported&quot;</span><span class="p">);</span>
+<a id="__codelineno-24-30" name="__codelineno-24-30"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sendMethodNotAllowed</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<a id="__codelineno-24-31" name="__codelineno-24-31"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-32" name="__codelineno-24-32"></a>
+<a id="__codelineno-24-33" name="__codelineno-24-33"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doDelete</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-34" name="__codelineno-24-34"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lStrings</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;http.method_delete_not_supported&quot;</span><span class="p">);</span>
+<a id="__codelineno-24-35" name="__codelineno-24-35"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sendMethodNotAllowed</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<a id="__codelineno-24-36" name="__codelineno-24-36"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-37" name="__codelineno-24-37"></a>
+<a id="__codelineno-24-38" name="__codelineno-24-38"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendMethodNotAllowed</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-39" name="__codelineno-24-39"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getProtocol</span><span class="p">();</span>
+<a id="__codelineno-24-40" name="__codelineno-24-40"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">protocol</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">protocol</span><span class="p">.</span><span class="na">endsWith</span><span class="p">(</span><span class="s">&quot;0.9&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">protocol</span><span class="p">.</span><span class="na">endsWith</span><span class="p">(</span><span class="s">&quot;1.0&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-41" name="__codelineno-24-41"></a><span class="w">            </span><span class="n">resp</span><span class="p">.</span><span class="na">sendError</span><span class="p">(</span><span class="mi">405</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<a id="__codelineno-24-42" name="__codelineno-24-42"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-43" name="__codelineno-24-43"></a><span class="w">            </span><span class="n">resp</span><span class="p">.</span><span class="na">sendError</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<a id="__codelineno-24-44" name="__codelineno-24-44"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-24-45" name="__codelineno-24-45"></a>
+<a id="__codelineno-24-46" name="__codelineno-24-46"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-47" name="__codelineno-24-47"></a>
+<a id="__codelineno-24-48" name="__codelineno-24-48"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doOptions</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-49" name="__codelineno-24-49"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getCachedAllowHeaderValue</span><span class="p">();</span>
+<a id="__codelineno-24-50" name="__codelineno-24-50"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">HttpServlet</span><span class="p">.</span><span class="na">TomcatHack</span><span class="p">.</span><span class="na">getAllowTrace</span><span class="p">(</span><span class="n">req</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-51" name="__codelineno-24-51"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">allow</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-52" name="__codelineno-24-52"></a><span class="w">                </span><span class="n">allow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;TRACE&quot;</span><span class="p">;</span>
+<a id="__codelineno-24-53" name="__codelineno-24-53"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-54" name="__codelineno-24-54"></a><span class="w">                </span><span class="n">allow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, TRACE&quot;</span><span class="p">;</span>
+<a id="__codelineno-24-55" name="__codelineno-24-55"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-24-56" name="__codelineno-24-56"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-24-57" name="__codelineno-24-57"></a>
+<a id="__codelineno-24-58" name="__codelineno-24-58"></a><span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">setHeader</span><span class="p">(</span><span class="s">&quot;Allow&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">allow</span><span class="p">);</span>
+<a id="__codelineno-24-59" name="__codelineno-24-59"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-60" name="__codelineno-24-60"></a>
+<a id="__codelineno-24-61" name="__codelineno-24-61"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doTrace</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-62" name="__codelineno-24-62"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">CRLF</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;\r\n&quot;</span><span class="p">;</span>
+<a id="__codelineno-24-63" name="__codelineno-24-63"></a><span class="w">        </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">(</span><span class="s">&quot;TRACE &quot;</span><span class="p">)).</span><span class="na">append</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="na">getRequestURI</span><span class="p">()).</span><span class="na">append</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="na">getProtocol</span><span class="p">());</span>
+<a id="__codelineno-24-64" name="__codelineno-24-64"></a><span class="w">        </span><span class="n">Enumeration</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reqHeaderNames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getHeaderNames</span><span class="p">();</span>
+<a id="__codelineno-24-65" name="__codelineno-24-65"></a>
+<a id="__codelineno-24-66" name="__codelineno-24-66"></a><span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-67" name="__codelineno-24-67"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">headerName</span><span class="p">;</span>
+<a id="__codelineno-24-68" name="__codelineno-24-68"></a><span class="w">            </span><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-69" name="__codelineno-24-69"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">reqHeaderNames</span><span class="p">.</span><span class="na">hasMoreElements</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-70" name="__codelineno-24-70"></a><span class="w">                    </span><span class="n">buffer</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">CRLF</span><span class="p">);</span>
+<a id="__codelineno-24-71" name="__codelineno-24-71"></a><span class="w">                    </span><span class="kt">int</span><span class="w"> </span><span class="n">responseLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buffer</span><span class="p">.</span><span class="na">length</span><span class="p">();</span>
+<a id="__codelineno-24-72" name="__codelineno-24-72"></a><span class="w">                    </span><span class="n">resp</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">&quot;message/http&quot;</span><span class="p">);</span>
+<a id="__codelineno-24-73" name="__codelineno-24-73"></a><span class="w">                    </span><span class="n">resp</span><span class="p">.</span><span class="na">setContentLength</span><span class="p">(</span><span class="n">responseLength</span><span class="p">);</span>
+<a id="__codelineno-24-74" name="__codelineno-24-74"></a><span class="w">                    </span><span class="n">ServletOutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resp</span><span class="p">.</span><span class="na">getOutputStream</span><span class="p">();</span>
+<a id="__codelineno-24-75" name="__codelineno-24-75"></a><span class="w">                    </span><span class="n">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+<a id="__codelineno-24-76" name="__codelineno-24-76"></a><span class="w">                    </span><span class="n">out</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<a id="__codelineno-24-77" name="__codelineno-24-77"></a><span class="w">                    </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-24-78" name="__codelineno-24-78"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-24-79" name="__codelineno-24-79"></a>
+<a id="__codelineno-24-80" name="__codelineno-24-80"></a><span class="w">                </span><span class="n">headerName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="n">reqHeaderNames</span><span class="p">.</span><span class="na">nextElement</span><span class="p">();</span>
+<a id="__codelineno-24-81" name="__codelineno-24-81"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">isSensitiveHeader</span><span class="p">(</span><span class="n">headerName</span><span class="p">));</span>
+<a id="__codelineno-24-82" name="__codelineno-24-82"></a>
+<a id="__codelineno-24-83" name="__codelineno-24-83"></a><span class="w">            </span><span class="n">Enumeration</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">headerValues</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getHeaders</span><span class="p">(</span><span class="n">headerName</span><span class="p">);</span>
+<a id="__codelineno-24-84" name="__codelineno-24-84"></a>
+<a id="__codelineno-24-85" name="__codelineno-24-85"></a><span class="w">            </span><span class="k">while</span><span class="p">(</span><span class="n">headerValues</span><span class="p">.</span><span class="na">hasMoreElements</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-86" name="__codelineno-24-86"></a><span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">headerValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="n">headerValues</span><span class="p">.</span><span class="na">nextElement</span><span class="p">();</span>
+<a id="__codelineno-24-87" name="__codelineno-24-87"></a><span class="w">                </span><span class="n">buffer</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">CRLF</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="n">headerName</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="n">headerValue</span><span class="p">);</span>
+<a id="__codelineno-24-88" name="__codelineno-24-88"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-24-89" name="__codelineno-24-89"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-24-90" name="__codelineno-24-90"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-91" name="__codelineno-24-91"></a>
+<a id="__codelineno-24-92" name="__codelineno-24-92"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-93" name="__codelineno-24-93"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getMethod</span><span class="p">();</span>
+<a id="__codelineno-24-94" name="__codelineno-24-94"></a><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">lastModified</span><span class="p">;</span>
+<a id="__codelineno-24-95" name="__codelineno-24-95"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">method</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;GET&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-96" name="__codelineno-24-96"></a><span class="w">            </span><span class="n">lastModified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getLastModified</span><span class="p">(</span><span class="n">req</span><span class="p">);</span>
+<a id="__codelineno-24-97" name="__codelineno-24-97"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lastModified</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1L</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-98" name="__codelineno-24-98"></a><span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">doGet</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-24-99" name="__codelineno-24-99"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-100" name="__codelineno-24-100"></a><span class="w">                </span><span class="kt">long</span><span class="w"> </span><span class="n">ifModifiedSince</span><span class="p">;</span>
+<a id="__codelineno-24-101" name="__codelineno-24-101"></a><span class="w">                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-102" name="__codelineno-24-102"></a><span class="w">                    </span><span class="n">ifModifiedSince</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getDateHeader</span><span class="p">(</span><span class="s">&quot;If-Modified-Since&quot;</span><span class="p">);</span>
+<a id="__codelineno-24-103" name="__codelineno-24-103"></a><span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="w"> </span><span class="n">var9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-104" name="__codelineno-24-104"></a><span class="w">                    </span><span class="n">ifModifiedSince</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1L</span><span class="p">;</span>
+<a id="__codelineno-24-105" name="__codelineno-24-105"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-24-106" name="__codelineno-24-106"></a>
+<a id="__codelineno-24-107" name="__codelineno-24-107"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ifModifiedSince</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">lastModified</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000L</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-108" name="__codelineno-24-108"></a><span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="na">maybeSetLastModified</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span><span class="w"> </span><span class="n">lastModified</span><span class="p">);</span>
+<a id="__codelineno-24-109" name="__codelineno-24-109"></a><span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="na">doGet</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-24-110" name="__codelineno-24-110"></a><span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-111" name="__codelineno-24-111"></a><span class="w">                    </span><span class="n">resp</span><span class="p">.</span><span class="na">setStatus</span><span class="p">(</span><span class="mi">304</span><span class="p">);</span>
+<a id="__codelineno-24-112" name="__codelineno-24-112"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-24-113" name="__codelineno-24-113"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-24-114" name="__codelineno-24-114"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">method</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;HEAD&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-115" name="__codelineno-24-115"></a><span class="w">            </span><span class="n">lastModified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getLastModified</span><span class="p">(</span><span class="n">req</span><span class="p">);</span>
+<a id="__codelineno-24-116" name="__codelineno-24-116"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">maybeSetLastModified</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span><span class="w"> </span><span class="n">lastModified</span><span class="p">);</span>
+<a id="__codelineno-24-117" name="__codelineno-24-117"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">doHead</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-24-118" name="__codelineno-24-118"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">method</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;POST&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-119" name="__codelineno-24-119"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">doPost</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-24-120" name="__codelineno-24-120"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">method</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;PUT&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-121" name="__codelineno-24-121"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">doPut</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-24-122" name="__codelineno-24-122"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">method</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;DELETE&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-123" name="__codelineno-24-123"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">doDelete</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-24-124" name="__codelineno-24-124"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">method</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;OPTIONS&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-125" name="__codelineno-24-125"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">doOptions</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-24-126" name="__codelineno-24-126"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">method</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;TRACE&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-127" name="__codelineno-24-127"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">doTrace</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-24-128" name="__codelineno-24-128"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-129" name="__codelineno-24-129"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">errMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lStrings</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;http.method_not_implemented&quot;</span><span class="p">);</span>
+<a id="__codelineno-24-130" name="__codelineno-24-130"></a><span class="w">            </span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="n">errArgs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Object</span><span class="o">[]</span><span class="p">{</span><span class="n">method</span><span class="p">};</span>
+<a id="__codelineno-24-131" name="__codelineno-24-131"></a><span class="w">            </span><span class="n">errMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MessageFormat</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">errMsg</span><span class="p">,</span><span class="w"> </span><span class="n">errArgs</span><span class="p">);</span>
+<a id="__codelineno-24-132" name="__codelineno-24-132"></a><span class="w">            </span><span class="n">resp</span><span class="p">.</span><span class="na">sendError</span><span class="p">(</span><span class="mi">501</span><span class="p">,</span><span class="w"> </span><span class="n">errMsg</span><span class="p">);</span>
+<a id="__codelineno-24-133" name="__codelineno-24-133"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-24-134" name="__codelineno-24-134"></a>
+<a id="__codelineno-24-135" name="__codelineno-24-135"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-136" name="__codelineno-24-136"></a>
+<a id="__codelineno-24-137" name="__codelineno-24-137"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">res</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-138" name="__codelineno-24-138"></a><span class="w">        </span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">;</span>
+<a id="__codelineno-24-139" name="__codelineno-24-139"></a><span class="w">        </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">;</span>
+<a id="__codelineno-24-140" name="__codelineno-24-140"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-141" name="__codelineno-24-141"></a><span class="w">            </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="p">)</span><span class="n">req</span><span class="p">;</span>
+<a id="__codelineno-24-142" name="__codelineno-24-142"></a><span class="w">            </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">HttpServletResponse</span><span class="p">)</span><span class="n">res</span><span class="p">;</span>
+<a id="__codelineno-24-143" name="__codelineno-24-143"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ClassCastException</span><span class="w"> </span><span class="n">var6</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-144" name="__codelineno-24-144"></a><span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ServletException</span><span class="p">(</span><span class="n">lStrings</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;http.non_http&quot;</span><span class="p">));</span>
+<a id="__codelineno-24-145" name="__codelineno-24-145"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-24-146" name="__codelineno-24-146"></a>
+<a id="__codelineno-24-147" name="__codelineno-24-147"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">service</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span>
+<a id="__codelineno-24-148" name="__codelineno-24-148"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-149" name="__codelineno-24-149"></a>
+<a id="__codelineno-24-150" name="__codelineno-24-150"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-24-151" name="__codelineno-24-151"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>解释如下：</p>
+<ol>
+<li><code>public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException</code>：对服务方法的实现。在该方法中,将请求和响应对象转换成对应HTTP协议的<code>HttpServletRequest</code>和<code>HttpServletResponse</code>对象，调用重载的<code>service</code>方法</li>
+<li><code>public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException</code>：重载的<code>service</code>方法,被重写的<code>service</code>方法所调用。在该方法中，通过请求方式判断，调用具体的<code>do***</code>方法完成请求的处理</li>
+<li><code>protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException</code>、<code>protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException</code>、<code>protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException</code>、<code>protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException</code>、<code>protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException</code>、<code>protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException</code>、<code>protected void doTrace(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException</code>：对应不同请求方式的处理方法。除了<code>doOptions</code>和<code>doTrace</code>方法，其他的<code>do***</code>方法都在故意响应错误信息</li>
+</ol>
+<h3 id="_2">继承结构结论<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>自定义Servlet中，必须要对处理请求的方法进行重写，有两种重写方式：</p>
+<ol>
+<li>重写<code>service</code>方法</li>
+<li>重写<code>doGet</code>或者<code>doPost</code>方法，或者两种都重写，在调用时，如果<code>doGet</code>和<code>doPost</code>逻辑基本一致，只是因为请求方式不同，则可以在<code>doGet</code>方法或者<code>doPost</code>方法中调用另外一个即可</li>
+</ol>
+<p>实际上，不论是第一种方式还是第二种方式，都没有什么本质的区别，唯一的区别就是第二种方式不会覆盖<code>service</code>方法中的错误处理，但是目前学习下不会遇到这些问题，也就可以不用深究。在后面使用框架后更不会关心这两种方法，所以使用哪一种方法都可以</p>
 
 
 

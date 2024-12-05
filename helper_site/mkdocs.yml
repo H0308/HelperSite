@@ -201,6 +201,7 @@ nav:
         - DOM和BOM小练习: JavaScript基础知识/11. （附加）DOM和BOM小练习/11. （附加）DOM和BOM小练习.md
       - JavaScript与JQuery（了解）: JavaScript基础知识/10. JavaScript与JQuery/10. JavaScript与JQuery.md
     - HTTP协议介绍: JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
+    - Servlet开发: JavaWeb/2. Servlet开发/2. Servlet开发.md
   - MySQL:
     - MySQL基础: MySQL/MySQL基础使用/MySQL基础使用.md
     - JDBC（Java连接数据库技术）:
@@ -219,6 +220,7 @@ nav:
     - Tomcat安装和使用: 工具帮助/Tomcat安装和使用/Tomcat安装和使用.md
   - 面试:
     - C++ 后端需要知道的找工作问题: 面试/C++ 后端需要知道的找工作问题/C++ 后端需要知道的找工作问题.md 
+    - C++ 学长经验之谈: 面试/C++ 学长经验之谈/C++ 学长经验之谈.md
   - 联系作者: 作者/作者.md
 
 markdown_extensions:

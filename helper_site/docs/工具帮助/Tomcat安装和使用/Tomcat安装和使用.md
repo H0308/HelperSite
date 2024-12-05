@@ -238,6 +238,12 @@ JavaWeb项目部署一般有三种方式：
 
     <img src="Tomcat安装和使用.assets/1681458939400.png" alt="1681458939400" style="zoom:70%;" />
 
+    !!! note
+
+        本步骤是在前面关联Tomcat的第6步的基础之上进行的。之所以使用这种方式是因为后面在使用相关的`Servlet.jar`时不需要单独将`jar`包放到`lib`文件夹再点击`Add as Library`。当前使用的这种导入方式在存在多个项目时可以有效的减少磁盘空间的占用，因为在Tomcat中本身就有一个`lib`，这个`lib`中的所有`jar`包是供所有运行在Tomcat上的程序使用的
+
+        在添加完Tomcat依赖后可以看到有一个`Scope`一栏对应的是`Provided`，表示当前的Tomcat的依赖在编译时或者构建时不携带这个`jar`包
+
 6. 选择`modules`，右键点击`Add Framework Support`
 
     !!! note

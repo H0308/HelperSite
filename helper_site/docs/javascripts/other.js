@@ -22,11 +22,19 @@ document.addEventListener('DOMContentLoaded', () => {
     progress.className = 'reading-progress';
     document.body.appendChild(progress);
 
+    let ticking = false;
+
     window.addEventListener('scroll', () => {
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = (window.scrollY / docHeight) * 100;
-        progress.style.setProperty('--scroll-percent', `${scrollPercent}%`);
-    });
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (window.scrollY / docHeight) * 100;
+                document.querySelector('.reading-progress').style.setProperty('--scroll-percent', `${scrollPercent}%`);
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
 });
 
 // 文字渐显效果
@@ -38,8 +46,10 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            requestAnimationFrame(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            });
         }
     });
 }, observerOptions);

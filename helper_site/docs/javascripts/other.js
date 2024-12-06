@@ -66,6 +66,38 @@ document.querySelectorAll('.md-content > *').forEach((el, i) => {
     el.style.setProperty('--animation-order', i);
 });
 
+// 标题动画效果
+document.querySelectorAll('.md-content h1, .md-content h2, .md-content h3').forEach(heading => {
+    // 添加交互动画
+    heading.addEventListener('mouseenter', () => {
+        heading.style.transform = 'translateX(10px)';
+        requestAnimationFrame(() => {
+            heading.style.transform = 'translateX(0)';
+        });
+    });
+    
+    // 添加点击波纹效果
+    heading.addEventListener('click', (e) => {
+        const ripple = document.createElement('div');
+        ripple.style.cssText = `
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(77, 166, 218, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            animation: ripple 0.6s ease-out;
+        `;
+        
+        ripple.style.left = e.clientX - heading.getBoundingClientRect().left + 'px';
+        ripple.style.top = e.clientY - heading.getBoundingClientRect().top + 'px';
+        
+        heading.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+    });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const indicator = document.createElement('div');
     indicator.className = 'scroll-indicator';

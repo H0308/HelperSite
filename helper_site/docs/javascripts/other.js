@@ -51,13 +51,6 @@ document.querySelectorAll('.md-content p, .md-content h1, .md-content h2, .md-co
     observer.observe(el);
 });
 
-document.querySelectorAll('.highlight pre').forEach(block => {
-    const lines = block.innerHTML.split('\n');
-    block.innerHTML = lines.map((line, i) => 
-        `<span class="line" style="--line-number: ${i + 1}">${line}</span>`
-    ).join('\n');
-});
-
 // 设置元素动画延迟
 document.querySelectorAll('.md-content > *').forEach((el, i) => {
     el.style.setProperty('--animation-order', i);

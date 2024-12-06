@@ -200,12 +200,6 @@ html {
     scroll-margin-top: 2rem;
 }
 
-.md-typeset .admonition,
-.md-typeset details {
-    border-width: 0;
-    border-left-width: 4px;
-}
-
 /* 链接悬停效果 */
 .md-content a:not(.headerlink) {
     position: relative;
@@ -245,14 +239,6 @@ html {
     margin: 1rem 0;
 }
 
-/* 代码块现代化 */
-pre[class*="language-"] {
-    backdrop-filter: blur(4px);
-    background: rgba(40, 44, 52, 0.95) !important;
-    border-radius: 12px;
-    margin: 1.5em 0;
-}
-
 /* 引用块现代化 */
 blockquote {
     border: none;
@@ -277,19 +263,6 @@ blockquote {
 .md-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(77, 166, 218, 0.2);
-}
-
-/* 搜索框美化 */
-.md-search__form {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-}
-
-.md-search__form:focus-within {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 /* 标题渐变装饰 */
@@ -329,47 +302,4 @@ blockquote {
     height: 3px;
     background: linear-gradient(90deg, #4da6da 0%, #275796 var(--scroll-percent, 0%), transparent var(--scroll-percent, 0%));
     z-index: 1000;
-}
-
-/* 动态背景 */
-.md-main {
-    position: relative;
-    overflow: hidden;
-}
-
-.md-main::before {
-    content: '';
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, #4da6da10 0%, transparent 50%);
-    animation: bgRotate 20s linear infinite;
-    z-index: -1;
-}
-
-@keyframes bgRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.scroll-indicator {
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    height: 100px;
-    background: rgba(77, 166, 218, 0.1);
-    border-radius: 3px;
-}
-
-.scroll-indicator::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    background: #4da6da;
-    border-radius: 3px;
-    transition: top 0.3s ease, height 0.3s ease;
 }

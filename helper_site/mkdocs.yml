@@ -19,6 +19,12 @@ theme:
     - content.code.copy
     # - content.tabs.link
   language: zh
+  palette:
+    - scheme: default
+      accent: teal
+      primary: white
+  icon:
+    edit: material/pencil
 
 copyright: Copyright &copy; 2024 EPSDA
 

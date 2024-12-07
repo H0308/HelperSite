@@ -235,7 +235,7 @@ html {
     backdrop-filter: blur(10px);
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-    padding: 2rem;
+    padding: 1.5rem;
     margin: 1rem 0;
 }
 
@@ -472,17 +472,73 @@ body::after {
 
 /* 内容区域背景 */
 .md-content {
-    background-color: #f5e6c9 !important; /* 米黄色基础背景 */
-    background-image: 
-        linear-gradient(#e5d5b8 1px, transparent 1px),
-        linear-gradient(90deg, #e5d5b8 1px, transparent 1px) !important;
-    background-size: 20px 20px !important;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /* 设置内容最大宽度为50rem */
+    max-width: 50rem;
+    /* 设置内容的外边距 */
+    margin-left: 50px;
 }
 
+/* 旧版警告框 */
 .md-typeset .admonition,
 .md-typeset details {
     border-width: 0;
     border-left-width: 4px;
+}
+
+/* 去除整体框架的最大宽度 */
+.md-grid {
+    margin-left: 20px !important;
+    max-width: -webkit-fill-available;
+}
+
+/* 设置背景 */
+.md-content__inner {
+    margin-right: 1.2em !important;
+}
+
+/* 设置搜索框位置 */
+.md-search {
+    margin-right: 100px;
+}
+
+/* 回到顶部按钮样式 */
+.md-top {
+    position: fixed !important;
+    right: 8.5rem !important;
+    bottom: 0.8rem !important;
+    top: unset !important; /* 清除可能的top值 */
+    transform: none !important; /* 移除可能的transform */
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    padding: 0.5rem !important;
+    margin: 0 !important;
+    background: rgba(77, 166, 218, 0.9) !important;
+    border-radius: 0.6rem !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+    backdrop-filter: blur(4px) !important;
+    z-index: 99 !important;
+}
+
+/* 设置二级目录的缩进线 */
+@media screen and (min-width: 76.25em) {
+    [dir=ltr] .md-nav--integrated>.md-nav__list>.md-nav__item--active .md-nav--secondary {
+        border-left: 0.1rem solid rgba(77, 166, 218, 0.9) !important;
+    }
+}
+
+/* 设置复制框样式 */
+[dir=ltr] .md-dialog {
+    right: 0.5rem !important;
+}
+
+.md-dialog {
+    border-radius: 0.5rem !important;
+    background-color: rgba(77, 166, 218, 0.9) !important;
+    min-width: 7.1rem !important;
+}
+
+/* 设置导航栏滚动条样式 */
+.md-sidebar__scrollwrap {
+    scrollbar-color: rgba(77, 166, 218, 0.9) #0000 !important;
 }

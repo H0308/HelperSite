@@ -37,35 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 });
 
-// 文字渐显效果
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -10% 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            requestAnimationFrame(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            });
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.md-content p, .md-content h1, .md-content h2, .md-content h3').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'all 0.5s ease-out';
-    observer.observe(el);
-});
-
-// 设置元素动画延迟
-document.querySelectorAll('.md-content > *').forEach((el, i) => {
-    el.style.setProperty('--animation-order', i);
-});
-
 // 标题动画效果
 document.querySelectorAll('.md-content h1, .md-content h2, .md-content h3').forEach(heading => {
     // 添加交互动画

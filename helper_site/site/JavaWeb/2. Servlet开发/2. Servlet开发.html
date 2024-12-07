@@ -6530,32 +6530,24 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>!!! note
-
-    在上面的方法中，需要注意下面的两点：
-
-    1. URI和URL的区别：
-        - URI（Uniform Resource Identifier，统一资源标识符）是不包括协议、IP和端口的资源路径
-        - URL（Uniform Resource Locator，统一资源定位器）是包括协议、IP和端口的全路径
-
-        可以理解为URL是URI的一种扩展，其具有URI的内容（资源路径），也有URI不具有的内容（协议、IP和端口）。例如：`http://127.0.0.1:8080/demo1/servlet1`，其中URI为`demo1/servlet1`，URL为`http://127.0.0.1:8080/demo1/servlet1`
-
-    2. 「客户端发送请求时的端口」和「本应用所在容器的端口」的区别：
-
-        所谓「客户端发送请求时的端口」就是客户端发送请求时请求的服务器所在的端口，如果客户端和服务器端没有代理服务器，那么「客户端发送请求时的端口」和「本应用所在容器的端口」是一致的。但是如果存在代理服务器，则「客户端发送请求时的端口」就是代理服务器的端口号，此时可能就与「本应用所在容器的端口」不同
-</code></pre></div></td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>在上面的方法中，需要注意下面的两点：</p>
+<ol>
+<li>
+<ul>
+<li>URI（Uniform Resource Identifier，统一资源标识符）是不包括协议、IP和端口的资源路径</li>
+<li>URL（Uniform Resource Locator，统一资源定位器）是包括协议、IP和端口的全路径</li>
+</ul>
+<p>URI和URL的区别：</p>
+<p>可以理解为URL是URI的一种扩展，其具有URI的内容（资源路径），也有URI不具有的内容（协议、IP和端口）。例如：<code>http://127.0.0.1:8080/demo1/servlet1</code>，其中URI为<code>demo1/servlet1</code>，URL为<code>http://127.0.0.1:8080/demo1/servlet1</code></p>
+</li>
+<li>
+<p>「客户端发送请求时的端口」和「本应用所在容器的端口」的区别：</p>
+<p>所谓「客户端发送请求时的端口」就是客户端发送请求时请求的服务器所在的端口，如果客户端和服务器端没有代理服务器，那么「客户端发送请求时的端口」和「本应用所在容器的端口」是一致的。但是如果存在代理服务器，则「客户端发送请求时的端口」就是代理服务器的端口号，此时可能就与「本应用所在容器的端口」不同</p>
+</li>
+</ol>
+</div>
 <ul>
 <li>获得请求头信息相关</li>
 </ul>

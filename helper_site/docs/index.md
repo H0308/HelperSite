@@ -5,7 +5,7 @@
 这是一个学习内容记录网站，主要记录了作者学习到的技术知识，如果发现错误或者存在疑问请[联系作者](https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html)
 
 - 本网站不提供英文版
-- 本网站使用下面的几种字体：
+- 本网站使用下面的字体：
     1. 标题：[霞鹜臻楷](https://github.com/lxgw/LxgwZhenKai)
     2. 内容（非代码）：[OPPO官方字体OPPO Sans](https://www.coloros.com/article/A00000050/)
     3. 代码：[JetBrains Mono](https://www.jetbrains.com/lp/mono/)

@@ -4927,12 +4927,12 @@
 <li>
 <p>孩子节点找父亲节点：</p>
 <ol>
-<li>左孩子：<code>leftChild = parent * 2 + 1</code></li>
-<li>右孩子：<code>rightChild = parent * 2 + 2</code>（即<code>leftChild + 1</code>）</li>
+<li>左孩子：<code>leftChild = parent * 2 + 1</code>（根节点下标为0，左孩子的下标总是奇数）</li>
+<li>右孩子：<code>rightChild = parent * 2 + 2</code>（即<code>leftChild + 1</code>。根节点下标为0，右孩子的下标总是偶数）</li>
 </ol>
 </li>
 <li>
-<p>父亲节点找孩子节点：<code>parent = (child - 1) / 2</code>。这个公式不论孩子节点下标为奇数还是偶数均可以使用，因为当<code>child</code>为奇数时，会进行取整操作</p>
+<p>父亲节点找孩子节点：<code>parent = (child - 1) / 2</code>。这个公式<strong>不论孩子节点下标为奇数还是偶数均可以使用</strong>，因为当<code>child</code>为奇数时，会进行取整操作</p>
 </li>
 </ul>
 </li>
@@ -5021,7 +5021,7 @@
 <p><a class="glightbox" href="images\image1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image1.png"></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>注意，判断循环条件为<code>child &gt; 0</code>，而不是<code>parent &gt;= 0</code>，因为当<code>child</code>为0时，说明已经到了根节点，就不需要再进行向上调整了，而如果使用<code>parent &gt;= 0</code>作为循环条件，那么当<code>child</code>为0是，<code>parent = (child - 1) / 2</code>算出来的值依旧是0，从而多进行一次无意义的比较再<code>break</code></p>
+<p>注意，判断循环条件为<code>child &gt; 0</code>，而不是<code>parent &gt;= 0</code>，因为当<code>child</code>为0时，说明已经到了根节点，就不需要再进行向上调整了，而如果使用<code>parent &gt;= 0</code>作为循环条件，那么当<code>child</code>为0时，<code>parent = (child - 1) / 2</code>算出来的值依旧是0，从而多进行一次无意义的比较再<code>break</code></p>
 </div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
@@ -5122,7 +5122,7 @@
 <a id="__codelineno-5-49" name="__codelineno-5-49"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="_9">堆的数据移除<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
-<p>在堆中，移除的数据均为堆的第一个数据，即根节点的数据，但是不能直接使用挪动覆盖的思路，因为会打破原有的堆结构，可以采用先交换根节点和叶子节点的数据再使用向下调整算法恢复小堆结构</p>
+<p>在堆中，移<strong>除的数据均为堆的第一个数据，即根节点的数据</strong>，但是不能直接使用挪动覆盖的思路，因为会打破原有的堆结构，可以采用先交换根节点和叶子节点的数据再使用向下调整算法恢复小堆结构</p>
 <p>先交换根节点和叶子节点的数据，再改变<code>size</code>的值，从而达到删除数据的效果</p>
 <p><a class="glightbox" href="images\image7.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image7.png"></a></p>
 <p>接着执行向下调整算法恢复堆结构</p>
@@ -5271,10 +5271,10 @@
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c1">//以下面的数组为例</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="w"> </span><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<p>注意在设计向上调整算法的函数时，传入的控制数组大小的参数为i而不是数组的整体大小，如果用数组的整体大小，则需要从最后一个元素进行向上比较，但是需要注意的问题是，在左右孩子节点均存在时，需要比较左右孩子节点的大小，再与父亲节点比较判断是否需要进行交换</p>
+<p>注意在设计向上调整算法的函数时，传入的控制数组大小的参数为下标<code>i</code>而不是数组的整体大小，如果用数组的整体大小，则需要从最后一个元素进行向上比较，但是需要注意的问题是，在左右孩子节点均存在时，需要比较左右孩子节点的大小，再与父亲节点比较判断是否需要进行交换</p>
 <p><a class="glightbox" href="images\image11.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image11.png"></a></p>
 <p>接下来处理第二个问题，如何进行排序</p>
-<p>在前面有堆的数据结构及实现的基础上，了解到当使用小堆时，会将数组排成升序，但是在没有先打印堆顶数据的情况下，会将数组排成降序，过程如下</p>
+<p>在前面有堆的数据结构及实现的基础上，了解到当使用小堆时，会将数组排成升序，但是在没有先打印堆顶数据的情况下，会将数组排成降序。因为升序的本质就是先打印末尾元素，再依次打印前面的元素从而实现升序，所以如果不打印，默认最小的元素就在末尾，前面的元素都比其后一个元素大，所以就是降序。过程如下：</p>
 <p><a class="glightbox" href="images\image12.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image12.png"></a></p>
 <p><a class="glightbox" href="images\image13.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image13.png"></a></p>
 <p><a class="glightbox" href="images\image14.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image14.png"></a></p>
@@ -5452,7 +5452,7 @@
 <a id="__codelineno-11-84" name="__codelineno-11-84"></a><span class="n">输出结果</span><span class="err">：</span>
 <a id="__codelineno-11-85" name="__codelineno-11-85"></a><span class="mi">9</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">1</span>
 </code></pre></div></td></tr></table></div>
-<p>同理可得，使用大堆排序时会得到升序结果</p>
+<p>同理可得，使用大堆排序时在不打印的情况下会得到升序结果，如果是打印则为降序结果</p>
 <h3 id="_16">优化：向下调整建堆+向下调整排序（小堆为例）<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <p>向下调整建堆采用分组进行调整，先调整最后一个父亲节点为大堆，再依次向前调整其他子树，最后到根节点的调整，具体过程如下</p>
 <p><a class="glightbox" href="images\image18.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image18.png"></a></p>
@@ -5611,8 +5611,11 @@
 <ol>
 <li>先抽取数据中的前K个值建立一个小堆，因为小堆的结构满足最小的数值一定在根节点，而比根节点大的数值一定会排在根节点的后面</li>
 <li>
-<p>再将剩余的N-K个数值依次与小堆的根节点数据进行比较，如果比根节点大就覆盖根节点并恢复成小堆。</p>
-<p>此处的主要思路是：因为前K个最大数值肯定比其余数值都大，但是不需要保证在第一步中一定取出的是最大的数值，所以每一次遇到一个属于前K个最大数值的数据时肯定会顶替掉根节点进入小堆重新排列，此过程一直持续到最后没有数据比根节点（前K个最大的数值中的最小值）的数据还要大的时候就结束</p>
+<p>再将剩余的N-K个数值依次与小堆的根节点数据进行比较，如果比根节点大就覆盖根节点并恢复成小堆</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>此处的主要思路是：前K个最大数值肯定比原来整个数据中的其余数值都大，由于不需要保证在第一步中一定取出的是最大的数值，所以每一次遇到一个属于前K个最大数值的数据时肯定会顶替掉根节点进入小堆重新排列，此过程一直持续到最后没有数据比根节点（前K个最大的数值中的最小值）的数据还要大的时候就结束</p>
+</div>
 </li>
 <li>
 <p>当没有数据再进堆时，此时的小堆即为前K个最大的数值</p>
@@ -5886,7 +5889,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 7, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 8, 2024</span>
   </span>
 
     

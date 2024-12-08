@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://www.help-doc.top/C%2B%2B/14.%20queue%E7%B1%BB/14.%20queue%E7%B1%BB.html">
+        <link rel="canonical" href="https://www.help-doc.top/C%2B%2B/14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB/14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB.html">
       
       
         <link rel="prev" href="../13.%20stack%E7%B1%BB/13.%20stack%E7%B1%BB.html">
@@ -22,7 +22,7 @@
     
     
       
-        <title>queue类 - 学习档案</title>
+        <title>queue与priority_queue类 - 学习档案</title>
       
     
     
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              queue类
+              queue与priority_queue类
             
           </span>
         </div>
@@ -945,18 +945,18 @@
           
   
   <span class="md-ellipsis">
-    queue类
+    queue与priority_queue类
   </span>
   
 
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="14.%20queue%E7%B1%BB.html" class="md-nav__link md-nav__link--active">
+      <a href="14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    queue类
+    queue与priority_queue类
   </span>
   
 
@@ -5607,6 +5607,93 @@
 <p class="admonition-title">Note</p>
 <p>使用方法与其他类类似，不再赘述</p>
 </div>
+<p>基本使用如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span>
+<span class="normal"><a href="#__codelineno-10-18">18</a></span>
+<span class="normal"><a href="#__codelineno-10-19">19</a></span>
+<span class="normal"><a href="#__codelineno-10-20">20</a></span>
+<span class="normal"><a href="#__codelineno-10-21">21</a></span>
+<span class="normal"><a href="#__codelineno-10-22">22</a></span>
+<span class="normal"><a href="#__codelineno-10-23">23</a></span>
+<span class="normal"><a href="#__codelineno-10-24">24</a></span>
+<span class="normal"><a href="#__codelineno-10-25">25</a></span>
+<span class="normal"><a href="#__codelineno-10-26">26</a></span>
+<span class="normal"><a href="#__codelineno-10-27">27</a></span>
+<span class="normal"><a href="#__codelineno-10-28">28</a></span>
+<span class="normal"><a href="#__codelineno-10-29">29</a></span>
+<span class="normal"><a href="#__codelineno-10-30">30</a></span>
+<span class="normal"><a href="#__codelineno-10-31">31</a></span>
+<span class="normal"><a href="#__codelineno-10-32">32</a></span>
+<span class="normal"><a href="#__codelineno-10-33">33</a></span>
+<span class="normal"><a href="#__codelineno-10-34">34</a></span>
+<span class="normal"><a href="#__codelineno-10-35">35</a></span>
+<span class="normal"><a href="#__codelineno-10-36">36</a></span>
+<span class="normal"><a href="#__codelineno-10-37">37</a></span>
+<span class="normal"><a href="#__codelineno-10-38">38</a></span>
+<span class="normal"><a href="#__codelineno-10-39">39</a></span>
+<span class="normal"><a href="#__codelineno-10-40">40</a></span>
+<span class="normal"><a href="#__codelineno-10-41">41</a></span>
+<span class="normal"><a href="#__codelineno-10-42">42</a></span>
+<span class="normal"><a href="#__codelineno-10-43">43</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;queue&gt;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="p">{</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">    </span><span class="c1">// 默认为大堆——降序</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">    </span><span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pq</span><span class="p">;</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">    </span><span class="c1">// 上面的写法也可以写成</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">    </span><span class="c1">// priority_queue&lt;int, vector&lt;int&gt;, less&lt;int&gt;&gt; pq;</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">    </span><span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">    </span><span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">    </span><span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">    </span><span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16"></a>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="w">        </span><span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23"></a>
+<a id="__codelineno-10-24" name="__codelineno-10-24"></a><span class="w">    </span><span class="c1">// 改为小堆时传仿函数——升序</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="w">    </span><span class="c1">// 必须写第二个参数，因为缺省参数必须满足从右向左依次使用</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26"></a><span class="w">    </span><span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">greater</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">pq1</span><span class="p">;</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="w">    </span><span class="n">pq1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="w">    </span><span class="n">pq1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29"></a><span class="w">    </span><span class="n">pq1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30"></a><span class="w">    </span><span class="n">pq1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<a id="__codelineno-10-31" name="__codelineno-10-31"></a>
+<a id="__codelineno-10-32" name="__codelineno-10-32"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">pq1</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-10-34" name="__codelineno-10-34"></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">pq1</span><span class="p">.</span><span class="n">top</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35"></a><span class="w">        </span><span class="n">pq1</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37"></a>
+<a id="__codelineno-10-38" name="__codelineno-10-38"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-10-39" name="__codelineno-10-39"></a><span class="p">}</span>
+<a id="__codelineno-10-40" name="__codelineno-10-40"></a>
+<a id="__codelineno-10-41" name="__codelineno-10-41"></a><span class="n">输出结果</span><span class="err">：</span>
+<a id="__codelineno-10-42" name="__codelineno-10-42"></a><span class="mi">6</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-10-43" name="__codelineno-10-43"></a><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span>
+</code></pre></div></td></tr></table></div>
 
 
 
@@ -5629,7 +5716,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 9, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 8, 2024</span>
   </span>
 
     

@@ -61,7 +61,7 @@ nav:
       - list类: C++/11. list类/11. list类.md
       - list类模拟实现: C++/12. list模拟实现/12. list类模拟实现.md
       - stack类: C++/13. stack类/13. stack类.md
-      - queue类: C++/14. queue类/14. queue类.md
+      - queue与priority_queue类: C++/14. queue与priority_queue类/14. queue与priority_queue类.md
       - stack和queue模拟实现: C++/15. stack和queue模拟实现/15. stack和queue模拟实现.md
       - priority_queue模拟实现: C++/16. priority_queue模拟实现/16. priority_queue模拟实现.md
       - 反向迭代器设计: C++/17. 反向迭代器设计/17. reverse_iterator迭代器结构设计.md

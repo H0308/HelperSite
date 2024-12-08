@@ -2,10 +2,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeSwitch = document.createElement('div');
     themeSwitch.className = 'theme-switch';
+    
+    // 获取保存的主题
+    const savedTheme = localStorage.getItem('preferred-theme') || 'theme1';
+    
     themeSwitch.innerHTML = `
         <select onchange="switchTheme(this.value)">
-            <option value="theme1">新版主题</option>
-            <option value="theme2">旧版主题</option>
+            <option value="theme1" ${savedTheme === 'theme1' ? 'selected' : ''}>新版主题</option>
+            <option value="theme2" ${savedTheme === 'theme2' ? 'selected' : ''}>旧版主题</option>
         </select>
     `;
     
@@ -13,7 +17,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchEl = document.querySelector('.md-search');
     // 将主题切换器插入到搜索框前面
     searchEl.parentNode.insertBefore(themeSwitch, searchEl);
+
+    // 页面加载时应用保存的主题
+    applyTheme(savedTheme);
 });
+
+function applyTheme(theme) {
+    const links = document.querySelectorAll('link[rel="stylesheet"]');
+    links.forEach(link => {
+        if (link.href.includes('theme')) {
+            link.disabled = !link.href.includes(theme);
+        }
+    });
+}
 
 function switchTheme(theme) {
     const links = document.querySelectorAll('link[rel="stylesheet"]');
@@ -32,12 +48,9 @@ function switchTheme(theme) {
     });
 
     setTimeout(() => {
-        // 切换主题
-        links.forEach(link => {
-            if (link.href.includes('theme')) {
-                link.disabled = !link.href.includes(theme);
-            }
-        });
+        // 切换主题并保存选择
+        applyTheme(theme);
+        localStorage.setItem('preferred-theme', theme);
 
         // 移除过渡效果
         setTimeout(() => {
@@ -48,6 +61,4 @@ function switchTheme(theme) {
             setTimeout(() => overlay.remove(), 800);
         }, 100);
     }, ANIMATION_DURATION / 2);
-
-    localStorage.setItem('preferred-theme', theme);
 }

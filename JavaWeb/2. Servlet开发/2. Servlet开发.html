@@ -14,7 +14,7 @@
         <link rel="prev" href="../1.%20HTTP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/1.%20HTTP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D.html">
       
       
-        <link rel="next" href="../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html">
+        <link rel="next" href="../3.%20%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E5%92%8C%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/3.%20%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E5%92%8C%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98.html">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -4302,10 +4302,85 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      请求转发和响应重定向
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="请求转发和响应重定向">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      请求转发
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      响应重定向
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E5%92%8C%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/3.%20%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E5%92%8C%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    乱码问题和路径问题
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%20MVC%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F%E4%BB%8B%E7%BB%8D/4.%20MVC%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F%E4%BB%8B%E7%BB%8D.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MVC架构模式介绍
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -6740,6 +6815,179 @@
 </tr>
 </tbody>
 </table>
+<h2 id="_4">请求转发和响应重定向<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>请求转发和响应重定向是Web应用中间接访问项目资源的两种手段，也是<code>Servlet</code>控制页面跳转的两种手段。其中，除了使用请求转发外，其他方式都不可以访问<code>WEB-INF</code>文件夹中的文件</p>
+<p>请求转发通过<code>HttpServletRequest</code>实现，响应重定向通过<code>HttpServletResponse</code>实现</p>
+<h3 id="_5">请求转发<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>请求转发逻辑图：</p>
+<p><a class="glightbox" href="2. Servlet开发.assets\1682321228643.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="2. Servlet开发.assets\1682321228643.png"></a></p>
+<p>请求转发的特点：</p>
+<ol>
+<li>请求转发通过<code>HttpServletRequest</code>对象获取请求转发器实现</li>
+<li>请求转发是服务器内部的行为，对客户端是屏蔽的，所以客户端只发送了一次请求，客户端地址栏不变</li>
+<li>服务端只产生了一对请求和响应对象，这一对请求和响应对象会继续传递给下一个资源。因为全程只有一个<code>HttpServletRequset</code>对象，所以请求参数可以传递，请求域中的数据也可以传递</li>
+<li>请求转发可以转发给其他<code>Servlet</code>动态资源，也可以转发给一些静态资源以实现页面跳转，但是请求转发不能转发到本项目以外的外部资源</li>
+<li>请求转发可以转发给<code>WEB-INF</code>下受保护的资源</li>
+</ol>
+<p>使用请求转发时需要使用到下面的方法：</p>
+<ol>
+<li>使用<code>HttpServletRequest</code>对象的方法<code>getRequestDispatcher()</code>获取请求转发器，参数传递请求转发的资源路径</li>
+<li>通过请求转发器调用<code>forward()</code>方法，参数传递<code>HttpServletRequest</code>对象和<code>HttpServletResponse</code>对象</li>
+</ol>
+<p>例如下面的代码：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1"><code>Servlet1</code></label><label for="__tabbed_4_2"><code>Servlet2</code></label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-38-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-38-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-38-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-38-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-38-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-38-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-38-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/s1&quot;</span><span class="p">)</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Servlet1</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Sevlet1执行&quot;</span><span class="p">);</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6"></a>
+<a id="__codelineno-38-7" name="__codelineno-38-7"></a><span class="w">        </span><span class="c1">// Servlet1请求转发Servlet2</span>
+<a id="__codelineno-38-8" name="__codelineno-38-8"></a><span class="w">        </span><span class="n">req</span><span class="p">.</span><span class="na">getRequestDispatcher</span><span class="p">(</span><span class="s">&quot;s2&quot;</span><span class="p">).</span><span class="na">forward</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span>
+<span class="normal"><a href="#__codelineno-39-2">2</a></span>
+<span class="normal"><a href="#__codelineno-39-3">3</a></span>
+<span class="normal"><a href="#__codelineno-39-4">4</a></span>
+<span class="normal"><a href="#__codelineno-39-5">5</a></span>
+<span class="normal"><a href="#__codelineno-39-6">6</a></span>
+<span class="normal"><a href="#__codelineno-39-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/s2&quot;</span><span class="p">)</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Servlet2</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-39-4" name="__codelineno-39-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-39-5" name="__codelineno-39-5"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Servlet2执行&quot;</span><span class="p">);</span>
+<a id="__codelineno-39-6" name="__codelineno-39-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-39-7" name="__codelineno-39-7"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>配置Tomcat后启动可以看到控制台输出如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1">1</a></span>
+<span class="normal"><a href="#__codelineno-40-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1"></a>Sevlet1执行
+<a id="__codelineno-40-2" name="__codelineno-40-2"></a>Servlet2执行
+</code></pre></div></td></tr></table></div>
+<p>请求转发访问<code>WEB-INF</code>下的资源：</p>
+<p>当前在<code>WEB-INF</code>下有一个<code>test.html</code>文件，其内容如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-41-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-41-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-41-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-41-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-41-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-41-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-41-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-41-4" name="__codelineno-41-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>测试<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-41-7" name="__codelineno-41-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-41-8" name="__codelineno-41-8"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>这是WEB-INF下的测试文件<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-41-9" name="__codelineno-41-9"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-41-10" name="__codelineno-41-10"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>对应的<code>Servlet1</code>代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-42-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-42-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-42-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-42-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-42-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-42-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-42-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-42-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/s1&quot;</span><span class="p">)</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Servlet1</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-42-4" name="__codelineno-42-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-42-5" name="__codelineno-42-5"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Sevlet1执行&quot;</span><span class="p">);</span>
+<a id="__codelineno-42-6" name="__codelineno-42-6"></a>
+<a id="__codelineno-42-7" name="__codelineno-42-7"></a><span class="w">        </span><span class="c1">// Servlet1请求转发WEB-INF下的test.html文件</span>
+<a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="w">        </span><span class="n">req</span><span class="p">.</span><span class="na">getRequestDispatcher</span><span class="p">(</span><span class="s">&quot;WEB-INF/test.html&quot;</span><span class="p">).</span><span class="na">forward</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-42-9" name="__codelineno-42-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-42-10" name="__codelineno-42-10"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>配置Tomcat后启动可以看到控制台输出和网页显示内容如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1"></a>Sevlet1执行
+</code></pre></div></td></tr></table></div>
+<p><a class="glightbox" href="2. Servlet开发.assets\Snipaste_2024-12-08_20-36-32.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="2. Servlet开发.assets\Snipaste_2024-12-08_20-36-32.png"></a></p>
+<h3 id="_6">响应重定向<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>响应重定向逻辑图：</p>
+<p><a class="glightbox" href="2. Servlet开发.assets\1682322460011.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="2. Servlet开发.assets\1682322460011.png"></a></p>
+<p>响应重定向的特点：</p>
+<ol>
+<li>响应重定向通过<code>HttpServletResponse</code>对象的<code>sendRedirect()</code>方法实现，该方法传递目标资源路径</li>
+<li>响应重定向是服务端通过302响应码和路径，告诉客户端自己去找其他资源，这个是客户端在服务端提示下的行为</li>
+<li>客户端至少发送了两次请求，客户端地址栏是要变化的，并且因为服务端产生了多对<code>HttpServletRequset</code>对象和<code>HttpServletResponse</code>对象，所以请求和响应对象不会传递给下一个资源，因此请求参数和请求域中的数据也不可以传递</li>
+<li>重定向可以是其他<code>Servlet</code>动态资源，也可以是一些静态资源以实现页面跳转，并且重定向可以到本项目以外的外部资源</li>
+<li>重定向不可以到给<code>WEB-INF</code>下受保护的资源</li>
+</ol>
+<p>例如下面的代码：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1"><code>Servlet1</code></label><label for="__tabbed_5_2"><code>Servlet2</code></label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-44-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-44-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-44-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-44-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-44-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-44-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-44-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/s1&quot;</span><span class="p">)</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Servlet1</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Servlet1执行&quot;</span><span class="p">);</span>
+<a id="__codelineno-44-6" name="__codelineno-44-6"></a>
+<a id="__codelineno-44-7" name="__codelineno-44-7"></a><span class="w">        </span><span class="c1">// Servlet1重定向到Servlet2</span>
+<a id="__codelineno-44-8" name="__codelineno-44-8"></a><span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">sendRedirect</span><span class="p">(</span><span class="s">&quot;s2&quot;</span><span class="p">);</span>
+<a id="__codelineno-44-9" name="__codelineno-44-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-44-10" name="__codelineno-44-10"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1">1</a></span>
+<span class="normal"><a href="#__codelineno-45-2">2</a></span>
+<span class="normal"><a href="#__codelineno-45-3">3</a></span>
+<span class="normal"><a href="#__codelineno-45-4">4</a></span>
+<span class="normal"><a href="#__codelineno-45-5">5</a></span>
+<span class="normal"><a href="#__codelineno-45-6">6</a></span>
+<span class="normal"><a href="#__codelineno-45-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/s2&quot;</span><span class="p">)</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Servlet2</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-45-4" name="__codelineno-45-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-5" name="__codelineno-45-5"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Servlet2执行&quot;</span><span class="p">);</span>
+<a id="__codelineno-45-6" name="__codelineno-45-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-45-7" name="__codelineno-45-7"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>配置Tomcat后启动可以看到控制台输出如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1">1</a></span>
+<span class="normal"><a href="#__codelineno-46-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1"></a>Sevlet1执行
+<a id="__codelineno-46-2" name="__codelineno-46-2"></a>Servlet2执行
+</code></pre></div></td></tr></table></div>
 
 
 
@@ -6762,7 +7010,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 7, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 8, 2024</span>
   </span>
 
     

@@ -263,7 +263,6 @@ extra:
 
 plugins:
   - search
-  - toggle-sidebar
   - git-authors
   - glightbox:
       touchNavigation: true

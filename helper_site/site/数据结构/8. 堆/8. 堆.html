@@ -5122,7 +5122,7 @@
 <a id="__codelineno-5-49" name="__codelineno-5-49"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="_9">堆的数据移除<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
-<p>在堆中，移<strong>除的数据均为堆的第一个数据，即根节点的数据</strong>，但是不能直接使用挪动覆盖的思路，因为会打破原有的堆结构，可以采用先交换根节点和叶子节点的数据再使用向下调整算法恢复小堆结构</p>
+<p>在堆中，<strong>移除的数据均为堆的第一个数据，即根节点的数据</strong>，但是不能直接使用挪动覆盖的思路，因为会打破原有的堆结构，可以采用先交换根节点和叶子节点的数据再使用向下调整算法恢复小堆结构</p>
 <p>先交换根节点和叶子节点的数据，再改变<code>size</code>的值，从而达到删除数据的效果</p>
 <p><a class="glightbox" href="images\image7.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="images\image7.png"></a></p>
 <p>接着执行向下调整算法恢复堆结构</p>

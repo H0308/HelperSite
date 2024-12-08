@@ -194,6 +194,8 @@ nav:
       - JavaScript与JQuery（了解）: JavaScript基础知识/10. JavaScript与JQuery/10. JavaScript与JQuery.md
     - HTTP协议介绍: JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
     - Servlet开发: JavaWeb/2. Servlet开发/2. Servlet开发.md
+    - 乱码问题和路径问题: JavaWeb/3. 乱码问题和路径问题/3. 乱码问题和路径问题.md
+    - MVC架构模式介绍: JavaWeb/4. MVC架构模式介绍/4. MVC架构模式介绍.md
   - MySQL:
     - MySQL基础: MySQL/MySQL基础使用/MySQL基础使用.md
     - JDBC（Java连接数据库技术）:

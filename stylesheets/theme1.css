@@ -1,5 +1,22 @@
+@font-face {
+    font-family: 'OPPOSans';
+    src: url('../assets/fonts/OPPOSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'LXGWZhenKai';
+    src: url('../assets/fonts/LXGWZhenKai-Regular.ttf') format('truetype');
+}
+
+:root {
+    --md-text-font: "OPPOSans"; 
+    --code-font-color: #e96900;
+}
+
+
 /* 切换主题选项框 */
 .theme-switch {
+    font-family: 'OPPOSans';
     display: inline-flex;
     align-items: center;
     margin-right: 1rem;
@@ -7,6 +24,7 @@
 }
 
 .theme-switch select {
+    font-family: 'OPPOSans';
     -webkit-appearance: none;
     appearance: none;
     padding: 0.3rem 1.5rem 0.3rem 0.8rem;
@@ -53,21 +71,6 @@
 .theme-overlay.active {
     opacity: 1;
     visibility: visible;
-}
-
-@font-face {
-    font-family: 'OPPOSans';
-    src: url('../assets/fonts/OPPOSans-Regular.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'LXGWZhenKai';
-    src: url('../assets/fonts/LXGWZhenKai-Regular.ttf') format('truetype');
-}
-
-:root {
-    --md-text-font: "OPPOSans"; 
-    --code-font-color: #e96900;
 }
 
 h1, h2, h3, h4, h5, h6 {

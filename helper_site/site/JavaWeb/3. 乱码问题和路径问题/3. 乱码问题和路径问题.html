@@ -4237,6 +4237,120 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="路径问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      前端路径问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="前端路径问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      相对路径
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      绝对路径
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      重定向中的路径问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="重定向中的路径问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      相对路径
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      绝对路径
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      请求转发中的路径问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="请求转发中的路径问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      相对路径
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      绝对路径
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      目标资源内相对路径处理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -4933,6 +5047,483 @@
 <p><a class="glightbox" href="3. 乱码问题和路径问题.assets\1682389263627.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="3. 乱码问题和路径问题.assets\1682389263627.png"></a></p>
 <p><a class="glightbox" href="3. 乱码问题和路径问题.assets\1682389317234.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="3. 乱码问题和路径问题.assets\1682389317234.png"></a></p>
 <h2 id="_4">路径问题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>定位一个资源时，有两种路径可以选择：</p>
+<ol>
+<li>绝对路径</li>
+<li>相对路径</li>
+</ol>
+<p>相对路径的特点：</p>
+<ul>
+<li>相对路径的规则是: 以当前资源所在的路径为出发点去寻找目标资源</li>
+<li>相对路径不以<code>/</code>开头</li>
+<li>在file协议下，使用的是磁盘路径</li>
+<li>在http协议下，使用的是<code>url</code>路径</li>
+<li>相对路径中可以使用<code>./</code>表示当前资源所在路径，可以省略不写</li>
+<li>相对路径中可以使用<code>../</code>表示当前资源所在路径的上一层路径，需要时要手动添加</li>
+</ul>
+<p>绝对路径的特点：</p>
+<ul>
+<li>绝对路径的规则是：使用以一个固定的路径做出出发点去寻找目标资源，和当前资源所在的路径没有关系</li>
+<li>绝对路径要以<code>/</code>开头</li>
+<li>绝对路径的写法中，不以当前资源的所在路径为出发点，所以不会出现<code>./</code>和<code>../</code></li>
+<li>不同的项目和不同的协议下，绝对路径的基础位置可能不同，要通过测试确定</li>
+<li>绝对路径的好处就是：无论当前资源位置在哪，寻找目标资源路径的写法都一致</li>
+</ul>
+<p>本次要讨论的路径问题就是基于上面两种的路径，常见的路径问题有下面几种：</p>
+<ol>
+<li>前端路径问题</li>
+<li>重定向中的路径问题</li>
+<li>请求转发中的路径问题</li>
+</ol>
+<h3 id="_5">前端路径问题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>前端路径问题一般出现在HTML文件中访问其他资源时，例如要获取到其他位置的图片、访问其他网页等，下面以访问图片为例</p>
+<p>下面是当前目录结构：</p>
+<p><a class="glightbox" href="3. 乱码问题和路径问题.assets\Snipaste_2024-12-09_19-53-37.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="3. 乱码问题和路径问题.assets\Snipaste_2024-12-09_19-53-37.png"></a></p>
+<h4 id="_6">相对路径<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>在<code>index.html</code>中引入<code>static/img/image.png</code>文件，代码如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>index<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>这是index<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;static/img/image.png&quot;</span> <span class="p">/&gt;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>启动Tomcat可以看到网页中正常显示了图片内容，下面分析为什么<code>index.html</code>中的图片会被正常访问到：</p>
+<p>访问<code>index.html</code>的<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/index.html</code>，当前资源为<code>index.html</code>，当前资源（<code>index.html</code>）的所在路径为：<code>http://localhost:8080/FrontEnd_war_exploded/</code>。要获取的目标资源<code>url</code>为 :  <code>http://localhost:8080/FrontEnd_war_exploded/static/img/logo.png</code></p>
+<p>因为<code>index.html</code>中定义的了：<code>&lt;img src="static/img/logo.png"/&gt;</code>，因为是相对路径，所以寻找方式就是在当前资源所在路径（<code>http://localhost:8080/FrontEnd_war_exploded/</code>）后拼接<code>src</code>属性值：<code>static/img/logo.png</code>，正好是目标资源正常获取的url，即<code>http://localhost:8080/FrontEnd_war_exploded/static/img/logo.png</code></p>
+<p>而根据前面磁盘的路径图构建后的<code>artifacts</code>结构正好可以找到<code>static/img/logo.png</code>文件，所以正常加载图片：</p>
+<p><a class="glightbox" href="3. 乱码问题和路径问题.assets\Snipaste_2024-12-09_20-07-26.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="3. 乱码问题和路径问题.assets\Snipaste_2024-12-09_20-07-26.png"></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>此处展示构建后的<code>artifacts</code>只是为了演示为什么可以正常读取，在实际开发中不可能先构建再写路径，所以需要记住<code>web</code>目录下的内容除了<code>WEB_INF</code>、<code>lib</code>以外，其他目录都会处于项目的根路径下，特别注意<code>src</code>目录会被转换为<code>classes</code>中的文件存放到<code>WEB_INF</code>下</p>
+</div>
+<p>接下来，在<code>test.html</code>文件中使用同样的<code>static/img/image.png</code>引入图片：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>test<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>这是test<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;static/img/image.png&quot;</span><span class="p">/&gt;</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>启动Tomcat访问<code>test.html</code>可以看到无法正常加载图片，原因如下：</p>
+<p>访问<code>test.html</code>的<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/a/b/c/test.html</code>，当前资源为：<code>test.html</code>，当前资源的所在路径为：<code>http://localhost:8080/FrontEnd_war_exploded/a/b/c/</code>，所以寻找方式就是在当前资源所在路径<code>http://localhost:8080/FrontEnd_war_exploded/a/b/c/</code>后拼接<code>src</code>属性值(<code>static/img/logo.png</code>)，此时因为<code>a/b/c</code>下不存在<code>static/img/logo.png</code>，所以找不到对应的资源</p>
+<p>因为要获取的目标资源<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/static/img/logo.png</code>，可以考虑使用<code>../</code>抵消掉<code>a/b/c</code>，此时<code>test.html</code>中的<code>img</code>的<code>src</code>就是：<code>&lt;img src="../../../static/img/logo.png"/&gt;</code>。
+其中<code>../</code>可以抵消一层路径，正好是目标资源正常获取的<code>url</code>：<code>http://localhost:8080/FrontEnd_war_exploded/static/img/logo.png</code></p>
+<p>接着在<code>view1.html</code>中引入static/img/logo.png，但是因为WEB-INF中的内容无法直接访问，此时需要用到请求转发，在<code>view1Servlet</code>中编写请求转发代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/view1Servlet&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">View1Servlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;这是view1Servlet&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">        </span><span class="n">RequestDispatcher</span><span class="w"> </span><span class="n">requestDispatcher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getRequestDispatcher</span><span class="p">(</span><span class="s">&quot;WEB-INF/views/view1.html&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">        </span><span class="n">requestDispatcher</span><span class="p">.</span><span class="na">forward</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>再向<code>view1.html</code>写入下面的代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>view1<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>这是view1<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;static/img/image.png&quot;</span> <span class="p">/&gt;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>启动Tomcat可以看到正常显示图片，此时就不是直观的看磁盘目录结构了，因为直接看磁盘目录结构可以发现<code>view1.html</code>不可能按照<code>static/img/image.png</code>可以找到图片，实际上是因为请求转发不会替换地址栏的内容，本质上就是通过替换view1Servlet来拼接<code>static/img/image.png</code>，所以就可以正常找到图片</p>
+<h4 id="_7">绝对路径<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p>接下来看绝对路径的情况：</p>
+<p>绝对路径情况1：<code>web/index.html</code>中引入<code>static/img/logo.png</code></p>
+<ul>
+<li>访问<code>index.html</code>的<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/index.html</code></li>
+<li>绝对路径的基准路径为：<code>http://localhost:8080</code></li>
+<li>要获取的目标资源<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/static/img/logo.png</code></li>
+<li><code>index.html</code>中定义的了：<code>&lt;img src="/FrontEnd_war_exploded/static/img/logo.png"/&gt;</code></li>
+<li>寻找方式就是在基准路径（<code>http://localhost:8080</code>)后面拼接<code>src</code>属性值（<code>/FrontEnd_war_exploded/static/img/logo.png</code>），得到的正是目标资源访问的正确路径</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>    <span class="cm">&lt;!-- 绝对路径写法 --&gt;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a>    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/FrontEnd_war_exploded/static/img/logo.png&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>绝对路径情况2：<code>a/b/c/test.html</code>中引入<code>static/img/logo.png</code></p>
+<ul>
+<li>访问<code>test.html</code>的<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/a/b/c/test.html</code></li>
+<li>绝对路径的基准路径为：<code>http://localhost:8080</code></li>
+<li>要获取的目标资源url为：<code>http://localhost:8080/FrontEnd_war_exploded/static/img/logo.png</code></li>
+<li><code>test.html</code>中定义的了：<code>&lt;img src="/FrontEnd_war_exploded/static/img/logo.png"/&gt;</code></li>
+<li>寻找方式就是在基准路径（<code>http://localhost:8080</code>）后面拼接<code>src</code>属性值（<code>/FrontEnd_war_exploded/static/img/logo.png</code>），得到的正是目标资源访问的正确路径</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>    <span class="cm">&lt;!-- 绝对路径写法 --&gt;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a>    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/FrontEnd_war_exploded/static/img/logo.png&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>绝对路径情况3：<code>/WEB-INF/views/view1.html</code>中引入<code>static/img/logo.png</code></p>
+<p><code>view1.html</code>在<code>WEB-INF</code>下，需要通过<code>Servlet</code>请求转发获得</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span>
+<span class="normal"><a href="#__codelineno-7-5">5</a></span>
+<span class="normal"><a href="#__codelineno-7-6">6</a></span>
+<span class="normal"><a href="#__codelineno-7-7">7</a></span>
+<span class="normal"><a href="#__codelineno-7-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/view1Servlet&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">View1Servlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">        </span><span class="n">RequestDispatcher</span><span class="w"> </span><span class="n">requestDispatcher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getRequestDispatcher</span><span class="p">(</span><span class="s">&quot;WEB-INF/views/view1.html&quot;</span><span class="p">);</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="w">        </span><span class="n">requestDispatcher</span><span class="p">.</span><span class="na">forward</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>访问<code>view1.html</code>的<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/view1Servlet</code></li>
+<li>绝对路径的基准路径为：<code>http://localhost:8080</code></li>
+<li>要获取的目标资源<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/static/img/logo.png</code></li>
+<li><code>view1.html</code>中定义的了：<code>&lt;img src="/FrontEnd_war_exploded/static/img/logo.png"/&gt;</code></li>
+<li>寻找方式就是在基准路径（<code>http://localhost:8080</code>）后面拼接<code>src</code>属性值（<code>/static/img/logo.png</code>），得到的正是目标资源访问的正确路径</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/FrontEnd_war_exploded/static/img/logo.png&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>使用<code>base</code>标签定义页面相对路径公共前缀</p>
+<ul>
+<li><code>base</code>标签定义在<code>head</code>标签中，用于定义相对路径的公共前缀</li>
+<li><code>base</code>标签定义的公共前缀只在相对路径上有效，绝对路径中无效</li>
+<li>如果相对路径开头有<code>./</code>或者<code>../</code>修饰，则<code>base</code>标签对该路径同样无效</li>
+</ul>
+<p><code>index.html</code>和<code>a/b/c/test.html</code>以及<code>view1Servlet</code>中的路径处理</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>    <span class="cm">&lt;!--定义相对路径的公共前缀，将相对路径转化成了绝对路径--&gt;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a>    <span class="p">&lt;</span><span class="nt">base</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/FrontEnd_war_exploded/&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a>    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;static/img/logo.png&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>项目上下文路径变化问题：通过<code>base</code>标签虽然解决了相对路径转绝对路径问题，但是<code>base</code>中定义的是项目的上下文路径，但是项目的上下文路径是可以随意变化的，一旦项目的上下文路径发生变化，所有<code>base</code>标签中的路径都需要改</p>
+<p>解决方案如下：将项目的上下文路径进行缺省设置，设置为<code>/</code>，所有的绝对路径中就不必填写项目的上下文了，直接就是<code>/</code>开头即可</p>
+<h3 id="_8">重定向中的路径问题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>目标：由<code>/x/y/z/servletA</code>重定向到<code>a/b/c/test.html</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span>
+<span class="normal"><a href="#__codelineno-10-6">6</a></span>
+<span class="normal"><a href="#__codelineno-10-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/x/y/z/servletA&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ServletA</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_9">相对路径<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>访问<code>ServletA</code>的<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/x/y/z/servletA</code></li>
+<li>当前资源为：<code>servletA</code></li>
+<li>当前资源的所在路径为：<code>http://localhost:8080/FrontEnd_war_exploded/x/x/z/</code></li>
+<li>要获取的目标资源url为：<code>http://localhost:8080/FrontEnd_war_exploded/a/b/c/test.html</code></li>
+<li>ServletA重定向的路径：<code>../../../a/b/c/test.html</code></li>
+<li>寻找方式就是在当前资源所在路径（<code>http://localhost:8080/FrontEnd_war_exploded/x/y/z/</code>）后拼接（<code>../../../a/b/c/test/html</code>），形成（<code>http://localhost:8080/FrontEnd_war_exploded/x/y/z/../../../a/b/c/test/html</code>）每个<code>../</code>抵消一层目录，正好是目标资源正常获取的<code>url</code>（<code>http://localhost:8080/FrontEnd_war_exploded/a/b/c/test/html</code>）</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span>
+<span class="normal"><a href="#__codelineno-11-6">6</a></span>
+<span class="normal"><a href="#__codelineno-11-7">7</a></span>
+<span class="normal"><a href="#__codelineno-11-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/x/y/z/servletA&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ServletA</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">        </span><span class="c1">// 相对路径重定向到test.html</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">sendRedirect</span><span class="p">(</span><span class="s">&quot;../../../a/b/c/test.html&quot;</span><span class="p">);</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_10">绝对路径<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>访问<code>ServletA</code>的<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/x/y/z/servletA</code></p>
+</li>
+<li>
+<p>绝对路径的基准路径为：<code>http://localhost:8080</code></p>
+</li>
+<li>
+<p>要获取的目标资源<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/a/b/c/test.html</code></p>
+</li>
+<li>
+<p><code>ServletA</code>重定向的路径：<code>/FrontEnd_war_exploded/a/b/c/test.html</code></p>
+</li>
+<li>
+<p>寻找方式就是在基准路径（<code>http://localhost:8080</code>）后面拼接（<code>/FrontEnd_war_exploded/a/b/c/test.html</code>），得到（<code>http://localhost:8080/FrontEnd_war_exploded/a/b/c/test.html</code>）正是目标资源访问的正确路径</p>
+</li>
+</ul>
+<p>绝对路径中需要填写项目上下文路径，但是上下文路径是变换的，可以通过<code>ServletContext</code>的<code>getContextPath()</code>获取上下文路径，也可以将项目上下文路径定义为<code>/</code>缺省路径，那么路径中直接以<code>/</code>开头即可</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span>
+<span class="normal"><a href="#__codelineno-12-5">5</a></span>
+<span class="normal"><a href="#__codelineno-12-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1">//绝对路径中，要写项目上下文路径</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="c1">//resp.sendRedirect(&quot;/FrontEnd_war_exploded/a/b/c/test.html&quot;);</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="c1">// 通过ServletContext对象动态获取项目上下文路径</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="c1">//resp.sendRedirect(getServletContext().getContextPath()-&quot;/a/b/c/test.html&quot;);</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="c1">// 缺省项目上下文路径时，直接以/开头即可</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="n">resp</span><span class="p">.</span><span class="na">sendRedirect</span><span class="p">(</span><span class="s">&quot;/a/b/c/test.html&quot;</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_11">请求转发中的路径问题<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>目标：由<code>x/y/servletB</code>请求转发到<code>a/b/c/test.html</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span>
+<span class="normal"><a href="#__codelineno-13-4">4</a></span>
+<span class="normal"><a href="#__codelineno-13-5">5</a></span>
+<span class="normal"><a href="#__codelineno-13-6">6</a></span>
+<span class="normal"><a href="#__codelineno-13-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/x/y/servletB&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ServletB</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_12">相对路径<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>访问<code>ServletB</code>的<code>url</code>为：<code>http://localhost:8080/FrontEnd_war_exploded/x/y/servletB</code></p>
+</li>
+<li>
+<p>当前资源为：<code>servletB</code></p>
+</li>
+<li>
+<p>当前资源的所在路径为：<code>http://localhost:8080/FrontEnd_war_exploded/x/y/</code></p>
+</li>
+<li>
+<p>要获取的目标资源url为：<code>http://localhost:8080/FrontEnd_war_exploded/a/b/c/test.html</code></p>
+</li>
+<li>
+<p><code>ServletA</code>请求转发路径：<code>../../a/b/c/test/html</code></p>
+</li>
+<li>
+<p>寻找方式就是在当前资源所在路径（<code>http://localhost:8080/FrontEnd_war_exploded/x/y/</code>）后拼接（<code>../../a/b/c/test/html</code>），形成（<code>http://localhost:8080/FrontEnd_war_exploded/x/y/../../a/b/c/test/html</code>）每个<code>../</code>抵消一层目录，正好是目标资源正常获取的<code>url</code>（<code>http://localhost:8080/FrontEnd_war_exploded/a/b/c/test/html</code>）</p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span>
+<span class="normal"><a href="#__codelineno-14-4">4</a></span>
+<span class="normal"><a href="#__codelineno-14-5">5</a></span>
+<span class="normal"><a href="#__codelineno-14-6">6</a></span>
+<span class="normal"><a href="#__codelineno-14-7">7</a></span>
+<span class="normal"><a href="#__codelineno-14-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/x/y/servletB&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ServletB</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">        </span><span class="n">RequestDispatcher</span><span class="w"> </span><span class="n">requestDispatcher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getRequestDispatcher</span><span class="p">(</span><span class="s">&quot;../../a/b/c/test.html&quot;</span><span class="p">);</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">        </span><span class="n">requestDispatcher</span><span class="p">.</span><span class="na">forward</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_13">绝对路径<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>请求转发只能转发到项目内部的资源，其绝对路径无需添加项目上下文路径</p>
+</li>
+<li>
+<p>请求转发绝对路径的基准路径相当于<code>http://localhost:8080/FrontEnd_war_exploded</code></p>
+</li>
+<li>
+<p>在项目上下文路径为缺省值时，也无需改变，直接以/开头即可</p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span>
+<span class="normal"><a href="#__codelineno-15-5">5</a></span>
+<span class="normal"><a href="#__codelineno-15-6">6</a></span>
+<span class="normal"><a href="#__codelineno-15-7">7</a></span>
+<span class="normal"><a href="#__codelineno-15-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&quot;/x/y/servletB&quot;</span><span class="p">)</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ServletB</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">        </span><span class="n">RequestDispatcher</span><span class="w"> </span><span class="n">requestDispatcher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getRequestDispatcher</span><span class="p">(</span><span class="s">&quot;/a/b/c/test.html&quot;</span><span class="p">);</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="w">        </span><span class="n">requestDispatcher</span><span class="p">.</span><span class="na">forward</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="n">resp</span><span class="p">);</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_14">目标资源内相对路径处理<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>此时需要注意，请求转发是服务器行为，浏览器不知道，地址栏不变化，相当于访问<code>test.html</code>的路径为<code>http://localhost:8080/FrontEnd_war_exploded/x/y/servletB</code></p>
+</li>
+<li>
+<p>那么此时<code>test.html</code>资源的所在路径就是<code>http://localhost:8080/FrontEnd_war_exploded/x/y/所以test.html</code>中相对路径要基于该路径编写，如果使用绝对路径则不用考虑</p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-16-10">10</a></span>
+<span class="normal"><a href="#__codelineno-16-11">11</a></span>
+<span class="normal"><a href="#__codelineno-16-12">12</a></span>
+<span class="normal"><a href="#__codelineno-16-13">13</a></span>
+<span class="normal"><a href="#__codelineno-16-14">14</a></span>
+<span class="normal"><a href="#__codelineno-16-15">15</a></span>
+<span class="normal"><a href="#__codelineno-16-16">16</a></span>
+<span class="normal"><a href="#__codelineno-16-17">17</a></span>
+<span class="normal"><a href="#__codelineno-16-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a>    <span class="cm">&lt;!--</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="cm">        当前资源路径是     http://localhost:8080/FrontEnd_war_exploded/x/y/servletB</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="cm">        当前资源所在路径是  http://localhost:8080/FrontEnd_war_exploded/x/y/</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="cm">        目标资源路径=所在资源路径+src属性值 </span>
+<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="cm">        http://localhost:8080/FrontEnd_war_exploded/x/y/../../static/img/logo.png</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="cm">        http://localhost:8080/FrontEnd_war_exploded/static/img/logo.png</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="cm">        得到目标路径正是目标资源的访问路径   </span>
+<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="cm">    --&gt;</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;../../static/img/logo.png&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
 
 
 
@@ -4955,7 +5546,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年12月8日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年12月9日</span>
   </span>
 
     

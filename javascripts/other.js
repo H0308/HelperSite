@@ -1,40 +1,23 @@
-// 页面加载进度条
+// 页面阅读进度条
 document.addEventListener('DOMContentLoaded', () => {
-    const bar = document.createElement('div');
-    bar.className = 'loading-bar';
-    document.body.appendChild(bar);
-
-    let width = 0;
-    const interval = setInterval(() => {
-        if (width >= 100) {
-            clearInterval(interval);
-            setTimeout(() => bar.remove(), 300);
-        } else {
-            width += Math.random() * 10;
-            bar.style.width = `${Math.min(width, 100)}%`;
-        }
-    }, 100);
-});
-
-// 阅读进度条
-document.addEventListener('DOMContentLoaded', () => {
+    // 创建阅读进度条
     const progress = document.createElement('div');
     progress.className = 'reading-progress';
     document.body.appendChild(progress);
 
+    // 阅读进度条逻辑
     let ticking = false;
-
     window.addEventListener('scroll', () => {
         if (!ticking) {
             requestAnimationFrame(() => {
                 const docHeight = document.documentElement.scrollHeight - window.innerHeight;
                 const scrollPercent = (window.scrollY / docHeight) * 100;
-                document.querySelector('.reading-progress').style.setProperty('--scroll-percent', `${scrollPercent}%`);
+                progress.style.setProperty('--scroll-percent', `${scrollPercent}%`);
                 ticking = false;
             });
             ticking = true;
         }
-    }, { passive: true });
+    });
 });
 
 // 标题动画效果

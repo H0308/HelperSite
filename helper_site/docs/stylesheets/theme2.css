@@ -1,16 +1,14 @@
 /* 1. 优化OPPO Sans字体 */
 @font-face {
     font-family: 'OPPOSans';
-    src: local('OPPOSans'),  /* 优先使用本地字体 */
-         url('../assets/fonts/OPPOSans-Regular.woff2') format('woff2');
+    src: url('../assets/fonts/OPPOSans-Regular.woff2') format('woff2');
     font-display: optional;  /* 使用可选策略,如果3秒内无法加载则使用后备字体 */
 }
 
 /* 2. 优化霞鹜臻楷字体 - 仅用于标题 */
 @font-face {
     font-family: 'LXGWZhenKai';
-    src: local('LXGWZhenKai'),
-         url('../assets/fonts/LXGWZhenKai-Regular.woff2') format('woff2');
+    src: url('../assets/fonts/LXGWZhenKai-Regular.woff2') format('woff2');
     font-display: optional;
 }
 

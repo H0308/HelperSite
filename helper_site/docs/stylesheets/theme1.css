@@ -2,14 +2,12 @@
 @font-face {
     font-family: 'OPPOSans';
     src: url('../assets/fonts/OPPOSans-Regular.woff2') format('woff2');
-    font-display: optional;  /* 使用可选策略,如果3秒内无法加载则使用后备字体 */
 }
 
 /* 2. 优化霞鹜臻楷字体 - 仅用于标题 */
 @font-face {
     font-family: 'LXGWZhenKai';
     src: url('../assets/fonts/LXGWZhenKai-Regular.woff2') format('woff2');
-    font-display: optional;
 }
 
 /* 3. 添加系统字体作为后备 */

@@ -1,25 +1,28 @@
+@import url('https://static.zeoseven.com/zsft/2/main/result.css');
+@import url('https://fonts.cdnfonts.com/css/opposans');
+
 /* 1. 优化OPPO Sans字体 */
 @font-face {
-    font-family: 'OPPOSans';
-    src: url('../assets/fonts/OPPOSans-Regular.woff2') format('woff2');
+    font-family: "OPPOSans";
+    font-weight: normal;
 }
 
 /* 2. 优化霞鹜臻楷字体 - 仅用于标题 */
 @font-face {
-    font-family: 'LXGWZhenKai';
-    src: url('../assets/fonts/LXGWZhenKai-Regular.woff2') format('woff2');
+    font-family: 'LXGW ZhenKai';
+    font-weight: normal;
 }
 
 /* 3. 添加系统字体作为后备 */
 :root {
     --md-text-font: "OPPOSans";
-    --md-header-font: "LXGWZhenKai";
+    --md-header-font: "LXGW ZhenKai";
     --code-font-color: #e96900;
 }
 
 /* 切换主题选项框 */
 .theme-switch {
-    font-family: 'OPPOSans';
+    font-family: var(--md-text-font);
     display: inline-flex;
     align-items: center;
     margin-right: 1rem;
@@ -27,7 +30,7 @@
 }
 
 .theme-switch select {
-    font-family: 'OPPOSans';
+    font-family: var(--md-text-font);
     -webkit-appearance: none;
     appearance: none;
     padding: 0.3rem 1.5rem 0.3rem 0.8rem;

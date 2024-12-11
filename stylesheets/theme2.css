@@ -11,8 +11,8 @@
 }
 
 :root {
-    --md-text-font: "OPPOSans", -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
-    --md-header-font: "LXGWZhenKai", "Microsoft YaHei", sans-serif;
+    --md-text-font: "OPPOSans";
+    --md-header-font: "LXGWZhenKai";
     --code-font-color: #e96900;
 }
 

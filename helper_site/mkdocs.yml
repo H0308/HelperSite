@@ -264,6 +264,21 @@ extra:
 
 plugins:
   - search
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+          remove_comments: true
+      cache_safe: true
+      js_files:
+          - javascripts/mathjax.js
+          - javascripts/other.js
+          - javascripts/particles.js
+          - javascripts/theme-switch.js
+      css_files:
+          - stylesheets/theme1.css
+          - stylesheets/theme1.css
   - git-authors
   - glightbox:
       touchNavigation: true

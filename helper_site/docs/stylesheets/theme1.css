@@ -1,5 +1,6 @@
 @import url('https://static.zeoseven.com/zsft/2/main/result.css');
 @import url('https://fonts.cdnfonts.com/css/opposans');
+@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
 
 /* 1. 优化OPPO Sans字体 */
 @font-face {
@@ -13,10 +14,15 @@
     font-weight: normal;
 }
 
+@font-face {
+    font-family: 'JetBrains Mono';
+}
+
 /* 3. 添加系统字体作为后备 */
 :root {
     --md-text-font: "OPPOSans";
     --md-header-font: "LXGW ZhenKai";
+    --md-code-font: "JetBrains Mono";
     --code-font-color: #e96900;
 }
 
@@ -171,8 +177,6 @@ pre code {
 
 .highlight .c1, /* 单行注释 */
 .highlight .cm  /* 多行注释 */ {
-    font-family: 'JetBrains Mono', Consolas, monospace;
-    /* font-style: italic; 可选：让注释变为斜体 */
     color: #6a737d; /* 注释颜色 */
 }
 
@@ -180,6 +184,16 @@ pre code {
 .highlight {
     border-radius: 8px;
     /* box-shadow: 0 2px 8px rgba(0,0,0,0.1); */
+}
+
+/* 代码块字体集 */
+/* .md-typeset .highlighttable>tbody>tr>.code>div>pre>code {
+    font-family: var(--md-code-font), var(--md-text-font);
+} */
+
+/* 行内注释字体 */
+.md-typeset code {
+    font-family: var(--md-code-font), var(--md-text-font);
 }
 
 /* 自定义滚动条 */

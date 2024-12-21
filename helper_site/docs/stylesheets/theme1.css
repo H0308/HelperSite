@@ -26,44 +26,43 @@
     --code-font-color: #e96900;
 }
 
-/* 切换主题选项框 */
+/* 主题切换按钮组样式 */
 .theme-switch {
-    font-family: var(--md-text-font);
     display: inline-flex;
-    align-items: center;
+    gap: 8px;
     margin-right: 1rem;
-    height: 100%;
+    padding: 4px;
+    border-radius: 100px;
+    border: 2px solid rgba(255,255,255,0.1);
 }
 
-.theme-switch select {
+/* 主题切换按钮样式 */
+.theme-switch {
+    margin-right: 1rem;
+}
+
+.theme-btn {
     font-family: var(--md-text-font);
-    -webkit-appearance: none;
-    appearance: none;
-    padding: 0.3rem 1.5rem 0.3rem 0.8rem;
-    font-size: 0.8rem;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 4px;
-    background: rgba(255,255,255,0.1);
-    color: var(--md-primary-bg-color);
+    font-size: medium;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 100px;
+    background: #444;
+    color: #fff;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* 添加主题切换蒙版 */
-.theme-overlay {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(77, 166, 218, 0.3), rgba(39, 87, 150, 0.3));
-    backdrop-filter: blur(8px);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 9999;
-    pointer-events: none;
+.theme-btn:hover {
+    background: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(53, 58, 60, 0.2);
 }
 
-.theme-overlay.active {
-    opacity: 1;
-    visibility: visible;
+.theme-btn:active {
+    background: #666;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transform: scale(0.95);
 }
 
 /* 4. 分别设置标题和内容字体 */
@@ -83,6 +82,7 @@ body {
     background-color: var(--code-font-color);
     border-radius: 50%;
     pointer-events: none;
+    z-index: 9999 !important; 
     animation: particleEffect 0.6s ease-out forwards;
     transform: translate(var(--translate-x, 0), var(--translate-y, 0)) scale(1);
 }

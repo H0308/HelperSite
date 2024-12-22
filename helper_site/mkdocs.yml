@@ -177,6 +177,7 @@ nav:
     - Linux中输入和输出基本过程: Linux/14. Linux中输入和输出基本过程/14. Linux中输入和输出基本过程.md
     - Linux文件系统: Linux/15. Linux文件系统/15. Linux文件系统.md
     - Linux软链接和硬链接: Linux/16. Linux软链接和硬链接/16. Linux软链接和硬链接.md
+    - Linux进程间通信: Linux/17. Linux进程间通信/17. Linux进程间通信.md
   - JavaEE应用开发:
     - HTML与CSS:
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md

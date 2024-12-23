@@ -421,448 +421,114 @@
 <a id=__codelineno-9-33 name=__codelineno-9-33></a><span class=w>    </span><span class=n>_IO_lock_t</span><span class=w> </span><span class=o>*</span><span class=n>_lock</span><span class=p>;</span>
 <a id=__codelineno-9-34 name=__codelineno-9-34></a><span class=cp>#ifdef _IO_USE_OLD_IO_FILE</span>
 <a id=__codelineno-9-35 name=__codelineno-9-35></a><span class=p>};</span>
-</code></pre></div></td></tr></table></div> <h2 id=_3>子进程与缓冲区<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <p>前面演示的都是只有一个进程打开关闭文件，如果此时在自动刷新语言级别的缓冲区之前创建了一个子进程，观察下面代码的执行效果：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1> 1</a></span>
-<span class=normal><a href=#__codelineno-10-2> 2</a></span>
-<span class=normal><a href=#__codelineno-10-3> 3</a></span>
-<span class=normal><a href=#__codelineno-10-4> 4</a></span>
-<span class=normal><a href=#__codelineno-10-5> 5</a></span>
-<span class=normal><a href=#__codelineno-10-6> 6</a></span>
-<span class=normal><a href=#__codelineno-10-7> 7</a></span>
-<span class=normal><a href=#__codelineno-10-8> 8</a></span>
-<span class=normal><a href=#__codelineno-10-9> 9</a></span>
-<span class=normal><a href=#__codelineno-10-10>10</a></span>
-<span class=normal><a href=#__codelineno-10-11>11</a></span>
-<span class=normal><a href=#__codelineno-10-12>12</a></span>
-<span class=normal><a href=#__codelineno-10-13>13</a></span>
-<span class=normal><a href=#__codelineno-10-14>14</a></span>
-<span class=normal><a href=#__codelineno-10-15>15</a></span>
-<span class=normal><a href=#__codelineno-10-16>16</a></span>
-<span class=normal><a href=#__codelineno-10-17>17</a></span>
-<span class=normal><a href=#__codelineno-10-18>18</a></span>
-<span class=normal><a href=#__codelineno-10-19>19</a></span>
-<span class=normal><a href=#__codelineno-10-20>20</a></span>
-<span class=normal><a href=#__codelineno-10-21>21</a></span>
-<span class=normal><a href=#__codelineno-10-22>22</a></span>
-<span class=normal><a href=#__codelineno-10-23>23</a></span>
-<span class=normal><a href=#__codelineno-10-24>24</a></span>
-<span class=normal><a href=#__codelineno-10-25>25</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-10-1 name=__codelineno-10-1></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
-<a id=__codelineno-10-2 name=__codelineno-10-2></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
-<a id=__codelineno-10-3 name=__codelineno-10-3></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
-<a id=__codelineno-10-4 name=__codelineno-10-4></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
-<a id=__codelineno-10-5 name=__codelineno-10-5></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
-<a id=__codelineno-10-6 name=__codelineno-10-6></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
-<a id=__codelineno-10-7 name=__codelineno-10-7></a>
-<a id=__codelineno-10-8 name=__codelineno-10-8></a><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
-<a id=__codelineno-10-9 name=__codelineno-10-9></a><span class=p>{</span>
-<a id=__codelineno-10-10 name=__codelineno-10-10></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;log.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_APPEND</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
-<a id=__codelineno-10-11 name=__codelineno-10-11></a><span class=w>    </span><span class=n>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>stdout</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
-<a id=__codelineno-10-12 name=__codelineno-10-12></a><span class=w>    </span><span class=c1>// C库函数</span>
-<a id=__codelineno-10-13 name=__codelineno-10-13></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot; hello printf</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
-<a id=__codelineno-10-14 name=__codelineno-10-14></a><span class=w>    </span><span class=n>fprintf</span><span class=p>(</span><span class=n>stdout</span><span class=p>,</span><span class=w> </span><span class=s>&quot; hello fprintf</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
-<a id=__codelineno-10-15 name=__codelineno-10-15></a><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=o>*</span><span class=n>message</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot; hello fwrite</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>;</span>
-<a id=__codelineno-10-16 name=__codelineno-10-16></a><span class=w>    </span><span class=n>fwrite</span><span class=p>(</span><span class=n>message</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>message</span><span class=p>),</span><span class=w> </span><span class=n>stdout</span><span class=p>);</span>
-<a id=__codelineno-10-17 name=__codelineno-10-17></a>
-<a id=__codelineno-10-18 name=__codelineno-10-18></a><span class=w>    </span><span class=c1>// 系统调用</span>
-<a id=__codelineno-10-19 name=__codelineno-10-19></a><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=o>*</span><span class=n>w</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot; hello write</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>;</span>
-<a id=__codelineno-10-20 name=__codelineno-10-20></a><span class=w>    </span><span class=n>write</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=n>w</span><span class=p>,</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>w</span><span class=p>));</span>
-<a id=__codelineno-10-21 name=__codelineno-10-21></a>
-<a id=__codelineno-10-22 name=__codelineno-10-22></a><span class=w>    </span><span class=c1>// 创建子进程</span>
-<a id=__codelineno-10-23 name=__codelineno-10-23></a><span class=w>    </span><span class=n>fork</span><span class=p>();</span>
-<a id=__codelineno-10-24 name=__codelineno-10-24></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-10-25 name=__codelineno-10-25></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <p>编译运行上面的代码，查看<code>log.txt</code>文件中的内容：</p> <p><a class=glightbox href="14. Linux中输入和输出基本过程.assets\image9.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="14. Linux中输入和输出基本过程.assets\image9.png"></a></p> <p>可以看到，除了系统调用接口<code>write</code>函数以外，其他的C语言库函数均出现两次打印的情况，本质就是因为语言级缓冲区自动刷新到系统内核级缓冲区机制，而因为<code>fork</code>创建了子进程，所以子进程在不修改的情况下会共享父进程中的所有内容，包括语言级缓冲区，所以在最后程序结束时，因为父进程没有刷新语言级缓冲区，所以创建子进程之后，父子进程都要进行一次刷新操作，所以父子进程都通过系统调用接口将数据写入到内核级缓冲区中，而之所以<code>write</code>函数没有写入两次，就是因为父进程已经调用完成<code>write</code>函数了，系统内核级缓冲区已经有对应的内容，所以此时子进程就不需要再调用了，最后由操作系统决定将所有内容刷新到文件中</p> <h2 id=shell2>手撕一个简单的shell（版本2）<a class=headerlink href=#shell2 title="Permanent link">&para;</a></h2> <h3 id=_4>判断重定向命令与截取<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <p>在第一个版本中已经实现了shell基本的功能，但是前面并没有解决重定向问题，本次版本中主要实现重定向的效果</p> <p>首先观察一条命令目的是将指定内容重定向到指定文件时的基本结构，以<code>ls</code>+重定向为例：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span>
-<span class=normal><a href=#__codelineno-11-2>2</a></span>
-<span class=normal><a href=#__codelineno-11-3>3</a></span>
-<span class=normal><a href=#__codelineno-11-4>4</a></span>
-<span class=normal><a href=#__codelineno-11-5>5</a></span>
-<span class=normal><a href=#__codelineno-11-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=c1>// 输出重定向</span>
-<a id=__codelineno-11-2 name=__codelineno-11-2></a><span class=n>ls</span><span class=w> </span><span class=o>-</span><span class=n>l</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=n>test</span><span class=p>.</span><span class=n>txt</span>
-<a id=__codelineno-11-3 name=__codelineno-11-3></a><span class=c1>// 追加重定向</span>
-<a id=__codelineno-11-4 name=__codelineno-11-4></a><span class=n>ls</span><span class=w> </span><span class=o>-</span><span class=n>l</span><span class=w> </span><span class=o>&gt;&gt;</span><span class=w> </span><span class=n>test</span><span class=p>.</span><span class=n>txt</span>
-<a id=__codelineno-11-5 name=__codelineno-11-5></a><span class=c1>// 输入重定向</span>
-<a id=__codelineno-11-6 name=__codelineno-11-6></a><span class=n>ls</span><span class=w> </span><span class=o>-</span><span class=n>l</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>test</span><span class=p>.</span><span class=n>txt</span>
-</code></pre></div></td></tr></table></div> <p>可以看到，重定向时需要使用到三个字符：<code>&gt;</code>、<code>&gt;&gt;</code>和<code>&lt;</code>，所以可以通过判断这三个字符判断是否是重定向，接下来的问题就转化为如何判断</p> <p>在前面获取用户输入的命令时，将用户的输入当成一串字符串看待，接下来在另一个函数中处理该字符串（对字符串进行切割），所以判断其中的字符就需要在切割字符串时处理，并且需要在调用<code>strtok</code>函数切割前处理</p> <p>可以考虑从尾部向前遍历字符串，如果遇到了三个字符中的其中一个就停止，在这个过程中，需要注意两个字符<code>&gt;</code>和<code>&gt;&gt;</code>，在Linux中，对于追加重定向的符号<code>&gt;&gt;</code>来说，不允许两个<code>&gt;</code>中含有空格，所以判断是<code>&gt;</code>后还需要判断前一个字符是不是<code>&gt;</code>，所以判断逻辑主要分成两种：</p> <ol> <li>是否是<code>&gt;</code><ol> <li>再判断前一个字符是否是<code>&gt;</code></li> </ol> </li> <li>是否是<code>&lt;</code></li> </ol> <div class="admonition quote"> <p class=admonition-title>Quote</p> <p>这里需要注意出现的先后，不要单独将<code>&gt;&gt;</code>拿出来判断，此时如果先写判断是否是<code>&gt;</code>的逻辑且判断<code>&gt;&gt;</code>是<code>else if</code>的分支时，就会出现判断<code>&gt;&gt;</code>始终无法进入</p> </div> <p>反向遍历到三个符号中的一个之后进入对应分支中就可以开始处理分割问题，在C语言中，一个字符串的结尾即为<code>\0</code>，所以可以将指定位置置为<code>\0</code>达到分割的效果，分割分为三种情况：</p> <ol> <li><code>&gt;</code>：将<code>&gt;</code>位置置为0，此时前面的内容即为普通命令，后面的内容即为文件名</li> <li><code>&gt;&gt;</code>：将两个<code>&gt;</code>位置置为0，此时前面的内容即为普通命令，后面的内容即为文件名</li> <li><code>&lt;</code>：将<code>&lt;</code>位置置为0，此时前面的内容即为普通命令，后面的内容即为文件名</li> </ol> <p>需要注意，获取到的文件名不一定一开始就是有效字符，还需要处理第一个有效字符前的空格问题，所以这里可以考虑使用一个宏函数或者内联函数解决，基本思路就是一直遍历到第一个有效字符为止：</p> <div class="tabbed-set tabbed-alternate" data-tabs=1:3><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><input id=__tabbed_1_3 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>宏函数</label><label for=__tabbed_1_2>内联函数（二级指针版本）</label><label for=__tabbed_1_3>内联函数（指针引用版本）</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1>1</a></span>
-<span class=normal><a href=#__codelineno-12-2>2</a></span>
-<span class=normal><a href=#__codelineno-12-3>3</a></span>
-<span class=normal><a href=#__codelineno-12-4>4</a></span>
-<span class=normal><a href=#__codelineno-12-5>5</a></span>
-<span class=normal><a href=#__codelineno-12-6>6</a></span>
-<span class=normal><a href=#__codelineno-12-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=c1>// 跳过空白字符</span>
-<a id=__codelineno-12-2 name=__codelineno-12-2></a><span class=cp>#define Trim(pos) do {\</span>
-<a id=__codelineno-12-3 name=__codelineno-12-3></a><span class=cp>    while(isspace(*pos))\</span>
-<a id=__codelineno-12-4 name=__codelineno-12-4></a><span class=cp>    {\</span>
-<a id=__codelineno-12-5 name=__codelineno-12-5></a><span class=cp>        pos++;\</span>
-<a id=__codelineno-12-6 name=__codelineno-12-6></a><span class=cp>    }\</span>
-<a id=__codelineno-12-7 name=__codelineno-12-7></a><span class=cp>}while(0)</span>
-</code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1>1</a></span>
-<span class=normal><a href=#__codelineno-13-2>2</a></span>
-<span class=normal><a href=#__codelineno-13-3>3</a></span>
-<span class=normal><a href=#__codelineno-13-4>4</a></span>
-<span class=normal><a href=#__codelineno-13-5>5</a></span>
-<span class=normal><a href=#__codelineno-13-6>6</a></span>
-<span class=normal><a href=#__codelineno-13-7>7</a></span>
-<span class=normal><a href=#__codelineno-13-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-13-1 name=__codelineno-13-1></a><span class=c1>// 二级指针</span>
-<a id=__codelineno-13-2 name=__codelineno-13-2></a><span class=kr>inline</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>trim</span><span class=p>(</span><span class=kt>char</span><span class=o>**</span><span class=w> </span><span class=n>pos</span><span class=p>)</span><span class=w> </span>
-<a id=__codelineno-13-3 name=__codelineno-13-3></a><span class=p>{</span>
-<a id=__codelineno-13-4 name=__codelineno-13-4></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>isspace</span><span class=p>(</span><span class=o>*</span><span class=p>(</span><span class=o>*</span><span class=n>pos</span><span class=p>)))</span>
-<a id=__codelineno-13-5 name=__codelineno-13-5></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-13-6 name=__codelineno-13-6></a><span class=w>        </span><span class=p>(</span><span class=o>*</span><span class=n>pos</span><span class=p>)</span><span class=o>++</span><span class=p>;</span>
-<a id=__codelineno-13-7 name=__codelineno-13-7></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-13-8 name=__codelineno-13-8></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1>1</a></span>
-<span class=normal><a href=#__codelineno-14-2>2</a></span>
-<span class=normal><a href=#__codelineno-14-3>3</a></span>
-<span class=normal><a href=#__codelineno-14-4>4</a></span>
-<span class=normal><a href=#__codelineno-14-5>5</a></span>
-<span class=normal><a href=#__codelineno-14-6>6</a></span>
-<span class=normal><a href=#__codelineno-14-7>7</a></span>
-<span class=normal><a href=#__codelineno-14-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=c1>// 指针引用</span>
-<a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=kr>inline</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>trim</span><span class=p>(</span><span class=kt>char</span><span class=o>*&amp;</span><span class=w> </span><span class=n>pos</span><span class=p>)</span>
-<a id=__codelineno-14-3 name=__codelineno-14-3></a><span class=p>{</span>
-<a id=__codelineno-14-4 name=__codelineno-14-4></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>isspace</span><span class=p>(</span><span class=o>*</span><span class=n>pos</span><span class=p>))</span>
-<a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-14-6 name=__codelineno-14-6></a><span class=w>        </span><span class=n>pos</span><span class=o>++</span><span class=p>;</span>
-<a id=__codelineno-14-7 name=__codelineno-14-7></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-14-8 name=__codelineno-14-8></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> </div> </div> </div> <div class="admonition note"> <p class=admonition-title>Note</p> <p>上面的宏函数中使用<code>do...while(0)</code>结构只是确保主体逻辑代码被代码块包裹，使结构更加清晰</p> </div> <p>示例代码如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
-<span class=normal><a href=#__codelineno-15-2> 2</a></span>
-<span class=normal><a href=#__codelineno-15-3> 3</a></span>
-<span class=normal><a href=#__codelineno-15-4> 4</a></span>
-<span class=normal><a href=#__codelineno-15-5> 5</a></span>
-<span class=normal><a href=#__codelineno-15-6> 6</a></span>
-<span class=normal><a href=#__codelineno-15-7> 7</a></span>
-<span class=normal><a href=#__codelineno-15-8> 8</a></span>
-<span class=normal><a href=#__codelineno-15-9> 9</a></span>
-<span class=normal><a href=#__codelineno-15-10>10</a></span>
-<span class=normal><a href=#__codelineno-15-11>11</a></span>
-<span class=normal><a href=#__codelineno-15-12>12</a></span>
-<span class=normal><a href=#__codelineno-15-13>13</a></span>
-<span class=normal><a href=#__codelineno-15-14>14</a></span>
-<span class=normal><a href=#__codelineno-15-15>15</a></span>
-<span class=normal><a href=#__codelineno-15-16>16</a></span>
-<span class=normal><a href=#__codelineno-15-17>17</a></span>
-<span class=normal><a href=#__codelineno-15-18>18</a></span>
-<span class=normal><a href=#__codelineno-15-19>19</a></span>
-<span class=normal><a href=#__codelineno-15-20>20</a></span>
-<span class=normal><a href=#__codelineno-15-21>21</a></span>
-<span class=normal><a href=#__codelineno-15-22>22</a></span>
-<span class=normal><a href=#__codelineno-15-23>23</a></span>
-<span class=normal><a href=#__codelineno-15-24>24</a></span>
-<span class=normal><a href=#__codelineno-15-25>25</a></span>
-<span class=normal><a href=#__codelineno-15-26>26</a></span>
-<span class=normal><a href=#__codelineno-15-27>27</a></span>
-<span class=normal><a href=#__codelineno-15-28>28</a></span>
-<span class=normal><a href=#__codelineno-15-29>29</a></span>
-<span class=normal><a href=#__codelineno-15-30>30</a></span>
-<span class=normal><a href=#__codelineno-15-31>31</a></span>
-<span class=normal><a href=#__codelineno-15-32>32</a></span>
-<span class=normal><a href=#__codelineno-15-33>33</a></span>
-<span class=normal><a href=#__codelineno-15-34>34</a></span>
-<span class=normal><a href=#__codelineno-15-35>35</a></span>
-<span class=normal><a href=#__codelineno-15-36>36</a></span>
-<span class=normal><a href=#__codelineno-15-37>37</a></span>
-<span class=normal><a href=#__codelineno-15-38>38</a></span>
-<span class=normal><a href=#__codelineno-15-39>39</a></span>
-<span class=normal><a href=#__codelineno-15-40>40</a></span>
-<span class=normal><a href=#__codelineno-15-41>41</a></span>
-<span class=normal><a href=#__codelineno-15-42>42</a></span>
-<span class=normal><a href=#__codelineno-15-43>43</a></span>
-<span class=normal><a href=#__codelineno-15-44>44</a></span>
-<span class=normal><a href=#__codelineno-15-45>45</a></span>
-<span class=normal><a href=#__codelineno-15-46>46</a></span>
-<span class=normal><a href=#__codelineno-15-47>47</a></span>
-<span class=normal><a href=#__codelineno-15-48>48</a></span>
-<span class=normal><a href=#__codelineno-15-49>49</a></span>
-<span class=normal><a href=#__codelineno-15-50>50</a></span>
-<span class=normal><a href=#__codelineno-15-51>51</a></span>
-<span class=normal><a href=#__codelineno-15-52>52</a></span>
-<span class=normal><a href=#__codelineno-15-53>53</a></span>
-<span class=normal><a href=#__codelineno-15-54>54</a></span>
-<span class=normal><a href=#__codelineno-15-55>55</a></span>
-<span class=normal><a href=#__codelineno-15-56>56</a></span>
-<span class=normal><a href=#__codelineno-15-57>57</a></span>
-<span class=normal><a href=#__codelineno-15-58>58</a></span>
-<span class=normal><a href=#__codelineno-15-59>59</a></span>
-<span class=normal><a href=#__codelineno-15-60>60</a></span>
-<span class=normal><a href=#__codelineno-15-61>61</a></span>
-<span class=normal><a href=#__codelineno-15-62>62</a></span>
-<span class=normal><a href=#__codelineno-15-63>63</a></span>
-<span class=normal><a href=#__codelineno-15-64>64</a></span>
-<span class=normal><a href=#__codelineno-15-65>65</a></span>
-<span class=normal><a href=#__codelineno-15-66>66</a></span>
-<span class=normal><a href=#__codelineno-15-67>67</a></span>
-<span class=normal><a href=#__codelineno-15-68>68</a></span>
-<span class=normal><a href=#__codelineno-15-69>69</a></span>
-<span class=normal><a href=#__codelineno-15-70>70</a></span>
-<span class=normal><a href=#__codelineno-15-71>71</a></span>
-<span class=normal><a href=#__codelineno-15-72>72</a></span>
-<span class=normal><a href=#__codelineno-15-73>73</a></span>
-<span class=normal><a href=#__codelineno-15-74>74</a></span>
-<span class=normal><a href=#__codelineno-15-75>75</a></span>
-<span class=normal><a href=#__codelineno-15-76>76</a></span>
-<span class=normal><a href=#__codelineno-15-77>77</a></span>
-<span class=normal><a href=#__codelineno-15-78>78</a></span>
-<span class=normal><a href=#__codelineno-15-79>79</a></span>
-<span class=normal><a href=#__codelineno-15-80>80</a></span>
-<span class=normal><a href=#__codelineno-15-81>81</a></span>
-<span class=normal><a href=#__codelineno-15-82>82</a></span>
-<span class=normal><a href=#__codelineno-15-83>83</a></span>
-<span class=normal><a href=#__codelineno-15-84>84</a></span>
-<span class=normal><a href=#__codelineno-15-85>85</a></span>
-<span class=normal><a href=#__codelineno-15-86>86</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=c1>// 重定向状态</span>
-<a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=k>enum</span><span class=w> </span><span class=n>redirStatus</span>
-<a id=__codelineno-15-3 name=__codelineno-15-3></a><span class=p>{</span>
-<a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=w>    </span><span class=n>NONE</span><span class=p>,</span>
-<a id=__codelineno-15-5 name=__codelineno-15-5></a><span class=w>    </span><span class=n>APPEND</span><span class=p>,</span>
-<a id=__codelineno-15-6 name=__codelineno-15-6></a><span class=w>    </span><span class=n>TRUNCATE</span><span class=p>,</span>
-<a id=__codelineno-15-7 name=__codelineno-15-7></a><span class=w>    </span><span class=n>INPUT</span><span class=w> </span>
-<a id=__codelineno-15-8 name=__codelineno-15-8></a><span class=p>};</span>
-<a id=__codelineno-15-9 name=__codelineno-15-9></a><span class=c1>// 重定向状态码</span>
-<a id=__codelineno-15-10 name=__codelineno-15-10></a><span class=kt>int</span><span class=w> </span><span class=n>redirCode</span><span class=p>;</span>
-<a id=__codelineno-15-11 name=__codelineno-15-11></a><span class=c1>// 文件名</span>
-<a id=__codelineno-15-12 name=__codelineno-15-12></a><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>filename</span><span class=p>;</span>
-<a id=__codelineno-15-13 name=__codelineno-15-13></a>
-<a id=__codelineno-15-14 name=__codelineno-15-14></a><span class=kt>void</span><span class=w> </span><span class=nf>parseInput</span><span class=p>()</span>
-<a id=__codelineno-15-15 name=__codelineno-15-15></a><span class=p>{</span>
-<a id=__codelineno-15-16 name=__codelineno-15-16></a><span class=w>    </span><span class=c1>// ...</span>
-<a id=__codelineno-15-17 name=__codelineno-15-17></a>
-<a id=__codelineno-15-18 name=__codelineno-15-18></a><span class=w>    </span><span class=c1>// 重定向</span>
-<a id=__codelineno-15-19 name=__codelineno-15-19></a><span class=w>    </span><span class=n>redirCode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>NONE</span><span class=p>;</span>
-<a id=__codelineno-15-20 name=__codelineno-15-20></a><span class=w>    </span><span class=n>filename</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>nullptr</span><span class=p>;</span>
-<a id=__codelineno-15-21 name=__codelineno-15-21></a>
-<a id=__codelineno-15-22 name=__codelineno-15-22></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;command start: %s</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>input_arr</span><span class=p>);</span>
-<a id=__codelineno-15-23 name=__codelineno-15-23></a><span class=w>    </span><span class=c1>// 判断是否存在重定向符号</span>
-<a id=__codelineno-15-24 name=__codelineno-15-24></a><span class=w>    </span><span class=kt>size_t</span><span class=w> </span><span class=n>end</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>input_arr</span><span class=p>)</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>;</span>
-<a id=__codelineno-15-25 name=__codelineno-15-25></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>end</span><span class=p>)</span>
-<a id=__codelineno-15-26 name=__codelineno-15-26></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-15-27 name=__codelineno-15-27></a><span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;&gt;&#39;</span><span class=p>)</span>
-<a id=__codelineno-15-28 name=__codelineno-15-28></a><span class=w>        </span><span class=p>{</span>
-<a id=__codelineno-15-29 name=__codelineno-15-29></a><span class=w>            </span><span class=c1>// 判断前面一个字符是否是&gt;</span>
-<a id=__codelineno-15-30 name=__codelineno-15-30></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;&gt;&#39;</span><span class=p>)</span>
-<a id=__codelineno-15-31 name=__codelineno-15-31></a><span class=w>            </span><span class=p>{</span>
-<a id=__codelineno-15-32 name=__codelineno-15-32></a><span class=w>                </span><span class=n>redirCode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>APPEND</span><span class=p>;</span>
-<a id=__codelineno-15-33 name=__codelineno-15-33></a><span class=w>                </span><span class=c1>// 切割字符串</span>
-<a id=__codelineno-15-34 name=__codelineno-15-34></a><span class=w>                </span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-15-35 name=__codelineno-15-35></a><span class=w>                </span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-15-36 name=__codelineno-15-36></a><span class=w>                </span><span class=c1>// 获取文件名，重定向符的下一个位置</span>
-<a id=__codelineno-15-37 name=__codelineno-15-37></a><span class=w>                </span><span class=n>filename</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=o>&amp;</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=o>+</span><span class=mi>1</span><span class=p>];</span>
-<a id=__codelineno-15-38 name=__codelineno-15-38></a><span class=w>                </span><span class=c1>// 去除空格</span>
-<a id=__codelineno-15-39 name=__codelineno-15-39></a><span class=w>                </span><span class=n>trim</span><span class=p>(</span><span class=n>filename</span><span class=p>);</span>
-<a id=__codelineno-15-40 name=__codelineno-15-40></a><span class=w>                </span><span class=c1>// 查找到重定向符号后就可以停止遍历</span>
-<a id=__codelineno-15-41 name=__codelineno-15-41></a><span class=w>                </span><span class=k>break</span><span class=p>;</span>
-<a id=__codelineno-15-42 name=__codelineno-15-42></a><span class=w>            </span><span class=p>}</span>
-<a id=__codelineno-15-43 name=__codelineno-15-43></a><span class=w>            </span><span class=k>else</span><span class=w> </span>
-<a id=__codelineno-15-44 name=__codelineno-15-44></a><span class=w>            </span><span class=p>{</span>
-<a id=__codelineno-15-45 name=__codelineno-15-45></a><span class=w>                </span><span class=c1>// 输出重定向</span>
-<a id=__codelineno-15-46 name=__codelineno-15-46></a><span class=w>                </span><span class=n>redirCode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>TRUNCATE</span><span class=p>;</span>
-<a id=__codelineno-15-47 name=__codelineno-15-47></a><span class=w>                </span><span class=c1>// 切割字符串</span>
-<a id=__codelineno-15-48 name=__codelineno-15-48></a><span class=w>                </span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-15-49 name=__codelineno-15-49></a><span class=w>                </span><span class=c1>// 获取文件名</span>
-<a id=__codelineno-15-50 name=__codelineno-15-50></a><span class=w>                </span><span class=n>filename</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=o>&amp;</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=o>+</span><span class=mi>1</span><span class=p>];</span>
-<a id=__codelineno-15-51 name=__codelineno-15-51></a><span class=w>                </span><span class=c1>// 去除空格</span>
-<a id=__codelineno-15-52 name=__codelineno-15-52></a><span class=w>                </span><span class=n>trim</span><span class=p>(</span><span class=n>filename</span><span class=p>);</span>
-<a id=__codelineno-15-53 name=__codelineno-15-53></a><span class=w>                </span><span class=c1>// 查找到重定向符号后就可以停止遍历</span>
-<a id=__codelineno-15-54 name=__codelineno-15-54></a><span class=w>                </span><span class=k>break</span><span class=p>;</span>
-<a id=__codelineno-15-55 name=__codelineno-15-55></a><span class=w>            </span><span class=p>}</span>
-<a id=__codelineno-15-56 name=__codelineno-15-56></a><span class=w>        </span><span class=p>}</span>
-<a id=__codelineno-15-57 name=__codelineno-15-57></a><span class=w>        </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;&lt;&#39;</span><span class=p>)</span>
-<a id=__codelineno-15-58 name=__codelineno-15-58></a><span class=w>        </span><span class=p>{</span>
-<a id=__codelineno-15-59 name=__codelineno-15-59></a><span class=w>            </span><span class=c1>// 输入重定向</span>
-<a id=__codelineno-15-60 name=__codelineno-15-60></a><span class=w>            </span><span class=n>redirCode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>INPUT</span><span class=p>;</span>
-<a id=__codelineno-15-61 name=__codelineno-15-61></a><span class=w>            </span><span class=c1>// 切割字符串</span>
-<a id=__codelineno-15-62 name=__codelineno-15-62></a><span class=w>            </span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-15-63 name=__codelineno-15-63></a><span class=w>            </span><span class=c1>// 获取文件名</span>
-<a id=__codelineno-15-64 name=__codelineno-15-64></a><span class=w>            </span><span class=n>filename</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=o>&amp;</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=o>+</span><span class=mi>1</span><span class=p>];</span>
-<a id=__codelineno-15-65 name=__codelineno-15-65></a><span class=w>            </span><span class=c1>// 去除空格</span>
-<a id=__codelineno-15-66 name=__codelineno-15-66></a><span class=w>            </span><span class=n>trim</span><span class=p>(</span><span class=n>filename</span><span class=p>);</span>
-<a id=__codelineno-15-67 name=__codelineno-15-67></a><span class=w>            </span><span class=c1>// 查找到重定向符号后就可以停止遍历</span>
-<a id=__codelineno-15-68 name=__codelineno-15-68></a><span class=w>            </span><span class=k>break</span><span class=p>;</span>
-<a id=__codelineno-15-69 name=__codelineno-15-69></a><span class=w>        </span><span class=p>}</span>
-<a id=__codelineno-15-70 name=__codelineno-15-70></a><span class=w>        </span><span class=k>else</span><span class=w> </span>
-<a id=__codelineno-15-71 name=__codelineno-15-71></a><span class=w>        </span><span class=p>{</span>
-<a id=__codelineno-15-72 name=__codelineno-15-72></a><span class=w>            </span><span class=c1>// 一直向前查找</span>
-<a id=__codelineno-15-73 name=__codelineno-15-73></a><span class=w>            </span><span class=o>--</span><span class=n>end</span><span class=p>;</span>
-<a id=__codelineno-15-74 name=__codelineno-15-74></a><span class=w>        </span><span class=p>}</span>
-<a id=__codelineno-15-75 name=__codelineno-15-75></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-15-76 name=__codelineno-15-76></a>
-<a id=__codelineno-15-77 name=__codelineno-15-77></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;redir: %d</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>redirCode</span><span class=p>);</span>
-<a id=__codelineno-15-78 name=__codelineno-15-78></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;filename: %s</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>filename</span><span class=p>);</span>
-<a id=__codelineno-15-79 name=__codelineno-15-79></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;command end: %s</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>input_arr</span><span class=p>);</span>
-<a id=__codelineno-15-80 name=__codelineno-15-80></a>
-<a id=__codelineno-15-81 name=__codelineno-15-81></a><span class=w>    </span><span class=c1>// 拆分读取的字符串</span>
-<a id=__codelineno-15-82 name=__codelineno-15-82></a><span class=w>    </span><span class=k>for</span><span class=p>(</span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>ch</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>strtok</span><span class=p>(</span><span class=n>input_arr</span><span class=p>,</span><span class=w> </span><span class=s>&quot; &quot;</span><span class=p>);</span><span class=w> </span><span class=p>(</span><span class=kt>bool</span><span class=p>)</span><span class=n>ch</span><span class=p>;</span><span class=w> </span><span class=n>ch</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>strtok</span><span class=p>(</span><span class=n>nullptr</span><span class=p>,</span><span class=w> </span><span class=s>&quot; &quot;</span><span class=p>))</span>
-<a id=__codelineno-15-83 name=__codelineno-15-83></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-15-84 name=__codelineno-15-84></a><span class=w>       </span><span class=n>global_argv</span><span class=p>[</span><span class=n>global_argc</span><span class=o>++</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>ch</span><span class=p>;</span><span class=w> </span>
-<a id=__codelineno-15-85 name=__codelineno-15-85></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-15-86 name=__codelineno-15-86></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <h3 id=_5>执行重定向<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <p>执行重定向不可以使用父进程执行，如果使用父进程执行，则后续执行的指令都会受到重定向的影响，所以考虑使用子进程执行</p> <p>但是这里涉及到一个问题：程序替换时，被替换的代码会受到重定向的影响吗？答案是会的，因为重定向本质改的是<code>files_struct</code>结构体，而该结构体存在于进程中，当前这个进程是子进程，程序替换本质只是替换子进程的代码和数据，但是不会替换进程PCB，所以重定向会影响到被替换的代码</p> <p>本质重定向就是改变输出文件，所以对于三种重定向来说，只需要在不同类型的重定向中执行不同的重定向逻辑即可：</p> <ol> <li>输出重定向：以覆写以及不存在新建的模式打开文件并将<code>stdout</code>位置更改为该文件</li> <li>追加重定向：以追加写以及不存在新建的模式打开文件并将<code>stdout</code>位置更改为该文件</li> <li>输入重定向：以只读模式打开文件并将<code>stdin</code>位置更改为该文件</li> </ol> <div class="admonition note"> <p class=admonition-title>Note</p> <p>下面的代码中涉及到一些错误情况的处理</p> </div> <p>示例代码如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1> 1</a></span>
-<span class=normal><a href=#__codelineno-16-2> 2</a></span>
-<span class=normal><a href=#__codelineno-16-3> 3</a></span>
-<span class=normal><a href=#__codelineno-16-4> 4</a></span>
-<span class=normal><a href=#__codelineno-16-5> 5</a></span>
-<span class=normal><a href=#__codelineno-16-6> 6</a></span>
-<span class=normal><a href=#__codelineno-16-7> 7</a></span>
-<span class=normal><a href=#__codelineno-16-8> 8</a></span>
-<span class=normal><a href=#__codelineno-16-9> 9</a></span>
-<span class=normal><a href=#__codelineno-16-10>10</a></span>
-<span class=normal><a href=#__codelineno-16-11>11</a></span>
-<span class=normal><a href=#__codelineno-16-12>12</a></span>
-<span class=normal><a href=#__codelineno-16-13>13</a></span>
-<span class=normal><a href=#__codelineno-16-14>14</a></span>
-<span class=normal><a href=#__codelineno-16-15>15</a></span>
-<span class=normal><a href=#__codelineno-16-16>16</a></span>
-<span class=normal><a href=#__codelineno-16-17>17</a></span>
-<span class=normal><a href=#__codelineno-16-18>18</a></span>
-<span class=normal><a href=#__codelineno-16-19>19</a></span>
-<span class=normal><a href=#__codelineno-16-20>20</a></span>
-<span class=normal><a href=#__codelineno-16-21>21</a></span>
-<span class=normal><a href=#__codelineno-16-22>22</a></span>
-<span class=normal><a href=#__codelineno-16-23>23</a></span>
-<span class=normal><a href=#__codelineno-16-24>24</a></span>
-<span class=normal><a href=#__codelineno-16-25>25</a></span>
-<span class=normal><a href=#__codelineno-16-26>26</a></span>
-<span class=normal><a href=#__codelineno-16-27>27</a></span>
-<span class=normal><a href=#__codelineno-16-28>28</a></span>
-<span class=normal><a href=#__codelineno-16-29>29</a></span>
-<span class=normal><a href=#__codelineno-16-30>30</a></span>
-<span class=normal><a href=#__codelineno-16-31>31</a></span>
-<span class=normal><a href=#__codelineno-16-32>32</a></span>
-<span class=normal><a href=#__codelineno-16-33>33</a></span>
-<span class=normal><a href=#__codelineno-16-34>34</a></span>
-<span class=normal><a href=#__codelineno-16-35>35</a></span>
-<span class=normal><a href=#__codelineno-16-36>36</a></span>
-<span class=normal><a href=#__codelineno-16-37>37</a></span>
-<span class=normal><a href=#__codelineno-16-38>38</a></span>
-<span class=normal><a href=#__codelineno-16-39>39</a></span>
-<span class=normal><a href=#__codelineno-16-40>40</a></span>
-<span class=normal><a href=#__codelineno-16-41>41</a></span>
-<span class=normal><a href=#__codelineno-16-42>42</a></span>
-<span class=normal><a href=#__codelineno-16-43>43</a></span>
-<span class=normal><a href=#__codelineno-16-44>44</a></span>
-<span class=normal><a href=#__codelineno-16-45>45</a></span>
-<span class=normal><a href=#__codelineno-16-46>46</a></span>
-<span class=normal><a href=#__codelineno-16-47>47</a></span>
-<span class=normal><a href=#__codelineno-16-48>48</a></span>
-<span class=normal><a href=#__codelineno-16-49>49</a></span>
-<span class=normal><a href=#__codelineno-16-50>50</a></span>
-<span class=normal><a href=#__codelineno-16-51>51</a></span>
-<span class=normal><a href=#__codelineno-16-52>52</a></span>
-<span class=normal><a href=#__codelineno-16-53>53</a></span>
-<span class=normal><a href=#__codelineno-16-54>54</a></span>
-<span class=normal><a href=#__codelineno-16-55>55</a></span>
-<span class=normal><a href=#__codelineno-16-56>56</a></span>
-<span class=normal><a href=#__codelineno-16-57>57</a></span>
-<span class=normal><a href=#__codelineno-16-58>58</a></span>
-<span class=normal><a href=#__codelineno-16-59>59</a></span>
-<span class=normal><a href=#__codelineno-16-60>60</a></span>
-<span class=normal><a href=#__codelineno-16-61>61</a></span>
-<span class=normal><a href=#__codelineno-16-62>62</a></span>
-<span class=normal><a href=#__codelineno-16-63>63</a></span>
-<span class=normal><a href=#__codelineno-16-64>64</a></span>
-<span class=normal><a href=#__codelineno-16-65>65</a></span>
-<span class=normal><a href=#__codelineno-16-66>66</a></span>
-<span class=normal><a href=#__codelineno-16-67>67</a></span>
-<span class=normal><a href=#__codelineno-16-68>68</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=kt>void</span><span class=w> </span><span class=nf>executeProgram</span><span class=p>()</span>
-<a id=__codelineno-16-2 name=__codelineno-16-2></a><span class=p>{</span>
-<a id=__codelineno-16-3 name=__codelineno-16-3></a><span class=w>    </span><span class=kt>pid_t</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>fork</span><span class=p>();</span>
-<a id=__codelineno-16-4 name=__codelineno-16-4></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>id</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
-<a id=__codelineno-16-5 name=__codelineno-16-5></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-16-6 name=__codelineno-16-6></a><span class=w>        </span><span class=c1>// 判断是哪一种重定向</span>
-<a id=__codelineno-16-7 name=__codelineno-16-7></a><span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>redirCode</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>TRUNCATE</span><span class=p>)</span>
-<a id=__codelineno-16-8 name=__codelineno-16-8></a><span class=w>        </span><span class=p>{</span>
-<a id=__codelineno-16-9 name=__codelineno-16-9></a><span class=w>            </span><span class=c1>// 输出重定向</span>
-<a id=__codelineno-16-10 name=__codelineno-16-10></a><span class=w>            </span><span class=c1>// 1. 打开文件</span>
-<a id=__codelineno-16-11 name=__codelineno-16-11></a><span class=w>            </span><span class=c1>// 确保文件不为空</span>
-<a id=__codelineno-16-12 name=__codelineno-16-12></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>
-<a id=__codelineno-16-13 name=__codelineno-16-13></a><span class=w>            </span><span class=p>{</span>
-<a id=__codelineno-16-14 name=__codelineno-16-14></a><span class=w>                </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_TRUNC</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
-<a id=__codelineno-16-15 name=__codelineno-16-15></a><span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>fd</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
-<a id=__codelineno-16-16 name=__codelineno-16-16></a><span class=w>                </span><span class=p>{</span>
-<a id=__codelineno-16-17 name=__codelineno-16-17></a><span class=w>                    </span><span class=n>exit</span><span class=p>(</span><span class=n>FILEOPENFAIL</span><span class=p>);</span>
-<a id=__codelineno-16-18 name=__codelineno-16-18></a><span class=w>                </span><span class=p>}</span>
-<a id=__codelineno-16-19 name=__codelineno-16-19></a><span class=w>                </span><span class=c1>// 2. 重定向stdout文件为新创文件</span>
-<a id=__codelineno-16-20 name=__codelineno-16-20></a><span class=w>                </span><span class=n>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>stdout</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
-<a id=__codelineno-16-21 name=__codelineno-16-21></a><span class=w>            </span><span class=p>}</span>
-<a id=__codelineno-16-22 name=__codelineno-16-22></a><span class=w>            </span><span class=k>else</span><span class=w> </span>
-<a id=__codelineno-16-23 name=__codelineno-16-23></a><span class=w>            </span><span class=p>{</span>
-<a id=__codelineno-16-24 name=__codelineno-16-24></a><span class=w>                </span><span class=n>exit</span><span class=p>(</span><span class=n>FILENOTEXISTS</span><span class=p>);</span>
-<a id=__codelineno-16-25 name=__codelineno-16-25></a><span class=w>            </span><span class=p>}</span>
-<a id=__codelineno-16-26 name=__codelineno-16-26></a><span class=w>        </span><span class=p>}</span>
-<a id=__codelineno-16-27 name=__codelineno-16-27></a><span class=w>        </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>redirCode</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>APPEND</span><span class=p>)</span>
-<a id=__codelineno-16-28 name=__codelineno-16-28></a><span class=w>        </span><span class=p>{</span>
-<a id=__codelineno-16-29 name=__codelineno-16-29></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>
-<a id=__codelineno-16-30 name=__codelineno-16-30></a><span class=w>            </span><span class=p>{</span>
-<a id=__codelineno-16-31 name=__codelineno-16-31></a><span class=w>                </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_APPEND</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
-<a id=__codelineno-16-32 name=__codelineno-16-32></a><span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>fd</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
-<a id=__codelineno-16-33 name=__codelineno-16-33></a><span class=w>                </span><span class=p>{</span>
-<a id=__codelineno-16-34 name=__codelineno-16-34></a><span class=w>                    </span><span class=n>exit</span><span class=p>(</span><span class=n>FILEOPENFAIL</span><span class=p>);</span>
-<a id=__codelineno-16-35 name=__codelineno-16-35></a><span class=w>                </span><span class=p>}</span>
-<a id=__codelineno-16-36 name=__codelineno-16-36></a><span class=w>                </span><span class=c1>// 2. 重定向stdout文件为新创文件</span>
-<a id=__codelineno-16-37 name=__codelineno-16-37></a><span class=w>                </span><span class=n>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>stdout</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
-<a id=__codelineno-16-38 name=__codelineno-16-38></a><span class=w>            </span><span class=p>}</span>
-<a id=__codelineno-16-39 name=__codelineno-16-39></a><span class=w>            </span><span class=k>else</span>
-<a id=__codelineno-16-40 name=__codelineno-16-40></a><span class=w>            </span><span class=p>{</span>
-<a id=__codelineno-16-41 name=__codelineno-16-41></a><span class=w>                </span><span class=n>exit</span><span class=p>(</span><span class=n>FILENOTEXISTS</span><span class=p>);</span>
-<a id=__codelineno-16-42 name=__codelineno-16-42></a><span class=w>            </span><span class=p>}</span>
-<a id=__codelineno-16-43 name=__codelineno-16-43></a><span class=w>        </span><span class=p>}</span>
-<a id=__codelineno-16-44 name=__codelineno-16-44></a><span class=w>        </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>redirCode</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>INPUT</span><span class=p>)</span>
-<a id=__codelineno-16-45 name=__codelineno-16-45></a><span class=w>        </span><span class=p>{</span><span class=w> </span>
-<a id=__codelineno-16-46 name=__codelineno-16-46></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>
-<a id=__codelineno-16-47 name=__codelineno-16-47></a><span class=w>            </span><span class=p>{</span>
-<a id=__codelineno-16-48 name=__codelineno-16-48></a><span class=w>                </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_RDONLY</span><span class=p>);</span>
-<a id=__codelineno-16-49 name=__codelineno-16-49></a><span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>fd</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
-<a id=__codelineno-16-50 name=__codelineno-16-50></a><span class=w>                </span><span class=p>{</span>
-<a id=__codelineno-16-51 name=__codelineno-16-51></a><span class=w>                    </span><span class=n>exit</span><span class=p>(</span><span class=n>FILEOPENFAIL</span><span class=p>);</span>
-<a id=__codelineno-16-52 name=__codelineno-16-52></a><span class=w>                </span><span class=p>}</span>
-<a id=__codelineno-16-53 name=__codelineno-16-53></a><span class=w>                </span><span class=c1>// 2. 重定向stdout文件为新创文件</span>
-<a id=__codelineno-16-54 name=__codelineno-16-54></a><span class=w>                </span><span class=n>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>stdin</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
-<a id=__codelineno-16-55 name=__codelineno-16-55></a><span class=w>            </span><span class=p>}</span>
-<a id=__codelineno-16-56 name=__codelineno-16-56></a><span class=w>            </span><span class=k>else</span>
-<a id=__codelineno-16-57 name=__codelineno-16-57></a><span class=w>            </span><span class=p>{</span>
-<a id=__codelineno-16-58 name=__codelineno-16-58></a><span class=w>                </span><span class=n>exit</span><span class=p>(</span><span class=n>FILENOTEXISTS</span><span class=p>);</span>
-<a id=__codelineno-16-59 name=__codelineno-16-59></a><span class=w>            </span><span class=p>}</span>
-<a id=__codelineno-16-60 name=__codelineno-16-60></a><span class=w>        </span><span class=p>}</span>
-<a id=__codelineno-16-61 name=__codelineno-16-61></a><span class=w>        </span><span class=c1>// 重定向后恢复redirCode标记便于下次使用</span>
-<a id=__codelineno-16-62 name=__codelineno-16-62></a><span class=w>        </span><span class=n>redirCode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>NONE</span><span class=p>;</span>
-<a id=__codelineno-16-63 name=__codelineno-16-63></a><span class=w>        </span><span class=c1>// 程序替换</span>
-<a id=__codelineno-16-64 name=__codelineno-16-64></a><span class=w>        </span><span class=n>execvpe</span><span class=p>(</span><span class=n>global_argv</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span><span class=w> </span><span class=n>global_argv</span><span class=p>,</span><span class=w> </span><span class=n>global_env</span><span class=p>);</span>
-<a id=__codelineno-16-65 name=__codelineno-16-65></a><span class=w>        </span><span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
-<a id=__codelineno-16-66 name=__codelineno-16-66></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-16-67 name=__codelineno-16-67></a><span class=w>    </span><span class=c1>// ...</span>
-<a id=__codelineno-16-68 name=__codelineno-16-68></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <p>在上面代码中，尽管开启了文件，但是可以不需要关闭文件，因为当一个进程结束并被父进程回收之后，该进程的PCB以及相关的文件结构都会被释放，此时文件就会被自动关闭，所以在Linux中，文件描述符的声明周期随着进程的结束而结束</p> <h2 id=stdioh>简单实现<code>stdio.h</code>中的文件相关操作<a class=headerlink href=#stdioh title="Permanent link">&para;</a></h2> <p>本次简单实现主要实现<code>FILE</code>结构体、<code>fwrite</code>函数、<code>fopen</code>函数、<code>fflush</code>函数和<code>fclose</code>函数</p> <h3 id=file><code>FILE</code>结构体<a class=headerlink href=#file title="Permanent link">&para;</a></h3> <p>根据前面的学习，可以知道该结构体主要会存在缓冲区和文件描述符</p> <p>而因为C语言的缓冲区有三种缓冲方式，所以定义一个<code>flag</code>标记缓冲区刷新模式，其值有如下三种：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1>1</a></span>
+</code></pre></div></td></tr></table></div> <p>结合上面的内容，接下来对前面学习到的Linux重定向符号进行细致化：</p> <p>在Linux中，重定向符号为<code>&gt;</code>，前面学习到的指令写法是：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-10-1 name=__codelineno-10-1></a>内容<span class=w> </span>&gt;<span class=w> </span>文件
+</code></pre></div></td></tr></table></div> <p>实际上，上面的写法是一种简单的写法，完整的写法如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-11-1 name=__codelineno-11-1></a>内容<span class=w> </span><span class=m>1</span><span class=w> </span>&gt;<span class=w> </span>文件
+</code></pre></div></td></tr></table></div> <p>表示使用指定的文件覆盖文件描述符为1的文件，也就是将指定内容从标准输出转向指定的文件</p> <p>同样，如果需要关闭标准错误（文件描述符为2的文件），则写法如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-12-1 name=__codelineno-12-1></a>内容<span class=w> </span><span class=m>2</span><span class=w> </span>&gt;<span class=w> </span>文件
+</code></pre></div></td></tr></table></div> <p>如果使用了<code>cerr</code>/<code>perror</code>和<code>cout</code>/<code>printf</code>就会发现，默认情况下，二者并不是使用的同一个标准输出（文件描述符为1），而是<code>cerr</code>/<code>perror</code>使用标准错误（文件描述符为2），<code>cout</code>/<code>printf</code>使用标准输出（文件描述符为1），所以这种情况下，如果既使用了<code>cerr</code>/<code>perror</code>打印，也使用了<code>cout</code>/<code>printf</code>打印，那么当需要同时将标准错误信息和标准输出信息写入到同一个文件时，就可以使用下面的重定向方式：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-13-1 name=__codelineno-13-1></a>内容<span class=w> </span><span class=m>1</span><span class=w> </span>&gt;<span class=w> </span>文件<span class=w> </span><span class=m>2</span>&gt;<span class=p>&amp;</span><span class=m>1</span>
+</code></pre></div></td></tr></table></div> <p>在上面的指令中，<code>&amp;</code>符号与输入输出重定向结合使用时，可以用来指定文件描述符，当看到<code>&amp;&gt;</code>或<code>2&gt;&amp;1</code>这样的用法时，就表示将标准错误重定向到标准输出的同一位置，所以上面的指令就意味着，先将标准输出内容重定向到指定的文件中，再将标准错误也重定向到指定的文件中</p> <h2 id=_3>子进程与缓冲区<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <p>前面演示的都是只有一个进程打开关闭文件，如果此时在自动刷新语言级别的缓冲区之前创建了一个子进程，观察下面代码的执行效果：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
+<span class=normal><a href=#__codelineno-14-2> 2</a></span>
+<span class=normal><a href=#__codelineno-14-3> 3</a></span>
+<span class=normal><a href=#__codelineno-14-4> 4</a></span>
+<span class=normal><a href=#__codelineno-14-5> 5</a></span>
+<span class=normal><a href=#__codelineno-14-6> 6</a></span>
+<span class=normal><a href=#__codelineno-14-7> 7</a></span>
+<span class=normal><a href=#__codelineno-14-8> 8</a></span>
+<span class=normal><a href=#__codelineno-14-9> 9</a></span>
+<span class=normal><a href=#__codelineno-14-10>10</a></span>
+<span class=normal><a href=#__codelineno-14-11>11</a></span>
+<span class=normal><a href=#__codelineno-14-12>12</a></span>
+<span class=normal><a href=#__codelineno-14-13>13</a></span>
+<span class=normal><a href=#__codelineno-14-14>14</a></span>
+<span class=normal><a href=#__codelineno-14-15>15</a></span>
+<span class=normal><a href=#__codelineno-14-16>16</a></span>
+<span class=normal><a href=#__codelineno-14-17>17</a></span>
+<span class=normal><a href=#__codelineno-14-18>18</a></span>
+<span class=normal><a href=#__codelineno-14-19>19</a></span>
+<span class=normal><a href=#__codelineno-14-20>20</a></span>
+<span class=normal><a href=#__codelineno-14-21>21</a></span>
+<span class=normal><a href=#__codelineno-14-22>22</a></span>
+<span class=normal><a href=#__codelineno-14-23>23</a></span>
+<span class=normal><a href=#__codelineno-14-24>24</a></span>
+<span class=normal><a href=#__codelineno-14-25>25</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+<a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+<a id=__codelineno-14-3 name=__codelineno-14-3></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+<a id=__codelineno-14-4 name=__codelineno-14-4></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+<a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+<a id=__codelineno-14-6 name=__codelineno-14-6></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+<a id=__codelineno-14-7 name=__codelineno-14-7></a>
+<a id=__codelineno-14-8 name=__codelineno-14-8></a><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+<a id=__codelineno-14-9 name=__codelineno-14-9></a><span class=p>{</span>
+<a id=__codelineno-14-10 name=__codelineno-14-10></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;log.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_APPEND</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
+<a id=__codelineno-14-11 name=__codelineno-14-11></a><span class=w>    </span><span class=n>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>stdout</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
+<a id=__codelineno-14-12 name=__codelineno-14-12></a><span class=w>    </span><span class=c1>// C库函数</span>
+<a id=__codelineno-14-13 name=__codelineno-14-13></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot; hello printf</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+<a id=__codelineno-14-14 name=__codelineno-14-14></a><span class=w>    </span><span class=n>fprintf</span><span class=p>(</span><span class=n>stdout</span><span class=p>,</span><span class=w> </span><span class=s>&quot; hello fprintf</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+<a id=__codelineno-14-15 name=__codelineno-14-15></a><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=o>*</span><span class=n>message</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot; hello fwrite</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>;</span>
+<a id=__codelineno-14-16 name=__codelineno-14-16></a><span class=w>    </span><span class=n>fwrite</span><span class=p>(</span><span class=n>message</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>message</span><span class=p>),</span><span class=w> </span><span class=n>stdout</span><span class=p>);</span>
+<a id=__codelineno-14-17 name=__codelineno-14-17></a>
+<a id=__codelineno-14-18 name=__codelineno-14-18></a><span class=w>    </span><span class=c1>// 系统调用</span>
+<a id=__codelineno-14-19 name=__codelineno-14-19></a><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=o>*</span><span class=n>w</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot; hello write</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>;</span>
+<a id=__codelineno-14-20 name=__codelineno-14-20></a><span class=w>    </span><span class=n>write</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=n>w</span><span class=p>,</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>w</span><span class=p>));</span>
+<a id=__codelineno-14-21 name=__codelineno-14-21></a>
+<a id=__codelineno-14-22 name=__codelineno-14-22></a><span class=w>    </span><span class=c1>// 创建子进程</span>
+<a id=__codelineno-14-23 name=__codelineno-14-23></a><span class=w>    </span><span class=n>fork</span><span class=p>();</span>
+<a id=__codelineno-14-24 name=__codelineno-14-24></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-14-25 name=__codelineno-14-25></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <p>编译运行上面的代码，查看<code>log.txt</code>文件中的内容：</p> <p><a class=glightbox href="14. Linux中输入和输出基本过程.assets\image9.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="14. Linux中输入和输出基本过程.assets\image9.png"></a></p> <p>可以看到，除了系统调用接口<code>write</code>函数以外，其他的C语言库函数均出现两次打印的情况，本质就是因为语言级缓冲区自动刷新到系统内核级缓冲区机制，而因为<code>fork</code>创建了子进程，所以子进程在不修改的情况下会共享父进程中的所有内容，包括语言级缓冲区，所以在最后程序结束时，因为父进程没有刷新语言级缓冲区，所以创建子进程之后，父子进程都要进行一次刷新操作，所以父子进程都通过系统调用接口将数据写入到内核级缓冲区中，而之所以<code>write</code>函数没有写入两次，就是因为父进程已经调用完成<code>write</code>函数了，系统内核级缓冲区已经有对应的内容，所以此时子进程就不需要再调用了，最后由操作系统决定将所有内容刷新到文件中</p> <h2 id=shell2>手撕一个简单的shell（版本2）<a class=headerlink href=#shell2 title="Permanent link">&para;</a></h2> <h3 id=_4>判断重定向命令与截取<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <p>在第一个版本中已经实现了shell基本的功能，但是前面并没有解决重定向问题，本次版本中主要实现重定向的效果</p> <p>首先观察一条命令目的是将指定内容重定向到指定文件时的基本结构，以<code>ls</code>+重定向为例：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1>1</a></span>
+<span class=normal><a href=#__codelineno-15-2>2</a></span>
+<span class=normal><a href=#__codelineno-15-3>3</a></span>
+<span class=normal><a href=#__codelineno-15-4>4</a></span>
+<span class=normal><a href=#__codelineno-15-5>5</a></span>
+<span class=normal><a href=#__codelineno-15-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=c1>// 输出重定向</span>
+<a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=n>ls</span><span class=w> </span><span class=o>-</span><span class=n>l</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=n>test</span><span class=p>.</span><span class=n>txt</span>
+<a id=__codelineno-15-3 name=__codelineno-15-3></a><span class=c1>// 追加重定向</span>
+<a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=n>ls</span><span class=w> </span><span class=o>-</span><span class=n>l</span><span class=w> </span><span class=o>&gt;&gt;</span><span class=w> </span><span class=n>test</span><span class=p>.</span><span class=n>txt</span>
+<a id=__codelineno-15-5 name=__codelineno-15-5></a><span class=c1>// 输入重定向</span>
+<a id=__codelineno-15-6 name=__codelineno-15-6></a><span class=n>ls</span><span class=w> </span><span class=o>-</span><span class=n>l</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>test</span><span class=p>.</span><span class=n>txt</span>
+</code></pre></div></td></tr></table></div> <p>可以看到，重定向时需要使用到三个字符：<code>&gt;</code>、<code>&gt;&gt;</code>和<code>&lt;</code>，所以可以通过判断这三个字符判断是否是重定向，接下来的问题就转化为如何判断</p> <p>在前面获取用户输入的命令时，将用户的输入当成一串字符串看待，接下来在另一个函数中处理该字符串（对字符串进行切割），所以判断其中的字符就需要在切割字符串时处理，并且需要在调用<code>strtok</code>函数切割前处理</p> <p>可以考虑从尾部向前遍历字符串，如果遇到了三个字符中的其中一个就停止，在这个过程中，需要注意两个字符<code>&gt;</code>和<code>&gt;&gt;</code>，在Linux中，对于追加重定向的符号<code>&gt;&gt;</code>来说，不允许两个<code>&gt;</code>中含有空格，所以判断是<code>&gt;</code>后还需要判断前一个字符是不是<code>&gt;</code>，所以判断逻辑主要分成两种：</p> <ol> <li>是否是<code>&gt;</code><ol> <li>再判断前一个字符是否是<code>&gt;</code></li> </ol> </li> <li>是否是<code>&lt;</code></li> </ol> <div class="admonition quote"> <p class=admonition-title>Quote</p> <p>这里需要注意出现的先后，不要单独将<code>&gt;&gt;</code>拿出来判断，此时如果先写判断是否是<code>&gt;</code>的逻辑且判断<code>&gt;&gt;</code>是<code>else if</code>的分支时，就会出现判断<code>&gt;&gt;</code>始终无法进入</p> </div> <p>反向遍历到三个符号中的一个之后进入对应分支中就可以开始处理分割问题，在C语言中，一个字符串的结尾即为<code>\0</code>，所以可以将指定位置置为<code>\0</code>达到分割的效果，分割分为三种情况：</p> <ol> <li><code>&gt;</code>：将<code>&gt;</code>位置置为0，此时前面的内容即为普通命令，后面的内容即为文件名</li> <li><code>&gt;&gt;</code>：将两个<code>&gt;</code>位置置为0，此时前面的内容即为普通命令，后面的内容即为文件名</li> <li><code>&lt;</code>：将<code>&lt;</code>位置置为0，此时前面的内容即为普通命令，后面的内容即为文件名</li> </ol> <p>需要注意，获取到的文件名不一定一开始就是有效字符，还需要处理第一个有效字符前的空格问题，所以这里可以考虑使用一个宏函数或者内联函数解决，基本思路就是一直遍历到第一个有效字符为止：</p> <div class="tabbed-set tabbed-alternate" data-tabs=1:3><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><input id=__tabbed_1_3 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>宏函数</label><label for=__tabbed_1_2>内联函数（二级指针版本）</label><label for=__tabbed_1_3>内联函数（指针引用版本）</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1>1</a></span>
+<span class=normal><a href=#__codelineno-16-2>2</a></span>
+<span class=normal><a href=#__codelineno-16-3>3</a></span>
+<span class=normal><a href=#__codelineno-16-4>4</a></span>
+<span class=normal><a href=#__codelineno-16-5>5</a></span>
+<span class=normal><a href=#__codelineno-16-6>6</a></span>
+<span class=normal><a href=#__codelineno-16-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=c1>// 跳过空白字符</span>
+<a id=__codelineno-16-2 name=__codelineno-16-2></a><span class=cp>#define Trim(pos) do {\</span>
+<a id=__codelineno-16-3 name=__codelineno-16-3></a><span class=cp>    while(isspace(*pos))\</span>
+<a id=__codelineno-16-4 name=__codelineno-16-4></a><span class=cp>    {\</span>
+<a id=__codelineno-16-5 name=__codelineno-16-5></a><span class=cp>        pos++;\</span>
+<a id=__codelineno-16-6 name=__codelineno-16-6></a><span class=cp>    }\</span>
+<a id=__codelineno-16-7 name=__codelineno-16-7></a><span class=cp>}while(0)</span>
+</code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1>1</a></span>
 <span class=normal><a href=#__codelineno-17-2>2</a></span>
 <span class=normal><a href=#__codelineno-17-3>3</a></span>
 <span class=normal><a href=#__codelineno-17-4>4</a></span>
 <span class=normal><a href=#__codelineno-17-5>5</a></span>
-<span class=normal><a href=#__codelineno-17-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=k>enum</span><span class=w> </span>
-<a id=__codelineno-17-2 name=__codelineno-17-2></a><span class=p>{</span>
-<a id=__codelineno-17-3 name=__codelineno-17-3></a><span class=w>    </span><span class=n>LINE</span><span class=p>,</span><span class=w> </span><span class=c1>// 行刷新</span>
-<a id=__codelineno-17-4 name=__codelineno-17-4></a><span class=w>    </span><span class=n>FULL</span><span class=p>,</span><span class=w> </span><span class=c1>// 满刷新</span>
-<a id=__codelineno-17-5 name=__codelineno-17-5></a><span class=w>    </span><span class=n>NONE</span><span class=p>,</span><span class=w> </span><span class=c1>// 不缓冲</span>
-<a id=__codelineno-17-6 name=__codelineno-17-6></a><span class=p>};</span>
-</code></pre></div></td></tr></table></div> <p>所以此时的<code>FILE</code>定义为如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1> 1</a></span>
-<span class=normal><a href=#__codelineno-18-2> 2</a></span>
-<span class=normal><a href=#__codelineno-18-3> 3</a></span>
-<span class=normal><a href=#__codelineno-18-4> 4</a></span>
-<span class=normal><a href=#__codelineno-18-5> 5</a></span>
-<span class=normal><a href=#__codelineno-18-6> 6</a></span>
-<span class=normal><a href=#__codelineno-18-7> 7</a></span>
-<span class=normal><a href=#__codelineno-18-8> 8</a></span>
-<span class=normal><a href=#__codelineno-18-9> 9</a></span>
-<span class=normal><a href=#__codelineno-18-10>10</a></span>
-<span class=normal><a href=#__codelineno-18-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-18-1 name=__codelineno-18-1></a><span class=cp>#define SIZE 1024</span>
-<a id=__codelineno-18-2 name=__codelineno-18-2></a><span class=k>struct</span><span class=w> </span><span class=nc>myFILE</span>
+<span class=normal><a href=#__codelineno-17-6>6</a></span>
+<span class=normal><a href=#__codelineno-17-7>7</a></span>
+<span class=normal><a href=#__codelineno-17-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=c1>// 二级指针</span>
+<a id=__codelineno-17-2 name=__codelineno-17-2></a><span class=kr>inline</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>trim</span><span class=p>(</span><span class=kt>char</span><span class=o>**</span><span class=w> </span><span class=n>pos</span><span class=p>)</span><span class=w> </span>
+<a id=__codelineno-17-3 name=__codelineno-17-3></a><span class=p>{</span>
+<a id=__codelineno-17-4 name=__codelineno-17-4></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>isspace</span><span class=p>(</span><span class=o>*</span><span class=p>(</span><span class=o>*</span><span class=n>pos</span><span class=p>)))</span>
+<a id=__codelineno-17-5 name=__codelineno-17-5></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-17-6 name=__codelineno-17-6></a><span class=w>        </span><span class=p>(</span><span class=o>*</span><span class=n>pos</span><span class=p>)</span><span class=o>++</span><span class=p>;</span>
+<a id=__codelineno-17-7 name=__codelineno-17-7></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-17-8 name=__codelineno-17-8></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1>1</a></span>
+<span class=normal><a href=#__codelineno-18-2>2</a></span>
+<span class=normal><a href=#__codelineno-18-3>3</a></span>
+<span class=normal><a href=#__codelineno-18-4>4</a></span>
+<span class=normal><a href=#__codelineno-18-5>5</a></span>
+<span class=normal><a href=#__codelineno-18-6>6</a></span>
+<span class=normal><a href=#__codelineno-18-7>7</a></span>
+<span class=normal><a href=#__codelineno-18-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-18-1 name=__codelineno-18-1></a><span class=c1>// 指针引用</span>
+<a id=__codelineno-18-2 name=__codelineno-18-2></a><span class=kr>inline</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>trim</span><span class=p>(</span><span class=kt>char</span><span class=o>*&amp;</span><span class=w> </span><span class=n>pos</span><span class=p>)</span>
 <a id=__codelineno-18-3 name=__codelineno-18-3></a><span class=p>{</span>
-<a id=__codelineno-18-4 name=__codelineno-18-4></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_fileno</span><span class=p>;</span><span class=w> </span><span class=c1>// 文件描述符</span>
-<a id=__codelineno-18-5 name=__codelineno-18-5></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_flag</span><span class=p>;</span><span class=w> </span><span class=c1>// 刷新方式标记</span>
-<a id=__codelineno-18-6 name=__codelineno-18-6></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>_buffer</span><span class=p>[</span><span class=n>SIZE</span><span class=p>];</span><span class=w> </span><span class=c1>// 缓冲区</span>
-<a id=__codelineno-18-7 name=__codelineno-18-7></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>capacity</span><span class=p>;</span><span class=w> </span><span class=c1>// 缓冲区容量</span>
-<a id=__codelineno-18-8 name=__codelineno-18-8></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>size</span><span class=p>;</span><span class=w> </span><span class=c1>// 缓冲区有效数据个数</span>
-<a id=__codelineno-18-9 name=__codelineno-18-9></a><span class=p>};</span>
-<a id=__codelineno-18-10 name=__codelineno-18-10></a>
-<a id=__codelineno-18-11 name=__codelineno-18-11></a><span class=k>typedef</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>IO_FILE</span><span class=w> </span><span class=n>myFILE</span><span class=p>;</span><span class=w> </span>
-</code></pre></div></td></tr></table></div> <h3 id=fopen><code>fopen</code>函数<a class=headerlink href=#fopen title="Permanent link">&para;</a></h3> <p>在C语言中，<code>fopen</code>函数本质就是打开文件，所以使用到两个参数：</p> <ol> <li>文件名：定义为<code>const char* filename</code></li> <li>打开模式：定义为<code>const char* mode</code></li> </ol> <p>在函数中，为了代码健壮性可以考虑先判断<code>filename</code>是否为空，如果不为空就调用系统接口打开文件，但是打开文件需要考虑打开方式<code>mode</code>，本次主要考虑三种：<code>w</code>、<code>r</code>和<code>a</code>，依次判断并打开文件即可</p> <p>接下来考虑函数的返回值问题，对于标准库中的<code>fopen</code>函数来说，其返回值为<code>FILE*</code>，但是如果在<code>fopen</code>函数中直接返回一个局部变量就会出现野指针问题，所以考虑在函数内部返回一个在堆中开辟的空间</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-19-1> 1</a></span>
+<a id=__codelineno-18-4 name=__codelineno-18-4></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>isspace</span><span class=p>(</span><span class=o>*</span><span class=n>pos</span><span class=p>))</span>
+<a id=__codelineno-18-5 name=__codelineno-18-5></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-18-6 name=__codelineno-18-6></a><span class=w>        </span><span class=n>pos</span><span class=o>++</span><span class=p>;</span>
+<a id=__codelineno-18-7 name=__codelineno-18-7></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-18-8 name=__codelineno-18-8></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> </div> </div> </div> <div class="admonition note"> <p class=admonition-title>Note</p> <p>上面的宏函数中使用<code>do...while(0)</code>结构只是确保主体逻辑代码被代码块包裹，使结构更加清晰</p> </div> <p>示例代码如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-19-1> 1</a></span>
 <span class=normal><a href=#__codelineno-19-2> 2</a></span>
 <span class=normal><a href=#__codelineno-19-3> 3</a></span>
 <span class=normal><a href=#__codelineno-19-4> 4</a></span>
@@ -908,54 +574,132 @@
 <span class=normal><a href=#__codelineno-19-44>44</a></span>
 <span class=normal><a href=#__codelineno-19-45>45</a></span>
 <span class=normal><a href=#__codelineno-19-46>46</a></span>
-<span class=normal><a href=#__codelineno-19-47>47</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-19-1 name=__codelineno-19-1></a><span class=n>myFILE</span><span class=o>*</span><span class=w> </span><span class=nf>myfopen</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>mode</span><span class=p>)</span>
-<a id=__codelineno-19-2 name=__codelineno-19-2></a><span class=p>{</span>
-<a id=__codelineno-19-3 name=__codelineno-19-3></a><span class=w>    </span><span class=c1>// 判断文件是否存在</span>
-<a id=__codelineno-19-4 name=__codelineno-19-4></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=n>filename</span><span class=p>)</span>
-<a id=__codelineno-19-5 name=__codelineno-19-5></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-19-6 name=__codelineno-19-6></a><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>NULL</span><span class=p>;</span>
-<a id=__codelineno-19-7 name=__codelineno-19-7></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-19-8 name=__codelineno-19-8></a><span class=w>    </span><span class=c1>// 判断模式是否为空</span>
-<a id=__codelineno-19-9 name=__codelineno-19-9></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=n>mode</span><span class=p>)</span>
-<a id=__codelineno-19-10 name=__codelineno-19-10></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-19-11 name=__codelineno-19-11></a><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>NULL</span><span class=p>;</span>
-<a id=__codelineno-19-12 name=__codelineno-19-12></a><span class=w>    </span><span class=p>}</span>
+<span class=normal><a href=#__codelineno-19-47>47</a></span>
+<span class=normal><a href=#__codelineno-19-48>48</a></span>
+<span class=normal><a href=#__codelineno-19-49>49</a></span>
+<span class=normal><a href=#__codelineno-19-50>50</a></span>
+<span class=normal><a href=#__codelineno-19-51>51</a></span>
+<span class=normal><a href=#__codelineno-19-52>52</a></span>
+<span class=normal><a href=#__codelineno-19-53>53</a></span>
+<span class=normal><a href=#__codelineno-19-54>54</a></span>
+<span class=normal><a href=#__codelineno-19-55>55</a></span>
+<span class=normal><a href=#__codelineno-19-56>56</a></span>
+<span class=normal><a href=#__codelineno-19-57>57</a></span>
+<span class=normal><a href=#__codelineno-19-58>58</a></span>
+<span class=normal><a href=#__codelineno-19-59>59</a></span>
+<span class=normal><a href=#__codelineno-19-60>60</a></span>
+<span class=normal><a href=#__codelineno-19-61>61</a></span>
+<span class=normal><a href=#__codelineno-19-62>62</a></span>
+<span class=normal><a href=#__codelineno-19-63>63</a></span>
+<span class=normal><a href=#__codelineno-19-64>64</a></span>
+<span class=normal><a href=#__codelineno-19-65>65</a></span>
+<span class=normal><a href=#__codelineno-19-66>66</a></span>
+<span class=normal><a href=#__codelineno-19-67>67</a></span>
+<span class=normal><a href=#__codelineno-19-68>68</a></span>
+<span class=normal><a href=#__codelineno-19-69>69</a></span>
+<span class=normal><a href=#__codelineno-19-70>70</a></span>
+<span class=normal><a href=#__codelineno-19-71>71</a></span>
+<span class=normal><a href=#__codelineno-19-72>72</a></span>
+<span class=normal><a href=#__codelineno-19-73>73</a></span>
+<span class=normal><a href=#__codelineno-19-74>74</a></span>
+<span class=normal><a href=#__codelineno-19-75>75</a></span>
+<span class=normal><a href=#__codelineno-19-76>76</a></span>
+<span class=normal><a href=#__codelineno-19-77>77</a></span>
+<span class=normal><a href=#__codelineno-19-78>78</a></span>
+<span class=normal><a href=#__codelineno-19-79>79</a></span>
+<span class=normal><a href=#__codelineno-19-80>80</a></span>
+<span class=normal><a href=#__codelineno-19-81>81</a></span>
+<span class=normal><a href=#__codelineno-19-82>82</a></span>
+<span class=normal><a href=#__codelineno-19-83>83</a></span>
+<span class=normal><a href=#__codelineno-19-84>84</a></span>
+<span class=normal><a href=#__codelineno-19-85>85</a></span>
+<span class=normal><a href=#__codelineno-19-86>86</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-19-1 name=__codelineno-19-1></a><span class=c1>// 重定向状态</span>
+<a id=__codelineno-19-2 name=__codelineno-19-2></a><span class=k>enum</span><span class=w> </span><span class=n>redirStatus</span>
+<a id=__codelineno-19-3 name=__codelineno-19-3></a><span class=p>{</span>
+<a id=__codelineno-19-4 name=__codelineno-19-4></a><span class=w>    </span><span class=n>NONE</span><span class=p>,</span>
+<a id=__codelineno-19-5 name=__codelineno-19-5></a><span class=w>    </span><span class=n>APPEND</span><span class=p>,</span>
+<a id=__codelineno-19-6 name=__codelineno-19-6></a><span class=w>    </span><span class=n>TRUNCATE</span><span class=p>,</span>
+<a id=__codelineno-19-7 name=__codelineno-19-7></a><span class=w>    </span><span class=n>INPUT</span><span class=w> </span>
+<a id=__codelineno-19-8 name=__codelineno-19-8></a><span class=p>};</span>
+<a id=__codelineno-19-9 name=__codelineno-19-9></a><span class=c1>// 重定向状态码</span>
+<a id=__codelineno-19-10 name=__codelineno-19-10></a><span class=kt>int</span><span class=w> </span><span class=n>redirCode</span><span class=p>;</span>
+<a id=__codelineno-19-11 name=__codelineno-19-11></a><span class=c1>// 文件名</span>
+<a id=__codelineno-19-12 name=__codelineno-19-12></a><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>filename</span><span class=p>;</span>
 <a id=__codelineno-19-13 name=__codelineno-19-13></a>
-<a id=__codelineno-19-14 name=__codelineno-19-14></a><span class=w>    </span><span class=c1>// 开辟返回的空间</span>
-<a id=__codelineno-19-15 name=__codelineno-19-15></a><span class=w>    </span><span class=n>myFILE</span><span class=o>*</span><span class=w> </span><span class=n>myfile</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>myFILE</span><span class=o>*</span><span class=p>)</span><span class=n>malloc</span><span class=p>(</span><span class=k>sizeof</span><span class=p>(</span><span class=n>myFILE</span><span class=p>));</span>
-<a id=__codelineno-19-16 name=__codelineno-19-16></a><span class=w>    </span><span class=c1>// 文件和模式都不为空时可以开始打开文件</span>
-<a id=__codelineno-19-17 name=__codelineno-19-17></a><span class=w>    </span><span class=c1>// 判断是何种模式</span>
-<a id=__codelineno-19-18 name=__codelineno-19-18></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>strcmp</span><span class=p>(</span><span class=n>mode</span><span class=p>,</span><span class=w> </span><span class=s>&quot;w&quot;</span><span class=p>)</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
-<a id=__codelineno-19-19 name=__codelineno-19-19></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-19-20 name=__codelineno-19-20></a><span class=w>        </span><span class=c1>// 写模式打开</span>
-<a id=__codelineno-19-21 name=__codelineno-19-21></a><span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_TRUNC</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
-<a id=__codelineno-19-22 name=__codelineno-19-22></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>fd</span><span class=p>;</span>
-<a id=__codelineno-19-23 name=__codelineno-19-23></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_flag</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>LINE</span><span class=p>;</span>
-<a id=__codelineno-19-24 name=__codelineno-19-24></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_capacity</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>SIZE</span><span class=p>;</span>
-<a id=__codelineno-19-25 name=__codelineno-19-25></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-19-26 name=__codelineno-19-26></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-19-27 name=__codelineno-19-27></a><span class=w>    </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>strcmp</span><span class=p>(</span><span class=n>mode</span><span class=p>,</span><span class=w> </span><span class=s>&quot;r&quot;</span><span class=p>)</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
-<a id=__codelineno-19-28 name=__codelineno-19-28></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-19-29 name=__codelineno-19-29></a><span class=w>        </span><span class=c1>// 写模式打开</span>
-<a id=__codelineno-19-30 name=__codelineno-19-30></a><span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_RDONLY</span><span class=p>);</span><span class=w> </span>
-<a id=__codelineno-19-31 name=__codelineno-19-31></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>fd</span><span class=p>;</span>
-<a id=__codelineno-19-32 name=__codelineno-19-32></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_flag</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>LINE</span><span class=p>;</span>
-<a id=__codelineno-19-33 name=__codelineno-19-33></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_capacity</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>SIZE</span><span class=p>;</span>
-<a id=__codelineno-19-34 name=__codelineno-19-34></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-19-35 name=__codelineno-19-35></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-19-36 name=__codelineno-19-36></a><span class=w>    </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>strcmp</span><span class=p>(</span><span class=n>mode</span><span class=p>,</span><span class=w> </span><span class=s>&quot;a&quot;</span><span class=p>)</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
-<a id=__codelineno-19-37 name=__codelineno-19-37></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-19-38 name=__codelineno-19-38></a><span class=w>        </span><span class=c1>// 写模式打开</span>
-<a id=__codelineno-19-39 name=__codelineno-19-39></a><span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_APPEND</span><span class=p>);</span><span class=w> </span>
-<a id=__codelineno-19-40 name=__codelineno-19-40></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>fd</span><span class=p>;</span>
-<a id=__codelineno-19-41 name=__codelineno-19-41></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_flag</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>LINE</span><span class=p>;</span>
-<a id=__codelineno-19-42 name=__codelineno-19-42></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_capacity</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>SIZE</span><span class=p>;</span>
-<a id=__codelineno-19-43 name=__codelineno-19-43></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span>
-<a id=__codelineno-19-44 name=__codelineno-19-44></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-19-45 name=__codelineno-19-45></a>
-<a id=__codelineno-19-46 name=__codelineno-19-46></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>myfile</span><span class=p>;</span>
-<a id=__codelineno-19-47 name=__codelineno-19-47></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <h3 id=fwrite><code>fwrite</code>函数<a class=headerlink href=#fwrite title="Permanent link">&para;</a></h3> <p>写函数本质是将函数的内容拷贝到语言级缓冲区，拷贝过程中需要注意要从缓冲区已有的内容之后开始拷贝，接着如果是行刷新就进行刷新操作，最后返回写入内容个数</p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>本次只考虑行刷新</p> </div> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-20-1> 1</a></span>
+<a id=__codelineno-19-14 name=__codelineno-19-14></a><span class=kt>void</span><span class=w> </span><span class=nf>parseInput</span><span class=p>()</span>
+<a id=__codelineno-19-15 name=__codelineno-19-15></a><span class=p>{</span>
+<a id=__codelineno-19-16 name=__codelineno-19-16></a><span class=w>    </span><span class=c1>// ...</span>
+<a id=__codelineno-19-17 name=__codelineno-19-17></a>
+<a id=__codelineno-19-18 name=__codelineno-19-18></a><span class=w>    </span><span class=c1>// 重定向</span>
+<a id=__codelineno-19-19 name=__codelineno-19-19></a><span class=w>    </span><span class=n>redirCode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>NONE</span><span class=p>;</span>
+<a id=__codelineno-19-20 name=__codelineno-19-20></a><span class=w>    </span><span class=n>filename</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>nullptr</span><span class=p>;</span>
+<a id=__codelineno-19-21 name=__codelineno-19-21></a>
+<a id=__codelineno-19-22 name=__codelineno-19-22></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;command start: %s</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>input_arr</span><span class=p>);</span>
+<a id=__codelineno-19-23 name=__codelineno-19-23></a><span class=w>    </span><span class=c1>// 判断是否存在重定向符号</span>
+<a id=__codelineno-19-24 name=__codelineno-19-24></a><span class=w>    </span><span class=kt>size_t</span><span class=w> </span><span class=n>end</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>input_arr</span><span class=p>)</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>;</span>
+<a id=__codelineno-19-25 name=__codelineno-19-25></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>end</span><span class=p>)</span>
+<a id=__codelineno-19-26 name=__codelineno-19-26></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-19-27 name=__codelineno-19-27></a><span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;&gt;&#39;</span><span class=p>)</span>
+<a id=__codelineno-19-28 name=__codelineno-19-28></a><span class=w>        </span><span class=p>{</span>
+<a id=__codelineno-19-29 name=__codelineno-19-29></a><span class=w>            </span><span class=c1>// 判断前面一个字符是否是&gt;</span>
+<a id=__codelineno-19-30 name=__codelineno-19-30></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;&gt;&#39;</span><span class=p>)</span>
+<a id=__codelineno-19-31 name=__codelineno-19-31></a><span class=w>            </span><span class=p>{</span>
+<a id=__codelineno-19-32 name=__codelineno-19-32></a><span class=w>                </span><span class=n>redirCode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>APPEND</span><span class=p>;</span>
+<a id=__codelineno-19-33 name=__codelineno-19-33></a><span class=w>                </span><span class=c1>// 切割字符串</span>
+<a id=__codelineno-19-34 name=__codelineno-19-34></a><span class=w>                </span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-19-35 name=__codelineno-19-35></a><span class=w>                </span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-19-36 name=__codelineno-19-36></a><span class=w>                </span><span class=c1>// 获取文件名，重定向符的下一个位置</span>
+<a id=__codelineno-19-37 name=__codelineno-19-37></a><span class=w>                </span><span class=n>filename</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=o>&amp;</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=o>+</span><span class=mi>1</span><span class=p>];</span>
+<a id=__codelineno-19-38 name=__codelineno-19-38></a><span class=w>                </span><span class=c1>// 去除空格</span>
+<a id=__codelineno-19-39 name=__codelineno-19-39></a><span class=w>                </span><span class=n>trim</span><span class=p>(</span><span class=n>filename</span><span class=p>);</span>
+<a id=__codelineno-19-40 name=__codelineno-19-40></a><span class=w>                </span><span class=c1>// 查找到重定向符号后就可以停止遍历</span>
+<a id=__codelineno-19-41 name=__codelineno-19-41></a><span class=w>                </span><span class=k>break</span><span class=p>;</span>
+<a id=__codelineno-19-42 name=__codelineno-19-42></a><span class=w>            </span><span class=p>}</span>
+<a id=__codelineno-19-43 name=__codelineno-19-43></a><span class=w>            </span><span class=k>else</span><span class=w> </span>
+<a id=__codelineno-19-44 name=__codelineno-19-44></a><span class=w>            </span><span class=p>{</span>
+<a id=__codelineno-19-45 name=__codelineno-19-45></a><span class=w>                </span><span class=c1>// 输出重定向</span>
+<a id=__codelineno-19-46 name=__codelineno-19-46></a><span class=w>                </span><span class=n>redirCode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>TRUNCATE</span><span class=p>;</span>
+<a id=__codelineno-19-47 name=__codelineno-19-47></a><span class=w>                </span><span class=c1>// 切割字符串</span>
+<a id=__codelineno-19-48 name=__codelineno-19-48></a><span class=w>                </span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-19-49 name=__codelineno-19-49></a><span class=w>                </span><span class=c1>// 获取文件名</span>
+<a id=__codelineno-19-50 name=__codelineno-19-50></a><span class=w>                </span><span class=n>filename</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=o>&amp;</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=o>+</span><span class=mi>1</span><span class=p>];</span>
+<a id=__codelineno-19-51 name=__codelineno-19-51></a><span class=w>                </span><span class=c1>// 去除空格</span>
+<a id=__codelineno-19-52 name=__codelineno-19-52></a><span class=w>                </span><span class=n>trim</span><span class=p>(</span><span class=n>filename</span><span class=p>);</span>
+<a id=__codelineno-19-53 name=__codelineno-19-53></a><span class=w>                </span><span class=c1>// 查找到重定向符号后就可以停止遍历</span>
+<a id=__codelineno-19-54 name=__codelineno-19-54></a><span class=w>                </span><span class=k>break</span><span class=p>;</span>
+<a id=__codelineno-19-55 name=__codelineno-19-55></a><span class=w>            </span><span class=p>}</span>
+<a id=__codelineno-19-56 name=__codelineno-19-56></a><span class=w>        </span><span class=p>}</span>
+<a id=__codelineno-19-57 name=__codelineno-19-57></a><span class=w>        </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;&lt;&#39;</span><span class=p>)</span>
+<a id=__codelineno-19-58 name=__codelineno-19-58></a><span class=w>        </span><span class=p>{</span>
+<a id=__codelineno-19-59 name=__codelineno-19-59></a><span class=w>            </span><span class=c1>// 输入重定向</span>
+<a id=__codelineno-19-60 name=__codelineno-19-60></a><span class=w>            </span><span class=n>redirCode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>INPUT</span><span class=p>;</span>
+<a id=__codelineno-19-61 name=__codelineno-19-61></a><span class=w>            </span><span class=c1>// 切割字符串</span>
+<a id=__codelineno-19-62 name=__codelineno-19-62></a><span class=w>            </span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-19-63 name=__codelineno-19-63></a><span class=w>            </span><span class=c1>// 获取文件名</span>
+<a id=__codelineno-19-64 name=__codelineno-19-64></a><span class=w>            </span><span class=n>filename</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=o>&amp;</span><span class=n>input_arr</span><span class=p>[</span><span class=n>end</span><span class=o>+</span><span class=mi>1</span><span class=p>];</span>
+<a id=__codelineno-19-65 name=__codelineno-19-65></a><span class=w>            </span><span class=c1>// 去除空格</span>
+<a id=__codelineno-19-66 name=__codelineno-19-66></a><span class=w>            </span><span class=n>trim</span><span class=p>(</span><span class=n>filename</span><span class=p>);</span>
+<a id=__codelineno-19-67 name=__codelineno-19-67></a><span class=w>            </span><span class=c1>// 查找到重定向符号后就可以停止遍历</span>
+<a id=__codelineno-19-68 name=__codelineno-19-68></a><span class=w>            </span><span class=k>break</span><span class=p>;</span>
+<a id=__codelineno-19-69 name=__codelineno-19-69></a><span class=w>        </span><span class=p>}</span>
+<a id=__codelineno-19-70 name=__codelineno-19-70></a><span class=w>        </span><span class=k>else</span><span class=w> </span>
+<a id=__codelineno-19-71 name=__codelineno-19-71></a><span class=w>        </span><span class=p>{</span>
+<a id=__codelineno-19-72 name=__codelineno-19-72></a><span class=w>            </span><span class=c1>// 一直向前查找</span>
+<a id=__codelineno-19-73 name=__codelineno-19-73></a><span class=w>            </span><span class=o>--</span><span class=n>end</span><span class=p>;</span>
+<a id=__codelineno-19-74 name=__codelineno-19-74></a><span class=w>        </span><span class=p>}</span>
+<a id=__codelineno-19-75 name=__codelineno-19-75></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-19-76 name=__codelineno-19-76></a>
+<a id=__codelineno-19-77 name=__codelineno-19-77></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;redir: %d</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>redirCode</span><span class=p>);</span>
+<a id=__codelineno-19-78 name=__codelineno-19-78></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;filename: %s</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>filename</span><span class=p>);</span>
+<a id=__codelineno-19-79 name=__codelineno-19-79></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;command end: %s</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>input_arr</span><span class=p>);</span>
+<a id=__codelineno-19-80 name=__codelineno-19-80></a>
+<a id=__codelineno-19-81 name=__codelineno-19-81></a><span class=w>    </span><span class=c1>// 拆分读取的字符串</span>
+<a id=__codelineno-19-82 name=__codelineno-19-82></a><span class=w>    </span><span class=k>for</span><span class=p>(</span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>ch</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>strtok</span><span class=p>(</span><span class=n>input_arr</span><span class=p>,</span><span class=w> </span><span class=s>&quot; &quot;</span><span class=p>);</span><span class=w> </span><span class=p>(</span><span class=kt>bool</span><span class=p>)</span><span class=n>ch</span><span class=p>;</span><span class=w> </span><span class=n>ch</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>strtok</span><span class=p>(</span><span class=n>nullptr</span><span class=p>,</span><span class=w> </span><span class=s>&quot; &quot;</span><span class=p>))</span>
+<a id=__codelineno-19-83 name=__codelineno-19-83></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-19-84 name=__codelineno-19-84></a><span class=w>       </span><span class=n>global_argv</span><span class=p>[</span><span class=n>global_argc</span><span class=o>++</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>ch</span><span class=p>;</span><span class=w> </span>
+<a id=__codelineno-19-85 name=__codelineno-19-85></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-19-86 name=__codelineno-19-86></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <h3 id=_5>执行重定向<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <p>执行重定向不可以使用父进程执行，如果使用父进程执行，则后续执行的指令都会受到重定向的影响，所以考虑使用子进程执行</p> <p>但是这里涉及到一个问题：程序替换时，被替换的代码会受到重定向的影响吗？答案是会的，因为重定向本质改的是<code>files_struct</code>结构体，而该结构体存在于进程中，当前这个进程是子进程，程序替换本质只是替换子进程的代码和数据，但是不会替换进程PCB，所以重定向会影响到被替换的代码</p> <p>本质重定向就是改变输出文件，所以对于三种重定向来说，只需要在不同类型的重定向中执行不同的重定向逻辑即可：</p> <ol> <li>输出重定向：以覆写以及不存在新建的模式打开文件并将<code>stdout</code>位置更改为该文件</li> <li>追加重定向：以追加写以及不存在新建的模式打开文件并将<code>stdout</code>位置更改为该文件</li> <li>输入重定向：以只读模式打开文件并将<code>stdin</code>位置更改为该文件</li> </ol> <div class="admonition note"> <p class=admonition-title>Note</p> <p>下面的代码中涉及到一些错误情况的处理</p> </div> <p>示例代码如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-20-1> 1</a></span>
 <span class=normal><a href=#__codelineno-20-2> 2</a></span>
 <span class=normal><a href=#__codelineno-20-3> 3</a></span>
 <span class=normal><a href=#__codelineno-20-4> 4</a></span>
@@ -968,44 +712,140 @@
 <span class=normal><a href=#__codelineno-20-11>11</a></span>
 <span class=normal><a href=#__codelineno-20-12>12</a></span>
 <span class=normal><a href=#__codelineno-20-13>13</a></span>
-<span class=normal><a href=#__codelineno-20-14>14</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-20-1 name=__codelineno-20-1></a><span class=kt>int</span><span class=w> </span><span class=nf>myfwrite</span><span class=p>(</span><span class=n>myFILE</span><span class=o>*</span><span class=w> </span><span class=n>stream</span><span class=p>,</span><span class=w> </span><span class=k>const</span><span class=w> </span><span class=kt>void</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>num</span><span class=p>)</span>
+<span class=normal><a href=#__codelineno-20-14>14</a></span>
+<span class=normal><a href=#__codelineno-20-15>15</a></span>
+<span class=normal><a href=#__codelineno-20-16>16</a></span>
+<span class=normal><a href=#__codelineno-20-17>17</a></span>
+<span class=normal><a href=#__codelineno-20-18>18</a></span>
+<span class=normal><a href=#__codelineno-20-19>19</a></span>
+<span class=normal><a href=#__codelineno-20-20>20</a></span>
+<span class=normal><a href=#__codelineno-20-21>21</a></span>
+<span class=normal><a href=#__codelineno-20-22>22</a></span>
+<span class=normal><a href=#__codelineno-20-23>23</a></span>
+<span class=normal><a href=#__codelineno-20-24>24</a></span>
+<span class=normal><a href=#__codelineno-20-25>25</a></span>
+<span class=normal><a href=#__codelineno-20-26>26</a></span>
+<span class=normal><a href=#__codelineno-20-27>27</a></span>
+<span class=normal><a href=#__codelineno-20-28>28</a></span>
+<span class=normal><a href=#__codelineno-20-29>29</a></span>
+<span class=normal><a href=#__codelineno-20-30>30</a></span>
+<span class=normal><a href=#__codelineno-20-31>31</a></span>
+<span class=normal><a href=#__codelineno-20-32>32</a></span>
+<span class=normal><a href=#__codelineno-20-33>33</a></span>
+<span class=normal><a href=#__codelineno-20-34>34</a></span>
+<span class=normal><a href=#__codelineno-20-35>35</a></span>
+<span class=normal><a href=#__codelineno-20-36>36</a></span>
+<span class=normal><a href=#__codelineno-20-37>37</a></span>
+<span class=normal><a href=#__codelineno-20-38>38</a></span>
+<span class=normal><a href=#__codelineno-20-39>39</a></span>
+<span class=normal><a href=#__codelineno-20-40>40</a></span>
+<span class=normal><a href=#__codelineno-20-41>41</a></span>
+<span class=normal><a href=#__codelineno-20-42>42</a></span>
+<span class=normal><a href=#__codelineno-20-43>43</a></span>
+<span class=normal><a href=#__codelineno-20-44>44</a></span>
+<span class=normal><a href=#__codelineno-20-45>45</a></span>
+<span class=normal><a href=#__codelineno-20-46>46</a></span>
+<span class=normal><a href=#__codelineno-20-47>47</a></span>
+<span class=normal><a href=#__codelineno-20-48>48</a></span>
+<span class=normal><a href=#__codelineno-20-49>49</a></span>
+<span class=normal><a href=#__codelineno-20-50>50</a></span>
+<span class=normal><a href=#__codelineno-20-51>51</a></span>
+<span class=normal><a href=#__codelineno-20-52>52</a></span>
+<span class=normal><a href=#__codelineno-20-53>53</a></span>
+<span class=normal><a href=#__codelineno-20-54>54</a></span>
+<span class=normal><a href=#__codelineno-20-55>55</a></span>
+<span class=normal><a href=#__codelineno-20-56>56</a></span>
+<span class=normal><a href=#__codelineno-20-57>57</a></span>
+<span class=normal><a href=#__codelineno-20-58>58</a></span>
+<span class=normal><a href=#__codelineno-20-59>59</a></span>
+<span class=normal><a href=#__codelineno-20-60>60</a></span>
+<span class=normal><a href=#__codelineno-20-61>61</a></span>
+<span class=normal><a href=#__codelineno-20-62>62</a></span>
+<span class=normal><a href=#__codelineno-20-63>63</a></span>
+<span class=normal><a href=#__codelineno-20-64>64</a></span>
+<span class=normal><a href=#__codelineno-20-65>65</a></span>
+<span class=normal><a href=#__codelineno-20-66>66</a></span>
+<span class=normal><a href=#__codelineno-20-67>67</a></span>
+<span class=normal><a href=#__codelineno-20-68>68</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-20-1 name=__codelineno-20-1></a><span class=kt>void</span><span class=w> </span><span class=nf>executeProgram</span><span class=p>()</span>
 <a id=__codelineno-20-2 name=__codelineno-20-2></a><span class=p>{</span>
-<a id=__codelineno-20-3 name=__codelineno-20-3></a><span class=w>    </span><span class=c1>// 写函数的本质是将数据拷贝到缓冲区</span>
-<a id=__codelineno-20-4 name=__codelineno-20-4></a><span class=w>    </span><span class=n>memcpy</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_buffer</span><span class=o>+</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=p>,</span><span class=w> </span><span class=n>ptr</span><span class=p>,</span><span class=w> </span><span class=n>num</span><span class=p>);</span>
-<a id=__codelineno-20-5 name=__codelineno-20-5></a><span class=w>    </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>+=</span><span class=w> </span><span class=n>num</span><span class=p>;</span>
-<a id=__codelineno-20-6 name=__codelineno-20-6></a>
-<a id=__codelineno-20-7 name=__codelineno-20-7></a><span class=w>    </span><span class=c1>// 判断刷新方式</span>
-<a id=__codelineno-20-8 name=__codelineno-20-8></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_flag</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>LINE</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>0</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_buffer</span><span class=p>[</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;\n&#39;</span><span class=p>)</span>
-<a id=__codelineno-20-9 name=__codelineno-20-9></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-20-10 name=__codelineno-20-10></a><span class=w>        </span><span class=n>myfflush</span><span class=p>(</span><span class=n>stream</span><span class=p>);</span>
-<a id=__codelineno-20-11 name=__codelineno-20-11></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-20-12 name=__codelineno-20-12></a>
-<a id=__codelineno-20-13 name=__codelineno-20-13></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>num</span><span class=p>;</span>
-<a id=__codelineno-20-14 name=__codelineno-20-14></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <h3 id=fflush><code>fflush</code>函数<a class=headerlink href=#fflush title="Permanent link">&para;</a></h3> <p>对于刷新函数来说，只要语言级缓冲区有内容就可以调用系统接口<code>write</code>函数将语言级缓冲区的内容写入内核级缓冲区，写完成后将缓冲区的大小更新为0。可以考虑调用<code>fsync</code>函数每一次刷新就将内核级缓冲区的内容刷新到文件中</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-21-1> 1</a></span>
-<span class=normal><a href=#__codelineno-21-2> 2</a></span>
-<span class=normal><a href=#__codelineno-21-3> 3</a></span>
-<span class=normal><a href=#__codelineno-21-4> 4</a></span>
-<span class=normal><a href=#__codelineno-21-5> 5</a></span>
-<span class=normal><a href=#__codelineno-21-6> 6</a></span>
-<span class=normal><a href=#__codelineno-21-7> 7</a></span>
-<span class=normal><a href=#__codelineno-21-8> 8</a></span>
-<span class=normal><a href=#__codelineno-21-9> 9</a></span>
-<span class=normal><a href=#__codelineno-21-10>10</a></span>
-<span class=normal><a href=#__codelineno-21-11>11</a></span>
-<span class=normal><a href=#__codelineno-21-12>12</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-21-1 name=__codelineno-21-1></a><span class=kt>void</span><span class=w> </span><span class=nf>myfflush</span><span class=p>(</span><span class=n>myFILE</span><span class=o>*</span><span class=w> </span><span class=n>stream</span><span class=p>)</span>
+<a id=__codelineno-20-3 name=__codelineno-20-3></a><span class=w>    </span><span class=kt>pid_t</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>fork</span><span class=p>();</span>
+<a id=__codelineno-20-4 name=__codelineno-20-4></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>id</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+<a id=__codelineno-20-5 name=__codelineno-20-5></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-20-6 name=__codelineno-20-6></a><span class=w>        </span><span class=c1>// 判断是哪一种重定向</span>
+<a id=__codelineno-20-7 name=__codelineno-20-7></a><span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>redirCode</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>TRUNCATE</span><span class=p>)</span>
+<a id=__codelineno-20-8 name=__codelineno-20-8></a><span class=w>        </span><span class=p>{</span>
+<a id=__codelineno-20-9 name=__codelineno-20-9></a><span class=w>            </span><span class=c1>// 输出重定向</span>
+<a id=__codelineno-20-10 name=__codelineno-20-10></a><span class=w>            </span><span class=c1>// 1. 打开文件</span>
+<a id=__codelineno-20-11 name=__codelineno-20-11></a><span class=w>            </span><span class=c1>// 确保文件不为空</span>
+<a id=__codelineno-20-12 name=__codelineno-20-12></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>
+<a id=__codelineno-20-13 name=__codelineno-20-13></a><span class=w>            </span><span class=p>{</span>
+<a id=__codelineno-20-14 name=__codelineno-20-14></a><span class=w>                </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_TRUNC</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
+<a id=__codelineno-20-15 name=__codelineno-20-15></a><span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>fd</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+<a id=__codelineno-20-16 name=__codelineno-20-16></a><span class=w>                </span><span class=p>{</span>
+<a id=__codelineno-20-17 name=__codelineno-20-17></a><span class=w>                    </span><span class=n>exit</span><span class=p>(</span><span class=n>FILEOPENFAIL</span><span class=p>);</span>
+<a id=__codelineno-20-18 name=__codelineno-20-18></a><span class=w>                </span><span class=p>}</span>
+<a id=__codelineno-20-19 name=__codelineno-20-19></a><span class=w>                </span><span class=c1>// 2. 重定向stdout文件为新创文件</span>
+<a id=__codelineno-20-20 name=__codelineno-20-20></a><span class=w>                </span><span class=n>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>stdout</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
+<a id=__codelineno-20-21 name=__codelineno-20-21></a><span class=w>            </span><span class=p>}</span>
+<a id=__codelineno-20-22 name=__codelineno-20-22></a><span class=w>            </span><span class=k>else</span><span class=w> </span>
+<a id=__codelineno-20-23 name=__codelineno-20-23></a><span class=w>            </span><span class=p>{</span>
+<a id=__codelineno-20-24 name=__codelineno-20-24></a><span class=w>                </span><span class=n>exit</span><span class=p>(</span><span class=n>FILENOTEXISTS</span><span class=p>);</span>
+<a id=__codelineno-20-25 name=__codelineno-20-25></a><span class=w>            </span><span class=p>}</span>
+<a id=__codelineno-20-26 name=__codelineno-20-26></a><span class=w>        </span><span class=p>}</span>
+<a id=__codelineno-20-27 name=__codelineno-20-27></a><span class=w>        </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>redirCode</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>APPEND</span><span class=p>)</span>
+<a id=__codelineno-20-28 name=__codelineno-20-28></a><span class=w>        </span><span class=p>{</span>
+<a id=__codelineno-20-29 name=__codelineno-20-29></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>
+<a id=__codelineno-20-30 name=__codelineno-20-30></a><span class=w>            </span><span class=p>{</span>
+<a id=__codelineno-20-31 name=__codelineno-20-31></a><span class=w>                </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_APPEND</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
+<a id=__codelineno-20-32 name=__codelineno-20-32></a><span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>fd</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+<a id=__codelineno-20-33 name=__codelineno-20-33></a><span class=w>                </span><span class=p>{</span>
+<a id=__codelineno-20-34 name=__codelineno-20-34></a><span class=w>                    </span><span class=n>exit</span><span class=p>(</span><span class=n>FILEOPENFAIL</span><span class=p>);</span>
+<a id=__codelineno-20-35 name=__codelineno-20-35></a><span class=w>                </span><span class=p>}</span>
+<a id=__codelineno-20-36 name=__codelineno-20-36></a><span class=w>                </span><span class=c1>// 2. 重定向stdout文件为新创文件</span>
+<a id=__codelineno-20-37 name=__codelineno-20-37></a><span class=w>                </span><span class=n>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>stdout</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
+<a id=__codelineno-20-38 name=__codelineno-20-38></a><span class=w>            </span><span class=p>}</span>
+<a id=__codelineno-20-39 name=__codelineno-20-39></a><span class=w>            </span><span class=k>else</span>
+<a id=__codelineno-20-40 name=__codelineno-20-40></a><span class=w>            </span><span class=p>{</span>
+<a id=__codelineno-20-41 name=__codelineno-20-41></a><span class=w>                </span><span class=n>exit</span><span class=p>(</span><span class=n>FILENOTEXISTS</span><span class=p>);</span>
+<a id=__codelineno-20-42 name=__codelineno-20-42></a><span class=w>            </span><span class=p>}</span>
+<a id=__codelineno-20-43 name=__codelineno-20-43></a><span class=w>        </span><span class=p>}</span>
+<a id=__codelineno-20-44 name=__codelineno-20-44></a><span class=w>        </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>redirCode</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>INPUT</span><span class=p>)</span>
+<a id=__codelineno-20-45 name=__codelineno-20-45></a><span class=w>        </span><span class=p>{</span><span class=w> </span>
+<a id=__codelineno-20-46 name=__codelineno-20-46></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>
+<a id=__codelineno-20-47 name=__codelineno-20-47></a><span class=w>            </span><span class=p>{</span>
+<a id=__codelineno-20-48 name=__codelineno-20-48></a><span class=w>                </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_RDONLY</span><span class=p>);</span>
+<a id=__codelineno-20-49 name=__codelineno-20-49></a><span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>fd</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+<a id=__codelineno-20-50 name=__codelineno-20-50></a><span class=w>                </span><span class=p>{</span>
+<a id=__codelineno-20-51 name=__codelineno-20-51></a><span class=w>                    </span><span class=n>exit</span><span class=p>(</span><span class=n>FILEOPENFAIL</span><span class=p>);</span>
+<a id=__codelineno-20-52 name=__codelineno-20-52></a><span class=w>                </span><span class=p>}</span>
+<a id=__codelineno-20-53 name=__codelineno-20-53></a><span class=w>                </span><span class=c1>// 2. 重定向stdout文件为新创文件</span>
+<a id=__codelineno-20-54 name=__codelineno-20-54></a><span class=w>                </span><span class=n>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>stdin</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
+<a id=__codelineno-20-55 name=__codelineno-20-55></a><span class=w>            </span><span class=p>}</span>
+<a id=__codelineno-20-56 name=__codelineno-20-56></a><span class=w>            </span><span class=k>else</span>
+<a id=__codelineno-20-57 name=__codelineno-20-57></a><span class=w>            </span><span class=p>{</span>
+<a id=__codelineno-20-58 name=__codelineno-20-58></a><span class=w>                </span><span class=n>exit</span><span class=p>(</span><span class=n>FILENOTEXISTS</span><span class=p>);</span>
+<a id=__codelineno-20-59 name=__codelineno-20-59></a><span class=w>            </span><span class=p>}</span>
+<a id=__codelineno-20-60 name=__codelineno-20-60></a><span class=w>        </span><span class=p>}</span>
+<a id=__codelineno-20-61 name=__codelineno-20-61></a><span class=w>        </span><span class=c1>// 重定向后恢复redirCode标记便于下次使用</span>
+<a id=__codelineno-20-62 name=__codelineno-20-62></a><span class=w>        </span><span class=n>redirCode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>NONE</span><span class=p>;</span>
+<a id=__codelineno-20-63 name=__codelineno-20-63></a><span class=w>        </span><span class=c1>// 程序替换</span>
+<a id=__codelineno-20-64 name=__codelineno-20-64></a><span class=w>        </span><span class=n>execvpe</span><span class=p>(</span><span class=n>global_argv</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span><span class=w> </span><span class=n>global_argv</span><span class=p>,</span><span class=w> </span><span class=n>global_env</span><span class=p>);</span>
+<a id=__codelineno-20-65 name=__codelineno-20-65></a><span class=w>        </span><span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+<a id=__codelineno-20-66 name=__codelineno-20-66></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-20-67 name=__codelineno-20-67></a><span class=w>    </span><span class=c1>// ...</span>
+<a id=__codelineno-20-68 name=__codelineno-20-68></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <p>在上面代码中，尽管开启了文件，但是可以不需要关闭文件，因为当一个进程结束并被父进程回收之后，该进程的PCB以及相关的文件结构都会被释放，此时文件就会被自动关闭，所以在Linux中，文件描述符的声明周期随着进程的结束而结束</p> <h2 id=stdioh>简单实现<code>stdio.h</code>中的文件相关操作<a class=headerlink href=#stdioh title="Permanent link">&para;</a></h2> <p>本次简单实现主要实现<code>FILE</code>结构体、<code>fwrite</code>函数、<code>fopen</code>函数、<code>fflush</code>函数和<code>fclose</code>函数</p> <h3 id=file><code>FILE</code>结构体<a class=headerlink href=#file title="Permanent link">&para;</a></h3> <p>根据前面的学习，可以知道该结构体主要会存在缓冲区和文件描述符</p> <p>而因为C语言的缓冲区有三种缓冲方式，所以定义一个<code>flag</code>标记缓冲区刷新模式，其值有如下三种：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-21-1>1</a></span>
+<span class=normal><a href=#__codelineno-21-2>2</a></span>
+<span class=normal><a href=#__codelineno-21-3>3</a></span>
+<span class=normal><a href=#__codelineno-21-4>4</a></span>
+<span class=normal><a href=#__codelineno-21-5>5</a></span>
+<span class=normal><a href=#__codelineno-21-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-21-1 name=__codelineno-21-1></a><span class=k>enum</span><span class=w> </span>
 <a id=__codelineno-21-2 name=__codelineno-21-2></a><span class=p>{</span>
-<a id=__codelineno-21-3 name=__codelineno-21-3></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
-<a id=__codelineno-21-4 name=__codelineno-21-4></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-21-5 name=__codelineno-21-5></a><span class=w>        </span><span class=c1>// 刷新的本质是将缓冲区中的数据拷贝到系统缓冲区</span>
-<a id=__codelineno-21-6 name=__codelineno-21-6></a><span class=w>        </span><span class=n>write</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>,</span><span class=w> </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_buffer</span><span class=p>,</span><span class=w> </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=p>);</span>
-<a id=__codelineno-21-7 name=__codelineno-21-7></a><span class=w>        </span><span class=c1>// 刷新到外部设备</span>
-<a id=__codelineno-21-8 name=__codelineno-21-8></a><span class=w>        </span><span class=n>fsync</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
-<a id=__codelineno-21-9 name=__codelineno-21-9></a><span class=w>        </span><span class=c1>// 更新缓冲区的_size</span>
-<a id=__codelineno-21-10 name=__codelineno-21-10></a><span class=w>        </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-21-11 name=__codelineno-21-11></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-21-12 name=__codelineno-21-12></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <h3 id=fclose><code>fclose</code>函数<a class=headerlink href=#fclose title="Permanent link">&para;</a></h3> <p>关闭函数需要注意关闭之前需要刷新</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-22-1> 1</a></span>
+<a id=__codelineno-21-3 name=__codelineno-21-3></a><span class=w>    </span><span class=n>LINE</span><span class=p>,</span><span class=w> </span><span class=c1>// 行刷新</span>
+<a id=__codelineno-21-4 name=__codelineno-21-4></a><span class=w>    </span><span class=n>FULL</span><span class=p>,</span><span class=w> </span><span class=c1>// 满刷新</span>
+<a id=__codelineno-21-5 name=__codelineno-21-5></a><span class=w>    </span><span class=n>NONE</span><span class=p>,</span><span class=w> </span><span class=c1>// 不缓冲</span>
+<a id=__codelineno-21-6 name=__codelineno-21-6></a><span class=p>};</span>
+</code></pre></div></td></tr></table></div> <p>所以此时的<code>FILE</code>定义为如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-22-1> 1</a></span>
 <span class=normal><a href=#__codelineno-22-2> 2</a></span>
 <span class=normal><a href=#__codelineno-22-3> 3</a></span>
 <span class=normal><a href=#__codelineno-22-4> 4</a></span>
@@ -1014,16 +854,180 @@
 <span class=normal><a href=#__codelineno-22-7> 7</a></span>
 <span class=normal><a href=#__codelineno-22-8> 8</a></span>
 <span class=normal><a href=#__codelineno-22-9> 9</a></span>
-<span class=normal><a href=#__codelineno-22-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-22-1 name=__codelineno-22-1></a><span class=kt>void</span><span class=w> </span><span class=nf>myfclose</span><span class=p>(</span><span class=n>myFILE</span><span class=o>*</span><span class=w> </span><span class=n>stream</span><span class=p>)</span>
-<a id=__codelineno-22-2 name=__codelineno-22-2></a><span class=p>{</span>
-<a id=__codelineno-22-3 name=__codelineno-22-3></a><span class=w>    </span><span class=c1>// 关闭之前需要自动刷新</span>
-<a id=__codelineno-22-4 name=__codelineno-22-4></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
-<a id=__codelineno-22-5 name=__codelineno-22-5></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-22-6 name=__codelineno-22-6></a><span class=w>        </span><span class=n>myfflush</span><span class=p>(</span><span class=n>stream</span><span class=p>);</span>
-<a id=__codelineno-22-7 name=__codelineno-22-7></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-22-8 name=__codelineno-22-8></a>
-<a id=__codelineno-22-9 name=__codelineno-22-9></a><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
-<a id=__codelineno-22-10 name=__codelineno-22-10></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <h3 id=_6>链接基本使用<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <p>前面已经通过代码编写好了<code>mystdio.c</code>源文件，如果现在需要给其他人使用可以将<code>mystdio.c</code>源文件编译成<code>.o</code>文件，接着只需要将<code>mystdio.o</code>文件和<code>mystdio.h</code>文件给别人即可，别人只需要将对应的头文件引入，最后编译时将自己的源文件和<code>mystdio.o</code>文件一起编译生成可执行程序即可，具体内容将在<a href=#>软硬链接部分</a>继续讲解</p> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 2, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 20, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=贡献者> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg> </span> <nav> <a href=mailto:1848312235@qq.com>H0308</a> </nav> </span> </aside> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024 EPSDA </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script> <script src=../../assets/javascripts/bundle.fe8b6f2b.min.js></script> <script src=../../javascripts/mathjax.68e8db.min.js></script> <script src=../../javascripts/particles.da90bc.min.js></script> <script src=../../javascripts/other.57ed5a.min.js></script> <script src=../../javascripts/theme-switch.9e5245.min.js></script> <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+<span class=normal><a href=#__codelineno-22-10>10</a></span>
+<span class=normal><a href=#__codelineno-22-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-22-1 name=__codelineno-22-1></a><span class=cp>#define SIZE 1024</span>
+<a id=__codelineno-22-2 name=__codelineno-22-2></a><span class=k>struct</span><span class=w> </span><span class=nc>myFILE</span>
+<a id=__codelineno-22-3 name=__codelineno-22-3></a><span class=p>{</span>
+<a id=__codelineno-22-4 name=__codelineno-22-4></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_fileno</span><span class=p>;</span><span class=w> </span><span class=c1>// 文件描述符</span>
+<a id=__codelineno-22-5 name=__codelineno-22-5></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_flag</span><span class=p>;</span><span class=w> </span><span class=c1>// 刷新方式标记</span>
+<a id=__codelineno-22-6 name=__codelineno-22-6></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>_buffer</span><span class=p>[</span><span class=n>SIZE</span><span class=p>];</span><span class=w> </span><span class=c1>// 缓冲区</span>
+<a id=__codelineno-22-7 name=__codelineno-22-7></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>capacity</span><span class=p>;</span><span class=w> </span><span class=c1>// 缓冲区容量</span>
+<a id=__codelineno-22-8 name=__codelineno-22-8></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>size</span><span class=p>;</span><span class=w> </span><span class=c1>// 缓冲区有效数据个数</span>
+<a id=__codelineno-22-9 name=__codelineno-22-9></a><span class=p>};</span>
+<a id=__codelineno-22-10 name=__codelineno-22-10></a>
+<a id=__codelineno-22-11 name=__codelineno-22-11></a><span class=k>typedef</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>IO_FILE</span><span class=w> </span><span class=n>myFILE</span><span class=p>;</span><span class=w> </span>
+</code></pre></div></td></tr></table></div> <h3 id=fopen><code>fopen</code>函数<a class=headerlink href=#fopen title="Permanent link">&para;</a></h3> <p>在C语言中，<code>fopen</code>函数本质就是打开文件，所以使用到两个参数：</p> <ol> <li>文件名：定义为<code>const char* filename</code></li> <li>打开模式：定义为<code>const char* mode</code></li> </ol> <p>在函数中，为了代码健壮性可以考虑先判断<code>filename</code>是否为空，如果不为空就调用系统接口打开文件，但是打开文件需要考虑打开方式<code>mode</code>，本次主要考虑三种：<code>w</code>、<code>r</code>和<code>a</code>，依次判断并打开文件即可</p> <p>接下来考虑函数的返回值问题，对于标准库中的<code>fopen</code>函数来说，其返回值为<code>FILE*</code>，但是如果在<code>fopen</code>函数中直接返回一个局部变量就会出现野指针问题，所以考虑在函数内部返回一个在堆中开辟的空间</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-23-1> 1</a></span>
+<span class=normal><a href=#__codelineno-23-2> 2</a></span>
+<span class=normal><a href=#__codelineno-23-3> 3</a></span>
+<span class=normal><a href=#__codelineno-23-4> 4</a></span>
+<span class=normal><a href=#__codelineno-23-5> 5</a></span>
+<span class=normal><a href=#__codelineno-23-6> 6</a></span>
+<span class=normal><a href=#__codelineno-23-7> 7</a></span>
+<span class=normal><a href=#__codelineno-23-8> 8</a></span>
+<span class=normal><a href=#__codelineno-23-9> 9</a></span>
+<span class=normal><a href=#__codelineno-23-10>10</a></span>
+<span class=normal><a href=#__codelineno-23-11>11</a></span>
+<span class=normal><a href=#__codelineno-23-12>12</a></span>
+<span class=normal><a href=#__codelineno-23-13>13</a></span>
+<span class=normal><a href=#__codelineno-23-14>14</a></span>
+<span class=normal><a href=#__codelineno-23-15>15</a></span>
+<span class=normal><a href=#__codelineno-23-16>16</a></span>
+<span class=normal><a href=#__codelineno-23-17>17</a></span>
+<span class=normal><a href=#__codelineno-23-18>18</a></span>
+<span class=normal><a href=#__codelineno-23-19>19</a></span>
+<span class=normal><a href=#__codelineno-23-20>20</a></span>
+<span class=normal><a href=#__codelineno-23-21>21</a></span>
+<span class=normal><a href=#__codelineno-23-22>22</a></span>
+<span class=normal><a href=#__codelineno-23-23>23</a></span>
+<span class=normal><a href=#__codelineno-23-24>24</a></span>
+<span class=normal><a href=#__codelineno-23-25>25</a></span>
+<span class=normal><a href=#__codelineno-23-26>26</a></span>
+<span class=normal><a href=#__codelineno-23-27>27</a></span>
+<span class=normal><a href=#__codelineno-23-28>28</a></span>
+<span class=normal><a href=#__codelineno-23-29>29</a></span>
+<span class=normal><a href=#__codelineno-23-30>30</a></span>
+<span class=normal><a href=#__codelineno-23-31>31</a></span>
+<span class=normal><a href=#__codelineno-23-32>32</a></span>
+<span class=normal><a href=#__codelineno-23-33>33</a></span>
+<span class=normal><a href=#__codelineno-23-34>34</a></span>
+<span class=normal><a href=#__codelineno-23-35>35</a></span>
+<span class=normal><a href=#__codelineno-23-36>36</a></span>
+<span class=normal><a href=#__codelineno-23-37>37</a></span>
+<span class=normal><a href=#__codelineno-23-38>38</a></span>
+<span class=normal><a href=#__codelineno-23-39>39</a></span>
+<span class=normal><a href=#__codelineno-23-40>40</a></span>
+<span class=normal><a href=#__codelineno-23-41>41</a></span>
+<span class=normal><a href=#__codelineno-23-42>42</a></span>
+<span class=normal><a href=#__codelineno-23-43>43</a></span>
+<span class=normal><a href=#__codelineno-23-44>44</a></span>
+<span class=normal><a href=#__codelineno-23-45>45</a></span>
+<span class=normal><a href=#__codelineno-23-46>46</a></span>
+<span class=normal><a href=#__codelineno-23-47>47</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-23-1 name=__codelineno-23-1></a><span class=n>myFILE</span><span class=o>*</span><span class=w> </span><span class=nf>myfopen</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>mode</span><span class=p>)</span>
+<a id=__codelineno-23-2 name=__codelineno-23-2></a><span class=p>{</span>
+<a id=__codelineno-23-3 name=__codelineno-23-3></a><span class=w>    </span><span class=c1>// 判断文件是否存在</span>
+<a id=__codelineno-23-4 name=__codelineno-23-4></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=n>filename</span><span class=p>)</span>
+<a id=__codelineno-23-5 name=__codelineno-23-5></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-23-6 name=__codelineno-23-6></a><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>NULL</span><span class=p>;</span>
+<a id=__codelineno-23-7 name=__codelineno-23-7></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-23-8 name=__codelineno-23-8></a><span class=w>    </span><span class=c1>// 判断模式是否为空</span>
+<a id=__codelineno-23-9 name=__codelineno-23-9></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=n>mode</span><span class=p>)</span>
+<a id=__codelineno-23-10 name=__codelineno-23-10></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-23-11 name=__codelineno-23-11></a><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>NULL</span><span class=p>;</span>
+<a id=__codelineno-23-12 name=__codelineno-23-12></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-23-13 name=__codelineno-23-13></a>
+<a id=__codelineno-23-14 name=__codelineno-23-14></a><span class=w>    </span><span class=c1>// 开辟返回的空间</span>
+<a id=__codelineno-23-15 name=__codelineno-23-15></a><span class=w>    </span><span class=n>myFILE</span><span class=o>*</span><span class=w> </span><span class=n>myfile</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>myFILE</span><span class=o>*</span><span class=p>)</span><span class=n>malloc</span><span class=p>(</span><span class=k>sizeof</span><span class=p>(</span><span class=n>myFILE</span><span class=p>));</span>
+<a id=__codelineno-23-16 name=__codelineno-23-16></a><span class=w>    </span><span class=c1>// 文件和模式都不为空时可以开始打开文件</span>
+<a id=__codelineno-23-17 name=__codelineno-23-17></a><span class=w>    </span><span class=c1>// 判断是何种模式</span>
+<a id=__codelineno-23-18 name=__codelineno-23-18></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>strcmp</span><span class=p>(</span><span class=n>mode</span><span class=p>,</span><span class=w> </span><span class=s>&quot;w&quot;</span><span class=p>)</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+<a id=__codelineno-23-19 name=__codelineno-23-19></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-23-20 name=__codelineno-23-20></a><span class=w>        </span><span class=c1>// 写模式打开</span>
+<a id=__codelineno-23-21 name=__codelineno-23-21></a><span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_TRUNC</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
+<a id=__codelineno-23-22 name=__codelineno-23-22></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>fd</span><span class=p>;</span>
+<a id=__codelineno-23-23 name=__codelineno-23-23></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_flag</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>LINE</span><span class=p>;</span>
+<a id=__codelineno-23-24 name=__codelineno-23-24></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_capacity</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>SIZE</span><span class=p>;</span>
+<a id=__codelineno-23-25 name=__codelineno-23-25></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-23-26 name=__codelineno-23-26></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-23-27 name=__codelineno-23-27></a><span class=w>    </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>strcmp</span><span class=p>(</span><span class=n>mode</span><span class=p>,</span><span class=w> </span><span class=s>&quot;r&quot;</span><span class=p>)</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+<a id=__codelineno-23-28 name=__codelineno-23-28></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-23-29 name=__codelineno-23-29></a><span class=w>        </span><span class=c1>// 写模式打开</span>
+<a id=__codelineno-23-30 name=__codelineno-23-30></a><span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_RDONLY</span><span class=p>);</span><span class=w> </span>
+<a id=__codelineno-23-31 name=__codelineno-23-31></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>fd</span><span class=p>;</span>
+<a id=__codelineno-23-32 name=__codelineno-23-32></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_flag</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>LINE</span><span class=p>;</span>
+<a id=__codelineno-23-33 name=__codelineno-23-33></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_capacity</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>SIZE</span><span class=p>;</span>
+<a id=__codelineno-23-34 name=__codelineno-23-34></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-23-35 name=__codelineno-23-35></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-23-36 name=__codelineno-23-36></a><span class=w>    </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>strcmp</span><span class=p>(</span><span class=n>mode</span><span class=p>,</span><span class=w> </span><span class=s>&quot;a&quot;</span><span class=p>)</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+<a id=__codelineno-23-37 name=__codelineno-23-37></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-23-38 name=__codelineno-23-38></a><span class=w>        </span><span class=c1>// 写模式打开</span>
+<a id=__codelineno-23-39 name=__codelineno-23-39></a><span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_APPEND</span><span class=p>);</span><span class=w> </span>
+<a id=__codelineno-23-40 name=__codelineno-23-40></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>fd</span><span class=p>;</span>
+<a id=__codelineno-23-41 name=__codelineno-23-41></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_flag</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>LINE</span><span class=p>;</span>
+<a id=__codelineno-23-42 name=__codelineno-23-42></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_capacity</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>SIZE</span><span class=p>;</span>
+<a id=__codelineno-23-43 name=__codelineno-23-43></a><span class=w>        </span><span class=n>myfile</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span>
+<a id=__codelineno-23-44 name=__codelineno-23-44></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-23-45 name=__codelineno-23-45></a>
+<a id=__codelineno-23-46 name=__codelineno-23-46></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>myfile</span><span class=p>;</span>
+<a id=__codelineno-23-47 name=__codelineno-23-47></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <h3 id=fwrite><code>fwrite</code>函数<a class=headerlink href=#fwrite title="Permanent link">&para;</a></h3> <p>写函数本质是将函数的内容拷贝到语言级缓冲区，拷贝过程中需要注意要从缓冲区已有的内容之后开始拷贝，接着如果是行刷新就进行刷新操作，最后返回写入内容个数</p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>本次只考虑行刷新</p> </div> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-24-1> 1</a></span>
+<span class=normal><a href=#__codelineno-24-2> 2</a></span>
+<span class=normal><a href=#__codelineno-24-3> 3</a></span>
+<span class=normal><a href=#__codelineno-24-4> 4</a></span>
+<span class=normal><a href=#__codelineno-24-5> 5</a></span>
+<span class=normal><a href=#__codelineno-24-6> 6</a></span>
+<span class=normal><a href=#__codelineno-24-7> 7</a></span>
+<span class=normal><a href=#__codelineno-24-8> 8</a></span>
+<span class=normal><a href=#__codelineno-24-9> 9</a></span>
+<span class=normal><a href=#__codelineno-24-10>10</a></span>
+<span class=normal><a href=#__codelineno-24-11>11</a></span>
+<span class=normal><a href=#__codelineno-24-12>12</a></span>
+<span class=normal><a href=#__codelineno-24-13>13</a></span>
+<span class=normal><a href=#__codelineno-24-14>14</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-24-1 name=__codelineno-24-1></a><span class=kt>int</span><span class=w> </span><span class=nf>myfwrite</span><span class=p>(</span><span class=n>myFILE</span><span class=o>*</span><span class=w> </span><span class=n>stream</span><span class=p>,</span><span class=w> </span><span class=k>const</span><span class=w> </span><span class=kt>void</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>num</span><span class=p>)</span>
+<a id=__codelineno-24-2 name=__codelineno-24-2></a><span class=p>{</span>
+<a id=__codelineno-24-3 name=__codelineno-24-3></a><span class=w>    </span><span class=c1>// 写函数的本质是将数据拷贝到缓冲区</span>
+<a id=__codelineno-24-4 name=__codelineno-24-4></a><span class=w>    </span><span class=n>memcpy</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_buffer</span><span class=o>+</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=p>,</span><span class=w> </span><span class=n>ptr</span><span class=p>,</span><span class=w> </span><span class=n>num</span><span class=p>);</span>
+<a id=__codelineno-24-5 name=__codelineno-24-5></a><span class=w>    </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>+=</span><span class=w> </span><span class=n>num</span><span class=p>;</span>
+<a id=__codelineno-24-6 name=__codelineno-24-6></a>
+<a id=__codelineno-24-7 name=__codelineno-24-7></a><span class=w>    </span><span class=c1>// 判断刷新方式</span>
+<a id=__codelineno-24-8 name=__codelineno-24-8></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_flag</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>LINE</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>0</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_buffer</span><span class=p>[</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;\n&#39;</span><span class=p>)</span>
+<a id=__codelineno-24-9 name=__codelineno-24-9></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-24-10 name=__codelineno-24-10></a><span class=w>        </span><span class=n>myfflush</span><span class=p>(</span><span class=n>stream</span><span class=p>);</span>
+<a id=__codelineno-24-11 name=__codelineno-24-11></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-24-12 name=__codelineno-24-12></a>
+<a id=__codelineno-24-13 name=__codelineno-24-13></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>num</span><span class=p>;</span>
+<a id=__codelineno-24-14 name=__codelineno-24-14></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <h3 id=fflush><code>fflush</code>函数<a class=headerlink href=#fflush title="Permanent link">&para;</a></h3> <p>对于刷新函数来说，只要语言级缓冲区有内容就可以调用系统接口<code>write</code>函数将语言级缓冲区的内容写入内核级缓冲区，写完成后将缓冲区的大小更新为0。可以考虑调用<code>fsync</code>函数每一次刷新就将内核级缓冲区的内容刷新到文件中</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-25-1> 1</a></span>
+<span class=normal><a href=#__codelineno-25-2> 2</a></span>
+<span class=normal><a href=#__codelineno-25-3> 3</a></span>
+<span class=normal><a href=#__codelineno-25-4> 4</a></span>
+<span class=normal><a href=#__codelineno-25-5> 5</a></span>
+<span class=normal><a href=#__codelineno-25-6> 6</a></span>
+<span class=normal><a href=#__codelineno-25-7> 7</a></span>
+<span class=normal><a href=#__codelineno-25-8> 8</a></span>
+<span class=normal><a href=#__codelineno-25-9> 9</a></span>
+<span class=normal><a href=#__codelineno-25-10>10</a></span>
+<span class=normal><a href=#__codelineno-25-11>11</a></span>
+<span class=normal><a href=#__codelineno-25-12>12</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-25-1 name=__codelineno-25-1></a><span class=kt>void</span><span class=w> </span><span class=nf>myfflush</span><span class=p>(</span><span class=n>myFILE</span><span class=o>*</span><span class=w> </span><span class=n>stream</span><span class=p>)</span>
+<a id=__codelineno-25-2 name=__codelineno-25-2></a><span class=p>{</span>
+<a id=__codelineno-25-3 name=__codelineno-25-3></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+<a id=__codelineno-25-4 name=__codelineno-25-4></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-25-5 name=__codelineno-25-5></a><span class=w>        </span><span class=c1>// 刷新的本质是将缓冲区中的数据拷贝到系统缓冲区</span>
+<a id=__codelineno-25-6 name=__codelineno-25-6></a><span class=w>        </span><span class=n>write</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>,</span><span class=w> </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_buffer</span><span class=p>,</span><span class=w> </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=p>);</span>
+<a id=__codelineno-25-7 name=__codelineno-25-7></a><span class=w>        </span><span class=c1>// 刷新到外部设备</span>
+<a id=__codelineno-25-8 name=__codelineno-25-8></a><span class=w>        </span><span class=n>fsync</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
+<a id=__codelineno-25-9 name=__codelineno-25-9></a><span class=w>        </span><span class=c1>// 更新缓冲区的_size</span>
+<a id=__codelineno-25-10 name=__codelineno-25-10></a><span class=w>        </span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-25-11 name=__codelineno-25-11></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-25-12 name=__codelineno-25-12></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <h3 id=fclose><code>fclose</code>函数<a class=headerlink href=#fclose title="Permanent link">&para;</a></h3> <p>关闭函数需要注意关闭之前需要刷新</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-26-1> 1</a></span>
+<span class=normal><a href=#__codelineno-26-2> 2</a></span>
+<span class=normal><a href=#__codelineno-26-3> 3</a></span>
+<span class=normal><a href=#__codelineno-26-4> 4</a></span>
+<span class=normal><a href=#__codelineno-26-5> 5</a></span>
+<span class=normal><a href=#__codelineno-26-6> 6</a></span>
+<span class=normal><a href=#__codelineno-26-7> 7</a></span>
+<span class=normal><a href=#__codelineno-26-8> 8</a></span>
+<span class=normal><a href=#__codelineno-26-9> 9</a></span>
+<span class=normal><a href=#__codelineno-26-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-26-1 name=__codelineno-26-1></a><span class=kt>void</span><span class=w> </span><span class=nf>myfclose</span><span class=p>(</span><span class=n>myFILE</span><span class=o>*</span><span class=w> </span><span class=n>stream</span><span class=p>)</span>
+<a id=__codelineno-26-2 name=__codelineno-26-2></a><span class=p>{</span>
+<a id=__codelineno-26-3 name=__codelineno-26-3></a><span class=w>    </span><span class=c1>// 关闭之前需要自动刷新</span>
+<a id=__codelineno-26-4 name=__codelineno-26-4></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_size</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+<a id=__codelineno-26-5 name=__codelineno-26-5></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-26-6 name=__codelineno-26-6></a><span class=w>        </span><span class=n>myfflush</span><span class=p>(</span><span class=n>stream</span><span class=p>);</span>
+<a id=__codelineno-26-7 name=__codelineno-26-7></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-26-8 name=__codelineno-26-8></a>
+<a id=__codelineno-26-9 name=__codelineno-26-9></a><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>stream</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
+<a id=__codelineno-26-10 name=__codelineno-26-10></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <h3 id=_6>链接基本使用<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <p>前面已经通过代码编写好了<code>mystdio.c</code>源文件，如果现在需要给其他人使用可以将<code>mystdio.c</code>源文件编译成<code>.o</code>文件，接着只需要将<code>mystdio.o</code>文件和<code>mystdio.h</code>文件给别人即可，别人只需要将对应的头文件引入，最后编译时将自己的源文件和<code>mystdio.o</code>文件一起编译生成可执行程序即可，具体内容将在<a href=#>软硬链接部分</a>继续讲解</p> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 23, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 20, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=贡献者> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg> </span> <nav> <a href=mailto:1848312235@qq.com>H0308</a> </nav> </span> </aside> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024 EPSDA </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script> <script src=../../assets/javascripts/bundle.fe8b6f2b.min.js></script> <script src=../../javascripts/mathjax.68e8db.min.js></script> <script src=../../javascripts/particles.da90bc.min.js></script> <script src=../../javascripts/other.57ed5a.min.js></script> <script src=../../javascripts/theme-switch.9e5245.min.js></script> <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
 document$.subscribe(() => { lightbox.reload() });
 </script></body> </html>

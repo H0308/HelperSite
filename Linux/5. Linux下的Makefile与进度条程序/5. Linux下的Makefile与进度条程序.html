@@ -125,156 +125,86 @@
 <a id=__codelineno-9-9 name=__codelineno-9-9></a><span class=nf>.PHONY</span><span class=o>:</span><span class=n>clean</span>
 <a id=__codelineno-9-10 name=__codelineno-9-10></a><span class=nf>clean</span><span class=o>:</span>
 <a id=__codelineno-9-11 name=__codelineno-9-11></a><span class=w>    </span>@rm<span class=w> </span>-rf<span class=w> </span><span class=k>$(</span>TARGET<span class=k>)</span><span class=w> </span><span class=k>$(</span>SRC<span class=k>)</span>
-</code></pre></div></td></tr></table></div> <p>上面的代码中，首先创建了两个变量分别代表生成的目标文件<code>code</code>以及第一个依赖集中的依赖文件列表中的文件，在依赖方法中使用了两个自动变量（一般建议大写），分别是<code>$@</code>和<code>$&lt;</code></p> <p>在<code>Makefile</code>中，<code>$@</code>表示生成的目标文件，<code>$&lt;</code>表示从依赖文件列表中取出一个文件，对应的还有<code>$^</code>表示依赖文件列表中的所有文件</p> <p>而对于<code>gcc</code>来说，在<code>Makefile</code>中可以使用内置变量<code>CC</code>（表示C编译器的名字）代替</p> <p>如果涉及到多个文件编译，则在<code>SRC</code>和<code>%.c</code>处使用空格分隔每一个文件</p> <div style="border-bottom:2px solid #cdcdcd;"></div> <p>至此，一个基本的<code>Makefile</code>文件编写语法就这么多，如果需要更详细了解<code>Makefile</code>文件，请移步至此-&gt;<a href=https://liaoxuefeng.com/books/makefile/introduction/index.html>Makefile教程</a></p> <h2 id=_1>进度条程序<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <h3 id=_2>实现效果<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <p><a class=glightbox href="5. Linux下的Makefile与进度条程序.assets\image.gif" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="5. Linux下的Makefile与进度条程序.assets\image.gif"></a></p> <h3 id=_3>前置知识<a class=headerlink href=#_3 title="Permanent link">&para;</a></h3> <h4 id=rn>回车(<code>\r</code>)与换行(<code>\n</code>)<a class=headerlink href=#rn title="Permanent link">&para;</a></h4> <p>在C语言或者其他高级语言中，换行(<code>\n</code>)表示回到下一行的开始处，实际上换行的效果并不如此</p> <p>回车（<code>\r</code>）：回到当前光标所在行的开始</p> <p>换行（<code>\n</code>）：前往光标所在行的下一行，但是光标是平行向下移动</p> <p><a class=glightbox href="5. Linux下的Makefile与进度条程序.assets\image16.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="5. Linux下的Makefile与进度条程序.assets\image16.png"></a></p> <h4 id=_4>输出缓冲区<a class=headerlink href=#_4 title="Permanent link">&para;</a></h4> <p>观察下面程序运行的结果：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1>1</a></span>
-<span class=normal><a href=#__codelineno-10-2>2</a></span>
-<span class=normal><a href=#__codelineno-10-3>3</a></span>
-<span class=normal><a href=#__codelineno-10-4>4</a></span>
-<span class=normal><a href=#__codelineno-10-5>5</a></span>
-<span class=normal><a href=#__codelineno-10-6>6</a></span>
-<span class=normal><a href=#__codelineno-10-7>7</a></span>
-<span class=normal><a href=#__codelineno-10-8>8</a></span>
-<span class=normal><a href=#__codelineno-10-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-10-1 name=__codelineno-10-1></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
-<a id=__codelineno-10-2 name=__codelineno-10-2></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</code></pre></div></td></tr></table></div> <p>上面的代码中，首先创建了两个变量分别代表生成的目标文件<code>code</code>以及第一个依赖集中的依赖文件列表中的文件，在依赖方法中使用了两个自动变量（一般建议大写），分别是<code>$@</code>和<code>$&lt;</code></p> <p>在<code>Makefile</code>中，<code>$@</code>表示生成的目标文件，<code>$&lt;</code>表示从依赖文件列表中取出一个文件，对应的还有<code>$^</code>表示依赖文件列表中的所有文件。如果想表示当前目录下的所有相同后缀的文件，可以使用<code>%</code>通配符，例如上面的<code>Makefile</code>中使用<code>%.c</code>代表匹配当前目录下所有后缀为<code>.c</code>的文件</p> <p>而对于<code>gcc</code>来说，在<code>Makefile</code>中可以使用内置变量<code>CC</code>（表示C编译器的名字）代替</p> <p>如果涉及到多个文件编译，则在<code>SRC</code>和<code>%.c</code>处使用空格分隔每一个文件</p> <p>但是，上面的Makefile并没有完全实现通用性，主要的问题还是「每一次创建新的文件就要修改<code>Makefile</code>文件」，如果文件比较多一个一个写也不利于添加，所以考虑结合变量以及指令让<code>Makefile</code>批量添加文件</p> <p>在Makefile中，可以使用shell命令，例如可以使用<code>ls *.c</code>表示展示当前目录下的<code>.c</code>后缀文件，如果结合变量，就是<code>SRC=$(shell ls *.c)</code>，这个做法也可以使用Makefile的内置函数<code>wildcard</code>实现，所以也可以写成<code>SRC=$(wildcard *.c)</code>。在这两个变量创建语法中，<code>$()</code>表示调用，也可以写成<code>${}</code>，二者没有区别</p> <p>所以上面的<code>Makefile</code>可以修改为：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1> 1</a></span>
+<span class=normal><a href=#__codelineno-10-2> 2</a></span>
+<span class=normal><a href=#__codelineno-10-3> 3</a></span>
+<span class=normal><a href=#__codelineno-10-4> 4</a></span>
+<span class=normal><a href=#__codelineno-10-5> 5</a></span>
+<span class=normal><a href=#__codelineno-10-6> 6</a></span>
+<span class=normal><a href=#__codelineno-10-7> 7</a></span>
+<span class=normal><a href=#__codelineno-10-8> 8</a></span>
+<span class=normal><a href=#__codelineno-10-9> 9</a></span>
+<span class=normal><a href=#__codelineno-10-10>10</a></span>
+<span class=normal><a href=#__codelineno-10-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-10-1 name=__codelineno-10-1></a><span class=nv>TARGET</span><span class=o>=</span>code
+<a id=__codelineno-10-2 name=__codelineno-10-2></a><span class=nv>SRC</span><span class=o>=</span><span class=k>$(</span>wildcard<span class=w> </span>*.o<span class=k>)</span>
 <a id=__codelineno-10-3 name=__codelineno-10-3></a>
-<a id=__codelineno-10-4 name=__codelineno-10-4></a><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
-<a id=__codelineno-10-5 name=__codelineno-10-5></a><span class=p>{</span>
-<a id=__codelineno-10-6 name=__codelineno-10-6></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;hello linux</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
-<a id=__codelineno-10-7 name=__codelineno-10-7></a><span class=w>    </span><span class=n>sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
-<a id=__codelineno-10-8 name=__codelineno-10-8></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-10-9 name=__codelineno-10-9></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <p>如果在Linux终端运行该程序，可以看到程序先打印了<code>hello linux</code>，然后等待了2秒才显示<code>prompt</code>提示</p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>这里的<code>sleep</code>函数不是Windows下的<code>Sleep</code>函数，但是效果基本一致</p> </div> <p>将上面的程序修改为下面的程序，再观察效果：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span>
+<a id=__codelineno-10-4 name=__codelineno-10-4></a><span class=nf>$(TARGET)</span><span class=o>:</span><span class=k>$(</span><span class=nv>SRC</span><span class=k>)</span>
+<a id=__codelineno-10-5 name=__codelineno-10-5></a><span class=w>    </span><span class=k>$(</span>CC<span class=k>)</span><span class=w> </span>-o<span class=w> </span><span class=nv>$@</span><span class=w> </span>$&lt;
+<a id=__codelineno-10-6 name=__codelineno-10-6></a><span class=nf>%.o</span><span class=o>:</span>%.<span class=n>c</span>
+<a id=__codelineno-10-7 name=__codelineno-10-7></a><span class=w>    </span><span class=k>$(</span>CC<span class=k>)</span><span class=w> </span>-c<span class=w> </span>$&lt;<span class=w> </span>-o<span class=w> </span><span class=nv>$@</span>
+<a id=__codelineno-10-8 name=__codelineno-10-8></a>
+<a id=__codelineno-10-9 name=__codelineno-10-9></a><span class=nf>.PHONY</span><span class=o>:</span><span class=n>clean</span>
+<a id=__codelineno-10-10 name=__codelineno-10-10></a><span class=nf>clean</span><span class=o>:</span>
+<a id=__codelineno-10-11 name=__codelineno-10-11></a><span class=w>    </span>@rm<span class=w> </span>-rf<span class=w> </span><span class=k>$(</span>TARGET<span class=k>)</span><span class=w> </span><span class=k>$(</span>SRC<span class=k>)</span>
+</code></pre></div></td></tr></table></div> <p>如果想对文件名中的指定内容进行简单的替换，也可以结合变量和<code>$()</code>，语法为：<code>变量名=$(原始内容=替换内容)</code>，例如将当前目录下所有的.c文件替换为.o文件，就可以写成：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span>
 <span class=normal><a href=#__codelineno-11-2>2</a></span>
-<span class=normal><a href=#__codelineno-11-3>3</a></span>
-<span class=normal><a href=#__codelineno-11-4>4</a></span>
-<span class=normal><a href=#__codelineno-11-5>5</a></span>
-<span class=normal><a href=#__codelineno-11-6>6</a></span>
-<span class=normal><a href=#__codelineno-11-7>7</a></span>
-<span class=normal><a href=#__codelineno-11-8>8</a></span>
-<span class=normal><a href=#__codelineno-11-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
-<a id=__codelineno-11-2 name=__codelineno-11-2></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
-<a id=__codelineno-11-3 name=__codelineno-11-3></a>
-<a id=__codelineno-11-4 name=__codelineno-11-4></a><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
-<a id=__codelineno-11-5 name=__codelineno-11-5></a><span class=p>{</span>
-<a id=__codelineno-11-6 name=__codelineno-11-6></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;hello linux&quot;</span><span class=p>);</span>
-<a id=__codelineno-11-7 name=__codelineno-11-7></a><span class=w>    </span><span class=n>sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
-<a id=__codelineno-11-8 name=__codelineno-11-8></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-11-9 name=__codelineno-11-9></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <p>可以看到程序先等待了2秒，然后才打印<code>hello linux</code></p> <p>C语言程序默认从上往下顺序执行代码，所以不可能是先执行了<code>sleep(2)</code>才执行<code>printf("hello linux");</code>，出现这种现象的原因就是因为缓冲区的存在，程序在输出时并不会直接将内容输出到显示器上，而是先输出到输出缓冲区，再通过刷新/结束缓冲区将内容打印到屏幕上，而之所以在有<code>\n</code>时会显示再等待就是因为<code>\n</code>刷新了缓冲区，导致内容打印到了屏幕上</p> <p>如果使用将<code>\n</code>替换为<code>\r</code>则同样会先等待再打印，因为<code>\r</code>也不具备刷新缓冲区的效果，如果在当前情况下想刷新缓冲区但又不想使用<code>\n</code>，则可以使用<code>fflush()</code>函数，传递参数为标准输出<code>stdout</code>，代码如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1> 1</a></span>
-<span class=normal><a href=#__codelineno-12-2> 2</a></span>
-<span class=normal><a href=#__codelineno-12-3> 3</a></span>
-<span class=normal><a href=#__codelineno-12-4> 4</a></span>
-<span class=normal><a href=#__codelineno-12-5> 5</a></span>
-<span class=normal><a href=#__codelineno-12-6> 6</a></span>
-<span class=normal><a href=#__codelineno-12-7> 7</a></span>
-<span class=normal><a href=#__codelineno-12-8> 8</a></span>
-<span class=normal><a href=#__codelineno-12-9> 9</a></span>
-<span class=normal><a href=#__codelineno-12-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+<span class=normal><a href=#__codelineno-11-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=nv>SRC</span><span class=o>=</span><span class=k>$(</span>wildcard<span class=w> </span>*.c<span class=k>)</span>
+<a id=__codelineno-11-2 name=__codelineno-11-2></a><span class=c># 替换</span>
+<a id=__codelineno-11-3 name=__codelineno-11-3></a><span class=nv>OBJ</span><span class=o>=</span><span class=k>$(</span>SRC:.c<span class=o>=</span>.o<span class=k>)</span>
+</code></pre></div></td></tr></table></div> <p>此处用到的<code>$$(SRC:.c=.o)</code>表示引用或计算变量<code>SRC</code>的值，并将结果中的<code>.c</code>替换为<code>.o</code></p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>上面的替换规则不会改变原始文件中的内容，也就是说，在上面的例子中，<code>.c</code>文件的内容不会真正被替换为使用编译器生成的<code>.o</code>的文件内容</p> </div> <div style="border-bottom:2px solid #cdcdcd;"></div> <p>至此，一个基本的<code>Makefile</code>文件编写语法就这么多，如果需要更详细了解<code>Makefile</code>文件，请移步至此-&gt;<a href=https://liaoxuefeng.com/books/makefile/introduction/index.html>Makefile教程</a></p> <h2 id=_1>进度条程序<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <h3 id=_2>实现效果<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <p><a class=glightbox href="5. Linux下的Makefile与进度条程序.assets\image.gif" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="5. Linux下的Makefile与进度条程序.assets\image.gif"></a></p> <h3 id=_3>前置知识<a class=headerlink href=#_3 title="Permanent link">&para;</a></h3> <h4 id=rn>回车(<code>\r</code>)与换行(<code>\n</code>)<a class=headerlink href=#rn title="Permanent link">&para;</a></h4> <p>在C语言或者其他高级语言中，换行(<code>\n</code>)表示回到下一行的开始处，实际上换行的效果并不如此</p> <p>回车（<code>\r</code>）：回到当前光标所在行的开始</p> <p>换行（<code>\n</code>）：前往光标所在行的下一行，但是光标是平行向下移动</p> <p><a class=glightbox href="5. Linux下的Makefile与进度条程序.assets\image16.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="5. Linux下的Makefile与进度条程序.assets\image16.png"></a></p> <h4 id=_4>输出缓冲区<a class=headerlink href=#_4 title="Permanent link">&para;</a></h4> <p>观察下面程序运行的结果：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1>1</a></span>
+<span class=normal><a href=#__codelineno-12-2>2</a></span>
+<span class=normal><a href=#__codelineno-12-3>3</a></span>
+<span class=normal><a href=#__codelineno-12-4>4</a></span>
+<span class=normal><a href=#__codelineno-12-5>5</a></span>
+<span class=normal><a href=#__codelineno-12-6>6</a></span>
+<span class=normal><a href=#__codelineno-12-7>7</a></span>
+<span class=normal><a href=#__codelineno-12-8>8</a></span>
+<span class=normal><a href=#__codelineno-12-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
 <a id=__codelineno-12-2 name=__codelineno-12-2></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
 <a id=__codelineno-12-3 name=__codelineno-12-3></a>
 <a id=__codelineno-12-4 name=__codelineno-12-4></a><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
 <a id=__codelineno-12-5 name=__codelineno-12-5></a><span class=p>{</span>
-<a id=__codelineno-12-6 name=__codelineno-12-6></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;hello linux&quot;</span><span class=p>);</span>
-<a id=__codelineno-12-7 name=__codelineno-12-7></a><span class=w>    </span><span class=n>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
-<a id=__codelineno-12-8 name=__codelineno-12-8></a><span class=w>    </span><span class=n>sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
-<a id=__codelineno-12-9 name=__codelineno-12-9></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-12-10 name=__codelineno-12-10></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <h3 id=_5>实现进度条<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <h4 id=_6>基础版本<a class=headerlink href=#_6 title="Permanent link">&para;</a></h4> <p>思路：首先创建3个文件，分别是测试文件<code>main.c</code>、头文件<code>process.h</code>和实现文件<code>process.c</code>。对于进度条，实际上就是先打印原数组内容，再填充数组然后刷新缓冲区，对于百分比，只需要使用循环变量控制即可，对于最右侧闪烁的符号，实际上就是四个动画帧符号，每一次循环加载一个动画帧即可，但是为了循环加载，需要使下标在指定范围内循环，可以考虑循环队列（数组版）下标轮回的思路，所以基本代码如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1> 1</a></span>
-<span class=normal><a href=#__codelineno-13-2> 2</a></span>
-<span class=normal><a href=#__codelineno-13-3> 3</a></span>
-<span class=normal><a href=#__codelineno-13-4> 4</a></span>
-<span class=normal><a href=#__codelineno-13-5> 5</a></span>
-<span class=normal><a href=#__codelineno-13-6> 6</a></span>
-<span class=normal><a href=#__codelineno-13-7> 7</a></span>
-<span class=normal><a href=#__codelineno-13-8> 8</a></span>
-<span class=normal><a href=#__codelineno-13-9> 9</a></span>
-<span class=normal><a href=#__codelineno-13-10>10</a></span>
-<span class=normal><a href=#__codelineno-13-11>11</a></span>
-<span class=normal><a href=#__codelineno-13-12>12</a></span>
-<span class=normal><a href=#__codelineno-13-13>13</a></span>
-<span class=normal><a href=#__codelineno-13-14>14</a></span>
-<span class=normal><a href=#__codelineno-13-15>15</a></span>
-<span class=normal><a href=#__codelineno-13-16>16</a></span>
-<span class=normal><a href=#__codelineno-13-17>17</a></span>
-<span class=normal><a href=#__codelineno-13-18>18</a></span>
-<span class=normal><a href=#__codelineno-13-19>19</a></span>
-<span class=normal><a href=#__codelineno-13-20>20</a></span>
-<span class=normal><a href=#__codelineno-13-21>21</a></span>
-<span class=normal><a href=#__codelineno-13-22>22</a></span>
-<span class=normal><a href=#__codelineno-13-23>23</a></span>
-<span class=normal><a href=#__codelineno-13-24>24</a></span>
-<span class=normal><a href=#__codelineno-13-25>25</a></span>
-<span class=normal><a href=#__codelineno-13-26>26</a></span>
-<span class=normal><a href=#__codelineno-13-27>27</a></span>
-<span class=normal><a href=#__codelineno-13-28>28</a></span>
-<span class=normal><a href=#__codelineno-13-29>29</a></span>
-<span class=normal><a href=#__codelineno-13-30>30</a></span>
-<span class=normal><a href=#__codelineno-13-31>31</a></span>
-<span class=normal><a href=#__codelineno-13-32>32</a></span>
-<span class=normal><a href=#__codelineno-13-33>33</a></span>
-<span class=normal><a href=#__codelineno-13-34>34</a></span>
-<span class=normal><a href=#__codelineno-13-35>35</a></span>
-<span class=normal><a href=#__codelineno-13-36>36</a></span>
-<span class=normal><a href=#__codelineno-13-37>37</a></span>
-<span class=normal><a href=#__codelineno-13-38>38</a></span>
-<span class=normal><a href=#__codelineno-13-39>39</a></span>
-<span class=normal><a href=#__codelineno-13-40>40</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-13-1 name=__codelineno-13-1></a><span class=c1>// 实现文件</span>
-<a id=__codelineno-13-2 name=__codelineno-13-2></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&quot;process.h&quot;</span>
+<a id=__codelineno-12-6 name=__codelineno-12-6></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;hello linux</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+<a id=__codelineno-12-7 name=__codelineno-12-7></a><span class=w>    </span><span class=n>sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+<a id=__codelineno-12-8 name=__codelineno-12-8></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-12-9 name=__codelineno-12-9></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <p>如果在Linux终端运行该程序，可以看到程序先打印了<code>hello linux</code>，然后等待了2秒才显示<code>prompt</code>提示</p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>这里的<code>sleep</code>函数不是Windows下的<code>Sleep</code>函数，但是效果基本一致</p> </div> <p>将上面的程序修改为下面的程序，再观察效果：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1>1</a></span>
+<span class=normal><a href=#__codelineno-13-2>2</a></span>
+<span class=normal><a href=#__codelineno-13-3>3</a></span>
+<span class=normal><a href=#__codelineno-13-4>4</a></span>
+<span class=normal><a href=#__codelineno-13-5>5</a></span>
+<span class=normal><a href=#__codelineno-13-6>6</a></span>
+<span class=normal><a href=#__codelineno-13-7>7</a></span>
+<span class=normal><a href=#__codelineno-13-8>8</a></span>
+<span class=normal><a href=#__codelineno-13-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-13-1 name=__codelineno-13-1></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+<a id=__codelineno-13-2 name=__codelineno-13-2></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
 <a id=__codelineno-13-3 name=__codelineno-13-3></a>
-<a id=__codelineno-13-4 name=__codelineno-13-4></a><span class=kt>void</span><span class=w> </span><span class=nf>process</span><span class=p>()</span>
+<a id=__codelineno-13-4 name=__codelineno-13-4></a><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
 <a id=__codelineno-13-5 name=__codelineno-13-5></a><span class=p>{</span>
-<a id=__codelineno-13-6 name=__codelineno-13-6></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>bar</span><span class=p>[</span><span class=n>NUM</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span><span class=c1>// 进度条数组</span>
-<a id=__codelineno-13-7 name=__codelineno-13-7></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-13-8 name=__codelineno-13-8></a><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=o>*</span><span class=n>label</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;|/-</span><span class=se>\\</span><span class=s>&quot;</span><span class=p>;</span><span class=c1>//控制进度条最右侧的闪烁符号（| 顺时针旋转）</span>
-<a id=__codelineno-13-9 name=__codelineno-13-9></a><span class=w>    </span><span class=kt>size_t</span><span class=w> </span><span class=n>len</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>label</span><span class=p>);</span>
-<a id=__codelineno-13-10 name=__codelineno-13-10></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>count</span><span class=w> </span><span class=o>&lt;=</span><span class=w> </span><span class=mi>100</span><span class=p>)</span><span class=w> </span>
-<a id=__codelineno-13-11 name=__codelineno-13-11></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-13-12 name=__codelineno-13-12></a><span class=w>        </span><span class=c1>// [%-100s]预留100个字符的位置，每一次打印数组bar中的字符，因为初始化为0，所以数组中全是&#39;\0&#39;，当遇到第一个&#39;\0&#39;就停止，加上-表示从右往左（默认从左往右）打印</span>
-<a id=__codelineno-13-13 name=__codelineno-13-13></a><span class=w>        </span><span class=c1>// 使用count控制进度条百分比，百分号%需要额外转义</span>
-<a id=__codelineno-13-14 name=__codelineno-13-14></a><span class=w>        </span><span class=c1>// label闪烁符号，使用count%4使下标循环在0-3，思路可以联想循环队列数组版控制下标轮回的方式</span>
-<a id=__codelineno-13-15 name=__codelineno-13-15></a><span class=w>        </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;[%-100s][%d%%][%c]</span><span class=se>\r</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>bar</span><span class=p>,</span><span class=w> </span><span class=n>count</span><span class=p>,</span><span class=w> </span><span class=n>label</span><span class=p>[</span><span class=n>count</span><span class=o>%</span><span class=n>len</span><span class=p>]);</span>
-<a id=__codelineno-13-16 name=__codelineno-13-16></a><span class=w>        </span><span class=n>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span><span class=w> </span><span class=c1>// 先刷新缓冲区，打印出停留在缓冲区的内容</span>
-<a id=__codelineno-13-17 name=__codelineno-13-17></a><span class=w>        </span><span class=n>bar</span><span class=p>[</span><span class=n>count</span><span class=o>++</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>STYLE</span><span class=p>;</span><span class=w> </span><span class=c1>// 向数组中添加字符</span>
-<a id=__codelineno-13-18 name=__codelineno-13-18></a><span class=w>        </span><span class=n>usleep</span><span class=p>(</span><span class=mi>20000</span><span class=p>);</span><span class=c1>// 睡眠时间单位为微秒，1秒 = 6000毫秒=60000000微秒</span>
-<a id=__codelineno-13-19 name=__codelineno-13-19></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-13-20 name=__codelineno-13-20></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
-<a id=__codelineno-13-21 name=__codelineno-13-21></a><span class=p>}</span>
-<a id=__codelineno-13-22 name=__codelineno-13-22></a>
-<a id=__codelineno-13-23 name=__codelineno-13-23></a><span class=c1>// 头文件</span>
-<a id=__codelineno-13-24 name=__codelineno-13-24></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
-<a id=__codelineno-13-25 name=__codelineno-13-25></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
-<a id=__codelineno-13-26 name=__codelineno-13-26></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
-<a id=__codelineno-13-27 name=__codelineno-13-27></a>
-<a id=__codelineno-13-28 name=__codelineno-13-28></a><span class=cp>#define NUM 101 </span><span class=c1>// 定义进度条字符的个数</span>
-<a id=__codelineno-13-29 name=__codelineno-13-29></a><span class=cp>#define STYLE &#39;#&#39; </span><span class=c1>// 定义进度条的样式</span>
-<a id=__codelineno-13-30 name=__codelineno-13-30></a>
-<a id=__codelineno-13-31 name=__codelineno-13-31></a><span class=kt>void</span><span class=w> </span><span class=nf>process</span><span class=p>();</span>
-<a id=__codelineno-13-32 name=__codelineno-13-32></a>
-<a id=__codelineno-13-33 name=__codelineno-13-33></a><span class=c1>// 测试文件</span>
-<a id=__codelineno-13-34 name=__codelineno-13-34></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&quot;process.h&quot;</span>
-<a id=__codelineno-13-35 name=__codelineno-13-35></a>
-<a id=__codelineno-13-36 name=__codelineno-13-36></a><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
-<a id=__codelineno-13-37 name=__codelineno-13-37></a><span class=p>{</span>
-<a id=__codelineno-13-38 name=__codelineno-13-38></a><span class=w>    </span><span class=n>process</span><span class=p>();</span>
-<a id=__codelineno-13-39 name=__codelineno-13-39></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-13-40 name=__codelineno-13-40></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <p>对应的<code>Makefile</code>如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1>1</a></span>
-<span class=normal><a href=#__codelineno-14-2>2</a></span>
-<span class=normal><a href=#__codelineno-14-3>3</a></span>
-<span class=normal><a href=#__codelineno-14-4>4</a></span>
-<span class=normal><a href=#__codelineno-14-5>5</a></span>
-<span class=normal><a href=#__codelineno-14-6>6</a></span>
-<span class=normal><a href=#__codelineno-14-7>7</a></span>
-<span class=normal><a href=#__codelineno-14-8>8</a></span>
-<span class=normal><a href=#__codelineno-14-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=nv>TARGET</span><span class=o>=</span>process
-<a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=nv>SRC</span><span class=o>=</span>process.c<span class=w> </span>main.c
+<a id=__codelineno-13-6 name=__codelineno-13-6></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;hello linux&quot;</span><span class=p>);</span>
+<a id=__codelineno-13-7 name=__codelineno-13-7></a><span class=w>    </span><span class=n>sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+<a id=__codelineno-13-8 name=__codelineno-13-8></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-13-9 name=__codelineno-13-9></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <p>可以看到程序先等待了2秒，然后才打印<code>hello linux</code></p> <p>C语言程序默认从上往下顺序执行代码，所以不可能是先执行了<code>sleep(2)</code>才执行<code>printf("hello linux");</code>，出现这种现象的原因就是因为缓冲区的存在，程序在输出时并不会直接将内容输出到显示器上，而是先输出到输出缓冲区，再通过刷新/结束缓冲区将内容打印到屏幕上，而之所以在有<code>\n</code>时会显示再等待就是因为<code>\n</code>刷新了缓冲区，导致内容打印到了屏幕上</p> <p>如果使用将<code>\n</code>替换为<code>\r</code>则同样会先等待再打印，因为<code>\r</code>也不具备刷新缓冲区的效果，如果在当前情况下想刷新缓冲区但又不想使用<code>\n</code>，则可以使用<code>fflush()</code>函数，传递参数为标准输出<code>stdout</code>，代码如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
+<span class=normal><a href=#__codelineno-14-2> 2</a></span>
+<span class=normal><a href=#__codelineno-14-3> 3</a></span>
+<span class=normal><a href=#__codelineno-14-4> 4</a></span>
+<span class=normal><a href=#__codelineno-14-5> 5</a></span>
+<span class=normal><a href=#__codelineno-14-6> 6</a></span>
+<span class=normal><a href=#__codelineno-14-7> 7</a></span>
+<span class=normal><a href=#__codelineno-14-8> 8</a></span>
+<span class=normal><a href=#__codelineno-14-9> 9</a></span>
+<span class=normal><a href=#__codelineno-14-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+<a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
 <a id=__codelineno-14-3 name=__codelineno-14-3></a>
-<a id=__codelineno-14-4 name=__codelineno-14-4></a><span class=nf>$(TARGET)</span><span class=o>:</span><span class=k>$(</span><span class=nv>SRC</span><span class=k>)</span>
-<a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=w>    </span><span class=k>$(</span>CC<span class=k>)</span><span class=w> </span>$^<span class=w> </span>-o<span class=w> </span><span class=nv>$@</span>
-<a id=__codelineno-14-6 name=__codelineno-14-6></a>
-<a id=__codelineno-14-7 name=__codelineno-14-7></a><span class=nf>.PHONY</span><span class=o>:</span><span class=n>clean</span>
-<a id=__codelineno-14-8 name=__codelineno-14-8></a><span class=nf>clean</span><span class=o>:</span>
-<a id=__codelineno-14-9 name=__codelineno-14-9></a><span class=w>    </span>rm<span class=w> </span>-rf<span class=w> </span><span class=k>$(</span>TARGET<span class=k>)</span>
-</code></pre></div></td></tr></table></div> <h4 id=_7>改进版本<a class=headerlink href=#_7 title="Permanent link">&para;</a></h4> <p>前面的进度条只是根据100进行依次填充，并没有达到进度条的实用性「根据下载进度更新进度条」，所以可以通过下面的思路对上面的代码进行优化：</p> <p>首先，定义一个函数<code>download</code>，该函数用于定义下载任务</p> <p>假设需要下载的文件<code>FILE</code>大小为2048MB，定义一个带宽<code>BASE</code>为1MB，为了模拟出网络波动，可以使用<code>(rand()%BASE+1)/10</code>计算出增量，用增量乘以<code>BASE</code>计算出下载速度<code>speed</code>，但是需要注意，因为<code>rand()%BASE+1</code>计算出的值为整数，整数除以10依旧为整数，所以此时值只会为0，为了解决这个问题可以将<code>rand()%BASE+1</code>强转为<code>double</code>再除法运算</p> <p>定义两个变量分别为<code>current</code>和<code>total</code>，分别代表当前下载量和总下载量，因为需要根据百分比显示更新进度条，所以这两个变量需要使用<code>double</code>类型定义，百分比计算公式：<code>current / total * 100</code></p> <p>模拟下载效果可以使用一个循环，循环体内使<code>current</code>不断根据速<code>speed</code>进行更新，但是这里可能最后计算出的<code>current</code>不一定刚好等于<code>double</code>，为了防止出现进度条计算出的百分比大于1，可以使用一个矫正「当<code>current</code>大于等于<code>total</code>时，就将<code>total</code>赋值给<code>current</code>」，当<code>current</code>大于或等于<code>total</code>时结束循环</p> <p>前面的进度条只是单纯根据100进行填充，所以需要使用循环。但是此处更新进度条不可以再使用循环，否则会出现「更新一次<code>current</code>，进度条就跑满一次的问题」，正确的思路是「更新一次<code>current</code>，进度条更新一次」</p> <p>进度条的设计分成两部分：</p> <ol> <li>进度条填充图案及动画</li> <li>进度条加载图案及动画（这个不是必须的，但是如果出现进度条卡住等问题，该图案可以用于辨别是系统卡住还是下载卡住）</li> </ol> <p>对于「进度条填充图案及动画」来说，主要思路是根据下载百分比更新进度条，所以可以使用变量<code>rate</code>存储百分比，根据该百分比进行数组图案循环填充，但是需要注意，因为百分比为<code>double</code>类型，存在精度损失问题，所以在作为循环结束条件比较运算符的右操作数时需要强转为<code>int</code>，同样的思路打印进度条填充图案及显示动画即可</p> <p>对于「进度条加载图案及动画」来说，这里使用<code>.</code>作为加载图案，重点考虑如何实现依次打印「.」「..」「...」「....」「.....」「......」并循环往复。每一次调用进度条可以考虑更新一次符号，和填充图案类似，但是需要每一次更新指定数量的<code>.</code>，可以定义一个静态变量，每一次调用更新一次，但是必须确保不超过设计的数量，这里假设数量<code>PNUM</code>为6，即一共6个<code>.</code>，在循环中根据<code>PNUM</code>进行循环，如果i小于<code>num</code>，就打印<code>.</code>（通过<code>num</code>控制<code>.</code>的个数），否则打印空格进行占位，使用打印进度条的思路打印加载动画即可</p> <p>最后，可以考虑使用一个<code>count</code>变量降低加载动画的速度</p> <p>示例代码：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
+<a id=__codelineno-14-4 name=__codelineno-14-4></a><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+<a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=p>{</span>
+<a id=__codelineno-14-6 name=__codelineno-14-6></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;hello linux&quot;</span><span class=p>);</span>
+<a id=__codelineno-14-7 name=__codelineno-14-7></a><span class=w>    </span><span class=n>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
+<a id=__codelineno-14-8 name=__codelineno-14-8></a><span class=w>    </span><span class=n>sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+<a id=__codelineno-14-9 name=__codelineno-14-9></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-14-10 name=__codelineno-14-10></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <h3 id=_5>实现进度条<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <h4 id=_6>基础版本<a class=headerlink href=#_6 title="Permanent link">&para;</a></h4> <p>思路：首先创建3个文件，分别是测试文件<code>main.c</code>、头文件<code>process.h</code>和实现文件<code>process.c</code>。对于进度条，实际上就是先打印原数组内容，再填充数组然后刷新缓冲区，对于百分比，只需要使用循环变量控制即可，对于最右侧闪烁的符号，实际上就是四个动画帧符号，每一次循环加载一个动画帧即可，但是为了循环加载，需要使下标在指定范围内循环，可以考虑循环队列（数组版）下标轮回的思路，所以基本代码如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
 <span class=normal><a href=#__codelineno-15-2> 2</a></span>
 <span class=normal><a href=#__codelineno-15-3> 3</a></span>
 <span class=normal><a href=#__codelineno-15-4> 4</a></span>
@@ -313,201 +243,297 @@
 <span class=normal><a href=#__codelineno-15-37>37</a></span>
 <span class=normal><a href=#__codelineno-15-38>38</a></span>
 <span class=normal><a href=#__codelineno-15-39>39</a></span>
-<span class=normal><a href=#__codelineno-15-40>40</a></span>
-<span class=normal><a href=#__codelineno-15-41>41</a></span>
-<span class=normal><a href=#__codelineno-15-42>42</a></span>
-<span class=normal><a href=#__codelineno-15-43>43</a></span>
-<span class=normal><a href=#__codelineno-15-44>44</a></span>
-<span class=normal><a href=#__codelineno-15-45>45</a></span>
-<span class=normal><a href=#__codelineno-15-46>46</a></span>
-<span class=normal><a href=#__codelineno-15-47>47</a></span>
-<span class=normal><a href=#__codelineno-15-48>48</a></span>
-<span class=normal><a href=#__codelineno-15-49>49</a></span>
-<span class=normal><a href=#__codelineno-15-50>50</a></span>
-<span class=normal><a href=#__codelineno-15-51>51</a></span>
-<span class=normal><a href=#__codelineno-15-52>52</a></span>
-<span class=normal><a href=#__codelineno-15-53>53</a></span>
-<span class=normal><a href=#__codelineno-15-54>54</a></span>
-<span class=normal><a href=#__codelineno-15-55>55</a></span>
-<span class=normal><a href=#__codelineno-15-56>56</a></span>
-<span class=normal><a href=#__codelineno-15-57>57</a></span>
-<span class=normal><a href=#__codelineno-15-58>58</a></span>
-<span class=normal><a href=#__codelineno-15-59>59</a></span>
-<span class=normal><a href=#__codelineno-15-60>60</a></span>
-<span class=normal><a href=#__codelineno-15-61>61</a></span>
-<span class=normal><a href=#__codelineno-15-62>62</a></span>
-<span class=normal><a href=#__codelineno-15-63>63</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=c1>// 头文件</span>
-<a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
-<a id=__codelineno-15-3 name=__codelineno-15-3></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
-<a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;time.h&gt;</span>
-<a id=__codelineno-15-5 name=__codelineno-15-5></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdlib.h&gt;</span>
-<a id=__codelineno-15-6 name=__codelineno-15-6></a>
-<a id=__codelineno-15-7 name=__codelineno-15-7></a><span class=cp>#define NUM 101 </span><span class=c1>// 定义进度条字符的个数</span>
-<a id=__codelineno-15-8 name=__codelineno-15-8></a><span class=cp>#define STYLE &#39;#&#39; </span><span class=c1>// 定义进度条的样式</span>
-<a id=__codelineno-15-9 name=__codelineno-15-9></a>
-<a id=__codelineno-15-10 name=__codelineno-15-10></a><span class=cp>#define FILE 2048.0</span>
-<a id=__codelineno-15-11 name=__codelineno-15-11></a><span class=cp>#define BASE 1</span>
-<a id=__codelineno-15-12 name=__codelineno-15-12></a><span class=cp>#define LOAD &#39;.&#39;</span>
-<a id=__codelineno-15-13 name=__codelineno-15-13></a><span class=cp>#define PNUM 6</span>
-<a id=__codelineno-15-14 name=__codelineno-15-14></a>
-<a id=__codelineno-15-15 name=__codelineno-15-15></a><span class=kt>void</span><span class=w> </span><span class=nf>process</span><span class=p>(</span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=p>);</span>
-<a id=__codelineno-15-16 name=__codelineno-15-16></a><span class=kt>void</span><span class=w> </span><span class=nf>download</span><span class=p>(</span><span class=n>pro</span><span class=w> </span><span class=n>proc</span><span class=p>);</span>
-<a id=__codelineno-15-17 name=__codelineno-15-17></a>
-<a id=__codelineno-15-18 name=__codelineno-15-18></a><span class=c1>// 实现文件</span>
-<a id=__codelineno-15-19 name=__codelineno-15-19></a><span class=w> </span><span class=n>download</span><span class=p>()</span>
-<a id=__codelineno-15-20 name=__codelineno-15-20></a><span class=p>{</span>
-<a id=__codelineno-15-21 name=__codelineno-15-21></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>speed</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>BASE</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=p>(((</span><span class=kt>double</span><span class=p>)(</span><span class=n>rand</span><span class=p>()</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=n>BASE</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>))</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=mi>10</span><span class=p>);</span>
-<a id=__codelineno-15-22 name=__codelineno-15-22></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>0.0</span><span class=p>;</span>
-<a id=__codelineno-15-23 name=__codelineno-15-23></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=kt>FILE</span><span class=p>;</span>
-<a id=__codelineno-15-24 name=__codelineno-15-24></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span>
-<a id=__codelineno-15-25 name=__codelineno-15-25></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-15-26 name=__codelineno-15-26></a><span class=w>        </span><span class=n>current</span><span class=o>+=</span><span class=n>speed</span><span class=p>;</span>
-<a id=__codelineno-15-27 name=__codelineno-15-27></a><span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-15-28 name=__codelineno-15-28></a><span class=w>            </span><span class=n>current</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>total</span><span class=p>;</span>
-<a id=__codelineno-15-29 name=__codelineno-15-29></a><span class=w>        </span><span class=p>}</span>
-<a id=__codelineno-15-30 name=__codelineno-15-30></a><span class=w>        </span><span class=n>process</span><span class=p>(</span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=n>total</span><span class=p>);</span>
-<a id=__codelineno-15-31 name=__codelineno-15-31></a><span class=w>        </span><span class=n>usleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>
-<a id=__codelineno-15-32 name=__codelineno-15-32></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-15-33 name=__codelineno-15-33></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
-<a id=__codelineno-15-34 name=__codelineno-15-34></a><span class=p>}</span>
+<span class=normal><a href=#__codelineno-15-40>40</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=c1>// 实现文件</span>
+<a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&quot;process.h&quot;</span>
+<a id=__codelineno-15-3 name=__codelineno-15-3></a>
+<a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=kt>void</span><span class=w> </span><span class=nf>process</span><span class=p>()</span>
+<a id=__codelineno-15-5 name=__codelineno-15-5></a><span class=p>{</span>
+<a id=__codelineno-15-6 name=__codelineno-15-6></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>bar</span><span class=p>[</span><span class=n>NUM</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span><span class=c1>// 进度条数组</span>
+<a id=__codelineno-15-7 name=__codelineno-15-7></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-15-8 name=__codelineno-15-8></a><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=o>*</span><span class=n>label</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;|/-</span><span class=se>\\</span><span class=s>&quot;</span><span class=p>;</span><span class=c1>//控制进度条最右侧的闪烁符号（| 顺时针旋转）</span>
+<a id=__codelineno-15-9 name=__codelineno-15-9></a><span class=w>    </span><span class=kt>size_t</span><span class=w> </span><span class=n>len</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>label</span><span class=p>);</span>
+<a id=__codelineno-15-10 name=__codelineno-15-10></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>count</span><span class=w> </span><span class=o>&lt;=</span><span class=w> </span><span class=mi>100</span><span class=p>)</span><span class=w> </span>
+<a id=__codelineno-15-11 name=__codelineno-15-11></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-15-12 name=__codelineno-15-12></a><span class=w>        </span><span class=c1>// [%-100s]预留100个字符的位置，每一次打印数组bar中的字符，因为初始化为0，所以数组中全是&#39;\0&#39;，当遇到第一个&#39;\0&#39;就停止，加上-表示从右往左（默认从左往右）打印</span>
+<a id=__codelineno-15-13 name=__codelineno-15-13></a><span class=w>        </span><span class=c1>// 使用count控制进度条百分比，百分号%需要额外转义</span>
+<a id=__codelineno-15-14 name=__codelineno-15-14></a><span class=w>        </span><span class=c1>// label闪烁符号，使用count%4使下标循环在0-3，思路可以联想循环队列数组版控制下标轮回的方式</span>
+<a id=__codelineno-15-15 name=__codelineno-15-15></a><span class=w>        </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;[%-100s][%d%%][%c]</span><span class=se>\r</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>bar</span><span class=p>,</span><span class=w> </span><span class=n>count</span><span class=p>,</span><span class=w> </span><span class=n>label</span><span class=p>[</span><span class=n>count</span><span class=o>%</span><span class=n>len</span><span class=p>]);</span>
+<a id=__codelineno-15-16 name=__codelineno-15-16></a><span class=w>        </span><span class=n>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span><span class=w> </span><span class=c1>// 先刷新缓冲区，打印出停留在缓冲区的内容</span>
+<a id=__codelineno-15-17 name=__codelineno-15-17></a><span class=w>        </span><span class=n>bar</span><span class=p>[</span><span class=n>count</span><span class=o>++</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>STYLE</span><span class=p>;</span><span class=w> </span><span class=c1>// 向数组中添加字符</span>
+<a id=__codelineno-15-18 name=__codelineno-15-18></a><span class=w>        </span><span class=n>usleep</span><span class=p>(</span><span class=mi>20000</span><span class=p>);</span><span class=c1>// 睡眠时间单位为微秒，1秒 = 6000毫秒=60000000微秒</span>
+<a id=__codelineno-15-19 name=__codelineno-15-19></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-15-20 name=__codelineno-15-20></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+<a id=__codelineno-15-21 name=__codelineno-15-21></a><span class=p>}</span>
+<a id=__codelineno-15-22 name=__codelineno-15-22></a>
+<a id=__codelineno-15-23 name=__codelineno-15-23></a><span class=c1>// 头文件</span>
+<a id=__codelineno-15-24 name=__codelineno-15-24></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+<a id=__codelineno-15-25 name=__codelineno-15-25></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+<a id=__codelineno-15-26 name=__codelineno-15-26></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+<a id=__codelineno-15-27 name=__codelineno-15-27></a>
+<a id=__codelineno-15-28 name=__codelineno-15-28></a><span class=cp>#define NUM 101 </span><span class=c1>// 定义进度条字符的个数</span>
+<a id=__codelineno-15-29 name=__codelineno-15-29></a><span class=cp>#define STYLE &#39;#&#39; </span><span class=c1>// 定义进度条的样式</span>
+<a id=__codelineno-15-30 name=__codelineno-15-30></a>
+<a id=__codelineno-15-31 name=__codelineno-15-31></a><span class=kt>void</span><span class=w> </span><span class=nf>process</span><span class=p>();</span>
+<a id=__codelineno-15-32 name=__codelineno-15-32></a>
+<a id=__codelineno-15-33 name=__codelineno-15-33></a><span class=c1>// 测试文件</span>
+<a id=__codelineno-15-34 name=__codelineno-15-34></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&quot;process.h&quot;</span>
 <a id=__codelineno-15-35 name=__codelineno-15-35></a>
-<a id=__codelineno-15-36 name=__codelineno-15-36></a><span class=c1>// Version 2：根据下载百分比更新进度条</span>
-<a id=__codelineno-15-37 name=__codelineno-15-37></a><span class=kt>void</span><span class=w> </span><span class=n>process</span><span class=p>(</span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=p>)</span>
-<a id=__codelineno-15-38 name=__codelineno-15-38></a><span class=p>{</span>
-<a id=__codelineno-15-39 name=__codelineno-15-39></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>bar</span><span class=p>[</span><span class=n>NUM</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span>
-<a id=__codelineno-15-40 name=__codelineno-15-40></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>rate</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>100</span><span class=p>;</span>
-<a id=__codelineno-15-41 name=__codelineno-15-41></a><span class=w>    </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=p>(</span><span class=kt>int</span><span class=p>)</span><span class=w> </span><span class=n>rate</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-15-42 name=__codelineno-15-42></a><span class=w>        </span><span class=n>bar</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>STYLE</span><span class=p>;</span>
-<a id=__codelineno-15-43 name=__codelineno-15-43></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-15-44 name=__codelineno-15-44></a>
-<a id=__codelineno-15-45 name=__codelineno-15-45></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>points</span><span class=p>[</span><span class=n>PNUM</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span>
-<a id=__codelineno-15-46 name=__codelineno-15-46></a><span class=w>    </span><span class=k>static</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span>
-<a id=__codelineno-15-47 name=__codelineno-15-47></a><span class=w>    </span><span class=n>count</span><span class=o>++</span><span class=p>;</span>
-<a id=__codelineno-15-48 name=__codelineno-15-48></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>count</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>100</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-15-49 name=__codelineno-15-49></a><span class=w>        </span><span class=n>count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-15-50 name=__codelineno-15-50></a><span class=w>        </span><span class=k>static</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>num</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-15-51 name=__codelineno-15-51></a><span class=w>        </span><span class=n>num</span><span class=o>++</span><span class=p>;</span>
-<a id=__codelineno-15-52 name=__codelineno-15-52></a><span class=w>        </span><span class=n>num</span><span class=w> </span><span class=o>%=</span><span class=w> </span><span class=n>PNUM</span><span class=p>;</span>
-<a id=__codelineno-15-53 name=__codelineno-15-53></a><span class=w>        </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>PNUM</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-15-54 name=__codelineno-15-54></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>num</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-15-55 name=__codelineno-15-55></a><span class=w>                </span><span class=n>points</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>LOAD</span><span class=p>;</span><span class=w> </span><span class=c1>// 根据num填充符号</span>
-<a id=__codelineno-15-56 name=__codelineno-15-56></a><span class=w>            </span><span class=p>}</span><span class=w> </span><span class=k>else</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-15-57 name=__codelineno-15-57></a><span class=w>                </span><span class=n>points</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=sc>&#39; &#39;</span><span class=p>;</span><span class=w> </span><span class=c1>// 剩余按照空格填充</span>
-<a id=__codelineno-15-58 name=__codelineno-15-58></a><span class=w>            </span><span class=p>}</span>
-<a id=__codelineno-15-59 name=__codelineno-15-59></a><span class=w>        </span><span class=p>}</span><span class=w>    </span>
-<a id=__codelineno-15-60 name=__codelineno-15-60></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-15-61 name=__codelineno-15-61></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;[%-100s][%.1lf%%]%s</span><span class=se>\r</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>bar</span><span class=p>,</span><span class=w> </span><span class=n>rate</span><span class=p>,</span><span class=w> </span><span class=n>points</span><span class=p>);</span>
-<a id=__codelineno-15-62 name=__codelineno-15-62></a><span class=w>    </span><span class=n>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
-<a id=__codelineno-15-63 name=__codelineno-15-63></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <h4 id=_8>最终版本<a class=headerlink href=#_8 title="Permanent link">&para;</a></h4> <p>为了使下载函数更加具有通用性，可以使用函数指针，将进度条的函数声明使用<code>typedef</code>声明为<code>pro</code>，使用该函数指针在下载函数形参位置声明一个变量，在下载函数内部使用形参调用对应形参指向的进度条函数，之后如果有多个进度条代码，只要进度条代码的函数声明于形参函数指针执行的函数类型相同，就可以更换为其他的进度条代码执行</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1> 1</a></span>
-<span class=normal><a href=#__codelineno-16-2> 2</a></span>
-<span class=normal><a href=#__codelineno-16-3> 3</a></span>
-<span class=normal><a href=#__codelineno-16-4> 4</a></span>
-<span class=normal><a href=#__codelineno-16-5> 5</a></span>
-<span class=normal><a href=#__codelineno-16-6> 6</a></span>
-<span class=normal><a href=#__codelineno-16-7> 7</a></span>
-<span class=normal><a href=#__codelineno-16-8> 8</a></span>
-<span class=normal><a href=#__codelineno-16-9> 9</a></span>
-<span class=normal><a href=#__codelineno-16-10>10</a></span>
-<span class=normal><a href=#__codelineno-16-11>11</a></span>
-<span class=normal><a href=#__codelineno-16-12>12</a></span>
-<span class=normal><a href=#__codelineno-16-13>13</a></span>
-<span class=normal><a href=#__codelineno-16-14>14</a></span>
-<span class=normal><a href=#__codelineno-16-15>15</a></span>
-<span class=normal><a href=#__codelineno-16-16>16</a></span>
-<span class=normal><a href=#__codelineno-16-17>17</a></span>
-<span class=normal><a href=#__codelineno-16-18>18</a></span>
-<span class=normal><a href=#__codelineno-16-19>19</a></span>
-<span class=normal><a href=#__codelineno-16-20>20</a></span>
-<span class=normal><a href=#__codelineno-16-21>21</a></span>
-<span class=normal><a href=#__codelineno-16-22>22</a></span>
-<span class=normal><a href=#__codelineno-16-23>23</a></span>
-<span class=normal><a href=#__codelineno-16-24>24</a></span>
-<span class=normal><a href=#__codelineno-16-25>25</a></span>
-<span class=normal><a href=#__codelineno-16-26>26</a></span>
-<span class=normal><a href=#__codelineno-16-27>27</a></span>
-<span class=normal><a href=#__codelineno-16-28>28</a></span>
-<span class=normal><a href=#__codelineno-16-29>29</a></span>
-<span class=normal><a href=#__codelineno-16-30>30</a></span>
-<span class=normal><a href=#__codelineno-16-31>31</a></span>
-<span class=normal><a href=#__codelineno-16-32>32</a></span>
-<span class=normal><a href=#__codelineno-16-33>33</a></span>
-<span class=normal><a href=#__codelineno-16-34>34</a></span>
-<span class=normal><a href=#__codelineno-16-35>35</a></span>
-<span class=normal><a href=#__codelineno-16-36>36</a></span>
-<span class=normal><a href=#__codelineno-16-37>37</a></span>
-<span class=normal><a href=#__codelineno-16-38>38</a></span>
-<span class=normal><a href=#__codelineno-16-39>39</a></span>
-<span class=normal><a href=#__codelineno-16-40>40</a></span>
-<span class=normal><a href=#__codelineno-16-41>41</a></span>
-<span class=normal><a href=#__codelineno-16-42>42</a></span>
-<span class=normal><a href=#__codelineno-16-43>43</a></span>
-<span class=normal><a href=#__codelineno-16-44>44</a></span>
-<span class=normal><a href=#__codelineno-16-45>45</a></span>
-<span class=normal><a href=#__codelineno-16-46>46</a></span>
-<span class=normal><a href=#__codelineno-16-47>47</a></span>
-<span class=normal><a href=#__codelineno-16-48>48</a></span>
-<span class=normal><a href=#__codelineno-16-49>49</a></span>
-<span class=normal><a href=#__codelineno-16-50>50</a></span>
-<span class=normal><a href=#__codelineno-16-51>51</a></span>
-<span class=normal><a href=#__codelineno-16-52>52</a></span>
-<span class=normal><a href=#__codelineno-16-53>53</a></span>
-<span class=normal><a href=#__codelineno-16-54>54</a></span>
-<span class=normal><a href=#__codelineno-16-55>55</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=c1>//头文件</span>
-<a id=__codelineno-16-2 name=__codelineno-16-2></a><span class=c1>// ...</span>
-<a id=__codelineno-16-3 name=__codelineno-16-3></a><span class=k>typedef</span><span class=w> </span><span class=kt>void</span><span class=p>(</span><span class=o>*</span><span class=n>pro</span><span class=p>)(</span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=p>);</span>
-<a id=__codelineno-16-4 name=__codelineno-16-4></a><span class=c1>// ...</span>
-<a id=__codelineno-16-5 name=__codelineno-16-5></a>
-<a id=__codelineno-16-6 name=__codelineno-16-6></a><span class=kt>void</span><span class=w> </span><span class=nf>process</span><span class=p>(</span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=p>);</span>
-<a id=__codelineno-16-7 name=__codelineno-16-7></a><span class=kt>void</span><span class=w> </span><span class=nf>download</span><span class=p>(</span><span class=n>pro</span><span class=w> </span><span class=n>proc</span><span class=p>);</span>
-<a id=__codelineno-16-8 name=__codelineno-16-8></a>
-<a id=__codelineno-16-9 name=__codelineno-16-9></a><span class=c1>// 实现文件</span>
-<a id=__codelineno-16-10 name=__codelineno-16-10></a><span class=kt>void</span><span class=w> </span><span class=nf>download</span><span class=p>(</span><span class=n>pro</span><span class=w> </span><span class=n>proc</span><span class=p>)</span>
-<a id=__codelineno-16-11 name=__codelineno-16-11></a><span class=p>{</span>
-<a id=__codelineno-16-12 name=__codelineno-16-12></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>speed</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>BASE</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=p>(((</span><span class=kt>double</span><span class=p>)(</span><span class=n>rand</span><span class=p>()</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=n>BASE</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>))</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=mi>10</span><span class=p>);</span>
-<a id=__codelineno-16-13 name=__codelineno-16-13></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>0.0</span><span class=p>;</span>
-<a id=__codelineno-16-14 name=__codelineno-16-14></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=kt>FILE</span><span class=p>;</span>
-<a id=__codelineno-16-15 name=__codelineno-16-15></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span>
-<a id=__codelineno-16-16 name=__codelineno-16-16></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-16-17 name=__codelineno-16-17></a>
-<a id=__codelineno-16-18 name=__codelineno-16-18></a><span class=w>        </span><span class=n>current</span><span class=o>+=</span><span class=n>speed</span><span class=p>;</span>
-<a id=__codelineno-16-19 name=__codelineno-16-19></a><span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-16-20 name=__codelineno-16-20></a><span class=w>            </span><span class=n>current</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>total</span><span class=p>;</span>
-<a id=__codelineno-16-21 name=__codelineno-16-21></a><span class=w>        </span><span class=p>}</span>
-<a id=__codelineno-16-22 name=__codelineno-16-22></a><span class=w>        </span><span class=n>proc</span><span class=p>(</span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=n>total</span><span class=p>);</span>
-<a id=__codelineno-16-23 name=__codelineno-16-23></a><span class=w>        </span><span class=n>usleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>
-<a id=__codelineno-16-24 name=__codelineno-16-24></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-16-25 name=__codelineno-16-25></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
-<a id=__codelineno-16-26 name=__codelineno-16-26></a><span class=p>}</span>
-<a id=__codelineno-16-27 name=__codelineno-16-27></a>
-<a id=__codelineno-16-28 name=__codelineno-16-28></a><span class=c1>// Version 2：根据下载百分比更新进度条</span>
-<a id=__codelineno-16-29 name=__codelineno-16-29></a><span class=kt>void</span><span class=w> </span><span class=nf>process</span><span class=p>(</span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=p>)</span>
-<a id=__codelineno-16-30 name=__codelineno-16-30></a><span class=p>{</span>
-<a id=__codelineno-16-31 name=__codelineno-16-31></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>bar</span><span class=p>[</span><span class=n>NUM</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span>
-<a id=__codelineno-16-32 name=__codelineno-16-32></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>rate</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>100</span><span class=p>;</span>
-<a id=__codelineno-16-33 name=__codelineno-16-33></a><span class=w>    </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=p>(</span><span class=kt>int</span><span class=p>)</span><span class=w> </span><span class=n>rate</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-16-34 name=__codelineno-16-34></a><span class=w>        </span><span class=n>bar</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>STYLE</span><span class=p>;</span>
-<a id=__codelineno-16-35 name=__codelineno-16-35></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-16-36 name=__codelineno-16-36></a>
-<a id=__codelineno-16-37 name=__codelineno-16-37></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>points</span><span class=p>[</span><span class=n>PNUM</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span>
-<a id=__codelineno-16-38 name=__codelineno-16-38></a><span class=w>    </span><span class=k>static</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span>
-<a id=__codelineno-16-39 name=__codelineno-16-39></a><span class=w>    </span><span class=n>count</span><span class=o>++</span><span class=p>;</span>
-<a id=__codelineno-16-40 name=__codelineno-16-40></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>count</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>100</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-16-41 name=__codelineno-16-41></a><span class=w>        </span><span class=n>count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-16-42 name=__codelineno-16-42></a><span class=w>        </span><span class=k>static</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>num</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-16-43 name=__codelineno-16-43></a><span class=w>        </span><span class=n>num</span><span class=o>++</span><span class=p>;</span>
-<a id=__codelineno-16-44 name=__codelineno-16-44></a><span class=w>        </span><span class=n>num</span><span class=w> </span><span class=o>%=</span><span class=w> </span><span class=n>PNUM</span><span class=p>;</span>
-<a id=__codelineno-16-45 name=__codelineno-16-45></a><span class=w>        </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>PNUM</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-16-46 name=__codelineno-16-46></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>num</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-16-47 name=__codelineno-16-47></a><span class=w>                </span><span class=n>points</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>LOAD</span><span class=p>;</span><span class=w> </span><span class=c1>// 根据num填充符号</span>
-<a id=__codelineno-16-48 name=__codelineno-16-48></a><span class=w>            </span><span class=p>}</span><span class=w> </span><span class=k>else</span><span class=w> </span><span class=p>{</span>
-<a id=__codelineno-16-49 name=__codelineno-16-49></a><span class=w>                </span><span class=n>points</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=sc>&#39; &#39;</span><span class=p>;</span><span class=w> </span><span class=c1>// 剩余按照空格填充</span>
-<a id=__codelineno-16-50 name=__codelineno-16-50></a><span class=w>            </span><span class=p>}</span>
-<a id=__codelineno-16-51 name=__codelineno-16-51></a><span class=w>        </span><span class=p>}</span><span class=w>    </span>
-<a id=__codelineno-16-52 name=__codelineno-16-52></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-16-53 name=__codelineno-16-53></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;[%-100s][%.1lf%%]%s</span><span class=se>\r</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>bar</span><span class=p>,</span><span class=w> </span><span class=n>rate</span><span class=p>,</span><span class=w> </span><span class=n>points</span><span class=p>);</span>
-<a id=__codelineno-16-54 name=__codelineno-16-54></a><span class=w>    </span><span class=n>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
-<a id=__codelineno-16-55 name=__codelineno-16-55></a><span class=p>}</span>
-</code></pre></div></td></tr></table></div> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 19, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 7, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=贡献者> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg> </span> <nav> <a href=mailto:1848312235@qq.com>H0308</a> </nav> </span> </aside> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024 EPSDA </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script> <script src=../../assets/javascripts/bundle.fe8b6f2b.min.js></script> <script src=../../javascripts/mathjax.68e8db.min.js></script> <script src=../../javascripts/particles.da90bc.min.js></script> <script src=../../javascripts/other.57ed5a.min.js></script> <script src=../../javascripts/theme-switch.9e5245.min.js></script> <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+<a id=__codelineno-15-36 name=__codelineno-15-36></a><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+<a id=__codelineno-15-37 name=__codelineno-15-37></a><span class=p>{</span>
+<a id=__codelineno-15-38 name=__codelineno-15-38></a><span class=w>    </span><span class=n>process</span><span class=p>();</span>
+<a id=__codelineno-15-39 name=__codelineno-15-39></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-15-40 name=__codelineno-15-40></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <p>对应的<code>Makefile</code>如下：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1>1</a></span>
+<span class=normal><a href=#__codelineno-16-2>2</a></span>
+<span class=normal><a href=#__codelineno-16-3>3</a></span>
+<span class=normal><a href=#__codelineno-16-4>4</a></span>
+<span class=normal><a href=#__codelineno-16-5>5</a></span>
+<span class=normal><a href=#__codelineno-16-6>6</a></span>
+<span class=normal><a href=#__codelineno-16-7>7</a></span>
+<span class=normal><a href=#__codelineno-16-8>8</a></span>
+<span class=normal><a href=#__codelineno-16-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=nv>TARGET</span><span class=o>=</span>process
+<a id=__codelineno-16-2 name=__codelineno-16-2></a><span class=nv>SRC</span><span class=o>=</span>process.c<span class=w> </span>main.c
+<a id=__codelineno-16-3 name=__codelineno-16-3></a>
+<a id=__codelineno-16-4 name=__codelineno-16-4></a><span class=nf>$(TARGET)</span><span class=o>:</span><span class=k>$(</span><span class=nv>SRC</span><span class=k>)</span>
+<a id=__codelineno-16-5 name=__codelineno-16-5></a><span class=w>    </span><span class=k>$(</span>CC<span class=k>)</span><span class=w> </span>$^<span class=w> </span>-o<span class=w> </span><span class=nv>$@</span>
+<a id=__codelineno-16-6 name=__codelineno-16-6></a>
+<a id=__codelineno-16-7 name=__codelineno-16-7></a><span class=nf>.PHONY</span><span class=o>:</span><span class=n>clean</span>
+<a id=__codelineno-16-8 name=__codelineno-16-8></a><span class=nf>clean</span><span class=o>:</span>
+<a id=__codelineno-16-9 name=__codelineno-16-9></a><span class=w>    </span>rm<span class=w> </span>-rf<span class=w> </span><span class=k>$(</span>TARGET<span class=k>)</span>
+</code></pre></div></td></tr></table></div> <h4 id=_7>改进版本<a class=headerlink href=#_7 title="Permanent link">&para;</a></h4> <p>前面的进度条只是根据100进行依次填充，并没有达到进度条的实用性「根据下载进度更新进度条」，所以可以通过下面的思路对上面的代码进行优化：</p> <p>首先，定义一个函数<code>download</code>，该函数用于定义下载任务</p> <p>假设需要下载的文件<code>FILE</code>大小为2048MB，定义一个带宽<code>BASE</code>为1MB，为了模拟出网络波动，可以使用<code>(rand()%BASE+1)/10</code>计算出增量，用增量乘以<code>BASE</code>计算出下载速度<code>speed</code>，但是需要注意，因为<code>rand()%BASE+1</code>计算出的值为整数，整数除以10依旧为整数，所以此时值只会为0，为了解决这个问题可以将<code>rand()%BASE+1</code>强转为<code>double</code>再除法运算</p> <p>定义两个变量分别为<code>current</code>和<code>total</code>，分别代表当前下载量和总下载量，因为需要根据百分比显示更新进度条，所以这两个变量需要使用<code>double</code>类型定义，百分比计算公式：<code>current / total * 100</code></p> <p>模拟下载效果可以使用一个循环，循环体内使<code>current</code>不断根据速<code>speed</code>进行更新，但是这里可能最后计算出的<code>current</code>不一定刚好等于<code>double</code>，为了防止出现进度条计算出的百分比大于1，可以使用一个矫正「当<code>current</code>大于等于<code>total</code>时，就将<code>total</code>赋值给<code>current</code>」，当<code>current</code>大于或等于<code>total</code>时结束循环</p> <p>前面的进度条只是单纯根据100进行填充，所以需要使用循环。但是此处更新进度条不可以再使用循环，否则会出现「更新一次<code>current</code>，进度条就跑满一次的问题」，正确的思路是「更新一次<code>current</code>，进度条更新一次」</p> <p>进度条的设计分成两部分：</p> <ol> <li>进度条填充图案及动画</li> <li>进度条加载图案及动画（这个不是必须的，但是如果出现进度条卡住等问题，该图案可以用于辨别是系统卡住还是下载卡住）</li> </ol> <p>对于「进度条填充图案及动画」来说，主要思路是根据下载百分比更新进度条，所以可以使用变量<code>rate</code>存储百分比，根据该百分比进行数组图案循环填充，但是需要注意，因为百分比为<code>double</code>类型，存在精度损失问题，所以在作为循环结束条件比较运算符的右操作数时需要强转为<code>int</code>，同样的思路打印进度条填充图案及显示动画即可</p> <p>对于「进度条加载图案及动画」来说，这里使用<code>.</code>作为加载图案，重点考虑如何实现依次打印「.」「..」「...」「....」「.....」「......」并循环往复。每一次调用进度条可以考虑更新一次符号，和填充图案类似，但是需要每一次更新指定数量的<code>.</code>，可以定义一个静态变量，每一次调用更新一次，但是必须确保不超过设计的数量，这里假设数量<code>PNUM</code>为6，即一共6个<code>.</code>，在循环中根据<code>PNUM</code>进行循环，如果i小于<code>num</code>，就打印<code>.</code>（通过<code>num</code>控制<code>.</code>的个数），否则打印空格进行占位，使用打印进度条的思路打印加载动画即可</p> <p>最后，可以考虑使用一个<code>count</code>变量降低加载动画的速度</p> <p>示例代码：</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1> 1</a></span>
+<span class=normal><a href=#__codelineno-17-2> 2</a></span>
+<span class=normal><a href=#__codelineno-17-3> 3</a></span>
+<span class=normal><a href=#__codelineno-17-4> 4</a></span>
+<span class=normal><a href=#__codelineno-17-5> 5</a></span>
+<span class=normal><a href=#__codelineno-17-6> 6</a></span>
+<span class=normal><a href=#__codelineno-17-7> 7</a></span>
+<span class=normal><a href=#__codelineno-17-8> 8</a></span>
+<span class=normal><a href=#__codelineno-17-9> 9</a></span>
+<span class=normal><a href=#__codelineno-17-10>10</a></span>
+<span class=normal><a href=#__codelineno-17-11>11</a></span>
+<span class=normal><a href=#__codelineno-17-12>12</a></span>
+<span class=normal><a href=#__codelineno-17-13>13</a></span>
+<span class=normal><a href=#__codelineno-17-14>14</a></span>
+<span class=normal><a href=#__codelineno-17-15>15</a></span>
+<span class=normal><a href=#__codelineno-17-16>16</a></span>
+<span class=normal><a href=#__codelineno-17-17>17</a></span>
+<span class=normal><a href=#__codelineno-17-18>18</a></span>
+<span class=normal><a href=#__codelineno-17-19>19</a></span>
+<span class=normal><a href=#__codelineno-17-20>20</a></span>
+<span class=normal><a href=#__codelineno-17-21>21</a></span>
+<span class=normal><a href=#__codelineno-17-22>22</a></span>
+<span class=normal><a href=#__codelineno-17-23>23</a></span>
+<span class=normal><a href=#__codelineno-17-24>24</a></span>
+<span class=normal><a href=#__codelineno-17-25>25</a></span>
+<span class=normal><a href=#__codelineno-17-26>26</a></span>
+<span class=normal><a href=#__codelineno-17-27>27</a></span>
+<span class=normal><a href=#__codelineno-17-28>28</a></span>
+<span class=normal><a href=#__codelineno-17-29>29</a></span>
+<span class=normal><a href=#__codelineno-17-30>30</a></span>
+<span class=normal><a href=#__codelineno-17-31>31</a></span>
+<span class=normal><a href=#__codelineno-17-32>32</a></span>
+<span class=normal><a href=#__codelineno-17-33>33</a></span>
+<span class=normal><a href=#__codelineno-17-34>34</a></span>
+<span class=normal><a href=#__codelineno-17-35>35</a></span>
+<span class=normal><a href=#__codelineno-17-36>36</a></span>
+<span class=normal><a href=#__codelineno-17-37>37</a></span>
+<span class=normal><a href=#__codelineno-17-38>38</a></span>
+<span class=normal><a href=#__codelineno-17-39>39</a></span>
+<span class=normal><a href=#__codelineno-17-40>40</a></span>
+<span class=normal><a href=#__codelineno-17-41>41</a></span>
+<span class=normal><a href=#__codelineno-17-42>42</a></span>
+<span class=normal><a href=#__codelineno-17-43>43</a></span>
+<span class=normal><a href=#__codelineno-17-44>44</a></span>
+<span class=normal><a href=#__codelineno-17-45>45</a></span>
+<span class=normal><a href=#__codelineno-17-46>46</a></span>
+<span class=normal><a href=#__codelineno-17-47>47</a></span>
+<span class=normal><a href=#__codelineno-17-48>48</a></span>
+<span class=normal><a href=#__codelineno-17-49>49</a></span>
+<span class=normal><a href=#__codelineno-17-50>50</a></span>
+<span class=normal><a href=#__codelineno-17-51>51</a></span>
+<span class=normal><a href=#__codelineno-17-52>52</a></span>
+<span class=normal><a href=#__codelineno-17-53>53</a></span>
+<span class=normal><a href=#__codelineno-17-54>54</a></span>
+<span class=normal><a href=#__codelineno-17-55>55</a></span>
+<span class=normal><a href=#__codelineno-17-56>56</a></span>
+<span class=normal><a href=#__codelineno-17-57>57</a></span>
+<span class=normal><a href=#__codelineno-17-58>58</a></span>
+<span class=normal><a href=#__codelineno-17-59>59</a></span>
+<span class=normal><a href=#__codelineno-17-60>60</a></span>
+<span class=normal><a href=#__codelineno-17-61>61</a></span>
+<span class=normal><a href=#__codelineno-17-62>62</a></span>
+<span class=normal><a href=#__codelineno-17-63>63</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=c1>// 头文件</span>
+<a id=__codelineno-17-2 name=__codelineno-17-2></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+<a id=__codelineno-17-3 name=__codelineno-17-3></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+<a id=__codelineno-17-4 name=__codelineno-17-4></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;time.h&gt;</span>
+<a id=__codelineno-17-5 name=__codelineno-17-5></a><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdlib.h&gt;</span>
+<a id=__codelineno-17-6 name=__codelineno-17-6></a>
+<a id=__codelineno-17-7 name=__codelineno-17-7></a><span class=cp>#define NUM 101 </span><span class=c1>// 定义进度条字符的个数</span>
+<a id=__codelineno-17-8 name=__codelineno-17-8></a><span class=cp>#define STYLE &#39;#&#39; </span><span class=c1>// 定义进度条的样式</span>
+<a id=__codelineno-17-9 name=__codelineno-17-9></a>
+<a id=__codelineno-17-10 name=__codelineno-17-10></a><span class=cp>#define FILE 2048.0</span>
+<a id=__codelineno-17-11 name=__codelineno-17-11></a><span class=cp>#define BASE 1</span>
+<a id=__codelineno-17-12 name=__codelineno-17-12></a><span class=cp>#define LOAD &#39;.&#39;</span>
+<a id=__codelineno-17-13 name=__codelineno-17-13></a><span class=cp>#define PNUM 6</span>
+<a id=__codelineno-17-14 name=__codelineno-17-14></a>
+<a id=__codelineno-17-15 name=__codelineno-17-15></a><span class=kt>void</span><span class=w> </span><span class=nf>process</span><span class=p>(</span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=p>);</span>
+<a id=__codelineno-17-16 name=__codelineno-17-16></a><span class=kt>void</span><span class=w> </span><span class=nf>download</span><span class=p>(</span><span class=n>pro</span><span class=w> </span><span class=n>proc</span><span class=p>);</span>
+<a id=__codelineno-17-17 name=__codelineno-17-17></a>
+<a id=__codelineno-17-18 name=__codelineno-17-18></a><span class=c1>// 实现文件</span>
+<a id=__codelineno-17-19 name=__codelineno-17-19></a><span class=w> </span><span class=n>download</span><span class=p>()</span>
+<a id=__codelineno-17-20 name=__codelineno-17-20></a><span class=p>{</span>
+<a id=__codelineno-17-21 name=__codelineno-17-21></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>speed</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>BASE</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=p>(((</span><span class=kt>double</span><span class=p>)(</span><span class=n>rand</span><span class=p>()</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=n>BASE</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>))</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=mi>10</span><span class=p>);</span>
+<a id=__codelineno-17-22 name=__codelineno-17-22></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>0.0</span><span class=p>;</span>
+<a id=__codelineno-17-23 name=__codelineno-17-23></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=kt>FILE</span><span class=p>;</span>
+<a id=__codelineno-17-24 name=__codelineno-17-24></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span>
+<a id=__codelineno-17-25 name=__codelineno-17-25></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-17-26 name=__codelineno-17-26></a><span class=w>        </span><span class=n>current</span><span class=o>+=</span><span class=n>speed</span><span class=p>;</span>
+<a id=__codelineno-17-27 name=__codelineno-17-27></a><span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-17-28 name=__codelineno-17-28></a><span class=w>            </span><span class=n>current</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>total</span><span class=p>;</span>
+<a id=__codelineno-17-29 name=__codelineno-17-29></a><span class=w>        </span><span class=p>}</span>
+<a id=__codelineno-17-30 name=__codelineno-17-30></a><span class=w>        </span><span class=n>process</span><span class=p>(</span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=n>total</span><span class=p>);</span>
+<a id=__codelineno-17-31 name=__codelineno-17-31></a><span class=w>        </span><span class=n>usleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>
+<a id=__codelineno-17-32 name=__codelineno-17-32></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-17-33 name=__codelineno-17-33></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+<a id=__codelineno-17-34 name=__codelineno-17-34></a><span class=p>}</span>
+<a id=__codelineno-17-35 name=__codelineno-17-35></a>
+<a id=__codelineno-17-36 name=__codelineno-17-36></a><span class=c1>// Version 2：根据下载百分比更新进度条</span>
+<a id=__codelineno-17-37 name=__codelineno-17-37></a><span class=kt>void</span><span class=w> </span><span class=n>process</span><span class=p>(</span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=p>)</span>
+<a id=__codelineno-17-38 name=__codelineno-17-38></a><span class=p>{</span>
+<a id=__codelineno-17-39 name=__codelineno-17-39></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>bar</span><span class=p>[</span><span class=n>NUM</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span>
+<a id=__codelineno-17-40 name=__codelineno-17-40></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>rate</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>100</span><span class=p>;</span>
+<a id=__codelineno-17-41 name=__codelineno-17-41></a><span class=w>    </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=p>(</span><span class=kt>int</span><span class=p>)</span><span class=w> </span><span class=n>rate</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-17-42 name=__codelineno-17-42></a><span class=w>        </span><span class=n>bar</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>STYLE</span><span class=p>;</span>
+<a id=__codelineno-17-43 name=__codelineno-17-43></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-17-44 name=__codelineno-17-44></a>
+<a id=__codelineno-17-45 name=__codelineno-17-45></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>points</span><span class=p>[</span><span class=n>PNUM</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span>
+<a id=__codelineno-17-46 name=__codelineno-17-46></a><span class=w>    </span><span class=k>static</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span>
+<a id=__codelineno-17-47 name=__codelineno-17-47></a><span class=w>    </span><span class=n>count</span><span class=o>++</span><span class=p>;</span>
+<a id=__codelineno-17-48 name=__codelineno-17-48></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>count</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>100</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-17-49 name=__codelineno-17-49></a><span class=w>        </span><span class=n>count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-17-50 name=__codelineno-17-50></a><span class=w>        </span><span class=k>static</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>num</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-17-51 name=__codelineno-17-51></a><span class=w>        </span><span class=n>num</span><span class=o>++</span><span class=p>;</span>
+<a id=__codelineno-17-52 name=__codelineno-17-52></a><span class=w>        </span><span class=n>num</span><span class=w> </span><span class=o>%=</span><span class=w> </span><span class=n>PNUM</span><span class=p>;</span>
+<a id=__codelineno-17-53 name=__codelineno-17-53></a><span class=w>        </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>PNUM</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-17-54 name=__codelineno-17-54></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>num</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-17-55 name=__codelineno-17-55></a><span class=w>                </span><span class=n>points</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>LOAD</span><span class=p>;</span><span class=w> </span><span class=c1>// 根据num填充符号</span>
+<a id=__codelineno-17-56 name=__codelineno-17-56></a><span class=w>            </span><span class=p>}</span><span class=w> </span><span class=k>else</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-17-57 name=__codelineno-17-57></a><span class=w>                </span><span class=n>points</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=sc>&#39; &#39;</span><span class=p>;</span><span class=w> </span><span class=c1>// 剩余按照空格填充</span>
+<a id=__codelineno-17-58 name=__codelineno-17-58></a><span class=w>            </span><span class=p>}</span>
+<a id=__codelineno-17-59 name=__codelineno-17-59></a><span class=w>        </span><span class=p>}</span><span class=w>    </span>
+<a id=__codelineno-17-60 name=__codelineno-17-60></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-17-61 name=__codelineno-17-61></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;[%-100s][%.1lf%%]%s</span><span class=se>\r</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>bar</span><span class=p>,</span><span class=w> </span><span class=n>rate</span><span class=p>,</span><span class=w> </span><span class=n>points</span><span class=p>);</span>
+<a id=__codelineno-17-62 name=__codelineno-17-62></a><span class=w>    </span><span class=n>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
+<a id=__codelineno-17-63 name=__codelineno-17-63></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <h4 id=_8>最终版本<a class=headerlink href=#_8 title="Permanent link">&para;</a></h4> <p>为了使下载函数更加具有通用性，可以使用函数指针，将进度条的函数声明使用<code>typedef</code>声明为<code>pro</code>，使用该函数指针在下载函数形参位置声明一个变量，在下载函数内部使用形参调用对应形参指向的进度条函数，之后如果有多个进度条代码，只要进度条代码的函数声明于形参函数指针执行的函数类型相同，就可以更换为其他的进度条代码执行</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1> 1</a></span>
+<span class=normal><a href=#__codelineno-18-2> 2</a></span>
+<span class=normal><a href=#__codelineno-18-3> 3</a></span>
+<span class=normal><a href=#__codelineno-18-4> 4</a></span>
+<span class=normal><a href=#__codelineno-18-5> 5</a></span>
+<span class=normal><a href=#__codelineno-18-6> 6</a></span>
+<span class=normal><a href=#__codelineno-18-7> 7</a></span>
+<span class=normal><a href=#__codelineno-18-8> 8</a></span>
+<span class=normal><a href=#__codelineno-18-9> 9</a></span>
+<span class=normal><a href=#__codelineno-18-10>10</a></span>
+<span class=normal><a href=#__codelineno-18-11>11</a></span>
+<span class=normal><a href=#__codelineno-18-12>12</a></span>
+<span class=normal><a href=#__codelineno-18-13>13</a></span>
+<span class=normal><a href=#__codelineno-18-14>14</a></span>
+<span class=normal><a href=#__codelineno-18-15>15</a></span>
+<span class=normal><a href=#__codelineno-18-16>16</a></span>
+<span class=normal><a href=#__codelineno-18-17>17</a></span>
+<span class=normal><a href=#__codelineno-18-18>18</a></span>
+<span class=normal><a href=#__codelineno-18-19>19</a></span>
+<span class=normal><a href=#__codelineno-18-20>20</a></span>
+<span class=normal><a href=#__codelineno-18-21>21</a></span>
+<span class=normal><a href=#__codelineno-18-22>22</a></span>
+<span class=normal><a href=#__codelineno-18-23>23</a></span>
+<span class=normal><a href=#__codelineno-18-24>24</a></span>
+<span class=normal><a href=#__codelineno-18-25>25</a></span>
+<span class=normal><a href=#__codelineno-18-26>26</a></span>
+<span class=normal><a href=#__codelineno-18-27>27</a></span>
+<span class=normal><a href=#__codelineno-18-28>28</a></span>
+<span class=normal><a href=#__codelineno-18-29>29</a></span>
+<span class=normal><a href=#__codelineno-18-30>30</a></span>
+<span class=normal><a href=#__codelineno-18-31>31</a></span>
+<span class=normal><a href=#__codelineno-18-32>32</a></span>
+<span class=normal><a href=#__codelineno-18-33>33</a></span>
+<span class=normal><a href=#__codelineno-18-34>34</a></span>
+<span class=normal><a href=#__codelineno-18-35>35</a></span>
+<span class=normal><a href=#__codelineno-18-36>36</a></span>
+<span class=normal><a href=#__codelineno-18-37>37</a></span>
+<span class=normal><a href=#__codelineno-18-38>38</a></span>
+<span class=normal><a href=#__codelineno-18-39>39</a></span>
+<span class=normal><a href=#__codelineno-18-40>40</a></span>
+<span class=normal><a href=#__codelineno-18-41>41</a></span>
+<span class=normal><a href=#__codelineno-18-42>42</a></span>
+<span class=normal><a href=#__codelineno-18-43>43</a></span>
+<span class=normal><a href=#__codelineno-18-44>44</a></span>
+<span class=normal><a href=#__codelineno-18-45>45</a></span>
+<span class=normal><a href=#__codelineno-18-46>46</a></span>
+<span class=normal><a href=#__codelineno-18-47>47</a></span>
+<span class=normal><a href=#__codelineno-18-48>48</a></span>
+<span class=normal><a href=#__codelineno-18-49>49</a></span>
+<span class=normal><a href=#__codelineno-18-50>50</a></span>
+<span class=normal><a href=#__codelineno-18-51>51</a></span>
+<span class=normal><a href=#__codelineno-18-52>52</a></span>
+<span class=normal><a href=#__codelineno-18-53>53</a></span>
+<span class=normal><a href=#__codelineno-18-54>54</a></span>
+<span class=normal><a href=#__codelineno-18-55>55</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-18-1 name=__codelineno-18-1></a><span class=c1>//头文件</span>
+<a id=__codelineno-18-2 name=__codelineno-18-2></a><span class=c1>// ...</span>
+<a id=__codelineno-18-3 name=__codelineno-18-3></a><span class=k>typedef</span><span class=w> </span><span class=kt>void</span><span class=p>(</span><span class=o>*</span><span class=n>pro</span><span class=p>)(</span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=p>);</span>
+<a id=__codelineno-18-4 name=__codelineno-18-4></a><span class=c1>// ...</span>
+<a id=__codelineno-18-5 name=__codelineno-18-5></a>
+<a id=__codelineno-18-6 name=__codelineno-18-6></a><span class=kt>void</span><span class=w> </span><span class=nf>process</span><span class=p>(</span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=p>);</span>
+<a id=__codelineno-18-7 name=__codelineno-18-7></a><span class=kt>void</span><span class=w> </span><span class=nf>download</span><span class=p>(</span><span class=n>pro</span><span class=w> </span><span class=n>proc</span><span class=p>);</span>
+<a id=__codelineno-18-8 name=__codelineno-18-8></a>
+<a id=__codelineno-18-9 name=__codelineno-18-9></a><span class=c1>// 实现文件</span>
+<a id=__codelineno-18-10 name=__codelineno-18-10></a><span class=kt>void</span><span class=w> </span><span class=nf>download</span><span class=p>(</span><span class=n>pro</span><span class=w> </span><span class=n>proc</span><span class=p>)</span>
+<a id=__codelineno-18-11 name=__codelineno-18-11></a><span class=p>{</span>
+<a id=__codelineno-18-12 name=__codelineno-18-12></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>speed</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>BASE</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=p>(((</span><span class=kt>double</span><span class=p>)(</span><span class=n>rand</span><span class=p>()</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=n>BASE</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>))</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=mi>10</span><span class=p>);</span>
+<a id=__codelineno-18-13 name=__codelineno-18-13></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>0.0</span><span class=p>;</span>
+<a id=__codelineno-18-14 name=__codelineno-18-14></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=kt>FILE</span><span class=p>;</span>
+<a id=__codelineno-18-15 name=__codelineno-18-15></a><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span>
+<a id=__codelineno-18-16 name=__codelineno-18-16></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-18-17 name=__codelineno-18-17></a>
+<a id=__codelineno-18-18 name=__codelineno-18-18></a><span class=w>        </span><span class=n>current</span><span class=o>+=</span><span class=n>speed</span><span class=p>;</span>
+<a id=__codelineno-18-19 name=__codelineno-18-19></a><span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-18-20 name=__codelineno-18-20></a><span class=w>            </span><span class=n>current</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>total</span><span class=p>;</span>
+<a id=__codelineno-18-21 name=__codelineno-18-21></a><span class=w>        </span><span class=p>}</span>
+<a id=__codelineno-18-22 name=__codelineno-18-22></a><span class=w>        </span><span class=n>proc</span><span class=p>(</span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=n>total</span><span class=p>);</span>
+<a id=__codelineno-18-23 name=__codelineno-18-23></a><span class=w>        </span><span class=n>usleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>
+<a id=__codelineno-18-24 name=__codelineno-18-24></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-18-25 name=__codelineno-18-25></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+<a id=__codelineno-18-26 name=__codelineno-18-26></a><span class=p>}</span>
+<a id=__codelineno-18-27 name=__codelineno-18-27></a>
+<a id=__codelineno-18-28 name=__codelineno-18-28></a><span class=c1>// Version 2：根据下载百分比更新进度条</span>
+<a id=__codelineno-18-29 name=__codelineno-18-29></a><span class=kt>void</span><span class=w> </span><span class=nf>process</span><span class=p>(</span><span class=kt>double</span><span class=w> </span><span class=n>current</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>total</span><span class=p>)</span>
+<a id=__codelineno-18-30 name=__codelineno-18-30></a><span class=p>{</span>
+<a id=__codelineno-18-31 name=__codelineno-18-31></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>bar</span><span class=p>[</span><span class=n>NUM</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span>
+<a id=__codelineno-18-32 name=__codelineno-18-32></a><span class=w>    </span><span class=kt>double</span><span class=w> </span><span class=n>rate</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>current</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=n>total</span><span class=p>)</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>100</span><span class=p>;</span>
+<a id=__codelineno-18-33 name=__codelineno-18-33></a><span class=w>    </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=p>(</span><span class=kt>int</span><span class=p>)</span><span class=w> </span><span class=n>rate</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-18-34 name=__codelineno-18-34></a><span class=w>        </span><span class=n>bar</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>STYLE</span><span class=p>;</span>
+<a id=__codelineno-18-35 name=__codelineno-18-35></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-18-36 name=__codelineno-18-36></a>
+<a id=__codelineno-18-37 name=__codelineno-18-37></a><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>points</span><span class=p>[</span><span class=n>PNUM</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span>
+<a id=__codelineno-18-38 name=__codelineno-18-38></a><span class=w>    </span><span class=k>static</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span>
+<a id=__codelineno-18-39 name=__codelineno-18-39></a><span class=w>    </span><span class=n>count</span><span class=o>++</span><span class=p>;</span>
+<a id=__codelineno-18-40 name=__codelineno-18-40></a><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>count</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>100</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-18-41 name=__codelineno-18-41></a><span class=w>        </span><span class=n>count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-18-42 name=__codelineno-18-42></a><span class=w>        </span><span class=k>static</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>num</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-18-43 name=__codelineno-18-43></a><span class=w>        </span><span class=n>num</span><span class=o>++</span><span class=p>;</span>
+<a id=__codelineno-18-44 name=__codelineno-18-44></a><span class=w>        </span><span class=n>num</span><span class=w> </span><span class=o>%=</span><span class=w> </span><span class=n>PNUM</span><span class=p>;</span>
+<a id=__codelineno-18-45 name=__codelineno-18-45></a><span class=w>        </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>PNUM</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-18-46 name=__codelineno-18-46></a><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>num</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-18-47 name=__codelineno-18-47></a><span class=w>                </span><span class=n>points</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>LOAD</span><span class=p>;</span><span class=w> </span><span class=c1>// 根据num填充符号</span>
+<a id=__codelineno-18-48 name=__codelineno-18-48></a><span class=w>            </span><span class=p>}</span><span class=w> </span><span class=k>else</span><span class=w> </span><span class=p>{</span>
+<a id=__codelineno-18-49 name=__codelineno-18-49></a><span class=w>                </span><span class=n>points</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=sc>&#39; &#39;</span><span class=p>;</span><span class=w> </span><span class=c1>// 剩余按照空格填充</span>
+<a id=__codelineno-18-50 name=__codelineno-18-50></a><span class=w>            </span><span class=p>}</span>
+<a id=__codelineno-18-51 name=__codelineno-18-51></a><span class=w>        </span><span class=p>}</span><span class=w>    </span>
+<a id=__codelineno-18-52 name=__codelineno-18-52></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-18-53 name=__codelineno-18-53></a><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;[%-100s][%.1lf%%]%s</span><span class=se>\r</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>bar</span><span class=p>,</span><span class=w> </span><span class=n>rate</span><span class=p>,</span><span class=w> </span><span class=n>points</span><span class=p>);</span>
+<a id=__codelineno-18-54 name=__codelineno-18-54></a><span class=w>    </span><span class=n>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
+<a id=__codelineno-18-55 name=__codelineno-18-55></a><span class=p>}</span>
+</code></pre></div></td></tr></table></div> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 25, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 7, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=贡献者> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg> </span> <nav> <a href=mailto:1848312235@qq.com>H0308</a> </nav> </span> </aside> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024 EPSDA </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script> <script src=../../assets/javascripts/bundle.fe8b6f2b.min.js></script> <script src=../../javascripts/mathjax.68e8db.min.js></script> <script src=../../javascripts/particles.da90bc.min.js></script> <script src=../../javascripts/other.57ed5a.min.js></script> <script src=../../javascripts/theme-switch.9e5245.min.js></script> <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
 document$.subscribe(() => { lightbox.reload() });
 </script></body> </html>

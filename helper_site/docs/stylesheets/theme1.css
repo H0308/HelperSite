@@ -608,11 +608,6 @@ body::after {
     transition: text-shadow 0.3s ease;
 }
 
-/* 页面切换渐入效果 */
-.md-content {
-    animation: fadeIn 0.5s ease-out;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;

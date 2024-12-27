@@ -73,9 +73,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.getElementsByClassName("md-top")[0].innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>';
 
-$(function() {
-    function animationStart() {
-        $('#container').addClass('fin');
-    }
-    setTimeout(animationStart, 250);
+// 页面加载动画
+document.addEventListener('DOMContentLoaded', () => {
+    const transition = document.createElement('div');
+    transition.className = 'page-transition';
+    document.body.appendChild(transition);
+});
+// 代码块复制炫光效果
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.md-clipboard').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const codeBlock = this.closest('.highlight');
+            
+            // 移除已存在的炫光元素
+            const oldFlash = codeBlock.querySelector('.copy-flash');
+            if (oldFlash) {
+                oldFlash.remove();
+            }
+            
+            // 创建新的炫光元素
+            const flash = document.createElement('div');
+            flash.className = 'copy-flash';
+            codeBlock.appendChild(flash);
+            
+            // 动画结束后移除元素
+            flash.addEventListener('animationend', () => {
+                flash.remove();
+            });
+        });
+    });
 });

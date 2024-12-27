@@ -601,3 +601,71 @@ body::after {
 .md-sidebar__scrollwrap {
     scrollbar-color: rgba(77, 166, 218, 0.9) #0000 !important;
 }
+
+/* 文字悬浮发光特效 */
+.md-content p:hover {
+    text-shadow: 0 0 10px rgba(77, 166, 218, 0.3);
+    transition: text-shadow 0.3s ease;
+}
+
+/* 页面切换渐入效果 */
+.md-content {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 代码块复制按钮动画 */
+.md-clipboard {
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform: scale(0.8);
+}
+
+.highlight:hover .md-clipboard {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 代码块炫光效果 */
+.highlight {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.highlight .copy-flash {
+    content: "";
+    position: absolute !important;
+    top: -50% !important;
+    left: -50% !important;
+    width: 200% !important;
+    height: 200% !important;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(77, 166, 218, 0.2),
+        transparent
+    ) !important;
+    transform: rotate(45deg);
+    pointer-events: none;
+    z-index: 100;
+    animation: flash 1.5s ease-out forwards;
+}
+
+@keyframes flash {
+    0% {
+        transform: translate(-100%, -100%) rotate(45deg);
+    }
+    100% {
+        transform: translate(100%, 100%) rotate(45deg);
+    }
+}

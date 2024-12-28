@@ -664,3 +664,7 @@ body::after {
         transform: translate(100%, 100%) rotate(45deg);
     }
 }
+
+.md-typeset .highlighttable {
+    margin:0 0 !important;
+}

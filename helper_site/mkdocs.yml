@@ -5,6 +5,7 @@ edit_uri: https://github.com/H0308/HelperSite/tree/main/helper_site/docs
 
 theme:
   name: 'material'
+  custom_dir: overrides
   favicon: images/favicon.png
   logo: assets/logo.png
   font:

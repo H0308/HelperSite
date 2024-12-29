@@ -16,35 +16,40 @@ document.addEventListener('DOMContentLoaded', () => {
     // 获取搜索框元素
     const searchEl = document.querySelector('.md-search');
     searchEl.parentNode.insertBefore(themeSwitch, searchEl);
-
-    // 页面加载时应用保存的主题
-    applyTheme(savedTheme);
+    
+    // 立即应用保存的主题，避免闪烁
+    const theme1Link = document.querySelector('link[href*="theme1"]');
+    const theme2Link = document.querySelector('link[href*="theme2"]');
+    
+    if (savedTheme === 'theme1') {
+        theme1Link.removeAttribute('disabled');
+        theme2Link.setAttribute('disabled', 'true');
+    } else {
+        theme2Link.removeAttribute('disabled');
+        theme1Link.setAttribute('disabled', 'true');
+    }
 });
 
 function switchTheme() {
     const currentTheme = localStorage.getItem('preferred-theme') || 'theme1';
     const newTheme = currentTheme === 'theme1' ? 'theme2' : 'theme1';
-    const btn = document.querySelector('.theme-btn');
     
-    // 更新按钮文字
-    btn.textContent = newTheme === 'theme1' ? '旧版主题' : '新版主题';
+    // 更新主题样式
+    const theme1Link = document.querySelector('link[href*="theme1"]');
+    const theme2Link = document.querySelector('link[href*="theme2"]');
     
-    // 添加过渡动画
-    btn.style.transform = 'scale(0.95)';
-    setTimeout(() => btn.style.transform = 'scale(1)', 200);
-    
-    // 应用主题
-    applyTheme(newTheme);
+    if (newTheme === 'theme1') {
+        theme1Link.removeAttribute('disabled');
+        theme2Link.setAttribute('disabled', 'true');
+    } else {
+        theme2Link.removeAttribute('disabled');
+        theme1Link.setAttribute('disabled', 'true');
+    }
     
     // 保存主题选择
     localStorage.setItem('preferred-theme', newTheme);
-}
-
-function applyTheme(theme) {
-    const links = document.querySelectorAll('link[rel="stylesheet"]');
-    links.forEach(link => {
-        if (link.href.includes('theme')) {
-            link.disabled = !link.href.includes(theme);
-        }
-    });
+    
+    // 更新按钮文本
+    const themeBtn = document.querySelector('.theme-btn');
+    themeBtn.textContent = newTheme === 'theme1' ? '旧版主题' : '新版主题';
 }

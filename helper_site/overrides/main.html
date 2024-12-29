@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+    {{ super() }}
+    <!-- 添加自定义的head内容 -->
+    <script>
+    // 在页面解析时立即执行主题设置
+    (function initTheme() {
+        const savedTheme = localStorage.getItem('preferred-theme');
+        if (savedTheme) {
+            const theme1Link = document.querySelector('link[href*="theme1"]');
+            const theme2Link = document.querySelector('link[href*="theme2"]');
+            if (theme1Link && theme2Link) {
+                if (savedTheme === 'theme1') {
+                    theme1Link.removeAttribute('disabled');
+                    theme2Link.setAttribute('disabled', 'true');
+                } else {
+                    theme2Link.removeAttribute('disabled');
+                    theme1Link.setAttribute('disabled', 'true');
+                }
+            }
+        }
+    })();
+    </script>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+{% endblock %}

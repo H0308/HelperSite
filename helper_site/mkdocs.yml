@@ -251,9 +251,9 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
-extra_css:
-  - stylesheets/theme1.css
-  - stylesheets/theme2.css
+# extra_css:
+#   - stylesheets/theme1.css
+#   - stylesheets/theme2.css
   
 extra:
   social:
@@ -273,9 +273,9 @@ plugins:
           - javascripts/mathjax.js
           - javascripts/other.js
           - javascripts/particles.js
-      css_files:
-          - stylesheets/theme1.css
-          - stylesheets/theme1.css
+      # css_files:
+      #     - stylesheets/theme1.css
+      #     - stylesheets/theme1.css
   - git-authors
   - glightbox:
       touchNavigation: true

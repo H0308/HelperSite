@@ -276,7 +276,6 @@ plugins:
           - javascripts/mathjax.js
           - javascripts/other.js
           - javascripts/particles.js
-          - javascripts/theme-switch.js
       css_files:
           - stylesheets/theme1.css
           - stylesheets/theme1.css

@@ -2,10 +2,12 @@
 
 {% block extrahead %}
     {{ super() }}
-    <!-- 桌面端加载theme1.css (>=1024px) -->
-    <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme1.css" media="screen and (min-width: 1024px)">
-    <!-- 平板端加载theme2.css (768px-1023px) -->
-    <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.css" media="screen and (min-width: 768px) and (max-width: 1023px)">
+    <!-- 桌面端加载theme1.css (>=1200px) -->
+    <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme1.css" media="screen and (min-width: 1200px)">
+    
+    <!-- 平板端加载theme2.css (768px-1199px) -->
+    <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.css" media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)">
+    
     <!-- 手机端加载theme2.css (<768px) -->
     <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.css" media="screen and (max-width: 767px)">
     <style>
@@ -37,7 +39,7 @@
         }
 
         /* 主题切换按钮只在桌面端显示 */
-        @media screen and (max-width: 1023px) {
+        @media screen and (max-width: 1199px) and (orientation: landscape) {
             .theme-switch {
                 display: none !important;
             }

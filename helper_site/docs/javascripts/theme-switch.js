@@ -6,10 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 获取保存的主题
     const savedTheme = localStorage.getItem('preferred-theme') || 'theme1';
     
-    // 创建单个切换按钮
+    // 修改按钮HTML结构
     themeSwitch.innerHTML = `
         <button class="theme-btn" onclick="switchTheme()">
-            ${savedTheme === 'theme1' ? '旧版主题' : '新版主题'}
+            <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '旧版主题'}</span>
+            <span class="target-theme">${savedTheme === 'theme1' ? '旧版主题' : '新版主题'}</span>
         </button>
     `;
     
@@ -51,5 +52,8 @@ function switchTheme() {
     
     // 更新按钮文本
     const themeBtn = document.querySelector('.theme-btn');
-    themeBtn.textContent = newTheme === 'theme1' ? '旧版主题' : '新版主题';
+    const currentThemeEl = themeBtn.querySelector('.current-theme');
+    const targetThemeEl = themeBtn.querySelector('.target-theme');
+    currentThemeEl.textContent = newTheme === 'theme1' ? '新版主题' : '旧版主题';
+    targetThemeEl.textContent = newTheme === 'theme1' ? '旧版主题' : '新版主题';
 }

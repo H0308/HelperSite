@@ -1,7 +1,6 @@
 site_name: 学习档案
 site_url: https://www.help-doc.top
 use_directory_urls: false
-edit_uri: https://github.com/H0308/HelperSite/tree/main/helper_site/docs
 
 theme:
   name: 'material'
@@ -25,8 +24,6 @@ theme:
     - scheme: default
       accent: teal
       primary: white
-  icon:
-    edit: material/pencil
 
 copyright: Copyright &copy; 2024 EPSDA
 
@@ -306,3 +303,6 @@ plugins:
       manual: false
   - git-revision-date-localized:
       enable_creation_date: true
+  - privacy:            # 隐私保护
+      external_links: true
+      external_assets: true

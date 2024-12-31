@@ -2,28 +2,141 @@
 
 {% block extrahead %}
     {{ super() }}
-    <!-- 添加自定义的head内容 -->
+    <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme1.css">
+    <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.css" disabled>
+    <style>
+        /* 主题切换按钮组样式 */
+        .theme-switch {
+            display: inline-flex;
+            gap: 8px;
+            margin-right: 1rem;
+            padding: 4px;
+            border-radius: 100px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* 主题切换按钮样式 */
+        .theme-switch {
+            margin-right: 1rem;
+        }
+
+        /* 主题切换按钮样式 */
+        .theme-btn {
+            /* 保持原有基础样式 */
+            font-family: var(--md-text-font);
+            font-size: medium;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 100px;
+            background: #444;
+            color: #fff;
+            cursor: pointer;
+            
+            /* 调整按钮尺寸 */
+            min-width: 100px;
+            height: 36px;
+            
+            /* 容器属性 */
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        /* 文字容器样式 */
+        .theme-btn .current-theme,
+        .theme-btn .target-theme {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+            z-index: 2;
+        }
+
+        .theme-btn .current-theme {
+            transform: translateX(0);
+            opacity: 1;
+            transition-delay: 0ms;
+        }
+
+        .theme-btn .target-theme {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition-delay: 0ms;
+        }
+
+        /* 悬停动画效果 */
+        .theme-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-btn:hover .current-theme {
+            transform: translateX(10px);
+            opacity: 0;
+            transition-delay: 100ms;
+        }
+
+        .theme-btn:hover .target-theme {
+            transform: translateX(0);
+            opacity: 1;
+            transition-delay: 200ms;
+        }
+
+        /* 点击效果 */
+        .theme-btn:active {
+            transform: scale(0.95);
+            transition: all 100ms ease;
+        }
+    </style>
     <script>
-    // 在页面解析时立即执行主题设置
-    (function initTheme() {
-        const savedTheme = localStorage.getItem('preferred-theme');
-        if (savedTheme) {
-            const theme1Link = document.querySelector('link[href*="theme1"]');
-            const theme2Link = document.querySelector('link[href*="theme2"]');
-            if (theme1Link && theme2Link) {
-                if (savedTheme === 'theme1') {
-                    theme1Link.removeAttribute('disabled');
-                    theme2Link.setAttribute('disabled', 'true');
-                } else {
-                    theme2Link.removeAttribute('disabled');
-                    theme1Link.setAttribute('disabled', 'true');
+        (function initTheme() {
+            const savedTheme = localStorage.getItem('preferred-theme');
+            if (savedTheme) {
+                const theme1Link = document.querySelector('link[href*="theme1"]');
+                const theme2Link = document.querySelector('link[href*="theme2"]');
+                if (theme1Link && theme2Link) {
+                    if (savedTheme === 'theme1') {
+                        theme1Link.removeAttribute('disabled');
+                        theme2Link.setAttribute('disabled', 'true');
+                    } else {
+                        theme2Link.removeAttribute('disabled');
+                        theme1Link.setAttribute('disabled', 'true');
+                    }
                 }
             }
-        }
-    })();
+        })();
     </script>
 {% endblock %}
 
 {% block content %}
-{{ super() }}
+    {{ super() }}
+{% endblock %}
+
+<!-- 在header部分添加主题切换按钮 -->
+{% block header %}
+    {{ super() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 找到搜索框
+            const searchEl = document.querySelector('.md-search');
+            // 获取保存的主题
+            const savedTheme = localStorage.getItem('preferred-theme') || 'theme1';
+            // 创建按钮HTML结构
+            const themeSwitch = document.createElement('div');
+            themeSwitch.className = 'theme-switch';
+            themeSwitch.innerHTML = `
+                <button class="theme-btn" onclick="switchTheme()">
+                    <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '旧版主题'}</span>
+                    <span class="target-theme">${savedTheme === 'theme1' ? '旧版主题' : '新版主题'}</span>
+                </button>
+            `;
+            // 插入按钮到搜索框前面
+            searchEl.parentNode.insertBefore(themeSwitch, searchEl);
+        });
+    </script>
 {% endblock %}

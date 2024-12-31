@@ -273,9 +273,6 @@ plugins:
       minify_html: true
       minify_js: true
       minify_css: true
-      htmlmin_opts:
-          remove_comments: true
-      cache_safe: true
       js_files:
           - javascripts/mathjax.js
           - javascripts/other.js
@@ -303,6 +300,3 @@ plugins:
       manual: false
   - git-revision-date-localized:
       enable_creation_date: true
-  - privacy:            # 隐私保护
-      external_links: true
-      external_assets: true

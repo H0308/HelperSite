@@ -1,4 +1,31 @@
-<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html><link rel=prev href=../../%E7%BC%96%E7%A8%8B%E9%A2%98%E7%9B%AE%E7%BB%83%E4%B9%A0%E6%80%BB%E7%BB%93/%E6%A8%A1%E6%8B%9F%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B4%E6%95%B0%E5%87%BD%E6%95%B0/%E6%A8%A1%E6%8B%9F%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B4%E6%95%B0%E5%87%BD%E6%95%B0.html><link rel=next href=../C%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0%E6%A0%88%E5%B8%A7/%E5%85%B3%E4%BA%8E%E5%87%BD%E6%95%B0%E6%A0%88%E5%B8%A7%EF%BC%88C%E8%AF%AD%E8%A8%80%E6%BC%94%E7%A4%BA%EF%BC%89.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.0, mkdocs-material-9.5.31"><title>关于Shell - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.3cba04c6.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"JetBrains Mono"}</style><link rel=stylesheet href=../../stylesheets/theme1.min.css><link rel=stylesheet href=../../stylesheets/theme2.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><link rel=stylesheet href=../../stylesheets/theme1.css><link rel=stylesheet href=../../stylesheets/theme2.css disabled><style>
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html><link rel=prev href=../../%E7%BC%96%E7%A8%8B%E9%A2%98%E7%9B%AE%E7%BB%83%E4%B9%A0%E6%80%BB%E7%BB%93/%E6%A8%A1%E6%8B%9F%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B4%E6%95%B0%E5%87%BD%E6%95%B0/%E6%A8%A1%E6%8B%9F%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B4%E6%95%B0%E5%87%BD%E6%95%B0.html><link rel=next href=../C%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0%E6%A0%88%E5%B8%A7/%E5%85%B3%E4%BA%8E%E5%87%BD%E6%95%B0%E6%A0%88%E5%B8%A7%EF%BC%88C%E8%AF%AD%E8%A8%80%E6%BC%94%E7%A4%BA%EF%BC%89.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.0, mkdocs-material-9.5.31"><title>关于Shell - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.3cba04c6.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><link rel=stylesheet href=../../stylesheets/theme1.min.css><link rel=stylesheet href=../../stylesheets/theme2.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><link rel=stylesheet href=../../stylesheets/theme1.css><link rel=stylesheet href=../../stylesheets/theme2.css disabled><style>
+        @import url('https://static.zeoseven.com/zsft/2/main/result.css');
+        @import url('https://fonts.cdnfonts.com/css/opposans');
+        @import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
+
+        /* 1. 优化OPPO Sans字体 */
+        @font-face {
+            font-family: "OPPOSans";
+            font-weight: normal;
+        }
+
+        /* 2. 优化霞鹜臻楷字体 - 仅用于标题 */
+        @font-face {
+            font-family: 'LXGW ZhenKai';
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: 'JetBrains Mono';
+        }
+
+        :root {
+            --md-text-font: "OPPOSans";
+            --md-header-font: "LXGW ZhenKai";
+            --md-code-font: "JetBrains Mono";
+            --code-font-color: #e96900;
+        }
+
         /* 主题切换按钮组样式 */
         .theme-switch {
             display: inline-flex;
@@ -22,7 +49,6 @@
             padding: 8px 16px;
             border: none;
             border-radius: 100px;
-            background: #444;
             color: #fff;
             cursor: pointer;
             
@@ -36,7 +62,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            
+            /* 背景设置 */
+            background-color: #333;
+            background-size: 200% 100%;
+            background-position: right bottom;
+            background-repeat: no-repeat;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* 文字容器样式 */
@@ -48,7 +80,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.5s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 2;
         }
 
@@ -67,10 +99,12 @@
         /* 悬停动画效果 */
         .theme-btn:hover {
             transform: scale(1.05);
+            background-image: linear-gradient(to right, #4da6da 0%, #275796 100%);
+            background-position: left bottom;
         }
 
         .theme-btn:hover .current-theme {
-            transform: translateX(10px);
+            transform: translateX(100%);
             opacity: 0;
             transition-delay: 100ms;
         }
@@ -85,6 +119,175 @@
         .theme-btn:active {
             transform: scale(0.95);
             transition: all 100ms ease;
+        }
+
+        /* 修改选择器，只针对文章内容区域 */
+        .md-content article > *:not(.md-top):not(.md-nav) {
+            animation: flyIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* 动画延迟 */
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(1) { animation-delay: 0.1s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(2) { animation-delay: 0.2s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(3) { animation-delay: 0.3s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(4) { animation-delay: 0.4s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(5) { animation-delay: 0.5s; }
+
+        /* 为搜索框添加圆角效果 */
+        .md-search__input {
+        border-radius: 8px !important; /* 使用 !important 确保样式生效 */
+        }
+
+        /* 如果需要调整悬浮状态的圆角 */
+        .md-search__input:hover,
+        .md-search__input:focus {
+            border-radius: 8px !important;
+        }
+
+        /* 搜索框容器也添加圆角，确保完整的圆角效果 */
+        .md-search__form {
+            border-radius: 8px !important;
+        }
+
+        /* 搜索结果容器圆角 */
+        .md-search__output {
+            border-radius: 8px !important;
+        }
+
+        /* 搜索结果列表圆角 */
+        .md-search__overlay {
+            border-radius: 8px !important;
+        }
+
+        /* 搜索结果项容器圆角 */
+        .md-search-result {
+            border-radius: 8px !important;
+        }
+
+        /* 搜索结果外层容器圆角 */
+        .md-search__inner {
+            border-radius: 8px !important;
+        }
+
+        /* 设置行内代码的颜色为橙色，但排除代码块 */
+        :not(pre) > code {
+            color: #ff7043 !important; /* 橙色 */
+            font-weight: normal;
+        }
+
+        .highlight .c1, /* 单行注释 */
+        .highlight .cm  /* 多行注释 */ {
+            color: #6a737d; /* 注释颜色 */
+        }
+
+        .md-typeset .admonition,
+        .md-typeset details {
+            border-width: 0;
+            border-left-width: 4px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--md-header-font);
+            color: #4da6da;
+        }
+
+        body {
+            font-family: var(--md-text-font);
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--code-font-color);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleEffect 0.6s ease-out forwards;
+            transform: translate(var(--translate-x, 0), var(--translate-y, 0)) scale(1);
+        }
+
+        @keyframes particleEffect {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translate(var(--translate-x), var(--translate-y)) scale(0.5);
+            }
+        }
+
+        /* 定义飞入动画关键帧 */
+        @keyframes flyIn {
+            0% {
+            opacity: 0;
+            transform: translateY(-20px);
+            }
+            100% {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
+
+        /* 保持代码块样式不变 */
+        pre code {
+            color: var(--md-code-fg-color) !important;
+        }
+
+        /* 代码块样式增强 */
+        .highlight {
+            border-radius: 8px;
+        }
+
+        /* 确保代码块背景色保持原样 */
+        .highlight pre {
+            background-color: var(--md-code-bg-color) !important;
+        }
+
+
+
+        /* 行内注释字体 */
+        .md-typeset code {
+            font-family: var(--md-code-font), var(--md-text-font);
+        }
+
+        /* 如果需要自定义滚动动画,可以使用下面的代码 */
+        html {
+            scroll-behavior: smooth;
+            --scroll-duration: 0.5s; /* 自定义滚动持续时间 */
+        }
+
+        /* 兼容性处理 - 对于不支持scroll-behavior的浏览器 */
+        @supports not (scroll-behavior: smooth) {
+            html {
+                overflow: auto;
+                scroll-behavior: auto;
+            }
+        }
+
+        /* 确保锚点有足够的顶部间距,避免被固定导航栏遮挡 */
+        [id] {
+            scroll-margin-top: 2rem;
+        }
+
+        /* 页脚运行时间样式 */
+        .md-footer-runtime {
+            position: relative;
+            z-index: 3;
+            margin: 0.5rem 0;
+            padding: 0.4rem 0;
+            font-size: .7rem;
+            line-height: 1.6;
+            color: var(--md-footer-fg-color--light);
+            display: flex;
+            align-items: center;
+        }
+
+        /* 文本选择效果 */
+        ::selection {
+            background: rgba(77, 166, 218, 0.2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
     </style><script>
         (function initTheme() {

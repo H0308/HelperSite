@@ -128,6 +128,20 @@
             transition: all 100ms ease;
         }
 
+        /* 如果需要自定义滚动动画,可以使用下面的代码 */
+        html {
+            scroll-behavior: smooth;
+            --scroll-duration: 0.5s; /* 自定义滚动持续时间 */
+        }
+
+        /* 兼容性处理 - 对于不支持scroll-behavior的浏览器 */
+        @supports not (scroll-behavior: smooth) {
+            html {
+                overflow: auto;
+                scroll-behavior: auto;
+            }
+        }
+
         /* 修改选择器，只针对文章内容区域 */
         .md-content article > *:not(.md-top):not(.md-nav) {
             animation: flyIn 0.6s ease-out forwards;
@@ -196,7 +210,7 @@
 
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--md-header-font);
-            color: #4da6da;
+            color: #4da6da !important;
         }
 
         body {
@@ -242,11 +256,6 @@
             color: var(--md-code-fg-color) !important;
         }
 
-        /* 代码块样式增强 */
-        .highlight {
-            border-radius: 8px;
-        }
-
         /* 确保代码块背景色保持原样 */
         .highlight pre {
             background-color: var(--md-code-bg-color) !important;
@@ -278,7 +287,6 @@
         /* 文本选择效果 */
         ::selection {
             background: rgba(77, 166, 218, 0.2);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
     </style><script>
         (function initTheme() {
@@ -750,7 +758,7 @@
 <span class=normal><a href=#__codelineno-14-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=nl>输入</span><span class=p>:</span><span class=w> </span><span class=n>root</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>[</span><span class=mi>6</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>8</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=mi>4</span><span class=p>,</span><span class=mi>7</span><span class=p>,</span><span class=mi>9</span><span class=p>,</span><span class=n>null</span><span class=p>,</span><span class=n>null</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>5</span><span class=p>],</span><span class=w> </span><span class=n>p</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=n>q</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>4</span>
 <a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=nl>输出</span><span class=p>:</span><span class=w> </span><span class=mi>2</span>
 <a id=__codelineno-14-3 name=__codelineno-14-3></a><span class=nl>解释</span><span class=p>:</span><span class=w> </span><span class=n>节点</span><span class=w> </span><span class=mi>2</span><span class=w> </span><span class=n>和节点</span><span class=w> </span><span class=mi>4</span><span class=w> </span><span class=n>的最近公共祖先是</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=n>因为根据定义最近公共祖先节点可以为节点本身</span><span class=err>。</span>
-</code></pre></div></td></tr></table></div> </div> <p><strong>思路分析：</strong></p> <ol> <li> <p>解法1：针对任何二叉树</p> <p>第一种写法和<a href=#>二叉树基础题目篇：力扣236</a>的写法2一模一样，因为二叉搜索树本质也是二叉树</p> </li> <li> <p>解法2：二叉搜索树</p> <p>第二种解法就略有不同，因为需要用到二叉搜索树的特性：左子树所有节点均小于根节点，右子树所有节点均大于根节点可以分出下面的三种情况：</p> <ol> <li>当前节点大于<code>p</code>和<code>q</code>，说明最近公共祖先在左子树</li> <li>当前节点小于<code>p</code>和<code>q</code>，说明最近公共祖先在右子树</li> <li>当前节点介于<code>p</code>和<code>q</code>，说明当前节点就是最近公共祖先</li> </ol> <p>注意，不会出现「当前节点介于<code>p</code>和<code>q</code>，说明当前节点不是最近公共祖先」的情况，因为一旦当前节点介于<code>p</code>和<code>q</code>，则左子树一定小于当前节点，右子树一定大于当前节点，那么当前节点不论是向左遍历还是向右遍历都会出现错过一个节点的情况</p> </li> </ol> <p><strong>参考代码：</strong></p> <div class="tabbed-set tabbed-alternate" data-tabs=3:2><input checked=checked id=__tabbed_3_1 name=__tabbed_3 type=radio><input id=__tabbed_3_2 name=__tabbed_3 type=radio><div class=tabbed-labels><label for=__tabbed_3_1>一般二叉树</label><label for=__tabbed_3_2>利用二叉搜索树特性</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
+</code></pre></div></td></tr></table></div> </div> <p><strong>思路分析：</strong></p> <ol> <li> <p>解法1：针对任何二叉树</p> <p>第一种写法和<a href=https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/3.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/3.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html#236>二叉树基础题目篇：力扣236</a>的写法2一模一样，因为二叉搜索树本质也是二叉树</p> </li> <li> <p>解法2：二叉搜索树</p> <p>第二种解法就略有不同，因为需要用到二叉搜索树的特性：左子树所有节点均小于根节点，右子树所有节点均大于根节点可以分出下面的三种情况：</p> <ol> <li>当前节点大于<code>p</code>和<code>q</code>，说明最近公共祖先在左子树</li> <li>当前节点小于<code>p</code>和<code>q</code>，说明最近公共祖先在右子树</li> <li>当前节点介于<code>p</code>和<code>q</code>，说明当前节点就是最近公共祖先</li> </ol> <p>注意，不会出现「当前节点介于<code>p</code>和<code>q</code>，说明当前节点不是最近公共祖先」的情况，因为一旦当前节点介于<code>p</code>和<code>q</code>，则左子树一定小于当前节点，右子树一定大于当前节点，那么当前节点不论是向左遍历还是向右遍历都会出现错过一个节点的情况</p> </li> </ol> <p><strong>参考代码：</strong></p> <div class="tabbed-set tabbed-alternate" data-tabs=3:2><input checked=checked id=__tabbed_3_1 name=__tabbed_3 type=radio><input id=__tabbed_3_2 name=__tabbed_3 type=radio><div class=tabbed-labels><label for=__tabbed_3_1>一般二叉树</label><label for=__tabbed_3_2>利用二叉搜索树特性</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
 <span class=normal><a href=#__codelineno-15-2> 2</a></span>
 <span class=normal><a href=#__codelineno-15-3> 3</a></span>
 <span class=normal><a href=#__codelineno-15-4> 4</a></span>
@@ -1279,28 +1287,112 @@
 <span class=normal><a href=#__codelineno-35-19>19</a></span>
 <span class=normal><a href=#__codelineno-35-20>20</a></span>
 <span class=normal><a href=#__codelineno-35-21>21</a></span>
-<span class=normal><a href=#__codelineno-35-22>22</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-35-1 name=__codelineno-35-1></a><span class=k>class</span><span class=w> </span><span class=nc>Solution538_2</span>
+<span class=normal><a href=#__codelineno-35-22>22</a></span>
+<span class=normal><a href=#__codelineno-35-23>23</a></span>
+<span class=normal><a href=#__codelineno-35-24>24</a></span>
+<span class=normal><a href=#__codelineno-35-25>25</a></span>
+<span class=normal><a href=#__codelineno-35-26>26</a></span>
+<span class=normal><a href=#__codelineno-35-27>27</a></span>
+<span class=normal><a href=#__codelineno-35-28>28</a></span>
+<span class=normal><a href=#__codelineno-35-29>29</a></span>
+<span class=normal><a href=#__codelineno-35-30>30</a></span>
+<span class=normal><a href=#__codelineno-35-31>31</a></span>
+<span class=normal><a href=#__codelineno-35-32>32</a></span>
+<span class=normal><a href=#__codelineno-35-33>33</a></span>
+<span class=normal><a href=#__codelineno-35-34>34</a></span>
+<span class=normal><a href=#__codelineno-35-35>35</a></span>
+<span class=normal><a href=#__codelineno-35-36>36</a></span>
+<span class=normal><a href=#__codelineno-35-37>37</a></span>
+<span class=normal><a href=#__codelineno-35-38>38</a></span>
+<span class=normal><a href=#__codelineno-35-39>39</a></span>
+<span class=normal><a href=#__codelineno-35-40>40</a></span>
+<span class=normal><a href=#__codelineno-35-41>41</a></span>
+<span class=normal><a href=#__codelineno-35-42>42</a></span>
+<span class=normal><a href=#__codelineno-35-43>43</a></span>
+<span class=normal><a href=#__codelineno-35-44>44</a></span>
+<span class=normal><a href=#__codelineno-35-45>45</a></span>
+<span class=normal><a href=#__codelineno-35-46>46</a></span>
+<span class=normal><a href=#__codelineno-35-47>47</a></span>
+<span class=normal><a href=#__codelineno-35-48>48</a></span>
+<span class=normal><a href=#__codelineno-35-49>49</a></span>
+<span class=normal><a href=#__codelineno-35-50>50</a></span>
+<span class=normal><a href=#__codelineno-35-51>51</a></span>
+<span class=normal><a href=#__codelineno-35-52>52</a></span>
+<span class=normal><a href=#__codelineno-35-53>53</a></span>
+<span class=normal><a href=#__codelineno-35-54>54</a></span>
+<span class=normal><a href=#__codelineno-35-55>55</a></span>
+<span class=normal><a href=#__codelineno-35-56>56</a></span>
+<span class=normal><a href=#__codelineno-35-57>57</a></span>
+<span class=normal><a href=#__codelineno-35-58>58</a></span>
+<span class=normal><a href=#__codelineno-35-59>59</a></span>
+<span class=normal><a href=#__codelineno-35-60>60</a></span>
+<span class=normal><a href=#__codelineno-35-61>61</a></span>
+<span class=normal><a href=#__codelineno-35-62>62</a></span>
+<span class=normal><a href=#__codelineno-35-63>63</a></span>
+<span class=normal><a href=#__codelineno-35-64>64</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-35-1 name=__codelineno-35-1></a><span class=k>class</span><span class=w> </span><span class=nc>Solution538_1</span>
 <a id=__codelineno-35-2 name=__codelineno-35-2></a><span class=p>{</span>
 <a id=__codelineno-35-3 name=__codelineno-35-3></a><span class=k>public</span><span class=o>:</span>
-<a id=__codelineno-35-4 name=__codelineno-35-4></a><span class=w>    </span><span class=c1>// 使用变量记录前一个节点计算出的总和</span>
-<a id=__codelineno-35-5 name=__codelineno-35-5></a><span class=w>    </span><span class=c1>// 使用使用数值记录，防止空指针解引用错误以及额外空指针处理逻辑</span>
-<a id=__codelineno-35-6 name=__codelineno-35-6></a><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>prev</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
-<a id=__codelineno-35-7 name=__codelineno-35-7></a>
-<a id=__codelineno-35-8 name=__codelineno-35-8></a><span class=w>    </span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=nf>convertBST</span><span class=p>(</span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>root</span><span class=p>)</span>
-<a id=__codelineno-35-9 name=__codelineno-35-9></a><span class=w>    </span><span class=p>{</span>
-<a id=__codelineno-35-10 name=__codelineno-35-10></a><span class=w>        </span><span class=c1>// 节点为空，返回0</span>
-<a id=__codelineno-35-11 name=__codelineno-35-11></a><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>!</span><span class=n>root</span><span class=p>)</span>
-<a id=__codelineno-35-12 name=__codelineno-35-12></a><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-35-4 name=__codelineno-35-4></a><span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=n>traversal</span><span class=p>(</span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>root</span><span class=p>,</span><span class=w> </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=o>&amp;</span><span class=n>nums</span><span class=p>)</span>
+<a id=__codelineno-35-5 name=__codelineno-35-5></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-35-6 name=__codelineno-35-6></a><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>!</span><span class=n>root</span><span class=p>)</span>
+<a id=__codelineno-35-7 name=__codelineno-35-7></a><span class=w>            </span><span class=k>return</span><span class=p>;</span>
+<a id=__codelineno-35-8 name=__codelineno-35-8></a>
+<a id=__codelineno-35-9 name=__codelineno-35-9></a><span class=w>        </span><span class=n>traversal</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>,</span><span class=w> </span><span class=n>nums</span><span class=p>);</span>
+<a id=__codelineno-35-10 name=__codelineno-35-10></a><span class=w>        </span><span class=n>nums</span><span class=p>.</span><span class=n>push_back</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>val</span><span class=p>);</span>
+<a id=__codelineno-35-11 name=__codelineno-35-11></a><span class=w>        </span><span class=n>traversal</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>,</span><span class=w> </span><span class=n>nums</span><span class=p>);</span>
+<a id=__codelineno-35-12 name=__codelineno-35-12></a><span class=w>    </span><span class=p>}</span>
 <a id=__codelineno-35-13 name=__codelineno-35-13></a>
-<a id=__codelineno-35-14 name=__codelineno-35-14></a><span class=w>        </span><span class=c1>// 使用右中左遍历</span>
-<a id=__codelineno-35-15 name=__codelineno-35-15></a><span class=w>        </span><span class=n>root</span><span class=o>-&gt;</span><span class=n>right</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>convertBST</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>);</span>
-<a id=__codelineno-35-16 name=__codelineno-35-16></a><span class=w>        </span><span class=n>root</span><span class=o>-&gt;</span><span class=n>val</span><span class=w> </span><span class=o>+=</span><span class=w> </span><span class=n>prev</span><span class=p>;</span>
-<a id=__codelineno-35-17 name=__codelineno-35-17></a><span class=w>        </span><span class=n>prev</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>root</span><span class=o>-&gt;</span><span class=n>val</span><span class=p>;</span>
-<a id=__codelineno-35-18 name=__codelineno-35-18></a><span class=w>        </span><span class=n>root</span><span class=o>-&gt;</span><span class=n>left</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>convertBST</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>);</span>
-<a id=__codelineno-35-19 name=__codelineno-35-19></a>
-<a id=__codelineno-35-20 name=__codelineno-35-20></a><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>root</span><span class=p>;</span>
-<a id=__codelineno-35-21 name=__codelineno-35-21></a><span class=w>    </span><span class=p>}</span>
-<a id=__codelineno-35-22 name=__codelineno-35-22></a><span class=p>};</span>
+<a id=__codelineno-35-14 name=__codelineno-35-14></a><span class=w>    </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>calSum</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=o>&amp;</span><span class=n>nums</span><span class=p>)</span>
+<a id=__codelineno-35-15 name=__codelineno-35-15></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-35-16 name=__codelineno-35-16></a><span class=w>        </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>ret</span><span class=p>(</span><span class=n>nums</span><span class=p>.</span><span class=n>size</span><span class=p>());</span>
+<a id=__codelineno-35-17 name=__codelineno-35-17></a><span class=w>        </span><span class=n>partial_sum</span><span class=p>(</span><span class=n>nums</span><span class=p>.</span><span class=n>rbegin</span><span class=p>(),</span><span class=w> </span><span class=n>nums</span><span class=p>.</span><span class=n>rend</span><span class=p>(),</span><span class=w> </span><span class=n>ret</span><span class=p>.</span><span class=n>begin</span><span class=p>());</span>
+<a id=__codelineno-35-18 name=__codelineno-35-18></a>
+<a id=__codelineno-35-19 name=__codelineno-35-19></a><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>ret</span><span class=p>;</span>
+<a id=__codelineno-35-20 name=__codelineno-35-20></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-35-21 name=__codelineno-35-21></a>
+<a id=__codelineno-35-22 name=__codelineno-35-22></a><span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=n>_convertBST</span><span class=p>(</span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>root</span><span class=p>,</span><span class=w> </span><span class=n>unordered_map</span><span class=o>&lt;</span><span class=kt>int</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=o>&amp;</span><span class=n>sum_node</span><span class=p>)</span>
+<a id=__codelineno-35-23 name=__codelineno-35-23></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-35-24 name=__codelineno-35-24></a><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>!</span><span class=n>root</span><span class=p>)</span>
+<a id=__codelineno-35-25 name=__codelineno-35-25></a><span class=w>            </span><span class=k>return</span><span class=p>;</span>
+<a id=__codelineno-35-26 name=__codelineno-35-26></a>
+<a id=__codelineno-35-27 name=__codelineno-35-27></a><span class=w>        </span><span class=n>_convertBST</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>,</span><span class=w> </span><span class=n>sum_node</span><span class=p>);</span>
+<a id=__codelineno-35-28 name=__codelineno-35-28></a><span class=w>        </span><span class=n>root</span><span class=o>-&gt;</span><span class=n>val</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>sum_node</span><span class=p>[</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>val</span><span class=p>];</span>
+<a id=__codelineno-35-29 name=__codelineno-35-29></a><span class=w>        </span><span class=n>_convertBST</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>,</span><span class=w> </span><span class=n>sum_node</span><span class=p>);</span>
+<a id=__codelineno-35-30 name=__codelineno-35-30></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-35-31 name=__codelineno-35-31></a>
+<a id=__codelineno-35-32 name=__codelineno-35-32></a><span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=n>findSum</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=o>&amp;</span><span class=n>nums</span><span class=p>,</span><span class=w> </span><span class=k>const</span><span class=w> </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=o>&amp;</span><span class=n>partialSum</span><span class=p>,</span><span class=w> </span><span class=n>unordered_map</span><span class=o>&lt;</span><span class=kt>int</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=o>&amp;</span><span class=n>sum_node</span><span class=p>)</span>
+<a id=__codelineno-35-33 name=__codelineno-35-33></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-35-34 name=__codelineno-35-34></a><span class=w>        </span><span class=k>for</span><span class=w> </span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>nums</span><span class=p>.</span><span class=n>size</span><span class=p>();</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span>
+<a id=__codelineno-35-35 name=__codelineno-35-35></a><span class=w>            </span><span class=n>sum_node</span><span class=p>[</span><span class=n>nums</span><span class=p>[</span><span class=n>i</span><span class=p>]]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>partialSum</span><span class=p>[</span><span class=n>i</span><span class=p>];</span>
+<a id=__codelineno-35-36 name=__codelineno-35-36></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-35-37 name=__codelineno-35-37></a>
+<a id=__codelineno-35-38 name=__codelineno-35-38></a><span class=w>    </span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>convertBST</span><span class=p>(</span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>root</span><span class=p>)</span>
+<a id=__codelineno-35-39 name=__codelineno-35-39></a><span class=w>    </span><span class=p>{</span>
+<a id=__codelineno-35-40 name=__codelineno-35-40></a><span class=w>        </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>nums</span><span class=p>;</span>
+<a id=__codelineno-35-41 name=__codelineno-35-41></a>
+<a id=__codelineno-35-42 name=__codelineno-35-42></a><span class=w>        </span><span class=c1>// 获取中序遍历结果</span>
+<a id=__codelineno-35-43 name=__codelineno-35-43></a><span class=w>        </span><span class=n>traversal</span><span class=p>(</span><span class=n>root</span><span class=p>,</span><span class=w> </span><span class=n>nums</span><span class=p>);</span>
+<a id=__codelineno-35-44 name=__codelineno-35-44></a>
+<a id=__codelineno-35-45 name=__codelineno-35-45></a><span class=w>        </span><span class=c1>// 找到根节点所在下标</span>
+<a id=__codelineno-35-46 name=__codelineno-35-46></a><span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>rootIndex</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+<a id=__codelineno-35-47 name=__codelineno-35-47></a><span class=w>        </span><span class=k>for</span><span class=w> </span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>nums</span><span class=p>.</span><span class=n>size</span><span class=p>();</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span>
+<a id=__codelineno-35-48 name=__codelineno-35-48></a><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>nums</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>root</span><span class=o>-&gt;</span><span class=n>val</span><span class=p>)</span>
+<a id=__codelineno-35-49 name=__codelineno-35-49></a><span class=w>                </span><span class=n>rootIndex</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>i</span><span class=p>;</span>
+<a id=__codelineno-35-50 name=__codelineno-35-50></a>
+<a id=__codelineno-35-51 name=__codelineno-35-51></a><span class=w>        </span><span class=c1>// 计算后缀和</span>
+<a id=__codelineno-35-52 name=__codelineno-35-52></a><span class=w>        </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>partialSum</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>calSum</span><span class=p>(</span><span class=n>nums</span><span class=p>);</span>
+<a id=__codelineno-35-53 name=__codelineno-35-53></a><span class=w>        </span><span class=n>reverse</span><span class=p>(</span><span class=n>partialSum</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span><span class=w> </span><span class=n>partialSum</span><span class=p>.</span><span class=n>end</span><span class=p>());</span>
+<a id=__codelineno-35-54 name=__codelineno-35-54></a>
+<a id=__codelineno-35-55 name=__codelineno-35-55></a><span class=w>        </span><span class=c1>// 将后缀和与原先树的节点建立映射关系</span>
+<a id=__codelineno-35-56 name=__codelineno-35-56></a><span class=w>        </span><span class=n>unordered_map</span><span class=o>&lt;</span><span class=kt>int</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>sum_node</span><span class=p>;</span>
+<a id=__codelineno-35-57 name=__codelineno-35-57></a><span class=w>        </span><span class=n>findSum</span><span class=p>(</span><span class=n>nums</span><span class=p>,</span><span class=w> </span><span class=n>partialSum</span><span class=p>,</span><span class=w> </span><span class=n>sum_node</span><span class=p>);</span>
+<a id=__codelineno-35-58 name=__codelineno-35-58></a>
+<a id=__codelineno-35-59 name=__codelineno-35-59></a><span class=w>        </span><span class=c1>// 遍历覆盖原树</span>
+<a id=__codelineno-35-60 name=__codelineno-35-60></a><span class=w>        </span><span class=n>_convertBST</span><span class=p>(</span><span class=n>root</span><span class=p>,</span><span class=w> </span><span class=n>sum_node</span><span class=p>);</span>
+<a id=__codelineno-35-61 name=__codelineno-35-61></a>
+<a id=__codelineno-35-62 name=__codelineno-35-62></a><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>root</span><span class=p>;</span>
+<a id=__codelineno-35-63 name=__codelineno-35-63></a><span class=w>    </span><span class=p>}</span>
+<a id=__codelineno-35-64 name=__codelineno-35-64></a><span class=p>};</span>
 </code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-36-1> 1</a></span>
 <span class=normal><a href=#__codelineno-36-2> 2</a></span>
 <span class=normal><a href=#__codelineno-36-3> 3</a></span>

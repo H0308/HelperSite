@@ -33,6 +33,54 @@
             }
         }
 
+        @media print {
+            /* 确保链接不显示URL */
+            a[href]:after {
+                content: "" !important;
+            }
+            
+            /* 禁用链接交互效果 */
+            a {
+                /* 移除默认下划线 */
+                text-decoration: none !important;
+                /* 继承文本颜色 */
+                color: inherit !important;
+                /* 禁用点击事件 */
+                pointer-events: none !important;
+                /* 移除链接提示 */
+                cursor: default !important;
+            }
+
+            /* 禁用链接悬浮提示 */
+            a[title] {
+                position: relative;
+            }
+
+            a[title]:hover:after {
+                display: none !important;
+            }
+
+            /* 禁用链接点击状态 */
+            a:active, a:hover, a:focus {
+                outline: none !important;
+                text-decoration: none !important;
+            }
+            
+            /* 保持图片显示 */
+            img {
+                max-width: 100% !important;
+                page-break-inside: avoid;
+            }
+            
+            /* 隐藏导航和不必要元素 */
+            .md-header,
+            .md-tabs,
+            .md-sidebar,
+            .md-footer {
+                display: none !important;
+            }
+        }
+
         /* 主题切换按钮组样式 */
         .theme-switch {
             display: inline-flex;

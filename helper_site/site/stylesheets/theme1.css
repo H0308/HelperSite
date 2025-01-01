@@ -142,20 +142,6 @@ pre code {
     background-color: #f8fafc;
 }
 
-/* 如果需要自定义滚动动画,可以使用下面的代码 */
-html {
-    scroll-behavior: smooth;
-    --scroll-duration: 0.5s; /* 自定义滚动持续时间 */
-}
-
-/* 兼容性处理 - 对于不支持scroll-behavior的浏览器 */
-@supports not (scroll-behavior: smooth) {
-    html {
-        overflow: auto;
-        scroll-behavior: auto;
-    }
-}
-
 /* 确保锚点有足够的顶部间距,避免被固定导航栏遮挡 */
 [id] {
     scroll-margin-top: 2rem;
@@ -319,13 +305,6 @@ blockquote {
     z-index: 1000;
 }
 
-/* 优化滚动性能 */
-.md-content > * {
-    /* 使用transform代替top/left，启用GPU加速 */
-    transform: translateZ(0);
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-}
 /* 页脚基础样式 */
 .md-footer {
     position: relative;

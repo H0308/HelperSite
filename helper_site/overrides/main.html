@@ -264,25 +264,9 @@
             background-color: var(--md-code-bg-color) !important;
         }
 
-
-
         /* 行内注释字体 */
         .md-typeset code {
             font-family: var(--md-code-font), var(--md-text-font);
-        }
-
-        /* 如果需要自定义滚动动画,可以使用下面的代码 */
-        html {
-            scroll-behavior: smooth;
-            --scroll-duration: 0.5s; /* 自定义滚动持续时间 */
-        }
-
-        /* 兼容性处理 - 对于不支持scroll-behavior的浏览器 */
-        @supports not (scroll-behavior: smooth) {
-            html {
-                overflow: auto;
-                scroll-behavior: auto;
-            }
         }
 
         /* 确保锚点有足够的顶部间距,避免被固定导航栏遮挡 */

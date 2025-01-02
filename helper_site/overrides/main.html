@@ -189,18 +189,18 @@
         }
 
         /* 如果需要自定义滚动动画,可以使用下面的代码 */
-        html {
-            scroll-behavior: smooth;
-            --scroll-duration: 0.5s; /* 自定义滚动持续时间 */
-        }
+        /* html { */
+            /* scroll-behavior: smooth; */
+            /* --scroll-duration: 0.5s; 自定义滚动持续时间 */
+        /* } */
 
         /* 兼容性处理 - 对于不支持scroll-behavior的浏览器 */
-        @supports not (scroll-behavior: smooth) {
+        /* @supports not (scroll-behavior: smooth) {
             html {
                 overflow: auto;
                 scroll-behavior: auto;
             }
-        }
+        } */
 
         /* 修改选择器，只针对文章内容区域 */
         .md-content article > *:not(.md-top):not(.md-nav) {
@@ -348,6 +348,30 @@
         ::selection {
             background: rgba(77, 166, 218, 0.2);
         }
+
+        /* 控制滚动行为 */
+        html {
+            scroll-behavior: smooth !important; /* 强制启用平滑滚动 */
+            scroll-padding-top: 5rem; /* 设置滚动偏移量,避免标题被导航栏遮挡 */
+        }
+
+        /* 为所有链接添加滚动行为 */
+        a[href^="#"],  /* 站内锚点 */
+        a[href*="/#"] /* 跨页锚点 */ {
+            scroll-behavior: smooth !important;
+        }
+
+        /* 提供回退方案 */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+            
+            a[href^="#"],
+            a[href*="/#"] {
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
     <script>
         (function initTheme() {
@@ -377,6 +401,7 @@
 {% block header %}
     {{ super() }}
     <script>
+        // 主题切换相关代码
         document.addEventListener('DOMContentLoaded', () => {
             // 找到搜索框
             const searchEl = document.querySelector('.md-search');
@@ -393,6 +418,24 @@
             `;
             // 插入按钮到搜索框前面
             searchEl.parentNode.insertBefore(themeSwitch, searchEl);
+
+            // 处理跨页面锚点跳转
+            setTimeout(() => {
+                // 获取URL中的锚点
+                const hash = window.location.hash;
+                if (hash) {
+                    // 移除#号
+                    const targetId = hash.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        // 平滑滚动到目标元素
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            }, 300); // 适当延迟以确保页面完全加载
         });
 
         function switchTheme() {

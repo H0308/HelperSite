@@ -171,24 +171,17 @@
 
 [Python标准库官方文档](https://docs.python.org/zh-cn/3/library/index.html)
 
-[常用内容参考网站](https://quickref.cn/)
-!!! note
-    该网站可以提供：编程语言笔记、工具使用技巧等，之后的链接主要来自于上面的网站
+!!! info "其他参考网站"
+    [常用内容参考网站](https://quickref.cn/)，该网站可以提供：编程语言笔记、工具使用技巧等，下面的链接主要来自于该网站
 
-[vim使用技巧参考](https://quickref.cn/docs/vim.html)
-!!! note
-    vim使用也可以直接看[Linux部分关于vim的笔记](https://www.help-doc.top/Linux/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E4%B8%8EVim%E4%BD%BF%E7%94%A8/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E4%B8%8EVim%E4%BD%BF%E7%94%A8.html)
+    [git使用指令参考](https://quickref.cn/docs/git.html)
 
-[git使用指令参考](https://quickref.cn/docs/git.html)
+    [Github使用技巧参考](https://quickref.cn/docs/github.html)
 
-[Github使用技巧参考](https://quickref.cn/docs/github.html)
+    [HTTP状态码参考](https://quickref.cn/docs/http-status-code.html)
 
-[HTTP状态码参考](https://quickref.cn/docs/http-status-code.html)
+    [LaTeX符号代码参考](https://quickref.cn/docs/latex.html)
 
-[ASCII码参考](https://quickref.cn/docs/ascii-code.html)
+    [Emmet表达式参考](https://quickref.cn/docs/emmet.html)
 
-[LaTeX符号代码参考](https://quickref.cn/docs/latex.html)
-
-[Emmet表达式参考](https://quickref.cn/docs/emmet.html)
-
-[正则表达式参考](https://quickref.cn/docs/regex.html)
+    [正则表达式参考](https://quickref.cn/docs/regex.html)

@@ -467,3 +467,88 @@ body::after {
 .md-typeset .highlighttable {
     margin: 0 0 !important;
 }
+
+/* Material Design 代码行高亮效果 */
+.highlight tr td:first-child {
+    border-left: 2px solid transparent;
+}
+
+.highlight tr:hover td:first-child {
+    border-left: 2px solid #2196F3;
+}
+
+/* Material Design 小标题分隔线 */
+.md-typeset h4, .md-typeset h5, .md-typeset h6 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    padding-bottom: 0.3em;
+}
+
+/* Material Design 清单项目标记 */
+.md-typeset ul li::marker {
+    color: #2196F3;
+}
+
+.md-typeset ol li::marker {
+    color: #2196F3;
+    font-weight: 500;
+}
+
+/* Material Design 表格hover效果增强 */
+.md-typeset table:not([class]) tbody tr:hover {
+    background-color: rgba(33, 150, 243, 0.04);
+    transition: background-color 0.2s ease;
+}
+
+/* Material Design 搜索建议增强 */
+.md-search-result__item {
+    transition: transform 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.md-search-result__item:hover {
+    transform: translateX(2px);
+    border-left: 3px solid #2196F3;
+}
+
+/* Material Design 边栏目录当前项目 */
+.md-nav__link--active {
+    padding-left: 0.6em;
+    border-left: 3px solid #2196F3;
+    background: linear-gradient(to right, rgba(33, 150, 243, 0.05), transparent);
+    transition: all 0.3s ease;
+}
+
+/* Material Design 滚动平滑度优化 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Material Design 导航菜单动画 */
+.md-nav__item {
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.md-nav__item:hover {
+    transform: translateX(1px);
+}
+
+/* Material Design 搜索框动画 */
+.md-search__input {
+    transition: all 0.3s ease;
+}
+
+.md-search__input:focus {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+}
+
+/* Material Design 代码块动画 */
+.highlight {
+    transition: all 0.3s ease;
+}
+
+.highlight:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(33, 150, 243, 0.1);
+}

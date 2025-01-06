@@ -136,3 +136,21 @@ document.addEventListener('DOMContentLoaded', () => {
     updateRuntime();
     setInterval(updateRuntime, 1000);
 });
+
+// 添加页面平滑滚动动画
+document.addEventListener('DOMContentLoaded', () => {
+    // 为所有锚点链接添加平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+

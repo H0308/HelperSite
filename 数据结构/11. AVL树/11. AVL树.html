@@ -1,4 +1,12 @@
-<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%20AVL%E6%A0%91/11.%20AVL%E6%A0%91.html><link rel=prev href=../10.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/10.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html><link rel=next href=../12.%20%E7%BA%A2%E9%BB%91%E6%A0%91/12.%20%E7%BA%A2%E9%BB%91%E6%A0%91.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.0, mkdocs-material-9.5.31"><title>AVL树 - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.3cba04c6.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><!-- 安全响应头 --><meta http-equiv=Content-Security-Policy content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:;"><meta http-equiv=X-Frame-Options content=DENY><meta http-equiv=X-Content-Type-Options content=nosniff><meta http-equiv=Strict-Transport-Security content="max-age=31536000; includeSubDomains"><meta http-equiv=Referrer-Policy content=same-origin><!-- 桌面端加载theme1.css (>=1200px) --><link rel=stylesheet href=../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><!-- 平板端加载theme2.css (768px-1199px) --><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><!-- 手机端加载theme2.css (<768px) --><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (max-width: 767px)"><style>
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%20AVL%E6%A0%91/11.%20AVL%E6%A0%91.html><link rel=prev href=../10.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/10.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html><link rel=next href=../12.%20%E7%BA%A2%E9%BB%91%E6%A0%91/12.%20%E7%BA%A2%E9%BB%91%E6%A0%91.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.0, mkdocs-material-9.5.31"><title>AVL树 - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.3cba04c6.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><!-- 调整后的安全响应头 --><meta http-equiv=Content-Security-Policy content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https:;
+        style-src 'self' 'unsafe-inline' https:;
+        img-src 'self' data: https:;
+        font-src 'self' data: https:;
+        connect-src 'self' https:;
+        frame-src 'self';
+        media-src 'self'"><meta http-equiv=X-Frame-Options content=SAMEORIGIN><meta http-equiv=X-Content-Type-Options content=nosniff><meta http-equiv=Strict-Transport-Security content="max-age=31536000; includeSubDomains"><meta http-equiv=Referrer-Policy content=strict-origin-when-cross-origin><!-- 桌面端加载theme1.css (>=1200px) --><link rel=stylesheet href=../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><!-- 平板端加载theme2.css (768px-1199px) --><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><!-- 手机端加载theme2.css (<768px) --><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (max-width: 767px)"><style>
         @import url('https://static.zeoseven.com/zsft/2/main/result.css');
         @import url('https://fonts.cdnfonts.com/css/opposans');
         @import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
@@ -393,61 +401,6 @@
                 }
             }
         })();
-
-        (function() {
-            // 配置允许的域名列表
-            const allowedDomains = [
-                'www.help-doc.top',
-                'help-doc.top',
-                'h0308.github.io',
-                'localhost',
-                '127.0.0.1'
-            ];
-
-            // 验证当前域名
-            function validateDomain() {
-                const currentDomain = window.location.hostname;
-                
-                // 检查当前域名是否在允许列表中或是其子域名
-                const isAllowed = allowedDomains.some(domain => {
-                    return currentDomain === domain || 
-                        currentDomain.endsWith('.' + domain) ||
-                        domain.includes(currentDomain);
-                });
-
-                // 仅在非本地开发环境且域名不在允许列表时重定向
-                if (!isAllowed && !currentDomain.includes('localhost') && !currentDomain.includes('127.0.0.1')) {
-                    window.location.href = `https://www.help-doc.top${window.location.pathname}`;
-                }
-            }
-
-            // 添加一些延迟再执行验证，确保页面基本内容已加载
-            setTimeout(() => {
-                // 启动安全检查
-                validateDomain();
-            }, 500);
-
-            // 禁止iframe嵌入
-            if (window.top !== window.self) {
-                window.top.location.href = window.self.location.href;
-            }
-
-            // 添加点击劫持保护
-            if (typeof window.orientation === 'undefined') {
-                const style = document.createElement('style');
-                style.innerHTML = 'html { display: none !important; }';
-                document.head.appendChild(style);
-                
-                if (document.body) {
-                    document.body.style.display = 'block';
-                } else {
-                    document.addEventListener('DOMContentLoaded', function() {
-                        document.body.style.display = 'block';
-                    });
-                }
-            }
-        })();
-
     </script> <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }

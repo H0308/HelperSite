@@ -1,8 +1,8 @@
 (function() {
     // 配置允许的域名列表
     const allowedDomains = [
-        'https://h0308.github.io/HelperSite/',
-        'www.help-doc.com'
+        'www.help-doc.com',
+        'h0308.github.io/HelperSite/'
     ];
 
     // 验证当前域名

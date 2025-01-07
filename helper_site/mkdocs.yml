@@ -257,6 +257,7 @@ extra_javascript:
   - javascripts/mathjax.js
   - javascripts/particles.js
   - javascripts/other.js
+  - javascripts/security.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
@@ -271,6 +272,12 @@ extra:
     - icon: fontawesome/brands/qq
       link: https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html
   generator: false
+  security:
+    enable_csp: true
+    enable_hsts: true
+    policy:
+      referrer: "same-origin"
+      csp: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:;"
 
 plugins:
   - search
@@ -282,6 +289,7 @@ plugins:
           - javascripts/mathjax.js
           - javascripts/other.js
           - javascripts/particles.js
+          - javascripts/security.js
       # css_files:
       #     - stylesheets/theme1.css
       #     - stylesheets/theme1.css

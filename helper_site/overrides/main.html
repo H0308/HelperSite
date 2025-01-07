@@ -2,6 +2,12 @@
 
 {% block extrahead %}
     {{ super() }}
+    <!-- 安全响应头 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:;">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
+    <meta http-equiv="Referrer-Policy" content="same-origin">
     <!-- 桌面端加载theme1.css (>=1200px) -->
     <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme1.css" media="screen and (min-width: 1200px)">
     

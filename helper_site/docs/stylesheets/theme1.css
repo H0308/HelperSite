@@ -542,13 +542,3 @@ html {
     transform: scale(1.02);
     box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
 }
-
-/* Material Design 代码块动画 */
-.highlight {
-    transition: all 0.3s ease;
-}
-
-.highlight:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(33, 150, 243, 0.1);
-}

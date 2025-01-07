@@ -2,12 +2,20 @@
 
 {% block extrahead %}
     {{ super() }}
-    <!-- 安全响应头 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:;">
-    <meta http-equiv="X-Frame-Options" content="DENY">
+    <!-- 调整后的安全响应头 -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https:;
+        style-src 'self' 'unsafe-inline' https:;
+        img-src 'self' data: https:;
+        font-src 'self' data: https:;
+        connect-src 'self' https:;
+        frame-src 'self';
+        media-src 'self'">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
-    <meta http-equiv="Referrer-Policy" content="same-origin">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <!-- 桌面端加载theme1.css (>=1200px) -->
     <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme1.css" media="screen and (min-width: 1200px)">
     
@@ -412,61 +420,6 @@
                 }
             }
         })();
-
-        (function() {
-            // 配置允许的域名列表
-            const allowedDomains = [
-                'www.help-doc.top',
-                'help-doc.top',
-                'h0308.github.io',
-                'localhost',
-                '127.0.0.1'
-            ];
-
-            // 验证当前域名
-            function validateDomain() {
-                const currentDomain = window.location.hostname;
-                
-                // 检查当前域名是否在允许列表中或是其子域名
-                const isAllowed = allowedDomains.some(domain => {
-                    return currentDomain === domain || 
-                        currentDomain.endsWith('.' + domain) ||
-                        domain.includes(currentDomain);
-                });
-
-                // 仅在非本地开发环境且域名不在允许列表时重定向
-                if (!isAllowed && !currentDomain.includes('localhost') && !currentDomain.includes('127.0.0.1')) {
-                    window.location.href = `https://www.help-doc.top${window.location.pathname}`;
-                }
-            }
-
-            // 添加一些延迟再执行验证，确保页面基本内容已加载
-            setTimeout(() => {
-                // 启动安全检查
-                validateDomain();
-            }, 500);
-
-            // 禁止iframe嵌入
-            if (window.top !== window.self) {
-                window.top.location.href = window.self.location.href;
-            }
-
-            // 添加点击劫持保护
-            if (typeof window.orientation === 'undefined') {
-                const style = document.createElement('style');
-                style.innerHTML = 'html { display: none !important; }';
-                document.head.appendChild(style);
-                
-                if (document.body) {
-                    document.body.style.display = 'block';
-                } else {
-                    document.addEventListener('DOMContentLoaded', function() {
-                        document.body.style.display = 'block';
-                    });
-                }
-            }
-        })();
-
     </script>
 {% endblock %}
 

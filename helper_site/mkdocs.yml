@@ -257,7 +257,6 @@ extra_javascript:
   - javascripts/mathjax.js
   - javascripts/particles.js
   - javascripts/other.js
-  - javascripts/security.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
@@ -289,7 +288,6 @@ plugins:
           - javascripts/mathjax.js
           - javascripts/other.js
           - javascripts/particles.js
-          - javascripts/security.js
       # css_files:
       #     - stylesheets/theme1.css
       #     - stylesheets/theme1.css

@@ -10,7 +10,7 @@
         const currentDomain = window.location.hostname;
         if (!allowedDomains.includes(currentDomain)) {
             // 如果域名不在白名单中，重定向到正确域名
-            window.location.href = `https://${allowedDomains[0]}${window.location.pathname}`;
+            window.location.href = `${allowedDomains[0]}${window.location.pathname}`;
         }
     }
 

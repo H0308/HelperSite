@@ -1,6 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
+import rateLimit, { Options } from 'express-rate-limit';
 import { redirectSecurityMiddleware } from './middleware/redirectSecurityMiddleware';
 
 const app = express();
@@ -9,10 +9,11 @@ const app = express();
 app.use(helmet());
 
 // 速率限制
-const limiter = rateLimit({
+const limiterOptions: Partial<Options> = {
     windowMs: 15 * 60 * 1000, // 15分钟
     max: 100 // 限制每个IP 15分钟内最多100个请求
-});
+};
+const limiter = rateLimit(limiterOptions);
 app.use(limiter);
 
 // 增强的 CSP 配置

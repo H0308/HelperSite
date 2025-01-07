@@ -1,7 +1,7 @@
 (function() {
     // 配置允许的域名列表
     const allowedDomains = [
-        'www.help-doc.com',
+        'www.help-doc.top',
         'h0308.github.io/HelperSite/'
     ];
 

@@ -404,23 +404,6 @@
         }
     </style>
     <script>
-        (function initTheme() {
-            const savedTheme = localStorage.getItem('preferred-theme');
-            if (savedTheme) {
-                const theme1Link = document.querySelector('link[href*="theme1"]');
-                const theme2Link = document.querySelector('link[href*="theme2"]');
-                if (theme1Link && theme2Link) {
-                    if (savedTheme === 'theme1') {
-                        theme1Link.removeAttribute('disabled');
-                        theme2Link.setAttribute('disabled', 'true');
-                    } else {
-                        theme2Link.removeAttribute('disabled');
-                        theme1Link.setAttribute('disabled', 'true');
-                    }
-                }
-            }
-        })();
-
         (function() {
             // 配置允许的域名列表
             const allowedDomains = [
@@ -461,6 +444,23 @@
             // 禁止iframe嵌入
             if (window.top !== window.self) {
                 window.top.location.href = window.self.location.href;
+            }
+        })();
+
+        (function initTheme() {
+            const savedTheme = localStorage.getItem('preferred-theme');
+            if (savedTheme) {
+                const theme1Link = document.querySelector('link[href*="theme1"]');
+                const theme2Link = document.querySelector('link[href*="theme2"]');
+                if (theme1Link && theme2Link) {
+                    if (savedTheme === 'theme1') {
+                        theme1Link.removeAttribute('disabled');
+                        theme2Link.setAttribute('disabled', 'true');
+                    } else {
+                        theme2Link.removeAttribute('disabled');
+                        theme1Link.setAttribute('disabled', 'true');
+                    }
+                }
             }
         })();
     </script>

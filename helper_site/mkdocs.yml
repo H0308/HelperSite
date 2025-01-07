@@ -1,0 +1,306 @@
+site_name: 学习档案
+site_url: https://www.help-doc.top
+use_directory_urls: false
+
+theme:
+  name: 'material'
+  custom_dir: overrides
+  favicon: images/favicon.png
+  logo: assets/logo.png
+  features:
+    # - header.autohide
+    # - navigation.tabs
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    # - content.tabs.link
+  language: zh
+  palette:
+    - scheme: default
+      accent: teal
+      primary: white
+
+copyright: Copyright &copy; 2024 EPSDA
+
+nav:
+  - 主页: index.md
+  - 编程语言:
+    - C语言:
+      - C语言基础知识: C语言/1. C语言基础知识/1. C语言基础知识.md
+      - 进制转换与类型在内存的存储方式: C语言/2. 进制转换与类型在内存中存储方式/2. 进制转换与类型在内存中存储方式.md
+      - C语言数据类型与变量: C语言/3. C语言数据类型和变量/3. C语言数据类型和变量.md
+      - C语言操作符: C语言/4. C语言操作符/4. C语言操作符.md
+      - C语言的标准输入函数scanf及标准输出函数printf: C语言/5. C语言的标准输入函数scanf及标准输出函数printf/5. C语言的标准输入函数scanf及标准输出函数printf.md
+      - C语言中的分支语句: C语言/6. C语言中的分支语句/6. C语言中的分支语句.md
+      - C语言中的循环语句: C语言/7. C语言中的循环语句/7. C语言中的循环语句.md
+      - C语言函数: C语言/8. C语言函数/8. C语言函数.md
+      - C语言指针: C语言/9. C语言指针/9. C语言指针.md
+      - C语言字符函数、字符串函数与内存函数: C语言/10. C语言字符函数、字符串函数与内存函数/10. C语言字符函数、字符串函数与内存函数.md
+      - C语言动态内存管理: C语言/11. C语言动态内存管理/11. C语言动态内存管理.md
+      - C语言文件操作: C语言/12. C语言文件操作/12. C语言文件操作.md
+      - C语言编译与链接（基础）: C语言/13. C语言编译与链接（基础）/13. C语言编译与链接（基础）.md
+      - C语言预处理（部分）: C语言/14. C语言预处理（部分）/14. C语言预处理（部分）.md
+    - C++: 
+      - C语言过渡C++基础知识: C++/1. C语言过渡C++基础知识/1. C语言过渡C++基础知识.md
+      - C++类和对象: C++/2. C++类和对象/2. 类和对象.md
+      - C++默认成员函数: C++/3. C++默认成员函数/3. C++默认成员函数.md
+      - C++类和对象相关内容: C++/4. C++类和对象相关内容/4. C++类和对象相关内容.md
+      - C++内存管理: C++/5. C++内存管理/5. C++内存管理.md
+      - C++模版（基础）: C++/6. C++模版（基础）/6. C++模版（基础）.md
+      - C++STL简介与string类: C++/7. C++STL简介与string类/7. C++STL简介与string类.md
+      - string类模拟实现: C++/8. string类模拟实现/8. string类的模拟实现.md
+      - vector类: C++/9. vector类/9. vector类.md
+      - vector类模拟实现: C++/10. vector类模拟实现/10. vector模拟实现.md
+      - list类: C++/11. list类/11. list类.md
+      - list类模拟实现: C++/12. list模拟实现/12. list类模拟实现.md
+      - stack类: C++/13. stack类/13. stack类.md
+      - queue与priority_queue类: C++/14. queue与priority_queue类/14. queue与priority_queue类.md
+      - stack和queue模拟实现: C++/15. stack和queue模拟实现/15. stack和queue模拟实现.md
+      - priority_queue模拟实现: C++/16. priority_queue模拟实现/16. priority_queue模拟实现.md
+      - 反向迭代器设计: C++/17. 反向迭代器设计/17. reverse_iterator迭代器结构设计.md
+      - C++模版（高阶）: C++/18. C++模板（高阶）/18. C++模板（高阶）.md
+      - C++继承: C++/19. C++继承/19. C++继承.md
+      - C++多态: C++/20. C++多态/20. C++多态.md
+      - set类: C++/21. set类/21. set类.md
+      - map类: C++/22. map类/22. map类.md
+      - map和set类模拟实现: C++/23. map和set类模拟实现/23. map和set类模拟实现.md
+      - unordered_map和unordered_set类模拟实现: C++/24. unordered_map和unordered_set类模拟实现/24. unordered_map和unordered_set类模拟实现.md
+      - bitset类: C++/31. bitset类/31. bitset类.md
+      - initializer_list类: C++/32. initializer_list类/32. initializer_list类.md
+      - C++ 11相关新特性: C++/25. C++11相关新特性/C++ 11相关新特性.md
+      - C++ 异常: C++/26. C++异常/26. C++异常.md
+      - C++ 智能指针: C++/27. 智能指针/27. 智能指针.md
+      - 特殊类设计: C++/28. 特殊类设计/28. 特殊类设计.md
+      - C++中的类型转换: C++/29. C++中的类型转换/29. C++中的类型转换.md
+      - C++ IO流: C++/30. C++IO流/30. C++IO流.md
+    - Java:
+      - Java基础知识: Java/1. Java基础知识/Java基础知识.md
+      - Java数组类型: Java/2. Java数组类型/2. Java数组类型.md
+      - Java面向对象与方法: Java/3. Java面向对象与方法/3. Java面向对象与方法.md
+      - Java面向对象与封装: Java/4. Java面向对象与封装/4. Java面向对象与封装.md
+      - Java面向对象与继承: Java/5. Java面向对象与继承/5. Java面向对象与继承.md
+      - Java面向对象与接口: Java/6. Java面向对象与接口/6. 面向对象与接口.md
+      - Java面向对象与多态: Java/7. Java面向对象与多态/7. Java面向对象与多态.md
+      - Java面向对象与权限修饰符、final、代码块及内部类: Java/8. Java面向对象与权限修饰符、final、代码块及内部类/8. Java面向对象与权限修饰符、final、代码块及内部类.md
+      - Java异常类: Java/9. Java异常类/9. Java异常类.md
+      - Java中的Object类和常用方法、经典接口: Java/10. Java中的Object类和常用方法、经典接口/10. Java中的Object类和常用方法、经典接口.md
+      - Java.lang中的String类和StringBuilder类介绍和常用方法: Java/11. Java.lang中的String类和StringBuilder介绍和常用方法/11. Java.lang中的String类和StringBuilder介绍和常用方法.md
+      - Java中的常用类及包装类: Java/12. Java中的常用类及包装类/12. Java中的常用类及包装类.md
+      - Java多线程: Java/13. Java多线程/13. Java多线程.md
+      - Java单列集合: Java/14. Java单列集合/14. Java单列集合.md
+      - Java双列集合: Java/15. Java双列集合/15. Java双列集合.md
+      - Java的IO流: Java/16. Java的IO流/16. Java的IO流.md
+      - Java网络编程、正则表达式、设计模式与Lombok: Java/17. Java网络编程、正则表达式、设计模式与Lombok/17. Java网络编程、正则表达式、设计模式与Lombok.md
+      - Java中的JDK8及后续的重要新特性: Java/18. Java中的JDK8及后续的重要新特性/18. Java中的JDK8及后续的重要新特性.md
+      - Java中的Junit、类加载时机与机制、反射、注解及枚举: Java/19. Java中的Junit、类加载时机与机制、反射、注解及枚举/19. Java中的Junit、类加载时机与机制、反射、注解及枚举.md
+      - （补充）JSON在后端的应用: Java/20. （补充）JSON在后端的应用/20. （补充）JSON在后端的应用.md
+    - Python:
+      - Python基础知识: Python基础知识/1. Python基础知识/1. Python基础知识.md
+      - Python组合数据类型: Python基础知识/2. Python组合数据类型/2. Python组合数据类型.md
+      - Python异常处理: Python基础知识/3. Python异常处理/3. Python异常处理.md
+      - Python函数: Python基础知识/4. Python函数/4. Python函数.md
+      - Python模块: Python基础知识/5. Python模块/5. Python模块.md
+      - Python输出与文件操作: Python基础知识/6. Python输出与文件操作/6. Python输出与文件操作.md
+      - Python类和对象基础: Python基础知识/7. Python类和对象基础/7. Python类和对象基础.md
+      - Python类和对象进阶: Python基础知识/8. Python类和对象进阶/8. Python类和对象进阶.md
+  - 数据结构与算法:
+    - 数据结构:
+      - 数据结构基础: 数据结构/1. 时间复杂度和空间复杂度/1. 时间复杂度与空间复杂度.md
+      - 顺序结构与顺序表: 数据结构/2. 顺序表/2. 顺序表.md
+      - 链表: 数据结构/3. 链表/3. 链表.md
+      - 栈: 数据结构/4. 栈/4. 栈.md
+      - 队列: 数据结构/5. 队列/5. 队列.md
+      - 树的基本概念: 数据结构/6. 树的基本概念/6. 树的基本结构.md
+      - 二叉树（基础）: 数据结构/7. 二叉树（基础）/7. 二叉树（基础）.md
+      - 堆: 数据结构/8. 堆/8. 堆.md
+      - 排序: 数据结构/9. 排序/9. 排序.md
+      - 二叉搜索树: 数据结构/10. 二叉搜索树/10. 二叉搜索树.md
+      - AVL树: 数据结构/11. AVL树/11. AVL树.md
+      - 红黑树: 数据结构/12. 红黑树/12. 红黑树.md
+      - 哈希表: 数据结构/13. 哈希表/13. 哈希表.md
+      - 位图: 数据结构/14. 位图/14. 位图.md
+      - 布隆过滤器与海量数据处理: 数据结构/15. 布隆过滤器与海量数据处理/15. 布隆过滤器与海量数据处理.md
+    - 算法:
+      - 算法比赛常用内容: 算法/0. 常用内容/0. 常用内容.md
+      - 数组基础篇:
+        - 数组理论基础: 算法/1. 数组基础篇/1. 数组理论基础/1. 数组理论基础.md
+        - 二分查找: 算法/1. 数组基础篇/2. 二分查找/2. 二分查找.md
+        - 移除元素（双指针基础）: 算法/1. 数组基础篇/3. 移除元素/3. 移除元素.md
+        - 滑动窗口: 算法/1. 数组基础篇/4. 滑动窗口/4. 滑动窗口.md
+        - 前缀和: 算法/1. 数组基础篇/5. 前缀和/5. 前缀和.md
+        - 模拟: 算法/1. 数组基础篇/6. 模拟/6. 模拟.md
+        - 位运算: 算法/1. 数组基础篇/7. 位运算/7. 位运算.md
+      - 链表篇:
+        - 链表理论基础: 算法/2. 链表篇/1. 链表理论基础/1. 链表理论基础.md
+        - 链表基础练习: 算法/2. 链表篇/2. 链表基础练习/2. 链表基础练习.md
+        - 链表进阶练习: 算法/2. 链表篇/3. 链表进阶练习/3. 链表进阶练习.md
+      - 哈希表篇:
+        - 哈希表理论基础: 算法/3. 哈希表篇/1. 哈希表理论基础/1. 哈希表理论基础.md
+        - 哈希表基础练习: 算法/3. 哈希表篇/2. 哈希表基础练习/2. 哈希表基础练习.md
+        - 哈希表进阶练习: 算法/3. 哈希表篇/3. 哈希表进阶练习/3. 哈希表进阶练习.md
+      - 字符串篇:
+        - 字符串基础练习: 算法/4. 字符串篇/1. 字符串基础练习/1. 字符串基础练习.md
+        - 字符串进阶练习: 算法/4. 字符串篇/2. 字符串进阶练习/2. 字符串进阶练习.md
+      - 双指针: 算法/5. 双指针篇/5. 双指针算法.md
+      - 栈和队列篇:
+        - 栈和队列理论基础: 算法/6. 栈和队列篇/1. 栈和队列理论基础/1. 栈和队列理论基础.md
+        - 栈和队列基础练习: 算法/6. 栈和队列篇/2. 栈和队列基础练习/2. 栈和队列基础练习.md
+      - 递归与二叉树篇:
+        - 递归介绍: 算法/7. 递归与二叉树篇/0. 递归介绍/0. 递归介绍.md
+        - 二叉树理论基础: 算法/7. 递归与二叉树篇/1. 二叉树理论基础/1. 二叉树理论基础.md
+        - 二叉树遍历相关题目: 算法/7. 递归与二叉树篇/2. 二叉树遍历相关题目/2. 二叉树遍历相关题目.md
+        - 二叉树基础题目: 算法/7. 递归与二叉树篇/3. 二叉树基础题目/3. 二叉树基础题目.md
+        - 二叉搜索树相关题目: 算法/7. 递归与二叉树篇/4. 二叉搜索树相关题目/4. 二叉搜索树相关题目.md
+        - 常规题目中的递归: 算法/7. 递归与二叉树篇/5. 常规题目中的递归/5. 常规题目中的递归.md
+      - 回溯篇:
+        - 回溯理论基础: 算法/8. 回溯篇/1. 回溯理论基础/1. 回溯理论基础.md
+      - 其他算法:
+        - KMP算法: 算法/其他算法/KMP算法/KMP算法.md
+        - 波兰表达式与逆波兰表达式: 算法/其他算法/波兰表达式与逆波兰表达式/波兰表达式与逆波兰表达式.md
+        - 霍尔法则: 算法/其他算法/霍尔法则/霍尔法则.md
+        - 数字和与数字根: 算法/其他算法/数字和与数字根/数字和与数字根.md
+        - 最大公因数和最小公倍数: 算法/其他算法/最大公因数和最小公倍数/最大公因数和最小公倍数.md
+        - 大数运算: 算法/其他算法/大数运算/大数运算.md
+        - 取模与取余: 算法/其他算法/取模与取余/取模与取余.md
+  - Linux:
+    - Linux常用选项和指令: Linux/1. Linux常用选项和指令/1. Linux常用选项和指令.md
+    - Linux权限相关: Linux/2. Linux权限相关/2. Linux权限相关.md
+    - CentOS软件安装与vim使用: Linux/3. CentOS软件安装与Vim使用/3. CentOS软件安装与Vim使用.md
+    - Linux下的gcc与gdb: Linux/4. Linux下的gcc与gdb/4. Linux下的gcc与gdb.md
+    - Linux下的Makefile与进度条程序: Linux/5. Linux下的Makefile与进度条程序/5. Linux下的Makefile与进度条程序.md
+    - 操作系统基础知识: Linux/6. 操作系统基础知识/6. 操作系统基础知识.md
+    - Linux进程基础: Linux/7. Linux进程/7. Linux进程.md
+    - Linux进程状态与进程优先级: Linux/8. Linux进程状态与进程优先级/8. Linux进程状态与进程优先级.md
+    - Linux进程切换以及调度算法: Linux/9. Linux进程切换以及调度算法/9. Linux进程切换以及调度算法.md
+    - Linux命令行与环境变量: Linux/10. Linux命令行与环境变量/10. Linux命令行与环境变量.md
+    - Linux进程地址空间: Linux/11. Linux进程地址空间/11. 进程地址空间.md
+    - Linux进程控制: Linux/12. Linux进程控制/12. Linux进程控制.md
+    - Linux文件操作基础: Linux/13. Linux文件操作基础/13. Linux文件操作基础.md
+    - Linux中输入和输出基本过程: Linux/14. Linux中输入和输出基本过程/14. Linux中输入和输出基本过程.md
+    - Linux文件系统: Linux/15. Linux文件系统/15. Linux文件系统.md
+    - Linux软链接和硬链接: Linux/16. Linux软链接和硬链接/16. Linux软链接和硬链接.md
+    - Linux进程间通信: 
+      - 进程间通信介绍与匿名管道: Linux/17. Linux进程间通信/1. 进程间通信介绍与匿名管道/1. 进程间通信介绍与匿名管道.md
+      - 命名管道与共享内存: Linux/17. Linux进程间通信/2. 命名管道与共享内存/2. 命名管道与共享内存.md
+  - JavaEE应用开发:
+    - HTML与CSS:
+      - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md
+      - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md
+    - JavaScript:
+      - JavaScript语法基础:
+        - JavaScript基本语法: JavaScript基础知识/1. JavaScript基础/JavaScript基础.md
+        - JavaScript对象基础: JavaScript基础知识/2. JavaScript对象基础/2. JavaScript对象基础.md
+        - JavaScript函数: JavaScript基础知识/3. JavaScript函数/3. JavaScript函数.md
+        - JavaScript面向对象: JavaScript基础知识/4. JavaScript面向对象/4. JavaScript面向对象.md
+        - JavaScript数组: JavaScript基础知识/5. JavaScript数组/5. JavaScript数组.md
+        - JavaScript内建对象: JavaScript基础知识/6. JavaScript内建对象/6. JavaScript内建对象.md
+      - JavaScript与DOM和BOM操作:
+        - DOM和BOM介绍: JavaScript基础知识/7. DOM和BOM介绍/7. DOM和BOM介绍.md
+        - DOM操作: JavaScript基础知识/8. JavaScript与DOM操作/8. JavaScript与DOM操作.md
+        - BOM操作: JavaScript基础知识/9. JavaScript与BOM操作/9. JavaScript与BOM操作.md
+        - DOM和BOM小练习: JavaScript基础知识/11. （附加）DOM和BOM小练习/11. （附加）DOM和BOM小练习.md
+      - JavaScript与JQuery（了解）: JavaScript基础知识/10. JavaScript与JQuery/10. JavaScript与JQuery.md
+    - HTTP协议介绍: JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
+    - Servlet开发: JavaWeb/2. Servlet开发/2. Servlet开发.md
+    - 乱码问题和路径问题: JavaWeb/3. 乱码问题和路径问题/3. 乱码问题和路径问题.md
+    - MVC架构模式介绍: JavaWeb/4. MVC架构模式介绍/4. MVC架构模式介绍.md
+    - 会话、过滤器和监听器: JavaWeb/5. 会话、过滤器和监听器/5. 会话、过滤器和监听器.md
+  - MySQL:
+    - MySQL基础: MySQL/MySQL基础使用/MySQL基础使用.md
+    - JDBC（Java连接数据库技术）:
+      - JDBC基础: MySQL/JDBC/JDBC基础/JDBC基础.md
+      - JDBC进阶: MySQL/JDBC/JDBC进阶/JDBC进阶.md
+      - JDBC高级: MySQL/JDBC/JDBC高级/JDBC高级.md
+  - 编程题目练习总结:
+    - 模拟字符串转整数函数: 编程题目练习总结/模拟字符串转整数函数/模拟字符串转整数函数.md
+  - 其它: 
+    - 关于Shell: 其它/Shell脚本语言/关于Shell.md
+    - 关于函数栈帧（C语言演示）: 其它/C语言函数栈帧/关于函数栈帧（C语言演示）.md
+    - 关于xml文件: 其它/关于xml文件/关于xml文件.md
+  - 工具帮助:
+    - vscode中添加代码片段: 工具帮助/vscode中添加代码片段/vscode中添加代码片段.md
+    - Windows系统下在VMware中配置Linux环境并通过客户端进行连接: 工具帮助/Windows系统下在VMware中配置Linux环境并通过客户端进行连接/Windows系统下在VMware中配置Linux环境并通过客户端进行连接.md
+    - Tomcat安装和使用: 工具帮助/Tomcat安装和使用/Tomcat安装和使用.md
+    - Sunshine+Moonlight实现屏幕内容串流: 工具帮助/Sunshine+Moonlight实现屏幕内容串流/Sunshine+Moonlight实现屏幕内容串流.md
+  - 面试:
+    - C++ 后端需要知道的找工作问题: 面试/C++ 后端需要知道的找工作问题/C++ 后端需要知道的找工作问题.md 
+    - C++ 学长经验之谈: 面试/C++ 学长经验之谈/C++ 学长经验之谈.md
+  - 联系作者: 作者/作者.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.keys
+  - md_in_html
+  - tables
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      linenums: true  # 启用行号显示
+      anchor_linenums: true
+  - toc:
+      permalink: true
+      baselevel: 1  # 开始级别
+      toc_depth: 6  # 最大深度
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - javascripts/particles.js
+  - javascripts/other.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# extra_css:
+#   - stylesheets/theme1.css
+#   - stylesheets/theme2.css
+  
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/H0308
+    - icon: fontawesome/brands/qq
+      link: https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html
+  generator: false
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      js_files:
+          - javascripts/mathjax.js
+          - javascripts/other.js
+          - javascripts/particles.js
+      # css_files:
+      #     - stylesheets/theme1.css
+      #     - stylesheets/theme1.css
+  - git-authors
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      slide_effect: slide
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
+      skip_classes:
+        - custom-skip-class-name
+      auto_caption: false
+      caption_position: bottom
+      background: white
+      shadow: true
+      manual: false
+  - git-revision-date-localized:
+      enable_creation_date: true

@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "pip install -r requirements.txt && mkdocs build",
+    "buildCommand": "chmod +x build.sh && ./build.sh",
     "outputDirectory": "site",
     "framework": null,
     "rewrites": [

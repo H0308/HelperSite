@@ -1,10 +1,9 @@
 {
     "version": 2,
-    "builds": [{
-        "src": "requirements.txt",
-        "use": "@vercel/python"
-    }],
-
     "buildCommand": "pip install -r requirements.txt && mkdocs build",
-    "outputDirectory": "site"
+    "outputDirectory": "site",
+    "framework": null,
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/$1" }
+    ]
 }

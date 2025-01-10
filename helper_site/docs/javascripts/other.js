@@ -119,14 +119,16 @@ function calculateRuntime() {
     return `本站已运行 ${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒`;
 }
 // 添加运行时间到页脚
-document.addEventListener('DOMContentLoaded', () => {
-    const footerInner = document.querySelector('.md-footer-meta__inner.md-grid');
-    const copyright = document.querySelector('.md-copyright');
-    const social = document.querySelector('.md-social');
-    
-    const runtimeDiv = document.createElement('div');
-    runtimeDiv.className = 'md-footer-runtime md-typeset';
-    
+document.addEventListener("DOMContentLoaded", () => {
+    const footerInner = document.querySelector(
+        ".md-footer-meta__inner.md-grid"
+    );
+    const copyright = document.querySelector(".md-copyright");
+    const social = document.querySelector(".md-social");
+
+    const runtimeDiv = document.createElement("div");
+    runtimeDiv.className = "md-footer-runtime md-typeset";
+
     copyright.parentNode.insertBefore(runtimeDiv, social);
 
     function updateRuntime() {
@@ -136,21 +138,3 @@ document.addEventListener('DOMContentLoaded', () => {
     updateRuntime();
     setInterval(updateRuntime, 1000);
 });
-
-// 添加页面平滑滚动动画
-document.addEventListener('DOMContentLoaded', () => {
-    // 为所有锚点链接添加平滑滚动
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-});
-

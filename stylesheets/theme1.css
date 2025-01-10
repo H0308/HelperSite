@@ -263,67 +263,9 @@ blockquote {
     z-index: 3;
 }
 
-/* 网页静态背景 */
 body {
     position: relative;
     background-color: #f8f9fa;
-    background-image: linear-gradient(
-            120deg,
-            rgba(77, 166, 218, 0.05),
-            transparent 70%
-        ),
-        linear-gradient(240deg, rgba(39, 87, 150, 0.05), transparent 70%);
-}
-
-/* 第一层背景 - 渐变图案 */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(
-            120deg,
-            rgba(173, 216, 230, 0.1),
-            transparent 70%
-        ),
-        linear-gradient(240deg, rgba(255, 182, 193, 0.1), transparent 70%),
-        linear-gradient(360deg, rgba(176, 224, 230, 0.1), transparent 70%);
-    z-index: -2;
-}
-
-/* 第二层背景 - 动态图案 */
-body::after {
-    content: "";
-    position: fixed;
-    inset: -50%;
-    background: radial-gradient(
-            circle at 0% 0%,
-            rgba(173, 216, 230, 0.1) 0%,
-            transparent 50%
-        ),
-        radial-gradient(
-            circle at 100% 0%,
-            rgba(255, 182, 193, 0.1) 0%,
-            transparent 50%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(176, 224, 230, 0.1) 0%,
-            transparent 50%
-        );
-    animation: backgroundRotate 30s linear infinite;
-    z-index: -1;
-}
-
-@keyframes backgroundRotate {
-    0% {
-        transform: rotate(0deg) scale(1);
-    }
-    50% {
-        transform: rotate(180deg) scale(1.1);
-    }
-    100% {
-        transform: rotate(360deg) scale(1);
-    }
 }
 
 /* 导航标题毛玻璃效果 */

@@ -1,12 +1,4 @@
-<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/5.%20%E5%B8%B8%E8%A7%84%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E9%80%92%E5%BD%92/5.%20%E5%B8%B8%E8%A7%84%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E9%80%92%E5%BD%92.html><link rel=prev href=../4.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/4.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE.html><link rel=next href=../../8.%20%E5%9B%9E%E6%BA%AF%E7%AF%87/1.%20%E5%9B%9E%E6%BA%AF%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E5%9B%9E%E6%BA%AF%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html><link rel=icon href=../../../images/favicon.png><meta name=generator content="mkdocs-1.6.0, mkdocs-material-9.5.31"><title>常规题目中的递归 - 学习档案</title><link rel=stylesheet href=../../../assets/stylesheets/main.3cba04c6.min.css><link rel=stylesheet href=../../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><!-- 调整后的安全响应头 --><meta http-equiv=Content-Security-Policy content="
-        default-src 'self';
-        script-src 'self' 'unsafe-inline' 'unsafe-eval' https:;
-        style-src 'self' 'unsafe-inline' https:;
-        img-src 'self' data: https:;
-        font-src 'self' data: https:;
-        connect-src 'self' https:;
-        frame-src 'self';
-        media-src 'self'"><meta http-equiv=X-Frame-Options content=SAMEORIGIN><meta http-equiv=X-Content-Type-Options content=nosniff><meta http-equiv=Strict-Transport-Security content="max-age=31536000; includeSubDomains"><meta http-equiv=Referrer-Policy content=strict-origin-when-cross-origin><!-- 桌面端加载theme1.css (>=1200px) --><link rel=stylesheet href=../../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><!-- 平板端加载theme2.css (768px-1199px) --><link rel=stylesheet href=../../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><!-- 手机端加载theme2.css (<768px) --><link rel=stylesheet href=../../../stylesheets/theme2.css media="screen and (max-width: 767px)"><style>
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/5.%20%E5%B8%B8%E8%A7%84%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E9%80%92%E5%BD%92/5.%20%E5%B8%B8%E8%A7%84%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E9%80%92%E5%BD%92.html><link rel=prev href=../4.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/4.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE.html><link rel=next href=../../8.%20%E5%9B%9E%E6%BA%AF%E7%AF%87/1.%20%E5%9B%9E%E6%BA%AF%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E5%9B%9E%E6%BA%AF%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html><link rel=icon href=../../../images/favicon.png><meta name=generator content="mkdocs-1.6.0, mkdocs-material-9.5.31"><title>常规题目中的递归 - 学习档案</title><link rel=stylesheet href=../../../assets/stylesheets/main.3cba04c6.min.css><link rel=stylesheet href=../../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><!-- 桌面端加载theme1.css (>=1200px) --><link rel=stylesheet href=../../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><!-- 平板端加载theme2.css (768px-1199px) --><link rel=stylesheet href=../../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><!-- 手机端加载theme2.css (<768px) --><link rel=stylesheet href=../../../stylesheets/theme2.css media="screen and (max-width: 767px)"><style>
         @import url('https://static.zeoseven.com/zsft/2/main/result.css');
         @import url('https://fonts.cdnfonts.com/css/opposans');
         @import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
@@ -184,48 +176,32 @@
             transition: all 100ms ease;
         }
 
+        /* 如果需要自定义滚动动画,可以使用下面的代码 */
+        /* html { */
+            /* scroll-behavior: smooth; */
+            /* --scroll-duration: 0.5s; 自定义滚动持续时间 */
+        /* } */
+
+        /* 兼容性处理 - 对于不支持scroll-behavior的浏览器 */
+        /* @supports not (scroll-behavior: smooth) {
+            html {
+                overflow: auto;
+                scroll-behavior: auto;
+            }
+        } */
+
         /* 修改选择器，只针对文章内容区域 */
         .md-content article > *:not(.md-top):not(.md-nav) {
             animation: flyIn 0.6s ease-out forwards;
             opacity: 0;
         }
 
-        /* 优化动画延迟，支持更多元素 */
-        /* 每个元素延迟0.1秒，最多支持20个元素 */
+        /* 动画延迟 */
         .md-content article > *:not(.md-top):not(.md-nav):nth-child(1) { animation-delay: 0.1s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(2) { animation-delay: 0.15s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(3) { animation-delay: 0.2s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(4) { animation-delay: 0.25s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(5) { animation-delay: 0.3s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(6) { animation-delay: 0.35s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(7) { animation-delay: 0.4s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(8) { animation-delay: 0.45s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(9) { animation-delay: 0.5s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(10) { animation-delay: 0.55s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(11) { animation-delay: 0.6s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(12) { animation-delay: 0.65s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(13) { animation-delay: 0.7s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(14) { animation-delay: 0.75s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(15) { animation-delay: 0.8s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(16) { animation-delay: 0.85s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(17) { animation-delay: 0.9s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(18) { animation-delay: 0.95s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(19) { animation-delay: 1s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(20) { animation-delay: 1.05s; }
-        /* 超过20个元素的统一使用1.1s延迟 */
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(n+21) { animation-delay: 1.1s; }
-
-        /* 优化动画效果，使其更平滑 */
-        @keyframes flyIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(2) { animation-delay: 0.2s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(3) { animation-delay: 0.3s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(4) { animation-delay: 0.4s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(5) { animation-delay: 0.5s; }
 
         /* 为搜索框添加圆角效果 */
         .md-search__input {
@@ -309,7 +285,7 @@
                 opacity: 0;
                 transform: translate(var(--translate-x), var(--translate-y)) scale(0.5);
             }
-        } 
+        }
 
         /* 定义飞入动画关键帧 */
         @keyframes flyIn {
@@ -385,49 +361,6 @@
             }
         }
     </style><script>
-        (function() {
-            // 配置允许的域名列表
-            const allowedDomains = [
-                'www.help-doc.top',
-                'help-doc.top',
-                'h0308.github.io',
-                'localhost',
-                '127.0.0.1'
-            ];
-
-            // 验证当前域名
-            function validateDomain() {
-                const currentDomain = window.location.hostname;
-                
-                // 本地开发环境直接允许
-                if (currentDomain.includes('localhost') || currentDomain.includes('127.0.0.1')) {
-                    return;
-                }
-
-                // 检查是否是允许的域名
-                const isAllowed = allowedDomains.some(domain => 
-                    currentDomain === domain || currentDomain.endsWith('.' + domain)
-                );
-
-                // 仅在域名不允许时重定向
-                if (!isAllowed) {
-                    window.location.href = `https://www.help-doc.top${window.location.pathname}`;
-                }
-            }
-
-            // 延迟执行域名验证
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => setTimeout(validateDomain, 1000));
-            } else {
-                setTimeout(validateDomain, 1000);
-            }
-
-            // 禁止iframe嵌入
-            if (window.top !== window.self) {
-                window.top.location.href = window.self.location.href;
-            }
-        })();
-
         (function initTheme() {
             const savedTheme = localStorage.getItem('preferred-theme');
             if (savedTheme) {
@@ -454,7 +387,6 @@
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
     body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#_1 class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class="md-header md-header--shadow" data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../../../index.html title=学习档案 class="md-header__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 学习档案 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> 常规题目中的递归 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-hidden=true type=radio name=__palette id=__palette_0> </form> <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <script>
-        
         // 主题切换相关代码
         document.addEventListener('DOMContentLoaded', () => {
             // 找到搜索框

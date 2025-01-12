@@ -279,7 +279,15 @@ extra:
     enable_hsts: true
     policy:
       referrer: "strict-origin-when-cross-origin"
-      csp: "upgrade-insecure-requests; default-src https: 'unsafe-inline' 'unsafe-eval' data:; img-src https: data: 'self'"
+      # 修改CSP配置，允许Vercel相关资源
+      csp:
+        upgrade-insecure-requests;
+        default-src 'self' vercel.app vercel.com *.vercel.app *.vercel.com;
+        script-src 'self' 'unsafe-inline' 'unsafe-eval';
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' data: https:;
+        font-src 'self' data: https:;
+        connect-src 'self' vercel.app vercel.com *.vercel.app *.vercel.com;
 
 plugins:
   - search

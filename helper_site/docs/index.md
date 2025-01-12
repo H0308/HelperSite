@@ -100,7 +100,7 @@
 
 - 本网站不提供英文版
 - 本网站使用下面的字体：
-    1. 导航栏标题：[得意黑](https://t.bilibili.com/728710797587382345)
+    1. 导航栏标题：[抖音美好体](https://github.com/bytedance/fonts)
     2. 标题：[霞鹜臻楷](https://github.com/lxgw/LxgwZhenKai)
     3. 内容（非代码）：[霞鹜975黑体](https://github.com/lxgw/975gothic)
     4. 代码：[JetBrains Mono](https://www.jetbrains.com/lp/mono/)

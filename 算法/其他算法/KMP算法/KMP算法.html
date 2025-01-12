@@ -2,7 +2,7 @@
         @import url('https://static.zeoseven.com/zsft/2/main/result.css');
         @import url('https://static.zeoseven.com/zsft/442/main/result.css');
         @import url('https://static.zeoseven.com/zsft/185/main/result.css');
-        @import url('https://static.zeoseven.com/zsft/92/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/84/main/result.css');
 
         /* 1. 优化霞鹜975黑体字体 */
         @font-face {
@@ -22,11 +22,11 @@
         }
 
         @font-face {
-            font-family: "Smiley Sans Oblique";
+            font-family: "Douyin Sans";
         }
 
         .md-header__topic .md-ellipsis {
-            font-family: "Smiley Sans Oblique" !important;
+            font-family: "Douyin Sans" !important;
         }
 
         :root {
@@ -385,6 +385,42 @@
                         theme1Link.setAttribute('disabled', 'true');
                     }
                 }
+            }
+        })();
+
+        (function() {
+            // 配置允许的域名列表
+            const allowedDomains = [
+                'www.help-doc.top',
+                'help-doc.top',
+                'h0308.github.io',
+                'localhost',
+                '127.0.0.1',
+            ];
+
+            // 验证当前域名
+            function validateDomain() {
+                const currentDomain = window.location.hostname;
+                
+                // 本地开发环境直接允许
+                if (currentDomain.includes('localhost') || currentDomain.includes('127.0.0.1')) {
+                    return;
+                }
+
+                // 检查是否是允许的域名
+                const isAllowed = allowedDomains.some(domain => 
+                    currentDomain === domain || currentDomain.endsWith('.' + domain)
+                );
+
+                // 仅在域名不允许时重定向
+                if (!isAllowed) {
+                    window.location.href = `https://www.help-doc.top${window.location.pathname}`;
+                }
+            }
+
+            // 禁止iframe嵌入
+            if (window.top !== window.self) {
+                window.top.location.href = window.self.location.href;
             }
         })();
     </script> <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>

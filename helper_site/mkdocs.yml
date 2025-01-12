@@ -167,7 +167,7 @@ nav:
   - Linux:
     - Linux常用选项和指令: Linux/1. Linux常用选项和指令/1. Linux常用选项和指令.md
     - Linux权限相关: Linux/2. Linux权限相关/2. Linux权限相关.md
-    - CentOS软件安装与vim使用: Linux/3. CentOS软件安装与Vim使用/3. CentOS软件安装与Vim使用.md
+    - CentOS软件安装: Linux/3. CentOS软件安装/3. CentOS软件安装.md
     - Linux下的gcc与gdb: Linux/4. Linux下的gcc与gdb/4. Linux下的gcc与gdb.md
     - Linux下的Makefile与进度条程序: Linux/5. Linux下的Makefile与进度条程序/5. Linux下的Makefile与进度条程序.md
     - 操作系统基础知识: Linux/6. 操作系统基础知识/6. 操作系统基础知识.md
@@ -184,7 +184,8 @@ nav:
     - Linux进程间通信: 
       - 进程间通信介绍与匿名管道: Linux/17. Linux进程间通信/1. 进程间通信介绍与匿名管道/1. 进程间通信介绍与匿名管道.md
       - 命名管道与共享内存: Linux/17. Linux进程间通信/2. 命名管道与共享内存/2. 命名管道与共享内存.md
-      - 消息队列和信号量: Linux/17. Linux进程间通信/3. 消息队列和信号量/3. 消息队列和信号量.md
+      - 消息队列与信号量: Linux/17. Linux进程间通信/3. 消息队列和信号量/3. 消息队列和信号量.md
+      - 进程间通信原理: Linux/17. Linux进程间通信/4. 进程间通信原理/4. 进程间通信原理.md
   - JavaEE应用开发:
     - HTML与CSS:
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md
@@ -225,6 +226,7 @@ nav:
     - Windows系统下在VMware中配置Linux环境并通过客户端进行连接: 工具帮助/Windows系统下在VMware中配置Linux环境并通过客户端进行连接/Windows系统下在VMware中配置Linux环境并通过客户端进行连接.md
     - Tomcat安装和使用: 工具帮助/Tomcat安装和使用/Tomcat安装和使用.md
     - Sunshine+Moonlight实现屏幕内容串流: 工具帮助/Sunshine+Moonlight实现屏幕内容串流/Sunshine+Moonlight实现屏幕内容串流.md
+    - vim使用帮助: 工具帮助/vim使用帮助/vim使用帮助.md
   - 面试:
     - C++ 后端需要知道的找工作问题: 面试/C++ 后端需要知道的找工作问题/C++ 后端需要知道的找工作问题.md 
     - C++ 学长经验之谈: 面试/C++ 学长经验之谈/C++ 学长经验之谈.md

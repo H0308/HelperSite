@@ -1,26 +1,36 @@
 <!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/%E7%AE%97%E6%B3%95/8.%20%E5%9B%9E%E6%BA%AF%E7%AF%87/1.%20%E5%9B%9E%E6%BA%AF%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E5%9B%9E%E6%BA%AF%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html><link rel=prev href=../../7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/5.%20%E5%B8%B8%E8%A7%84%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E9%80%92%E5%BD%92/5.%20%E5%B8%B8%E8%A7%84%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E9%80%92%E5%BD%92.html><link rel=next href=../../%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95.html><link rel=icon href=../../../images/favicon.png><meta name=generator content="mkdocs-1.6.0, mkdocs-material-9.5.31"><title>回溯理论基础 - 学习档案</title><link rel=stylesheet href=../../../assets/stylesheets/main.3cba04c6.min.css><link rel=stylesheet href=../../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><!-- 桌面端加载theme1.css (>=1200px) --><link rel=stylesheet href=../../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><!-- 平板端加载theme2.css (768px-1199px) --><link rel=stylesheet href=../../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><!-- 手机端加载theme2.css (<768px) --><link rel=stylesheet href=../../../stylesheets/theme2.css media="screen and (max-width: 767px)"><style>
         @import url('https://static.zeoseven.com/zsft/2/main/result.css');
-        @import url('https://fonts.cdnfonts.com/css/opposans');
-        @import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
+        @import url('https://static.zeoseven.com/zsft/442/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/185/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/92/main/result.css');
 
-        /* 1. 优化OPPO Sans字体 */
+        /* 1. 优化霞鹜975黑体字体 */
         @font-face {
-            font-family: "OPPOSans";
+            font-family: "LXGW 975 Gothic SC";
             font-weight: normal;
         }
 
         /* 2. 优化霞鹜臻楷字体 - 仅用于标题 */
         @font-face {
             font-family: 'LXGW ZhenKai';
-            font-weight: normal;
         }
 
         @font-face {
-            font-family: 'JetBrains Mono';
+            font-family: "JetBrains Mono";
+            src: url('https://static.zeoseven.com/zsft/hk/main.woff2') format('woff2'),
+                url('https://static-host.zeoseven.com/zsft/hk/main.woff2') format('woff2');
+        }
+
+        @font-face {
+            font-family: "Smiley Sans Oblique";
+        }
+
+        .md-header__topic .md-ellipsis {
+            font-family: "Smiley Sans Oblique" !important;
         }
 
         :root {
-            --md-text-font: "OPPOSans";
+            --md-text-font: "LXGW 975 Gothic SC";
             --md-header-font: "LXGW ZhenKai";
             --md-code-font: "JetBrains Mono";
             --code-font-color: #e96900;

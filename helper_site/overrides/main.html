@@ -401,43 +401,41 @@
             }
         })();
 
-        // (function() {
-        //     // 配置允许的域名列表
-        //     const allowedDomains = [
-        //         'www.helper-wiki.top',
-        //         'www.help-doc.top',
-        //         'help-doc.top',
-        //         'h0308.github.io',
-        //         'localhost',
-        //         '127.0.0.1',
-        //         'helper-site-one.vercel.app',
-        //     ];
+        (function() {
+            // 配置允许的域名列表
+            const allowedDomains = [
+                'www.help-doc.top',
+                'help-doc.top',
+                'h0308.github.io',
+                'localhost',
+                '127.0.0.1',
+            ];
 
-        //     // 验证当前域名
-        //     function validateDomain() {
-        //         const currentDomain = window.location.hostname;
+            // 验证当前域名
+            function validateDomain() {
+                const currentDomain = window.location.hostname;
                 
-        //         // 本地开发环境直接允许
-        //         if (currentDomain.includes('localhost') || currentDomain.includes('127.0.0.1')) {
-        //             return;
-        //         }
+                // 本地开发环境直接允许
+                if (currentDomain.includes('localhost') || currentDomain.includes('127.0.0.1')) {
+                    return;
+                }
 
-        //         // 检查是否是允许的域名
-        //         const isAllowed = allowedDomains.some(domain => 
-        //             currentDomain === domain || currentDomain.endsWith('.' + domain)
-        //         );
+                // 检查是否是允许的域名
+                const isAllowed = allowedDomains.some(domain => 
+                    currentDomain === domain || currentDomain.endsWith('.' + domain)
+                );
 
-        //         // 仅在域名不允许时重定向
-        //         if (!isAllowed) {
-        //             window.location.href = `https://www.help-doc.top${window.location.pathname}`;
-        //         }
-        //     }
+                // 仅在域名不允许时重定向
+                if (!isAllowed) {
+                    window.location.href = `https://www.help-doc.top${window.location.pathname}`;
+                }
+            }
 
-        //     // 禁止iframe嵌入
-        //     if (window.top !== window.self) {
-        //         window.top.location.href = window.self.location.href;
-        //     }
-        // })();
+            // 禁止iframe嵌入
+            if (window.top !== window.self) {
+                window.top.location.href = window.self.location.href;
+            }
+        })();
     </script>
 {% endblock %}
 

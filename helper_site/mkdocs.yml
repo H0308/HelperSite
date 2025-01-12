@@ -279,8 +279,9 @@ extra:
     enable_hsts: true
     policy:
       referrer: "strict-origin-when-cross-origin"
-      csp: "upgrade-insecure-requests; default-src https: 'unsafe-inline' 'unsafe-eval' data:; img-src https: data: 'self'"
-
+      csp: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self' data:; frame-ancestors 'none'; form-action 'self'; base-uri 'self';"
+      hsts: "max-age=31536000; includeSubDomains; preload"
+      
 plugins:
   - search
   - minify:

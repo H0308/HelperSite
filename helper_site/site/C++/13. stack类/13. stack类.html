@@ -1,26 +1,25 @@
 <!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/C%2B%2B/13.%20stack%E7%B1%BB/13.%20stack%E7%B1%BB.html><link rel=prev href=../12.%20list%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/12.%20list%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html><link rel=next href=../14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB/14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.0, mkdocs-material-9.5.31"><title>stack类 - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.3cba04c6.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><!-- 桌面端加载theme1.css (>=1200px) --><link rel=stylesheet href=../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><!-- 平板端加载theme2.css (768px-1199px) --><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><!-- 手机端加载theme2.css (<768px) --><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (max-width: 767px)"><style>
         @import url('https://static.zeoseven.com/zsft/2/main/result.css');
-        @import url('https://fonts.cdnfonts.com/css/opposans');
-        @import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
+        @import url('https://static.zeoseven.com/zsft/442/main/result.css');
 
-        /* 1. 优化OPPO Sans字体 */
+        /* 1. 优化Maple Mono NF CN字体 */
         @font-face {
-            font-family: "OPPOSans";
-            font-weight: normal;
+            font-family: "Maple Mono NF CN";
         }
 
         /* 2. 优化霞鹜臻楷字体 - 仅用于标题 */
         @font-face {
             font-family: 'LXGW ZhenKai';
-            font-weight: normal;
         }
 
         @font-face {
-            font-family: 'JetBrains Mono';
+            font-family: "JetBrains Mono";
+            src: url('https://static.zeoseven.com/zsft/hk/main.woff2') format('woff2'),
+                url('https://static-host.zeoseven.com/zsft/hk/main.woff2') format('woff2');
         }
 
         :root {
-            --md-text-font: "OPPOSans";
+            --md-text-font: "Maple Mono NF CN";
             --md-header-font: "LXGW ZhenKai";
             --md-code-font: "JetBrains Mono";
             --code-font-color: #e96900;

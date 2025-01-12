@@ -12,27 +12,26 @@
     <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.css" media="screen and (max-width: 767px)">
     <style>
         @import url('https://static.zeoseven.com/zsft/2/main/result.css');
-        @import url('https://fonts.cdnfonts.com/css/opposans');
-        @import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
+        @import url('https://static.zeoseven.com/zsft/442/main/result.css');
 
-        /* 1. 优化OPPO Sans字体 */
+        /* 1. 优化Maple Mono NF CN字体 */
         @font-face {
-            font-family: "OPPOSans";
-            font-weight: normal;
+            font-family: "Maple Mono NF CN";
         }
 
         /* 2. 优化霞鹜臻楷字体 - 仅用于标题 */
         @font-face {
             font-family: 'LXGW ZhenKai';
-            font-weight: normal;
         }
 
         @font-face {
-            font-family: 'JetBrains Mono';
+            font-family: "JetBrains Mono";
+            src: url('https://static.zeoseven.com/zsft/hk/main.woff2') format('woff2'),
+                url('https://static-host.zeoseven.com/zsft/hk/main.woff2') format('woff2');
         }
 
         :root {
-            --md-text-font: "OPPOSans";
+            --md-text-font: "Maple Mono NF CN";
             --md-header-font: "LXGW ZhenKai";
             --md-code-font: "JetBrains Mono";
             --code-font-color: #e96900;

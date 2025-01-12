@@ -13,10 +13,13 @@
     <style>
         @import url('https://static.zeoseven.com/zsft/2/main/result.css');
         @import url('https://static.zeoseven.com/zsft/442/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/185/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/92/main/result.css');
 
-        /* 1. 优化Maple Mono NF CN字体 */
+        /* 1. 优化霞鹜975黑体字体 */
         @font-face {
-            font-family: "Maple Mono NF CN";
+            font-family: "LXGW 975 Gothic SC";
+            font-weight: normal;
         }
 
         /* 2. 优化霞鹜臻楷字体 - 仅用于标题 */
@@ -30,8 +33,16 @@
                 url('https://static-host.zeoseven.com/zsft/hk/main.woff2') format('woff2');
         }
 
+        @font-face {
+            font-family: "Smiley Sans Oblique";
+        }
+
+        .md-header__topic .md-ellipsis {
+            font-family: "Smiley Sans Oblique" !important;
+        }
+
         :root {
-            --md-text-font: "Maple Mono NF CN";
+            --md-text-font: "LXGW 975 Gothic SC";
             --md-header-font: "LXGW ZhenKai";
             --md-code-font: "JetBrains Mono";
             --code-font-color: #e96900;

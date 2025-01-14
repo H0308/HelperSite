@@ -614,15 +614,19 @@
                 // 获取URL中的锚点
                 const hash = window.location.hash;
                 if (hash) {
-                    // 移除#号
-                    const targetId = hash.substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        // 平滑滚动到目标元素
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                    // 检查是否存在阅读全文按钮（未解锁状态）
+                    const readmoreBtn = document.getElementById('readmore-wrapper');
+                    // 只有在内容已解锁或不需要解锁时才执行跳转
+                    if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
+                        const targetId = hash.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            // 平滑滚动到目标元素
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
                     }
                 }
             }, 300); // 适当延迟以确保页面完全加载

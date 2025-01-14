@@ -1,41 +1,31 @@
-<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/12.%20C%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/12.%20C%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C.html><link rel=prev href=../11.%20C%E8%AF%AD%E8%A8%80%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/11.%20C%E8%AF%AD%E8%A8%80%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html><link rel=next href=../13.%20C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/13.%20C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.0, mkdocs-material-9.5.31"><title>C语言文件操作 - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.3cba04c6.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><!-- 桌面端加载theme1.css (>=1200px) --><link rel=stylesheet href=../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><!-- 平板端加载theme2.css (768px-1199px) --><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><!-- 手机端加载theme2.css (<768px) --><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (max-width: 767px)"><style>
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/12.%20C%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/12.%20C%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C.html><link rel=prev href=../11.%20C%E8%AF%AD%E8%A8%80%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/11.%20C%E8%AF%AD%E8%A8%80%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html><link rel=next href=../13.%20C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/13.%20C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.0, mkdocs-material-9.5.31"><title>C语言文件操作 - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.3cba04c6.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><link rel=stylesheet href=../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (max-width: 767px)"><style>
         @import url('https://static.zeoseven.com/zsft/2/main/result.css');
         @import url('https://static.zeoseven.com/zsft/442/main/result.css');
         @import url('https://static.zeoseven.com/zsft/25/main/result.css'); 
         @import url('https://static.zeoseven.com/zsft/84/main/result.css');
-
-        /* 1. 优化文泉驿微米黑字体 */
         @font-face {
             font-family: "WenQuanYi Micro Hei";
         }
-
-        /* 2. 优化霞鹜臻楷字体 - 仅用于标题 */
         @font-face {
             font-family: 'LXGW ZhenKai';
         }
-
         @font-face {
             font-family: "JetBrains Mono";
             src: url('https://static.zeoseven.com/zsft/hk/main.woff2') format('woff2'),
                 url('https://static-host.zeoseven.com/zsft/hk/main.woff2') format('woff2');
         }
-
         @font-face {
             font-family: "Douyin Sans";
         }
-
         .md-header__topic .md-ellipsis {
             font-family: "Douyin Sans" !important;
         }
-
         :root {
             --md-text-font: "WenQuanYi Micro Hei";
             --md-header-font: "LXGW ZhenKai";
             --md-code-font: "JetBrains Mono";
             --code-font-color: #e96900;
         }
-
-        /* 主题切换按钮只在桌面端显示 */
         @media screen and (max-width: 1199px) {
             .theme-switch {
                 display: none !important;
@@ -43,45 +33,29 @@
         }
 
         @media print {
-            /* 确保链接不显示URL */
             a[href]:after {
                 content: "" !important;
             }
-            
-            /* 禁用链接交互效果 */
             a {
-                /* 移除默认下划线 */
                 text-decoration: none !important;
-                /* 继承文本颜色 */
                 color: inherit !important;
-                /* 禁用点击事件 */
                 pointer-events: none !important;
-                /* 移除链接提示 */
                 cursor: default !important;
             }
-
-            /* 禁用链接悬浮提示 */
             a[title] {
                 position: relative;
             }
-
             a[title]:hover:after {
                 display: none !important;
             }
-
-            /* 禁用链接点击状态 */
             a:active, a:hover, a:focus {
                 outline: none !important;
                 text-decoration: none !important;
             }
-            
-            /* 保持图片显示 */
             img {
                 max-width: 100% !important;
                 page-break-inside: avoid;
             }
-            
-            /* 隐藏导航和不必要元素 */
             .md-header,
             .md-tabs,
             .md-sidebar,
@@ -89,8 +63,6 @@
                 display: none !important;
             }
         }
-
-        /* 主题切换按钮组样式 */
         .theme-switch {
             display: inline-flex;
             gap: 8px;
@@ -99,15 +71,10 @@
             border-radius: 100px;
             border: 2px solid rgba(255, 255, 255, 0.1);
         }
-
-        /* 主题切换按钮样式 */
         .theme-switch {
             margin-right: 1rem;
         }
-
-        /* 主题切换按钮样式 */
         .theme-btn {
-            /* 保持原有基础样式 */
             font-family: var(--md-text-font);
             font-size: medium;
             padding: 8px 16px;
@@ -115,27 +82,19 @@
             border-radius: 100px;
             color: #fff;
             cursor: pointer;
-            
-            /* 调整按钮尺寸 */
             min-width: 100px;
             height: 36px;
-            
-            /* 容器属性 */
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            
-            /* 背景设置 */
             background-color: #333;
             background-size: 200% 100%;
             background-position: right bottom;
             background-repeat: no-repeat;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        /* 文字容器样式 */
         .theme-btn .current-theme,
         .theme-btn .target-theme {
             position: absolute;
@@ -147,133 +106,109 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 2;
         }
-
         .theme-btn .current-theme {
             transform: translateX(0);
             opacity: 1;
             transition-delay: 0ms;
         }
-
         .theme-btn .target-theme {
             transform: translateX(-100%);
             opacity: 0;
             transition-delay: 0ms;
         }
-
-        /* 悬停动画效果 */
         .theme-btn:hover {
             transform: scale(1.05);
             background-image: linear-gradient(to right, #4da6da 0%, #275796 100%);
             background-position: left bottom;
         }
-
         .theme-btn:hover .current-theme {
             transform: translateX(100%);
             opacity: 0;
             transition-delay: 100ms;
         }
-
         .theme-btn:hover .target-theme {
             transform: translateX(0);
             opacity: 1;
             transition-delay: 200ms;
         }
-
-        /* 点击效果 */
         .theme-btn:active {
             transform: scale(0.95);
             transition: all 100ms ease;
         }
-
-        /* 如果需要自定义滚动动画,可以使用下面的代码 */
-        /* html { */
-            /* scroll-behavior: smooth; */
-            /* --scroll-duration: 0.5s; 自定义滚动持续时间 */
-        /* } */
-
-        /* 兼容性处理 - 对于不支持scroll-behavior的浏览器 */
-        /* @supports not (scroll-behavior: smooth) {
-            html {
-                overflow: auto;
-                scroll-behavior: auto;
-            }
-        } */
-
-        /* 修改选择器，只针对文章内容区域 */
         .md-content article > *:not(.md-top):not(.md-nav) {
             animation: flyIn 0.6s ease-out forwards;
             opacity: 0;
         }
-
-        /* 动画延迟 */
         .md-content article > *:not(.md-top):not(.md-nav):nth-child(1) { animation-delay: 0.1s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(2) { animation-delay: 0.2s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(3) { animation-delay: 0.3s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(4) { animation-delay: 0.4s; }
-        .md-content article > *:not(.md-top):not(.md-nav):nth-child(5) { animation-delay: 0.5s; }
-
-        /* 为搜索框添加圆角效果 */
-        .md-search__input {
-            border-radius: 8px !important; /* 使用 !important 确保样式生效 */
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(2) { animation-delay: 0.15s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(3) { animation-delay: 0.2s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(4) { animation-delay: 0.25s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(5) { animation-delay: 0.3s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(6) { animation-delay: 0.35s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(7) { animation-delay: 0.4s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(8) { animation-delay: 0.45s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(9) { animation-delay: 0.5s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(10) { animation-delay: 0.55s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(11) { animation-delay: 0.6s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(12) { animation-delay: 0.65s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(13) { animation-delay: 0.7s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(14) { animation-delay: 0.75s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(15) { animation-delay: 0.8s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(16) { animation-delay: 0.85s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(17) { animation-delay: 0.9s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(18) { animation-delay: 0.95s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(19) { animation-delay: 1s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(20) { animation-delay: 1.05s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(n+21) { animation-delay: 1.1s; }
+        @keyframes flyIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
-        /* 如果需要调整悬浮状态的圆角 */
         .md-search__input:hover,
         .md-search__input:focus {
             border-radius: 8px !important;
         }
-
-        /* 搜索框容器也添加圆角，确保完整的圆角效果 */
         .md-search__form {
             border-radius: 8px !important;
         }
-
-        /* 搜索结果容器圆角 */
         .md-search__output {
             border-radius: 8px !important;
         }
-
-        /* 搜索结果列表圆角 */
         .md-search__overlay {
             border-radius: 8px !important;
         }
-
-        /* 搜索结果项容器圆角 */
         .md-search-result {
             border-radius: 8px !important;
         }
-
-        /* 搜索结果外层容器圆角 */
         .md-search__inner {
             border-radius: 8px !important;
         }
-
-        /* 设置行内代码的颜色为橙色，但排除代码块 */
         :not(pre) > code {
-            color: #ff7043 !important; /* 橙色 */
+            color: #ff7043 !important;
             font-weight: normal;
         }
-
-        .highlight .c1, /* 单行注释 */
-        .highlight .cm  /* 多行注释 */ {
-            color: #6a737d; /* 注释颜色 */
+        .highlight .c1,
+        .highlight .cm {
+            color: #6a737d;
         }
-
         .md-typeset .admonition,
         .md-typeset details {
             border-width: 0;
             border-left-width: 4px;
         }
-
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--md-header-font);
             color: #4da6da !important;
         }
-
         body {
             font-family: var(--md-text-font);
         }
-
         .particle {
             position: absolute;
             width: 8px;
@@ -284,7 +219,6 @@
             animation: particleEffect 0.6s ease-out forwards;
             transform: translate(var(--translate-x, 0), var(--translate-y, 0)) scale(1);
         }
-
         @keyframes particleEffect {
             from {
                 opacity: 1;
@@ -295,40 +229,15 @@
                 transform: translate(var(--translate-x), var(--translate-y)) scale(0.5);
             }
         }
-
-        /* 定义飞入动画关键帧 */
-        @keyframes flyIn {
-            0% {
-            opacity: 0;
-            transform: translateY(-20px);
-            }
-            100% {
-            opacity: 1;
-            transform: translateY(0);
-            }
-        }
-
-        /* 保持代码块样式不变 */
         pre code {
             color: var(--md-code-fg-color) !important;
         }
-
-        /* 确保代码块背景色保持原样 */
         .highlight pre {
             background-color: var(--md-code-bg-color) !important;
         }
-
-        /* 行内注释字体 */
         .md-typeset code {
             font-family: var(--md-code-font), var(--md-text-font);
         }
-
-        /* 确保锚点有足够的顶部间距,避免被固定导航栏遮挡 */
-        [id] {
-            scroll-margin-top: 2rem;
-        }
-
-        /* 页脚运行时间样式 */
         .md-footer-runtime {
             position: relative;
             z-index: 3;
@@ -340,37 +249,26 @@
             display: flex;
             align-items: center;
         }
-
-        /* 文本选择效果 */
         ::selection {
             background: rgba(77, 166, 218, 0.2);
         }
-
-        /* 控制滚动行为 */
         html {
             scroll-behavior: smooth !important; /* 强制启用平滑滚动 */
             scroll-padding-top: 5rem; /* 设置滚动偏移量,避免标题被导航栏遮挡 */
         }
-
-        /* 为所有链接添加滚动行为 */
         a[href^="#"],  /* 站内锚点 */
         a[href*="/#"] /* 跨页锚点 */ {
             scroll-behavior: smooth !important;
         }
-
-        /* 提供回退方案 */
         @media (prefers-reduced-motion: reduce) {
             html {
                 scroll-behavior: auto !important;
             }
-            
             a[href^="#"],
             a[href*="/#"] {
                 scroll-behavior: auto !important;
             }
         }
-
-        /** Readmore Css v0.0.38 **/
         #readmore-wrapper {
             position: absolute;
             bottom: 0px;
@@ -380,13 +278,11 @@
             font-family: var(--md-text-font);
             display: none;
         }
-
         #readmore-mask {
             position: relative;
             height: 500px;
             background: -webkit-gradient(linear, 0 0%, 0 100%, from(rgba(255, 255, 255, 0)), to(rgb(255, 255, 255)));
         }
-
         #readmore-btn {
             position: absolute;
             left: 50%;
@@ -406,7 +302,6 @@
             border-bottom: 1px solid rgba(77, 166, 218, 0.9) !important;
             text-decoration: none !important;
         }
-
         #readmore-modal-mask {
             position: fixed;
             inset: 0px;
@@ -414,7 +309,6 @@
             z-index: 999;
             background: rgb(0, 0, 0);
         }
-
         #readmore-modal-content {
             position: fixed;
             top: 40%;
@@ -428,7 +322,6 @@
             z-index: 9999;
             font-family: var(--md-text-font), sans-serif;
         }
-
         #readmore-modal-close-btn {
             position: absolute;
             top: 5px;
@@ -443,33 +336,26 @@
             border: none;
             outline: none;
         }
-
         #readmore-modal-header {
             font-size: 15px;
             margin-top: 15px;
             font-weight: bold;
         }
-
         #readmore-modal-header div {
             margin-top: 5px;
         }
-
         #readmore-blog-name {
             color: rgba(77, 166, 218, 0.9);
         }
-
         #readmore-blog-keyword {
             color: rgba(77, 166, 218, 0.9);
         }
-
         #readmore-blog-forever {
             color: rgba(77, 166, 218, 0.9);
         }
-
         #readmore-modal-header div span:not([id]) {
             color: #444;
         }
-
         #readmore-modal-qrcode img {
             width: 220px;
             height: 220px;
@@ -479,11 +365,9 @@
             opacity: 1 !important;
             display: inline !important;
         }
-
         #readmore-modal-form {
             background: rgb(255, 255, 255);
         }
-
         #readmore-modal-captcha-input {
             width: 160px;
             height: 32px;
@@ -503,7 +387,6 @@
             background-color: white;
             -webkit-rtl-ordering: logical;
         }
-
         #readmore-modal-submit-btn {
             padding: 0px 20px;
             height: 32px;
@@ -514,25 +397,21 @@
             background: rgba(77, 166, 218, 0.9);
             cursor: pointer;
         }
-
         #readmore-modal-footer p {
             font-size: 15px;
             margin: 30px 0px 20px;
             color: rgb(153, 153, 153);
             text-align: center;
         }
-
         #readmore-official-website {
             border-bottom: none !important;
             text-decoration: none !important;
             color: rgba(77, 166, 218, 0.9) !important;
         }
-
         .readmore-btn-mouseover {
             color: rgb(255, 255, 255) !important;
             background: rgba(77, 166, 218, 0.9) !important;
         }
-
         .readmore-btn-mouseout {
             color: rgba(77, 166, 218, 0.9) !important;
             background: rgb(255, 255, 255) !important;
@@ -554,9 +433,7 @@
                 }
             }
         })();
-
         (function() {
-            // 配置允许的域名列表
             const allowedDomains = [
                 'www.help-doc.top',
                 'help-doc.top',
@@ -564,28 +441,18 @@
                 'localhost',
                 '127.0.0.1',
             ];
-
-            // 验证当前域名
             function validateDomain() {
                 const currentDomain = window.location.hostname;
-                
-                // 本地开发环境直接允许
                 if (currentDomain.includes('localhost') || currentDomain.includes('127.0.0.1')) {
                     return;
                 }
-
-                // 检查是否是允许的域名
                 const isAllowed = allowedDomains.some(domain => 
                     currentDomain === domain || currentDomain.endsWith('.' + domain)
                 );
-
-                // 仅在域名不允许时重定向
                 if (!isAllowed) {
                     window.location.href = `https://www.help-doc.top${window.location.pathname}`;
                 }
             }
-
-            // 禁止iframe嵌入
             if (window.top !== window.self) {
                 window.top.location.href = window.self.location.href;
             }
@@ -600,13 +467,9 @@
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
     body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#c class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class="md-header md-header--shadow" data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../../index.html title=学习档案 class="md-header__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 学习档案 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> C语言文件操作 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-hidden=true type=radio name=__palette id=__palette_0> </form> <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <script>
-        // 主题切换相关代码
         document.addEventListener('DOMContentLoaded', () => {
-            // 找到搜索框
             const searchEl = document.querySelector('.md-search');
-            // 获取保存的主题
             const savedTheme = localStorage.getItem('preferred-theme') || 'theme1';
-            // 创建按钮HTML结构
             const themeSwitch = document.createElement('div');
             themeSwitch.className = 'theme-switch';
             themeSwitch.innerHTML = `
@@ -615,17 +478,11 @@
                     <span class="target-theme">${savedTheme === 'theme1' ? '旧版主题' : '新版主题'}</span>
                 </button>
             `;
-            // 插入按钮到搜索框前面
             searchEl.parentNode.insertBefore(themeSwitch, searchEl);
-
-            // 处理跨页面锚点跳转
             setTimeout(() => {
-                // 获取URL中的锚点
                 const hash = window.location.hash;
                 if (hash) {
-                    // 检查是否存在阅读全文按钮（未解锁状态）
                     const readmoreBtn = document.getElementById('readmore-wrapper');
-                    // 只有在内容已解锁或不需要解锁时才执行跳转
                     if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
                         const targetId = hash.substring(1);
                         const targetElement = document.getElementById(targetId);
@@ -638,17 +495,14 @@
                         }
                     }
                 }
-            }, 300); // 适当延迟以确保页面完全加载
+            }, 300); 
         });
 
         function switchTheme() {
             const currentTheme = localStorage.getItem('preferred-theme') || 'theme1';
             const newTheme = currentTheme === 'theme1' ? 'theme2' : 'theme1';
-            
-            // 更新主题样式
             const theme1Link = document.querySelector('link[href*="theme1"]');
             const theme2Link = document.querySelector('link[href*="theme2"]');
-            
             if (newTheme === 'theme1') {
                 theme1Link.removeAttribute('disabled');
                 theme2Link.setAttribute('disabled', 'true');
@@ -656,11 +510,7 @@
                 theme2Link.removeAttribute('disabled');
                 theme1Link.setAttribute('disabled', 'true');
             }
-            
-            // 保存主题选择
             localStorage.setItem('preferred-theme', newTheme);
-            
-            // 更新按钮文本
             const themeBtn = document.querySelector('.theme-btn');
             const currentThemeEl = themeBtn.querySelector('.current-theme');
             const targetThemeEl = themeBtn.querySelector('.target-theme');
@@ -670,7 +520,6 @@
 
         document.addEventListener('copy', function(e) {
             const selectedText = window.getSelection().toString();
-            
             if(selectedText) {
                 const copyright = '\n\n' +
                     '————————————————\n' +
@@ -679,7 +528,6 @@
                     '当前文章链接：' + window.location.href + '\n' +
                     '版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。\n' +
                     '转载请注明来自怡晗★的个人网站！';
-                
                 e.preventDefault();
                 e.clipboardData.setData('text/plain', selectedText + copyright);
             }
@@ -2116,19 +1964,13 @@
 <a id=__codelineno-23-20 name=__codelineno-23-20></a><span class=n>睡眠10秒</span><span class=o>-</span><span class=n>已经写数据了</span><span class=err>，</span><span class=n>打开test_fflush</span><span class=p>.</span><span class=n>txt文件</span><span class=err>，</span><span class=n>发现文件没有内容</span>
 <a id=__codelineno-23-21 name=__codelineno-23-21></a><span class=n>刷新缓冲区</span>
 <a id=__codelineno-23-22 name=__codelineno-23-22></a><span class=n>再睡眠10秒</span><span class=o>-</span><span class=n>此时</span><span class=err>，</span><span class=n>再次打开test_fflush</span><span class=p>.</span><span class=n>txt文件</span><span class=err>，</span><span class=n>文件有内容了</span>
-</code></pre></div></td></tr></table></div> <p>刷新缓冲区之前：</p> <p><a class=glightbox href=image8.png data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src=image8.png></a></p> <p>刷新缓冲区之后：</p> <p><a class=glightbox href=image9.png data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src=image9.png></a></p> <div class="admonition tip"> <p class=admonition-title>Tip</p> <p>因为有缓冲区的存在，C语言在操作文件的时候，需要做刷新缓冲区或者在文件操作结束的时候使用<code>fclose</code>函数关闭文件来对缓冲区进行刷新</p> </div> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 3, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 9, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=贡献者> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg> </span> <nav> <a href=mailto:1848312235@qq.com>H0308</a> </nav> </span> </aside> </div> <!-- 引流工具代码 --> <script src=https://qiniu.techgrow.cn/readmore/dist/readmore.js type=text/javascript></script> <script>
-        // 标记是否排除当前文章
+</code></pre></div></td></tr></table></div> <p>刷新缓冲区之前：</p> <p><a class=glightbox href=image8.png data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src=image8.png></a></p> <p>刷新缓冲区之后：</p> <p><a class=glightbox href=image9.png data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src=image9.png></a></p> <div class="admonition tip"> <p class=admonition-title>Tip</p> <p>因为有缓冲区的存在，C语言在操作文件的时候，需要做刷新缓冲区或者在文件操作结束的时候使用<code>fclose</code>函数关闭文件来对缓冲区进行刷新</p> </div> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 3, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2Z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 9, 2024</span> </span> <span class=md-source-file__fact> <span class=md-icon title=贡献者> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg> </span> <nav> <a href=mailto:1848312235@qq.com>H0308</a> </nav> </span> </aside> </div> <script src=https://qiniu.techgrow.cn/readmore/dist/readmore.js type=text/javascript></script> <script>
         var isExclude = false;
-        // 需要关闭引流功能的文章的 URL
         var excludePages = ['/网站验证码', '/阅读档案', '/作者', '/网站时间线'];
-        // 当前文章的 URL（解码中文字符，去掉尾部的斜杠，统一小写）
         var currentPath = decodeURIComponent(window.location.pathname).replace(/\/$/, '').toLowerCase();
-        // 判断是否排除当前文章
         isExclude = excludePages.some(page => currentPath.includes(page.toLowerCase()));
-
         var isMobile = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
         var allowMobile = true;
-                
         if (!isExclude && (!isMobile || (isMobile && allowMobile))) {
         try {
                 var plugin = new ReadmorePlugin();
@@ -2148,47 +1990,30 @@
                 console.warn("readmore plugin occurred error: " + e.name + " | " + e.message);
             }
         }
-
-        // 添加全局变量跟踪验证状态
         let verificationInProgress = false;
-
-        // 检查内容是否已解锁
         function isContentUnlocked() {
             const readmoreWrapper = document.getElementById('readmore-wrapper');
             const readmoreModel = document.getElementById('readmore-model-wrapper');
             const readmoreModalMask = document.getElementById('readmore-modal-mask');
-            
-            // 如果正在验证中，视为未解锁
             if (verificationInProgress) {
                 return false;
             }
-            
-            // 如果没有任何限制元素，说明不需要解锁
             if (!readmoreWrapper && !readmoreModel && !readmoreModalMask) {
                 return true;
             }
-            
-            // 严格检查解锁状态：
-            // 1. wrapper必须存在且display为none
-            // 2. 必须确保model-wrapper和modal-mask都不存在或隐藏
             return readmoreWrapper && 
                    window.getComputedStyle(readmoreWrapper).display === 'none' && 
                    (!readmoreModel || window.getComputedStyle(readmoreModel).display === 'none') &&
                    (!readmoreModalMask || window.getComputedStyle(readmoreModalMask).display === 'none');
         }
-
-        // 显示验证弹窗
         function showVerificationModal() {
             const readmoreBtn = document.getElementById('readmore-btn');
             if (readmoreBtn) {
                 verificationInProgress = true;
                 readmoreBtn.click();
-                
-                // 监听弹窗关闭
                 const observer = new MutationObserver(() => {
                     const modalMask = document.getElementById('readmore-modal-mask');
                     if (!modalMask || window.getComputedStyle(modalMask).display === 'none') {
-                        // 弹窗关闭后，等待一小段时间再检查是否真正解锁
                         setTimeout(() => {
                             if (!isContentUnlocked()) {
                                 verificationInProgress = false;
@@ -2196,7 +2021,6 @@
                         }, 100);
                     }
                 });
-                
                 observer.observe(document.body, {
                     childList: true,
                     subtree: true,
@@ -2205,10 +2029,7 @@
                 });
             }
         }
-
-        // 处理所有锚点相关操作
         function handleAnchorNavigation(e, href) {
-            // 检查解锁状态
             if (!isContentUnlocked()) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -2217,8 +2038,6 @@
                 }
                 return false;
             }
-            
-            // 已解锁状态，执行滚动
             if (href && href.includes('#')) {
                 const targetId = href.split('#')[1];
                 const targetElement = document.getElementById(targetId);
@@ -2232,15 +2051,10 @@
             }
             return true;
         }
-
         document.addEventListener('DOMContentLoaded', () => {
             let searchResultsInitialized = false;
-
-            // 监听搜索结果
             const searchObserver = new MutationObserver((mutations) => {
-                // 避免重复初始化搜索结果
                 if (searchResultsInitialized) return;
-
                 const searchResults = document.querySelectorAll('.md-search-result__link');
                 if (searchResults.length > 0) {
                     searchResults.forEach(link => {
@@ -2249,8 +2063,6 @@
                             link.addEventListener('click', (e) => {
                                 const currentPath = window.location.pathname;
                                 const [linkPath, hash] = href.split('#');
-                                
-                                // 如果是当前页面的锚点
                                 if (!linkPath || linkPath === currentPath) {
                                     handleAnchorNavigation(e, '#' + hash);
                                 }
@@ -2259,8 +2071,6 @@
                     });
                     
                     searchResultsInitialized = true;
-                    
-                    // 一定时间后重置状态，允许下次搜索重新初始化
                     setTimeout(() => {
                         searchResultsInitialized = false;
                     }, 100);
@@ -2274,20 +2084,14 @@
                     subtree: true
                 });
             }
-
-            // 重置搜索状态的函数
             function resetSearchState() {
                 searchResultsInitialized = false;
             }
-
-            // 监听搜索框关闭事件
             const searchInput = document.querySelector('.md-search__input');
             if (searchInput) {
                 searchInput.addEventListener('blur', resetSearchState);
                 searchInput.addEventListener('search', resetSearchState);
             }
-
-            // 处理普通锚点点击
             document.addEventListener('click', (e) => {
                 const target = e.target.closest('a[href*="#"]');
                 if (!target) return;
@@ -2297,24 +2101,18 @@
                     handleAnchorNavigation(e, href);
                 }
             }, true);
-
-            // 处理页面加载时的锚点
             setTimeout(() => {
                 const hash = window.location.hash;
                 if (hash && !isContentUnlocked()) {
                     showVerificationModal();
                 }
             }, 300);
-
-            // 阻止通过修改 URL hash 来跳转
             window.addEventListener('hashchange', (e) => {
                 if (!isContentUnlocked()) {
                     e.preventDefault();
                     showVerificationModal();
                 }
             }, false);
-
-            // 监听验证码弹窗的关闭事件
             const modalObserver = new MutationObserver(() => {
                 const modalMask = document.getElementById('readmore-modal-mask');
                 if (modalMask && window.getComputedStyle(modalMask).display === 'none') {
@@ -2325,7 +2123,6 @@
                     }, 100);
                 }
             });
-
             modalObserver.observe(document.body, {
                 childList: true,
                 subtree: true,

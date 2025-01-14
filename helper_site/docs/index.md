@@ -10,14 +10,14 @@
         width: 100%;
         height: auto;
     }
-
+    
     /* 定义渐变色 */
     #hello-svg {
         --gradient-1: #FF6B6B, #4ECDC4, #45B7D1;
         --gradient-2: #96E6A1, #D4FC79;
         --gradient-3: #FFD93D, #FF6B6B;
     }
-
+    
     /* 路径基础样式 */
     .path {
         fill: none;
@@ -25,7 +25,7 @@
         stroke-linecap: round;
         stroke-linejoin: round;
     }
-
+    
     /* 路径1动画和渐变 */
     .path-1 {
         stroke: url(#gradient1);
@@ -33,7 +33,7 @@
         stroke-dashoffset: 1800;
         animation: drawPath1 3s ease forwards;
     }
-
+    
     /* 路径2动画和渐变 */
     .path-2 {
         stroke: url(#gradient2);
@@ -41,7 +41,7 @@
         stroke-dashoffset: 600;
         animation: drawPath2 2s ease forwards 3s;
     }
-
+    
     /* 路径3动画和渐变 */
     .path-3 {
         stroke: url(#gradient3);
@@ -49,20 +49,20 @@
         stroke-dashoffset: 300;
         animation: drawPath3 1.5s ease forwards 5s;
     }
-
+    
     /* 动画关键帧保持不变 */
     @keyframes drawPath1 {
         to {
             stroke-dashoffset: 0;
         }
     }
-
+    
     @keyframes drawPath2 {
         to {
             stroke-dashoffset: 0;
         }
     }
-
+    
     @keyframes drawPath3 {
         to {
             stroke-dashoffset: 0;
@@ -121,6 +121,16 @@
 
 <span style="color:red">本网站没有权威性，请注意对信息的甄别</span>
 
+## 网站验证码
+
+获取网站验证码可以关注通过关注阅读档案微信公众号获取：
+
+<img src="index.assets/qrcode_for_gh_166df3e5da8b_258.jpg" alt="qrcode_for_gh_166df3e5da8b_258" />
+
+!!! note
+
+    网站中存在一些极少数内容较短的网页，可能导致无法正确显示验证码输入弹窗，可以尝试切换到其他页面获取到验证码后再回看需要的页面
+
 ## 参考网站
 
 下面是常用的参考文档或官方文档：
@@ -139,13 +149,13 @@
     [常用内容参考网站](https://quickref.cn/)，该网站可以提供：编程语言笔记、工具使用技巧等，下面的链接主要来自于该网站
 
     [git使用指令参考](https://quickref.cn/docs/git.html)
-
+    
     [Github使用技巧参考](https://quickref.cn/docs/github.html)
-
+    
     [HTTP状态码参考](https://quickref.cn/docs/http-status-code.html)
-
+    
     [LaTeX符号代码参考](https://quickref.cn/docs/latex.html)
-
+    
     [Emmet表达式参考](https://quickref.cn/docs/emmet.html)
-
+    
     [正则表达式参考](https://quickref.cn/docs/regex.html)

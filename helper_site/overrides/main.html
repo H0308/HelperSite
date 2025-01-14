@@ -625,6 +625,7 @@
 
         var isMobile = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
         var allowMobile = true;
+                
         if (!isExclude && (!isMobile || (isMobile && allowMobile))) {
         try {
                 var plugin = new ReadmorePlugin();
@@ -644,6 +645,78 @@
                 console.warn("readmore plugin occurred error: " + e.name + " | " + e.message);
             }
         }
+
+        // 添加检查内容是否已解锁的函数
+        function isContentUnlocked() {
+            const readmoreBtn = document.getElementById('readmore-btn');
+            const readmoreMask = document.getElementById('readmore-mask');
+            
+            // 如果页面不需要解锁(没有readmore按钮和遮罩)，返回true
+            if (!readmoreBtn && !readmoreMask) {
+                return true;
+            }
+            
+            // 如果有readmore按钮但是隐藏了，说明已解锁
+            if (readmoreBtn && window.getComputedStyle(readmoreBtn).display === 'none') {
+                return true;
+            }
+            
+            return false;
+        }
+
+        // 添加锚点点击拦截功能
+        document.addEventListener('DOMContentLoaded', () => {
+            // 拦截所有内部锚点链接点击
+            document.addEventListener('click', (e) => {
+                const target = e.target.closest('a');
+                if (!target) return;
+                
+                // 检查是否是内部锚点链接
+                const href = target.getAttribute('href');
+                if (!href || !(href.startsWith('#') || href.includes('/#'))) return;
+
+                // 先检查页面是否需要解锁
+                const readmoreBtn = document.getElementById('readmore-wrapper');
+                
+                // 如果页面不需要解锁或已经解锁，直接执行跳转
+                if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
+                    e.preventDefault();
+                    const targetId = href.split('#')[1];
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    return;
+                }
+                
+                // 内容未解锁，阻止跳转并提示
+                e.preventDefault();
+                alert('请先解锁全文后再使用锚点功能！');
+            }, true);
+            
+            // 处理页面加载时的锚点跳转
+            setTimeout(() => {
+                const hash = window.location.hash;
+                if (hash) {
+                    const readmoreBtn = document.getElementById('readmore-wrapper');
+                    
+                    // 如果页面不需要解锁或已经解锁，执行跳转
+                    if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
+                        const targetId = hash.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                }
+            }, 300);
+        });
     </script>
 {% endblock %}
 
@@ -673,15 +746,19 @@
                 // 获取URL中的锚点
                 const hash = window.location.hash;
                 if (hash) {
-                    // 移除#号
-                    const targetId = hash.substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        // 平滑滚动到目标元素
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                    // 检查是否存在阅读全文按钮（未解锁状态）
+                    const readmoreBtn = document.getElementById('readmore-wrapper');
+                    // 只有在内容已解锁或不需要解锁时才执行跳转
+                    if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
+                        const targetId = hash.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            // 平滑滚动到目标元素
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
                     }
                 }
             }, 300); // 适当延迟以确保页面完全加载

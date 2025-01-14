@@ -636,7 +636,7 @@
                     keyword: "验证码",
                     qrcode: "https://www.help-doc.top/index.assets/qrcode_for_gh_166df3e5da8b_258.jpg",
                     type: "website",
-                    height: "600",
+                    height: "auto",
                     expires: "7",
                     interval: "60",
                     random: "1.0"
@@ -646,76 +646,189 @@
             }
         }
 
-        // 添加检查内容是否已解锁的函数
+        // 添加全局变量跟踪验证状态
+        let verificationInProgress = false;
+
+        // 检查内容是否已解锁
         function isContentUnlocked() {
-            const readmoreBtn = document.getElementById('readmore-btn');
-            const readmoreMask = document.getElementById('readmore-mask');
+            const readmoreWrapper = document.getElementById('readmore-wrapper');
+            const readmoreModel = document.getElementById('readmore-model-wrapper');
+            const readmoreModalMask = document.getElementById('readmore-modal-mask');
             
-            // 如果页面不需要解锁(没有readmore按钮和遮罩)，返回true
-            if (!readmoreBtn && !readmoreMask) {
+            // 如果正在验证中，视为未解锁
+            if (verificationInProgress) {
+                return false;
+            }
+            
+            // 如果没有任何限制元素，说明不需要解锁
+            if (!readmoreWrapper && !readmoreModel && !readmoreModalMask) {
                 return true;
             }
             
-            // 如果有readmore按钮但是隐藏了，说明已解锁
-            if (readmoreBtn && window.getComputedStyle(readmoreBtn).display === 'none') {
-                return true;
-            }
-            
-            return false;
+            // 严格检查解锁状态：
+            // 1. wrapper必须存在且display为none
+            // 2. 必须确保model-wrapper和modal-mask都不存在或隐藏
+            return readmoreWrapper && 
+                   window.getComputedStyle(readmoreWrapper).display === 'none' && 
+                   (!readmoreModel || window.getComputedStyle(readmoreModel).display === 'none') &&
+                   (!readmoreModalMask || window.getComputedStyle(readmoreModalMask).display === 'none');
         }
 
-        // 添加锚点点击拦截功能
+        // 显示验证弹窗
+        function showVerificationModal() {
+            const readmoreBtn = document.getElementById('readmore-btn');
+            if (readmoreBtn) {
+                verificationInProgress = true;
+                readmoreBtn.click();
+                
+                // 监听弹窗关闭
+                const observer = new MutationObserver(() => {
+                    const modalMask = document.getElementById('readmore-modal-mask');
+                    if (!modalMask || window.getComputedStyle(modalMask).display === 'none') {
+                        // 弹窗关闭后，等待一小段时间再检查是否真正解锁
+                        setTimeout(() => {
+                            if (!isContentUnlocked()) {
+                                verificationInProgress = false;
+                            }
+                        }, 100);
+                    }
+                });
+                
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['style', 'class']
+                });
+            }
+        }
+
+        // 处理所有锚点相关操作
+        function handleAnchorNavigation(e, href) {
+            // 检查解锁状态
+            if (!isContentUnlocked()) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!verificationInProgress) {
+                    showVerificationModal();
+                }
+                return false;
+            }
+            
+            // 已解锁状态，执行滚动
+            if (href && href.includes('#')) {
+                const targetId = href.split('#')[1];
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+            return true;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            // 拦截所有内部锚点链接点击
+            let searchResultsInitialized = false;
+
+            // 监听搜索结果
+            const searchObserver = new MutationObserver((mutations) => {
+                // 避免重复初始化搜索结果
+                if (searchResultsInitialized) return;
+
+                const searchResults = document.querySelectorAll('.md-search-result__link');
+                if (searchResults.length > 0) {
+                    searchResults.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href && href.includes('#')) {
+                            link.addEventListener('click', (e) => {
+                                const currentPath = window.location.pathname;
+                                const [linkPath, hash] = href.split('#');
+                                
+                                // 如果是当前页面的锚点
+                                if (!linkPath || linkPath === currentPath) {
+                                    handleAnchorNavigation(e, '#' + hash);
+                                }
+                            }, { capture: true, once: true });
+                        }
+                    });
+                    
+                    searchResultsInitialized = true;
+                    
+                    // 一定时间后重置状态，允许下次搜索重新初始化
+                    setTimeout(() => {
+                        searchResultsInitialized = false;
+                    }, 100);
+                }
+            });
+
+            const searchContainer = document.querySelector('.md-search');
+            if (searchContainer) {
+                searchObserver.observe(searchContainer, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+
+            // 重置搜索状态的函数
+            function resetSearchState() {
+                searchResultsInitialized = false;
+            }
+
+            // 监听搜索框关闭事件
+            const searchInput = document.querySelector('.md-search__input');
+            if (searchInput) {
+                searchInput.addEventListener('blur', resetSearchState);
+                searchInput.addEventListener('search', resetSearchState);
+            }
+
+            // 处理普通锚点点击
             document.addEventListener('click', (e) => {
-                const target = e.target.closest('a');
+                const target = e.target.closest('a[href*="#"]');
                 if (!target) return;
                 
-                // 检查是否是内部锚点链接
                 const href = target.getAttribute('href');
-                if (!href || !(href.startsWith('#') || href.includes('/#'))) return;
-
-                // 先检查页面是否需要解锁
-                const readmoreBtn = document.getElementById('readmore-wrapper');
-                
-                // 如果页面不需要解锁或已经解锁，直接执行跳转
-                if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
-                    e.preventDefault();
-                    const targetId = href.split('#')[1];
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                    return;
+                if (href && (href.startsWith('#') || href.includes('/#'))) {
+                    handleAnchorNavigation(e, href);
                 }
-                
-                // 内容未解锁，阻止跳转并提示
-                e.preventDefault();
-                alert('请先解锁全文后再使用锚点功能！');
             }, true);
-            
-            // 处理页面加载时的锚点跳转
+
+            // 处理页面加载时的锚点
             setTimeout(() => {
                 const hash = window.location.hash;
-                if (hash) {
-                    const readmoreBtn = document.getElementById('readmore-wrapper');
-                    
-                    // 如果页面不需要解锁或已经解锁，执行跳转
-                    if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
-                        const targetId = hash.substring(1);
-                        const targetElement = document.getElementById(targetId);
-                        if (targetElement) {
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
-                    }
+                if (hash && !isContentUnlocked()) {
+                    showVerificationModal();
                 }
             }, 300);
+
+            // 阻止通过修改 URL hash 来跳转
+            window.addEventListener('hashchange', (e) => {
+                if (!isContentUnlocked()) {
+                    e.preventDefault();
+                    showVerificationModal();
+                }
+            }, false);
+
+            // 监听验证码弹窗的关闭事件
+            const modalObserver = new MutationObserver(() => {
+                const modalMask = document.getElementById('readmore-modal-mask');
+                if (modalMask && window.getComputedStyle(modalMask).display === 'none') {
+                    setTimeout(() => {
+                        if (!isContentUnlocked()) {
+                            verificationInProgress = false;
+                        }
+                    }, 100);
+                }
+            });
+
+            modalObserver.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style']
+            });
         });
     </script>
 {% endblock %}

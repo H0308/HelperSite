@@ -123,9 +123,11 @@
 
 ## 网站验证码
 
-获取网站验证码可以关注通过关注阅读档案微信公众号获取：
+获取网站验证码可以通过**关注「阅读档案」微信公众号并回复「验证码」**获取：
 
-<img src="index.assets/qrcode_for_gh_166df3e5da8b_258.jpg" alt="qrcode_for_gh_166df3e5da8b_258" />
+<img src="index.assets/qrcode_for_gh_166df3e5da8b_258.jpg" style="width:15%" alt="qrcode_for_gh_166df3e5da8b_258" />
+
+也可以通过具体页面点击「阅读全文」根据操作指示获取验证码
 
 ## 参考网站
 

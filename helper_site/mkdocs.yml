@@ -188,6 +188,7 @@ nav:
       - 命名管道与共享内存: Linux/17. Linux进程间通信/2. 命名管道与共享内存/2. 命名管道与共享内存.md
       - 消息队列与信号量: Linux/17. Linux进程间通信/3. 消息队列和信号量/3. 消息队列和信号量.md
       - 操作系统管理System V标准中三种资源的方式: Linux/17. Linux进程间通信/4. 操作系统管理System V标准中三种资源的方式/4. 操作系统管理System V标准中三种资源的方式.md
+    - Linux信号: Linux/18. Linux信号/18. Linux信号.md
   - JavaEE应用开发:
     - HTML与CSS:
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md

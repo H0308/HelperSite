@@ -253,7 +253,7 @@ markdown_extensions:
       generic: true
   - pymdownx.highlight:
       linenums: true  # 启用行号显示
-      anchor_linenums: true
+      # anchor_linenums: true
   - toc:
       permalink: true
       baselevel: 1  # 开始级别
@@ -320,3 +320,5 @@ plugins:
       manual: false
   - git-revision-date-localized:
       enable_creation_date: true
+      type: date
+      fallback_to_build_date: true

@@ -53,8 +53,14 @@
 .md-header {
     backdrop-filter: blur(8px);
     background-color: rgba(255, 255, 255, 0.8);
+    /* 启用navigation-top插件时不使用 */
+    /* box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06); */
+}
+.md-header--shadow {
+    /* 启用navigation-top插件时使用 */
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
+/* 启用navigation-top插件时使用 */
 @media screen and (min-width: 76.25em) {
     .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {
         background: rgba(255, 255, 255, 0.7) !important;
@@ -64,6 +70,56 @@
         padding: 0.6rem 0.8rem !important;
     }
 }
+@media screen and (min-width: 60em) {
+    .md-nav--secondary .md-nav__title {
+        background: rgba(255, 255, 255, 0.7) !important;
+        backdrop-filter: blur(10px) !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        padding: 0.6rem 0.8rem !important;
+    }
+}
+@media screen and (min-width: 76.25em) {
+    [data-md-color-primary=white] .md-tabs {
+        /* 启用navigation-top插件时使用 */
+        border-top: 5px solid;
+        border-image: linear-gradient(
+            to right,
+            rgba(77, 166, 218, 0.5),
+            rgba(218, 77, 166, 0.5),
+            rgba(166, 218, 77, 0.5)
+        ) 1;
+        animation: borderGradient 2s ease infinite;
+        border-bottom: none !important;
+    }
+}
+@keyframes borderGradient {
+    0% {
+        border-image: linear-gradient(
+            to right,
+            rgba(77, 166, 218, 0.5),
+            rgba(218, 77, 166, 0.5),
+            rgba(166, 218, 77, 0.5)
+        ) 1;
+    }
+    50% {
+        border-image: linear-gradient(
+            to right,
+            rgba(166, 218, 77, 0.5),
+            rgba(77, 166, 218, 0.5),
+            rgba(218, 77, 166, 0.5)
+        ) 1;
+    }
+    100% {
+        border-image: linear-gradient(
+            to right,
+            rgba(77, 166, 218, 0.5),
+            rgba(218, 77, 166, 0.5),
+            rgba(166, 218, 77, 0.5)
+        ) 1;
+    }
+}
+
 .md-content article {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
@@ -219,6 +275,7 @@ body {
     position: relative;
     background-color: #f8f9fa;
 }
+/* 启用navigation-top插件时不使用 */
 /* .md-nav__title {
     background: rgba(255, 255, 255, 0.7) !important;
     -webkit-backdrop-filter: blur(10px) !important;
@@ -265,7 +322,10 @@ body {
         > .md-nav__list
         > .md-nav__item--active
         .md-nav--secondary {
-        border-left: 0.1rem solid rgba(77, 166, 218, 0.9) !important;
+        /* 启用navigation-top插件时不使用 */
+        /* background: rgba(255, 255, 255, 0.7) !important;*/
+        /* 否则使用 */
+        border-left: none !important;
     }
 }
 [dir="ltr"] .md-dialog {

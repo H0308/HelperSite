@@ -9,8 +9,8 @@ theme:
   logo: assets/logo.png
   features:
     # - header.autohide
-    - navigation.tabs
-    - toc.integrate
+    - navigation.tabs # 启用navigation-top插件时需要禁用theme1.css中提示的内容，否则启用
+    # - toc.integrate
     - navigation.top
     - search.suggest
     - search.highlight
@@ -247,6 +247,10 @@ markdown_extensions:
   - pymdownx.keys
   - md_in_html
   - tables
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.tabbed:
       alternate_style: true 
   - pymdownx.arithmatex:
@@ -290,6 +294,7 @@ extra:
       
 plugins:
   - search
+  - statistics
   - minify:
       minify_html: true
       minify_js: true
@@ -301,7 +306,6 @@ plugins:
       # css_files:
       #     - stylesheets/theme1.css
       #     - stylesheets/theme1.css
-  - git-authors
   - glightbox:
       touchNavigation: true
       loop: false

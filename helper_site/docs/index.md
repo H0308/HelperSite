@@ -1,3 +1,7 @@
+---
+statistics: True
+---
+
 # 
 <style>
     /* SVG容器样式保持不变 */
@@ -104,6 +108,8 @@
     2. 标题：[霞鹜臻楷](https://github.com/lxgw/LxgwZhenKai)
     3. 内容（非代码）：[文泉驿微米黑](http://wenq.org/wqy2/index.cgi)
     4. 代码：[JetBrains Mono](https://www.jetbrains.com/lp/mono/)
+
+- 本站共有 {{ pages }} 个页面，{{ words }} 个字，{{ codes }} 行代码，{{ images }} 张图片
 
 ## 网站通知
 

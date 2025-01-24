@@ -55,6 +55,15 @@
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
+@media screen and (min-width: 76.25em) {
+    .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {
+        background: rgba(255, 255, 255, 0.7) !important;
+        backdrop-filter: blur(10px) !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        padding: 0.6rem 0.8rem !important;
+    }
+}
 .md-content article {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
@@ -210,7 +219,7 @@ body {
     position: relative;
     background-color: #f8f9fa;
 }
-.md-nav__title {
+/* .md-nav__title {
     background: rgba(255, 255, 255, 0.7) !important;
     -webkit-backdrop-filter: blur(10px) !important;
     backdrop-filter: blur(10px) !important;
@@ -218,7 +227,7 @@ body {
     padding: 0.6rem 0.8rem !important;
     transition: all 0.3s ease !important;
     box-shadow: none !important;
-}
+} */
 .md-content {
     max-width: 50rem;
     margin-left: 50px;

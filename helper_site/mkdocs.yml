@@ -9,7 +9,7 @@ theme:
   logo: assets/logo.png
   features:
     # - header.autohide
-    # - navigation.tabs
+    - navigation.tabs
     - toc.integrate
     - navigation.top
     - search.suggest

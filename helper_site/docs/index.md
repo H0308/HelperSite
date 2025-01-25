@@ -111,7 +111,7 @@ statistics: True
 
 - 本站共有 {{ pages }} 个页面，{{ words }} 个字，{{ codes }} 行代码，{{ images }} 张图片
 
-## 网站通知
+## 最近更新
 
 见[网站时间线](https://www.help-doc.top/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html)
 

@@ -296,6 +296,7 @@ extra:
 plugins:
   - search
   - statistics
+  - changelog
   - minify:
       minify_html: true
       minify_js: true

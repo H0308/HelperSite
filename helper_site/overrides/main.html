@@ -8,10 +8,10 @@
     <style>
         @import url('https://static.zeoseven.com/zsft/2/main/result.css');
         @import url('https://static.zeoseven.com/zsft/442/main/result.css');
-        @import url('https://static.zeoseven.com/zsft/25/main/result.css'); 
+        @import url('https://static.zeoseven.com/zsft/288/main/result.css');
         @import url('https://static.zeoseven.com/zsft/84/main/result.css');
         @font-face {
-            font-family: "WenQuanYi Micro Hei";
+            font-family: "Source Han Sans SC VF";
         }
         @font-face {
             font-family: 'LXGW ZhenKai';
@@ -28,7 +28,7 @@
             font-family: "Douyin Sans" !important;
         }
         :root {
-            --md-text-font: "WenQuanYi Micro Hei";
+            --md-text-font: "Source Han Sans SC VF";
             --md-header-font: "LXGW ZhenKai";
             --md-code-font: "JetBrains Mono";
             --code-font-color: #e96900;
@@ -254,12 +254,21 @@
         .md-tabs__list > .md-tabs__item--active > .md-tabs__link {
             color: rgba(77, 166, 218, 0.9) !important;
         }
+        .timeline-content::before {
+            background-color: #efefef;
+        }
+        .timeline-card {
+            background-color: #efefef !important;
+        }
         .changelog-content a {
             color: #4051b5 !important;
             word-break: break-word;
         }
         .changelog-content a:focus, .changelog-content a:hover {
             color: #00bda4 !important;
+        }
+        .changelog-type-pageupdate {
+            background-color: rgba(77, 166, 218, 0.9) !important;
         }
         .md-footer-runtime {
             position: relative;
@@ -457,31 +466,7 @@
                 }
             }
         })();
-        (function() {
-            const allowedDomains = [
-                'www.help-doc.top',
-                'help-doc.top',
-                'h0308.github.io',
-                'localhost',
-                '127.0.0.1',
-            ];
-            function validateDomain() {
-                const currentDomain = window.location.hostname;
-                if (currentDomain.includes('localhost') || currentDomain.includes('127.0.0.1')) {
-                    return;
-                }
-                const isAllowed = allowedDomains.some(domain => 
-                    currentDomain === domain || currentDomain.endsWith('.' + domain)
-                );
-                if (!isAllowed) {
-                    window.location.href = `https://www.help-doc.top${window.location.pathname}`;
-                }
-            }
-            if (window.top !== window.self) {
-                window.top.location.href = window.self.location.href;
-            }
-        })();
-    </script>
+        </script>
 {% endblock %}
 
 {% block content %}

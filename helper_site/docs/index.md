@@ -106,7 +106,7 @@ statistics: True
 - 本网站使用下面的字体：
     1. 导航栏标题：[抖音美好体](https://github.com/bytedance/fonts)
     2. 标题：[霞鹜臻楷](https://github.com/lxgw/LxgwZhenKai)
-    3. 内容（非代码）：[文泉驿微米黑](http://wenq.org/wqy2/index.cgi)
+    3. 内容（非代码）：[Adobe Source Han Sans 思源黑体 SC](https://github.com/adobe-fonts/source-han-sans)
     4. 代码：[JetBrains Mono](https://www.jetbrains.com/lp/mono/)
 
 - 本站共有 {{ pages }} 个页面，{{ words }} 个字，{{ codes }} 行代码，{{ images }} 张图片
@@ -120,6 +120,10 @@ statistics: True
 本网页提供两种主题，新版主题中包含一些动画和特效，对浏览器性能要求较高，建议在Chrome桌面端浏览器下使用；旧版主题去除了部分动画和特效，并且为了保证阅读性，对背景也有所改动，建议在移动端浏览器性能稍弱的浏览器中使用
 
 对于上文未提到的浏览器可自行尝试哪一种主题更适合阅读并且可以流畅运行
+
+!!! success "提示"
+
+    在新版网页中，对屏幕尺寸较小的设备默认使用旧版主题且不可更改，所以没有看到「切换主题」的按钮属于正常现象
 
 <span style="color:red">注意，切换主题只是改变网页显示效果，并不会改变网页本身对内存的占用</span>
 

@@ -25,9 +25,8 @@ theme:
 copyright: Copyright &copy; 2024 EPSDA
 
 nav:
-  - 主页: 
-    - 主页: index.md
-    - 网站时间线: 网站时间线/网站时间线.md
+  - 主页: index.md
+  - 网站时间线: 网站时间线/网站时间线.md
   - 编程语言:
     - C语言:
       - C语言基础知识: C语言/1. C语言基础知识/1. C语言基础知识.md
@@ -327,3 +326,5 @@ plugins:
   - git-revision-date-localized:
       enable_creation_date: true
       type: date
+      exclude:
+        - index.md

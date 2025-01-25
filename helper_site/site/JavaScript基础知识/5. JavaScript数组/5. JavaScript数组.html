@@ -1,10 +1,10 @@
-<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/5.%20JavaScript%E6%95%B0%E7%BB%84/5.%20JavaScript%E6%95%B0%E7%BB%84.html><link rel=prev href=../4.%20JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/4.%20JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.html><link rel=next href=../6.%20JavaScript%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1/6.%20JavaScript%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.5.50"><title>JavaScript数组 - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.a40c8224.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><link rel=stylesheet href=../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (max-width: 767px)"><style>
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/5.%20JavaScript%E6%95%B0%E7%BB%84/5.%20JavaScript%E6%95%B0%E7%BB%84.html><link rel=prev href=../4.%20JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/4.%20JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.html><link rel=next href=../6.%20JavaScript%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1/6.%20JavaScript%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.5.50"><title>JavaScript数组 - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.a40c8224.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><link rel=stylesheet href=../../css/timeline.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><link rel=stylesheet href=../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (max-width: 767px)"><style>
         @import url('https://static.zeoseven.com/zsft/2/main/result.css');
         @import url('https://static.zeoseven.com/zsft/442/main/result.css');
-        @import url('https://static.zeoseven.com/zsft/25/main/result.css'); 
+        @import url('https://static.zeoseven.com/zsft/288/main/result.css');
         @import url('https://static.zeoseven.com/zsft/84/main/result.css');
         @font-face {
-            font-family: "WenQuanYi Micro Hei";
+            font-family: "Source Han Sans SC VF";
         }
         @font-face {
             font-family: 'LXGW ZhenKai';
@@ -21,7 +21,7 @@
             font-family: "Douyin Sans" !important;
         }
         :root {
-            --md-text-font: "WenQuanYi Micro Hei";
+            --md-text-font: "Source Han Sans SC VF";
             --md-header-font: "LXGW ZhenKai";
             --md-code-font: "JetBrains Mono";
             --code-font-color: #e96900;
@@ -247,6 +247,22 @@
         .md-tabs__list > .md-tabs__item--active > .md-tabs__link {
             color: rgba(77, 166, 218, 0.9) !important;
         }
+        .timeline-content::before {
+            background-color: #efefef;
+        }
+        .timeline-card {
+            background-color: #efefef !important;
+        }
+        .changelog-content a {
+            color: #4051b5 !important;
+            word-break: break-word;
+        }
+        .changelog-content a:focus, .changelog-content a:hover {
+            color: #00bda4 !important;
+        }
+        .changelog-type-pageupdate {
+            background-color: rgba(77, 166, 218, 0.9) !important;
+        }
         .md-footer-runtime {
             position: relative;
             z-index: 3;
@@ -442,31 +458,7 @@
                 }
             }
         })();
-        (function() {
-            const allowedDomains = [
-                'www.help-doc.top',
-                'help-doc.top',
-                'h0308.github.io',
-                'localhost',
-                '127.0.0.1',
-            ];
-            function validateDomain() {
-                const currentDomain = window.location.hostname;
-                if (currentDomain.includes('localhost') || currentDomain.includes('127.0.0.1')) {
-                    return;
-                }
-                const isAllowed = allowedDomains.some(domain => 
-                    currentDomain === domain || currentDomain.endsWith('.' + domain)
-                );
-                if (!isAllowed) {
-                    window.location.href = `https://www.help-doc.top${window.location.pathname}`;
-                }
-            }
-            if (window.top !== window.self) {
-                window.top.location.href = window.self.location.href;
-            }
-        })();
-    </script> <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        </script> <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }

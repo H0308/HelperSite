@@ -181,8 +181,23 @@ statistics: True
 }
 
 /* 隐藏侧边栏样式 */
-.md-sidebar {
+/* .md-sidebar {
     display: none !important;
+} */
+.md-sidebar--primary {
+    display: block !important;
+    
+    @media screen and (min-width: 1220px) {
+        display: none !important;
+    }
+}
+
+.md-sidebar--secondary {
+    display: none !important;
+    
+    @media screen and (min-width: 1220px) {
+        display: none !important;
+    }
 }
 
 /* 重置主页内容区域的样式 */

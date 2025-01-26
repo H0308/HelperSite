@@ -1,5 +1,8 @@
 ---
 statistics: True
+hide:
+  - navigation
+  - toc
 ---
 
 <style>
@@ -180,26 +183,6 @@ statistics: True
     color: white;
 }
 
-/* 隐藏侧边栏样式 */
-/* .md-sidebar {
-    display: none !important;
-} */
-.md-sidebar--primary {
-    display: block !important;
-    
-    @media screen and (min-width: 1220px) {
-        display: none !important;
-    }
-}
-
-.md-sidebar--secondary {
-    display: none !important;
-    
-    @media screen and (min-width: 1220px) {
-        display: none !important;
-    }
-}
-
 /* 重置主页内容区域的样式 */
 .md-content article {
     background: none;
@@ -234,11 +217,6 @@ statistics: True
     max-width: none;
     margin: 0 auto;
 }
-
-/* .md-grid {
-    margin-left: auto !important;
-    max-width: 61rem;
-} */
 
 .md-content__inner {
     margin-right: auto !important;
@@ -432,17 +410,6 @@ a {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(77, 166, 218, 0.15);
 }
-
-/* 调整验证码卡片容器高度 */
-/* .side-section .content-card:nth-child(3) {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.side-section .content-card:nth-child(3):hover {
-    box-shadow: 0 8px 24px rgba(77, 166, 218, 0.15);
-} */
 </style>
 
 <div class="content-container">

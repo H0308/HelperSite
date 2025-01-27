@@ -410,6 +410,113 @@ a {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(77, 166, 218, 0.15);
 }
+
+.disclaimer-section {
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.disclaimer-section .content-card {
+    margin: 0;
+    padding: 1rem;
+    background: rgba(255, 217, 61, 0.1);
+    background: linear-gradient(135deg, rgba(255, 217, 61, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border: 1px solid rgba(255, 217, 61, 0.2);
+}
+
+.disclaimer-section p {
+    margin: 0;
+    color: #666;
+}
+
+/* 优化特性网格项样式 */
+.feature-item {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(77, 166, 218, 0.15);
+}
+
+/* 优化欢迎区域 */
+.welcome-section {
+    background: linear-gradient(135deg, rgba(77, 166, 218, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 优化参考链接样式 */
+.reference-grid a {
+    background: rgba(248, 249, 250, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reference-grid a:hover {
+    background: linear-gradient(135deg, #4da6da 0%, #275796 100%);
+    transform: translateY(-3px);
+}
+
+/* 优化免责声明样式 */
+.disclaimer-section .content-card {
+    background: linear-gradient(135deg, rgba(255, 217, 61, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border: 1px solid rgba(255, 217, 61, 0.2);
+}
+
+/* 优化动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 添加布局动画 */
+.main-section > *,
+.side-section > * {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+}
+
+.main-section > *:nth-child(1) { animation-delay: 0.1s; }
+.main-section > *:nth-child(2) { animation-delay: 0.2s; }
+.main-section > *:nth-child(3) { animation-delay: 0.3s; }
+.side-section > *:nth-child(1) { animation-delay: 0.2s; }
+.side-section > *:nth-child(2) { animation-delay: 0.3s; }
+.side-section > *:nth-child(3) { animation-delay: 0.4s; }
+
+/* 优化响应式布局 */
+@media (max-width: 1024px) {
+    .main-content-area {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .reference-grid {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 
 <div class="content-container">
@@ -440,7 +547,7 @@ a {
                     </svg>
                 </div>
                 <h1 class="welcome-title">欢迎来到学习档案</h1>
-                <p class="welcome-subtitle">记录技术，分享知识，共同进步</p>
+                <p class="welcome-subtitle">记录技术，分享知识</p>
             </div>
             
             <div class="content-card">
@@ -517,6 +624,12 @@ a {
                 <a href="https://quickref.cn/docs/emmet.html">Emmet 表达式</a>
                 <a href="https://quickref.cn/docs/regex.html">正则表达式</a>
             </div>
+        </div>
+    </div>
+
+    <div class="disclaimer-section">
+        <div class="content-card">
+            <p>⚠️ 本网站的内容不具有权威性，请注意对信息进行甄别</p>
         </div>
     </div>
 </div>

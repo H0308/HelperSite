@@ -627,6 +627,16 @@ a {
         </div>
     </div>
 
+    <div class="copyright-section">
+        <div class="content-card">
+            <h2>版权声明</h2>
+            <div class="copyright-info">
+                <p>版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。</p>
+                <p>转载请注明来自怡晗★的个人网站！</p>
+            </div>
+        </div>
+    </div>
+
     <div class="disclaimer-section">
         <div class="content-card">
             <p>⚠️ 本网站的内容不具有权威性，请注意对信息进行甄别</p>

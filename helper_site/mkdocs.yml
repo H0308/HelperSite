@@ -332,3 +332,4 @@ plugins:
       type: date
       exclude:
         - index.md
+        - 作者/作者.md

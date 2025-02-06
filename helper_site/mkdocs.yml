@@ -22,7 +22,7 @@ theme:
       accent: teal
       primary: white
 
-copyright: Copyright &copy; 2024 EPSDA
+copyright: Copyright &copy; 2024-2025 EPSDA
 
 nav:
   - 主页: index.md

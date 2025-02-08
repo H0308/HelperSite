@@ -194,6 +194,7 @@ nav:
     - Linux信号与操作系统原理: Linux/18. Linux信号与操作系统原理/18. Linux信号与操作系统原理.md
     - Linux线程:
       - Linux线程概念与线程操作: Linux/19. Linux线程/1. Linux线程概念与线程操作/1. Linux线程概念与线程操作.md
+      - Linux线程库与线程库封装: Linux/19. Linux线程/2. Linux线程库与线程库封装/2. Linux线程库与线程库封装.md
   - JavaEE应用开发:
     - HTML与CSS:
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md

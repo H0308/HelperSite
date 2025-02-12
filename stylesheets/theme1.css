@@ -361,6 +361,10 @@ body {
 .highlight {
     position: relative !important;
     overflow: hidden !important;
+    border-radius: 10px; /* 新增：默认四角圆角 */
+}
+.tabbed-block .highlight {
+    border-radius: 0 0 10px 10px;
 }
 .highlight .copy-flash {
     content: "";

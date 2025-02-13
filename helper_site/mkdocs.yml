@@ -197,6 +197,7 @@ nav:
       - Linux线程概念与线程操作: Linux/19. Linux线程/1. Linux线程概念与线程操作/1. Linux线程概念与线程操作.md
       - Linux线程库与线程库封装: Linux/19. Linux线程/2. Linux线程库与线程库封装/2. Linux线程库与线程库封装.md
       - Linux线程互斥与同步: Linux/19. Linux线程/3. Linux线程同步与互斥/3. Linux线程同步与互斥.md
+      - 生产者消费者模型（Producer-Consumer Model）: Linux/19. Linux线程/4. 生产者消费者模型（Producer-Consumer Model）/4. 生产者消费者模型（Producer-Consumer Model）.md
   - JavaEE应用开发:
     - HTML与CSS:
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md

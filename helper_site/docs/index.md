@@ -547,7 +547,7 @@ a {
                     </svg>
                 </div>
                 <h1 class="welcome-title">欢迎来到学习档案</h1>
-                <p class="welcome-subtitle">记录技术，分享知识</p>
+                <p class="welcome-subtitle">记录学习，分享知识</p>
             </div>
             
             <div class="content-card">
@@ -561,7 +561,7 @@ a {
             </div>
             
             <div class="content-card">
-                <h2>使用指南</h2>
+                <h2>浏览提示</h2>
                 <p>本网页提供两种主题：</p>
                 <ul>
                     <li><strong>新版主题：</strong>包含动画和特效，建议在Chrome桌面端使用</li>
@@ -596,7 +596,7 @@ a {
             
             <div class="content-card">
                 <h2>最近更新</h2>
-                <p>查看<a href="https://www.help-doc.top/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html">网站时间线</a>了解最新内容更新。</p>
+                <p>查看<a href="https://www.help-doc.top/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html">网站时间线</a>了解网站最近更新</p>
             </div>
             
             <div class="content-card">
@@ -632,7 +632,7 @@ a {
             <h2>版权声明</h2>
             <div class="copyright-info">
                 <p>版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。</p>
-                <p>转载请注明来自怡晗★的个人网站！</p>
+                <p>转载请注明来自<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html">柯懒不是柯南</a>的个人网站！</p>
             </div>
         </div>
     </div>

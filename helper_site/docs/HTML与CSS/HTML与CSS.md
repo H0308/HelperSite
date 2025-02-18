@@ -15,6 +15,10 @@
 
 [CSS2](./CSS2笔记.pdf)
 
+!!! note
+
+    本部分存在补充笔记，见[网页](./CSS2笔记补充/CSS2笔记补充.html)
+
 ## CSS3笔记
 
 [CSS3](./CSS3笔记.pdf)

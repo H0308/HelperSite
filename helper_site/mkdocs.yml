@@ -201,6 +201,8 @@ nav:
       - Linux线程互斥与同步: Linux/19. Linux线程/3. Linux线程同步与互斥/3. Linux线程同步与互斥.md
       - Linux线程与信号量: Linux/19. Linux线程/4. Linux线程与信号量/4. Linux线程与信号量.md
       - 生产者消费者模型（Producer-Consumer Model）: Linux/19. Linux线程/5. 生产者消费者模型（Producer-Consumer Model）/5. 生产者消费者模型（Producer-Consumer Model）.md
+      - 日志系统: Linux/19. Linux线程/6. 日志系统/6. 日志系统.md
+      _ Linux线程池: Linux/19. Linux线程/7. Linux线程池/7. Linux线程池.md
   - JavaEE应用开发:
     - HTML与CSS:
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md

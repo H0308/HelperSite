@@ -611,7 +611,7 @@ a {
 
     <div class="reference-section">
         <div class="content-card">
-            <h2>参考文档</h2>
+            <h2>帮助文档</h2>
             <div class="reference-grid">
                 <a href="https://legacy.cplusplus.com/">C/C++ 参考文档</a>
                 <a href="https://docs.oracle.com/javase/8/docs/api/">Java 官方文档</a>

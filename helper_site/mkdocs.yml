@@ -204,6 +204,8 @@ nav:
       - 日志系统: Linux/19. Linux线程/6. 日志系统/6. 日志系统.md
       - Linux线程安全与死锁: Linux/19. Linux线程/7. Linux线程安全与死锁/7. Linux线程安全与死锁.md
       - Linux线程池: Linux/19. Linux线程/8. Linux线程池/8. Linux线程池.md
+      - 读者写者问题与读写锁: Linux/19. Linux线程/9. 读者写者问题与读写锁/9. 读者写者问题与读写锁.md
+      - 自旋锁: Linux/19. Linux线程/10. 自旋锁/10. 自旋锁.md
   - JavaEE应用开发:
     - HTML与CSS:
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md

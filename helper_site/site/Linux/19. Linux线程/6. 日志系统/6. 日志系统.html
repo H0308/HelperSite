@@ -1163,7 +1163,7 @@ sudo<span class=w> </span>cat/var/log/syslog
                 if (searchResults.length > 0) {
                     searchResults.forEach(link => {
                         const href = link.getAttribute('href');
-                        if (href && href.includes('#')) {
+                        if (href && href.includes('#') && !href.includes('#__tabbed_')) {
                             link.addEventListener('click', (e) => {
                                 const currentPath = window.location.pathname;
                                 const [linkPath, hash] = href.split('#');
@@ -1201,7 +1201,8 @@ sudo<span class=w> </span>cat/var/log/syslog
                 if (!target) return;
                 
                 const href = target.getAttribute('href');
-                if (href && (href.startsWith('#') || href.includes('/#'))) {
+                // 排除以 __tabbed_ 开头的锚点
+                if (href && (href.startsWith('#') || href.includes('/#')) && !href.includes('#__tabbed_')) {
                     handleAnchorNavigation(e, href);
                 }
             }, true);

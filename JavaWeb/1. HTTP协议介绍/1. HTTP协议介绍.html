@@ -728,7 +728,7 @@ Date: Mon, 13 Aug 2018 02:47:57 GMT  响应的时间，这可能会有8小时的
                 if (searchResults.length > 0) {
                     searchResults.forEach(link => {
                         const href = link.getAttribute('href');
-                        if (href && href.includes('#')) {
+                        if (href && href.includes('#') && !href.includes('#__tabbed_')) {
                             link.addEventListener('click', (e) => {
                                 const currentPath = window.location.pathname;
                                 const [linkPath, hash] = href.split('#');
@@ -766,7 +766,8 @@ Date: Mon, 13 Aug 2018 02:47:57 GMT  响应的时间，这可能会有8小时的
                 if (!target) return;
                 
                 const href = target.getAttribute('href');
-                if (href && (href.startsWith('#') || href.includes('/#'))) {
+                // 排除以 __tabbed_ 开头的锚点
+                if (href && (href.startsWith('#') || href.includes('/#')) && !href.includes('#__tabbed_')) {
                     handleAnchorNavigation(e, href);
                 }
             }, true);

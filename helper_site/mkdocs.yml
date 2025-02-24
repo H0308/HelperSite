@@ -15,6 +15,7 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy
+    # - content.code.select
     # - content.tabs.link
   language: zh
   palette:
@@ -277,6 +278,8 @@ markdown_extensions:
   - pymdownx.highlight:
       linenums: true  # 启用行号显示
       # anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - toc:
       permalink: true
       baselevel: 1  # 开始级别
@@ -312,7 +315,8 @@ extra:
       hsts: "max-age=31536000; includeSubDomains; preload"
       
 plugins:
-  - search
+  - search:
+      jieba_dict: dict.txt.small
   - statistics
   - changelog
   - minify:

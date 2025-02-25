@@ -8,6 +8,9 @@ theme:
   favicon: images/favicon.png
   logo: assets/logo.png
   features:
+    # - navigation.instant 缓慢加载，有bug
+    # - navigation.instant.progress # 加载缓慢时显示进度条，但是目前有bug
+    - navigation.prune
     # - header.autohide
     - navigation.tabs # 启用navigation-top插件时需要禁用theme1.css中提示的内容，否则启用
     # - toc.integrate
@@ -15,7 +18,7 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy
-    # - content.code.select
+    # - content.code.select # 目前没有效果
     # - content.tabs.link
   language: zh
   palette:

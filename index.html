@@ -444,6 +444,78 @@
             color: rgba(77, 166, 218, 0.9) !important;
             background: rgb(255, 255, 255) !important;
         }
+        .custom-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            color: rgba(77, 166, 218, 0.9);
+            border-bottom: 1px dashed rgba(77, 166, 218, 0.9);
+            text-decoration: none !important;
+        }
+        .custom-tooltip > span {
+            color: grey;
+            font-size: 12px;
+            margin-left: 4px;
+        }
+        .custom-tooltip::before {
+            content: attr(data-title);
+            position: absolute;
+            width: 300px;
+            background-color: rgba(51, 51, 51, 0.95);
+            color: #fff;
+            text-align: left;
+            padding: 10px;
+            border-radius: 6px;
+            bottom: 125%;  /* 定位在链接上方 */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99999;  /* 确保显示在最上层 */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 1.5;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            word-wrap: break-word;
+            white-space: normal;
+        }
+        .custom-tooltip::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(51, 51, 51, 0.95) transparent transparent transparent;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .custom-tooltip:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+        @media (max-width: 767px) {
+            .custom-tooltip::before {
+                width: 250px;
+                white-space: normal;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 130%;
+            }
+        }
+        .md-content a.custom-tooltip::after {
+            display: none !important;
+        }
     </style><script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchEl = document.querySelector('.md-search');
@@ -1048,7 +1120,7 @@ a {
         grid-template-columns: 1fr;
     }
 }
-</style> <div class=content-container> <div class=main-content-area> <div class=main-section> <div class=welcome-section> <div id=container> <svg id=hello-svg data-name=hello xmlns=http://www.w3.org/2000/svg viewbox="0 0 582 197"> <defs> <lineargradient id=gradient1 x1=0% y1=0% x2=100% y2=0%> <stop offset=0% style=stop-color:#FF6B6B /> <stop offset=50% style=stop-color:#4ECDC4 /> <stop offset=100% style=stop-color:#45B7D1 /> </lineargradient> <lineargradient id=gradient2 x1=0% y1=0% x2=100% y2=0%> <stop offset=0% style=stop-color:#96E6A1 /> <stop offset=100% style=stop-color:#D4FC79 /> </lineargradient> <lineargradient id=gradient3 x1=0% y1=0% x2=100% y2=0%> <stop offset=0% style=stop-color:#FFD93D /> <stop offset=100% style=stop-color:#FF6B6B /> </lineargradient> </defs> <path class="path path-1" d=M208,338c38-16.67,73.74-45.72,97.33-66,21.33-18.33,32.67-35.67,37.33-52.67C347.12,203.12,344,192,332,192c-11,0-21,10.33-24.94,27.68-4.52,19.89-22.06,107.82-29.39,149,15.67-72.33,36.33-81.33,53.67-81.33,22.33,0,24.67,18.67,19.42,39-5.43,21.07-7.42,44.32,17.91,44.32,18,0,35.53-8.17,52.67-20,14-9.67,23-24,23-40,0-13.42-8-23.33-20.67-23.33s-24.33,12-24.33,33.33c0,27,16.33,48,44,48,25.67,0,47.67-19.67,62-44.67,13.61-23.74,30.67-64.67,33.33-92.67s-5.33-36-18.67-36-24.67,17.33-28.67,43.33S486,302,491.33,330s28,37.67,46,37.67,38.17-15.67,52-37c16.54-25.51,35.87-67.45,38.67-102,2-24.67-8.67-33.33-20-33.33-14.67,0-23.33,13.33-28,38-4.5,23.81-8,64-2,94,4.64,23.21,25.33,40.33,44.67,40.33s32.67-19,36.67-42.33 transform="translate(-199 -183)"/> <path class="path path-2" d=M697.33,287.33C672,287.33,661.33,305,659,327c-2.81,26.54,10.33,41.67,29.67,41.67,22,0,34.54-20.78,36.67-40.67,2-18.67-7.39-39.13-28-40.67 transform="translate(-199 -183)"/> <path class="path path-3" d=M714.8,295.12c12.11,12.26,43.53,9.55,56.53-5.79 transform="translate(-199 -183)"/> <line x1=561 y1=181.67 x2=561 y2=181.67 class="path path-4"/> </svg> </div> <h1 class=welcome-title>欢迎来到学习档案</h1> <p class=welcome-subtitle>记录学习，分享知识</p> </div> <div class=content-card> <h2>字体说明</h2> <ul> <li>导航栏标题：<a href=https://github.com/bytedance/fonts>抖音美好体</a></li> <li>标题：<a href=https://github.com/lxgw/LxgwZhenKai>霞鹜臻楷</a></li> <li>内容：<a href=https://github.com/adobe-fonts/source-han-sans>Adobe Source Han Sans 思源黑体 SC</a></li> <li>代码：<a href=https://www.jetbrains.com/lp/mono/ >JetBrains Mono</a></li> </ul> </div> <div class=content-card> <h2>浏览提示</h2> <p>本网页提供两种主题：</p> <ul> <li><strong>新版主题：</strong>包含动画和特效，建议在Chrome桌面端使用</li> <li><strong>旧版主题：</strong>简化版本，适合移动端和性能较弱的设备</li> </ul> 在新版网页中，对屏幕尺寸较小的设备默认使用旧版主题且不可更改，所以没有看到「切换主题」的按钮属于正常现象 <p><span style=color:red>注意：切换主题只改变显示效果，不会改变网页本身的内存占用。后续网站的样式主要更新新版主题</span></p> </div> </div> <div class=side-section> <div class=feature-grid> <div class=feature-item> <h3>📚 页面总数</h3> <p>199 个页面</p> </div> <div class=feature-item> <h3>📝 文字总数</h3> <p>568212 个字</p> </div> <div class=feature-item> <h3>💻 代码行数</h3> <p>69601 行代码</p> </div> <div class=feature-item> <h3>🖼️ 图片数量</h3> <p>1286 张图片</p> </div> </div> <div class=content-card> <h2>最近更新</h2> <p>查看<a href=https://www.help-doc.top/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html>网站时间线</a>了解网站最近更新</p> </div> <div class=content-card> <h2>网站验证码</h2> <div class=qr-code-section> <p><strong>关注「阅读档案」微信公众号并回复「验证码」获取验证码</strong></p> <a class=glightbox href=index.assets/qrcode_for_gh_166df3e5da8b_258.jpg data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src=index.assets/qrcode_for_gh_166df3e5da8b_258.jpg alt=微信公众号二维码></a> </div> </div> </div> </div> <div class=reference-section> <div class=content-card> <h2>帮助文档</h2> <div class=reference-grid> <a href=https://legacy.cplusplus.com/ >C/C++ 参考文档</a> <a href=https://docs.oracle.com/javase/8/docs/api/ >Java 官方文档</a> <a href=https://developer.mozilla.org/en-US/ >MDN Web 文档</a> <a href=https://docs.python.org/zh-cn/3/library/index.html>Python 标准库</a> <a href=https://quickref.cn/docs/git.html>Git 指令参考</a> <a href=https://quickref.cn/docs/github.html>Github 使用技巧</a> <a href=https://quickref.cn/docs/http-status-code.html>HTTP 状态码</a> <a href=https://quickref.cn/docs/latex.html>LaTeX 符号代码</a> <a href=https://quickref.cn/docs/emmet.html>Emmet 表达式</a> <a href=https://quickref.cn/docs/regex.html>正则表达式</a> </div> </div> </div> <div class=copyright-section> <div class=content-card> <h2>版权声明</h2> <div class=copyright-info> <p>版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。</p> <p>转载请注明来自<a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html>柯懒不是柯南</a>的个人网站！</p> </div> </div> </div> <div class=disclaimer-section> <div class=content-card> <p>⚠️ 本网站的内容不具有权威性，请注意对信息进行甄别</p> </div> </div> </div> </div> <script src=https://qiniu.techgrow.cn/readmore/dist/readmore.js type=text/javascript></script> <script>
+</style> <div class=content-container> <div class=main-content-area> <div class=main-section> <div class=welcome-section> <div id=container> <svg id=hello-svg data-name=hello xmlns=http://www.w3.org/2000/svg viewbox="0 0 582 197"> <defs> <lineargradient id=gradient1 x1=0% y1=0% x2=100% y2=0%> <stop offset=0% style=stop-color:#FF6B6B /> <stop offset=50% style=stop-color:#4ECDC4 /> <stop offset=100% style=stop-color:#45B7D1 /> </lineargradient> <lineargradient id=gradient2 x1=0% y1=0% x2=100% y2=0%> <stop offset=0% style=stop-color:#96E6A1 /> <stop offset=100% style=stop-color:#D4FC79 /> </lineargradient> <lineargradient id=gradient3 x1=0% y1=0% x2=100% y2=0%> <stop offset=0% style=stop-color:#FFD93D /> <stop offset=100% style=stop-color:#FF6B6B /> </lineargradient> </defs> <path class="path path-1" d=M208,338c38-16.67,73.74-45.72,97.33-66,21.33-18.33,32.67-35.67,37.33-52.67C347.12,203.12,344,192,332,192c-11,0-21,10.33-24.94,27.68-4.52,19.89-22.06,107.82-29.39,149,15.67-72.33,36.33-81.33,53.67-81.33,22.33,0,24.67,18.67,19.42,39-5.43,21.07-7.42,44.32,17.91,44.32,18,0,35.53-8.17,52.67-20,14-9.67,23-24,23-40,0-13.42-8-23.33-20.67-23.33s-24.33,12-24.33,33.33c0,27,16.33,48,44,48,25.67,0,47.67-19.67,62-44.67,13.61-23.74,30.67-64.67,33.33-92.67s-5.33-36-18.67-36-24.67,17.33-28.67,43.33S486,302,491.33,330s28,37.67,46,37.67,38.17-15.67,52-37c16.54-25.51,35.87-67.45,38.67-102,2-24.67-8.67-33.33-20-33.33-14.67,0-23.33,13.33-28,38-4.5,23.81-8,64-2,94,4.64,23.21,25.33,40.33,44.67,40.33s32.67-19,36.67-42.33 transform="translate(-199 -183)"/> <path class="path path-2" d=M697.33,287.33C672,287.33,661.33,305,659,327c-2.81,26.54,10.33,41.67,29.67,41.67,22,0,34.54-20.78,36.67-40.67,2-18.67-7.39-39.13-28-40.67 transform="translate(-199 -183)"/> <path class="path path-3" d=M714.8,295.12c12.11,12.26,43.53,9.55,56.53-5.79 transform="translate(-199 -183)"/> <line x1=561 y1=181.67 x2=561 y2=181.67 class="path path-4"/> </svg> </div> <h1 class=welcome-title>欢迎来到学习档案</h1> <p class=welcome-subtitle>记录学习，分享知识</p> </div> <div class=content-card> <h2>字体说明</h2> <ul> <li>导航栏标题：<a href=https://github.com/bytedance/fonts>抖音美好体</a></li> <li>标题：<a href=https://github.com/lxgw/LxgwZhenKai>霞鹜臻楷</a></li> <li>内容：<a href=https://github.com/adobe-fonts/source-han-sans>Adobe Source Han Sans 思源黑体 SC</a></li> <li>代码：<a href=https://www.jetbrains.com/lp/mono/ >JetBrains Mono</a></li> </ul> </div> <div class=content-card> <h2>浏览提示</h2> <p>本网页提供两种主题：</p> <ul> <li><strong>新版主题：</strong>包含动画和特效，建议在Chrome桌面端使用</li> <li><strong>旧版主题：</strong>简化版本，适合移动端和性能较弱的设备</li> </ul> 在新版网页中，对屏幕尺寸较小的设备默认使用旧版主题且不可更改，所以没有看到「切换主题」的按钮属于正常现象 <p><span style=color:red>注意：切换主题只改变显示效果，不会改变网页本身的内存占用。后续网站的样式主要更新新版主题</span></p> </div> </div> <div class=side-section> <div class=feature-grid> <div class=feature-item> <h3>📚 页面总数</h3> <p>200 个页面</p> </div> <div class=feature-item> <h3>📝 文字总数</h3> <p>573131 个字</p> </div> <div class=feature-item> <h3>💻 代码行数</h3> <p>70010 行代码</p> </div> <div class=feature-item> <h3>🖼️ 图片数量</h3> <p>1287 张图片</p> </div> </div> <div class=content-card> <h2>最近更新</h2> <p>查看<a href=https://www.help-doc.top/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html>网站时间线</a>了解网站最近更新</p> </div> <div class=content-card> <h2>网站验证码</h2> <div class=qr-code-section> <p><strong>关注「阅读档案」微信公众号并回复「验证码」获取验证码</strong></p> <a class=glightbox href=index.assets/qrcode_for_gh_166df3e5da8b_258.jpg data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src=index.assets/qrcode_for_gh_166df3e5da8b_258.jpg alt=微信公众号二维码></a> </div> </div> </div> </div> <div class=reference-section> <div class=content-card> <h2>帮助文档</h2> <div class=reference-grid> <a href=https://legacy.cplusplus.com/ >C/C++ 参考文档</a> <a href=https://docs.oracle.com/javase/8/docs/api/ >Java 官方文档</a> <a href=https://developer.mozilla.org/en-US/ >MDN Web 文档</a> <a href=https://docs.python.org/zh-cn/3/library/index.html>Python 标准库</a> <a href=https://quickref.cn/docs/git.html>Git 指令参考</a> <a href=https://quickref.cn/docs/github.html>Github 使用技巧</a> <a href=https://quickref.cn/docs/http-status-code.html>HTTP 状态码</a> <a href=https://quickref.cn/docs/latex.html>LaTeX 符号代码</a> <a href=https://quickref.cn/docs/emmet.html>Emmet 表达式</a> <a href=https://quickref.cn/docs/regex.html>正则表达式</a> </div> </div> </div> <div class=copyright-section> <div class=content-card> <h2>版权声明</h2> <div class=copyright-info> <p>版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。</p> <p>转载请注明来自<a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html>柯懒不是柯南</a>的个人网站！</p> </div> </div> </div> <div class=disclaimer-section> <div class=content-card> <p>⚠️ 本网站的内容不具有权威性，请注意对信息进行甄别</p> </div> </div> </div> </div> <script src=https://qiniu.techgrow.cn/readmore/dist/readmore.js type=text/javascript></script> <script>
         var isExclude = false;
         var excludePages = ['/网站验证码', '/阅读档案', '/作者', '/网站时间线'];
         var currentPath = decodeURIComponent(window.location.pathname).replace(/\/$/, '').toLowerCase();

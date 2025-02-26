@@ -444,6 +444,78 @@
             color: rgba(77, 166, 218, 0.9) !important;
             background: rgb(255, 255, 255) !important;
         }
+        .custom-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            color: rgba(77, 166, 218, 0.9);
+            border-bottom: 1px dashed rgba(77, 166, 218, 0.9);
+            text-decoration: none !important;
+        }
+        .custom-tooltip > span {
+            color: grey;
+            font-size: 12px;
+            margin-left: 4px;
+        }
+        .custom-tooltip::before {
+            content: attr(data-title);
+            position: absolute;
+            width: 300px;
+            background-color: rgba(51, 51, 51, 0.95);
+            color: #fff;
+            text-align: left;
+            padding: 10px;
+            border-radius: 6px;
+            bottom: 125%;  /* 定位在链接上方 */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99999;  /* 确保显示在最上层 */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 1.5;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            word-wrap: break-word;
+            white-space: normal;
+        }
+        .custom-tooltip::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(51, 51, 51, 0.95) transparent transparent transparent;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .custom-tooltip:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+        @media (max-width: 767px) {
+            .custom-tooltip::before {
+                width: 250px;
+                white-space: normal;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 130%;
+            }
+        }
+        .md-content a.custom-tooltip::after {
+            display: none !important;
+        }
     </style><script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchEl = document.querySelector('.md-search');

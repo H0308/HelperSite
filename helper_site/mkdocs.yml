@@ -279,6 +279,7 @@ not_in_nav: |
   MySQL/JDBC/JDBC进阶/JDBC进阶.md
   MySQL/JDBC/JDBC高级/JDBC高级.md
   其他/关于xml文件/关于xml文件.md
+  工具帮助/Tomcat安装和使用/Tomcat安装和使用.md
 
 markdown_extensions:
   - admonition

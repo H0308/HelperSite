@@ -278,6 +278,7 @@ not_in_nav: |
   MySQL/JDBC/JDBC基础/JDBC基础.md
   MySQL/JDBC/JDBC进阶/JDBC进阶.md
   MySQL/JDBC/JDBC高级/JDBC高级.md
+  其他/关于xml文件/关于xml文件.md
 
 markdown_extensions:
   - admonition

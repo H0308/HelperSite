@@ -1,0 +1,1366 @@
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/Linux/13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80/13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80.html><link rel=prev href=../12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6.html><link rel=next href=../14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B/14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.6.5"><title>Linux文件操作基础 - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.8608ea7d.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><link rel=stylesheet href=../../css/timeline.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (max-width: 767px)"><link rel=stylesheet href=../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><style>
+        @import url('https://static.zeoseven.com/zsft/2/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/442/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/288/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/84/main/result.css');
+        @font-face {
+            font-family: "Source Han Sans SC VF";
+        }
+        @font-face {
+            font-family: 'LXGW ZhenKai';
+        }
+        @font-face {
+            font-family: "JetBrains Mono";
+            src: url('https://static.zeoseven.com/zsft/hk/main.woff2') format('woff2'),
+                url('https://static-host.zeoseven.com/zsft/hk/main.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: "Douyin Sans";
+        }
+        .md-header__topic .md-ellipsis {
+            font-family: "Douyin Sans" !important;
+        }
+        :root {
+            --md-text-font: "Source Han Sans SC VF";
+            --md-header-font: "LXGW ZhenKai";
+            --md-code-font: "JetBrains Mono";
+            --code-font-color: #e96900;
+        }
+        h1 + div > p {
+            font-family: var(--md-header-font);
+        }
+        @media screen and (max-width: 1199px) {
+            .theme-switch {
+                display: none !important;
+            }
+        }
+
+        @media print {
+            a[href]:after {
+                content: "" !important;
+            }
+            a {
+                text-decoration: none !important;
+                color: inherit !important;
+                pointer-events: none !important;
+                cursor: default !important;
+            }
+            a[title] {
+                position: relative;
+            }
+            a[title]:hover:after {
+                display: none !important;
+            }
+            a:active, a:hover, a:focus {
+                outline: none !important;
+                text-decoration: none !important;
+            }
+            img {
+                max-width: 100% !important;
+                page-break-inside: avoid;
+            }
+            .md-header,
+            .md-tabs,
+            .md-sidebar,
+            .md-footer {
+                display: none !important;
+            }
+        }
+        .theme-switch {
+            display: inline-flex;
+            gap: 8px;
+            margin-right: 1rem;
+            padding: 4px;
+            border-radius: 100px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .theme-switch {
+            margin-right: 1rem;
+        }
+        .theme-btn {
+            font-family: var(--md-text-font);
+            font-size: medium;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px 8px;
+            color: #fff;
+            cursor: pointer;
+            min-width: 100px;
+            height: 36px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            background-size: 200% 100%;
+            background-position: right bottom;
+            background-repeat: no-repeat;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .theme-btn .current-theme,
+        .theme-btn .target-theme {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+        .theme-btn .current-theme {
+            transform: translateX(0);
+            opacity: 1;
+            transition-delay: 0ms;
+        }
+        .theme-btn .target-theme {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition-delay: 0ms;
+        }
+        .theme-btn:hover {
+            transform: scale(1.05);
+            background-image: linear-gradient(to right, #4da6da 0%, #275796 100%);
+            background-position: left bottom;
+        }
+        .theme-btn:hover .current-theme {
+            transform: translateX(100%);
+            opacity: 0;
+            transition-delay: 100ms;
+        }
+        .theme-btn:hover .target-theme {
+            transform: translateX(0);
+            opacity: 1;
+            transition-delay: 200ms;
+        }
+        .theme-btn:active {
+            transform: scale(0.95);
+            transition: all 100ms ease;
+        }
+        .md-content article > *:not(.md-top):not(.md-nav) {
+            animation: flyIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(1) { animation-delay: 0.1s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(2) { animation-delay: 0.15s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(3) { animation-delay: 0.2s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(4) { animation-delay: 0.25s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(5) { animation-delay: 0.3s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(6) { animation-delay: 0.35s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(7) { animation-delay: 0.4s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(8) { animation-delay: 0.45s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(9) { animation-delay: 0.5s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(10) { animation-delay: 0.55s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(11) { animation-delay: 0.6s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(12) { animation-delay: 0.65s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(13) { animation-delay: 0.7s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(14) { animation-delay: 0.75s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(15) { animation-delay: 0.8s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(16) { animation-delay: 0.85s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(17) { animation-delay: 0.9s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(18) { animation-delay: 0.95s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(19) { animation-delay: 1s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(20) { animation-delay: 1.05s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(n+21) { animation-delay: 1.1s; }
+        @keyframes flyIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        li::marker { 
+            color: rgba(77, 166, 218, 0.9); 
+        }
+        .md-search__input:hover,
+        .md-search__input:focus {
+            border-radius: 8px !important;
+        }
+        .md-search__form {
+            border-radius: 8px !important;
+        }
+        .md-search__output {
+            border-radius: 8px !important;
+        }
+        .md-search__overlay {
+            border-radius: 8px !important;
+        }
+        .md-search-result {
+            border-radius: 8px !important;
+        }
+        .md-search__inner {
+            border-radius: 8px !important;
+        }
+        :not(pre) > code {
+            color: #ff7043 !important;
+            font-weight: normal;
+        }
+        .highlight .c1,
+        .highlight .cm {
+            color: #6a737d;
+        }
+        .md-typeset .admonition,
+        .md-typeset details {
+            border-width: 0;
+            border-left-width: 4px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--md-header-font);
+            color: #4da6da !important;
+        }
+        body {
+            font-family: var(--md-text-font);
+        }
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--code-font-color);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleEffect 0.6s ease-out forwards;
+            transform: translate(var(--translate-x, 0), var(--translate-y, 0)) scale(1);
+        }
+        @keyframes particleEffect {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translate(var(--translate-x), var(--translate-y)) scale(0.5);
+            }
+        }
+        pre code {
+            color: var(--md-code-fg-color) !important;
+        }
+        .highlight pre {
+            background-color: var(--md-code-bg-color) !important;
+        }
+        .md-typeset code {
+            font-family: var(--md-code-font), var(--md-text-font);
+        }
+        .md-tabs__item.md-tabs__item--active {
+            border-bottom: 2px solid rgba(77, 166, 218, 0.9);
+        }
+        .md-tabs__list > .md-tabs__item--active > .md-tabs__link {
+            color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .timeline-content::before {
+            background-color: #efefef;
+        }
+        .timeline-card {
+            background-color: #efefef !important;
+        }
+        .changelog-content a {
+            color: #4051b5 !important;
+            word-break: break-word;
+        }
+        .changelog-content a:focus, .changelog-content a:hover {
+            color: #00bda4 !important;
+        }
+        .changelog-type-pageupdate {
+            background-color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .md-footer-runtime {
+            position: relative;
+            z-index: 3;
+            margin: 0.5rem 0;
+            padding: 0.4rem 0;
+            font-size: .7rem;
+            line-height: 1.6;
+            color: var(--md-footer-fg-color--light);
+            display: flex;
+            align-items: center;
+        }
+        ::selection {
+            background: rgba(77, 166, 218, 0.2);
+        }
+        html {
+            scroll-behavior: smooth !important; /* 强制启用平滑滚动 */
+            scroll-padding-top: 53px; /* 设置滚动偏移量,避免标题被导航栏遮挡 */
+        }
+        a[href^="#"],  /* 站内锚点 */
+        a[href*="/#"] /* 跨页锚点 */ {
+            scroll-behavior: smooth !important;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+            a[href^="#"],
+            a[href*="/#"] {
+                scroll-behavior: auto !important;
+            }
+        }
+        #readmore-wrapper {
+            position: absolute;
+            bottom: 0px;
+            z-index: 9999;
+            width: 100%;
+            margin-top: -100px;
+            font-family: var(--md-text-font);
+            display: none;
+        }
+        #readmore-mask {
+            position: relative;
+            height: 500px;
+            background: -webkit-gradient(linear, 0 0%, 0 100%, from(rgba(255, 255, 255, 0)), to(rgb(255, 255, 255)));
+        }
+        #readmore-btn {
+            position: absolute;
+            left: 50%;
+            top: 70%;
+            bottom: 30px;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 36px;
+            line-height: 36px;
+            font-size: 15px;
+            text-align: center;
+            border: 1px solid rgba(77, 166, 218, 0.9);
+            color: rgba(77, 166, 218, 0.9);
+            background: rgb(255, 255, 255);
+            cursor: pointer;
+            border-radius: 6px;
+            border-bottom: 1px solid rgba(77, 166, 218, 0.9) !important;
+            text-decoration: none !important;
+        }
+        #readmore-modal-mask {
+            position: fixed;
+            inset: 0px;
+            opacity: 0.7;
+            z-index: 999;
+            background: rgb(0, 0, 0);
+        }
+        #readmore-modal-content {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            text-align: center;
+            font-size: 13px;
+            background: rgb(255, 255, 255);
+            border-radius: 10px;
+            z-index: 9999;
+            font-family: var(--md-text-font), sans-serif;
+        }
+        #readmore-modal-close-btn {
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            line-height: 34px;
+            font-size: 25px;
+            cursor: pointer;
+            opacity: 0.2;
+            z-index: 9999;
+            color: rgb(0, 0, 0);
+            background: none;
+            border: none;
+            outline: none;
+        }
+        #readmore-modal-header {
+            font-size: 15px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        #readmore-modal-header div {
+            margin-top: 5px;
+        }
+        #readmore-blog-name {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-blog-keyword {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-blog-forever {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-modal-header div span:not([id]) {
+            color: #444;
+        }
+        #readmore-modal-qrcode img {
+            width: 220px;
+            height: 220px;
+            border: 8px solid rgb(230, 230, 230);
+            margin-bottom: 10px !important;
+            margin-top: 10px !important;
+            opacity: 1 !important;
+            display: inline !important;
+        }
+        #readmore-modal-form {
+            background: rgb(255, 255, 255);
+        }
+        #readmore-modal-captcha-input {
+            width: 160px;
+            height: 32px;
+            line-height: 32px;
+            padding: 0px 10px;
+            margin-left: -1px !important;
+            margin: 0px 10px;
+            font-size: 13px;
+            text-rendering: auto;
+            text-transform: none;
+            cursor: text;
+            outline: none;
+            box-sizing: border-box;
+            border: 1px solid rgb(221, 221, 221);
+            appearance: textfield;
+            color: #000;
+            background-color: white;
+            -webkit-rtl-ordering: logical;
+        }
+        #readmore-modal-submit-btn {
+            padding: 0px 20px;
+            height: 32px;
+            font-size: 14px;
+            outline: none;
+            border: none;
+            color: rgb(255, 255, 255);
+            background: rgba(77, 166, 218, 0.9);
+            cursor: pointer;
+        }
+        #readmore-modal-footer p {
+            font-size: 15px;
+            margin: 30px 0px 20px;
+            color: rgb(153, 153, 153);
+            text-align: center;
+        }
+        #readmore-official-website {
+            border-bottom: none !important;
+            text-decoration: none !important;
+            color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .readmore-btn-mouseover {
+            color: rgb(255, 255, 255) !important;
+            background: rgba(77, 166, 218, 0.9) !important;
+        }
+        .readmore-btn-mouseout {
+            color: rgba(77, 166, 218, 0.9) !important;
+            background: rgb(255, 255, 255) !important;
+        }
+        .custom-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            color: rgba(77, 166, 218, 0.9);
+            border-bottom: 1px dashed rgba(77, 166, 218, 0.9);
+            text-decoration: none !important;
+        }
+        .custom-tooltip > span {
+            color: grey;
+            font-size: 12px;
+            margin-left: 4px;
+        }
+        .custom-tooltip::before {
+            content: attr(data-title);
+            position: absolute;
+            width: 300px;
+            background-color: rgba(51, 51, 51, 0.95);
+            color: #fff;
+            text-align: left;
+            padding: 10px;
+            border-radius: 6px;
+            bottom: 125%;  /* 定位在链接上方 */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99999;  /* 确保显示在最上层 */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 1.5;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            word-wrap: break-word;
+            white-space: normal;
+        }
+        .custom-tooltip::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(51, 51, 51, 0.95) transparent transparent transparent;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .custom-tooltip:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+        @media (max-width: 767px) {
+            .custom-tooltip::before {
+                width: 250px;
+                white-space: normal;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 130%;
+            }
+        }
+        .md-content a.custom-tooltip::after {
+            display: none !important;
+        }
+    </style><script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchEl = document.querySelector('.md-search');
+            const savedTheme = localStorage.getItem('preferred-theme') || 'theme1';
+            const themeSwitch = document.createElement('div');
+            themeSwitch.className = 'theme-switch';
+            themeSwitch.innerHTML = `
+                <button class="theme-btn" onclick="switchTheme()">
+                    <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '旧版主题'}</span>
+                    <span class="target-theme">${savedTheme === 'theme1' ? '旧版主题' : '新版主题'}</span>
+                </button>
+            `;
+            searchEl.parentNode.insertBefore(themeSwitch, searchEl);
+            setTimeout(() => {
+                const hash = window.location.hash;
+                if (hash) {
+                    const readmoreBtn = document.getElementById('readmore-wrapper');
+                    if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
+                        const targetId = hash.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            // 平滑滚动到目标元素
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                }
+            }, 300); 
+        });
+
+        (function initTheme() {
+            const savedTheme = localStorage.getItem('preferred-theme');
+            if (savedTheme) {
+                const theme1Link = document.querySelector('link[href*="theme1"]');
+                const theme2Link = document.querySelector('link[href*="theme2"]');
+                if (theme1Link && theme2Link) {
+                    if (savedTheme === 'theme1') {
+                        theme1Link.removeAttribute('disabled');
+                        theme2Link.setAttribute('disabled', 'true');
+                    } else {
+                        theme2Link.removeAttribute('disabled');
+                        theme1Link.setAttribute('disabled', 'true');
+                    }
+                }
+            }
+        })();
+
+        function switchTheme() {
+            const currentTheme = localStorage.getItem('preferred-theme') || 'theme1';
+            const newTheme = currentTheme === 'theme1' ? 'theme2' : 'theme1';
+            const theme1Link = document.querySelector('link[href*="theme1"]');
+            const theme2Link = document.querySelector('link[href*="theme2"]');
+            if (newTheme === 'theme1') {
+                theme1Link.removeAttribute('disabled');
+                theme2Link.setAttribute('disabled', 'true');
+            } else {
+                theme2Link.removeAttribute('disabled');
+                theme1Link.setAttribute('disabled', 'true');
+            }
+            localStorage.setItem('preferred-theme', newTheme);
+            const themeBtn = document.querySelector('.theme-btn');
+            const currentThemeEl = themeBtn.querySelector('.current-theme');
+            const targetThemeEl = themeBtn.querySelector('.target-theme');
+            currentThemeEl.textContent = newTheme === 'theme1' ? '新版主题' : '旧版主题';
+            targetThemeEl.textContent = newTheme === 'theme1' ? '旧版主题' : '新版主题';
+        }
+
+        document.addEventListener('copy', function(e) {
+            const selectedText = window.getSelection().toString();
+            if(selectedText) {
+                const copyright = '\n\n' +
+                    '————————————————\n' +
+                    '文章作者：怡晗★\n' +
+                    '网站链接：https://www.help-doc.top\n' +
+                    '当前文章链接：' + window.location.href + '\n' +
+                    '版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。\n' +
+                    '转载请注明来自怡晗★的个人网站！';
+                e.preventDefault();
+                e.clipboardData.setData('text/plain', selectedText + copyright);
+            }
+        });
+    </script> <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#linux class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../../index.html title=学习档案 class="md-header__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 学习档案 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> Linux文件操作基础 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-hidden=true type=radio name=__palette id=__palette_0> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=标签 data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../index.html class=md-tabs__link> 主页 </a> </li> <li class=md-tabs__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-tabs__link> 网站时间线 </a> </li> <li class=md-tabs__item> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-tabs__link> 编程语言 </a> </li> <li class=md-tabs__item> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-tabs__link> 数据结构与算法 </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-tabs__link> Linux </a> </li> <li class=md-tabs__item> <a href=../../HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html class=md-tabs__link> 前端 </a> </li> <li class=md-tabs__item> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-tabs__link> MySQL </a> </li> <li class=md-tabs__item> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-tabs__link> 其它 </a> </li> <li class=md-tabs__item> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-tabs__link> 工具帮助 </a> </li> <li class=md-tabs__item> <a href=../../%E9%9D%A2%E8%AF%95/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98.html class=md-tabs__link> 闲谈 </a> </li> <li class=md-tabs__item> <a href=../../%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88/%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88.html class=md-tabs__link> 阅读档案 </a> </li> <li class=md-tabs__item> <a href=../../%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html class=md-tabs__link> 联系作者 </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=导航栏 data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../../index.html title=学习档案 class="md-nav__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> 学习档案 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../index.html class=md-nav__link> <span class=md-ellipsis> 主页 </span> </a> </li> <li class=md-nav__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-nav__link> <span class=md-ellipsis> 网站时间线 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-nav__link> <span class=md-ellipsis> 数据结构与算法 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_5 checked> <label class=md-nav__link for=__nav_5 id=__nav_5_label tabindex> <span class=md-ellipsis> Linux </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_5_label aria-expanded=true> <label class=md-nav__title for=__nav_5> <span class="md-nav__icon md-icon"></span> Linux </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-nav__link> <span class=md-ellipsis> Linux常用选项和指令 </span> </a> </li> <li class=md-nav__item> <a href=../2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html class=md-nav__link> <span class=md-ellipsis> Linux权限相关 </span> </a> </li> <li class=md-nav__item> <a href=../3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85.html class=md-nav__link> <span class=md-ellipsis> CentOS软件安装 </span> </a> </li> <li class=md-nav__item> <a href=../4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb/4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb.html class=md-nav__link> <span class=md-ellipsis> Linux下的gcc与gdb </span> </a> </li> <li class=md-nav__item> <a href=../5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F/5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F.html class=md-nav__link> <span class=md-ellipsis> Linux下的Makefile与进度条程序 </span> </a> </li> <li class=md-nav__item> <a href=../6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 操作系统基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../7.%20Linux%E8%BF%9B%E7%A8%8B/7.%20Linux%E8%BF%9B%E7%A8%8B.html class=md-nav__link> <span class=md-ellipsis> Linux进程基础 </span> </a> </li> <li class=md-nav__item> <a href=../8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7/8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7.html class=md-nav__link> <span class=md-ellipsis> Linux进程状态与进程优先级 </span> </a> </li> <li class=md-nav__item> <a href=../9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95.html class=md-nav__link> <span class=md-ellipsis> Linux进程切换以及调度算法 </span> </a> </li> <li class=md-nav__item> <a href=../10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.html class=md-nav__link> <span class=md-ellipsis> Linux命令行与环境变量 </span> </a> </li> <li class=md-nav__item> <a href=../11.%20Linux%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4/11.%20%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.html class=md-nav__link> <span class=md-ellipsis> Linux进程地址空间 </span> </a> </li> <li class=md-nav__item> <a href=../12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6.html class=md-nav__link> <span class=md-ellipsis> Linux进程控制 </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> Linux文件操作基础 </span> <span class="md-nav__icon md-icon"></span> </label> <a href=13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80.html class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> Linux文件操作基础 </span> </a> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 引入 </span> </a> </li> <li class=md-nav__item> <a href=#c class=md-nav__link> <span class=md-ellipsis> 回顾C语言文件操作 </span> </a> </li> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 系统调用接口 </span> </a> <nav class=md-nav aria-label=系统调用接口> <ul class=md-nav__list> <li class=md-nav__item> <a href=#open class=md-nav__link> <span class=md-ellipsis> open函数 </span> </a> </li> <li class=md-nav__item> <a href=#readwrite class=md-nav__link> <span class=md-ellipsis> read函数和write函数 </span> </a> </li> <li class=md-nav__item> <a href=#close class=md-nav__link> <span class=md-ellipsis> close函数 </span> </a> </li> <li class=md-nav__item> <a href=#c_1 class=md-nav__link> <span class=md-ellipsis> 模拟C语言接口 </span> </a> </li> <li class=md-nav__item> <a href=#open_1 class=md-nav__link> <span class=md-ellipsis> open函数与文件权限 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 文件描述符 </span> </a> </li> <li class=md-nav__item> <a href=#linux_1 class=md-nav__link> <span class=md-ellipsis> 如何理解Linux下一切皆文件 </span> </a> </li> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 文本读写与二进制读写 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=../14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B/14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B.html class=md-nav__link> <span class=md-ellipsis> Linux中输入和输出基本过程 </span> </a> </li> <li class=md-nav__item> <a href=../15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html class=md-nav__link> <span class=md-ellipsis> Linux文件系统 </span> </a> </li> <li class=md-nav__item> <a href=../16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5.html class=md-nav__link> <span class=md-ellipsis> Linux软链接和硬链接 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../17.%20Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93.html class=md-nav__link> <span class=md-ellipsis> Linux进程间通信 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> Linux信号与操作系统原理 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../19.%20Linux%E7%BA%BF%E7%A8%8B/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C.html class=md-nav__link> <span class=md-ellipsis> Linux线程 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 网络基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> Socket编程基础 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../22.%20UDP%E7%BC%96%E7%A8%8B/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> UDP编程 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> TCP编程接口基本使用 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html class=md-nav__link> <span class=md-ellipsis> 前端 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-nav__link> <span class=md-ellipsis> 其它 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-nav__link> <span class=md-ellipsis> 工具帮助 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E9%9D%A2%E8%AF%95/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98.html class=md-nav__link> <span class=md-ellipsis> 闲谈 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../../%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88/%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88.html class=md-nav__link> <span class=md-ellipsis> 阅读档案 </span> </a> </li> <li class=md-nav__item> <a href=../../%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html class=md-nav__link> <span class=md-ellipsis> 联系作者 </span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 引入 </span> </a> </li> <li class=md-nav__item> <a href=#c class=md-nav__link> <span class=md-ellipsis> 回顾C语言文件操作 </span> </a> </li> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 系统调用接口 </span> </a> <nav class=md-nav aria-label=系统调用接口> <ul class=md-nav__list> <li class=md-nav__item> <a href=#open class=md-nav__link> <span class=md-ellipsis> open函数 </span> </a> </li> <li class=md-nav__item> <a href=#readwrite class=md-nav__link> <span class=md-ellipsis> read函数和write函数 </span> </a> </li> <li class=md-nav__item> <a href=#close class=md-nav__link> <span class=md-ellipsis> close函数 </span> </a> </li> <li class=md-nav__item> <a href=#c_1 class=md-nav__link> <span class=md-ellipsis> 模拟C语言接口 </span> </a> </li> <li class=md-nav__item> <a href=#open_1 class=md-nav__link> <span class=md-ellipsis> open函数与文件权限 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 文件描述符 </span> </a> </li> <li class=md-nav__item> <a href=#linux_1 class=md-nav__link> <span class=md-ellipsis> 如何理解Linux下一切皆文件 </span> </a> </li> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 文本读写与二进制读写 </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <div id=readmore-container> <h1 id=linux>Linux文件操作基础<a class=headerlink href=#linux title="Permanent link">&para;</a></h1> <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;"> <p><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 5657 个字 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 640 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3"/></svg></span> 304 行代码 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m12.96-10.71-2.75 3.54-1.96-2.36L8.5 15h11z"/></svg></span> 12 张图片 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 23 分钟</p> </div> <h2 id=_1>引入<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <p>在Linux第一章提到过，<a href="https://www.help-doc.top/Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html?h=%E7%9A%86#_8">在Linux中，一切皆文件</a>，而文件由文件内容和文件属性组成，在C语言中可以使用相应的接口打开文件，例如<code>fopen</code>函数</p> <p>文件最开始在磁盘中，但是因为磁盘的速度远低于CPU的执行速度，根据冯诺依曼体系结构，CPU与内存进行交互，所以可以推出文件要被程序读取，就需要与程序加载到内存变成进程一样，文件也需要加载到内存，而加载到内存中的文件包括其内容和属性，内容可以类比为进程的代码和数据，而因为操作系统也需要管理加载到内存的文件，所以文件属性也被存储到一个结构中，可以类比为进程的PCB</p> <p>所以，在研究Linux文件系统部分主要研究两种文件：</p> <ol> <li>加载到内存的文件</li> <li>存储在磁盘中的文件</li> </ol> <h2 id=c>回顾C语言文件操作<a class=headerlink href=#c title="Permanent link">&para;</a></h2> <p>在C语言中，常见的处理文件的步骤如下：</p> <ol> <li>打开文件：<code>fopen</code>函数</li> <li>读取/写入内容：<code>fwrite</code>函数或者<code>fread</code>函数</li> <li>关闭文件：<code>fclose</code>函数</li> </ol> <p>示例代码如下：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-0-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+</span><span id=__span-0-3>
+</span><span id=__span-0-4><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-0-5><span class=p>{</span>
+</span><span id=__span-0-6><span class=w>    </span><span class=c1>// 以写的方式打开</span>
+</span><span id=__span-0-7><span class=w>    </span><span class=kt>FILE</span><span class=o>*</span><span class=w> </span><span class=n>fp</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>fopen</span><span class=p>(</span><span class=s>&quot;test.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=s>&quot;w&quot;</span><span class=p>);</span>
+</span><span id=__span-0-8><span class=w>    </span><span class=c1>// 向文件中写数据</span>
+</span><span id=__span-0-9><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>content</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;hello linux</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>;</span>
+</span><span id=__span-0-10><span class=w>    </span><span class=n>fwrite</span><span class=p>(</span><span class=n>content</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>content</span><span class=p>),</span><span class=w> </span><span class=n>fp</span><span class=p>);</span>
+</span><span id=__span-0-11><span class=w>    </span><span class=c1>// 关闭文件</span>
+</span><span id=__span-0-12><span class=w>    </span><span class=n>fclose</span><span class=p>(</span><span class=n>fp</span><span class=p>);</span>
+</span><span id=__span-0-13>
+</span><span id=__span-0-14><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-0-15><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>在上面的代码中，使用<code>fopen</code>函数以<code>w</code>的方式打开当前目录下名为<code>test.txt</code>的文件，通过<code>fwrite</code>函数向文件中写入一个字符串，最后调用<code>fclose</code>函数关闭文件</p> <p>在C语言部分学到过，一切以<code>w</code>方式打开的文件，不论是否向该文件写入数据，都会优先清空文件中的数据，而如果指定的文件不存在，不论之后是否会写入都会先创建文件，下面是文档对<code>w</code>方式的介绍：</p> <div class="admonition quote"> <p class=admonition-title>Quote</p> <p><strong>w</strong> Truncate file to zero length or create text file for writing. The stream is positioned at the beginning of the file.</p> </div> <p>这一段描述中第一个需要关注的就是「truncate」，该单词的含义为「截断」，此段描述中的「truncate file to zero length」表现的效果就是清空文件内容</p> <p>第二个需要关注的是「create」，该单词的含义为「创建」，此段描述中的「create text file for writing」表现的效果就是如果指定文件不存在就创建文件</p> <p>除了<code>w</code>方式以外，还有一个<code>a</code>方式，以<code>a</code>方式打开的文件，不论是否向该文件写入数据，都不会清空数据，如果需要写入，则是在文件已有的内容之后进行追加，同样如果指定的文件不存在，不论之后是否会写入都会先创建文件，下面是文档对<code>a</code>方式的介绍：</p> <div class="admonition quote"> <p class=admonition-title>Quote</p> <p><strong>a</strong> Open for appending (writing at end of file). The file is created if it does not exist. The stream is positioned at the end of the file.</p> </div> <p>这一段描述中第一个需要关注的就是「append」，该单词的含义为「追加」，此段描述中的「opening for appending」表现的效果就是在文件已有内容之后追加写新的内容</p> <p>第二个需要关注的是「create」，该单词的含义为「创建」，此段描述中的「The file is created if it does not exist」表现的效果就是如果指定文件不存在就创建文件</p> <p>除了上面的操作性知识回顾以外，在C语言中也学到，默认情况下，程序在启动时默认会开启三个流：</p> <ol> <li><code>stdin</code>：标准输入流，一般认为是从键盘文件读取</li> <li><code>stdout</code>：标准输出流，一般认为是写入显示器</li> <li><code>stderr</code>：标准输出流，一般认为是写入日志文件或者写入显示器</li> </ol> <h2 id=_2>系统调用接口<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <p>在<a href=https://www.help-doc.top/Linux/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html#_3>操作系统基础</a>部分提到过，操作系统上层存在一个系统调用接口部分，实际上C语言提供的文件操作函数都是语言级的函数，对于不同的操作系统，系统调用接口部分也会提供不同的函数供上层调用，为了更加便捷，C语言针对操作系统封装了对应的系统接口形成对应的函数，例如在Linux中，C语言的<code>fopen</code>实际上封装的就是Linux系统接口<code>open</code>函数</p> <h3 id=open><code>open</code>函数<a class=headerlink href=#open title="Permanent link">&para;</a></h3> <p>根据Linux的操作手册，下面是<code>open</code>函数的两种函数原型：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><span class=kt>int</span><span class=w> </span><span class=nf>open</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=o>*</span><span class=n>pathname</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>flags</span><span class=p>);</span>
+</span><span id=__span-1-2><span class=kt>int</span><span class=w> </span><span class=nf>open</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=o>*</span><span class=n>pathname</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>flags</span><span class=p>,</span><span class=w> </span><span class=kt>mode_t</span><span class=w> </span><span class=n>mode</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> <p>参数解释：</p> <ol> <li><code>pathname</code>：文件路径名</li> <li><code>flags</code>：打开文件的方式</li> <li><code>mode</code>：创建文件是，文件所拥有的权限</li> </ol> <div class="admonition note"> <p class=admonition-title>Note</p> <p>需要注意的是，对于第一种方式，因为没有参数可以传递文件创建时的权限，所以一般不会用第一种方式创建文件，更多得可能还是使用第二种方式</p> </div> <p>返回值解释：</p> <p>两个函数都返回文件描述符，该值唯一代表一个加载到内存的文件</p> <p>在Linux中，<code>flags</code>有下面几种常用的值，这些值都是被定义的宏：</p> <ol> <li><code>O_RDONLY</code>：只读模式</li> <li><code>O_WRONLY</code>：只写模式</li> <li><code>O_RDWR</code>：读写模式</li> <li><code>O_TRUNC</code>：覆写模式</li> <li><code>O_CREAT</code>：文件不存在时创建文件</li> <li><code>O_APPEND</code>：追加模式</li> </ol> <div class="admonition note"> <p class=admonition-title>Note</p> <p>注意，上面的所有模式只有给出的文字描述中的一种效果，没有其他效果</p> </div> <p>在给<code>open</code>函数的<code>flags</code>参数传递实参时，如果只传递五种模式的其中一种，一个参数完全可以胜任，但是如果想一次传递多个模式，比如以只写并且文件不存在时创建文件模式打开，此时就涉及到两个模式，一个形参如果通过直接赋值的形式，则无法同时识别两个模式。为了解决这个问题，实际上在Linux中，这个<code>flags</code>是个32个比特位的<a href="https://www.help-doc.top/数据结构/14. 位图/14. 位图.html#_1">位图</a>结构，此时传递参数就可以按照位运算的方式传递，在<code>open</code>函数中，只需要判断位图中为1的部分就可以知道指定了哪些模式，下面以一个例子帮助理解这一个思路：</p> <ol> <li> <p>定义一些宏模拟上面的模式</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><span class=c1>// 1左移0位，结果还是1（二进制位01）</span>
+</span><span id=__span-2-2><span class=cp>#define AONE (1 &lt;&lt; 0) </span>
+</span><span id=__span-2-3><span class=c1>// 1左移1位，结果是2（二进制位10）</span>
+</span><span id=__span-2-4><span class=cp>#define ATWO (1 &lt;&lt; 1)</span>
+</span><span id=__span-2-5><span class=c1>// 1左移2位，结果是4（二进制100）</span>
+</span><span id=__span-2-6><span class=cp>#define ATHREE (1 &lt;&lt; 2)</span>
+</span></code></pre></div></td></tr></table></div> </li> <li> <p>创建函数，参数设置为一个整数，内容为打印指定模式</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><span class=kt>void</span><span class=w> </span><span class=nf>print</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>flag</span><span class=p>)</span>
+</span><span id=__span-3-2><span class=p>{</span>
+</span><span id=__span-3-3><span class=w>    </span><span class=c1>// 与运算取出二进制中的1判断指定模式是否选择</span>
+</span><span id=__span-3-4><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>flag</span><span class=w> </span><span class=o>&amp;</span><span class=w> </span><span class=n>AONE</span><span class=p>)</span>
+</span><span id=__span-3-5><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-3-6><span class=w>        </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;AONE模式</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+</span><span id=__span-3-7><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-3-8><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>flag</span><span class=w> </span><span class=o>&amp;</span><span class=w> </span><span class=n>ATWO</span><span class=p>)</span>
+</span><span id=__span-3-9><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-3-10><span class=w>        </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;ATWO模式</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+</span><span id=__span-3-11><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-3-12><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>flag</span><span class=w> </span><span class=o>&amp;</span><span class=w> </span><span class=n>ATHREE</span><span class=p>)</span>
+</span><span id=__span-3-13><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-3-14><span class=w>        </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;ATHREE模式</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+</span><span id=__span-3-15><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-3-16><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </li> <li> <p>测试</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-4-2>
+</span><span id=__span-4-3><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-4-4><span class=p>{</span>
+</span><span id=__span-4-5><span class=w>    </span><span class=c1>// 1种模式</span>
+</span><span id=__span-4-6><span class=w>    </span><span class=n>print</span><span class=p>(</span><span class=n>AONE</span><span class=p>);</span>
+</span><span id=__span-4-7><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;************</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+</span><span id=__span-4-8><span class=w>    </span><span class=c1>// 2种模式，将为0的比特位置为1</span>
+</span><span id=__span-4-9><span class=w>    </span><span class=n>print</span><span class=p>(</span><span class=n>AONE</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>ATWO</span><span class=p>);</span>
+</span><span id=__span-4-10><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;************</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+</span><span id=__span-4-11><span class=w>    </span><span class=c1>// 3种模式</span>
+</span><span id=__span-4-12><span class=w>    </span><span class=n>print</span><span class=p>(</span><span class=n>AONE</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>ATWO</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>ATHREE</span><span class=p>);</span>
+</span><span id=__span-4-13><span class=p>}</span>
+</span><span id=__span-4-14>
+</span><span id=__span-4-15><span class=n>输出结果</span><span class=err>：</span>
+</span><span id=__span-4-16><span class=n>AONE模式</span>
+</span><span id=__span-4-17><span class=o>************</span>
+</span><span id=__span-4-18><span class=n>AONE模式</span>
+</span><span id=__span-4-19><span class=n>ATWO模式</span>
+</span><span id=__span-4-20><span class=o>************</span>
+</span><span id=__span-4-21><span class=n>AONE模式</span>
+</span><span id=__span-4-22><span class=n>ATWO模式</span>
+</span><span id=__span-4-23><span class=n>ATHREE模式</span>
+</span></code></pre></div></td></tr></table></div> </li> </ol> <h3 id=readwrite><code>read</code>函数和<code>write</code>函数<a class=headerlink href=#readwrite title="Permanent link">&para;</a></h3> <p>在Linux中，<code>read</code>函数和<code>write</code>函数读和写的系统调用接口，其原型如下：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><span class=kt>ssize_t</span><span class=w> </span><span class=nf>read</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=o>*</span><span class=n>buf</span><span class=p>,</span><span class=w> </span><span class=kt>size_t</span><span class=w> </span><span class=n>count</span><span class=p>);</span>
+</span><span id=__span-5-2><span class=kt>ssize_t</span><span class=w> </span><span class=nf>write</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=k>const</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=o>*</span><span class=n>buf</span><span class=p>,</span><span class=w> </span><span class=kt>size_t</span><span class=w> </span><span class=n>count</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> <p>参数解释：</p> <ol> <li><code>fd</code>：文件描述符，对应<code>open</code>函数返回值</li> <li><code>buf</code>：指向指定数组，对于<code>read</code>函数来说，代表存入读取到的内容的起始地址；对于<code>write</code>函数来说，代表待输出的内容的起始地址</li> <li><code>count</code>：代表期望内容个数，对于<code>read</code>函数来说，代表最大读取内容的个数；对于<code>write</code>函数来说，表示最大输出内容的个数</li> </ol> <p>返回值解释：</p> <p>两个函数均返回实际的内容个数，对于<code>read</code>函数来说，代表实际读取内容的个数；对于<code>write</code>函数来说，表示实际输出内容个数</p> <h3 id=close><code>close</code>函数<a class=headerlink href=#close title="Permanent link">&para;</a></h3> <p>在Linux中，<code>close</code>函数是关闭文件的系统调用接口，其原型如下：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><span class=kt>int</span><span class=w> </span><span class=nf>close</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> <p>参数解释：<code>fd</code>代表文件描述符，与<code>open</code>函数的返回值对应</p> <p>返回值解释：0代表关闭成功，小于0代表失败</p> <h3 id=c_1>模拟C语言接口<a class=headerlink href=#c_1 title="Permanent link">&para;</a></h3> <p>有了上面的铺垫，现在考虑<code>open</code>函数的使用模拟<code>w</code>的方式，根据前面C语言中w方式的描述：以写模式打开并且不存在指定文件时创建该文件，若指定文件中有内容就清除文件内容，需要使用到只写模式、文件不存在时创建模式和覆写模式</p> <p>先观察三个模式依次搭配的特点：</p> <ul> <li> <p><code>O_WRONLY</code></p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-7-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+</span><span id=__span-7-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+</span><span id=__span-7-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+</span><span id=__span-7-5><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+</span><span id=__span-7-6><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</span><span id=__span-7-7>
+</span><span id=__span-7-8><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-7-9><span class=p>{</span>
+</span><span id=__span-7-10><span class=w>    </span><span class=c1>// 以只写模式打开文件</span>
+</span><span id=__span-7-11><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;test.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_WRONLY</span><span class=p>);</span>
+</span><span id=__span-7-12><span class=w>    </span><span class=c1>// 向文件中写入</span>
+</span><span id=__span-7-13><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>content</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;hello linux</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>;</span>
+</span><span id=__span-7-14><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>num</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>write</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>content</span><span class=p>,</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>content</span><span class=p>));</span>
+</span><span id=__span-7-15><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;%d</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>num</span><span class=p>);</span>
+</span><span id=__span-7-16><span class=w>    </span><span class=c1>// 关闭文件</span>
+</span><span id=__span-7-17><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span><span id=__span-7-18>
+</span><span id=__span-7-19><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-7-20><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>向当前目录中的<code>test.txt</code>文件输出内容：</p> <p><a class=glightbox href="13. Linux文件操作基础.assets\image.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image.png"></a></p> <p>如果此时将写入的内容变短为3个字符，观察下面代码的运行结果：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-8-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+</span><span id=__span-8-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+</span><span id=__span-8-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+</span><span id=__span-8-5><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+</span><span id=__span-8-6><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</span><span id=__span-8-7>
+</span><span id=__span-8-8><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-8-9><span class=p>{</span>
+</span><span id=__span-8-10><span class=w>    </span><span class=c1>// 以只写模式打开文件</span>
+</span><span id=__span-8-11><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;test.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_WRONLY</span><span class=p>);</span>
+</span><span id=__span-8-12><span class=w>    </span><span class=c1>// 向文件中写入</span>
+</span><span id=__span-8-13><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>content</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;bye&quot;</span><span class=p>;</span>
+</span><span id=__span-8-14><span class=w>    </span><span class=n>write</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>content</span><span class=p>,</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>content</span><span class=p>));</span>
+</span><span id=__span-8-15><span class=w>    </span><span class=c1>// 关闭文件</span>
+</span><span id=__span-8-16><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span><span id=__span-8-17>
+</span><span id=__span-8-18><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-8-19><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>向当前目录中的<code>test.txt</code>文件输出内容：</p> <p><a class=glightbox href="13. Linux文件操作基础.assets\image1.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image1.png"></a></p> <p>可以看到，只写模式打开一个有内容的文件默认不会清除原始内容，而是覆盖写</p> </li> <li> <p><code>O_TRUNC</code>和<code>O_WRONLY</code></p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-9-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+</span><span id=__span-9-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+</span><span id=__span-9-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+</span><span id=__span-9-5><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+</span><span id=__span-9-6><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</span><span id=__span-9-7>
+</span><span id=__span-9-8><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-9-9><span class=p>{</span>
+</span><span id=__span-9-10><span class=w>    </span><span class=c1>// 以只写模式打开文件</span>
+</span><span id=__span-9-11><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;test.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_TRUNC</span><span class=p>);</span>
+</span><span id=__span-9-12><span class=w>    </span><span class=c1>// 向文件中写入</span>
+</span><span id=__span-9-13><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>content</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;hello</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>;</span>
+</span><span id=__span-9-14><span class=w>    </span><span class=n>write</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>content</span><span class=p>,</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>content</span><span class=p>));</span>
+</span><span id=__span-9-15><span class=w>    </span><span class=c1>// 关闭文件</span>
+</span><span id=__span-9-16><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span><span id=__span-9-17>
+</span><span id=__span-9-18><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-9-19><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>向当前目录中的<code>test.txt</code>文件输出内容：</p> <p><a class=glightbox href="13. Linux文件操作基础.assets\image2.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image2.png"></a></p> <p>可以看到加了<code>O_TRUNC</code>宏后，就可以达到打开文件后不论文件是否有内容都会先清空再写入内容</p> </li> <li> <p><code>O_TRUNC</code>、<code>O_WRONLY</code>和<code>O_CREAT</code></p> <p>前面两个选项都只展示了在有指定文件的情况下正常运行，但是C语言的<code>fopen</code>函数以<code>w</code>方式打开指定文件，当该文件不存在会自动创建，所以此时就需要在系统调用接口加上<code>O_CREAT</code>，例如下面的代码：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-10-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+</span><span id=__span-10-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+</span><span id=__span-10-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+</span><span id=__span-10-5><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+</span><span id=__span-10-6><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</span><span id=__span-10-7>
+</span><span id=__span-10-8><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-10-9><span class=p>{</span>
+</span><span id=__span-10-10><span class=w>    </span><span class=c1>// 以只写模式打开文件</span>
+</span><span id=__span-10-11><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;test.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_TRUNC</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_CREAT</span><span class=p>);</span>
+</span><span id=__span-10-12><span class=w>    </span><span class=c1>// 向文件中写入</span>
+</span><span id=__span-10-13><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>content</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;hello, this is linux</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>;</span>
+</span><span id=__span-10-14><span class=w>    </span><span class=n>write</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>content</span><span class=p>,</span><span class=w> </span><span class=n>strlen</span><span class=p>(</span><span class=n>content</span><span class=p>));</span>
+</span><span id=__span-10-15><span class=w>    </span><span class=c1>// 关闭文件</span>
+</span><span id=__span-10-16><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span><span id=__span-10-17>
+</span><span id=__span-10-18><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-10-19><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>删除当前目录的<code>test.txt</code>文件后执行上面的代码：</p> <p><a class=glightbox href="13. Linux文件操作基础.assets\image3.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image3.png"></a></p> <p>可以看到会自动创建<code>test.txt</code>文件再写入指定的内容</p> <p>此时就简单实现了C语言中的<code>w</code>方式打开的效果，但是此时创建的<code>test.txt</code>文件与直接使用<code>touch</code>创建的文件有点出入</p> </li> </ul> <h3 id=open_1><code>open</code>函数与文件权限<a class=headerlink href=#open_1 title="Permanent link">&para;</a></h3> <p>前面使用到了<code>open</code>函数的第一个版本，现在考虑<code>open</code>函数第二个版本，这个函数可以传递第三个参数，该参数表示文件创建时拥有的权限，传递<a href=https://www.help-doc.top/Linux/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html#_3>权限八进制值</a></p> <p>先观察使用第一个版本创建出的文件拥有的权限： <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-11-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+</span><span id=__span-11-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+</span><span id=__span-11-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+</span><span id=__span-11-5><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+</span><span id=__span-11-6><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</span><span id=__span-11-7>
+</span><span id=__span-11-8><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-11-9><span class=p>{</span>
+</span><span id=__span-11-10><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;test.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=p>);</span>
+</span><span id=__span-11-11>
+</span><span id=__span-11-12><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>id</span><span class=p>);</span>
+</span><span id=__span-11-13>
+</span><span id=__span-11-14><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-11-15><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> 运行程序结果如下： <a class=glightbox href="13. Linux文件操作基础.assets\image5.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image5.png"></a></p> <p>可以看到创建出来的文件所拥有的权限是错乱的，尤其是除了所有者以外的权限，为了避免出现这个情况，就需要使用第二个版本的<code>open</code>函数 <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-12-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+</span><span id=__span-12-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+</span><span id=__span-12-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+</span><span id=__span-12-5><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+</span><span id=__span-12-6><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</span><span id=__span-12-7>
+</span><span id=__span-12-8><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-12-9><span class=p>{</span>
+</span><span id=__span-12-10><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;test.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
+</span><span id=__span-12-11>
+</span><span id=__span-12-12><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>id</span><span class=p>);</span>
+</span><span id=__span-12-13>
+</span><span id=__span-12-14><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-12-15><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> 运行程序结果如下： <a class=glightbox href="13. Linux文件操作基础.assets\image6.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image6.png"></a></p> <p>可以看到此时文件权限就是正常的，但是因为存在<a href=https://www.help-doc.top/Linux/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html#_8>文件权限掩码<code>umask</code></a>，所以其值并不是代码中设置的0666（对应为-rw-rw-rw-），当前系统的文件权限掩码可以通过<code>umask</code>指令查看，默认为0002</p> <p>如果不希望在程序中创建的文件所拥有的权限受到系统umask影响，可以在创建文件之前使用<code>umask</code>函数设置初始的文件权限掩码为0： <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-13-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+</span><span id=__span-13-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+</span><span id=__span-13-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+</span><span id=__span-13-5><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+</span><span id=__span-13-6><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</span><span id=__span-13-7>
+</span><span id=__span-13-8><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-13-9><span class=p>{</span>
+</span><span id=__span-13-10><span class=w>    </span><span class=n>umask</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span><span id=__span-13-11><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;test.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
+</span><span id=__span-13-12>
+</span><span id=__span-13-13><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>id</span><span class=p>);</span>
+</span><span id=__span-13-14>
+</span><span id=__span-13-15><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-13-16><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> 运行后观察到当前就是程序中指定的0666权限： <a class=glightbox href="13. Linux文件操作基础.assets\image7.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image7.png"></a></p> <h2 id=_3>文件描述符<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <p>前面的系统调用接口函数中，四个函数均涉及到了文件描述符，该描述符在Linux中是对每一个加载到内存的唯一标识，打印指定的文件观察<code>open</code>函数返回值：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-14-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;string.h&gt;</span>
+</span><span id=__span-14-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+</span><span id=__span-14-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+</span><span id=__span-14-5><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+</span><span id=__span-14-6><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</span><span id=__span-14-7>
+</span><span id=__span-14-8><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-14-9><span class=p>{</span>
+</span><span id=__span-14-10><span class=w>    </span><span class=c1>// 以只写模式打开文件</span>
+</span><span id=__span-14-11><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;test.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_TRUNC</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_CREAT</span><span class=p>);</span>
+</span><span id=__span-14-12><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;%d</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>fd</span><span class=p>);</span>
+</span><span id=__span-14-13><span class=w>    </span><span class=c1>// 关闭文件</span>
+</span><span id=__span-14-14><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span><span id=__span-14-15>
+</span><span id=__span-14-16><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-14-17><span class=p>}</span>
+</span><span id=__span-14-18>
+</span><span id=__span-14-19><span class=n>输出结果</span><span class=err>：</span>
+</span><span id=__span-14-20><span class=mi>3</span>
+</span></code></pre></div></td></tr></table></div> <p>根据Linux操作手册，对于<code>open</code>函数的返回值具体描述如下：</p> <div class="admonition quote"> <p class=admonition-title>Quote</p> <p>open() returns the new file descriptor, or -1 if an error occurred (in which case, errno is set appropriately).</p> </div> <p>可以看到，当<code>open</code>函数打开文件成功时返回-1，否则返回打开的文件对应的文件描述符，为了知道何为文件描述符，这里就需要深入了解在Linux具体是如何描述和管理文件的</p> <p>首先，有了前面学习进程的基础可以知道每一个进程需要被管理就需要先描述再组织，而描述对应的就是进程PCB（<code>task_struct</code>），组织就是双向链表，对于文件也是如此，描述对应的就是<code>struct file</code>，组织也是双向链表</p> <p>但是，如果直接让进程访问文件结构<code>file</code>就会增加耦合度，导致操作系统的管理工作会变得繁重，所以在内存中，进程结构在单独的一个区域，文件结构也在单独的一个区域，而为了进程可以访问到文件，进程结构中就存在一个结构体指针<code>struct files_struct *files</code>，该结构体指针类型是<code>struct files_struct *</code>，所谓的<code>files_struct</code>就是将文件和进程建立连接的结构，该结构中存在一个属性：<code>struct file * fd_array[NR_OPEN_DEFAULT]</code>，该数组的每一个成员就是指向每一个文件<code>file</code>结构的指针，因为是数组，所以可以通过下标访问指定的元素，在当前这个条件下，访问到的就是指向每一个文件<code>file</code>结构的指针</p> <p>所以所谓的文件描述符，就是<code>fd_array</code>数组的下标，示意图如下：</p> <p><a class=glightbox href="13. Linux文件操作基础.assets\image4.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image4.png"></a></p> <p>此时就会有第二个问题：为什么在程序中打开的文件默认下标是3，错误是-1，中间的0、1和2表示什么？</p> <p>前面提到，在C语言程序启动时，会自动加载3种文件流：</p> <ol> <li><code>stdin</code>：标准输入流，一般认为是从键盘文件读取</li> <li><code>stdout</code>：标准输出流，一般认为是写入显示器</li> <li><code>stderr</code>：标准输出流，一般认为是写入日志文件或者写入显示器</li> </ol> <p>在Linux手册中，这三个流的原型如下：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-15-2>
+</span><span id=__span-15-3><span class=k>extern</span><span class=w> </span><span class=kt>FILE</span><span class=w> </span><span class=o>*</span><span class=n>stdin</span><span class=p>;</span>
+</span><span id=__span-15-4><span class=k>extern</span><span class=w> </span><span class=kt>FILE</span><span class=w> </span><span class=o>*</span><span class=n>stdout</span><span class=p>;</span>
+</span><span id=__span-15-5><span class=k>extern</span><span class=w> </span><span class=kt>FILE</span><span class=w> </span><span class=o>*</span><span class=n>stderr</span><span class=p>;</span>
+</span></code></pre></div></td></tr></table></div> <p>可以看到三者均是<code>FILE</code>类型，这个类型实际上是语言级上的封装，因为在Linux中文件描述符是访问文件的唯一方式，所以C语言的接口想访问文件就必须要访问到指定文件的文件描述符，所以<code>FILE</code>结构中一定可以有文件描述符属性，根据下面代码可以验证（下面的代码中<code>_fileno</code>对应的就是文件描述符）：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-16-2>
+</span><span id=__span-16-3><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-16-4><span class=p>{</span>
+</span><span id=__span-16-5><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;%d</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>stdin</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
+</span><span id=__span-16-6><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;%d</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>stdout</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
+</span><span id=__span-16-7><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;%d</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>stderr</span><span class=o>-&gt;</span><span class=n>_fileno</span><span class=p>);</span>
+</span><span id=__span-16-8>
+</span><span id=__span-16-9><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-16-10><span class=p>}</span>
+</span><span id=__span-16-11>
+</span><span id=__span-16-12><span class=n>输出结果</span><span class=err>：</span>
+</span><span id=__span-16-13><span class=mi>0</span>
+</span><span id=__span-16-14><span class=mi>1</span>
+</span><span id=__span-16-15><span class=mi>2</span>
+</span></code></pre></div></td></tr></table></div> <p>所以，之所以显式打开的文件对应的文件描述符为3是因为默认打开的三个文件占用了<code>fd_array</code>数组前面三个空间</p> <h2 id=linux_1>如何理解Linux下一切皆文件<a class=headerlink href=#linux_1 title="Permanent link">&para;</a></h2> <p>前面提到多次「在Linux下一切皆文件」，对于保存在计算机硬盘中的文件来说，说其是文件再合适不过，但是对于硬件来说，如果再说硬件是文件难免有些不妥，但是如果硬件不属于文件，那么就不会出现「在Linux下一切皆文件」的表述，所以硬件为什么在Linux下硬件也算文件</p> <p>要理解为什么在Linux下硬件也算文件，需要先回顾操作系统的作用。在开始进程部分之前，提到过<a href=https://www.help-doc.top/Linux/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html#_3>操作系统实际上是一个管理者的身份</a>，上层提供调用接口，下层通过调用接口中的具体实现操控硬件，此处为了理解硬件也算文件，就需要研究下层中接口的实现</p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>此处不讨论接口中具体的代码实现，只讨论这整个过程是如何形成的</p> </div> <p>根据冯诺依曼体系结构，除了内存、CPU以外，其他设备均称为外设，也称为输入输出设备，而这些设备在接入计算机时，需要在计算机中安装驱动，而安装驱动的本质就是为了将对应的硬件信息加载到属于硬件的信息表中，而操作系统为了管理这些表，就需要创建一个结构体，这一个过程符合「先描述，再组织」的「描述」，此处的每一个结构体都是通过双向链表进行连接，这一个过程符合「先描述，再组织」的「组织」。有了硬件信息的结构体和对应的数据结构，操作系统就可以开始通过管理这一个硬件信息数据结构来管理硬件，这一个过程就可以理解为实现「硬件即文件」的初步过程</p> <p>但是上面的过程只是完成了硬件信息之间的联系，这些联系只能做到简单的增删查改，操作系统不可能一直停留在添加设备和删除设备的行为中，这也没有意义。上文提到这些硬件本身都属于输入输出设备，最基本的行为就是输入和输出，即I/O行为，所以每一个硬件都有属于自己的一套I/O行为方法，尽管有的只有输出，有的只有输入，而因为方法的实现不同，导致操作硬件的方法就不同，在C语言中，不允许在结构体中定义方法（也称函数），所以每一个设备的方法都独立于设备结构外，此时如果进程需要调用就会显得不方便（调用顺序：<code>task_struct</code> -&gt; <code>file_struct</code> -&gt; <code>file</code>访问到指定硬件信息，单独调用指定方法传参），为了简化这一步骤，考虑将指定方法的地址作为<code>file</code>结构的成员（即结构体中存储函数指针），此时进程调用即可通过<code>file</code>结构调用指定文件，而不需要再访问指定的硬件结构以及单独调用指定的方法，所以此时每一个结构体的属性和方法就可以通过<code>file</code>结构来进行管理和访问，最终做到了「硬件即文件」</p> <p>在上面的过程中，使用<code>file</code>结构描述所有文件，包括硬件视为文件在内的系统称为Linux下的虚拟文件系统（Virtual File System，简称VFS），有了前面的介绍，现在基本介绍一下虚拟文件系统的作用：虚拟文件系统是操作系统的文件系统虚拟层，在其下是实体的文件系统。虚拟文件系统的主要作用在于让上层的软件，能够用单一的方式，来跟底层不同的文件系统沟通。在操作系统与之下的各种文件系统之间，虚拟文件系统提供了标准的操作接口，让操作系统能够很快的支持新的文件系统</p> <p>简单理解这个作用就是让每一个进程访问每一个文件都认为是同一种文件，而不是每一个文件都是独立的个体</p> <div class="admonition info"> <p class=admonition-title>Info</p> <p>补充：在上面的描述中提到一个点：file结构体中保存了函数指针和文件属性字段，而其他文件只需要实现自己对应的函数即可，这个过程非常像C++面向对象三大特性中的一大特性：多态，多态的基本形式为父类提供方法名但不实现，由具体的子类去实现，所以上面C语言中的思路也可以理解为是C语言中实现多态的一种方式</p> </div> <p>下面是前面的描述对应的示意图：</p> <p><a class=glightbox href="13. Linux文件操作基础.assets\image8.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image8.png"></a></p> <p>Linux 2.6.0内核源代码中的<code>file_operations</code>结构体如下：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><span class=k>struct</span><span class=w> </span><span class=nc>file_operations</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-17-2><span class=w>    </span><span class=k>struct</span><span class=w> </span><span class=nc>module</span><span class=w> </span><span class=o>*</span><span class=n>owner</span><span class=p>;</span>
+</span><span id=__span-17-3><span class=w>    </span><span class=n>loff_t</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>llseek</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=n>loff_t</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=p>);</span>
+</span><span id=__span-17-4><span class=w>    </span><span class=kt>ssize_t</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>read</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=n>__user</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>size_t</span><span class=p>,</span><span class=w> </span><span class=n>loff_t</span><span class=w> </span><span class=o>*</span><span class=p>);</span>
+</span><span id=__span-17-5><span class=w>    </span><span class=kt>ssize_t</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>aio_read</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>kiocb</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=n>__user</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>size_t</span><span class=p>,</span><span class=w> </span><span class=n>loff_t</span><span class=p>);</span>
+</span><span id=__span-17-6><span class=w>    </span><span class=kt>ssize_t</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>write</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=n>__user</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>size_t</span><span class=p>,</span><span class=w> </span><span class=n>loff_t</span><span class=w> </span><span class=o>*</span><span class=p>);</span>
+</span><span id=__span-17-7><span class=w>    </span><span class=kt>ssize_t</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>aio_write</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>kiocb</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=n>__user</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>size_t</span><span class=p>,</span><span class=w> </span><span class=n>loff_t</span><span class=p>);</span>
+</span><span id=__span-17-8><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>readdir</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=n>filldir_t</span><span class=p>);</span>
+</span><span id=__span-17-9><span class=w>    </span><span class=kt>unsigned</span><span class=w> </span><span class=nf>int</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>poll</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>poll_table_struct</span><span class=w> </span><span class=o>*</span><span class=p>);</span>
+</span><span id=__span-17-10><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>ioctl</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>inode</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>unsigned</span><span class=w> </span><span class=kt>int</span><span class=p>,</span><span class=w> </span><span class=kt>unsigned</span><span class=w> </span><span class=kt>long</span><span class=p>);</span>
+</span><span id=__span-17-11><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>mmap</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>vm_area_struct</span><span class=w> </span><span class=o>*</span><span class=p>);</span>
+</span><span id=__span-17-12><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>open</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>inode</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>);</span>
+</span><span id=__span-17-13><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>flush</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>);</span>
+</span><span id=__span-17-14><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>release</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>inode</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>);</span>
+</span><span id=__span-17-15><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>fsync</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>dentry</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>datasync</span><span class=p>);</span>
+</span><span id=__span-17-16><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>aio_fsync</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>kiocb</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>datasync</span><span class=p>);</span>
+</span><span id=__span-17-17><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>fasync</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=kt>int</span><span class=p>,</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=p>);</span>
+</span><span id=__span-17-18><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>lock</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=p>,</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>file_lock</span><span class=w> </span><span class=o>*</span><span class=p>);</span>
+</span><span id=__span-17-19><span class=w>    </span><span class=kt>ssize_t</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>readv</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=k>const</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>iovec</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>unsigned</span><span class=w> </span><span class=kt>long</span><span class=p>,</span><span class=w> </span><span class=n>loff_t</span><span class=w> </span><span class=o>*</span><span class=p>);</span>
+</span><span id=__span-17-20><span class=w>    </span><span class=kt>ssize_t</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>writev</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=k>const</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>iovec</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>unsigned</span><span class=w> </span><span class=kt>long</span><span class=p>,</span><span class=w> </span><span class=n>loff_t</span><span class=w> </span><span class=o>*</span><span class=p>);</span>
+</span><span id=__span-17-21><span class=w>    </span><span class=kt>ssize_t</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>sendfile</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=n>loff_t</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>size_t</span><span class=p>,</span><span class=w> </span><span class=n>read_actor_t</span><span class=p>,</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=n>__user</span><span class=w> </span><span class=o>*</span><span class=p>);</span>
+</span><span id=__span-17-22><span class=w>    </span><span class=kt>ssize_t</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>sendpage</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=k>struct</span><span class=w> </span><span class=nc>page</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=p>,</span><span class=w> </span><span class=kt>size_t</span><span class=p>,</span><span class=w> </span><span class=n>loff_t</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=p>);</span>
+</span><span id=__span-17-23><span class=w>    </span><span class=kt>unsigned</span><span class=w> </span><span class=nf>long</span><span class=w> </span><span class=p>(</span><span class=o>*</span><span class=n>get_unmapped_area</span><span class=p>)(</span><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=o>*</span><span class=p>,</span><span class=w> </span><span class=kt>unsigned</span><span class=w> </span><span class=kt>long</span><span class=p>,</span><span class=w> </span><span class=kt>unsigned</span><span class=w> </span><span class=kt>long</span><span class=p>,</span><span class=w> </span><span class=kt>unsigned</span><span class=w> </span><span class=kt>long</span><span class=p>,</span><span class=w> </span><span class=kt>unsigned</span><span class=w> </span><span class=kt>long</span><span class=p>);</span>
+</span><span id=__span-17-24><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> <h2 id=_4>文本读写与二进制读写<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <p>在语言层面会看到大多数编程语言会提供文本读写的函数和二进制读写的函数，在计算机中，所有文件实际上都是以二进制的形式存储在内存中，文本文件也不例外，但是为什么需要将文本读写和二进制读写分开而不直接使用一套的二进制读写</p> <p>为了回答上面的问题，首先解释为什么语言层面需要对底层的系统调用进行封装</p> <p>观察前面提到的系统调用接口<code>write</code>函数和<code>read</code>函数，原型如下：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><span class=kt>ssize_t</span><span class=w> </span><span class=nf>read</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=o>*</span><span class=n>buf</span><span class=p>,</span><span class=w> </span><span class=kt>size_t</span><span class=w> </span><span class=n>count</span><span class=p>);</span>
+</span><span id=__span-18-2><span class=kt>ssize_t</span><span class=w> </span><span class=nf>write</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=k>const</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=o>*</span><span class=n>buf</span><span class=p>,</span><span class=w> </span><span class=kt>size_t</span><span class=w> </span><span class=n>count</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> <p>可以看到，这两个函数在指定写入和读取的内容时都是<code>void*</code>，说明这两个函数可以接受任意数据的指针，将任意数据写入或读取到指定位置，如果此时要向指定位置写入一个12345会出现下面的情况：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-19-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</span><span id=__span-19-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+</span><span id=__span-19-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+</span><span id=__span-19-5><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+</span><span id=__span-19-6>
+</span><span id=__span-19-7><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-19-8><span class=p>{</span>
+</span><span id=__span-19-9><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;test1.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_TRUNC</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
+</span><span id=__span-19-10><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>a</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>12345</span><span class=p>;</span>
+</span><span id=__span-19-11><span class=w>    </span><span class=n>write</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=o>&amp;</span><span class=n>a</span><span class=p>,</span><span class=w> </span><span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>));</span>
+</span><span id=__span-19-12><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span><span id=__span-19-13>
+</span><span id=__span-19-14><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-19-15><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>编译执行上面的代码查看<code>test1.txt</code>文件中的内容：</p> <p><a class=glightbox href="13. Linux文件操作基础.assets\image9.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image9.png"></a></p> <p>可以看到并非是写入的12345，那为什么是90：<code>write(fd, &amp;a, sizeof(int));</code>这一行会把整数 <code>12345</code> 的字节序列写入文件。整数<code>12345</code>在大多数系统上（小端序）会被存储为四个字节，在一个小端序Linux系统上运行这段代码，那么整数<code>12345</code>（即 <code>0x3039</code>或<code>0x00003039</code>补充高位零）会被分解成字节<code>0x39</code>, <code>0x30</code>, <code>0x00</code>, <code>0x00</code> 并按此顺序写入文件，而字节<code>0x39</code>对应ASCII字符<code>'9'</code>，而<code>0x30</code>对应 ASCII 字符<code>'0'</code></p> <p>如果想向文件中写入真正的12345，则必须按照下面的方案进行：</p> <ol> <li>将12345封装为字符串</li> <li>将该字符串写入</li> </ol> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-20-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-20-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</span><span id=__span-20-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+</span><span id=__span-20-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+</span><span id=__span-20-5><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+</span><span id=__span-20-6>
+</span><span id=__span-20-7><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-20-8><span class=p>{</span>
+</span><span id=__span-20-9><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;test1.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_CREAT</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_WRONLY</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>O_TRUNC</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
+</span><span id=__span-20-10><span class=w>    </span><span class=k>const</span><span class=w> </span><span class=kt>char</span><span class=o>*</span><span class=w> </span><span class=n>a</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;12345&quot;</span><span class=p>;</span>
+</span><span id=__span-20-11><span class=w>    </span><span class=n>write</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>a</span><span class=p>,</span><span class=w> </span><span class=k>sizeof</span><span class=p>(</span><span class=n>a</span><span class=p>));</span>
+</span><span id=__span-20-12>
+</span><span id=__span-20-13><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span><span id=__span-20-14>
+</span><span id=__span-20-15><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-20-16><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>编译执行上面的代码查看<code>test1.txt</code>文件中的内容：</p> <p><a class=glightbox href="13. Linux文件操作基础.assets\image10.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image10.png"></a></p> <p>而如何想用系统调用接口<code>read</code>函数进行读取，为了保证读取的内容也是真正的12345，需要单独创建一个数组存储到读取的数据</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-21-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;stdio.h&gt;</span>
+</span><span id=__span-21-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;unistd.h&gt;</span>
+</span><span id=__span-21-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/types.h&gt;</span>
+</span><span id=__span-21-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;sys/stat.h&gt;</span>
+</span><span id=__span-21-5><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;fcntl.h&gt;</span>
+</span><span id=__span-21-6>
+</span><span id=__span-21-7><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-21-8><span class=p>{</span>
+</span><span id=__span-21-9><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=s>&quot;test1.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=n>O_RDONLY</span><span class=p>,</span><span class=w> </span><span class=mo>0666</span><span class=p>);</span>
+</span><span id=__span-21-10>
+</span><span id=__span-21-11><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>buffer</span><span class=p>[</span><span class=mi>1024</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span>
+</span><span id=__span-21-12><span class=w>    </span><span class=kt>ssize_t</span><span class=w> </span><span class=n>num</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>read</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=n>buffer</span><span class=p>,</span><span class=w> </span><span class=k>sizeof</span><span class=p>(</span><span class=n>buffer</span><span class=p>));</span>
+</span><span id=__span-21-13><span class=w>    </span><span class=n>buffer</span><span class=p>[</span><span class=n>num</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=c1>// 尾部置为\0</span>
+</span><span id=__span-21-14><span class=w>    </span><span class=n>printf</span><span class=p>(</span><span class=s>&quot;%s</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>,</span><span class=w> </span><span class=n>buffer</span><span class=p>);</span>
+</span><span id=__span-21-15>
+</span><span id=__span-21-16><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span><span id=__span-21-17>
+</span><span id=__span-21-18><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-21-19><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>编译执行上面的代码可以看到下面的结果：</p> <p><a class=glightbox href="13. Linux文件操作基础.assets\image11.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="13. Linux文件操作基础.assets\image11.png"></a></p> <p>可以看到，不论是读还是写，使用系统调用接口都需要用户自己先处理数据的转换，否则就会出现写入或读取的内容不是预期的内容</p> <p>所以，为了保证用户想输入指定的内容而不希望其被转换为各种奇奇怪怪的内容，语言层就提供了对系统调用接口封装后的函数，比如写入的<code>sprintf</code>和读取的<code>sscanf</code>等</p> <p>现在再来解释为什么语言层面要区分文本读写和二进制读写，从前面的例子可以看到，如果想写入一个12345必须先转换为字符串才能继续写入，实际上很多情况下都需要将内容原样写入原样读取，例如将指定内容打印到显示器，显示器实际上就是字符设备，12345并不是以数字形式显示在显示器上，而是按照一个一个字符依次显示使其看起来是一个整体，所以语言层单独封装一层文本输入和输出就是因为文本输入和输出使用频率很高</p> <p>总结起来，语言层对系统调用接口进行封装的主要原因有以下几点：</p> <ol> <li>方便用户使用：封装可以提供更高层次的抽象，使得接口更加简洁易懂，降低使用难度</li> <li>便于跨平台，实现语言的可移植性：封装（Linux下的C语言的标准库为<code>glibc</code>）可以创建一个抽象层，屏蔽掉不同操作系统之间的差异，使得代码能够在多种平台上运行。通过封装，开发人员可以编写一次代码，然后在多个操作系统上运行，减少了针对不同平台进行调整的工作量</li> </ol> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年12月2日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年10月15日</span> </span> </aside> </div> <script src=https://qiniu.techgrow.cn/readmore/dist/readmore.js type=text/javascript></script> <script>
+        var isExclude = false;
+        var excludePages = ['/网站验证码', '/阅读档案', '/作者', '/网站时间线'];
+        var currentPath = decodeURIComponent(window.location.pathname).replace(/\/$/, '').toLowerCase();
+        isExclude = excludePages.some(page => currentPath.includes(page.toLowerCase()));
+        var isMobile = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
+        var allowMobile = true;
+        if (!isExclude && (!isMobile || (isMobile && allowMobile))) {
+            try {
+                var plugin = new ReadmorePlugin();
+                plugin.init({
+                    id: "readmore-container",
+                    blogId: "36140-2300591443397-093",
+                    name: "阅读档案",
+                    keyword: "验证码",
+                    qrcode: "https://www.help-doc.top/index.assets/qrcode_for_gh_166df3e5da8b_258.jpg",
+                    type: "website",
+                    height: "600",
+                    expires: "31",
+                    interval: "60",
+                    random: "1.0"
+                })
+            } catch (e) {
+                console.warn("readmore plugin occurred error: " + e.name + " | " + e.message);
+            }
+        }
+        let verificationInProgress = false;
+        function isContentUnlocked() {
+            const readmoreWrapper = document.getElementById('readmore-wrapper');
+            const readmoreModel = document.getElementById('readmore-model-wrapper');
+            const readmoreModalMask = document.getElementById('readmore-modal-mask');
+            if (verificationInProgress) {
+                return false;
+            }
+            if (!readmoreWrapper && !readmoreModel && !readmoreModalMask) {
+                return true;
+            }
+            return readmoreWrapper && 
+                window.getComputedStyle(readmoreWrapper).display === 'none' && 
+                (!readmoreModel || window.getComputedStyle(readmoreModel).display === 'none') &&
+                (!readmoreModalMask || window.getComputedStyle(readmoreModalMask).display === 'none');
+        }
+        function showVerificationModal() {
+            const readmoreBtn = document.getElementById('readmore-btn');
+            if (readmoreBtn) {
+                verificationInProgress = true;
+                readmoreBtn.click();
+                const observer = new MutationObserver(() => {
+                    const modalMask = document.getElementById('readmore-modal-mask');
+                    if (!modalMask || window.getComputedStyle(modalMask).display === 'none') {
+                        setTimeout(() => {
+                            if (!isContentUnlocked()) {
+                                verificationInProgress = false;
+                            }
+                        }, 100);
+                    }
+                });
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['style', 'class']
+                });
+            }
+        }
+        function handleAnchorNavigation(e, href) {
+            if (!isContentUnlocked()) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!verificationInProgress) {
+                    showVerificationModal();
+                }
+                return false;
+            }
+            if (href && href.includes('#')) {
+                const targetId = href.split('#')[1];
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+            return true;
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            let searchResultsInitialized = false;
+            const searchObserver = new MutationObserver((mutations) => {
+                if (searchResultsInitialized) return;
+                const searchResults = document.querySelectorAll('.md-search-result__link');
+                if (searchResults.length > 0) {
+                    searchResults.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href && href.includes('#') && !href.includes('#__tabbed_')) {
+                            link.addEventListener('click', (e) => {
+                                const currentPath = window.location.pathname;
+                                const [linkPath, hash] = href.split('#');
+                                if (!linkPath || linkPath === currentPath) {
+                                    handleAnchorNavigation(e, '#' + hash);
+                                }
+                            }, { capture: true, once: true });
+                        }
+                    });
+                    
+                    searchResultsInitialized = true;
+                    setTimeout(() => {
+                        searchResultsInitialized = false;
+                    }, 100);
+                }
+            });
+
+            const searchContainer = document.querySelector('.md-search');
+            if (searchContainer) {
+                searchObserver.observe(searchContainer, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+            function resetSearchState() {
+                searchResultsInitialized = false;
+            }
+            const searchInput = document.querySelector('.md-search__input');
+            if (searchInput) {
+                searchInput.addEventListener('blur', resetSearchState);
+                searchInput.addEventListener('search', resetSearchState);
+            }
+            document.addEventListener('click', (e) => {
+                const target = e.target.closest('a[href*="#"]');
+                if (!target) return;
+                
+                const href = target.getAttribute('href');
+                // 排除以 __tabbed_ 开头的锚点
+                if (href && (href.startsWith('#') || href.includes('/#')) && !href.includes('#__tabbed_')) {
+                    handleAnchorNavigation(e, href);
+                }
+            }, true);
+            setTimeout(() => {
+                const hash = window.location.hash;
+                if (hash && !isContentUnlocked()) {
+                    showVerificationModal();
+                }
+            }, 300);
+            window.addEventListener('hashchange', (e) => {
+                if (!isContentUnlocked()) {
+                    e.preventDefault();
+                    showVerificationModal();
+                }
+            }, false);
+            const modalObserver = new MutationObserver(() => {
+                const modalMask = document.getElementById('readmore-modal-mask');
+                if (modalMask && window.getComputedStyle(modalMask).display === 'none') {
+                    setTimeout(() => {
+                        if (!isContentUnlocked()) {
+                            verificationInProgress = false;
+                        }
+                    }, 100);
+                }
+            });
+            modalObserver.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style']
+            });
+        });
+    </script> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024-2025 EPSDA </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.prune", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script> <script src=../../assets/javascripts/bundle.f1b6f286.min.js></script> <script src=../../javascripts/mathjax.min.js></script> <script src=../../javascripts/particles.min.js></script> <script src=../../javascripts/other.min.js></script> <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body> </html>

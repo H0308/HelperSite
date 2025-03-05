@@ -1,0 +1,1719 @@
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/C%2B%2B/27.%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/27.%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.html><link rel=prev href=../26.%20C%2B%2B%E5%BC%82%E5%B8%B8/26.%20C%2B%2B%E5%BC%82%E5%B8%B8.html><link rel=next href=../28.%20%E7%89%B9%E6%AE%8A%E7%B1%BB%E8%AE%BE%E8%AE%A1/28.%20%E7%89%B9%E6%AE%8A%E7%B1%BB%E8%AE%BE%E8%AE%A1.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.6.5"><title>C++ 智能指针 - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.8608ea7d.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><link rel=stylesheet href=../../css/timeline.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (max-width: 767px)"><link rel=stylesheet href=../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><style>
+        @import url('https://static.zeoseven.com/zsft/2/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/442/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/288/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/84/main/result.css');
+        @font-face {
+            font-family: "Source Han Sans SC VF";
+        }
+        @font-face {
+            font-family: 'LXGW ZhenKai';
+        }
+        @font-face {
+            font-family: "JetBrains Mono";
+            src: url('https://static.zeoseven.com/zsft/hk/main.woff2') format('woff2'),
+                url('https://static-host.zeoseven.com/zsft/hk/main.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: "Douyin Sans";
+        }
+        .md-header__topic .md-ellipsis {
+            font-family: "Douyin Sans" !important;
+        }
+        :root {
+            --md-text-font: "Source Han Sans SC VF";
+            --md-header-font: "LXGW ZhenKai";
+            --md-code-font: "JetBrains Mono";
+            --code-font-color: #e96900;
+        }
+        h1 + div > p {
+            font-family: var(--md-header-font);
+        }
+        @media screen and (max-width: 1199px) {
+            .theme-switch {
+                display: none !important;
+            }
+        }
+
+        @media print {
+            a[href]:after {
+                content: "" !important;
+            }
+            a {
+                text-decoration: none !important;
+                color: inherit !important;
+                pointer-events: none !important;
+                cursor: default !important;
+            }
+            a[title] {
+                position: relative;
+            }
+            a[title]:hover:after {
+                display: none !important;
+            }
+            a:active, a:hover, a:focus {
+                outline: none !important;
+                text-decoration: none !important;
+            }
+            img {
+                max-width: 100% !important;
+                page-break-inside: avoid;
+            }
+            .md-header,
+            .md-tabs,
+            .md-sidebar,
+            .md-footer {
+                display: none !important;
+            }
+        }
+        .theme-switch {
+            display: inline-flex;
+            gap: 8px;
+            margin-right: 1rem;
+            padding: 4px;
+            border-radius: 100px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .theme-switch {
+            margin-right: 1rem;
+        }
+        .theme-btn {
+            font-family: var(--md-text-font);
+            font-size: medium;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px 8px;
+            color: #fff;
+            cursor: pointer;
+            min-width: 100px;
+            height: 36px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            background-size: 200% 100%;
+            background-position: right bottom;
+            background-repeat: no-repeat;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .theme-btn .current-theme,
+        .theme-btn .target-theme {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+        .theme-btn .current-theme {
+            transform: translateX(0);
+            opacity: 1;
+            transition-delay: 0ms;
+        }
+        .theme-btn .target-theme {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition-delay: 0ms;
+        }
+        .theme-btn:hover {
+            transform: scale(1.05);
+            background-image: linear-gradient(to right, #4da6da 0%, #275796 100%);
+            background-position: left bottom;
+        }
+        .theme-btn:hover .current-theme {
+            transform: translateX(100%);
+            opacity: 0;
+            transition-delay: 100ms;
+        }
+        .theme-btn:hover .target-theme {
+            transform: translateX(0);
+            opacity: 1;
+            transition-delay: 200ms;
+        }
+        .theme-btn:active {
+            transform: scale(0.95);
+            transition: all 100ms ease;
+        }
+        .md-content article > *:not(.md-top):not(.md-nav) {
+            animation: flyIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(1) { animation-delay: 0.1s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(2) { animation-delay: 0.15s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(3) { animation-delay: 0.2s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(4) { animation-delay: 0.25s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(5) { animation-delay: 0.3s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(6) { animation-delay: 0.35s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(7) { animation-delay: 0.4s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(8) { animation-delay: 0.45s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(9) { animation-delay: 0.5s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(10) { animation-delay: 0.55s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(11) { animation-delay: 0.6s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(12) { animation-delay: 0.65s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(13) { animation-delay: 0.7s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(14) { animation-delay: 0.75s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(15) { animation-delay: 0.8s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(16) { animation-delay: 0.85s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(17) { animation-delay: 0.9s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(18) { animation-delay: 0.95s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(19) { animation-delay: 1s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(20) { animation-delay: 1.05s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(n+21) { animation-delay: 1.1s; }
+        @keyframes flyIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        li::marker { 
+            color: rgba(77, 166, 218, 0.9); 
+        }
+        .md-search__input:hover,
+        .md-search__input:focus {
+            border-radius: 8px !important;
+        }
+        .md-search__form {
+            border-radius: 8px !important;
+        }
+        .md-search__output {
+            border-radius: 8px !important;
+        }
+        .md-search__overlay {
+            border-radius: 8px !important;
+        }
+        .md-search-result {
+            border-radius: 8px !important;
+        }
+        .md-search__inner {
+            border-radius: 8px !important;
+        }
+        :not(pre) > code {
+            color: #ff7043 !important;
+            font-weight: normal;
+        }
+        .highlight .c1,
+        .highlight .cm {
+            color: #6a737d;
+        }
+        .md-typeset .admonition,
+        .md-typeset details {
+            border-width: 0;
+            border-left-width: 4px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--md-header-font);
+            color: #4da6da !important;
+        }
+        body {
+            font-family: var(--md-text-font);
+        }
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--code-font-color);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleEffect 0.6s ease-out forwards;
+            transform: translate(var(--translate-x, 0), var(--translate-y, 0)) scale(1);
+        }
+        @keyframes particleEffect {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translate(var(--translate-x), var(--translate-y)) scale(0.5);
+            }
+        }
+        pre code {
+            color: var(--md-code-fg-color) !important;
+        }
+        .highlight pre {
+            background-color: var(--md-code-bg-color) !important;
+        }
+        .md-typeset code {
+            font-family: var(--md-code-font), var(--md-text-font);
+        }
+        .md-tabs__item.md-tabs__item--active {
+            border-bottom: 2px solid rgba(77, 166, 218, 0.9);
+        }
+        .md-tabs__list > .md-tabs__item--active > .md-tabs__link {
+            color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .timeline-content::before {
+            background-color: #efefef;
+        }
+        .timeline-card {
+            background-color: #efefef !important;
+        }
+        .changelog-content a {
+            color: #4051b5 !important;
+            word-break: break-word;
+        }
+        .changelog-content a:focus, .changelog-content a:hover {
+            color: #00bda4 !important;
+        }
+        .changelog-type-pageupdate {
+            background-color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .md-footer-runtime {
+            position: relative;
+            z-index: 3;
+            margin: 0.5rem 0;
+            padding: 0.4rem 0;
+            font-size: .7rem;
+            line-height: 1.6;
+            color: var(--md-footer-fg-color--light);
+            display: flex;
+            align-items: center;
+        }
+        ::selection {
+            background: rgba(77, 166, 218, 0.2);
+        }
+        html {
+            scroll-behavior: smooth !important; /* 强制启用平滑滚动 */
+            scroll-padding-top: 53px; /* 设置滚动偏移量,避免标题被导航栏遮挡 */
+        }
+        a[href^="#"],  /* 站内锚点 */
+        a[href*="/#"] /* 跨页锚点 */ {
+            scroll-behavior: smooth !important;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+            a[href^="#"],
+            a[href*="/#"] {
+                scroll-behavior: auto !important;
+            }
+        }
+        #readmore-wrapper {
+            position: absolute;
+            bottom: 0px;
+            z-index: 9999;
+            width: 100%;
+            margin-top: -100px;
+            font-family: var(--md-text-font);
+            display: none;
+        }
+        #readmore-mask {
+            position: relative;
+            height: 500px;
+            background: -webkit-gradient(linear, 0 0%, 0 100%, from(rgba(255, 255, 255, 0)), to(rgb(255, 255, 255)));
+        }
+        #readmore-btn {
+            position: absolute;
+            left: 50%;
+            top: 70%;
+            bottom: 30px;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 36px;
+            line-height: 36px;
+            font-size: 15px;
+            text-align: center;
+            border: 1px solid rgba(77, 166, 218, 0.9);
+            color: rgba(77, 166, 218, 0.9);
+            background: rgb(255, 255, 255);
+            cursor: pointer;
+            border-radius: 6px;
+            border-bottom: 1px solid rgba(77, 166, 218, 0.9) !important;
+            text-decoration: none !important;
+        }
+        #readmore-modal-mask {
+            position: fixed;
+            inset: 0px;
+            opacity: 0.7;
+            z-index: 999;
+            background: rgb(0, 0, 0);
+        }
+        #readmore-modal-content {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            text-align: center;
+            font-size: 13px;
+            background: rgb(255, 255, 255);
+            border-radius: 10px;
+            z-index: 9999;
+            font-family: var(--md-text-font), sans-serif;
+        }
+        #readmore-modal-close-btn {
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            line-height: 34px;
+            font-size: 25px;
+            cursor: pointer;
+            opacity: 0.2;
+            z-index: 9999;
+            color: rgb(0, 0, 0);
+            background: none;
+            border: none;
+            outline: none;
+        }
+        #readmore-modal-header {
+            font-size: 15px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        #readmore-modal-header div {
+            margin-top: 5px;
+        }
+        #readmore-blog-name {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-blog-keyword {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-blog-forever {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-modal-header div span:not([id]) {
+            color: #444;
+        }
+        #readmore-modal-qrcode img {
+            width: 220px;
+            height: 220px;
+            border: 8px solid rgb(230, 230, 230);
+            margin-bottom: 10px !important;
+            margin-top: 10px !important;
+            opacity: 1 !important;
+            display: inline !important;
+        }
+        #readmore-modal-form {
+            background: rgb(255, 255, 255);
+        }
+        #readmore-modal-captcha-input {
+            width: 160px;
+            height: 32px;
+            line-height: 32px;
+            padding: 0px 10px;
+            margin-left: -1px !important;
+            margin: 0px 10px;
+            font-size: 13px;
+            text-rendering: auto;
+            text-transform: none;
+            cursor: text;
+            outline: none;
+            box-sizing: border-box;
+            border: 1px solid rgb(221, 221, 221);
+            appearance: textfield;
+            color: #000;
+            background-color: white;
+            -webkit-rtl-ordering: logical;
+        }
+        #readmore-modal-submit-btn {
+            padding: 0px 20px;
+            height: 32px;
+            font-size: 14px;
+            outline: none;
+            border: none;
+            color: rgb(255, 255, 255);
+            background: rgba(77, 166, 218, 0.9);
+            cursor: pointer;
+        }
+        #readmore-modal-footer p {
+            font-size: 15px;
+            margin: 30px 0px 20px;
+            color: rgb(153, 153, 153);
+            text-align: center;
+        }
+        #readmore-official-website {
+            border-bottom: none !important;
+            text-decoration: none !important;
+            color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .readmore-btn-mouseover {
+            color: rgb(255, 255, 255) !important;
+            background: rgba(77, 166, 218, 0.9) !important;
+        }
+        .readmore-btn-mouseout {
+            color: rgba(77, 166, 218, 0.9) !important;
+            background: rgb(255, 255, 255) !important;
+        }
+        .custom-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            color: rgba(77, 166, 218, 0.9);
+            border-bottom: 1px dashed rgba(77, 166, 218, 0.9);
+            text-decoration: none !important;
+        }
+        .custom-tooltip > span {
+            color: grey;
+            font-size: 12px;
+            margin-left: 4px;
+        }
+        .custom-tooltip::before {
+            content: attr(data-title);
+            position: absolute;
+            width: 300px;
+            background-color: rgba(51, 51, 51, 0.95);
+            color: #fff;
+            text-align: left;
+            padding: 10px;
+            border-radius: 6px;
+            bottom: 125%;  /* 定位在链接上方 */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99999;  /* 确保显示在最上层 */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 1.5;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            word-wrap: break-word;
+            white-space: normal;
+        }
+        .custom-tooltip::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(51, 51, 51, 0.95) transparent transparent transparent;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .custom-tooltip:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+        @media (max-width: 767px) {
+            .custom-tooltip::before {
+                width: 250px;
+                white-space: normal;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 130%;
+            }
+        }
+        .md-content a.custom-tooltip::after {
+            display: none !important;
+        }
+    </style><script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchEl = document.querySelector('.md-search');
+            const savedTheme = localStorage.getItem('preferred-theme') || 'theme1';
+            const themeSwitch = document.createElement('div');
+            themeSwitch.className = 'theme-switch';
+            themeSwitch.innerHTML = `
+                <button class="theme-btn" onclick="switchTheme()">
+                    <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '旧版主题'}</span>
+                    <span class="target-theme">${savedTheme === 'theme1' ? '旧版主题' : '新版主题'}</span>
+                </button>
+            `;
+            searchEl.parentNode.insertBefore(themeSwitch, searchEl);
+            setTimeout(() => {
+                const hash = window.location.hash;
+                if (hash) {
+                    const readmoreBtn = document.getElementById('readmore-wrapper');
+                    if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
+                        const targetId = hash.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            // 平滑滚动到目标元素
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                }
+            }, 300); 
+        });
+
+        (function initTheme() {
+            const savedTheme = localStorage.getItem('preferred-theme');
+            if (savedTheme) {
+                const theme1Link = document.querySelector('link[href*="theme1"]');
+                const theme2Link = document.querySelector('link[href*="theme2"]');
+                if (theme1Link && theme2Link) {
+                    if (savedTheme === 'theme1') {
+                        theme1Link.removeAttribute('disabled');
+                        theme2Link.setAttribute('disabled', 'true');
+                    } else {
+                        theme2Link.removeAttribute('disabled');
+                        theme1Link.setAttribute('disabled', 'true');
+                    }
+                }
+            }
+        })();
+
+        function switchTheme() {
+            const currentTheme = localStorage.getItem('preferred-theme') || 'theme1';
+            const newTheme = currentTheme === 'theme1' ? 'theme2' : 'theme1';
+            const theme1Link = document.querySelector('link[href*="theme1"]');
+            const theme2Link = document.querySelector('link[href*="theme2"]');
+            if (newTheme === 'theme1') {
+                theme1Link.removeAttribute('disabled');
+                theme2Link.setAttribute('disabled', 'true');
+            } else {
+                theme2Link.removeAttribute('disabled');
+                theme1Link.setAttribute('disabled', 'true');
+            }
+            localStorage.setItem('preferred-theme', newTheme);
+            const themeBtn = document.querySelector('.theme-btn');
+            const currentThemeEl = themeBtn.querySelector('.current-theme');
+            const targetThemeEl = themeBtn.querySelector('.target-theme');
+            currentThemeEl.textContent = newTheme === 'theme1' ? '新版主题' : '旧版主题';
+            targetThemeEl.textContent = newTheme === 'theme1' ? '旧版主题' : '新版主题';
+        }
+
+        document.addEventListener('copy', function(e) {
+            const selectedText = window.getSelection().toString();
+            if(selectedText) {
+                const copyright = '\n\n' +
+                    '————————————————\n' +
+                    '文章作者：怡晗★\n' +
+                    '网站链接：https://www.help-doc.top\n' +
+                    '当前文章链接：' + window.location.href + '\n' +
+                    '版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。\n' +
+                    '转载请注明来自怡晗★的个人网站！';
+                e.preventDefault();
+                e.clipboardData.setData('text/plain', selectedText + copyright);
+            }
+        });
+    </script> <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#c class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../../index.html title=学习档案 class="md-header__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 学习档案 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> C++ 智能指针 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-hidden=true type=radio name=__palette id=__palette_0> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=标签 data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../index.html class=md-tabs__link> 主页 </a> </li> <li class=md-tabs__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-tabs__link> 网站时间线 </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-tabs__link> 编程语言 </a> </li> <li class=md-tabs__item> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-tabs__link> 数据结构与算法 </a> </li> <li class=md-tabs__item> <a href=../../Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-tabs__link> Linux </a> </li> <li class=md-tabs__item> <a href=../../HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html class=md-tabs__link> 前端 </a> </li> <li class=md-tabs__item> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-tabs__link> MySQL </a> </li> <li class=md-tabs__item> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-tabs__link> 其它 </a> </li> <li class=md-tabs__item> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-tabs__link> 工具帮助 </a> </li> <li class=md-tabs__item> <a href=../../%E9%9D%A2%E8%AF%95/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98.html class=md-tabs__link> 闲谈 </a> </li> <li class=md-tabs__item> <a href=../../%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88/%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88.html class=md-tabs__link> 阅读档案 </a> </li> <li class=md-tabs__item> <a href=../../%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html class=md-tabs__link> 联系作者 </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=导航栏 data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../../index.html title=学习档案 class="md-nav__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> 学习档案 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../index.html class=md-nav__link> <span class=md-ellipsis> 主页 </span> </a> </li> <li class=md-nav__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-nav__link> <span class=md-ellipsis> 网站时间线 </span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_3 checked> <label class=md-nav__link for=__nav_3 id=__nav_3_label tabindex> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_3_label aria-expanded=true> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> 编程语言 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> C语言 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_3_2 checked> <label class=md-nav__link for=__nav_3_2 id=__nav_3_2_label tabindex=0> <span class=md-ellipsis> C++ </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_2_label aria-expanded=true> <label class=md-nav__title for=__nav_3_2> <span class="md-nav__icon md-icon"></span> C++ </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../1.%20C%E8%AF%AD%E8%A8%80%E8%BF%87%E6%B8%A1C%2B%2B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E8%BF%87%E6%B8%A1C%2B%2B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> C语言过渡C++基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../2.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/2.%20%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1.html class=md-nav__link> <span class=md-ellipsis> C++类和对象 </span> </a> </li> <li class=md-nav__item> <a href=../3.%20C%2B%2B%E9%BB%98%E8%AE%A4%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/3.%20C%2B%2B%E9%BB%98%E8%AE%A4%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0.html class=md-nav__link> <span class=md-ellipsis> C++默认成员函数 </span> </a> </li> <li class=md-nav__item> <a href=../4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9.html class=md-nav__link> <span class=md-ellipsis> C++类和对象相关内容 </span> </a> </li> <li class=md-nav__item> <a href=../5.%20C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/5.%20C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> C++内存管理 </span> </a> </li> <li class=md-nav__item> <a href=../6.%20C%2B%2B%E6%A8%A1%E7%89%88%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/6.%20C%2B%2B%E6%A8%A1%E7%89%88%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89.html class=md-nav__link> <span class=md-ellipsis> C++模版（基础） </span> </a> </li> <li class=md-nav__item> <a href=../7.%20C%2B%2BSTL%E7%AE%80%E4%BB%8B%E4%B8%8Estring%E7%B1%BB/7.%20C%2B%2BSTL%E7%AE%80%E4%BB%8B%E4%B8%8Estring%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> C++STL简介与string类 </span> </a> </li> <li class=md-nav__item> <a href=../8.%20string%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/8.%20string%E7%B1%BB%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> string类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../9.%20vector%E7%B1%BB/9.%20vector%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> vector类 </span> </a> </li> <li class=md-nav__item> <a href=../10.%20vector%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/10.%20vector%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> vector类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../11.%20list%E7%B1%BB/11.%20list%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> list类 </span> </a> </li> <li class=md-nav__item> <a href=../12.%20list%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/12.%20list%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> list类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../13.%20stack%E7%B1%BB/13.%20stack%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> stack类 </span> </a> </li> <li class=md-nav__item> <a href=../14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB/14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> queue与priority_queue类 </span> </a> </li> <li class=md-nav__item> <a href=../15.%20stack%E5%92%8Cqueue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/15.%20stack%E5%92%8Cqueue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> stack和queue模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../16.%20priority_queue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/16.%20priority_queue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> priority_queue模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../17.%20%E5%8F%8D%E5%90%91%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%AE%BE%E8%AE%A1/17.%20reverse_iterator%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1.html class=md-nav__link> <span class=md-ellipsis> 反向迭代器设计 </span> </a> </li> <li class=md-nav__item> <a href=../18.%20C%2B%2B%E6%A8%A1%E6%9D%BF%EF%BC%88%E9%AB%98%E9%98%B6%EF%BC%89/18.%20C%2B%2B%E6%A8%A1%E6%9D%BF%EF%BC%88%E9%AB%98%E9%98%B6%EF%BC%89.html class=md-nav__link> <span class=md-ellipsis> C++模版（高阶） </span> </a> </li> <li class=md-nav__item> <a href=../19.%20C%2B%2B%E7%BB%A7%E6%89%BF/19.%20C%2B%2B%E7%BB%A7%E6%89%BF.html class=md-nav__link> <span class=md-ellipsis> C++继承 </span> </a> </li> <li class=md-nav__item> <a href=../20.%20C%2B%2B%E5%A4%9A%E6%80%81/20.%20C%2B%2B%E5%A4%9A%E6%80%81.html class=md-nav__link> <span class=md-ellipsis> C++多态 </span> </a> </li> <li class=md-nav__item> <a href=../21.%20set%E7%B1%BB/21.%20set%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> set类 </span> </a> </li> <li class=md-nav__item> <a href=../22.%20map%E7%B1%BB/22.%20map%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> map类 </span> </a> </li> <li class=md-nav__item> <a href=../23.%20map%E5%92%8Cset%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/23.%20map%E5%92%8Cset%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> map和set类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../24.%20unordered_map%E5%92%8Cunordered_set%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/24.%20unordered_map%E5%92%8Cunordered_set%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> unordered_map和unordered_set类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../31.%20bitset%E7%B1%BB/31.%20bitset%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> bitset类 </span> </a> </li> <li class=md-nav__item> <a href=../32.%20initializer_list%E7%B1%BB/32.%20initializer_list%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> initializer_list类 </span> </a> </li> <li class=md-nav__item> <a href=../25.%20C%2B%2B11%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7/C%2B%2B%2011%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7.html class=md-nav__link> <span class=md-ellipsis> C++ 11相关新特性 </span> </a> </li> <li class=md-nav__item> <a href=../26.%20C%2B%2B%E5%BC%82%E5%B8%B8/26.%20C%2B%2B%E5%BC%82%E5%B8%B8.html class=md-nav__link> <span class=md-ellipsis> C++ 异常 </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> C++ 智能指针 </span> <span class="md-nav__icon md-icon"></span> </label> <a href=27.%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.html class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> C++ 智能指针 </span> </a> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#raii class=md-nav__link> <span class=md-ellipsis> RAII </span> </a> </li> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 基本使用 </span> </a> </li> <li class=md-nav__item> <a href=#unique_ptrshared_ptr class=md-nav__link> <span class=md-ellipsis> unique_ptr和shared_ptr原理与模拟实现 </span> </a> <nav class=md-nav aria-label=unique_ptr和shared_ptr原理与模拟实现> <ul class=md-nav__list> <li class=md-nav__item> <a href=#unique_ptr class=md-nav__link> <span class=md-ellipsis> unique_ptr原理与模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=#shared_ptr class=md-nav__link> <span class=md-ellipsis> shared_ptr原理与模拟实现 </span> </a> <nav class=md-nav aria-label=shared_ptr原理与模拟实现> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 基本结构设计 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 析构函数和构造函数设计 </span> </a> </li> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 拷贝构造函数设计 </span> </a> </li> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 赋值运算符重载函数设计 </span> </a> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 添加可自定义删除器功能 </span> </a> </li> <li class=md-nav__item> <a href=#_7 class=md-nav__link> <span class=md-ellipsis> 数组类型特化版本 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#shared_ptrweak_ptr class=md-nav__link> <span class=md-ellipsis> shared_ptr循环引用问题与weak_ptr的使用 </span> </a> </li> <li class=md-nav__item> <a href=#auto_ptr class=md-nav__link> <span class=md-ellipsis> 智能指针的前身：auto_ptr </span> </a> </li> <li class=md-nav__item> <a href=#_8 class=md-nav__link> <span class=md-ellipsis> 内存泄漏问题 </span> </a> </li> <li class=md-nav__item> <a href=#_9 class=md-nav__link> <span class=md-ellipsis> 内存泄漏的分类 </span> </a> </li> <li class=md-nav__item> <a href=#_10 class=md-nav__link> <span class=md-ellipsis> 避免内存泄漏 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=../28.%20%E7%89%B9%E6%AE%8A%E7%B1%BB%E8%AE%BE%E8%AE%A1/28.%20%E7%89%B9%E6%AE%8A%E7%B1%BB%E8%AE%BE%E8%AE%A1.html class=md-nav__link> <span class=md-ellipsis> 特殊类设计 </span> </a> </li> <li class=md-nav__item> <a href=../29.%20C%2B%2B%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/29.%20C%2B%2B%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html class=md-nav__link> <span class=md-ellipsis> C++中的类型转换 </span> </a> </li> <li class=md-nav__item> <a href=../30.%20C%2B%2BIO%E6%B5%81/30.%20C%2B%2BIO%E6%B5%81.html class=md-nav__link> <span class=md-ellipsis> C++ IO流 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../Java/1.%20Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> Java </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> Python </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-nav__link> <span class=md-ellipsis> 数据结构与算法 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-nav__link> <span class=md-ellipsis> Linux </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html class=md-nav__link> <span class=md-ellipsis> 前端 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-nav__link> <span class=md-ellipsis> 其它 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-nav__link> <span class=md-ellipsis> 工具帮助 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E9%9D%A2%E8%AF%95/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98.html class=md-nav__link> <span class=md-ellipsis> 闲谈 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../../%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88/%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88.html class=md-nav__link> <span class=md-ellipsis> 阅读档案 </span> </a> </li> <li class=md-nav__item> <a href=../../%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html class=md-nav__link> <span class=md-ellipsis> 联系作者 </span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#raii class=md-nav__link> <span class=md-ellipsis> RAII </span> </a> </li> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 基本使用 </span> </a> </li> <li class=md-nav__item> <a href=#unique_ptrshared_ptr class=md-nav__link> <span class=md-ellipsis> unique_ptr和shared_ptr原理与模拟实现 </span> </a> <nav class=md-nav aria-label=unique_ptr和shared_ptr原理与模拟实现> <ul class=md-nav__list> <li class=md-nav__item> <a href=#unique_ptr class=md-nav__link> <span class=md-ellipsis> unique_ptr原理与模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=#shared_ptr class=md-nav__link> <span class=md-ellipsis> shared_ptr原理与模拟实现 </span> </a> <nav class=md-nav aria-label=shared_ptr原理与模拟实现> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 基本结构设计 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 析构函数和构造函数设计 </span> </a> </li> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 拷贝构造函数设计 </span> </a> </li> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 赋值运算符重载函数设计 </span> </a> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 添加可自定义删除器功能 </span> </a> </li> <li class=md-nav__item> <a href=#_7 class=md-nav__link> <span class=md-ellipsis> 数组类型特化版本 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#shared_ptrweak_ptr class=md-nav__link> <span class=md-ellipsis> shared_ptr循环引用问题与weak_ptr的使用 </span> </a> </li> <li class=md-nav__item> <a href=#auto_ptr class=md-nav__link> <span class=md-ellipsis> 智能指针的前身：auto_ptr </span> </a> </li> <li class=md-nav__item> <a href=#_8 class=md-nav__link> <span class=md-ellipsis> 内存泄漏问题 </span> </a> </li> <li class=md-nav__item> <a href=#_9 class=md-nav__link> <span class=md-ellipsis> 内存泄漏的分类 </span> </a> </li> <li class=md-nav__item> <a href=#_10 class=md-nav__link> <span class=md-ellipsis> 避免内存泄漏 </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <div id=readmore-container> <h1 id=c>C++智能指针<a class=headerlink href=#c title="Permanent link">&para;</a></h1> <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;"> <p><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 3132 个字 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 640 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3"/></svg></span> 477 行代码 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m12.96-10.71-2.75 3.54-1.96-2.36L8.5 15h11z"/></svg></span> 3 张图片 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 16 分钟</p> </div> <h2 id=raii>RAII<a class=headerlink href=#raii title="Permanent link">&para;</a></h2> <p>RAII（Resource Acquisition Is Initialization）是一种利用对象生命周期来控制程序资源（如内存、文件句柄、网络连接、互斥量等等）的简单技术。</p> <p>在对象构造时获取资源，接着控制对资源的访问使之在对象的生命周期内始终保持有效，最后在对象析构的时候释放资源。借此，我们实际上把管理一份资源的责任托管给了一个对象。这种做法有两大好处： </p> <ol> <li>不需要显式地释放资源。</li> <li>采用这种方式，对象所需的资源在其生命期内始终保持有效</li> </ol> <p>在C++中，<code>auto_ptr</code>、<code>unique_ptr</code>以及<code>shared_ptr</code>都遵循RAII原则，但是<code>weak_ptr</code>因为不直接管理空间，所以不遵循RAII原则</p> <h2 id=_1>基本使用<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <p>在C++ 11标准中，一共有三种常用的智能指针，分别是<code>unique_ptr</code>、<code>shared_ptr</code>和<code>weak_ptr</code>，下面是其三个的基本特性：</p> <ol> <li><code>unique_ptr</code>：C++ 11中的<code>unique_ptr</code>的前身是C++ 扩展库boost中<code>scope_ptr</code>/<code>scope_array</code>，因为<code>unique_ptr</code>是一个模版类型，所以需要传递指针指向对象的类型作为模版参数，构造时可以使用普通指针进行构造，也可以直接在构造处通过<code>new</code>开辟空间，默认情况下只能指向一个内存空间，如果开辟连续的空间，因为<code>unique_ptr</code>底层默认使用的是<code>delete</code>，所以需要额外给一个自定义的删除器，另外，<code>unique_ptr</code>不支持赋值构造和拷贝构造，所以不可以使用<code>unique_ptr</code>进行构造；当<code>unique_ptr</code>指针销毁时，会自动调用析构函数销毁指针指向的内容；<code>unique_ptr</code> 不支持所有权的隐式转移；必须使用 <code>std::move</code> 显式转移所有权。</li> <li><code>shared_ptr</code>：C++ 11中的<code>shared_ptr</code>的前身是C++扩展库boost中<code>shared_ptr</code>，基本使用方法与<code>unique_ptr</code>基本一致，但是<code>shared_ptr</code>可以支持赋值构造和拷贝构造，所以如果涉及到指针需要拷贝的情况，就可以考虑使用<code>shared_ptr</code></li> <li><code>weak_ptr</code>：C++ 11中新增的智能指针，用于解决<code>shared_ptr</code>循环引用的问题</li> </ol> <p>以下面的结构测试各种智能指针：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><span class=k>struct</span><span class=w> </span><span class=nc>Date</span>
+</span><span id=__span-0-2><span class=p>{</span>
+</span><span id=__span-0-3><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_year</span><span class=p>;</span>
+</span><span id=__span-0-4><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_month</span><span class=p>;</span>
+</span><span id=__span-0-5><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_day</span><span class=p>;</span>
+</span><span id=__span-0-6>
+</span><span id=__span-0-7><span class=w>    </span><span class=n>Date</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>year</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1900</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>month</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>day</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>)</span>
+</span><span id=__span-0-8><span class=w>        </span><span class=o>:</span><span class=n>_year</span><span class=p>(</span><span class=n>year</span><span class=p>)</span>
+</span><span id=__span-0-9><span class=w>        </span><span class=p>,</span><span class=w> </span><span class=n>_month</span><span class=p>(</span><span class=n>month</span><span class=p>)</span>
+</span><span id=__span-0-10><span class=w>        </span><span class=p>,</span><span class=w> </span><span class=n>_day</span><span class=p>(</span><span class=n>day</span><span class=p>)</span>
+</span><span id=__span-0-11><span class=w>    </span><span class=p>{}</span>
+</span><span id=__span-0-12>
+</span><span id=__span-0-13><span class=w>    </span><span class=o>~</span><span class=n>Date</span><span class=p>()</span>
+</span><span id=__span-0-14><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-0-15><span class=w>        </span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;~Date()&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-0-16><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-0-17><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> <p>基本使用如下：</p> <div class="tabbed-set tabbed-alternate" data-tabs=1:2><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1><code>unique_ptr</code>基本使用</label><label for=__tabbed_1_2><code>shared_ptr</code>基本使用</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><span class=c1>// 用于连续空间的释放</span>
+</span><span id=__span-1-2><span class=k>struct</span><span class=w> </span><span class=nc>Free</span>
+</span><span id=__span-1-3><span class=p>{</span>
+</span><span id=__span-1-4><span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=nf>operator</span><span class=p>()(</span><span class=n>Date</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-1-5><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-1-6><span class=w>        </span><span class=k>delete</span><span class=p>[]</span><span class=w> </span><span class=n>ptr</span><span class=p>;</span>
+</span><span id=__span-1-7><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-1-8><span class=p>};</span>
+</span><span id=__span-1-9>
+</span><span id=__span-1-10><span class=c1>// 用于释放fopen返回的文件指针</span>
+</span><span id=__span-1-11><span class=k>struct</span><span class=w> </span><span class=nc>FileCloser</span>
+</span><span id=__span-1-12><span class=p>{</span>
+</span><span id=__span-1-13><span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=nf>operator</span><span class=p>()(</span><span class=kt>FILE</span><span class=o>*</span><span class=w> </span><span class=n>fp</span><span class=p>)</span>
+</span><span id=__span-1-14><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-1-15><span class=w>        </span><span class=n>fclose</span><span class=p>(</span><span class=n>fp</span><span class=p>);</span>
+</span><span id=__span-1-16><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-1-17><span class=p>};</span>
+</span><span id=__span-1-18>
+</span><span id=__span-1-19><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-1-20><span class=p>{</span>
+</span><span id=__span-1-21><span class=w>    </span><span class=c1>// 创建一个对象</span>
+</span><span id=__span-1-22><span class=w>    </span><span class=n>unique_ptr</span><span class=o>&lt;</span><span class=n>Date</span><span class=o>&gt;</span><span class=w> </span><span class=n>up</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>Date</span><span class=p>);</span>
+</span><span id=__span-1-23>
+</span><span id=__span-1-24><span class=w>    </span><span class=c1>// 创建一个对象数组</span>
+</span><span id=__span-1-25><span class=w>    </span><span class=c1>// 如果直接使用下面的写法，需要单独传递一个删除器</span>
+</span><span id=__span-1-26><span class=w>    </span><span class=n>unique_ptr</span><span class=w> </span><span class=o>&lt;</span><span class=n>Date</span><span class=p>,</span><span class=w> </span><span class=n>Free</span><span class=o>&gt;</span><span class=w> </span><span class=n>upArr</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>Date</span><span class=p>[</span><span class=mi>3</span><span class=p>]);</span>
+</span><span id=__span-1-27>
+</span><span id=__span-1-28><span class=w>    </span><span class=c1>// 默认情况下，unique_ptr对数组有特化版本，也可以不需要传递删除器</span>
+</span><span id=__span-1-29><span class=w>    </span><span class=n>unique_ptr</span><span class=o>&lt;</span><span class=n>Date</span><span class=p>[]</span><span class=o>&gt;</span><span class=w> </span><span class=n>upArr1</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>Date</span><span class=p>[</span><span class=mi>3</span><span class=p>]);</span>
+</span><span id=__span-1-30>
+</span><span id=__span-1-31><span class=w>    </span><span class=c1>// unique_ptr不支持拷贝和赋值</span>
+</span><span id=__span-1-32><span class=w>    </span><span class=c1>//unique_ptr&lt;Date&gt; up1(up);</span>
+</span><span id=__span-1-33><span class=w>    </span><span class=c1>//unique_ptr&lt;Date&gt; up2 = up;</span>
+</span><span id=__span-1-34>
+</span><span id=__span-1-35><span class=w>    </span><span class=c1>// 删除器可以用于没有特化版本的情况</span>
+</span><span id=__span-1-36><span class=w>    </span><span class=n>unique_ptr</span><span class=o>&lt;</span><span class=kt>FILE</span><span class=p>,</span><span class=w> </span><span class=n>FileCloser</span><span class=o>&gt;</span><span class=w> </span><span class=n>upFile</span><span class=p>(</span><span class=n>fopen</span><span class=p>(</span><span class=s>&quot;test.txt&quot;</span><span class=p>,</span><span class=w> </span><span class=s>&quot;r&quot;</span><span class=p>));</span>
+</span><span id=__span-1-37>
+</span><span id=__span-1-38><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-1-39><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><span class=c1>// 释放连续的空间</span>
+</span><span id=__span-2-2><span class=k>struct</span><span class=w> </span><span class=nc>Free</span>
+</span><span id=__span-2-3><span class=p>{</span>
+</span><span id=__span-2-4><span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=nf>operator</span><span class=p>()(</span><span class=n>Date</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-2-5><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-2-6><span class=w>        </span><span class=k>delete</span><span class=p>[]</span><span class=w> </span><span class=n>ptr</span><span class=p>;</span>
+</span><span id=__span-2-7><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-2-8><span class=p>};</span>
+</span><span id=__span-2-9>
+</span><span id=__span-2-10><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-2-11><span class=p>{</span>
+</span><span id=__span-2-12><span class=w>    </span><span class=c1>// shared_ptr基本使用与unique_ptr一致</span>
+</span><span id=__span-2-13><span class=w>    </span><span class=c1>// 创建一个对象</span>
+</span><span id=__span-2-14><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>Date</span><span class=o>&gt;</span><span class=w> </span><span class=n>sp</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>Date</span><span class=p>);</span>
+</span><span id=__span-2-15>
+</span><span id=__span-2-16><span class=w>    </span><span class=c1>// 创建一个对象数组</span>
+</span><span id=__span-2-17><span class=w>    </span><span class=c1>// 如果直接使用下面的写法，需要单独传递一个删除器</span>
+</span><span id=__span-2-18><span class=w>    </span><span class=c1>// 不同与unique_ptr，shared_ptr的删除器可以使用lambda表达式或者函数对象</span>
+</span><span id=__span-2-19><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>Date</span><span class=o>&gt;</span><span class=w> </span><span class=n>spArr</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>Date</span><span class=p>[</span><span class=mi>3</span><span class=p>],</span><span class=w> </span><span class=n>Free</span><span class=p>());</span><span class=w> </span><span class=c1>// 使用函数对象</span>
+</span><span id=__span-2-20><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>Date</span><span class=o>&gt;</span><span class=w> </span><span class=n>spArr1</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>Date</span><span class=p>[</span><span class=mi>3</span><span class=p>],</span><span class=w> </span><span class=p>[](</span><span class=n>Date</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=k>delete</span><span class=p>[]</span><span class=w> </span><span class=n>ptr</span><span class=p>;</span><span class=w> </span><span class=p>});</span><span class=w> </span><span class=c1>// 使用lambda表达式</span>
+</span><span id=__span-2-21>
+</span><span id=__span-2-22><span class=w>    </span><span class=c1>// shared_ptr支持拷贝和赋值</span>
+</span><span id=__span-2-23><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>Date</span><span class=o>&gt;</span><span class=w> </span><span class=n>sp1</span><span class=p>(</span><span class=n>sp</span><span class=p>);</span>
+</span><span id=__span-2-24><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>Date</span><span class=o>&gt;</span><span class=w> </span><span class=n>sp2</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>sp</span><span class=p>;</span>
+</span><span id=__span-2-25>
+</span><span id=__span-2-26><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-2-27><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> </div> </div> <p>特殊地，<code>shared_ptr</code>支持使用<code>make_shared</code>创建<code>shared_ptr</code>，<code>make_shared</code>是一个可变模版参数函数模版，函数返回一个<code>shared_ptr</code>，因为支持可变模版参数，所以可以传递构造对象的值，但是需要注意<code>make_shared</code>模版参数需要与接收的<code>shared_ptr</code>模版参数一致，<code>make_shared</code>在头文件<code>&lt;memory&gt;</code>中，使用时可以考虑引入</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span>
+<span class=normal>7</span>
+<span class=normal>8</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-3-2><span class=p>{</span>
+</span><span id=__span-3-3><span class=w>    </span><span class=c1>// 使用make_shared创建对象</span>
+</span><span id=__span-3-4><span class=w>    </span><span class=c1>// make_shared会在一次内存分配中同时创建对象和控制块</span>
+</span><span id=__span-3-5><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>Date</span><span class=o>&gt;</span><span class=w> </span><span class=n>sp3</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>make_shared</span><span class=o>&lt;</span><span class=n>Date</span><span class=o>&gt;</span><span class=p>(</span><span class=mi>2019</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>);</span>
+</span><span id=__span-3-6>
+</span><span id=__span-3-7><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-3-8><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h2 id=unique_ptrshared_ptr><code>unique_ptr</code>和<code>shared_ptr</code>原理与模拟实现<a class=headerlink href=#unique_ptrshared_ptr title="Permanent link">&para;</a></h2> <h3 id=unique_ptr><code>unique_ptr</code>原理与模拟实现<a class=headerlink href=#unique_ptr title="Permanent link">&para;</a></h3> <p>原理：<code>unique_ptr</code>本质是使用一个普通指针进行构造，给出了基本的指针操作，并且默认情况下会释放指针指向的单一空间，特点是将拷贝构造函数和赋值运算符重载函数修饰为<code>=delete</code></p> <p>基本结构模拟实现如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><span class=cp>#pragma once</span>
+</span><span id=__span-4-2>
+</span><span id=__span-4-3><span class=k>namespace</span><span class=w> </span><span class=nn>simulate_unique_ptr</span>
+</span><span id=__span-4-4><span class=p>{</span>
+</span><span id=__span-4-5><span class=w>    </span><span class=k>template</span><span class=o>&lt;</span><span class=k>class</span><span class=w> </span><span class=nc>T</span><span class=o>&gt;</span>
+</span><span id=__span-4-6><span class=w>    </span><span class=k>class</span><span class=w> </span><span class=nc>unique_ptr</span>
+</span><span id=__span-4-7><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-4-8><span class=w>    </span><span class=k>public</span><span class=o>:</span>
+</span><span id=__span-4-9><span class=w>        </span><span class=c1>// 构造函数</span>
+</span><span id=__span-4-10><span class=w>        </span><span class=n>unique_ptr</span><span class=p>(</span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-4-11><span class=w>            </span><span class=o>:</span><span class=n>_ptr</span><span class=p>(</span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-4-12><span class=w>        </span><span class=p>{}</span>
+</span><span id=__span-4-13>
+</span><span id=__span-4-14><span class=w>        </span><span class=c1>// 析构函数</span>
+</span><span id=__span-4-15><span class=w>        </span><span class=o>~</span><span class=n>unique_ptr</span><span class=p>()</span>
+</span><span id=__span-4-16><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-4-17><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>_ptr</span><span class=p>)</span>
+</span><span id=__span-4-18><span class=w>            </span><span class=p>{</span>
+</span><span id=__span-4-19><span class=w>                </span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;~unique_ptr()&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-4-20><span class=w>                </span><span class=k>delete</span><span class=w> </span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-4-21><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-4-22><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-4-23>
+</span><span id=__span-4-24><span class=w>        </span><span class=c1>// 禁止拷贝构造函数和赋值重载函数</span>
+</span><span id=__span-4-25><span class=w>        </span><span class=n>unique_ptr</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>unique_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>delete</span><span class=p>;</span>
+</span><span id=__span-4-26><span class=w>        </span><span class=n>unique_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=k>operator</span><span class=o>=</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>unique_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>delete</span><span class=p>;</span>
+</span><span id=__span-4-27>
+</span><span id=__span-4-28><span class=w>        </span><span class=c1>// operator*()</span>
+</span><span id=__span-4-29><span class=w>        </span><span class=n>T</span><span class=o>&amp;</span><span class=w> </span><span class=k>operator</span><span class=o>*</span><span class=p>()</span>
+</span><span id=__span-4-30><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-4-31><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=o>*</span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-4-32><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-4-33>
+</span><span id=__span-4-34><span class=w>        </span><span class=c1>// operator-&gt;()</span>
+</span><span id=__span-4-35><span class=w>        </span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=k>operator</span><span class=o>-&gt;</span><span class=p>()</span>
+</span><span id=__span-4-36><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-4-37><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-4-38><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-4-39>
+</span><span id=__span-4-40><span class=w>    </span><span class=k>private</span><span class=o>:</span>
+</span><span id=__span-4-41><span class=w>        </span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>_ptr</span><span class=p>;</span><span class=w> </span><span class=c1>// 普通指针</span>
+</span><span id=__span-4-42><span class=w>    </span><span class=p>};</span>
+</span><span id=__span-4-43><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=shared_ptr><code>shared_ptr</code>原理与模拟实现<a class=headerlink href=#shared_ptr title="Permanent link">&para;</a></h3> <p>原理：因为<code>shared_ptr</code>支持拷贝，但是如果默认拷贝和赋值，则会出现同一块空间被释放两次导致的错误，所以在<code>shared_ptr</code>中还存在一个引用计数，用于记录有多少个<code>shared_ptr</code>指向同一块空间</p> <p>基本结构模拟实现如下：</p> <h4 id=_2>基本结构设计<a class=headerlink href=#_2 title="Permanent link">&para;</a></h4> <p>对于构造<code>shared_ptr</code>指针来说，与<code>unique_ptr</code>一致，但是对于引用计数来说，需要注意不可以使用普通的成员变量直接进行计数，因为这种方法会导致不论是创建对象、拷贝还是赋值，每一个对象中的引用变量始终为1或者0，也不可以使用静态成员变量进行计数，考虑到静态变量是所有对象够用一份，当两个指针指向同一块空间时没有任何问题，此时计数器为2，但是如果有一个新的指针指向另一块空间，此时计数器更新为3，但是前面的两个指针和第三个指针不是指向同一块空间，不应该更改前面两个指针的计数器。两种情况分析如下图所示：</p> <p><a class=glightbox href="27. 智能指针.assets\image.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="27. 智能指针.assets\image.png"></a></p> <p>考虑到以上两种情况后，设计的计数器需要满足两个条件：1. 指向同一块空间的<code>shared_ptr</code>共用一个引用计数器 2. 指向不同空间的<code>shared_ptr</code>使用不同的引用计数器。可以使用在堆上开辟内存的计数器，成员变量只需要一个指针，指向堆上已经开辟好的计数器即可，如果有指向同一块空间的另一个<code>shared_ptr</code>时，只需要使其指针指向相同的计数器空间即可，初始情况下引用计数器的数值为1</p> <h4 id=_3>析构函数和构造函数设计<a class=headerlink href=#_3 title="Permanent link">&para;</a></h4> <p>设计构造函数时，只需要考虑两点：1. 使用普通指针构造<code>shared_ptr</code> 2. 将计数器指针指向在堆上开辟的空间</p> <p>设计析构函数时，需要考虑到何时释放空间的问题，如果有两个指针指向同一块空间，则需要避免出现两次释放同一块空间的问题，所以可以考虑析构第一个指针时将该指针置为空并且计数器减小1</p> <h4 id=_4>拷贝构造函数设计<a class=headerlink href=#_4 title="Permanent link">&para;</a></h4> <p>设计拷贝构造函数只需要考虑将原来指针中的内容拷贝到新指针，再将计数器加1即可</p> <h4 id=_5>赋值运算符重载函数设计<a class=headerlink href=#_5 title="Permanent link">&para;</a></h4> <p>设计赋值重载需要考虑到下面的问题：</p> <ol> <li>自己给自己赋值，包括两种情况：1. 两个相同的指针 2. 指向同一个位置的两个指针</li> <li>赋值之前需要先释放被赋值的指针原来的空间，否则会出现内存泄漏问题（原因借下面的图分析）</li> <li>赋值需要更改用于赋值的指针的引用计数器</li> </ol> <p>具体步骤如下图所示：</p> <p><a class=glightbox href="27. 智能指针.assets\image1.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="27. 智能指针.assets\image1.png"></a></p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span>
+<span class=normal>44</span>
+<span class=normal>45</span>
+<span class=normal>46</span>
+<span class=normal>47</span>
+<span class=normal>48</span>
+<span class=normal>49</span>
+<span class=normal>50</span>
+<span class=normal>51</span>
+<span class=normal>52</span>
+<span class=normal>53</span>
+<span class=normal>54</span>
+<span class=normal>55</span>
+<span class=normal>56</span>
+<span class=normal>57</span>
+<span class=normal>58</span>
+<span class=normal>59</span>
+<span class=normal>60</span>
+<span class=normal>61</span>
+<span class=normal>62</span>
+<span class=normal>63</span>
+<span class=normal>64</span>
+<span class=normal>65</span>
+<span class=normal>66</span>
+<span class=normal>67</span>
+<span class=normal>68</span>
+<span class=normal>69</span>
+<span class=normal>70</span>
+<span class=normal>71</span>
+<span class=normal>72</span>
+<span class=normal>73</span>
+<span class=normal>74</span>
+<span class=normal>75</span>
+<span class=normal>76</span>
+<span class=normal>77</span>
+<span class=normal>78</span>
+<span class=normal>79</span>
+<span class=normal>80</span>
+<span class=normal>81</span>
+<span class=normal>82</span>
+<span class=normal>83</span>
+<span class=normal>84</span>
+<span class=normal>85</span>
+<span class=normal>86</span>
+<span class=normal>87</span>
+<span class=normal>88</span>
+<span class=normal>89</span>
+<span class=normal>90</span>
+<span class=normal>91</span>
+<span class=normal>92</span>
+<span class=normal>93</span>
+<span class=normal>94</span>
+<span class=normal>95</span>
+<span class=normal>96</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><span class=cp>#pragma once</span>
+</span><span id=__span-5-2>
+</span><span id=__span-5-3><span class=k>namespace</span><span class=w> </span><span class=nn>simulate_shared_ptr</span>
+</span><span id=__span-5-4><span class=p>{</span>
+</span><span id=__span-5-5><span class=w>    </span><span class=k>template</span><span class=w> </span><span class=o>&lt;</span><span class=k>class</span><span class=w> </span><span class=nc>T</span><span class=o>&gt;</span>
+</span><span id=__span-5-6><span class=w>    </span><span class=k>class</span><span class=w> </span><span class=nc>shared_ptr</span>
+</span><span id=__span-5-7><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-5-8><span class=w>    </span><span class=k>public</span><span class=o>:</span>
+</span><span id=__span-5-9><span class=w>        </span><span class=c1>// 构造函数</span>
+</span><span id=__span-5-10><span class=w>        </span><span class=n>shared_ptr</span><span class=p>(</span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span>
+</span><span id=__span-5-11><span class=w>            </span><span class=o>:</span><span class=n>_ptr</span><span class=p>(</span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-5-12><span class=w>            </span><span class=p>,</span><span class=n>_count</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=kt>int</span><span class=p>(</span><span class=mi>1</span><span class=p>))</span>
+</span><span id=__span-5-13><span class=w>        </span><span class=p>{}</span>
+</span><span id=__span-5-14>
+</span><span id=__span-5-15><span class=w>        </span><span class=kt>void</span><span class=w> </span><span class=n>release</span><span class=p>()</span>
+</span><span id=__span-5-16><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-5-17><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>--</span><span class=p>(</span><span class=o>*</span><span class=n>_count</span><span class=p>)</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-5-18><span class=w>            </span><span class=p>{</span>
+</span><span id=__span-5-19><span class=w>                </span><span class=c1>// 释放指向的空间</span>
+</span><span id=__span-5-20><span class=w>                </span><span class=k>delete</span><span class=w> </span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-5-21><span class=w>                </span><span class=c1>// 释放计数器空间</span>
+</span><span id=__span-5-22><span class=w>                </span><span class=k>delete</span><span class=w> </span><span class=n>_count</span><span class=p>;</span>
+</span><span id=__span-5-23><span class=w>                </span><span class=c1>// 将指针置为空</span>
+</span><span id=__span-5-24><span class=w>                </span><span class=n>_ptr</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>nullptr</span><span class=p>;</span>
+</span><span id=__span-5-25><span class=w>                </span><span class=n>_count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>nullptr</span><span class=p>;</span>
+</span><span id=__span-5-26><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-5-27><span class=w>            </span><span class=k>else</span>
+</span><span id=__span-5-28><span class=w>            </span><span class=p>{</span>
+</span><span id=__span-5-29><span class=w>                </span><span class=c1>// 如果不为0，只将当前指针置为空，防止出现野指针问题</span>
+</span><span id=__span-5-30><span class=w>                </span><span class=n>_ptr</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>nullptr</span><span class=p>;</span>
+</span><span id=__span-5-31><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-5-32><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-5-33>
+</span><span id=__span-5-34><span class=w>        </span><span class=c1>// 析构函数</span>
+</span><span id=__span-5-35><span class=w>        </span><span class=o>~</span><span class=n>shared_ptr</span><span class=p>()</span>
+</span><span id=__span-5-36><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-5-37><span class=w>            </span><span class=n>release</span><span class=p>();</span>
+</span><span id=__span-5-38><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-5-39>
+</span><span id=__span-5-40><span class=w>        </span><span class=c1>// 赋值运算符重载函数</span>
+</span><span id=__span-5-41><span class=w>        </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span><span class=w> </span><span class=k>operator</span><span class=o>=</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-5-42><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-5-43><span class=w>            </span><span class=c1>// 防止自己给自己赋值</span>
+</span><span id=__span-5-44><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>_ptr</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=n>ptr</span><span class=p>.</span><span class=n>_ptr</span><span class=p>)</span>
+</span><span id=__span-5-45><span class=w>            </span><span class=p>{</span>
+</span><span id=__span-5-46><span class=w>                </span><span class=c1>// 释放被赋值指针</span>
+</span><span id=__span-5-47><span class=w>                </span><span class=n>release</span><span class=p>();</span>
+</span><span id=__span-5-48>
+</span><span id=__span-5-49><span class=w>                </span><span class=c1>// 将被赋值指针指向ptr指针指向的内容</span>
+</span><span id=__span-5-50><span class=w>                </span><span class=n>_ptr</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>ptr</span><span class=p>.</span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-5-51><span class=w>                </span><span class=n>_count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>ptr</span><span class=p>.</span><span class=n>_count</span><span class=p>;</span>
+</span><span id=__span-5-52><span class=w>                </span><span class=c1>// 更改赋值指针的引用计数</span>
+</span><span id=__span-5-53><span class=w>                </span><span class=o>++</span><span class=p>(</span><span class=o>*</span><span class=n>_count</span><span class=p>);</span>
+</span><span id=__span-5-54><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-5-55>
+</span><span id=__span-5-56><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=o>*</span><span class=k>this</span><span class=p>;</span>
+</span><span id=__span-5-57><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-5-58>
+</span><span id=__span-5-59><span class=w>        </span><span class=c1>// 拷贝构造函数</span>
+</span><span id=__span-5-60><span class=w>        </span><span class=n>shared_ptr</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-5-61><span class=w>            </span><span class=o>:</span><span class=n>_ptr</span><span class=p>(</span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-5-62><span class=w>            </span><span class=p>,</span><span class=w> </span><span class=n>_count</span><span class=p>(</span><span class=n>ptr</span><span class=p>.</span><span class=n>_count</span><span class=p>)</span>
+</span><span id=__span-5-63><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-5-64><span class=w>            </span><span class=o>++</span><span class=p>(</span><span class=o>*</span><span class=n>_count</span><span class=p>);</span>
+</span><span id=__span-5-65><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-5-66>
+</span><span id=__span-5-67><span class=w>        </span><span class=c1>// 其他部分</span>
+</span><span id=__span-5-68><span class=w>        </span><span class=c1>// 获取原生指针</span>
+</span><span id=__span-5-69><span class=w>        </span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>get</span><span class=p>()</span><span class=w> </span><span class=k>const</span>
+</span><span id=__span-5-70><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-5-71><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-5-72><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-5-73>
+</span><span id=__span-5-74><span class=w>        </span><span class=c1>// 获取引用计数</span>
+</span><span id=__span-5-75><span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>use_count</span><span class=p>()</span><span class=w> </span><span class=k>const</span>
+</span><span id=__span-5-76><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-5-77><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=o>*</span><span class=n>_pcount</span><span class=p>;</span>
+</span><span id=__span-5-78><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-5-79>
+</span><span id=__span-5-80><span class=w>        </span><span class=c1>// operator*()</span>
+</span><span id=__span-5-81><span class=w>        </span><span class=n>T</span><span class=o>&amp;</span><span class=w> </span><span class=k>operator</span><span class=o>*</span><span class=p>()</span>
+</span><span id=__span-5-82><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-5-83><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=o>*</span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-5-84><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-5-85>
+</span><span id=__span-5-86><span class=w>        </span><span class=c1>// operator-&gt;()</span>
+</span><span id=__span-5-87><span class=w>        </span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=k>operator</span><span class=o>-&gt;</span><span class=p>()</span>
+</span><span id=__span-5-88><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-5-89><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-5-90><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-5-91>
+</span><span id=__span-5-92><span class=w>    </span><span class=k>private</span><span class=o>:</span>
+</span><span id=__span-5-93><span class=w>        </span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-5-94><span class=w>        </span><span class=kt>int</span><span class=o>*</span><span class=w> </span><span class=n>_count</span><span class=p>;</span>
+</span><span id=__span-5-95><span class=w>    </span><span class=p>};</span>
+</span><span id=__span-5-96><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h4 id=_6>添加可自定义删除器功能<a class=headerlink href=#_6 title="Permanent link">&para;</a></h4> <p>与<code>unique_ptr</code>不同的是，<code>shared_ptr</code>的自定义删除器是在构造对象参数列表中传递，并且可以使用任意函数对象，所以可以考虑使用<code>function</code>包装器对象作为成员（<code>release</code>函数中调用，因为没有模版参数，所以不可以直接使用构造函数中的模版参数对象），默认情况下使用<code>delete</code></p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>需要注意，因为需要默认情况下使用<code>delete</code>，所以需要使在没有传递自定义删除器时调用<code>delete</code>函数，此时lambda需要写在成员的后面，而不是构造函数关于自定义删除器的缺省参数，便于两个构造函数都可以初始化<code>_del</code>成员</p> </div> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><span class=cp>#pragma once</span>
+</span><span id=__span-6-2>
+</span><span id=__span-6-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;functional&gt;</span>
+</span><span id=__span-6-4>
+</span><span id=__span-6-5><span class=k>namespace</span><span class=w> </span><span class=nn>simulate_shared_ptr</span>
+</span><span id=__span-6-6><span class=p>{</span>
+</span><span id=__span-6-7><span class=w>    </span><span class=k>template</span><span class=w> </span><span class=o>&lt;</span><span class=k>class</span><span class=w> </span><span class=nc>T</span><span class=o>&gt;</span>
+</span><span id=__span-6-8><span class=w>    </span><span class=k>class</span><span class=w> </span><span class=nc>shared_ptr</span>
+</span><span id=__span-6-9><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-6-10><span class=w>    </span><span class=k>public</span><span class=o>:</span>
+</span><span id=__span-6-11><span class=w>        </span><span class=c1>// ...</span>
+</span><span id=__span-6-12><span class=w>        </span><span class=c1>// 支持自定义删除器的构造函数</span>
+</span><span id=__span-6-13><span class=w>        </span><span class=k>template</span><span class=o>&lt;</span><span class=k>class</span><span class=w> </span><span class=nc>D</span><span class=o>&gt;</span>
+</span><span id=__span-6-14><span class=w>        </span><span class=n>shared_ptr</span><span class=p>(</span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=p>,</span><span class=w> </span><span class=n>D</span><span class=w> </span><span class=n>del</span><span class=p>)</span>
+</span><span id=__span-6-15><span class=w>            </span><span class=o>:</span><span class=w> </span><span class=n>_ptr</span><span class=p>(</span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-6-16><span class=w>            </span><span class=p>,</span><span class=w> </span><span class=n>_count</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=kt>int</span><span class=p>(</span><span class=mi>1</span><span class=p>))</span>
+</span><span id=__span-6-17><span class=w>            </span><span class=p>,</span><span class=w> </span><span class=n>_del</span><span class=p>(</span><span class=n>del</span><span class=p>)</span>
+</span><span id=__span-6-18><span class=w>        </span><span class=p>{}</span>
+</span><span id=__span-6-19>
+</span><span id=__span-6-20><span class=w>        </span><span class=c1>// ...</span>
+</span><span id=__span-6-21><span class=w>        </span><span class=kt>void</span><span class=w> </span><span class=n>release</span><span class=p>()</span>
+</span><span id=__span-6-22><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-6-23><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>--</span><span class=p>(</span><span class=o>*</span><span class=n>_count</span><span class=p>)</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-6-24><span class=w>            </span><span class=p>{</span>
+</span><span id=__span-6-25><span class=w>                </span><span class=c1>// 释放指向的空间</span>
+</span><span id=__span-6-26><span class=w>                </span><span class=n>_del</span><span class=p>(</span><span class=n>_ptr</span><span class=p>);</span>
+</span><span id=__span-6-27><span class=w>                </span><span class=c1>// ...</span>
+</span><span id=__span-6-28><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-6-29><span class=w>            </span><span class=k>else</span>
+</span><span id=__span-6-30><span class=w>            </span><span class=p>{</span>
+</span><span id=__span-6-31><span class=w>                </span><span class=c1>// ...</span>
+</span><span id=__span-6-32><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-6-33><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-6-34><span class=w>    </span><span class=k>private</span><span class=o>:</span>
+</span><span id=__span-6-35><span class=w>        </span><span class=c1>// ...</span>
+</span><span id=__span-6-36><span class=w>        </span><span class=n>function</span><span class=w> </span><span class=o>&lt;</span><span class=kt>void</span><span class=p>(</span><span class=n>T</span><span class=o>*</span><span class=p>)</span><span class=o>&gt;</span><span class=w> </span><span class=n>_del</span><span class=w>  </span><span class=o>=</span><span class=w> </span><span class=p>[](</span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=k>delete</span><span class=w> </span><span class=n>ptr</span><span class=p>;</span><span class=w> </span><span class=p>};</span>
+</span><span id=__span-6-37><span class=w>    </span><span class=p>};</span>
+</span><span id=__span-6-38><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h4 id=_7>数组类型特化版本<a class=headerlink href=#_7 title="Permanent link">&para;</a></h4> <p>如果需要满足这样的调用：<code>SharedPtr&lt;Date[]&gt; sp2(new Date[5], [](Date* ptr) { delete[] ptr; });</code>，上面的代码就存在一定的缺陷，因为数组指针并不是普通的指针，可以考虑对数组指针版本进行特化处理，可以参考下面的代码：</p> <p><div class="language-C++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span>
+<span class=normal>44</span>
+<span class=normal>45</span>
+<span class=normal>46</span>
+<span class=normal>47</span>
+<span class=normal>48</span>
+<span class=normal>49</span>
+<span class=normal>50</span>
+<span class=normal>51</span>
+<span class=normal>52</span>
+<span class=normal>53</span>
+<span class=normal>54</span>
+<span class=normal>55</span>
+<span class=normal>56</span>
+<span class=normal>57</span>
+<span class=normal>58</span>
+<span class=normal>59</span>
+<span class=normal>60</span>
+<span class=normal>61</span>
+<span class=normal>62</span>
+<span class=normal>63</span>
+<span class=normal>64</span>
+<span class=normal>65</span>
+<span class=normal>66</span>
+<span class=normal>67</span>
+<span class=normal>68</span>
+<span class=normal>69</span>
+<span class=normal>70</span>
+<span class=normal>71</span>
+<span class=normal>72</span>
+<span class=normal>73</span>
+<span class=normal>74</span>
+<span class=normal>75</span>
+<span class=normal>76</span>
+<span class=normal>77</span>
+<span class=normal>78</span>
+<span class=normal>79</span>
+<span class=normal>80</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><span class=c1>// 针对数组类型特化shared_ptr类</span>
+</span><span id=__span-7-2><span class=k>template</span><span class=w> </span><span class=o>&lt;</span><span class=k>class</span><span class=w> </span><span class=nc>T</span><span class=o>&gt;</span>
+</span><span id=__span-7-3><span class=k>class</span><span class=w> </span><span class=nc>shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=p>[]</span><span class=o>&gt;</span>
+</span><span id=__span-7-4><span class=p>{</span>
+</span><span id=__span-7-5><span class=k>public</span><span class=o>:</span>
+</span><span id=__span-7-6><span class=w>    </span><span class=c1>// 构造函数</span>
+</span><span id=__span-7-7><span class=w>    </span><span class=n>shared_ptr</span><span class=p>(</span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span>
+</span><span id=__span-7-8><span class=w>        </span><span class=o>:</span><span class=w> </span><span class=n>_ptr</span><span class=p>(</span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-7-9><span class=w>        </span><span class=p>,</span><span class=w> </span><span class=n>_count</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=kt>int</span><span class=p>(</span><span class=mi>1</span><span class=p>))</span>
+</span><span id=__span-7-10><span class=w>    </span><span class=p>{}</span>
+</span><span id=__span-7-11>
+</span><span id=__span-7-12><span class=w>    </span><span class=c1>// 支持自定义删除器的构造函数</span>
+</span><span id=__span-7-13><span class=w>    </span><span class=k>template</span><span class=o>&lt;</span><span class=k>class</span><span class=w> </span><span class=nc>D</span><span class=o>&gt;</span>
+</span><span id=__span-7-14><span class=w>    </span><span class=n>shared_ptr</span><span class=p>(</span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=p>,</span><span class=w> </span><span class=n>D</span><span class=w> </span><span class=n>del</span><span class=p>)</span>
+</span><span id=__span-7-15><span class=w>        </span><span class=o>:</span><span class=w> </span><span class=n>_ptr</span><span class=p>(</span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-7-16><span class=w>        </span><span class=p>,</span><span class=w> </span><span class=n>_count</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=kt>int</span><span class=p>(</span><span class=mi>1</span><span class=p>))</span>
+</span><span id=__span-7-17><span class=w>        </span><span class=p>,</span><span class=w> </span><span class=n>_del</span><span class=p>(</span><span class=n>del</span><span class=p>)</span>
+</span><span id=__span-7-18><span class=w>    </span><span class=p>{}</span>
+</span><span id=__span-7-19>
+</span><span id=__span-7-20><span class=w>    </span><span class=c1>// 拷贝构造函数</span>
+</span><span id=__span-7-21><span class=w>    </span><span class=n>shared_ptr</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=p>[]</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-7-22><span class=w>        </span><span class=o>:</span><span class=w> </span><span class=n>_ptr</span><span class=p>(</span><span class=n>ptr</span><span class=p>.</span><span class=n>_ptr</span><span class=p>)</span>
+</span><span id=__span-7-23><span class=w>        </span><span class=p>,</span><span class=w> </span><span class=n>_count</span><span class=p>(</span><span class=n>ptr</span><span class=p>.</span><span class=n>_count</span><span class=p>)</span>
+</span><span id=__span-7-24><span class=w>        </span><span class=p>,</span><span class=w> </span><span class=n>_del</span><span class=p>(</span><span class=n>ptr</span><span class=p>.</span><span class=n>_del</span><span class=p>)</span>
+</span><span id=__span-7-25><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-7-26><span class=w>        </span><span class=o>++</span><span class=p>(</span><span class=o>*</span><span class=n>_count</span><span class=p>);</span>
+</span><span id=__span-7-27><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-7-28>
+</span><span id=__span-7-29><span class=w>    </span><span class=c1>// 赋值运算符重载函数</span>
+</span><span id=__span-7-30><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=p>[]</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=k>operator</span><span class=o>=</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=p>[]</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-7-31><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-7-32><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=k>this</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=o>&amp;</span><span class=n>ptr</span><span class=p>)</span>
+</span><span id=__span-7-33><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-7-34><span class=w>            </span><span class=n>release</span><span class=p>();</span>
+</span><span id=__span-7-35>
+</span><span id=__span-7-36><span class=w>            </span><span class=n>_ptr</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>ptr</span><span class=p>.</span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-7-37><span class=w>            </span><span class=n>_count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>ptr</span><span class=p>.</span><span class=n>_count</span><span class=p>;</span>
+</span><span id=__span-7-38><span class=w>            </span><span class=n>_del</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>ptr</span><span class=p>.</span><span class=n>_del</span><span class=p>;</span>
+</span><span id=__span-7-39>
+</span><span id=__span-7-40><span class=w>            </span><span class=o>++</span><span class=p>(</span><span class=o>*</span><span class=n>_count</span><span class=p>);</span>
+</span><span id=__span-7-41><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-7-42>
+</span><span id=__span-7-43><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=o>*</span><span class=k>this</span><span class=p>;</span>
+</span><span id=__span-7-44><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-7-45>
+</span><span id=__span-7-46><span class=w>    </span><span class=c1>// 析构函数</span>
+</span><span id=__span-7-47><span class=w>    </span><span class=o>~</span><span class=n>shared_ptr</span><span class=p>()</span>
+</span><span id=__span-7-48><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-7-49><span class=w>        </span><span class=n>release</span><span class=p>();</span>
+</span><span id=__span-7-50><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-7-51>
+</span><span id=__span-7-52><span class=w>    </span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>get</span><span class=p>()</span><span class=w> </span><span class=k>const</span>
+</span><span id=__span-7-53><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-7-54><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-7-55><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-7-56>
+</span><span id=__span-7-57><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>use_count</span><span class=p>()</span><span class=w> </span><span class=k>const</span>
+</span><span id=__span-7-58><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-7-59><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=o>*</span><span class=n>_count</span><span class=p>;</span>
+</span><span id=__span-7-60><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-7-61>
+</span><span id=__span-7-62><span class=w>    </span><span class=n>T</span><span class=o>&amp;</span><span class=w> </span><span class=k>operator</span><span class=p>[](</span><span class=kt>size_t</span><span class=w> </span><span class=n>index</span><span class=p>)</span>
+</span><span id=__span-7-63><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-7-64><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>_ptr</span><span class=p>[</span><span class=n>index</span><span class=p>];</span>
+</span><span id=__span-7-65><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-7-66>
+</span><span id=__span-7-67><span class=k>private</span><span class=o>:</span>
+</span><span id=__span-7-68><span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=n>release</span><span class=p>()</span>
+</span><span id=__span-7-69><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-7-70><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>--</span><span class=p>(</span><span class=o>*</span><span class=n>_count</span><span class=p>)</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-7-71><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-7-72><span class=w>            </span><span class=n>_del</span><span class=p>(</span><span class=n>_ptr</span><span class=p>);</span>
+</span><span id=__span-7-73><span class=w>            </span><span class=k>delete</span><span class=w> </span><span class=n>_count</span><span class=p>;</span>
+</span><span id=__span-7-74><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-7-75><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-7-76>
+</span><span id=__span-7-77><span class=w>    </span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>_ptr</span><span class=p>;</span>
+</span><span id=__span-7-78><span class=w>    </span><span class=kt>int</span><span class=o>*</span><span class=w> </span><span class=n>_count</span><span class=p>;</span>
+</span><span id=__span-7-79><span class=w>    </span><span class=n>function</span><span class=o>&lt;</span><span class=kt>void</span><span class=p>(</span><span class=n>T</span><span class=o>*</span><span class=p>)</span><span class=o>&gt;</span><span class=w> </span><span class=n>_del</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>[](</span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>ptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=k>delete</span><span class=p>[]</span><span class=w> </span><span class=n>ptr</span><span class=p>;</span><span class=w> </span><span class=p>};</span>
+</span><span id=__span-7-80><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> 在上面的代码中，之所以需要使用<code>T[]</code>是为了告诉编译器这是数组类型，而不是普通的<code>T*</code>，如果将<code>Date[]</code>直接赋值给<code>T*</code>，此时编译器会认为是<code>Date*</code>，导致因为<code>Date[]</code>衰减成了<code>Date*</code>丢失数组大小信息（这一过程称为数组衰减）</p> <h2 id=shared_ptrweak_ptr><code>shared_ptr</code>循环引用问题与<code>weak_ptr</code>的使用<a class=headerlink href=#shared_ptrweak_ptr title="Permanent link">&para;</a></h2> <p>以下面的代码为例：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><span class=k>struct</span><span class=w> </span><span class=nc>ListNode</span>
+</span><span id=__span-8-2><span class=p>{</span>
+</span><span id=__span-8-3><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_data</span><span class=p>;</span>
+</span><span id=__span-8-4>
+</span><span id=__span-8-5><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>ListNode</span><span class=o>&gt;</span><span class=w> </span><span class=n>_next</span><span class=p>;</span>
+</span><span id=__span-8-6><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>ListNode</span><span class=o>&gt;</span><span class=w> </span><span class=n>_prev</span><span class=p>;</span>
+</span><span id=__span-8-7>
+</span><span id=__span-8-8><span class=w>    </span><span class=o>~</span><span class=n>ListNode</span><span class=p>()</span>
+</span><span id=__span-8-9><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-8-10><span class=w>        </span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;~ListNode()&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-8-11><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-8-12><span class=p>};</span>
+</span><span id=__span-8-13>
+</span><span id=__span-8-14><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-8-15><span class=p>{</span>
+</span><span id=__span-8-16><span class=w>    </span><span class=c1>// 创建两个节点相互指向</span>
+</span><span id=__span-8-17><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>ListNode</span><span class=o>&gt;</span><span class=w> </span><span class=n>p1</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>ListNode</span><span class=p>);</span>
+</span><span id=__span-8-18><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>ListNode</span><span class=o>&gt;</span><span class=w> </span><span class=n>p2</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>ListNode</span><span class=p>);</span>
+</span><span id=__span-8-19>
+</span><span id=__span-8-20><span class=w>    </span><span class=n>p1</span><span class=o>-&gt;</span><span class=n>_next</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>p2</span><span class=p>;</span>
+</span><span id=__span-8-21><span class=w>    </span><span class=n>p2</span><span class=o>-&gt;</span><span class=n>_prev</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>p1</span><span class=p>;</span>
+</span><span id=__span-8-22>
+</span><span id=__span-8-23><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-8-24><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>上面的代码会出现内存泄漏的问题，首先分析内存泄漏出现的原因：</p> <ol> <li>首先p2指针析构，因为p1指针的_next成员与p2指针共同管理一片空间，所以此时该空间的引用计数器由2变为1，p2指针置为空即可</li> <li>接着析构p1指针，因为p2指针的_prev成员与p1指针共同管理一片空间，所以此时该空间的引用计数器由2变为1，p1指针置为空即可</li> </ol> <p>此时两个指针都已经被释放了，所以程序结束，但是实际上因为还有_next和_prev指针管理空间导致这两片空间依旧没有被释放，从而造成内存泄漏</p> <p>循环引用问题：</p> <ol> <li>当p2指针析构时，当前空间引用计数器减1</li> <li>当p1指针析构时，当前空间引用计数器减1</li> <li>当_next指针需要析构时，需要p1指针指向的空间析构</li> <li>当_prev指针需要析构时，需要p2指针指向的空间析构</li> <li>（循环开始）析构p2指针时，当前空间引用计数器减1</li> </ol> <p>....</p> <p>为了解决<code>shared_ptr</code>的循环引用问题，可以将<code>ListNode</code>的<code>_next</code>和<code>_prev</code>指针改为<code>weak_ptr</code>，因为<code>weak_ptr</code>支持使用<code>shared_ptr</code>构造</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><span class=k>struct</span><span class=w> </span><span class=nc>ListNode</span>
+</span><span id=__span-9-2><span class=p>{</span>
+</span><span id=__span-9-3><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_data</span><span class=p>;</span>
+</span><span id=__span-9-4>
+</span><span id=__span-9-5><span class=w>    </span><span class=n>weak_ptr</span><span class=o>&lt;</span><span class=n>ListNode</span><span class=o>&gt;</span><span class=w> </span><span class=n>_next</span><span class=p>;</span>
+</span><span id=__span-9-6><span class=w>    </span><span class=n>weak_ptr</span><span class=o>&lt;</span><span class=n>ListNode</span><span class=o>&gt;</span><span class=w> </span><span class=n>_prev</span><span class=p>;</span>
+</span><span id=__span-9-7>
+</span><span id=__span-9-8><span class=w>    </span><span class=o>~</span><span class=n>ListNode</span><span class=p>()</span>
+</span><span id=__span-9-9><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-9-10><span class=w>        </span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;~ListNode()&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-9-11><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-9-12><span class=p>};</span>
+</span><span id=__span-9-13>
+</span><span id=__span-9-14><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-9-15><span class=p>{</span>
+</span><span id=__span-9-16><span class=w>    </span><span class=c1>// 创建两个节点相互指向</span>
+</span><span id=__span-9-17><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>ListNode</span><span class=o>&gt;</span><span class=w> </span><span class=n>p1</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>ListNode</span><span class=p>);</span>
+</span><span id=__span-9-18><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>ListNode</span><span class=o>&gt;</span><span class=w> </span><span class=n>p2</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>ListNode</span><span class=p>);</span>
+</span><span id=__span-9-19>
+</span><span id=__span-9-20><span class=w>    </span><span class=n>p1</span><span class=o>-&gt;</span><span class=n>_next</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>p2</span><span class=p>;</span>
+</span><span id=__span-9-21><span class=w>    </span><span class=n>p2</span><span class=o>-&gt;</span><span class=n>_prev</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>p1</span><span class=p>;</span>
+</span><span id=__span-9-22>
+</span><span id=__span-9-23><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-9-24><span class=p>}</span>
+</span><span id=__span-9-25>
+</span><span id=__span-9-26><span class=n>输出结果</span><span class=err>：</span>
+</span><span id=__span-9-27><span class=o>~</span><span class=n>ListNode</span><span class=p>()</span>
+</span><span id=__span-9-28><span class=o>~</span><span class=n>ListNode</span><span class=p>()</span>
+</span></code></pre></div></td></tr></table></div> <p>需要注意，<code>weak_ptr</code>不可以单独用于管理对象，例如下面的代码：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span>
+<span class=normal>7</span>
+<span class=normal>8</span>
+<span class=normal>9</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><span class=c1>// weak_ptr不可以单独使用，需要通过lock()创建shared_ptr</span>
+</span><span id=__span-10-2>
+</span><span id=__span-10-3><span class=c1>// weak_ptr&lt;ListNode&gt; p3(new ListNode); // 错误</span>
+</span><span id=__span-10-4>
+</span><span id=__span-10-5><span class=c1>// 正确代码：</span>
+</span><span id=__span-10-6><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>ListNode</span><span class=o>&gt;</span><span class=w> </span><span class=n>p3</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>ListNode</span><span class=p>);</span>
+</span><span id=__span-10-7><span class=n>weak_ptr</span><span class=o>&lt;</span><span class=n>ListNode</span><span class=o>&gt;</span><span class=w> </span><span class=n>p4</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>p3</span><span class=p>;</span>
+</span><span id=__span-10-8><span class=c1>// 通过lock()创建shared_ptr</span>
+</span><span id=__span-10-9><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>ListNode</span><span class=o>&gt;</span><span class=w> </span><span class=n>p5</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>p4</span><span class=p>.</span><span class=n>lock</span><span class=p>();</span>
+</span></code></pre></div></td></tr></table></div> <p><code>weak_ptr</code> 本身不会影响由 <code>shared_ptr</code> 维护的引用计数，所以weak_ptr的基本结构类似下面的代码：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><span class=k>template</span><span class=o>&lt;</span><span class=k>class</span><span class=w> </span><span class=nc>T</span><span class=o>&gt;</span>
+</span><span id=__span-11-2><span class=k>class</span><span class=w> </span><span class=nc>weak_ptr</span>
+</span><span id=__span-11-3><span class=p>{</span>
+</span><span id=__span-11-4><span class=k>public</span><span class=o>:</span>
+</span><span id=__span-11-5><span class=w>    </span><span class=n>weak_ptr</span><span class=p>()</span>
+</span><span id=__span-11-6><span class=w>    </span><span class=p>{}</span>
+</span><span id=__span-11-7>
+</span><span id=__span-11-8><span class=w>    </span><span class=n>weak_ptr</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>sp</span><span class=p>)</span>
+</span><span id=__span-11-9><span class=w>        </span><span class=o>:</span><span class=n>_ptr</span><span class=p>(</span><span class=n>sp</span><span class=p>.</span><span class=n>get</span><span class=p>())</span><span class=w> </span><span class=c1>// 使用shared_ptr构造，不改变引用计数器</span>
+</span><span id=__span-11-10><span class=w>    </span><span class=p>{}</span>
+</span><span id=__span-11-11>
+</span><span id=__span-11-12><span class=w>    </span><span class=n>weak_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=k>operator</span><span class=o>=</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>sp</span><span class=p>)</span>
+</span><span id=__span-11-13><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-11-14><span class=w>        </span><span class=n>_ptr</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>sp</span><span class=p>.</span><span class=n>get</span><span class=p>();</span><span class=c1>// 使用shared_ptr赋值，不改变引用计数器</span>
+</span><span id=__span-11-15>
+</span><span id=__span-11-16><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=o>*</span><span class=k>this</span><span class=p>;</span>
+</span><span id=__span-11-17><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-11-18>
+</span><span id=__span-11-19><span class=k>private</span><span class=o>:</span>
+</span><span id=__span-11-20><span class=w>    </span><span class=n>T</span><span class=o>*</span><span class=w> </span><span class=n>_ptr</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>nullptr</span><span class=p>;</span>
+</span><span id=__span-11-21><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> <p>并且当最后一个 <code>shared_ptr</code> 对象离开作用域或被设置为无效时，它指向的对象才会被删除，即使此时仍然存在 <code>weak_ptr</code> 指向该对象，除非使用<code>lock()</code>函数，例如下面的代码中</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-12-2><span class=p>{</span>
+</span><span id=__span-12-3><span class=w>    </span><span class=n>weak_ptr</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>wp</span><span class=p>;</span>
+</span><span id=__span-12-4><span class=w>    </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>sp</span><span class=p>;</span>
+</span><span id=__span-12-5>
+</span><span id=__span-12-6><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-12-7><span class=w>        </span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>n1</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=kt>int</span><span class=p>);</span>
+</span><span id=__span-12-8><span class=w>        </span><span class=n>wp</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>n1</span><span class=p>;</span>
+</span><span id=__span-12-9><span class=w>        </span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>wp</span><span class=p>.</span><span class=n>expired</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-12-10><span class=w>        </span><span class=c1>// 如果没有lock()，weak_ptr即使指向了n1的空间，一旦n1离开作用域，n1的空间就会被释放，wp指向的空间就同样被释放</span>
+</span><span id=__span-12-11><span class=w>        </span><span class=c1>// 通过lock()获取shared_ptr，可以保证n1的空间不会被释放</span>
+</span><span id=__span-12-12><span class=w>        </span><span class=n>sp</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>wp</span><span class=p>.</span><span class=n>lock</span><span class=p>();</span>
+</span><span id=__span-12-13><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-12-14><span class=w>    </span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>wp</span><span class=p>.</span><span class=n>expired</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>endl</span><span class=p>;</span><span class=w> </span><span class=c1>// 没有lock()时，值为1，有lock()时，值为0</span>
+</span><span id=__span-12-15>
+</span><span id=__span-12-16><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-12-17><span class=p>}</span>
+</span><span id=__span-12-18>
+</span><span id=__span-12-19><span class=n>输出结果</span><span class=err>：</span>
+</span><span id=__span-12-20><span class=mi>0</span>
+</span><span id=__span-12-21><span class=mi>0</span>
+</span></code></pre></div></td></tr></table></div> <h2 id=auto_ptr>智能指针的前身：<code>auto_ptr</code><a class=headerlink href=#auto_ptr title="Permanent link">&para;</a></h2> <p>C++ 98时没有前面类型的智能指针，但是可以使用<code>auto_ptr</code>达到基本一致的效果，但是<code>auto_ptr</code>本身的原理是一种管理权转移的思想，所以存在已经将管理权转移，但是依旧使用被转移资源的指针进行内容访问导致的空指针解引用问题，所以为了更好地管理，<code>auto_ptr</code>基本上被<code>unique_ptr</code>和<code>shared_ptr</code>代替</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><span class=c1>// auto_ptr的问题</span>
+</span><span id=__span-13-2><span class=n>auto_ptr</span><span class=o>&lt;</span><span class=n>Date</span><span class=o>&gt;</span><span class=w> </span><span class=n>ap</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>Date</span><span class=p>);</span>
+</span><span id=__span-13-3><span class=n>auto_ptr</span><span class=o>&lt;</span><span class=n>Date</span><span class=o>&gt;</span><span class=w> </span><span class=n>ap1</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>ap</span><span class=p>;</span>
+</span><span id=__span-13-4><span class=c1>// ap的空间管理权已经转移给ap1，ap空指针访问</span>
+</span><span id=__span-13-5><span class=n>ap</span><span class=o>-&gt;</span><span class=n>_day</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>10</span><span class=p>;</span>
+</span></code></pre></div></td></tr></table></div> <h2 id=_8>内存泄漏问题<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <p>内存泄漏：指因为疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并不是指内存在物理上的消失，而是应用程序分配某段内存后，因为设计错误，失去了对该段内存的控制，因而造成了内存的浪费</p> <p>内存泄漏的危害：长期运行的程序出现内存泄漏，影响很大，如操作系统、后台服务等等，出现内存泄漏会导致响应越来越慢，最终卡死</p> <p>例如下面的代码：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&quot;vld.h&quot;</span>
+</span><span id=__span-14-2>
+</span><span id=__span-14-3><span class=kt>void</span><span class=w> </span><span class=nf>MemoryLeaks</span><span class=p>()</span>
+</span><span id=__span-14-4><span class=p>{</span>
+</span><span id=__span-14-5><span class=w>    </span><span class=c1>// 1.内存申请了忘记释放</span>
+</span><span id=__span-14-6><span class=w>    </span><span class=kt>int</span><span class=o>*</span><span class=w> </span><span class=n>p1</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=kt>int</span><span class=o>*</span><span class=p>)</span><span class=n>malloc</span><span class=p>(</span><span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>));</span>
+</span><span id=__span-14-7><span class=w>    </span><span class=kt>int</span><span class=o>*</span><span class=w> </span><span class=n>p2</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=kt>int</span><span class=p>;</span>
+</span><span id=__span-14-8>
+</span><span id=__span-14-9><span class=w>    </span><span class=c1>// 2.异常安全问题</span>
+</span><span id=__span-14-10><span class=w>    </span><span class=kt>int</span><span class=o>*</span><span class=w> </span><span class=n>p3</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=kt>int</span><span class=p>[</span><span class=mi>10</span><span class=p>];</span>
+</span><span id=__span-14-11>
+</span><span id=__span-14-12><span class=w>    </span><span class=c1>// Func(); // 如果这里Func函数抛异常导致 delete[] p3将不会执行，p3没被释放.</span>
+</span><span id=__span-14-13>
+</span><span id=__span-14-14><span class=w>    </span><span class=k>delete</span><span class=p>[]</span><span class=w> </span><span class=n>p3</span><span class=p>;</span>
+</span><span id=__span-14-15><span class=p>}</span>
+</span><span id=__span-14-16>
+</span><span id=__span-14-17><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-14-18><span class=p>{</span>
+</span><span id=__span-14-19><span class=w>    </span><span class=n>MemoryLeaks</span><span class=p>();</span>
+</span><span id=__span-14-20><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-14-21><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>检查内存溢出情况（仅供参考）：</p> <p><a class=glightbox href="27. 智能指针.assets\image2.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="27. 智能指针.assets\image2.png"></a></p> <h2 id=_9>内存泄漏的分类<a class=headerlink href=#_9 title="Permanent link">&para;</a></h2> <p>C/C++程序中一般我们关心两种方面的内存泄漏：</p> <ol> <li>堆内存泄漏(Heap leak) ：堆内存指的是程序执行中依据须要分配通过<code>malloc</code>/<code>calloc</code>/<code>realloc</code>/<code>new</code>等从堆中分配的一块内存，用完后必须通过调用相应的 <code>free</code>或者<code>delete</code> 删掉。假设程序的设计错误导致这部分内存没有被释放，那么以后这部分空间将无法再被使用，就会产生Heap Leak。</li> <li>系统资源泄漏：指程序使用系统分配的资源，比方套接字、文件描述符、管道等没有使用对应的函数释放掉，导致系统资源的浪费，严重可导致系统效能减少，系统执行不稳定。</li> </ol> <h2 id=_10>避免内存泄漏<a class=headerlink href=#_10 title="Permanent link">&para;</a></h2> <ol> <li> <p>工程前期良好的设计规范，养成良好的编码规范，申请的内存空间记着匹配的去释放。</p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>这个理想状态。但是如果碰上异常时，就算注意释放了，还是可能会出问题。需要下一条智能指针来管理才有保证。</p> </div> </li> <li> <p>采用RAII思想或者智能指针来管理资源。</p> </li> <li> <p>有些公司内部规范使用内部实现的私有内存管理库。这套库自带内存泄漏检测的功能选项。</p> </li> <li> <p>出问题了使用内存泄漏工具检测。</p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>不过很多工具都不够靠谱，或者收费昂贵。</p> </div> </li> </ol> <p>内存泄漏非常常见，解决方案分为两种：</p> <ol> <li>事前预防型，如智能指针等 </li> <li>事后查错型，如泄漏检测工具</li> </ol> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年2月12日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年8月16日</span> </span> </aside> </div> <script src=https://qiniu.techgrow.cn/readmore/dist/readmore.js type=text/javascript></script> <script>
+        var isExclude = false;
+        var excludePages = ['/网站验证码', '/阅读档案', '/作者', '/网站时间线'];
+        var currentPath = decodeURIComponent(window.location.pathname).replace(/\/$/, '').toLowerCase();
+        isExclude = excludePages.some(page => currentPath.includes(page.toLowerCase()));
+        var isMobile = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
+        var allowMobile = true;
+        if (!isExclude && (!isMobile || (isMobile && allowMobile))) {
+            try {
+                var plugin = new ReadmorePlugin();
+                plugin.init({
+                    id: "readmore-container",
+                    blogId: "36140-2300591443397-093",
+                    name: "阅读档案",
+                    keyword: "验证码",
+                    qrcode: "https://www.help-doc.top/index.assets/qrcode_for_gh_166df3e5da8b_258.jpg",
+                    type: "website",
+                    height: "600",
+                    expires: "31",
+                    interval: "60",
+                    random: "1.0"
+                })
+            } catch (e) {
+                console.warn("readmore plugin occurred error: " + e.name + " | " + e.message);
+            }
+        }
+        let verificationInProgress = false;
+        function isContentUnlocked() {
+            const readmoreWrapper = document.getElementById('readmore-wrapper');
+            const readmoreModel = document.getElementById('readmore-model-wrapper');
+            const readmoreModalMask = document.getElementById('readmore-modal-mask');
+            if (verificationInProgress) {
+                return false;
+            }
+            if (!readmoreWrapper && !readmoreModel && !readmoreModalMask) {
+                return true;
+            }
+            return readmoreWrapper && 
+                window.getComputedStyle(readmoreWrapper).display === 'none' && 
+                (!readmoreModel || window.getComputedStyle(readmoreModel).display === 'none') &&
+                (!readmoreModalMask || window.getComputedStyle(readmoreModalMask).display === 'none');
+        }
+        function showVerificationModal() {
+            const readmoreBtn = document.getElementById('readmore-btn');
+            if (readmoreBtn) {
+                verificationInProgress = true;
+                readmoreBtn.click();
+                const observer = new MutationObserver(() => {
+                    const modalMask = document.getElementById('readmore-modal-mask');
+                    if (!modalMask || window.getComputedStyle(modalMask).display === 'none') {
+                        setTimeout(() => {
+                            if (!isContentUnlocked()) {
+                                verificationInProgress = false;
+                            }
+                        }, 100);
+                    }
+                });
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['style', 'class']
+                });
+            }
+        }
+        function handleAnchorNavigation(e, href) {
+            if (!isContentUnlocked()) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!verificationInProgress) {
+                    showVerificationModal();
+                }
+                return false;
+            }
+            if (href && href.includes('#')) {
+                const targetId = href.split('#')[1];
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+            return true;
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            let searchResultsInitialized = false;
+            const searchObserver = new MutationObserver((mutations) => {
+                if (searchResultsInitialized) return;
+                const searchResults = document.querySelectorAll('.md-search-result__link');
+                if (searchResults.length > 0) {
+                    searchResults.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href && href.includes('#') && !href.includes('#__tabbed_')) {
+                            link.addEventListener('click', (e) => {
+                                const currentPath = window.location.pathname;
+                                const [linkPath, hash] = href.split('#');
+                                if (!linkPath || linkPath === currentPath) {
+                                    handleAnchorNavigation(e, '#' + hash);
+                                }
+                            }, { capture: true, once: true });
+                        }
+                    });
+                    
+                    searchResultsInitialized = true;
+                    setTimeout(() => {
+                        searchResultsInitialized = false;
+                    }, 100);
+                }
+            });
+
+            const searchContainer = document.querySelector('.md-search');
+            if (searchContainer) {
+                searchObserver.observe(searchContainer, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+            function resetSearchState() {
+                searchResultsInitialized = false;
+            }
+            const searchInput = document.querySelector('.md-search__input');
+            if (searchInput) {
+                searchInput.addEventListener('blur', resetSearchState);
+                searchInput.addEventListener('search', resetSearchState);
+            }
+            document.addEventListener('click', (e) => {
+                const target = e.target.closest('a[href*="#"]');
+                if (!target) return;
+                
+                const href = target.getAttribute('href');
+                // 排除以 __tabbed_ 开头的锚点
+                if (href && (href.startsWith('#') || href.includes('/#')) && !href.includes('#__tabbed_')) {
+                    handleAnchorNavigation(e, href);
+                }
+            }, true);
+            setTimeout(() => {
+                const hash = window.location.hash;
+                if (hash && !isContentUnlocked()) {
+                    showVerificationModal();
+                }
+            }, 300);
+            window.addEventListener('hashchange', (e) => {
+                if (!isContentUnlocked()) {
+                    e.preventDefault();
+                    showVerificationModal();
+                }
+            }, false);
+            const modalObserver = new MutationObserver(() => {
+                const modalMask = document.getElementById('readmore-modal-mask');
+                if (modalMask && window.getComputedStyle(modalMask).display === 'none') {
+                    setTimeout(() => {
+                        if (!isContentUnlocked()) {
+                            verificationInProgress = false;
+                        }
+                    }, 100);
+                }
+            });
+            modalObserver.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style']
+            });
+        });
+    </script> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024-2025 EPSDA </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.prune", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script> <script src=../../assets/javascripts/bundle.f1b6f286.min.js></script> <script src=../../javascripts/mathjax.min.js></script> <script src=../../javascripts/particles.min.js></script> <script src=../../javascripts/other.min.js></script> <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body> </html>

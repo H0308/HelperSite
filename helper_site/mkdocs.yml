@@ -217,7 +217,7 @@ nav:
       - UDP应用1：翻译软件: Linux/22. UDP编程/2. UDP应用1：翻译软件/2. UDP应用1：翻译软件.md
       - UDP应用2：简易聊天室: Linux/22. UDP编程/3. UDP应用2：简易聊天室/3. UDP应用2：简易聊天室.md
     - TCP编程接口基本使用: Linux/23. TCP编程接口基本使用/23. TCP编程接口基本使用.md
-  - JavaEE应用开发:
+  - 前端:
     - HTML与CSS:
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md
       - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md
@@ -236,6 +236,7 @@ nav:
         - BOM操作: JavaScript基础知识/9. JavaScript与BOM操作/9. JavaScript与BOM操作.md
         - DOM和BOM小练习: JavaScript基础知识/11. （附加）DOM和BOM小练习/11. （附加）DOM和BOM小练习.md
       - JavaScript与JQuery（了解）: JavaScript基础知识/10. JavaScript与JQuery/10. JavaScript与JQuery.md
+  - JavaEE应用开发:
     - HTTP协议介绍: JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
     - Servlet开发: JavaWeb/2. Servlet开发/2. Servlet开发.md
     - 乱码问题和路径问题: JavaWeb/3. 乱码问题和路径问题/3. 乱码问题和路径问题.md

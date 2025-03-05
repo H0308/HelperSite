@@ -238,18 +238,18 @@ nav:
       - JavaScript与JQuery（了解）: JavaScript基础知识/10. JavaScript与JQuery/10. JavaScript与JQuery.md
     - Vue:
       - Vue前置知识: vue基础知识/1. vue前置知识/1. vue前置知识.md
-  - JavaEE应用开发:
-    - HTTP协议介绍: JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
-    - Servlet开发: JavaWeb/2. Servlet开发/2. Servlet开发.md
-    - 乱码问题和路径问题: JavaWeb/3. 乱码问题和路径问题/3. 乱码问题和路径问题.md
-    - MVC架构模式介绍: JavaWeb/4. MVC架构模式介绍/4. MVC架构模式介绍.md
-    - 会话、过滤器和监听器: JavaWeb/5. 会话、过滤器和监听器/5. 会话、过滤器和监听器.md
+  # - JavaEE应用开发:
+  #   - HTTP协议介绍: JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
+  #   - Servlet开发: JavaWeb/2. Servlet开发/2. Servlet开发.md
+  #   - 乱码问题和路径问题: JavaWeb/3. 乱码问题和路径问题/3. 乱码问题和路径问题.md
+  #   - MVC架构模式介绍: JavaWeb/4. MVC架构模式介绍/4. MVC架构模式介绍.md
+  #   - 会话、过滤器和监听器: JavaWeb/5. 会话、过滤器和监听器/5. 会话、过滤器和监听器.md
   - MySQL:
     - MySQL基础: MySQL/MySQL基础使用/MySQL基础使用.md
-    - JDBC（Java连接数据库技术）:
-      - JDBC基础: MySQL/JDBC/JDBC基础/JDBC基础.md
-      - JDBC进阶: MySQL/JDBC/JDBC进阶/JDBC进阶.md
-      - JDBC高级: MySQL/JDBC/JDBC高级/JDBC高级.md
+    # - JDBC（Java连接数据库技术）:
+    #   - JDBC基础: MySQL/JDBC/JDBC基础/JDBC基础.md
+    #   - JDBC进阶: MySQL/JDBC/JDBC进阶/JDBC进阶.md
+    #   - JDBC高级: MySQL/JDBC/JDBC高级/JDBC高级.md
   - 编程题目练习总结:
     - 模拟字符串转整数函数: 编程题目练习总结/模拟字符串转整数函数/模拟字符串转整数函数.md
   - 其它: 
@@ -268,6 +268,18 @@ nav:
     - 学习晚一定没机会吗，大三学长有话说: 面试/学习晚一定没机会吗，大三学长有话说/学习晚一定没机会吗，大三学长有话说.md
   - 阅读档案: 阅读档案/阅读档案.md
   - 联系作者: 作者/作者.md
+
+
+
+not_in_nav: |
+  JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
+  JavaWeb/2. Servlet开发/2. Servlet开发.md
+  JavaWeb/3. 乱码问题和路径问题/3. 乱码问题和路径问题.md
+  JavaWeb/4. MVC架构模式介绍/4. MVC架构模式介绍.md
+  JavaWeb/5. 会话、过滤器和监听器/5. 会话、过滤器和监听器.md
+  MySQL/JDBC/JDBC基础/JDBC基础.md
+  MySQL/JDBC/JDBC进阶/JDBC进阶.md
+  MySQL/JDBC/JDBC高级/JDBC高级.md
 
 markdown_extensions:
   - admonition

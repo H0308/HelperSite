@@ -251,7 +251,7 @@ nav:
     #   - JDBC基础: MySQL/JDBC/JDBC基础/JDBC基础.md
     #   - JDBC进阶: MySQL/JDBC/JDBC进阶/JDBC进阶.md
     #   - JDBC高级: MySQL/JDBC/JDBC高级/JDBC高级.md
-  - 其它: 
+  - 扩展知识: 
     - 关于Shell: 其它/Shell脚本语言/关于Shell.md
     - 关于函数栈帧（C语言演示）: 其它/C语言函数栈帧/关于函数栈帧（C语言演示）.md
     - 关于xml文件: 其它/关于xml文件/关于xml文件.md

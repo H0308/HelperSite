@@ -239,6 +239,7 @@ nav:
       - JavaScript与JQuery（了解）: JavaScript基础知识/10. JavaScript与JQuery/10. JavaScript与JQuery.md
     - Vue:
       - Vue前置知识: vue基础知识/1. vue前置知识/1. vue前置知识.md
+      - Vue基础与响应式: vue基础知识/2. vue的响应式基础/2. vue的响应式基础.md
   # - JavaEE应用开发:
   #   - HTTP协议介绍: JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
   #   - Servlet开发: JavaWeb/2. Servlet开发/2. Servlet开发.md

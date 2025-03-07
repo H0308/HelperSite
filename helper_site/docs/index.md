@@ -617,6 +617,7 @@ a {
                 <a href="https://docs.oracle.com/javase/8/docs/api/">Java 官方文档</a>
                 <a href="https://developer.mozilla.org/en-US/">MDN Web 文档</a>
                 <a href="https://docs.python.org/zh-cn/3/library/index.html">Python 标准库</a>
+                <a href="https://cn.vuejs.org/guide/introduction.html">Vue 3</a>
                 <a href="https://quickref.cn/docs/git.html">Git 指令参考</a>
                 <a href="https://quickref.cn/docs/github.html">Github 使用技巧</a>
                 <a href="https://quickref.cn/docs/http-status-code.html">HTTP 状态码</a>

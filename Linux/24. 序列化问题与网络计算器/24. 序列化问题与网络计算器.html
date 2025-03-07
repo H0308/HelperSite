@@ -1,0 +1,1897 @@
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/Linux/24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8/24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8.html><link rel=prev href=../23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html><link rel=next href=../../HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.6.5"><title>序列化和反序列化与网络计算器 - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.8608ea7d.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><link rel=stylesheet href=../../css/timeline.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (max-width: 767px)"><link rel=stylesheet href=../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><style>
+        @import url('https://static.zeoseven.com/zsft/2/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/442/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/288/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/84/main/result.css');
+        @font-face {
+            font-family: "Source Han Sans SC VF";
+        }
+        @font-face {
+            font-family: 'LXGW ZhenKai';
+        }
+        @font-face {
+            font-family: "JetBrains Mono";
+            src: url('https://static.zeoseven.com/zsft/hk/main.woff2') format('woff2'),
+                url('https://static-host.zeoseven.com/zsft/hk/main.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: "Douyin Sans";
+        }
+        .md-header__topic .md-ellipsis {
+            font-family: "Douyin Sans" !important;
+        }
+        :root {
+            --md-text-font: "Source Han Sans SC VF";
+            --md-header-font: "LXGW ZhenKai";
+            --md-code-font: "JetBrains Mono";
+            --code-font-color: #e96900;
+        }
+        h1 + div > p {
+            font-family: var(--md-header-font);
+        }
+        @media screen and (max-width: 1199px) {
+            .theme-switch {
+                display: none !important;
+            }
+        }
+
+        @media print {
+            a[href]:after {
+                content: "" !important;
+            }
+            a {
+                text-decoration: none !important;
+                color: inherit !important;
+                pointer-events: none !important;
+                cursor: default !important;
+            }
+            a[title] {
+                position: relative;
+            }
+            a[title]:hover:after {
+                display: none !important;
+            }
+            a:active, a:hover, a:focus {
+                outline: none !important;
+                text-decoration: none !important;
+            }
+            img {
+                max-width: 100% !important;
+                page-break-inside: avoid;
+            }
+            .md-header,
+            .md-tabs,
+            .md-sidebar,
+            .md-footer {
+                display: none !important;
+            }
+        }
+        .theme-switch {
+            display: inline-flex;
+            gap: 8px;
+            margin-right: 1rem;
+            padding: 4px;
+            border-radius: 100px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .theme-switch {
+            margin-right: 1rem;
+        }
+        .theme-btn {
+            font-family: var(--md-text-font);
+            font-size: medium;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px 8px;
+            color: #fff;
+            cursor: pointer;
+            min-width: 100px;
+            height: 36px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            background-size: 200% 100%;
+            background-position: right bottom;
+            background-repeat: no-repeat;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .theme-btn .current-theme,
+        .theme-btn .target-theme {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+        .theme-btn .current-theme {
+            transform: translateX(0);
+            opacity: 1;
+            transition-delay: 0ms;
+        }
+        .theme-btn .target-theme {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition-delay: 0ms;
+        }
+        .theme-btn:hover {
+            transform: scale(1.05);
+            background-image: linear-gradient(to right, #4da6da 0%, #275796 100%);
+            background-position: left bottom;
+        }
+        .theme-btn:hover .current-theme {
+            transform: translateX(100%);
+            opacity: 0;
+            transition-delay: 100ms;
+        }
+        .theme-btn:hover .target-theme {
+            transform: translateX(0);
+            opacity: 1;
+            transition-delay: 200ms;
+        }
+        .theme-btn:active {
+            transform: scale(0.95);
+            transition: all 100ms ease;
+        }
+        .md-content article > *:not(.md-top):not(.md-nav) {
+            animation: flyIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(1) { animation-delay: 0.1s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(2) { animation-delay: 0.15s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(3) { animation-delay: 0.2s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(4) { animation-delay: 0.25s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(5) { animation-delay: 0.3s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(6) { animation-delay: 0.35s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(7) { animation-delay: 0.4s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(8) { animation-delay: 0.45s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(9) { animation-delay: 0.5s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(10) { animation-delay: 0.55s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(11) { animation-delay: 0.6s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(12) { animation-delay: 0.65s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(13) { animation-delay: 0.7s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(14) { animation-delay: 0.75s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(15) { animation-delay: 0.8s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(16) { animation-delay: 0.85s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(17) { animation-delay: 0.9s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(18) { animation-delay: 0.95s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(19) { animation-delay: 1s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(20) { animation-delay: 1.05s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(n+21) { animation-delay: 1.1s; }
+        @keyframes flyIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        li::marker { 
+            color: rgba(77, 166, 218, 0.9); 
+        }
+        .md-search__input:hover,
+        .md-search__input:focus {
+            border-radius: 8px !important;
+        }
+        .md-search__form {
+            border-radius: 8px !important;
+        }
+        .md-search__output {
+            border-radius: 8px !important;
+        }
+        .md-search__overlay {
+            border-radius: 8px !important;
+        }
+        .md-search-result {
+            border-radius: 8px !important;
+        }
+        .md-search__inner {
+            border-radius: 8px !important;
+        }
+        :not(pre) > code {
+            color: #ff7043 !important;
+            font-weight: normal;
+        }
+        .highlight .c1,
+        .highlight .cm {
+            color: #6a737d;
+        }
+        .md-typeset .admonition,
+        .md-typeset details {
+            border-width: 0;
+            border-left-width: 4px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--md-header-font);
+            color: #4da6da !important;
+        }
+        body {
+            font-family: var(--md-text-font);
+        }
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--code-font-color);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleEffect 0.6s ease-out forwards;
+            transform: translate(var(--translate-x, 0), var(--translate-y, 0)) scale(1);
+        }
+        @keyframes particleEffect {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translate(var(--translate-x), var(--translate-y)) scale(0.5);
+            }
+        }
+        pre code {
+            color: var(--md-code-fg-color) !important;
+        }
+        .highlight pre {
+            background-color: var(--md-code-bg-color) !important;
+        }
+        .md-typeset code {
+            font-family: var(--md-code-font), var(--md-text-font);
+        }
+        .md-tabs__item.md-tabs__item--active {
+            border-bottom: 2px solid rgba(77, 166, 218, 0.9);
+        }
+        .md-tabs__list > .md-tabs__item--active > .md-tabs__link {
+            color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .timeline-content::before {
+            background-color: #efefef;
+        }
+        .timeline-card {
+            background-color: #efefef !important;
+        }
+        .changelog-content a {
+            color: #4051b5 !important;
+            word-break: break-word;
+        }
+        .changelog-content a:focus, .changelog-content a:hover {
+            color: #00bda4 !important;
+        }
+        .changelog-type-pageupdate {
+            background-color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .md-footer-runtime {
+            position: relative;
+            z-index: 3;
+            margin: 0.5rem 0;
+            padding: 0.4rem 0;
+            font-size: .7rem;
+            line-height: 1.6;
+            color: var(--md-footer-fg-color--light);
+            display: flex;
+            align-items: center;
+        }
+        ::selection {
+            background: rgba(77, 166, 218, 0.2);
+        }
+        html {
+            scroll-behavior: smooth !important; /* 强制启用平滑滚动 */
+            scroll-padding-top: 53px; /* 设置滚动偏移量,避免标题被导航栏遮挡 */
+        }
+        a[href^="#"],  /* 站内锚点 */
+        a[href*="/#"] /* 跨页锚点 */ {
+            scroll-behavior: smooth !important;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+            a[href^="#"],
+            a[href*="/#"] {
+                scroll-behavior: auto !important;
+            }
+        }
+        #readmore-wrapper {
+            position: absolute;
+            bottom: 0px;
+            z-index: 9999;
+            width: 100%;
+            margin-top: -100px;
+            font-family: var(--md-text-font);
+            display: none;
+        }
+        #readmore-mask {
+            position: relative;
+            height: 500px;
+            background: -webkit-gradient(linear, 0 0%, 0 100%, from(rgba(255, 255, 255, 0)), to(rgb(255, 255, 255)));
+        }
+        #readmore-btn {
+            position: absolute;
+            left: 50%;
+            top: 70%;
+            bottom: 30px;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 36px;
+            line-height: 36px;
+            font-size: 15px;
+            text-align: center;
+            border: 1px solid rgba(77, 166, 218, 0.9);
+            color: rgba(77, 166, 218, 0.9);
+            background: rgb(255, 255, 255);
+            cursor: pointer;
+            border-radius: 6px;
+            border-bottom: 1px solid rgba(77, 166, 218, 0.9) !important;
+            text-decoration: none !important;
+        }
+        #readmore-modal-mask {
+            position: fixed;
+            inset: 0px;
+            opacity: 0.7;
+            z-index: 999;
+            background: rgb(0, 0, 0);
+        }
+        #readmore-modal-content {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            text-align: center;
+            font-size: 13px;
+            background: rgb(255, 255, 255);
+            border-radius: 10px;
+            z-index: 9999;
+            font-family: var(--md-text-font), sans-serif;
+        }
+        #readmore-modal-close-btn {
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            line-height: 34px;
+            font-size: 25px;
+            cursor: pointer;
+            opacity: 0.2;
+            z-index: 9999;
+            color: rgb(0, 0, 0);
+            background: none;
+            border: none;
+            outline: none;
+        }
+        #readmore-modal-header {
+            font-size: 15px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        #readmore-modal-header div {
+            margin-top: 5px;
+        }
+        #readmore-blog-name {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-blog-keyword {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-blog-forever {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-modal-header div span:not([id]) {
+            color: #444;
+        }
+        #readmore-modal-qrcode img {
+            width: 220px;
+            height: 220px;
+            border: 8px solid rgb(230, 230, 230);
+            margin-bottom: 10px !important;
+            margin-top: 10px !important;
+            opacity: 1 !important;
+            display: inline !important;
+        }
+        #readmore-modal-form {
+            background: rgb(255, 255, 255);
+        }
+        #readmore-modal-captcha-input {
+            width: 160px;
+            height: 32px;
+            line-height: 32px;
+            padding: 0px 10px;
+            margin-left: -1px !important;
+            margin: 0px 10px;
+            font-size: 13px;
+            text-rendering: auto;
+            text-transform: none;
+            cursor: text;
+            outline: none;
+            box-sizing: border-box;
+            border: 1px solid rgb(221, 221, 221);
+            appearance: textfield;
+            color: #000;
+            background-color: white;
+            -webkit-rtl-ordering: logical;
+        }
+        #readmore-modal-submit-btn {
+            padding: 0px 20px;
+            height: 32px;
+            font-size: 14px;
+            outline: none;
+            border: none;
+            color: rgb(255, 255, 255);
+            background: rgba(77, 166, 218, 0.9);
+            cursor: pointer;
+        }
+        #readmore-modal-footer p {
+            font-size: 15px;
+            margin: 30px 0px 20px;
+            color: rgb(153, 153, 153);
+            text-align: center;
+        }
+        #readmore-official-website {
+            border-bottom: none !important;
+            text-decoration: none !important;
+            color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .readmore-btn-mouseover {
+            color: rgb(255, 255, 255) !important;
+            background: rgba(77, 166, 218, 0.9) !important;
+        }
+        .readmore-btn-mouseout {
+            color: rgba(77, 166, 218, 0.9) !important;
+            background: rgb(255, 255, 255) !important;
+        }
+        .custom-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            color: rgba(77, 166, 218, 0.9);
+            border-bottom: 1px dashed rgba(77, 166, 218, 0.9);
+            text-decoration: none !important;
+        }
+        .custom-tooltip > span {
+            color: grey;
+            font-size: 12px;
+            margin-left: 4px;
+        }
+        .custom-tooltip::before {
+            content: attr(data-title);
+            position: absolute;
+            width: 300px;
+            background-color: rgba(51, 51, 51, 0.95);
+            color: #fff;
+            text-align: left;
+            padding: 10px;
+            border-radius: 6px;
+            bottom: 125%;  /* 定位在链接上方 */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99999;  /* 确保显示在最上层 */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 1.5;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            word-wrap: break-word;
+            white-space: normal;
+        }
+        .custom-tooltip::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(51, 51, 51, 0.95) transparent transparent transparent;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .custom-tooltip:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+        @media (max-width: 767px) {
+            .custom-tooltip::before {
+                width: 250px;
+                white-space: normal;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 130%;
+            }
+        }
+        .md-content a.custom-tooltip::after {
+            display: none !important;
+        }
+    </style><script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchEl = document.querySelector('.md-search');
+            const savedTheme = localStorage.getItem('preferred-theme') || 'theme1';
+            const themeSwitch = document.createElement('div');
+            themeSwitch.className = 'theme-switch';
+            themeSwitch.innerHTML = `
+                <button class="theme-btn" onclick="switchTheme()">
+                    <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '旧版主题'}</span>
+                    <span class="target-theme">${savedTheme === 'theme1' ? '旧版主题' : '新版主题'}</span>
+                </button>
+            `;
+            searchEl.parentNode.insertBefore(themeSwitch, searchEl);
+            setTimeout(() => {
+                const hash = window.location.hash;
+                if (hash) {
+                    const readmoreBtn = document.getElementById('readmore-wrapper');
+                    if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
+                        const targetId = hash.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            // 平滑滚动到目标元素
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                }
+            }, 300); 
+        });
+
+        (function initTheme() {
+            const savedTheme = localStorage.getItem('preferred-theme');
+            if (savedTheme) {
+                const theme1Link = document.querySelector('link[href*="theme1"]');
+                const theme2Link = document.querySelector('link[href*="theme2"]');
+                if (theme1Link && theme2Link) {
+                    if (savedTheme === 'theme1') {
+                        theme1Link.removeAttribute('disabled');
+                        theme2Link.setAttribute('disabled', 'true');
+                    } else {
+                        theme2Link.removeAttribute('disabled');
+                        theme1Link.setAttribute('disabled', 'true');
+                    }
+                }
+            }
+        })();
+
+        function switchTheme() {
+            const currentTheme = localStorage.getItem('preferred-theme') || 'theme1';
+            const newTheme = currentTheme === 'theme1' ? 'theme2' : 'theme1';
+            const theme1Link = document.querySelector('link[href*="theme1"]');
+            const theme2Link = document.querySelector('link[href*="theme2"]');
+            if (newTheme === 'theme1') {
+                theme1Link.removeAttribute('disabled');
+                theme2Link.setAttribute('disabled', 'true');
+            } else {
+                theme2Link.removeAttribute('disabled');
+                theme1Link.setAttribute('disabled', 'true');
+            }
+            localStorage.setItem('preferred-theme', newTheme);
+            const themeBtn = document.querySelector('.theme-btn');
+            const currentThemeEl = themeBtn.querySelector('.current-theme');
+            const targetThemeEl = themeBtn.querySelector('.target-theme');
+            currentThemeEl.textContent = newTheme === 'theme1' ? '新版主题' : '旧版主题';
+            targetThemeEl.textContent = newTheme === 'theme1' ? '旧版主题' : '新版主题';
+        }
+
+        document.addEventListener('copy', function(e) {
+            const selectedText = window.getSelection().toString();
+            if(selectedText) {
+                const copyright = '\n\n' +
+                    '————————————————\n' +
+                    '文章作者：怡晗★\n' +
+                    '网站链接：https://www.help-doc.top\n' +
+                    '当前文章链接：' + window.location.href + '\n' +
+                    '版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。\n' +
+                    '转载请注明来自怡晗★的个人网站！';
+                e.preventDefault();
+                e.clipboardData.setData('text/plain', selectedText + copyright);
+            }
+        });
+    </script> <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#_1 class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../../index.html title=学习档案 class="md-header__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 学习档案 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> 序列化和反序列化与网络计算器 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-hidden=true type=radio name=__palette id=__palette_0> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=标签 data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../index.html class=md-tabs__link> 主页 </a> </li> <li class=md-tabs__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-tabs__link> 网站时间线 </a> </li> <li class=md-tabs__item> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-tabs__link> 编程语言 </a> </li> <li class=md-tabs__item> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-tabs__link> 数据结构与算法 </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-tabs__link> Linux </a> </li> <li class=md-tabs__item> <a href=../../HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html class=md-tabs__link> 前端 </a> </li> <li class=md-tabs__item> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-tabs__link> MySQL </a> </li> <li class=md-tabs__item> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-tabs__link> 其它 </a> </li> <li class=md-tabs__item> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-tabs__link> 工具帮助 </a> </li> <li class=md-tabs__item> <a href=../../%E9%9D%A2%E8%AF%95/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98.html class=md-tabs__link> 闲谈 </a> </li> <li class=md-tabs__item> <a href=../../%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88/%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88.html class=md-tabs__link> 阅读档案 </a> </li> <li class=md-tabs__item> <a href=../../%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html class=md-tabs__link> 联系作者 </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=导航栏 data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../../index.html title=学习档案 class="md-nav__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> 学习档案 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../index.html class=md-nav__link> <span class=md-ellipsis> 主页 </span> </a> </li> <li class=md-nav__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-nav__link> <span class=md-ellipsis> 网站时间线 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-nav__link> <span class=md-ellipsis> 数据结构与算法 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_5 checked> <label class=md-nav__link for=__nav_5 id=__nav_5_label tabindex> <span class=md-ellipsis> Linux </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_5_label aria-expanded=true> <label class=md-nav__title for=__nav_5> <span class="md-nav__icon md-icon"></span> Linux </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-nav__link> <span class=md-ellipsis> Linux常用选项和指令 </span> </a> </li> <li class=md-nav__item> <a href=../2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html class=md-nav__link> <span class=md-ellipsis> Linux权限相关 </span> </a> </li> <li class=md-nav__item> <a href=../3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85.html class=md-nav__link> <span class=md-ellipsis> CentOS软件安装 </span> </a> </li> <li class=md-nav__item> <a href=../4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb/4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb.html class=md-nav__link> <span class=md-ellipsis> Linux下的gcc与gdb </span> </a> </li> <li class=md-nav__item> <a href=../5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F/5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F.html class=md-nav__link> <span class=md-ellipsis> Linux下的Makefile与进度条程序 </span> </a> </li> <li class=md-nav__item> <a href=../6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 操作系统基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../7.%20Linux%E8%BF%9B%E7%A8%8B/7.%20Linux%E8%BF%9B%E7%A8%8B.html class=md-nav__link> <span class=md-ellipsis> Linux进程基础 </span> </a> </li> <li class=md-nav__item> <a href=../8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7/8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7.html class=md-nav__link> <span class=md-ellipsis> Linux进程状态与进程优先级 </span> </a> </li> <li class=md-nav__item> <a href=../9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95.html class=md-nav__link> <span class=md-ellipsis> Linux进程切换以及调度算法 </span> </a> </li> <li class=md-nav__item> <a href=../10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.html class=md-nav__link> <span class=md-ellipsis> Linux命令行与环境变量 </span> </a> </li> <li class=md-nav__item> <a href=../11.%20Linux%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4/11.%20%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.html class=md-nav__link> <span class=md-ellipsis> Linux进程地址空间 </span> </a> </li> <li class=md-nav__item> <a href=../12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6.html class=md-nav__link> <span class=md-ellipsis> Linux进程控制 </span> </a> </li> <li class=md-nav__item> <a href=../13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80/13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> Linux文件操作基础 </span> </a> </li> <li class=md-nav__item> <a href=../14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B/14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B.html class=md-nav__link> <span class=md-ellipsis> Linux中输入和输出基本过程 </span> </a> </li> <li class=md-nav__item> <a href=../15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html class=md-nav__link> <span class=md-ellipsis> Linux文件系统 </span> </a> </li> <li class=md-nav__item> <a href=../16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5.html class=md-nav__link> <span class=md-ellipsis> Linux软链接和硬链接 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../17.%20Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93.html class=md-nav__link> <span class=md-ellipsis> Linux进程间通信 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> Linux信号与操作系统原理 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../19.%20Linux%E7%BA%BF%E7%A8%8B/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C.html class=md-nav__link> <span class=md-ellipsis> Linux线程 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 网络基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> Socket编程基础 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../22.%20UDP%E7%BC%96%E7%A8%8B/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> UDP编程 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> TCP编程接口基本使用 </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> 序列化和反序列化与网络计算器 </span> <span class="md-nav__icon md-icon"></span> </label> <a href=24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8.html class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> 序列化和反序列化与网络计算器 </span> </a> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 何为序列化和反序列化 </span> </a> </li> <li class=md-nav__item> <a href=#socketfd class=md-nav__link> <span class=md-ellipsis> 如何理解socketfd全双工 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 如何理解面向字节流和面向数据包 </span> </a> </li> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 网络计算器 </span> </a> <nav class=md-nav aria-label=网络计算器> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 定义客户端和服务端协议 </span> </a> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 实现客户端和服务端协议 </span> </a> <nav class=md-nav aria-label=实现客户端和服务端协议> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_7 class=md-nav__link> <span class=md-ellipsis> 基本结构 </span> </a> </li> <li class=md-nav__item> <a href=#_8 class=md-nav__link> <span class=md-ellipsis> 设计请求类 </span> </a> </li> <li class=md-nav__item> <a href=#_9 class=md-nav__link> <span class=md-ellipsis> 设计响应类 </span> </a> </li> <li class=md-nav__item> <a href=#_10 class=md-nav__link> <span class=md-ellipsis> 实现编码和解码方法 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_11 class=md-nav__link> <span class=md-ellipsis> 修改服务端 </span> </a> </li> <li class=md-nav__item> <a href=#_12 class=md-nav__link> <span class=md-ellipsis> 设计计算器类 </span> </a> </li> <li class=md-nav__item> <a href=#_13 class=md-nav__link> <span class=md-ellipsis> 修改服务端主函数逻辑 </span> </a> </li> <li class=md-nav__item> <a href=#_14 class=md-nav__link> <span class=md-ellipsis> 修改客户端 </span> </a> </li> <li class=md-nav__item> <a href=#_15 class=md-nav__link> <span class=md-ellipsis> 修改客户端主函数逻辑 </span> </a> </li> <li class=md-nav__item> <a href=#_16 class=md-nav__link> <span class=md-ellipsis> 测试 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#osi class=md-nav__link> <span class=md-ellipsis> 理解为什么OSI七层模型优秀 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html class=md-nav__link> <span class=md-ellipsis> 前端 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-nav__link> <span class=md-ellipsis> 其它 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-nav__link> <span class=md-ellipsis> 工具帮助 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E9%9D%A2%E8%AF%95/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98.html class=md-nav__link> <span class=md-ellipsis> 闲谈 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../../%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88/%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88.html class=md-nav__link> <span class=md-ellipsis> 阅读档案 </span> </a> </li> <li class=md-nav__item> <a href=../../%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html class=md-nav__link> <span class=md-ellipsis> 联系作者 </span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 何为序列化和反序列化 </span> </a> </li> <li class=md-nav__item> <a href=#socketfd class=md-nav__link> <span class=md-ellipsis> 如何理解socketfd全双工 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 如何理解面向字节流和面向数据包 </span> </a> </li> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 网络计算器 </span> </a> <nav class=md-nav aria-label=网络计算器> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 定义客户端和服务端协议 </span> </a> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 实现客户端和服务端协议 </span> </a> <nav class=md-nav aria-label=实现客户端和服务端协议> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_7 class=md-nav__link> <span class=md-ellipsis> 基本结构 </span> </a> </li> <li class=md-nav__item> <a href=#_8 class=md-nav__link> <span class=md-ellipsis> 设计请求类 </span> </a> </li> <li class=md-nav__item> <a href=#_9 class=md-nav__link> <span class=md-ellipsis> 设计响应类 </span> </a> </li> <li class=md-nav__item> <a href=#_10 class=md-nav__link> <span class=md-ellipsis> 实现编码和解码方法 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_11 class=md-nav__link> <span class=md-ellipsis> 修改服务端 </span> </a> </li> <li class=md-nav__item> <a href=#_12 class=md-nav__link> <span class=md-ellipsis> 设计计算器类 </span> </a> </li> <li class=md-nav__item> <a href=#_13 class=md-nav__link> <span class=md-ellipsis> 修改服务端主函数逻辑 </span> </a> </li> <li class=md-nav__item> <a href=#_14 class=md-nav__link> <span class=md-ellipsis> 修改客户端 </span> </a> </li> <li class=md-nav__item> <a href=#_15 class=md-nav__link> <span class=md-ellipsis> 修改客户端主函数逻辑 </span> </a> </li> <li class=md-nav__item> <a href=#_16 class=md-nav__link> <span class=md-ellipsis> 测试 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#osi class=md-nav__link> <span class=md-ellipsis> 理解为什么OSI七层模型优秀 </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <div id=readmore-container> <h1 id=_1>序列化和反序列化与网络计算器<a class=headerlink href=#_1 title="Permanent link">&para;</a></h1> <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;"> <p><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 5360 个字 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 640 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3"/></svg></span> 572 行代码 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m12.96-10.71-2.75 3.54-1.96-2.36L8.5 15h11z"/></svg></span> 4 张图片 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 25 分钟</p> </div> <h2 id=_2>何为序列化和反序列化<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <p>在前面UDP编程和TCP编程中，客户端和服务端之间传递的信息都是字符串，那么是否可以传递一个结构化的数据，例如前面聊天室中，传递一个类似于下面结构化的数据：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><span class=k>struct</span><span class=w> </span><span class=nc>UserInfo</span>
+</span><span id=__span-0-2><span class=p>{</span>
+</span><span id=__span-0-3><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>_name</span><span class=p>;</span><span class=w>    </span><span class=c1>// 用户名字</span>
+</span><span id=__span-0-4><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>_message</span><span class=p>;</span><span class=w> </span><span class=c1>// 用户发送的信息</span>
+</span><span id=__span-0-5><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> <p>实际上，如果是同一台计算机下，直接传递是完全可以的，因为同一台计算机对一个数据的封装和还原都是使用的同一个方式，但是在网络中，网络可能涉及到不同的操作系统，不同的计算机，其中就可能涉及到对结构化数据的设定，例如结构体的内存对齐问题，所以在网络中不建议之间传递结构化的数据，尽管在某些情况下可以</p> <p>既然不能使用结构化数据，但是又可以使用字符串形式的数据，那么有没有一种方式可以将二者结合？这个方式就是<strong>序列化</strong>，所谓序列化就是将结构化的数据转换为一种约定格式的字符串。既然可以将结构化的数据进行序列化，那么当另一方拿到这个序列化后的数据又改如何处理呢？利用<strong>反序列化</strong>，反序列化就是序列化的反向操作，即将约定格式的字符串转换为结构化的数据</p> <p>现在可以传递结构化的数据，那么为了保证客户端和服务端都能正确读取到具体的数据，就必须要保证客户端和服务端都使用同一个结构体，在这整个过程中，使用同一个结构就代表双方使用的是同一个协议。所以，所谓的协议就是结构化的数据。而因为这个结构都是定义在具体的应用中，所以这个协议属于应用层协议</p> <p>上面的内容对应示意图如下：</p> <p><a class=glightbox href="24. 序列化问题与网络计算器.assets\download.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="24. 序列化问题与网络计算器.assets\download.png"></a></p> <h2 id=socketfd>如何理解<code>socketfd</code>全双工<a class=headerlink href=#socketfd title="Permanent link">&para;</a></h2> <p>在前面介绍UDP和TCP时都提到了<code>socketfd</code>是全双工的，但是为什么他们是全双工的？以TCP为例，TCP在底层维护了两个缓冲区，分别是发送缓冲区和接收缓冲区。当客户端向服务端发送数据时，客户端发送数据的接口会将数据拷贝到发送缓冲区，接着由操作系统决定如何以及何时发送客户端发送缓冲区的数据，一旦这个数据发送给服务器，服务器就会将接收到的数据拷贝到服务器的接收缓冲区，而服务器端的写接口一旦发现其接收缓冲区有数据就会将接收缓冲区的数据拷贝到上层；同样的，当服务器向客户端发送数据时，服务端的写接口就会将数据拷贝到发送缓冲区，接着由操作系统决定如何以及何时发送服务端发送缓冲区的数据，一旦这个数据发送给客户端，客户端就会将接收到的数据拷贝到客户端的接收缓冲区，而客户端的写接口一旦发现其接收缓冲区有数据就会将接收缓冲区的数据拷贝到上层</p> <p>整个过程的示意图如下：</p> <p><a class=glightbox href="24. 序列化问题与网络计算器.assets\download1.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="24. 序列化问题与网络计算器.assets\download1.png"></a></p> <p>所以，所谓的全双工本质就是利用两个缓冲区，客户端的发送缓冲区对应服务端的接收缓冲区，服务端的发送缓冲区对应客户端的接收缓冲区</p> <p>但是，如果有多个客户端同时给服务端发送数据，那么服务端又该如何处理这些数据呢？这里就需要对这些数据进行管理，在操作系统底层，先对这些数据进行描述，即构建一个消息结构，再将这些消息结构对象链接到一张<a href=javascript:; class=custom-tooltip data-title=实际上不单单只有链表，因为链表的遍历时间复杂度为O(n)，这个时间复杂度对于操作系统来说显然很高，所以一般可能还伴随着哈希表，但是后面为了简单描述，以链表代替>链表<span style="color: grey;">（鼠标悬浮/手指点击时显示更多信息）</span></a>中，这样操作系统对数据的管理就转换为了对链表的<a href=javascript:; class=custom-tooltip data-title=增（Create）、删（Delete）、查/读（Read）和改（Update）>CURD<span style="color: grey;">（鼠标悬浮/手指点击时显示更多信息）</span></a>，既然接收缓冲区需要有对应的链表，那么发送缓冲区也需要有对应的链表，这张链表就是对待发送的多条数据进行管理。对应的Linux源码如下：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><span class=k>struct</span><span class=w> </span><span class=nc>file</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-1-2><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-1-3>
+</span><span id=__span-1-4><span class=w>    </span><span class=c1>// private_data指针会在数据为网络文件时启用，对于一般文件不使用</span>
+</span><span id=__span-1-5><span class=w>    </span><span class=kt>void</span><span class=w>            </span><span class=o>*</span><span class=n>private_data</span><span class=p>;</span>
+</span><span id=__span-1-6>
+</span><span id=__span-1-7><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-1-8><span class=p>};</span>
+</span><span id=__span-1-9>
+</span><span id=__span-1-10><span class=k>struct</span><span class=w> </span><span class=nc>socket</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-1-11><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-1-12><span class=w>    </span><span class=k>struct</span><span class=w> </span><span class=nc>sock</span><span class=w>     </span><span class=o>*</span><span class=n>sk</span><span class=p>;</span>
+</span><span id=__span-1-13><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-1-14><span class=p>};</span>
+</span><span id=__span-1-15>
+</span><span id=__span-1-16><span class=k>struct</span><span class=w> </span><span class=nc>sock</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-1-17><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-1-18><span class=w>    </span><span class=k>struct</span><span class=w> </span><span class=nc>sk_buff_head</span><span class=w> </span><span class=n>sk_receive_queue</span><span class=p>;</span><span class=w> </span><span class=c1>// 接收缓冲区队列</span>
+</span><span id=__span-1-19><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-1-20><span class=w>    </span><span class=k>struct</span><span class=w> </span><span class=nc>sk_buff_head</span><span class=w> </span><span class=n>sk_write_queue</span><span class=p>;</span><span class=w> </span><span class=c1>// 写入缓冲区队列</span>
+</span><span id=__span-1-21><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-1-22><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> <h2 id=_3>如何理解面向字节流和面向数据包<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <p>现在将视角集中到客户端向服务端发送的一条信息之上，因为TCP是面向字节流的，所以在客户端给服务端发送数据时<a href=javascript:; class=custom-tooltip data-title=因为发送缓冲区和接收缓冲区都是有大小限制的，所以有可能存在缓冲区空间不足，但是因为TCP面向字节流，所以可以想发多少就发多少，这也就意味着，假设服务端的接收缓冲区只有10KB了，那么客户端能发送的数据就会只发送10KB给服务端，这个发送也被称为TCP的流量控制>可能存在发送的数据只有待发送数据的一半甚至更少<span style="color: grey;">（鼠标悬浮/手指点击时显示更多信息）</span></a>，那这样服务端接收到数据就属于不完整的数据，在上面应用层转换时也就可能转换失败。基于这个原因，所以说TCP的读写，不论是使用文件流的<code>read</code>和<code>write</code>，还是网络中的<code>recv</code>和<code>send</code>都是不完善的，因为这些接口不会检测数据是否是上层需要的有效数据，而且这些接口也无法做到判断数据是否是上层需要的有效数据，所以这就需要应用层自己判断收到的数据是否是可以被正确转换的，如果不是就应该继续接收直到至少有一条有效数据</p> <p>但是对于UDP来说就不存在上面TCP这个问题，因为UDP是面向数据包的，所谓数据包就是将数据整个打包，在发送时要么就发整个数据包，要么就一点也不发，这样不论是哪一个接口，拿到的都是完整的数据</p> <h2 id=_4>网络计算器<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <p>上面已经基本介绍了一些概念，下面基于TCP实现一个网络计算器，通过这个计算器更深刻得去理解上面的概念</p> <p>网络计算器的基本功能就是客户端发送计算表达式（本次只实现五种运算，分别是：<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>和<code>%</code>），服务端接收到计算表达式后通过相关接口对这个表达式进行处理并将结果返回给客户端</p> <h3 id=_5>定义客户端和服务端协议<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <p>为了方便处理，本次考虑客户端和服务端都使用结构化的数据，既然是结构化的数据，那么就必须使用到序列化和反序列化。为了保证客户端和服务端看到同一个结构，就需要定义两个类，分别为请求类和响应类，其中请求类包含三个字段：第一个操作数、第二个操作数和操作符，响应类包含两个字段：计算结果和结果状态（正常计算或非正常计算的原因）</p> <p>当客户端发送数据给服务端时需要进行序列化，此时服务端就会收到一个字符串，但是前面提到过，TCP是面向字节流的，所以可能存在服务端收到的字符串并不是完整的或者是存在至少一个完整表达式的，对于并不是完整表达式的字符串，服那么这个表达式就无法被正确计算出结果，而对于存在至少一个完整表达式的，就需要提取其中的完整表达式</p> <p>现在就出现了另外一个问题，何为一个完整表达式？首先，例如<code>3+</code>、<code>+2</code>等肯定不是完整表达式，那<code>3+22+2</code>属于完整表达式吗？<code>3+22+2</code>到底是<code>3+2</code>和<code>2+2</code>还是<code>3+22</code>和<code>+2</code>，对于这种模棱两可的不论是按照哪一种方式进行处理都属于处理不当，所以在本次实现中，除了需要对结构化的数据进行序列化和反序列化外，还需要对序列化后的数据进行编码和对反序列化前的数据进行解码，此处考虑一种比较简单的编码方式，即在序列化的字符串前后添加<code>\n</code>，即<code>\n3+2\n</code>，除了这样，再考虑在第一个<code>\n</code>前添加一个数字，这个数字代表的就是序列化后的字符串的长度，例如<code>3\n3+2\n</code>。这样做就可以保证第一个<code>\n</code>前面的数字一定是用于表示序列化后的字符串的长度，而最后一个<code>\n</code>就是这个表达式的结尾。在解码过程中先找到一个<code>\n</code>，这个<code>\n</code>前的就是之后的序列化字符串的长度，只要没读取到等于这个长度的字符串就属于没有读取到完整的表达式，当读取到序列化字符串的长度加最后一个<code>\n</code>的长度就属于读取到一条有效的可以进行解码的字符串</p> <p>完成上面的步骤之后就完成了客户端和服务端之间定义协议</p> <h3 id=_6>实现客户端和服务端协议<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <h4 id=_7>基本结构<a class=headerlink href=#_7 title="Permanent link">&para;</a></h4> <p>根据上面的思路，可以实现<code>Request</code>和<code>Response</code>类基本结构：</p> <div class="tabbed-set tabbed-alternate" data-tabs=1:2><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>请求类</label><label for=__tabbed_1_2>响应类</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><span class=k>class</span><span class=w> </span><span class=nc>Request</span>
+</span><span id=__span-2-2><span class=p>{</span>
+</span><span id=__span-2-3><span class=k>public</span><span class=o>:</span>
+</span><span id=__span-2-4><span class=w>    </span><span class=n>Request</span><span class=p>()</span>
+</span><span id=__span-2-5><span class=w>        </span><span class=o>:</span><span class=w> </span><span class=n>_first</span><span class=p>(</span><span class=mi>0</span><span class=p>),</span><span class=w> </span><span class=n>_second</span><span class=p>(</span><span class=mi>0</span><span class=p>),</span><span class=w> </span><span class=n>_op</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-2-6><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-2-7><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-2-8><span class=w>    </span><span class=n>Request</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>f</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>s</span><span class=p>,</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=n>op</span><span class=p>)</span>
+</span><span id=__span-2-9><span class=w>        </span><span class=o>:</span><span class=w> </span><span class=n>_first</span><span class=p>(</span><span class=n>f</span><span class=p>),</span><span class=w> </span><span class=n>_second</span><span class=p>(</span><span class=n>s</span><span class=p>),</span><span class=w> </span><span class=n>_op</span><span class=p>(</span><span class=n>op</span><span class=p>)</span>
+</span><span id=__span-2-10><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-2-11><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-2-12>
+</span><span id=__span-2-13><span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>serialize</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>out</span><span class=p>)</span>
+</span><span id=__span-2-14><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-2-15><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-2-16>
+</span><span id=__span-2-17><span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>deserialize</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>in</span><span class=p>)</span>
+</span><span id=__span-2-18><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-2-19><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-2-20>
+</span><span id=__span-2-21><span class=k>private</span><span class=o>:</span>
+</span><span id=__span-2-22><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_first</span><span class=p>;</span>
+</span><span id=__span-2-23><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_second</span><span class=p>;</span>
+</span><span id=__span-2-24><span class=w>    </span><span class=kt>char</span><span class=w> </span><span class=n>_op</span><span class=p>;</span>
+</span><span id=__span-2-25><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><span class=k>enum</span><span class=w> </span><span class=k>class</span><span class=w> </span><span class=nc>CalculatStatus</span>
+</span><span id=__span-3-2><span class=p>{</span>
+</span><span id=__span-3-3><span class=w>    </span><span class=n>Initial</span><span class=p>,</span><span class=w>        </span><span class=c1>// 初始状态</span>
+</span><span id=__span-3-4><span class=w>    </span><span class=n>Normal</span><span class=p>,</span><span class=w>         </span><span class=c1>// 正常计算结果</span>
+</span><span id=__span-3-5><span class=w>    </span><span class=n>DividedByZero</span><span class=p>,</span><span class=w>  </span><span class=c1>// 除0错误</span>
+</span><span id=__span-3-6><span class=w>    </span><span class=n>ModByZero</span><span class=p>,</span><span class=w>      </span><span class=c1>// 模0错误</span>
+</span><span id=__span-3-7><span class=w>    </span><span class=n>WrongExpression</span><span class=w> </span><span class=c1>// 错误表达式</span>
+</span><span id=__span-3-8><span class=p>};</span>
+</span><span id=__span-3-9>
+</span><span id=__span-3-10><span class=k>class</span><span class=w> </span><span class=nc>Response</span>
+</span><span id=__span-3-11><span class=p>{</span>
+</span><span id=__span-3-12><span class=k>public</span><span class=o>:</span>
+</span><span id=__span-3-13><span class=w>    </span><span class=n>Response</span><span class=p>()</span>
+</span><span id=__span-3-14><span class=w>        </span><span class=o>:</span><span class=n>_result</span><span class=p>(</span><span class=mi>0</span><span class=p>),</span><span class=w> </span><span class=n>_c_stat</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>Initial</span><span class=p>)</span>
+</span><span id=__span-3-15><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-3-16>
+</span><span id=__span-3-17><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-3-18>
+</span><span id=__span-3-19><span class=w>    </span><span class=n>Response</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>ret</span><span class=p>,</span><span class=w> </span><span class=n>CalculatStatus</span><span class=w> </span><span class=n>c</span><span class=p>)</span>
+</span><span id=__span-3-20><span class=w>        </span><span class=o>:</span><span class=n>_result</span><span class=p>(</span><span class=n>ret</span><span class=p>),</span><span class=w> </span><span class=n>_c_stat</span><span class=p>(</span><span class=n>c</span><span class=p>)</span>
+</span><span id=__span-3-21><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-3-22>
+</span><span id=__span-3-23><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-3-24>
+</span><span id=__span-3-25><span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>serialize</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>out</span><span class=p>)</span>
+</span><span id=__span-3-26><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-3-27><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-3-28>
+</span><span id=__span-3-29><span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>deserialize</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>in</span><span class=p>)</span>
+</span><span id=__span-3-30><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-3-31><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-3-32>
+</span><span id=__span-3-33><span class=k>private</span><span class=o>:</span>
+</span><span id=__span-3-34><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>_result</span><span class=p>;</span>
+</span><span id=__span-3-35><span class=w>    </span><span class=n>CalculatStatus</span><span class=w> </span><span class=n>_c_stat</span><span class=p>;</span>
+</span><span id=__span-3-36><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> </div> </div> </div> <h4 id=_8>设计请求类<a class=headerlink href=#_8 title="Permanent link">&para;</a></h4> <p>对于请求类来说，主要需要实现的就是序列化和反序列化。在C++中，实现序列化和反序列化的方式有很多种，本次以JSON字符串为例，后面的其他项目会考虑使用别的序列化工具例如protobuf</p> <p>本次使用的JSON转换方案为jsoncpp库，基本使用和介绍见<a href=#>关于JSONCPP库</a></p> <p>对于序列化函数，参数为一个输出型参数，将当前类中的字段组合为一个完整的JSON字符串，再将该字符串赋值给输出型参数即可，代码如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><span class=kt>bool</span><span class=w> </span><span class=nf>serialize</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>out</span><span class=p>)</span>
+</span><span id=__span-4-2><span class=p>{</span>
+</span><span id=__span-4-3><span class=w>    </span><span class=n>Json</span><span class=o>::</span><span class=n>Value</span><span class=w> </span><span class=n>root</span><span class=p>;</span>
+</span><span id=__span-4-4><span class=w>    </span><span class=n>root</span><span class=p>[</span><span class=s>&quot;first&quot;</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>_first</span><span class=p>;</span>
+</span><span id=__span-4-5><span class=w>    </span><span class=n>root</span><span class=p>[</span><span class=s>&quot;second&quot;</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>_second</span><span class=p>;</span>
+</span><span id=__span-4-6><span class=w>    </span><span class=n>root</span><span class=p>[</span><span class=s>&quot;op&quot;</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>_op</span><span class=p>;</span>
+</span><span id=__span-4-7><span class=w>    </span><span class=n>Json</span><span class=o>::</span><span class=n>FastWriter</span><span class=w> </span><span class=n>fw</span><span class=p>;</span>
+</span><span id=__span-4-8><span class=w>    </span><span class=n>out</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>fw</span><span class=p>.</span><span class=n>write</span><span class=p>(</span><span class=n>root</span><span class=p>);</span>
+</span><span id=__span-4-9>
+</span><span id=__span-4-10><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=nb>true</span><span class=p>;</span>
+</span><span id=__span-4-11><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>对于反序列化函数，参数是一个输入型参数，对应的是一个序列化字符串，将序列化字符串中的相关字段转换为原始数据赋值给对应成员即可，代码如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><span class=kt>bool</span><span class=w> </span><span class=nf>deserialize</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>in</span><span class=p>)</span>
+</span><span id=__span-5-2><span class=p>{</span>
+</span><span id=__span-5-3><span class=w>    </span><span class=n>Json</span><span class=o>::</span><span class=n>Value</span><span class=w> </span><span class=n>root</span><span class=p>;</span>
+</span><span id=__span-5-4><span class=w>    </span><span class=n>Json</span><span class=o>::</span><span class=n>Reader</span><span class=w> </span><span class=n>rd</span><span class=p>;</span>
+</span><span id=__span-5-5><span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>isParsed</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>rd</span><span class=p>.</span><span class=n>parse</span><span class=p>(</span><span class=n>in</span><span class=p>,</span><span class=w> </span><span class=n>root</span><span class=p>);</span>
+</span><span id=__span-5-6><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=n>isParsed</span><span class=p>)</span>
+</span><span id=__span-5-7><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-5-8><span class=w>        </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>ERROR</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;Json Parse Fail: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>rd</span><span class=p>.</span><span class=n>getFormattedErrorMessages</span><span class=p>();</span>
+</span><span id=__span-5-9><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span>
+</span><span id=__span-5-10><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-5-11>
+</span><span id=__span-5-12><span class=w>    </span><span class=n>_first</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>root</span><span class=p>[</span><span class=s>&quot;first&quot;</span><span class=p>].</span><span class=n>asInt</span><span class=p>();</span>
+</span><span id=__span-5-13><span class=w>    </span><span class=n>_second</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>root</span><span class=p>[</span><span class=s>&quot;second&quot;</span><span class=p>].</span><span class=n>asInt</span><span class=p>();</span>
+</span><span id=__span-5-14><span class=w>    </span><span class=c1>// char本质也是整型，需要转换为整型，并且没有提供char类型</span>
+</span><span id=__span-5-15><span class=w>    </span><span class=n>_op</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>root</span><span class=p>[</span><span class=s>&quot;op&quot;</span><span class=p>].</span><span class=n>asInt</span><span class=p>();</span>
+</span><span id=__span-5-16>
+</span><span id=__span-5-17><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=nb>true</span><span class=p>;</span>
+</span><span id=__span-5-18><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h4 id=_9>设计响应类<a class=headerlink href=#_9 title="Permanent link">&para;</a></h4> <p>与请求类一致，主要设计序列化和反序列化方法</p> <p>对于序列化函数来说，基本思路与请求类中的序列化函数一样，但是需要注意的是，因为计算状态类并不属于内置类型，所以考虑提供一个<code>get</code>和一个<code>set</code>方法分别提供计算状态类转换为<code>int</code>的逻辑和<code>int</code>转换为计算状态类的逻辑：</p> <div class="tabbed-set tabbed-alternate" data-tabs=2:2><input checked=checked id=__tabbed_2_1 name=__tabbed_2 type=radio><input id=__tabbed_2_2 name=__tabbed_2 type=radio><div class=tabbed-labels><label for=__tabbed_2_1><code>get</code>函数</label><label for=__tabbed_2_2><code>set</code>函数</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><span class=kt>int</span><span class=w> </span><span class=nf>getCalStatusNum</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>&amp;</span><span class=w> </span><span class=n>c</span><span class=p>)</span>
+</span><span id=__span-6-2><span class=p>{</span>
+</span><span id=__span-6-3><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>c</span><span class=p>);</span>
+</span><span id=__span-6-4><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><span class=kt>void</span><span class=w> </span><span class=nf>setCalStatusNum</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>num</span><span class=p>)</span>
+</span><span id=__span-7-2><span class=p>{</span>
+</span><span id=__span-7-3><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>num</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>Normal</span><span class=p>)</span><span class=w> </span><span class=o>&amp;&amp;</span>
+</span><span id=__span-7-4><span class=w>        </span><span class=n>num</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>DividedByZero</span><span class=p>)</span><span class=w> </span><span class=o>&amp;&amp;</span>
+</span><span id=__span-7-5><span class=w>        </span><span class=n>num</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>ModByZero</span><span class=p>)</span><span class=w> </span><span class=o>&amp;&amp;</span>
+</span><span id=__span-7-6><span class=w>        </span><span class=n>num</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>WrongExpression</span><span class=p>)</span><span class=w> </span><span class=o>&amp;&amp;</span>
+</span><span id=__span-7-7><span class=w>        </span><span class=n>num</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>Initial</span><span class=p>))</span>
+</span><span id=__span-7-8><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-7-9><span class=w>        </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>ERROR</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;错误计算状态类型&quot;</span><span class=p>;</span>
+</span><span id=__span-7-10><span class=w>        </span><span class=k>return</span><span class=p>;</span>
+</span><span id=__span-7-11><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-7-12>
+</span><span id=__span-7-13><span class=w>    </span><span class=n>_c_stat</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>static_cast</span><span class=o>&lt;</span><span class=n>CalculatStatus</span><span class=o>&gt;</span><span class=p>(</span><span class=n>num</span><span class=p>);</span>
+</span><span id=__span-7-14><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> </div> </div> <p>其中，对于<code>get</code>方法可以考虑在计算状态类中提供<code>int()</code>重载函数代替，对于<code>set</code>函数可以将判断逻辑简化为之间判断<code>num</code>是否小于0或者大于3，一旦满足二者任意一个就说明是错误计算状态类型</p> <p>有了上面的两个函数后，就可以分别设计序列化函数和反序列化函数：</p> <div class="tabbed-set tabbed-alternate" data-tabs=3:2><input checked=checked id=__tabbed_3_1 name=__tabbed_3 type=radio><input id=__tabbed_3_2 name=__tabbed_3 type=radio><div class=tabbed-labels><label for=__tabbed_3_1>序列化函数</label><label for=__tabbed_3_2>反序列化函数</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><span class=kt>bool</span><span class=w> </span><span class=nf>serialize</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>out</span><span class=p>)</span>
+</span><span id=__span-8-2><span class=p>{</span>
+</span><span id=__span-8-3><span class=w>    </span><span class=n>Json</span><span class=o>::</span><span class=n>Value</span><span class=w> </span><span class=n>root</span><span class=p>;</span>
+</span><span id=__span-8-4><span class=w>    </span><span class=n>root</span><span class=p>[</span><span class=s>&quot;result&quot;</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>_result</span><span class=p>;</span>
+</span><span id=__span-8-5><span class=w>    </span><span class=c1>// 默认的赋值运算符没有自定义类</span>
+</span><span id=__span-8-6><span class=w>    </span><span class=n>root</span><span class=p>[</span><span class=s>&quot;cstat&quot;</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>getCalStatusNum</span><span class=p>(</span><span class=n>_c_stat</span><span class=p>);</span>
+</span><span id=__span-8-7><span class=w>    </span><span class=n>Json</span><span class=o>::</span><span class=n>FastWriter</span><span class=w> </span><span class=n>fw</span><span class=p>;</span>
+</span><span id=__span-8-8><span class=w>    </span><span class=n>out</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>fw</span><span class=p>.</span><span class=n>write</span><span class=p>(</span><span class=n>root</span><span class=p>);</span>
+</span><span id=__span-8-9>
+</span><span id=__span-8-10><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=nb>true</span><span class=p>;</span>
+</span><span id=__span-8-11><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><span class=kt>bool</span><span class=w> </span><span class=nf>deserialize</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>in</span><span class=p>)</span>
+</span><span id=__span-9-2><span class=p>{</span>
+</span><span id=__span-9-3><span class=w>    </span><span class=n>Json</span><span class=o>::</span><span class=n>Value</span><span class=w> </span><span class=n>root</span><span class=p>;</span>
+</span><span id=__span-9-4><span class=w>    </span><span class=n>Json</span><span class=o>::</span><span class=n>Reader</span><span class=w> </span><span class=n>rd</span><span class=p>;</span>
+</span><span id=__span-9-5><span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>isParsed</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>rd</span><span class=p>.</span><span class=n>parse</span><span class=p>(</span><span class=n>in</span><span class=p>,</span><span class=w> </span><span class=n>root</span><span class=p>);</span>
+</span><span id=__span-9-6><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>!</span><span class=n>isParsed</span><span class=p>)</span>
+</span><span id=__span-9-7><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-9-8><span class=w>        </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>ERROR</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;Json Parse Fail: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>rd</span><span class=p>.</span><span class=n>getFormattedErrorMessages</span><span class=p>();</span>
+</span><span id=__span-9-9><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span>
+</span><span id=__span-9-10><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-9-11>
+</span><span id=__span-9-12><span class=w>    </span><span class=n>_result</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>root</span><span class=p>[</span><span class=s>&quot;result&quot;</span><span class=p>].</span><span class=n>asInt</span><span class=p>();</span>
+</span><span id=__span-9-13><span class=w>    </span><span class=n>setCalStatusNum</span><span class=p>(</span><span class=n>root</span><span class=p>[</span><span class=s>&quot;cstat&quot;</span><span class=p>].</span><span class=n>asInt</span><span class=p>());</span>
+</span><span id=__span-9-14>
+</span><span id=__span-9-15><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=nb>true</span><span class=p>;</span>
+</span><span id=__span-9-16><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> </div> </div> <h4 id=_10>实现编码和解码方法<a class=headerlink href=#_10 title="Permanent link">&para;</a></h4> <p>在上面的两个类中，只提供了序列化和反序列化的方法，并没有提供解码和编码的方法，主要原因是解码和编码逻辑对于两个类来说都是一致的，都是对一个序列化字符串进行编码和未被反序列化字符串进行解码，所以没必要在两个类都写解码和编码</p> <p>考虑编码函数，根据上面定义的客户端和服务端协议，编码后的字符串格式应该为<code>JSON字符串长度\n{json}\n</code>，所以编码只需要将对应内容拼接到对应的位置即可：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><span class=c1>// 编码方法</span>
+</span><span id=__span-10-2><span class=kt>bool</span><span class=w> </span><span class=nf>encode</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>message</span><span class=p>)</span>
+</span><span id=__span-10-3><span class=p>{</span>
+</span><span id=__span-10-4><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=n>message</span><span class=p>.</span><span class=n>size</span><span class=p>())</span>
+</span><span id=__span-10-5><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span>
+</span><span id=__span-10-6><span class=w>    </span><span class=c1>// 获取json字符串长度</span>
+</span><span id=__span-10-7><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>jsonstrLen</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>message</span><span class=p>.</span><span class=n>size</span><span class=p>();</span>
+</span><span id=__span-10-8><span class=w>    </span><span class=c1>// 拼接</span>
+</span><span id=__span-10-9><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>temp</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>to_string</span><span class=p>(</span><span class=n>jsonstrLen</span><span class=p>)</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>sep</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>message</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>sep</span><span class=p>;</span>
+</span><span id=__span-10-10><span class=w>    </span><span class=c1>// 修改传入的字符串</span>
+</span><span id=__span-10-11><span class=w>    </span><span class=n>message</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>temp</span><span class=p>;</span>
+</span><span id=__span-10-12>
+</span><span id=__span-10-13><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=nb>true</span><span class=p>;</span>
+</span><span id=__span-10-14><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>考虑解码函数，根据编码字符串格式<code>JSON字符串长度\n{json}\n</code>，解码函数需要处理的逻辑就是将其中的<code>json</code>字符串提取出来，但是直接提取是不对的。因为前面提到TCP是面向字节流的，所以实际上传递给解码函数的字符串可能是不完整的，也有可能是至少有一个可以提取的字符串，对于不完整的字符串来说，解码函数就不能继续向后执行解码逻辑，但是对于至少有一个可以提取的字符串来说，只需要将其中完整的部分提取出来解码，剩下的再次判断是否完整再决定是否可以继续解码</p> <p>首先，找到传入字符串的第一个<code>\n</code>出现的位置，其前面的值就是<code>json</code>字符串的长度，如果没找到这个位置或者获取到的值为0，那么就没有必要再继续进行解码，返回<code>false</code>；接着，计算出<code>json</code>字符串的长度+两个<code>\n</code>的总长度，如果这个总长度小于前面获取的到值，说明也无法进行解码，返回<code>false</code></p> <p>有了这两步就可以排除字符串不完整的情况，此时就只剩两种情况：刚刚好是需要的完整字符串或者至少存在一个可以提取的字符串，对于这两种基本的处理方式都是一样的，只需要在其中提取到有效的<code>json</code>字符串即可，以至少存在一个可以提取的字符串为例，因为已经获取了<code>JSON</code>字符串的长度，所以只需要从第一个<code>\n</code>的下一个位置开始截取，一直到<code>JSON</code>字符串长度值为止即可。但是因为至少存在一个可以提取的字符串，所以可能剩余部分还有可以提取的字符串，为了避免重复提取，需要将当前已经提取的未解码的字符串从传入的字符串中移除</p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>需要注意，建议传入的字符串设置为引用类型，这样可以确保自始至终都在修改一个字符串</p> </div> <p>根据上面的思路，代码如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><span class=c1>// 解码方法</span>
+</span><span id=__span-11-2><span class=kt>bool</span><span class=w> </span><span class=nf>decode</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>encodedstr</span><span class=p>,</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>jsonstr</span><span class=p>)</span>
+</span><span id=__span-11-3><span class=p>{</span>
+</span><span id=__span-11-4><span class=w>    </span><span class=c1>// 找到第一个\n的位置</span>
+</span><span id=__span-11-5><span class=w>    </span><span class=k>auto</span><span class=w> </span><span class=n>pos</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>encodedstr</span><span class=p>.</span><span class=n>find</span><span class=p>(</span><span class=s>&quot;</span><span class=se>\n</span><span class=s>&quot;</span><span class=p>);</span>
+</span><span id=__span-11-6><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>pos</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>::</span><span class=n>npos</span><span class=p>)</span>
+</span><span id=__span-11-7><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-11-8><span class=w>        </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>WARNING</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;解码失败，不完整字符串&quot;</span><span class=p>;</span>
+</span><span id=__span-11-9><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span>
+</span><span id=__span-11-10><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-11-11>
+</span><span id=__span-11-12><span class=w>    </span><span class=c1>// 截取长度值</span>
+</span><span id=__span-11-13><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>jsonLenStr</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>encodedstr</span><span class=p>.</span><span class=n>substr</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=n>pos</span><span class=p>);</span>
+</span><span id=__span-11-14><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>jsonlen</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>stoi</span><span class=p>(</span><span class=n>jsonLenStr</span><span class=p>);</span>
+</span><span id=__span-11-15><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>jsonlen</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-11-16><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-11-17><span class=w>        </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>WARNING</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;解码失败，json字符串长度为0&quot;</span><span class=p>;</span>
+</span><span id=__span-11-18><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span>
+</span><span id=__span-11-19><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-11-20>
+</span><span id=__span-11-21><span class=w>    </span><span class=c1>// 计算剩余字符串长度</span>
+</span><span id=__span-11-22><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>restLen</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>jsonlen</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>2</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=n>sep</span><span class=p>.</span><span class=n>size</span><span class=p>();</span>
+</span><span id=__span-11-23><span class=w>    </span><span class=c1>// 原始长度小于需要的长度，说明不存在完整字符串</span>
+</span><span id=__span-11-24><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>encodedstr</span><span class=p>.</span><span class=n>size</span><span class=p>()</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=n>jsonLenStr</span><span class=p>.</span><span class=n>size</span><span class=p>()</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>restLen</span><span class=p>)</span>
+</span><span id=__span-11-25><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-11-26><span class=w>        </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>WARNING</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;解码失败，原始长度小于需要的长度&quot;</span><span class=p>;</span>
+</span><span id=__span-11-27><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span>
+</span><span id=__span-11-28><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-11-29>
+</span><span id=__span-11-30><span class=w>    </span><span class=c1>// 一定存在可以解码的字符串</span>
+</span><span id=__span-11-31><span class=w>    </span><span class=n>jsonstr</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>encodedstr</span><span class=p>.</span><span class=n>substr</span><span class=p>(</span><span class=n>jsonlen</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>sep</span><span class=p>.</span><span class=n>size</span><span class=p>(),</span><span class=w> </span><span class=n>jsonlen</span><span class=p>);</span>
+</span><span id=__span-11-32>
+</span><span id=__span-11-33><span class=w>    </span><span class=c1>// 移除截取了的字符串</span>
+</span><span id=__span-11-34><span class=w>    </span><span class=n>encodedstr</span><span class=p>.</span><span class=n>erase</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=n>restLen</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>jsonLenStr</span><span class=p>.</span><span class=n>size</span><span class=p>());</span>
+</span><span id=__span-11-35><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=_11>修改服务端<a class=headerlink href=#_11 title="Permanent link">&para;</a></h3> <p>在上一节中，服务端主要由线程池执行对应的任务，而对于线程池执行的任务来说固定为读取消息的<code>read_write_msg</code>函数，在本次实现的网络计算器中，为了保证每一个模块之间的耦合度降低，考虑将序列化反序列化任务和编码解码任务交给上层而不是服务器本身需要做的事情，服务器本身只需要做好IO即可</p> <p>根据这个思路，首先服务器的启动逻辑不需要改变，依旧是使用线程池执行对应的任务：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><span class=c1>// 启动服务器</span>
+</span><span id=__span-12-2><span class=kt>void</span><span class=w> </span><span class=nf>start</span><span class=p>()</span>
+</span><span id=__span-12-3><span class=p>{</span>
+</span><span id=__span-12-4><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>!</span><span class=n>_isRunning</span><span class=p>)</span>
+</span><span id=__span-12-5><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-12-6><span class=w>        </span><span class=n>_isRunning</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nb>true</span><span class=p>;</span>
+</span><span id=__span-12-7>
+</span><span id=__span-12-8><span class=w>        </span><span class=k>while</span><span class=w> </span><span class=p>(</span><span class=nb>true</span><span class=p>)</span>
+</span><span id=__span-12-9><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-12-10><span class=w>            </span><span class=k>struct</span><span class=w> </span><span class=nc>sockaddr_in</span><span class=w> </span><span class=n>peer</span><span class=p>;</span>
+</span><span id=__span-12-11><span class=w>            </span><span class=kt>socklen_t</span><span class=w> </span><span class=n>length</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>sizeof</span><span class=p>(</span><span class=n>peer</span><span class=p>);</span>
+</span><span id=__span-12-12><span class=w>            </span><span class=n>_ac_socketfd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>accept</span><span class=p>(</span><span class=n>_listen_socketfd</span><span class=p>,</span><span class=w> </span><span class=k>reinterpret_cast</span><span class=o>&lt;</span><span class=k>struct</span><span class=w> </span><span class=nc>sockaddr</span><span class=w> </span><span class=o>*&gt;</span><span class=p>(</span><span class=o>&amp;</span><span class=n>peer</span><span class=p>),</span><span class=w> </span><span class=o>&amp;</span><span class=n>length</span><span class=p>);</span>
+</span><span id=__span-12-13><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>_ac_socketfd</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-12-14><span class=w>            </span><span class=p>{</span>
+</span><span id=__span-12-15><span class=w>                </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>WARNING</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;Accept failed：&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>strerror</span><span class=p>(</span><span class=n>errno</span><span class=p>);</span>
+</span><span id=__span-12-16><span class=w>                </span><span class=n>exit</span><span class=p>(</span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>ErrorNumber</span><span class=o>::</span><span class=n>AcceptFail</span><span class=p>));</span>
+</span><span id=__span-12-17><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-12-18><span class=w>            </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>INFO</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;Accept Success: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>_ac_socketfd</span><span class=p>;</span>
+</span><span id=__span-12-19>
+</span><span id=__span-12-20><span class=w>            </span><span class=n>_tp</span><span class=o>-&gt;</span><span class=n>pushTasks</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>bind</span><span class=p>(</span><span class=o>&amp;</span><span class=n>TcpServer</span><span class=o>::</span><span class=n>read_write_msg</span><span class=p>,</span><span class=w> </span><span class=k>this</span><span class=p>,</span><span class=w> </span><span class=n>peer</span><span class=p>));</span>
+</span><span id=__span-12-21><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-12-22><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-12-23><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>但是在读写函数中，因为本次服务端只是负责接收客户端发送的信息，虽然接收到的是一个已经编码的字符串，但是并不对这个字符串进行直接处理，而是交给上层处理，处理完成后将结果返回给客户端。但是需要注意，如果读取到的字符串是空串就需要服务端继续读取，所以基本代码如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><span class=c1>// 读写函数</span>
+</span><span id=__span-13-2><span class=kt>void</span><span class=w> </span><span class=nf>read_write_msg</span><span class=p>(</span><span class=k>struct</span><span class=w> </span><span class=nc>sockaddr_in</span><span class=w> </span><span class=n>peer</span><span class=p>)</span>
+</span><span id=__span-13-3><span class=p>{</span>
+</span><span id=__span-13-4><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>encodedstr</span><span class=p>;</span>
+</span><span id=__span-13-5><span class=w>    </span><span class=k>while</span><span class=w> </span><span class=p>(</span><span class=nb>true</span><span class=p>)</span>
+</span><span id=__span-13-6><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-13-7><span class=w>        </span><span class=c1>// 读取客户端消息</span>
+</span><span id=__span-13-8><span class=w>        </span><span class=kt>char</span><span class=w> </span><span class=n>buffer</span><span class=p>[</span><span class=mi>4096</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span>
+</span><span id=__span-13-9><span class=w>        </span><span class=kt>ssize_t</span><span class=w> </span><span class=n>ret</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>recv</span><span class=p>(</span><span class=n>_ac_socketfd</span><span class=p>,</span><span class=w> </span><span class=n>buffer</span><span class=p>,</span><span class=w> </span><span class=k>sizeof</span><span class=p>(</span><span class=n>buffer</span><span class=p>)</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>);</span>
+</span><span id=__span-13-10><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>ret</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-13-11><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-13-12><span class=w>            </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>INFO</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;Client: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>inet_ntoa</span><span class=p>(</span><span class=n>peer</span><span class=p>.</span><span class=n>sin_addr</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;:&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>to_string</span><span class=p>(</span><span class=n>ntohs</span><span class=p>(</span><span class=n>peer</span><span class=p>.</span><span class=n>sin_port</span><span class=p>))</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; send: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>buffer</span><span class=p>;</span>
+</span><span id=__span-13-13><span class=w>            </span><span class=n>encodedstr</span><span class=w> </span><span class=o>+=</span><span class=w> </span><span class=n>buffer</span><span class=p>;</span>
+</span><span id=__span-13-14>
+</span><span id=__span-13-15><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>encodedstr</span><span class=p>.</span><span class=n>empty</span><span class=p>())</span>
+</span><span id=__span-13-16><span class=w>                </span><span class=k>continue</span><span class=p>;</span>
+</span><span id=__span-13-17>
+</span><span id=__span-13-18><span class=w>            </span><span class=c1>// 调用上层函数处理</span>
+</span><span id=__span-13-19><span class=w>            </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>ret</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>_cal</span><span class=p>(</span><span class=n>encodedstr</span><span class=p>);</span>
+</span><span id=__span-13-20><span class=w>            </span><span class=c1>// 返回结果</span>
+</span><span id=__span-13-21><span class=w>            </span><span class=n>send</span><span class=p>(</span><span class=n>_ac_socketfd</span><span class=p>,</span><span class=w> </span><span class=n>ret</span><span class=p>.</span><span class=n>c_str</span><span class=p>(),</span><span class=w> </span><span class=n>ret</span><span class=p>.</span><span class=n>size</span><span class=p>(),</span><span class=w> </span><span class=mi>0</span><span class=p>);</span>
+</span><span id=__span-13-22><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-13-23><span class=w>        </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>ret</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-13-24><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-13-25><span class=w>            </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>INFO</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;Client disconnected: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>_ac_socketfd</span><span class=p>;</span>
+</span><span id=__span-13-26><span class=w>            </span><span class=k>break</span><span class=p>;</span>
+</span><span id=__span-13-27><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-13-28><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-13-29>
+</span><span id=__span-13-30><span class=w>    </span><span class=n>close</span><span class=p>(</span><span class=n>_ac_socketfd</span><span class=p>);</span>
+</span><span id=__span-13-31><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=_12>设计计算器类<a class=headerlink href=#_12 title="Permanent link">&para;</a></h3> <p>计算器类非常简单，只需要将收到的内容进行计算，再将结果返回即可。但是，收到的内容并不直接是操作数和操作符，返回值也并不直接是一个计算结果，而应该分别是请求类对象和响应类对象，之所以这样设计，是因为计算器类本质已经算是最上层了，既然服务端和客户端传输的是结构化的数据，那么在计算的时候也使用结构化的数据保证整体统一。所以，计算器类基本结构如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span>
+<span class=normal>7</span>
+<span class=normal>8</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><span class=k>class</span><span class=w> </span><span class=nc>Calculator</span>
+</span><span id=__span-14-2><span class=p>{</span>
+</span><span id=__span-14-3><span class=k>public</span><span class=o>:</span>
+</span><span id=__span-14-4><span class=w>    </span><span class=n>Response</span><span class=w> </span><span class=n>calculate</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>Request</span><span class=o>&amp;</span><span class=w> </span><span class=n>req</span><span class=p>)</span>
+</span><span id=__span-14-5><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-14-6>
+</span><span id=__span-14-7><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-14-8><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> <p>既然计算器类已经是最上层，那么解码和编码操作以及序列化和反序列化操作不需要计算器类来做，所以在<code>calculate</code>方法中只需要根据具体的操作符计算出结果即可。为了保证可读性，可以将计算状态根据状态码转换为对应地字符串，这个函数可以考虑在响应类中定义：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=nf>getCalStatusStr</span><span class=p>()</span>
+</span><span id=__span-15-2><span class=p>{</span>
+</span><span id=__span-15-3><span class=w>    </span><span class=k>switch</span><span class=w> </span><span class=p>(</span><span class=n>_c_stat</span><span class=p>)</span>
+</span><span id=__span-15-4><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-15-5><span class=w>    </span><span class=k>case</span><span class=w> </span><span class=no>CalculatStatus</span><span class=o>::</span><span class=no>Normal</span><span class=p>:</span>
+</span><span id=__span-15-6><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=s>&quot;Normal&quot;</span><span class=p>;</span>
+</span><span id=__span-15-7><span class=w>    </span><span class=k>case</span><span class=w> </span><span class=no>CalculatStatus</span><span class=o>::</span><span class=no>DividedByZero</span><span class=w> </span><span class=p>:</span>
+</span><span id=__span-15-8><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=s>&quot;DividedByZero&quot;</span><span class=p>;</span>
+</span><span id=__span-15-9><span class=w>    </span><span class=k>case</span><span class=w> </span><span class=no>CalculatStatus</span><span class=o>::</span><span class=no>ModByZero</span><span class=w> </span><span class=p>:</span>
+</span><span id=__span-15-10><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=s>&quot;ModByZero&quot;</span><span class=p>;</span>
+</span><span id=__span-15-11><span class=w>    </span><span class=k>case</span><span class=w> </span><span class=no>CalculatStatus</span><span class=o>::</span><span class=no>WrongExpression</span><span class=w> </span><span class=p>:</span>
+</span><span id=__span-15-12><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=s>&quot;WrongExpression&quot;</span><span class=p>;</span>
+</span><span id=__span-15-13><span class=w>    </span><span class=k>default</span><span class=o>:</span>
+</span><span id=__span-15-14><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=s>&quot;错误状态&quot;</span><span class=p>;</span>
+</span><span id=__span-15-15><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-15-16>
+</span><span id=__span-15-17><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=s>&quot;None&quot;</span><span class=p>;</span>
+</span><span id=__span-15-18><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>另外，为了方便获取到操作数和操作符以及获取和设置计算结果，需要提供对应的<code>get</code>和<code>set</code>：</p> <div class="tabbed-set tabbed-alternate" data-tabs=4:5><input checked=checked id=__tabbed_4_1 name=__tabbed_4 type=radio><input id=__tabbed_4_2 name=__tabbed_4 type=radio><input id=__tabbed_4_3 name=__tabbed_4 type=radio><input id=__tabbed_4_4 name=__tabbed_4 type=radio><input id=__tabbed_4_5 name=__tabbed_4 type=radio><div class=tabbed-labels><label for=__tabbed_4_1>获取第一个操作数</label><label for=__tabbed_4_2>获取第二个操作数</label><label for=__tabbed_4_3>获取操作符</label><label for=__tabbed_4_4>获取计算结果</label><label for=__tabbed_4_5>设置计算结果</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><span class=kt>int</span><span class=w> </span><span class=nf>getFirst</span><span class=p>()</span><span class=w> </span><span class=k>const</span>
+</span><span id=__span-16-2><span class=p>{</span>
+</span><span id=__span-16-3><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>_first</span><span class=p>;</span>
+</span><span id=__span-16-4><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><span class=kt>int</span><span class=w> </span><span class=nf>getSecond</span><span class=p>()</span><span class=w> </span><span class=k>const</span>
+</span><span id=__span-17-2><span class=p>{</span>
+</span><span id=__span-17-3><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>_second</span><span class=p>;</span>
+</span><span id=__span-17-4><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><span class=kt>char</span><span class=w> </span><span class=nf>getOp</span><span class=p>()</span><span class=w> </span><span class=k>const</span>
+</span><span id=__span-18-2><span class=p>{</span>
+</span><span id=__span-18-3><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>_op</span><span class=p>;</span>
+</span><span id=__span-18-4><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><span class=kt>int</span><span class=w> </span><span class=nf>getResult</span><span class=p>()</span><span class=w> </span><span class=k>const</span>
+</span><span id=__span-19-2><span class=p>{</span>
+</span><span id=__span-19-3><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>_result</span><span class=p>;</span>
+</span><span id=__span-19-4><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-20-1><span class=kt>void</span><span class=w> </span><span class=nf>setResult</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>ret</span><span class=p>)</span>
+</span><span id=__span-20-2><span class=p>{</span>
+</span><span id=__span-20-3><span class=w>    </span><span class=n>_result</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>ret</span><span class=p>;</span>
+</span><span id=__span-20-4><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> </div> </div> <p>对应地<code>calculate</code>函数实现如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span>
+<span class=normal>44</span>
+<span class=normal>45</span>
+<span class=normal>46</span>
+<span class=normal>47</span>
+<span class=normal>48</span>
+<span class=normal>49</span>
+<span class=normal>50</span>
+<span class=normal>51</span>
+<span class=normal>52</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-21-1><span class=n>Response</span><span class=w> </span><span class=nf>calculate</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>Request</span><span class=w> </span><span class=o>&amp;</span><span class=n>req</span><span class=p>)</span>
+</span><span id=__span-21-2><span class=p>{</span>
+</span><span id=__span-21-3><span class=w>    </span><span class=n>Response</span><span class=w> </span><span class=n>resp</span><span class=p>;</span>
+</span><span id=__span-21-4><span class=w>    </span><span class=k>switch</span><span class=w> </span><span class=p>(</span><span class=n>req</span><span class=p>.</span><span class=n>getOp</span><span class=p>())</span>
+</span><span id=__span-21-5><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-21-6><span class=w>    </span><span class=k>case</span><span class=w> </span><span class=sc>&#39;+&#39;</span><span class=p>:</span>
+</span><span id=__span-21-7><span class=w>        </span><span class=n>resp</span><span class=p>.</span><span class=n>setResult</span><span class=p>(</span><span class=n>req</span><span class=p>.</span><span class=n>getFirst</span><span class=p>()</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>req</span><span class=p>.</span><span class=n>getSecond</span><span class=p>());</span>
+</span><span id=__span-21-8><span class=w>        </span><span class=n>resp</span><span class=p>.</span><span class=n>setCalStatusNum</span><span class=p>(</span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>Normal</span><span class=p>));</span><span class=w> </span><span class=c1>// 设置为正常状态</span>
+</span><span id=__span-21-9><span class=w>        </span><span class=k>break</span><span class=p>;</span>
+</span><span id=__span-21-10><span class=w>    </span><span class=k>case</span><span class=w> </span><span class=sc>&#39;-&#39;</span><span class=p>:</span>
+</span><span id=__span-21-11><span class=w>        </span><span class=n>resp</span><span class=p>.</span><span class=n>setResult</span><span class=p>(</span><span class=n>req</span><span class=p>.</span><span class=n>getFirst</span><span class=p>()</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=n>req</span><span class=p>.</span><span class=n>getSecond</span><span class=p>());</span>
+</span><span id=__span-21-12><span class=w>        </span><span class=n>resp</span><span class=p>.</span><span class=n>setCalStatusNum</span><span class=p>(</span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>Normal</span><span class=p>));</span><span class=w> </span><span class=c1>// 设置为正常状态</span>
+</span><span id=__span-21-13><span class=w>        </span><span class=k>break</span><span class=p>;</span>
+</span><span id=__span-21-14><span class=w>    </span><span class=k>case</span><span class=w> </span><span class=sc>&#39;*&#39;</span><span class=p>:</span>
+</span><span id=__span-21-15><span class=w>        </span><span class=n>resp</span><span class=p>.</span><span class=n>setResult</span><span class=p>(</span><span class=n>req</span><span class=p>.</span><span class=n>getFirst</span><span class=p>()</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=n>req</span><span class=p>.</span><span class=n>getSecond</span><span class=p>());</span>
+</span><span id=__span-21-16><span class=w>        </span><span class=n>resp</span><span class=p>.</span><span class=n>setCalStatusNum</span><span class=p>(</span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>Normal</span><span class=p>));</span><span class=w> </span><span class=c1>// 设置为正常状态</span>
+</span><span id=__span-21-17><span class=w>        </span><span class=k>break</span><span class=p>;</span>
+</span><span id=__span-21-18><span class=w>    </span><span class=k>case</span><span class=w> </span><span class=sc>&#39;/&#39;</span><span class=p>:</span>
+</span><span id=__span-21-19><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-21-20><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>req</span><span class=p>.</span><span class=n>getSecond</span><span class=p>()</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-21-21><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-21-22><span class=w>            </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>ERROR</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;除0错误&quot;</span><span class=p>;</span>
+</span><span id=__span-21-23><span class=w>            </span><span class=n>resp</span><span class=p>.</span><span class=n>setCalStatusNum</span><span class=p>(</span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>DividedByZero</span><span class=p>));</span>
+</span><span id=__span-21-24><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-21-25><span class=w>        </span><span class=k>else</span>
+</span><span id=__span-21-26><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-21-27><span class=w>            </span><span class=n>resp</span><span class=p>.</span><span class=n>setResult</span><span class=p>(</span><span class=n>req</span><span class=p>.</span><span class=n>getFirst</span><span class=p>()</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=n>req</span><span class=p>.</span><span class=n>getSecond</span><span class=p>());</span>
+</span><span id=__span-21-28><span class=w>            </span><span class=n>resp</span><span class=p>.</span><span class=n>setCalStatusNum</span><span class=p>(</span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>Normal</span><span class=p>));</span><span class=w> </span><span class=c1>// 设置为正常状态</span>
+</span><span id=__span-21-29><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-21-30><span class=w>        </span><span class=k>break</span><span class=p>;</span>
+</span><span id=__span-21-31><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-21-32><span class=w>    </span><span class=k>case</span><span class=w> </span><span class=sc>&#39;%&#39;</span><span class=p>:</span>
+</span><span id=__span-21-33><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-21-34><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>req</span><span class=p>.</span><span class=n>getSecond</span><span class=p>()</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-21-35><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-21-36><span class=w>            </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>ERROR</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;模0错误&quot;</span><span class=p>;</span>
+</span><span id=__span-21-37><span class=w>            </span><span class=n>resp</span><span class=p>.</span><span class=n>setCalStatusNum</span><span class=p>(</span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>ModByZero</span><span class=p>));</span>
+</span><span id=__span-21-38><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-21-39><span class=w>        </span><span class=k>else</span>
+</span><span id=__span-21-40><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-21-41><span class=w>            </span><span class=n>resp</span><span class=p>.</span><span class=n>setResult</span><span class=p>(</span><span class=n>req</span><span class=p>.</span><span class=n>getFirst</span><span class=p>()</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=n>req</span><span class=p>.</span><span class=n>getSecond</span><span class=p>());</span>
+</span><span id=__span-21-42><span class=w>            </span><span class=n>resp</span><span class=p>.</span><span class=n>setCalStatusNum</span><span class=p>(</span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>Normal</span><span class=p>));</span><span class=w> </span><span class=c1>// 设置为正常状态</span>
+</span><span id=__span-21-43><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-21-44><span class=w>        </span><span class=k>break</span><span class=p>;</span>
+</span><span id=__span-21-45><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-21-46><span class=w>    </span><span class=k>default</span><span class=o>:</span>
+</span><span id=__span-21-47><span class=w>        </span><span class=n>resp</span><span class=p>.</span><span class=n>setCalStatusNum</span><span class=p>(</span><span class=k>static_cast</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=p>(</span><span class=n>CalculatStatus</span><span class=o>::</span><span class=n>WrongExpression</span><span class=p>));</span>
+</span><span id=__span-21-48><span class=w>        </span><span class=k>break</span><span class=p>;</span>
+</span><span id=__span-21-49><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-21-50>
+</span><span id=__span-21-51><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>resp</span><span class=p>;</span>
+</span><span id=__span-21-52><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=_13>修改服务端主函数逻辑<a class=headerlink href=#_13 title="Permanent link">&para;</a></h3> <p>修改服务端上层的逻辑需要考虑到三点：</p> <ol> <li>根据客户端传递的字符串进行解码和反序列化</li> <li>计算有效表达式结果</li> <li>将有效结果表达式返回给客户端</li> </ol> <p>这里可以设计一个类<code>ServerEntry</code>，代表服务器需要执行的入口函数，在这个类中，存在一个函数，这个函数主要是为了将字符串反序列化和解码、获取结算结果和字符串序列化和编码。其中，计算有效表达式结果交给计算器类完成，这样可以确保复用性和可维护性，也可以保证低耦合度，所以考虑也使用回调函数的方式将计算方式交给上层</p> <p>不考虑计算逻辑后，下面只需要考虑对字符串进行处理的逻辑，首先是解码获取到其中的JSON字符串，但是需要注意，解码是否成功是个循环逻辑，因为可能存在收到的字符串是残缺的、完整的或者至少存在一个可以提取到有效JSON字符串的字符串。在循环内部就是对已经解码的字符串做相关处理，其中可以对获取到的JSON字符串进行判断是否为空决定是否继续向后进行，因为已经解码，所以下一步就是反序列化，如果反序列化失败就不再继续，否则就调用上层接口执行计算逻辑，再对收到的内容进行序列化和编码</p> <p>所以代码如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span>
+<span class=normal>44</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-22-1><span class=k>using</span><span class=w> </span><span class=n>calculate_t</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>function</span><span class=o>&lt;</span><span class=n>Response</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>Request</span><span class=o>&amp;</span><span class=p>)</span><span class=o>&gt;</span><span class=p>;</span>
+</span><span id=__span-22-2>
+</span><span id=__span-22-3><span class=k>class</span><span class=w> </span><span class=nc>ServerEntry</span>
+</span><span id=__span-22-4><span class=p>{</span>
+</span><span id=__span-22-5><span class=k>public</span><span class=o>:</span>
+</span><span id=__span-22-6><span class=w>    </span><span class=n>ServerEntry</span><span class=p>(</span><span class=n>calculate_t</span><span class=w> </span><span class=n>cal</span><span class=p>)</span>
+</span><span id=__span-22-7><span class=w>        </span><span class=o>:</span><span class=w> </span><span class=n>_calculate</span><span class=p>(</span><span class=n>cal</span><span class=p>)</span>
+</span><span id=__span-22-8><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-22-9>
+</span><span id=__span-22-10><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-22-11>
+</span><span id=__span-22-12><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>entry</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>encodedStr</span><span class=p>)</span>
+</span><span id=__span-22-13><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-22-14>
+</span><span id=__span-22-15><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>respStr</span><span class=p>;</span>
+</span><span id=__span-22-16><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>jsonstr</span><span class=p>;</span>
+</span><span id=__span-22-17><span class=w>        </span><span class=c1>// 解码-&gt;json字符串</span>
+</span><span id=__span-22-18><span class=w>        </span><span class=k>while</span><span class=w> </span><span class=p>(</span><span class=n>decode</span><span class=p>(</span><span class=n>encodedStr</span><span class=p>,</span><span class=w> </span><span class=n>jsonstr</span><span class=p>))</span>
+</span><span id=__span-22-19><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-22-20><span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>jsonstr</span><span class=p>.</span><span class=n>empty</span><span class=p>())</span>
+</span><span id=__span-22-21><span class=w>                </span><span class=k>break</span><span class=p>;</span>
+</span><span id=__span-22-22>
+</span><span id=__span-22-23><span class=w>            </span><span class=c1>// 反序列化</span>
+</span><span id=__span-22-24><span class=w>            </span><span class=n>Request</span><span class=w> </span><span class=n>req</span><span class=p>;</span>
+</span><span id=__span-22-25><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>!</span><span class=n>req</span><span class=p>.</span><span class=n>deserialize</span><span class=p>(</span><span class=n>jsonstr</span><span class=p>))</span>
+</span><span id=__span-22-26><span class=w>                </span><span class=k>break</span><span class=p>;</span>
+</span><span id=__span-22-27><span class=w>            </span><span class=c1>// 获取到操作数和操作符-&gt;运算</span>
+</span><span id=__span-22-28><span class=w>            </span><span class=n>Response</span><span class=w> </span><span class=n>resp</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>_calculate</span><span class=p>(</span><span class=n>req</span><span class=p>);</span>
+</span><span id=__span-22-29>
+</span><span id=__span-22-30><span class=w>            </span><span class=c1>// 序列化</span>
+</span><span id=__span-22-31><span class=w>            </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>out</span><span class=p>;</span>
+</span><span id=__span-22-32><span class=w>            </span><span class=n>resp</span><span class=p>.</span><span class=n>serialize</span><span class=p>(</span><span class=n>out</span><span class=p>);</span>
+</span><span id=__span-22-33>
+</span><span id=__span-22-34><span class=w>            </span><span class=c1>// 编码</span>
+</span><span id=__span-22-35><span class=w>            </span><span class=n>encode</span><span class=p>(</span><span class=n>out</span><span class=p>);</span>
+</span><span id=__span-22-36>
+</span><span id=__span-22-37><span class=w>            </span><span class=n>respStr</span><span class=w> </span><span class=o>+=</span><span class=w> </span><span class=n>out</span><span class=p>;</span>
+</span><span id=__span-22-38><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-22-39>
+</span><span id=__span-22-40><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>respStr</span><span class=p>;</span>
+</span><span id=__span-22-41><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-22-42><span class=k>private</span><span class=o>:</span>
+</span><span id=__span-22-43><span class=w>    </span><span class=n>calculate_t</span><span class=w> </span><span class=n>_calculate</span><span class=p>;</span>
+</span><span id=__span-22-44><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> <p>最后，在服务端的主函数内部，只需要定义三层对象，分别是计算类对象用于执行计算任务、入口类对象用于执行解析字符串任务和服务端对象用于进行IO操作，代码如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-23-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&quot;tcp_server.hpp&quot;</span>
+</span><span id=__span-23-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&quot;calculator.hpp&quot;</span>
+</span><span id=__span-23-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&quot;server_entry.hpp&quot;</span>
+</span><span id=__span-23-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;memory&gt;</span>
+</span><span id=__span-23-5>
+</span><span id=__span-23-6><span class=k>using</span><span class=w> </span><span class=k>namespace</span><span class=w> </span><span class=nn>TcpServerModule</span><span class=p>;</span>
+</span><span id=__span-23-7><span class=k>using</span><span class=w> </span><span class=k>namespace</span><span class=w> </span><span class=nn>CalculatorModule</span><span class=p>;</span>
+</span><span id=__span-23-8><span class=k>using</span><span class=w> </span><span class=k>namespace</span><span class=w> </span><span class=nn>ServerEntryModule</span><span class=p>;</span>
+</span><span id=__span-23-9>
+</span><span id=__span-23-10><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>argc</span><span class=p>,</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=o>*</span><span class=n>argv</span><span class=p>[])</span>
+</span><span id=__span-23-11><span class=p>{</span>
+</span><span id=__span-23-12><span class=w>    </span><span class=c1>// 定义计算对象</span>
+</span><span id=__span-23-13><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>Calculator</span><span class=o>&gt;</span><span class=w> </span><span class=n>c</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>make_shared</span><span class=o>&lt;</span><span class=n>Calculator</span><span class=o>&gt;</span><span class=p>();</span>
+</span><span id=__span-23-14><span class=w>    </span><span class=c1>// 定义入口对象</span>
+</span><span id=__span-23-15><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>ServerEntry</span><span class=o>&gt;</span><span class=w> </span><span class=n>s</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>make_shared</span><span class=o>&lt;</span><span class=n>ServerEntry</span><span class=o>&gt;</span><span class=p>([</span><span class=o>&amp;</span><span class=n>c</span><span class=p>](</span><span class=k>const</span><span class=w> </span><span class=n>Request</span><span class=w> </span><span class=o>&amp;</span><span class=n>req</span><span class=p>)</span>
+</span><span id=__span-23-16><span class=w>                                                                   </span><span class=p>{</span><span class=w> </span><span class=k>return</span><span class=w> </span><span class=n>c</span><span class=o>-&gt;</span><span class=n>calculate</span><span class=p>(</span><span class=n>req</span><span class=p>);</span><span class=w> </span><span class=p>});</span>
+</span><span id=__span-23-17>
+</span><span id=__span-23-18><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>TcpServer</span><span class=o>&gt;</span><span class=w> </span><span class=n>tcp_server</span><span class=p>;</span>
+</span><span id=__span-23-19><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>argc</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>1</span><span class=p>)</span>
+</span><span id=__span-23-20><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-23-21><span class=w>        </span><span class=c1>// 使用默认的端口</span>
+</span><span id=__span-23-22><span class=w>        </span><span class=n>tcp_server</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>make_shared</span><span class=o>&lt;</span><span class=n>TcpServer</span><span class=o>&gt;</span><span class=p>([</span><span class=o>&amp;</span><span class=n>s</span><span class=p>](</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>encodedStr</span><span class=p>)</span>
+</span><span id=__span-23-23><span class=w>                                                 </span><span class=p>{</span><span class=w> </span><span class=k>return</span><span class=w> </span><span class=n>s</span><span class=o>-&gt;</span><span class=n>entry</span><span class=p>(</span><span class=n>encodedStr</span><span class=p>);</span><span class=w> </span><span class=p>});</span>
+</span><span id=__span-23-24><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-23-25><span class=w>    </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>argc</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>2</span><span class=p>)</span>
+</span><span id=__span-23-26><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-23-27><span class=w>        </span><span class=c1>// 使用自定义端口</span>
+</span><span id=__span-23-28><span class=w>        </span><span class=kt>uint16_t</span><span class=w> </span><span class=n>port</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>stoi</span><span class=p>(</span><span class=n>argv</span><span class=p>[</span><span class=mi>1</span><span class=p>]);</span>
+</span><span id=__span-23-29><span class=w>        </span><span class=n>tcp_server</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>make_shared</span><span class=o>&lt;</span><span class=n>TcpServer</span><span class=o>&gt;</span><span class=p>([</span><span class=o>&amp;</span><span class=n>s</span><span class=p>](</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>encodedStr</span><span class=p>)</span>
+</span><span id=__span-23-30><span class=w>                                                 </span><span class=p>{</span><span class=w> </span><span class=k>return</span><span class=w> </span><span class=n>s</span><span class=o>-&gt;</span><span class=n>entry</span><span class=p>(</span><span class=n>encodedStr</span><span class=p>);</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>,</span><span class=w> </span><span class=n>port</span><span class=p>);</span>
+</span><span id=__span-23-31><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-23-32><span class=w>    </span><span class=k>else</span>
+</span><span id=__span-23-33><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-23-34><span class=w>        </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>ERROR</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;错误使用，正确方式：&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>argv</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 端口（可以省略）&quot;</span><span class=p>;</span>
+</span><span id=__span-23-35><span class=w>        </span><span class=n>exit</span><span class=p>(</span><span class=mi>6</span><span class=p>);</span>
+</span><span id=__span-23-36><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-23-37>
+</span><span id=__span-23-38><span class=w>    </span><span class=n>tcp_server</span><span class=o>-&gt;</span><span class=n>start</span><span class=p>();</span>
+</span><span id=__span-23-39>
+</span><span id=__span-23-40><span class=w>    </span><span class=n>tcp_server</span><span class=o>-&gt;</span><span class=n>stop</span><span class=p>();</span>
+</span><span id=__span-23-41>
+</span><span id=__span-23-42><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-23-43><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=_14>修改客户端<a class=headerlink href=#_14 title="Permanent link">&para;</a></h3> <p>客户端的逻辑和服务端类似，同样考虑将如何处理结果交给上层，代码如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span>
+<span class=normal>44</span>
+<span class=normal>45</span>
+<span class=normal>46</span>
+<span class=normal>47</span>
+<span class=normal>48</span>
+<span class=normal>49</span>
+<span class=normal>50</span>
+<span class=normal>51</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-24-1><span class=k>using</span><span class=w> </span><span class=n>handler_t</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>function</span><span class=o>&lt;</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>&amp;</span><span class=p>)</span><span class=o>&gt;</span><span class=p>;</span>
+</span><span id=__span-24-2>
+</span><span id=__span-24-3><span class=k>class</span><span class=w> </span><span class=nc>TcpClient</span>
+</span><span id=__span-24-4><span class=p>{</span>
+</span><span id=__span-24-5><span class=k>public</span><span class=o>:</span>
+</span><span id=__span-24-6><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-24-7>
+</span><span id=__span-24-8><span class=w>    </span><span class=c1>// 启动客户端</span>
+</span><span id=__span-24-9><span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=n>start</span><span class=p>()</span>
+</span><span id=__span-24-10><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-24-11><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>!</span><span class=n>_isRunning</span><span class=p>)</span>
+</span><span id=__span-24-12><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-24-13><span class=w>            </span><span class=c1>// ...</span>
+</span><span id=__span-24-14><span class=w>            </span><span class=k>while</span><span class=w> </span><span class=p>(</span><span class=nb>true</span><span class=p>)</span>
+</span><span id=__span-24-15><span class=w>            </span><span class=p>{</span>
+</span><span id=__span-24-16><span class=w>                </span><span class=c1>// 输入操作数和操作符</span>
+</span><span id=__span-24-17><span class=w>                </span><span class=kt>int</span><span class=w> </span><span class=n>first</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=n>second</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-24-18><span class=w>                </span><span class=kt>char</span><span class=w> </span><span class=n>op</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-24-19><span class=w>                </span><span class=n>std</span><span class=o>::</span><span class=n>cin</span><span class=w> </span><span class=o>&gt;&gt;</span><span class=w> </span><span class=n>first</span><span class=w> </span><span class=o>&gt;&gt;</span><span class=w> </span><span class=n>op</span><span class=w> </span><span class=o>&gt;&gt;</span><span class=w> </span><span class=n>second</span><span class=p>;</span>
+</span><span id=__span-24-20>
+</span><span id=__span-24-21><span class=w>                </span><span class=c1>// 直接构造请求类对象</span>
+</span><span id=__span-24-22><span class=w>                </span><span class=n>Request</span><span class=w> </span><span class=nf>req</span><span class=p>(</span><span class=n>first</span><span class=p>,</span><span class=w> </span><span class=n>second</span><span class=p>,</span><span class=w> </span><span class=n>op</span><span class=p>);</span>
+</span><span id=__span-24-23>
+</span><span id=__span-24-24><span class=w>                </span><span class=c1>// 服务端创建请求对象序列化和编码</span>
+</span><span id=__span-24-25><span class=w>                </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>message</span><span class=p>;</span>
+</span><span id=__span-24-26><span class=w>                </span><span class=n>req</span><span class=p>.</span><span class=n>serialize</span><span class=p>(</span><span class=n>message</span><span class=p>);</span>
+</span><span id=__span-24-27><span class=w>                </span><span class=n>encode</span><span class=p>(</span><span class=n>message</span><span class=p>);</span>
+</span><span id=__span-24-28>
+</span><span id=__span-24-29><span class=w>                </span><span class=c1>// 再向服务端发送信息</span>
+</span><span id=__span-24-30><span class=w>                </span><span class=kt>ssize_t</span><span class=w> </span><span class=n>ret</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>send</span><span class=p>(</span><span class=n>_socketfd</span><span class=p>,</span><span class=w> </span><span class=n>message</span><span class=p>.</span><span class=n>c_str</span><span class=p>(),</span><span class=w> </span><span class=n>message</span><span class=p>.</span><span class=n>size</span><span class=p>(),</span><span class=w> </span><span class=mi>0</span><span class=p>);</span>
+</span><span id=__span-24-31>
+</span><span id=__span-24-32><span class=w>                </span><span class=c1>// 接收服务端的消息</span>
+</span><span id=__span-24-33><span class=w>                </span><span class=kt>char</span><span class=w> </span><span class=n>buffer</span><span class=p>[</span><span class=mi>4096</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=mi>0</span><span class=p>};</span>
+</span><span id=__span-24-34><span class=w>                </span><span class=n>ret</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>recv</span><span class=p>(</span><span class=n>_socketfd</span><span class=p>,</span><span class=w> </span><span class=n>buffer</span><span class=p>,</span><span class=w> </span><span class=k>sizeof</span><span class=p>(</span><span class=n>buffer</span><span class=p>)</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>);</span>
+</span><span id=__span-24-35><span class=w>                </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>encodedStr</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>buffer</span><span class=p>;</span>
+</span><span id=__span-24-36><span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>ret</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-24-37><span class=w>                </span><span class=p>{</span>
+</span><span id=__span-24-38><span class=w>                    </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>result</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>_handler</span><span class=p>(</span><span class=n>encodedStr</span><span class=p>);</span>
+</span><span id=__span-24-39><span class=w>                    </span><span class=c1>// 打印结果</span>
+</span><span id=__span-24-40><span class=w>                    </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>INFO</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;计算结果：&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>result</span><span class=p>;</span>
+</span><span id=__span-24-41><span class=w>                </span><span class=p>}</span>
+</span><span id=__span-24-42><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-24-43><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-24-44><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-24-45>
+</span><span id=__span-24-46><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-24-47>
+</span><span id=__span-24-48><span class=k>private</span><span class=o>:</span>
+</span><span id=__span-24-49><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-24-50><span class=w>    </span><span class=n>handler_t</span><span class=w> </span><span class=n>_handler</span><span class=p>;</span><span class=w> </span><span class=c1>// 处理函数</span>
+</span><span id=__span-24-51><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=_15>修改客户端主函数逻辑<a class=headerlink href=#_15 title="Permanent link">&para;</a></h3> <p>与服务端主函数逻辑一样，需要一个入口类，但是这个入口类中的入口函数比较简单，只需要将服务端发送的序列化和编码的字符串解码和反序列化返回即可：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-25-1><span class=k>class</span><span class=w> </span><span class=nc>ClientEntry</span>
+</span><span id=__span-25-2><span class=p>{</span>
+</span><span id=__span-25-3><span class=k>public</span><span class=o>:</span>
+</span><span id=__span-25-4><span class=w>    </span><span class=n>ClientEntry</span><span class=p>()</span>
+</span><span id=__span-25-5><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-25-6>
+</span><span id=__span-25-7><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-25-8>
+</span><span id=__span-25-9><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>entry</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>&amp;</span><span class=w> </span><span class=n>encodedStr</span><span class=p>)</span>
+</span><span id=__span-25-10><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-25-11><span class=w>        </span><span class=c1>// 解码</span>
+</span><span id=__span-25-12><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>jsonstr</span><span class=p>;</span>
+</span><span id=__span-25-13><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>respStr</span><span class=p>;</span>
+</span><span id=__span-25-14><span class=w>        </span><span class=k>while</span><span class=w> </span><span class=p>(</span><span class=n>decode</span><span class=p>(</span><span class=n>encodedStr</span><span class=p>,</span><span class=w> </span><span class=n>jsonstr</span><span class=p>))</span>
+</span><span id=__span-25-15><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-25-16><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>jsonstr</span><span class=p>.</span><span class=n>empty</span><span class=p>())</span>
+</span><span id=__span-25-17><span class=w>                </span><span class=k>break</span><span class=p>;</span>
+</span><span id=__span-25-18><span class=w>            </span><span class=c1>// 反序列化</span>
+</span><span id=__span-25-19><span class=w>            </span><span class=n>Response</span><span class=w> </span><span class=n>resp</span><span class=p>;</span>
+</span><span id=__span-25-20><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>!</span><span class=n>resp</span><span class=p>.</span><span class=n>deserialize</span><span class=p>(</span><span class=n>jsonstr</span><span class=p>))</span>
+</span><span id=__span-25-21><span class=w>                </span><span class=k>break</span><span class=p>;</span>
+</span><span id=__span-25-22>
+</span><span id=__span-25-23><span class=w>            </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>temp</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>to_string</span><span class=p>(</span><span class=n>resp</span><span class=p>.</span><span class=n>getResult</span><span class=p>())</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=s>&quot;[&quot;</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>resp</span><span class=p>.</span><span class=n>getCalStatusStr</span><span class=p>()</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=s>&quot;]&quot;</span><span class=p>;</span>
+</span><span id=__span-25-24>
+</span><span id=__span-25-25><span class=w>            </span><span class=c1>// 构造返回字符串</span>
+</span><span id=__span-25-26><span class=w>            </span><span class=n>respStr</span><span class=w> </span><span class=o>+=</span><span class=w> </span><span class=n>temp</span><span class=p>;</span>
+</span><span id=__span-25-27><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-25-28>
+</span><span id=__span-25-29><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>respStr</span><span class=p>;</span>
+</span><span id=__span-25-30><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-25-31><span class=p>};</span>
+</span></code></pre></div></td></tr></table></div> <p>接着同样的方式修改客户端主函数：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-26-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&quot;tcp_client.hpp&quot;</span>
+</span><span id=__span-26-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&quot;client_entry.hpp&quot;</span>
+</span><span id=__span-26-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;memory&gt;</span>
+</span><span id=__span-26-4>
+</span><span id=__span-26-5><span class=k>using</span><span class=w> </span><span class=k>namespace</span><span class=w> </span><span class=nn>TcpClientModule</span><span class=p>;</span>
+</span><span id=__span-26-6><span class=k>using</span><span class=w> </span><span class=k>namespace</span><span class=w> </span><span class=nn>ClientEntryModule</span><span class=p>;</span>
+</span><span id=__span-26-7>
+</span><span id=__span-26-8><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>argc</span><span class=p>,</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=o>*</span><span class=n>argv</span><span class=p>[])</span>
+</span><span id=__span-26-9><span class=p>{</span>
+</span><span id=__span-26-10><span class=w>    </span><span class=c1>// 创建入口对象</span>
+</span><span id=__span-26-11><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>ClientEntry</span><span class=o>&gt;</span><span class=w> </span><span class=n>c</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>make_shared</span><span class=o>&lt;</span><span class=n>ClientEntry</span><span class=o>&gt;</span><span class=p>();</span>
+</span><span id=__span-26-12>
+</span><span id=__span-26-13><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>TcpClient</span><span class=o>&gt;</span><span class=w> </span><span class=n>tcp_client</span><span class=p>;</span>
+</span><span id=__span-26-14><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>argc</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>1</span><span class=p>)</span>
+</span><span id=__span-26-15><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-26-16><span class=w>        </span><span class=c1>// 使用默认端口和IP地址</span>
+</span><span id=__span-26-17><span class=w>        </span><span class=n>tcp_client</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>make_shared</span><span class=o>&lt;</span><span class=n>TcpClient</span><span class=o>&gt;</span><span class=p>([</span><span class=o>&amp;</span><span class=n>c</span><span class=p>](</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>encodedStr</span><span class=p>){</span>
+</span><span id=__span-26-18><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=n>c</span><span class=o>-&gt;</span><span class=n>entry</span><span class=p>(</span><span class=n>encodedStr</span><span class=p>);</span>
+</span><span id=__span-26-19><span class=w>        </span><span class=p>});</span>
+</span><span id=__span-26-20><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-26-21><span class=w>    </span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>argc</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>3</span><span class=p>)</span>
+</span><span id=__span-26-22><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-26-23><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>ip</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>argv</span><span class=p>[</span><span class=mi>1</span><span class=p>];</span>
+</span><span id=__span-26-24><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=kt>uint16_t</span><span class=w> </span><span class=n>port</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>stoi</span><span class=p>(</span><span class=n>argv</span><span class=p>[</span><span class=mi>2</span><span class=p>]);</span>
+</span><span id=__span-26-25><span class=w>        </span><span class=c1>// 使用自定义端口和IP地址</span>
+</span><span id=__span-26-26><span class=w>        </span><span class=n>tcp_client</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>make_shared</span><span class=o>&lt;</span><span class=n>TcpClient</span><span class=o>&gt;</span><span class=p>([</span><span class=o>&amp;</span><span class=n>c</span><span class=p>](</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=o>&amp;</span><span class=n>encodedStr</span><span class=p>)</span>
+</span><span id=__span-26-27><span class=w>                                                 </span><span class=p>{</span><span class=w> </span><span class=k>return</span><span class=w> </span><span class=n>c</span><span class=o>-&gt;</span><span class=n>entry</span><span class=p>(</span><span class=n>encodedStr</span><span class=p>);</span><span class=w> </span><span class=p>},</span><span class=w> </span><span class=n>ip</span><span class=p>,</span><span class=w> </span><span class=n>port</span><span class=p>);</span>
+</span><span id=__span-26-28><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-26-29><span class=w>    </span><span class=k>else</span>
+</span><span id=__span-26-30><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-26-31><span class=w>        </span><span class=n>LOG</span><span class=p>(</span><span class=n>LogLevel</span><span class=o>::</span><span class=n>ERROR</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;错误使用，正确使用为：&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>argv</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; IP地址 端口号（或者二者都不存在）&quot;</span><span class=p>;</span>
+</span><span id=__span-26-32><span class=w>        </span><span class=n>exit</span><span class=p>(</span><span class=mi>7</span><span class=p>);</span>
+</span><span id=__span-26-33><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-26-34>
+</span><span id=__span-26-35><span class=w>    </span><span class=n>tcp_client</span><span class=o>-&gt;</span><span class=n>start</span><span class=p>();</span>
+</span><span id=__span-26-36>
+</span><span id=__span-26-37><span class=w>    </span><span class=n>tcp_client</span><span class=o>-&gt;</span><span class=n>stop</span><span class=p>();</span>
+</span><span id=__span-26-38>
+</span><span id=__span-26-39><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-26-40><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=_16>测试<a class=headerlink href=#_16 title="Permanent link">&para;</a></h3> <p>根据上面的代码，编译生产可执行程序，运行服务端和客户端，可以得到类似下面的结果：</p> <p><a class=glightbox href="24. 序列化问题与网络计算器.assets\Snipaste_2025-03-07_15-34-05.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="24. 序列化问题与网络计算器.assets\Snipaste_2025-03-07_15-34-05.png"></a></p> <h2 id=osi>理解为什么OSI七层模型优秀<a class=headerlink href=#osi title="Permanent link">&para;</a></h2> <p>首先，对比TCP/IP五层模型和OSI七层模型：</p> <p><a class=glightbox href="24. 序列化问题与网络计算器.assets\download6.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="24. 序列化问题与网络计算器.assets\download6.png"></a></p> <p>可以看到两者下4层是一样的，本质是因为这4层是由操作系统可以实现的，为了进行网络通信，下4层必须要一样</p> <p>但是对于OSI七层模型的上三层来说：</p> <p>首先是会话层，这一层实际上就是进行通信管理，这就是客户端和服务端如何进行通信进行定义，而这一部分需要利用到操作系统底层的接口，这也就对应着会话层管理下4层，这里就对应着网络计算器中客户端和服务端的设计</p> <p>一旦客户端和服务端可以正常通信，接下来就是具体通信什么内容，这就需要表现层设定好传输内容的格式，确保客户端和服务端都可以认识彼此的数据并做出正确的解析，这里就对应着网络计算器中实现的序列化和反序列化以及编码和解码</p> <p>最后就是设置传输的内容，也就是定义结构化数据，这里就对应着网络计算器中的请求类和响应类的字段</p> <p>这三层，每一层都相互联系，但凡少一层都无法正确进行通信，而之所以TCP/IP协议将这三层压缩为一层，就是因为这三层是无法被操作系统具体实现的，属于操作系统之上的应用部分</p> <p>所以，尽管大部分教科书提到OSI七层模型麻烦，但是其依旧出现在各大教科书中</p> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年3月7日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年3月6日</span> </span> </aside> </div> <script src=https://qiniu.techgrow.cn/readmore/dist/readmore.js type=text/javascript></script> <script>
+        var isExclude = false;
+        var excludePages = ['/网站验证码', '/阅读档案', '/作者', '/网站时间线'];
+        var currentPath = decodeURIComponent(window.location.pathname).replace(/\/$/, '').toLowerCase();
+        isExclude = excludePages.some(page => currentPath.includes(page.toLowerCase()));
+        var isMobile = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
+        var allowMobile = true;
+        if (!isExclude && (!isMobile || (isMobile && allowMobile))) {
+            try {
+                var plugin = new ReadmorePlugin();
+                plugin.init({
+                    id: "readmore-container",
+                    blogId: "36140-2300591443397-093",
+                    name: "阅读档案",
+                    keyword: "验证码",
+                    qrcode: "https://www.help-doc.top/index.assets/qrcode_for_gh_166df3e5da8b_258.jpg",
+                    type: "website",
+                    height: "600",
+                    expires: "31",
+                    interval: "60",
+                    random: "1.0"
+                })
+            } catch (e) {
+                console.warn("readmore plugin occurred error: " + e.name + " | " + e.message);
+            }
+        }
+        let verificationInProgress = false;
+        function isContentUnlocked() {
+            const readmoreWrapper = document.getElementById('readmore-wrapper');
+            const readmoreModel = document.getElementById('readmore-model-wrapper');
+            const readmoreModalMask = document.getElementById('readmore-modal-mask');
+            if (verificationInProgress) {
+                return false;
+            }
+            if (!readmoreWrapper && !readmoreModel && !readmoreModalMask) {
+                return true;
+            }
+            return readmoreWrapper && 
+                window.getComputedStyle(readmoreWrapper).display === 'none' && 
+                (!readmoreModel || window.getComputedStyle(readmoreModel).display === 'none') &&
+                (!readmoreModalMask || window.getComputedStyle(readmoreModalMask).display === 'none');
+        }
+        function showVerificationModal() {
+            const readmoreBtn = document.getElementById('readmore-btn');
+            if (readmoreBtn) {
+                verificationInProgress = true;
+                readmoreBtn.click();
+                const observer = new MutationObserver(() => {
+                    const modalMask = document.getElementById('readmore-modal-mask');
+                    if (!modalMask || window.getComputedStyle(modalMask).display === 'none') {
+                        setTimeout(() => {
+                            if (!isContentUnlocked()) {
+                                verificationInProgress = false;
+                            }
+                        }, 100);
+                    }
+                });
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['style', 'class']
+                });
+            }
+        }
+        function handleAnchorNavigation(e, href) {
+            if (!isContentUnlocked()) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!verificationInProgress) {
+                    showVerificationModal();
+                }
+                return false;
+            }
+            if (href && href.includes('#')) {
+                const targetId = href.split('#')[1];
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+            return true;
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            let searchResultsInitialized = false;
+            const searchObserver = new MutationObserver((mutations) => {
+                if (searchResultsInitialized) return;
+                const searchResults = document.querySelectorAll('.md-search-result__link');
+                if (searchResults.length > 0) {
+                    searchResults.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href && href.includes('#') && !href.includes('#__tabbed_')) {
+                            link.addEventListener('click', (e) => {
+                                const currentPath = window.location.pathname;
+                                const [linkPath, hash] = href.split('#');
+                                if (!linkPath || linkPath === currentPath) {
+                                    handleAnchorNavigation(e, '#' + hash);
+                                }
+                            }, { capture: true, once: true });
+                        }
+                    });
+                    
+                    searchResultsInitialized = true;
+                    setTimeout(() => {
+                        searchResultsInitialized = false;
+                    }, 100);
+                }
+            });
+
+            const searchContainer = document.querySelector('.md-search');
+            if (searchContainer) {
+                searchObserver.observe(searchContainer, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+            function resetSearchState() {
+                searchResultsInitialized = false;
+            }
+            const searchInput = document.querySelector('.md-search__input');
+            if (searchInput) {
+                searchInput.addEventListener('blur', resetSearchState);
+                searchInput.addEventListener('search', resetSearchState);
+            }
+            document.addEventListener('click', (e) => {
+                const target = e.target.closest('a[href*="#"]');
+                if (!target) return;
+                
+                const href = target.getAttribute('href');
+                // 排除以 __tabbed_ 开头的锚点
+                if (href && (href.startsWith('#') || href.includes('/#')) && !href.includes('#__tabbed_')) {
+                    handleAnchorNavigation(e, href);
+                }
+            }, true);
+            setTimeout(() => {
+                const hash = window.location.hash;
+                if (hash && !isContentUnlocked()) {
+                    showVerificationModal();
+                }
+            }, 300);
+            window.addEventListener('hashchange', (e) => {
+                if (!isContentUnlocked()) {
+                    e.preventDefault();
+                    showVerificationModal();
+                }
+            }, false);
+            const modalObserver = new MutationObserver(() => {
+                const modalMask = document.getElementById('readmore-modal-mask');
+                if (modalMask && window.getComputedStyle(modalMask).display === 'none') {
+                    setTimeout(() => {
+                        if (!isContentUnlocked()) {
+                            verificationInProgress = false;
+                        }
+                    }, 100);
+                }
+            });
+            modalObserver.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style']
+            });
+        });
+    </script> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024-2025 EPSDA </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.prune", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script> <script src=../../assets/javascripts/bundle.f1b6f286.min.js></script> <script src=../../javascripts/mathjax.min.js></script> <script src=../../javascripts/particles.min.js></script> <script src=../../javascripts/other.min.js></script> <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body> </html>

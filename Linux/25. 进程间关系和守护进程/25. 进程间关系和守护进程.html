@@ -1,0 +1,956 @@
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/Linux/25.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E5%92%8C%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/25.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E5%92%8C%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B.html><link rel=prev href=../24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8/24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8.html><link rel=next href=../../HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.6.5"><title>进程间关系和守护进程 - 学习档案</title><link rel=stylesheet href=../../assets/stylesheets/main.8608ea7d.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><link rel=stylesheet href=../../css/timeline.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><link rel=stylesheet href=../../stylesheets/theme2.css media="screen and (max-width: 767px)"><link rel=stylesheet href=../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><style>
+        @import url('https://static.zeoseven.com/zsft/2/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/442/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/288/main/result.css');
+        @import url('https://static.zeoseven.com/zsft/84/main/result.css');
+        @font-face {
+            font-family: "Source Han Sans SC VF";
+        }
+        @font-face {
+            font-family: 'LXGW ZhenKai';
+        }
+        @font-face {
+            font-family: "JetBrains Mono";
+            src: url('https://static.zeoseven.com/zsft/hk/main.woff2') format('woff2'),
+                url('https://static-host.zeoseven.com/zsft/hk/main.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: "Douyin Sans";
+        }
+        .md-header__topic .md-ellipsis {
+            font-family: "Douyin Sans" !important;
+        }
+        :root {
+            --md-text-font: "Source Han Sans SC VF";
+            --md-header-font: "LXGW ZhenKai";
+            --md-code-font: "JetBrains Mono";
+            --code-font-color: #e96900;
+        }
+        h1 + div > p {
+            font-family: var(--md-header-font);
+        }
+        @media screen and (max-width: 1199px) {
+            .theme-switch {
+                display: none !important;
+            }
+        }
+
+        @media print {
+            a[href]:after {
+                content: "" !important;
+            }
+            a {
+                text-decoration: none !important;
+                color: inherit !important;
+                pointer-events: none !important;
+                cursor: default !important;
+            }
+            a[title] {
+                position: relative;
+            }
+            a[title]:hover:after {
+                display: none !important;
+            }
+            a:active, a:hover, a:focus {
+                outline: none !important;
+                text-decoration: none !important;
+            }
+            img {
+                max-width: 100% !important;
+                page-break-inside: avoid;
+            }
+            .md-header,
+            .md-tabs,
+            .md-sidebar,
+            .md-footer {
+                display: none !important;
+            }
+        }
+        .theme-switch {
+            display: inline-flex;
+            gap: 8px;
+            margin-right: 1rem;
+            padding: 4px;
+            border-radius: 100px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .theme-switch {
+            margin-right: 1rem;
+        }
+        .theme-btn {
+            font-family: var(--md-text-font);
+            font-size: medium;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px 8px;
+            color: #fff;
+            cursor: pointer;
+            min-width: 100px;
+            height: 36px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            background-size: 200% 100%;
+            background-position: right bottom;
+            background-repeat: no-repeat;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .theme-btn .current-theme,
+        .theme-btn .target-theme {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+        .theme-btn .current-theme {
+            transform: translateX(0);
+            opacity: 1;
+            transition-delay: 0ms;
+        }
+        .theme-btn .target-theme {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition-delay: 0ms;
+        }
+        .theme-btn:hover {
+            transform: scale(1.05);
+            background-image: linear-gradient(to right, #4da6da 0%, #275796 100%);
+            background-position: left bottom;
+        }
+        .theme-btn:hover .current-theme {
+            transform: translateX(100%);
+            opacity: 0;
+            transition-delay: 100ms;
+        }
+        .theme-btn:hover .target-theme {
+            transform: translateX(0);
+            opacity: 1;
+            transition-delay: 200ms;
+        }
+        .theme-btn:active {
+            transform: scale(0.95);
+            transition: all 100ms ease;
+        }
+        .md-content article > *:not(.md-top):not(.md-nav) {
+            animation: flyIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(1) { animation-delay: 0.1s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(2) { animation-delay: 0.15s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(3) { animation-delay: 0.2s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(4) { animation-delay: 0.25s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(5) { animation-delay: 0.3s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(6) { animation-delay: 0.35s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(7) { animation-delay: 0.4s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(8) { animation-delay: 0.45s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(9) { animation-delay: 0.5s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(10) { animation-delay: 0.55s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(11) { animation-delay: 0.6s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(12) { animation-delay: 0.65s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(13) { animation-delay: 0.7s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(14) { animation-delay: 0.75s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(15) { animation-delay: 0.8s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(16) { animation-delay: 0.85s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(17) { animation-delay: 0.9s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(18) { animation-delay: 0.95s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(19) { animation-delay: 1s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(20) { animation-delay: 1.05s; }
+        .md-content article > *:not(.md-top):not(.md-nav):nth-child(n+21) { animation-delay: 1.1s; }
+        @keyframes flyIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        li::marker { 
+            color: rgba(77, 166, 218, 0.9); 
+        }
+        .md-search__input:hover,
+        .md-search__input:focus {
+            border-radius: 8px !important;
+        }
+        .md-search__form {
+            border-radius: 8px !important;
+        }
+        .md-search__output {
+            border-radius: 8px !important;
+        }
+        .md-search__overlay {
+            border-radius: 8px !important;
+        }
+        .md-search-result {
+            border-radius: 8px !important;
+        }
+        .md-search__inner {
+            border-radius: 8px !important;
+        }
+        :not(pre) > code {
+            color: #ff7043 !important;
+            font-weight: normal;
+        }
+        .highlight .c1,
+        .highlight .cm {
+            color: #6a737d;
+        }
+        .md-typeset .admonition,
+        .md-typeset details {
+            border-width: 0;
+            border-left-width: 4px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--md-header-font);
+            color: #4da6da !important;
+        }
+        body {
+            font-family: var(--md-text-font);
+        }
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--code-font-color);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleEffect 0.6s ease-out forwards;
+            transform: translate(var(--translate-x, 0), var(--translate-y, 0)) scale(1);
+        }
+        @keyframes particleEffect {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translate(var(--translate-x), var(--translate-y)) scale(0.5);
+            }
+        }
+        pre code {
+            color: var(--md-code-fg-color) !important;
+        }
+        .highlight pre {
+            background-color: var(--md-code-bg-color) !important;
+        }
+        .md-typeset code {
+            font-family: var(--md-code-font), var(--md-text-font);
+        }
+        .md-tabs__item.md-tabs__item--active {
+            border-bottom: 2px solid rgba(77, 166, 218, 0.9);
+        }
+        .md-tabs__list > .md-tabs__item--active > .md-tabs__link {
+            color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .timeline-content::before {
+            background-color: #efefef;
+        }
+        .timeline-card {
+            background-color: #efefef !important;
+        }
+        .changelog-content a {
+            color: #4051b5 !important;
+            word-break: break-word;
+        }
+        .changelog-content a:focus, .changelog-content a:hover {
+            color: #00bda4 !important;
+        }
+        .changelog-type-pageupdate {
+            background-color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .md-footer-runtime {
+            position: relative;
+            z-index: 3;
+            margin: 0.5rem 0;
+            padding: 0.4rem 0;
+            font-size: .7rem;
+            line-height: 1.6;
+            color: var(--md-footer-fg-color--light);
+            display: flex;
+            align-items: center;
+        }
+        ::selection {
+            background: rgba(77, 166, 218, 0.2);
+        }
+        html {
+            scroll-behavior: smooth !important; /* 强制启用平滑滚动 */
+            scroll-padding-top: 53px; /* 设置滚动偏移量,避免标题被导航栏遮挡 */
+        }
+        a[href^="#"],  /* 站内锚点 */
+        a[href*="/#"] /* 跨页锚点 */ {
+            scroll-behavior: smooth !important;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+            a[href^="#"],
+            a[href*="/#"] {
+                scroll-behavior: auto !important;
+            }
+        }
+        #readmore-wrapper {
+            position: absolute;
+            bottom: 0px;
+            z-index: 9999;
+            width: 100%;
+            margin-top: -100px;
+            font-family: var(--md-text-font);
+            display: none;
+        }
+        #readmore-mask {
+            position: relative;
+            height: 500px;
+            background: -webkit-gradient(linear, 0 0%, 0 100%, from(rgba(255, 255, 255, 0)), to(rgb(255, 255, 255)));
+        }
+        #readmore-btn {
+            position: absolute;
+            left: 50%;
+            top: 70%;
+            bottom: 30px;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 36px;
+            line-height: 36px;
+            font-size: 15px;
+            text-align: center;
+            border: 1px solid rgba(77, 166, 218, 0.9);
+            color: rgba(77, 166, 218, 0.9);
+            background: rgb(255, 255, 255);
+            cursor: pointer;
+            border-radius: 6px;
+            border-bottom: 1px solid rgba(77, 166, 218, 0.9) !important;
+            text-decoration: none !important;
+        }
+        #readmore-modal-mask {
+            position: fixed;
+            inset: 0px;
+            opacity: 0.7;
+            z-index: 999;
+            background: rgb(0, 0, 0);
+        }
+        #readmore-modal-content {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            text-align: center;
+            font-size: 13px;
+            background: rgb(255, 255, 255);
+            border-radius: 10px;
+            z-index: 9999;
+            font-family: var(--md-text-font), sans-serif;
+        }
+        #readmore-modal-close-btn {
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            line-height: 34px;
+            font-size: 25px;
+            cursor: pointer;
+            opacity: 0.2;
+            z-index: 9999;
+            color: rgb(0, 0, 0);
+            background: none;
+            border: none;
+            outline: none;
+        }
+        #readmore-modal-header {
+            font-size: 15px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        #readmore-modal-header div {
+            margin-top: 5px;
+        }
+        #readmore-blog-name {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-blog-keyword {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-blog-forever {
+            color: rgba(77, 166, 218, 0.9);
+        }
+        #readmore-modal-header div span:not([id]) {
+            color: #444;
+        }
+        #readmore-modal-qrcode img {
+            width: 220px;
+            height: 220px;
+            border: 8px solid rgb(230, 230, 230);
+            margin-bottom: 10px !important;
+            margin-top: 10px !important;
+            opacity: 1 !important;
+            display: inline !important;
+        }
+        #readmore-modal-form {
+            background: rgb(255, 255, 255);
+        }
+        #readmore-modal-captcha-input {
+            width: 160px;
+            height: 32px;
+            line-height: 32px;
+            padding: 0px 10px;
+            margin-left: -1px !important;
+            margin: 0px 10px;
+            font-size: 13px;
+            text-rendering: auto;
+            text-transform: none;
+            cursor: text;
+            outline: none;
+            box-sizing: border-box;
+            border: 1px solid rgb(221, 221, 221);
+            appearance: textfield;
+            color: #000;
+            background-color: white;
+            -webkit-rtl-ordering: logical;
+        }
+        #readmore-modal-submit-btn {
+            padding: 0px 20px;
+            height: 32px;
+            font-size: 14px;
+            outline: none;
+            border: none;
+            color: rgb(255, 255, 255);
+            background: rgba(77, 166, 218, 0.9);
+            cursor: pointer;
+        }
+        #readmore-modal-footer p {
+            font-size: 15px;
+            margin: 30px 0px 20px;
+            color: rgb(153, 153, 153);
+            text-align: center;
+        }
+        #readmore-official-website {
+            border-bottom: none !important;
+            text-decoration: none !important;
+            color: rgba(77, 166, 218, 0.9) !important;
+        }
+        .readmore-btn-mouseover {
+            color: rgb(255, 255, 255) !important;
+            background: rgba(77, 166, 218, 0.9) !important;
+        }
+        .readmore-btn-mouseout {
+            color: rgba(77, 166, 218, 0.9) !important;
+            background: rgb(255, 255, 255) !important;
+        }
+        .custom-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            color: rgba(77, 166, 218, 0.9);
+            border-bottom: 1px dashed rgba(77, 166, 218, 0.9);
+            text-decoration: none !important;
+        }
+        .custom-tooltip > span {
+            color: grey;
+            font-size: 12px;
+            margin-left: 4px;
+        }
+        .custom-tooltip::before {
+            content: attr(data-title);
+            position: absolute;
+            width: 300px;
+            background-color: rgba(51, 51, 51, 0.95);
+            color: #fff;
+            text-align: left;
+            padding: 10px;
+            border-radius: 6px;
+            bottom: 125%;  /* 定位在链接上方 */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99999;  /* 确保显示在最上层 */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 1.5;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            word-wrap: break-word;
+            white-space: normal;
+        }
+        .custom-tooltip::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(51, 51, 51, 0.95) transparent transparent transparent;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .custom-tooltip:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+        @media (max-width: 767px) {
+            .custom-tooltip::before {
+                width: 250px;
+                white-space: normal;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 130%;
+            }
+        }
+        .md-content a.custom-tooltip::after {
+            display: none !important;
+        }
+    </style><script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchEl = document.querySelector('.md-search');
+            const savedTheme = localStorage.getItem('preferred-theme') || 'theme1';
+            const themeSwitch = document.createElement('div');
+            themeSwitch.className = 'theme-switch';
+            themeSwitch.innerHTML = `
+                <button class="theme-btn" onclick="switchTheme()">
+                    <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '旧版主题'}</span>
+                    <span class="target-theme">${savedTheme === 'theme1' ? '旧版主题' : '新版主题'}</span>
+                </button>
+            `;
+            searchEl.parentNode.insertBefore(themeSwitch, searchEl);
+            setTimeout(() => {
+                const hash = window.location.hash;
+                if (hash) {
+                    const readmoreBtn = document.getElementById('readmore-wrapper');
+                    if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
+                        const targetId = hash.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            // 平滑滚动到目标元素
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                }
+            }, 300); 
+        });
+
+        (function initTheme() {
+            const savedTheme = localStorage.getItem('preferred-theme');
+            if (savedTheme) {
+                const theme1Link = document.querySelector('link[href*="theme1"]');
+                const theme2Link = document.querySelector('link[href*="theme2"]');
+                if (theme1Link && theme2Link) {
+                    if (savedTheme === 'theme1') {
+                        theme1Link.removeAttribute('disabled');
+                        theme2Link.setAttribute('disabled', 'true');
+                    } else {
+                        theme2Link.removeAttribute('disabled');
+                        theme1Link.setAttribute('disabled', 'true');
+                    }
+                }
+            }
+        })();
+
+        function switchTheme() {
+            const currentTheme = localStorage.getItem('preferred-theme') || 'theme1';
+            const newTheme = currentTheme === 'theme1' ? 'theme2' : 'theme1';
+            const theme1Link = document.querySelector('link[href*="theme1"]');
+            const theme2Link = document.querySelector('link[href*="theme2"]');
+            if (newTheme === 'theme1') {
+                theme1Link.removeAttribute('disabled');
+                theme2Link.setAttribute('disabled', 'true');
+            } else {
+                theme2Link.removeAttribute('disabled');
+                theme1Link.setAttribute('disabled', 'true');
+            }
+            localStorage.setItem('preferred-theme', newTheme);
+            const themeBtn = document.querySelector('.theme-btn');
+            const currentThemeEl = themeBtn.querySelector('.current-theme');
+            const targetThemeEl = themeBtn.querySelector('.target-theme');
+            currentThemeEl.textContent = newTheme === 'theme1' ? '新版主题' : '旧版主题';
+            targetThemeEl.textContent = newTheme === 'theme1' ? '旧版主题' : '新版主题';
+        }
+
+        document.addEventListener('copy', function(e) {
+            const selectedText = window.getSelection().toString();
+            if(selectedText) {
+                const copyright = '\n\n' +
+                    '————————————————\n' +
+                    '文章作者：怡晗★\n' +
+                    '网站链接：https://www.help-doc.top\n' +
+                    '当前文章链接：' + window.location.href + '\n' +
+                    '版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。\n' +
+                    '转载请注明来自怡晗★的个人网站！';
+                e.preventDefault();
+                e.clipboardData.setData('text/plain', selectedText + copyright);
+            }
+        });
+    </script> <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#_1 class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../../index.html title=学习档案 class="md-header__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 学习档案 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> 进程间关系和守护进程 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-hidden=true type=radio name=__palette id=__palette_0> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=标签 data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../index.html class=md-tabs__link> 主页 </a> </li> <li class=md-tabs__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-tabs__link> 网站时间线 </a> </li> <li class=md-tabs__item> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-tabs__link> 编程语言 </a> </li> <li class=md-tabs__item> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-tabs__link> 数据结构与算法 </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-tabs__link> Linux </a> </li> <li class=md-tabs__item> <a href=../../HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html class=md-tabs__link> 前端 </a> </li> <li class=md-tabs__item> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-tabs__link> MySQL </a> </li> <li class=md-tabs__item> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-tabs__link> 扩展知识 </a> </li> <li class=md-tabs__item> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-tabs__link> 工具帮助 </a> </li> <li class=md-tabs__item> <a href=../../%E9%9D%A2%E8%AF%95/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98.html class=md-tabs__link> 闲谈 </a> </li> <li class=md-tabs__item> <a href=../../%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88/%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88.html class=md-tabs__link> 阅读档案 </a> </li> <li class=md-tabs__item> <a href=../../%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html class=md-tabs__link> 联系作者 </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=导航栏 data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../../index.html title=学习档案 class="md-nav__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> 学习档案 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../index.html class=md-nav__link> <span class=md-ellipsis> 主页 </span> </a> </li> <li class=md-nav__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-nav__link> <span class=md-ellipsis> 网站时间线 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-nav__link> <span class=md-ellipsis> 数据结构与算法 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_5 checked> <label class=md-nav__link for=__nav_5 id=__nav_5_label tabindex> <span class=md-ellipsis> Linux </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_5_label aria-expanded=true> <label class=md-nav__title for=__nav_5> <span class="md-nav__icon md-icon"></span> Linux </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-nav__link> <span class=md-ellipsis> Linux常用选项和指令 </span> </a> </li> <li class=md-nav__item> <a href=../2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html class=md-nav__link> <span class=md-ellipsis> Linux权限相关 </span> </a> </li> <li class=md-nav__item> <a href=../3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85.html class=md-nav__link> <span class=md-ellipsis> CentOS软件安装 </span> </a> </li> <li class=md-nav__item> <a href=../4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb/4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb.html class=md-nav__link> <span class=md-ellipsis> Linux下的gcc与gdb </span> </a> </li> <li class=md-nav__item> <a href=../5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F/5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F.html class=md-nav__link> <span class=md-ellipsis> Linux下的Makefile与进度条程序 </span> </a> </li> <li class=md-nav__item> <a href=../6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 操作系统基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../7.%20Linux%E8%BF%9B%E7%A8%8B/7.%20Linux%E8%BF%9B%E7%A8%8B.html class=md-nav__link> <span class=md-ellipsis> Linux进程基础 </span> </a> </li> <li class=md-nav__item> <a href=../8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7/8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7.html class=md-nav__link> <span class=md-ellipsis> Linux进程状态与进程优先级 </span> </a> </li> <li class=md-nav__item> <a href=../9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95.html class=md-nav__link> <span class=md-ellipsis> Linux进程切换以及调度算法 </span> </a> </li> <li class=md-nav__item> <a href=../10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.html class=md-nav__link> <span class=md-ellipsis> Linux命令行与环境变量 </span> </a> </li> <li class=md-nav__item> <a href=../11.%20Linux%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4/11.%20%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.html class=md-nav__link> <span class=md-ellipsis> Linux进程地址空间 </span> </a> </li> <li class=md-nav__item> <a href=../12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6.html class=md-nav__link> <span class=md-ellipsis> Linux进程控制 </span> </a> </li> <li class=md-nav__item> <a href=../13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80/13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> Linux文件操作基础 </span> </a> </li> <li class=md-nav__item> <a href=../14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B/14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B.html class=md-nav__link> <span class=md-ellipsis> Linux中输入和输出基本过程 </span> </a> </li> <li class=md-nav__item> <a href=../15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html class=md-nav__link> <span class=md-ellipsis> Linux文件系统 </span> </a> </li> <li class=md-nav__item> <a href=../16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5.html class=md-nav__link> <span class=md-ellipsis> Linux软链接和硬链接 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../17.%20Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93.html class=md-nav__link> <span class=md-ellipsis> Linux进程间通信 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> Linux信号与操作系统原理 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../19.%20Linux%E7%BA%BF%E7%A8%8B/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C.html class=md-nav__link> <span class=md-ellipsis> Linux线程 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 网络基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> Socket编程基础 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../22.%20UDP%E7%BC%96%E7%A8%8B/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> UDP编程 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> TCP编程接口基本使用 </span> </a> </li> <li class=md-nav__item> <a href=../24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8/24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8.html class=md-nav__link> <span class=md-ellipsis> 序列化和反序列化与网络计算器 </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> 进程间关系和守护进程 </span> <span class="md-nav__icon md-icon"></span> </label> <a href=25.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E5%92%8C%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B.html class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> 进程间关系和守护进程 </span> </a> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 进程组 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 会话 </span> </a> </li> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 终端文件 </span> </a> </li> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 作业控制 </span> </a> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 守护进程 </span> </a> </li> <li class=md-nav__item> <a href=#_7 class=md-nav__link> <span class=md-ellipsis> 网络服务进程变成守护进程 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html class=md-nav__link> <span class=md-ellipsis> 前端 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-nav__link> <span class=md-ellipsis> 扩展知识 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-nav__link> <span class=md-ellipsis> 工具帮助 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E9%9D%A2%E8%AF%95/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98/C%2B%2B%20%E5%90%8E%E7%AB%AF%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%BE%E5%B7%A5%E4%BD%9C%E9%97%AE%E9%A2%98.html class=md-nav__link> <span class=md-ellipsis> 闲谈 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../../%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88/%E9%98%85%E8%AF%BB%E6%A1%A3%E6%A1%88.html class=md-nav__link> <span class=md-ellipsis> 阅读档案 </span> </a> </li> <li class=md-nav__item> <a href=../../%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html class=md-nav__link> <span class=md-ellipsis> 联系作者 </span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 进程组 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 会话 </span> </a> </li> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 终端文件 </span> </a> </li> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 作业控制 </span> </a> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 守护进程 </span> </a> </li> <li class=md-nav__item> <a href=#_7 class=md-nav__link> <span class=md-ellipsis> 网络服务进程变成守护进程 </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <div id=readmore-container> <h1 id=_1>进程间关系和守护进程<a class=headerlink href=#_1 title="Permanent link">&para;</a></h1> <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;"> <p><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 3782 个字 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 640 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3"/></svg></span> 99 行代码 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m12.96-10.71-2.75 3.54-1.96-2.36L8.5 15h11z"/></svg></span> 15 张图片 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 14 分钟</p> </div> <h2 id=_2>进程组<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <p>在前面多次提到了进程的概念，其实每一个进程除了有一个进程ID（PID）之外还有一个进程组ID（PGID）</p> <p>进程组是一个或者多个进程的集合，一个进程组可以包含多个进程。每一个进程组也有一个唯一的进程组ID(PGID)，并且这个PIGD类似于PID，同样是一个正整数，可以存放在<code>pid_t</code>数据类型中</p> <p>例如，启动一个<code>sleep</code>进程：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1>sleep<span class=w> </span><span class=m>1000</span>
+</span></code></pre></div></td></tr></table></div> <p>使用<code>ps</code>指令查看该进程如下：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets/image-20250308190922205.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets/image-20250308190922205.png"></a></p> <p>在上图中，因为<code>sleep</code>进程是直接在终端上运行的，所以其父进程就是PPID为466951的<code>-bash</code>进程，而PGID就是进程组ID</p> <p>假设现在一次性启动多个<code>sleep</code>进程：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1>sleep<span class=w> </span><span class=m>1000</span><span class=w> </span><span class=p>|</span><span class=w> </span>sleep<span class=w> </span><span class=m>2000</span><span class=w> </span><span class=p>|</span><span class=w> </span>sleep<span class=w> </span><span class=m>3000</span>
+</span></code></pre></div></td></tr></table></div> <p>再次使用<code>ps</code>指令查看这些进程如下：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_19-13-01.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_19-13-01.png"></a></p> <p>可以看到，因为都是在终端启动，所以这些进程的PPID都是一样的，表示<code>-bash</code>进程。仔细观察PGID，可以发现，这些进程的PGID都是一样的，并且PGID值就是第一个当前组第一个进程的PID</p> <p>根据这个现象可以推出一个结论：<strong>进程组的ID值等于当前组第一个进程的PID</strong>。对于进程组的第一个进程来说，该进程也被称为组长进程。那么既然是组长进程，这个进程创建的子进程自然也就与组长进程属于同一个组，并且组长进程退出也不会影响到当前组的其他进程</p> <p>对于上面的最后一点「组长进程退出也不会影响到当前组的其他进程」来说，还是以上面多个<code>sleep</code>进程为例，如果现在删除组长进程（<code>sleep 1000</code>），那么后续的两个进程的进程组ID依旧不会改变，如下图所示：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_19-20-39.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_19-20-39.png"></a></p> <h2 id=_3>会话<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <p>了解了进程组，那么是否存在一个范围包括所有的进程组呢？当然有，这个就是<strong>会话</strong>，会话可以看成是一个或者多个进程组的集合，例如下图：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\image.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\image.png"></a></p> <p>那么，如何形成一个会话呢？有一种情况非常常见，就是用户通过终端工具登录到Linux系统，此时Linux就会为当前客户端分配一个终端文件，并匹配一个对应的<code>bash</code>进程，此时的终端文件+<code>bash</code>进程就构成了一个会话，因为<code>bash</code>属于当前会话，所以在当前<code>bash</code>中启动的所有进程都属于当前会话，而因为每个进程属于对应的进程组，所以实际上<code>bash</code>管理的就是一个一个的进程组</p> <p>一个操作系统可能会有多个客户端进行连接，此时操作系统需要创建多个会话，所以操作系统为了管理这些会话也需要对浙西会话进行先描述再组织，此时每个会话就会有自己对应的属性，其中就有一个会话ID的属性（SID）</p> <p>同样，启动多个<code>sleep</code>进程：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1>sleep<span class=w> </span><span class=m>1000</span><span class=w> </span><span class=p>|</span><span class=w> </span>sleep<span class=w> </span><span class=m>2000</span><span class=w> </span><span class=p>|</span><span class=w> </span>sleep<span class=w> </span><span class=m>3000</span>
+</span></code></pre></div></td></tr></table></div> <p>使用<code>ps</code>指令查看这些进程如下：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_19-13-01.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_19-13-01.png"></a></p> <p>在上面的字段中就有对应的会话ID，如果此时将<code>sleep</code>进程放置到后台运行，再启动一个其他进程，例如下面的代码形成的进程：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;iostream&gt;</span>
+</span><span id=__span-3-2>
+</span><span id=__span-3-3><span class=k>using</span><span class=w> </span><span class=k>namespace</span><span class=w> </span><span class=nn>std</span><span class=p>;</span>
+</span><span id=__span-3-4>
+</span><span id=__span-3-5><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-3-6><span class=p>{</span>
+</span><span id=__span-3-7><span class=w>    </span><span class=k>while</span><span class=p>(</span><span class=nb>true</span><span class=p>)</span>
+</span><span id=__span-3-8><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-3-9>
+</span><span id=__span-3-10><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-3-11><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-3-12><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>运行后使用<code>ps</code>同时查看<code>sleep</code>进程和上面的进程：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_19-46-24.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_19-46-24.png"></a></p> <p>在上图中，<code>-E</code>选项表示匹配多个，而<code>sleep</code>和<code>a.out</code>中间的<code>|</code>表示匹配这两个中的每一个，所以这样就会同时看到<code>sleep</code>进程和<code>a.out</code>进程，观察他们的SID会发现他们都有一样的SID，尽管他们的PGID不同，所以这也印证了一个会话中可以有多个进程组</p> <p>但是，如果细心发现，这次实验和上面的实验会有所不同：为什么需要将<code>sleep</code>进程放置到后台再启动<code>a.out</code>进程呢，可不可以不在后台启动<code>sleep</code>进程情况下直接启动<code>a.out</code>呢？答案是<strong>不可以</strong>，因为在一个Linux规定，在一个会话中，尽管可以有多个进程组，但是同一个时刻只能有一个前台进程，而可以有0个或者多个后台进程，而且只有前台进程可以从标准输入中读取信息</p> <p>之所以这样规定，主要是因为标准输入文件只有一份，而且键盘文件也只有一个，所以在同一个时刻只能有一个进程接收到键盘发送的信息。根据这个原因，再思考前面提出的问题：因为只有前台进程可以从标准输入读取信息，在<code>sleep</code>进程执行之前，前台进程就是<code>-bash</code>，一旦<code>sleep</code>在前台执行，那么根据上面说的规定，此时<code>-bash</code>进程就只能变成后台进程，而<code>sleep</code>就是前台进程，但是<code>sleep</code>并没有对从标准输入中读取到的数据进行处理，所以如果让<code>sleep</code>在前台执行，那么想要在当前会话中直接运行<code>a.out</code>就是无法做到的事情</p> <p>最后，如果一个会话被关闭（例如关闭终端连接工具），此时会话中的进程在一般情况下也会受到一定的影响，<strong>但是不一定会直接崩溃</strong></p> <h2 id=_4>终端文件<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <p>终端文件就是连接Linux操作系统时默认打开的文件，每当有一个终端工具连接到当前Linux系统，就可以看到多了一个文件，这个文件默认命名是按照数字进行命名，从0开始，使用下面的指令可以查看当前打开的文件：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1>ls<span class=w> </span>/dev/pts
+</span></code></pre></div></td></tr></table></div> <p>例如，当前启动了三个终端，所以对应的就有3个文件：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-04-04.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-04-04.png"></a></p> <p>默认情况下，因为每一个进程都是<code>-bash</code>进程的子进程，所以这些子进程会拷贝<code>-bash</code>进程的文件描述符表，对应的也就是有标准输入、标准输出和标准错误。基于这个原因，每一个在终端下运行的程序的输入和输出都会直接在终端上获取和显示，而当用户在终端中向进程发送信号，默认也会将这些信号发给前台的进程</p> <p>当需要查看一个运行程序的文件描述符表时，可以使用下面的指令进行查看：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1>ls<span class=w> </span>/proc/进程pid/fd<span class=w> </span>-l
+</span></code></pre></div></td></tr></table></div> <p>例如，查看<code>a.out</code>程序打开的文件描述符：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-10-41.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-10-41.png"></a></p> <p>在上面的结果中，可以看到因为<code>a.out</code>在<code>0</code>终端下运行，所以其文件描述符全部指向的是<code>0</code>终端。但是在虚拟机中可能指向有一些不同</p> <h2 id=_5>作业控制<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <p>作业是针对用户来讲，用户完成某项任务而启动的进程，一个作业既可以只包含一个进程，也可以包含多个进程，进程之间互相协作完成任务，通常是一个进程管道。 </p> <p>Shell分前后台来控制的不是进程而是作业或者进程组。一个前台作业可以由多个进程组成，一个后台作业也可以由多个进程组成，Shell可以同时运行一个前台作业和任意多个后台作业，这称为<strong>作业控制</strong></p> <p>还是以多个<code>sleep</code>进程为例：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1>sleep<span class=w> </span><span class=m>1000</span><span class=w> </span><span class=p>|</span><span class=w> </span>sleep<span class=w> </span><span class=m>2000</span><span class=w> </span><span class=p>|</span><span class=w> </span>sleep<span class=w> </span><span class=m>3000</span>
+</span></code></pre></div></td></tr></table></div> <p>当直接回车运行上面的指令，就是让该进程在前台运行，而需要让其在后台运行，就需要在指令最后添加<code>&amp;</code>，即：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1>sleep<span class=w> </span><span class=m>1000</span><span class=w> </span><span class=p>|</span><span class=w> </span>sleep<span class=w> </span><span class=m>2000</span><span class=w> </span><span class=p>|</span><span class=w> </span>sleep<span class=w> </span><span class=m>3000</span><span class=w> </span><span class=p>&amp;</span>
+</span></code></pre></div></td></tr></table></div> <p>此时终端会弹出一个内容：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><span class=o>[</span><span class=m>1</span><span class=o>]</span><span class=w> </span><span class=m>468553</span>
+</span></code></pre></div></td></tr></table></div> <p>这个内容表示当前有一个任务号为1的任务正在后台执行</p> <p>如果想要将该任务调到前台，就可以使用下面的指令：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><span class=nb>fg</span><span class=w> </span>任务号
+</span></code></pre></div></td></tr></table></div> <p>例如对于上面的任务应当执行：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><span class=nb>fg</span><span class=w> </span><span class=m>1</span>
+</span></code></pre></div></td></tr></table></div> <p>如果想要查看当前有多少个作业在后台运行就可以使用下面的命令：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><span class=nb>jobs</span>
+</span></code></pre></div></td></tr></table></div> <p>如果想要更加详细的内容，比如显示每一个进程组中的所有进程，就可以带上<code>-l</code>：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><span class=nb>jobs</span><span class=w> </span>-l
+</span></code></pre></div></td></tr></table></div> <p>例如对于后台运行的<code>sleep</code>进程，有下面的结果：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-20-47.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-20-47.png"></a></p> <p>如果再启动一个进程让其在后台运行，再使用<code>jobs</code>命令查看就会得到下面的结果：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-22-30.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-22-30.png"></a></p> <p>此时就会看到2号作业后面变成了<code>+</code>，而1号作业变成了<code>-</code>，这里的<code>+</code>和<code>-</code>分别表示默认作业和即将成为默认作业</p> <p>因为<code>a.out</code>进程后于<code>sleep</code>进程，所以后来者居上，即2号作业成为了默认作业，而因为1号作业紧接着2号作业，所以1号作业是即将成为默认作业</p> <p>如果此时再执行一个后台任务，就会看到下面的结果：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-26-25.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-26-25.png"></a></p> <p>可以看到，原来1号作业是即将成为默认作业，现在变成了2号作业，原来是2号作业为默认作业，现在变成了3号作业，并且1号作业当前后面没有任何符号，此时表示其他作业</p> <p>前面以及介绍了如何使一个任务以后台任务启动，并且如何将后台任务调到前台，但是如果一个任务本身是前台任务，又该如何将其设置为后台作业呢？</p> <p>这里需要经历两步：</p> <ol> <li>使用<span class=keys><kbd class=key-control>Ctrl</kbd><span>+</span><kbd class=key-z>Z</kbd></span>将前台任务暂停</li> <li>再使用<code>bg 任务号</code>命令让指定任务在后台启动</li> </ol> <p>例如，将正在前台运行的<code>a.out</code>进程进入后台运行：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-36-19.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_20-36-19.png"></a></p> <h2 id=_6>守护进程<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <p>所谓守护进程，就是一种特殊的孤儿进程。前面提到当一个会话结束时会影响到其中的进程组，如果希望某一个进程组不受当前会话的影响，就需要将该进程组单独提出来放到另外一个会话中，如果这个会话中只有某一个进程组，那么这个进程组中的进程就是守护进程</p> <p>所以，实际上一般网络服务都是守护进程，而为了让网络服务变成守护进程，就需要借助相应的接口。在Linux中，有直接的接口可以让调用进程变成守护进程：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><span class=kt>int</span><span class=w> </span><span class=nf>daemon</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>nochdir</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>noclose</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> <p>该接口的第一个参数表示是否需要改变当前工作目录，第二个参数表示是否需要关闭文件描述符</p> <p>如果该接口执行成功就返回0，否则返回-1并设置错误码</p> <p>但是，如果直接使用这个接口也不太容易理解这个接口到底做了什么，所以为了更加充分理解这个接口，本次考虑手动实现这个接口的基本功能：</p> <p>首先，为了让当前进程组可以脱离当前的会话，就需要有创建一个会话，在Linux中，创建会话可以使用<code>setsid</code>接口，其原型如下：</p> <div class="language-c highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><span class=kt>pid_t</span><span class=w> </span><span class=nf>setsid</span><span class=p>(</span><span class=kt>void</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> <p>该接口表示创建一个新会话，但是需要注意，这个接口的调用方一定不能是当前进程组的组长</p> <p>根据这个接口的介绍，下面设计一个思路：既然<code>setsid</code>接口不能是当前进程组的组长，那么就可以让子进程去调用这个接口，所以先调用<code>fork</code>创建一个子进程，子进程会继承当前父进程的进程组ID，此时再让父进程直接退出，让子进程执行后续的代码，其中就包括<code>setsid</code>即可</p> <p>所以基本调用<code>setsid</code>的基本逻辑如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><span class=c1>// 守护进程化接口</span>
+</span><span id=__span-15-2><span class=kt>void</span><span class=w> </span><span class=nf>daemon</span><span class=p>()</span>
+</span><span id=__span-15-3><span class=p>{</span>
+</span><span id=__span-15-4><span class=w>    </span><span class=c1>// 创建子进程</span>
+</span><span id=__span-15-5><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>fork</span><span class=p>()</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-15-6><span class=w>        </span><span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span><span id=__span-15-7>
+</span><span id=__span-15-8><span class=w>    </span><span class=c1>// 创建新会话</span>
+</span><span id=__span-15-9><span class=w>    </span><span class=n>setsid</span><span class=p>();</span>
+</span><span id=__span-15-10><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>但是仅仅这样写还不够，因为有的时候需要忽略可能引起程序异常退出的信号，所以还需要在执行开始就对一些信号进行捕捉，例如<code>SIGCHLD</code>和<code>SIGPIPE</code>：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span>
+<span class=normal>7</span>
+<span class=normal>8</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><span class=c1>// 守护进程化接口</span>
+</span><span id=__span-16-2><span class=kt>void</span><span class=w> </span><span class=nf>daemon</span><span class=p>()</span>
+</span><span id=__span-16-3><span class=p>{</span>
+</span><span id=__span-16-4><span class=w>    </span><span class=n>signal</span><span class=p>(</span><span class=n>SIGCHLD</span><span class=p>,</span><span class=w> </span><span class=n>SIG_IGN</span><span class=p>);</span>
+</span><span id=__span-16-5><span class=w>    </span><span class=n>signal</span><span class=p>(</span><span class=n>SIGPIPE</span><span class=p>,</span><span class=w> </span><span class=n>SIG_IGN</span><span class=p>);</span>
+</span><span id=__span-16-6>
+</span><span id=__span-16-7><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-16-8><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>创建完会话之后，因为每一个进程都有自己的<code>CWD</code>，可以考虑让用户自己决定是否将当前进程的<code>CWD</code>更改成为<code>/</code>根目录，所以此时可以提供一个参数用于判断是否要改变CWD</p> <details> <summary>为什么要更改<code>CWD</code>到根目录</summary> <p>将守护进程的当前工作目录(CWD)更改为根目录(<code>/</code>)有以下几个重要原因：</p> <ol> <li>防止文件系统挂载点被占用：如果守护进程的<code>CWD</code>在某个挂载点目录下，当需要卸载该文件系统时会失败，因为进程的<code>CWD</code>会导致文件系统处于"忙"状态</li> <li>避免资源访问问题：守护进程可能长期运行，如果<code>CWD</code>在某个用户目录下，该目录可能被删除或权限发生变化，从而会导致守护进程无法正常访问资源</li> <li>统一标准位置：根目录是系统最基本的目录，将<code>CWD</code>设为根目录便于管理和维护，使得相对路径都基于根目录，更可控</li> <li>安全性考虑：避免守护进程依赖特定用户目录，减少因目录权限变化导致的安全隐患，而根目录通常具有较严格的访问控制</li> <li>可移植性：根目录在所有UNIX/Linux系统中都存在，不依赖于特定的目录结构，从而提高了程序的可移植性</li> </ol> </details> <p>所以代码修改如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><span class=k>const</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=w> </span><span class=n>default_dir</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;/&quot;</span><span class=p>;</span>
+</span><span id=__span-17-2>
+</span><span id=__span-17-3><span class=c1>// 守护进程化接口</span>
+</span><span id=__span-17-4><span class=kt>void</span><span class=w> </span><span class=nf>daemon</span><span class=p>(</span><span class=kt>bool</span><span class=w> </span><span class=n>ischdir</span><span class=p>)</span>
+</span><span id=__span-17-5><span class=p>{</span>
+</span><span id=__span-17-6><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-17-7>
+</span><span id=__span-17-8><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>ischdir</span><span class=p>)</span>
+</span><span id=__span-17-9><span class=w>        </span><span class=n>chdir</span><span class=p>(</span><span class=n>default_dir</span><span class=p>.</span><span class=n>c_str</span><span class=p>());</span>
+</span><span id=__span-17-10><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>接着，因为有可能某一个进程中存在一些输入输出的行为，这种行为可能在守护进程下导致进程崩溃，所以可以考虑关闭三种标准文件描述符，但是这种做法并不是很推荐，更推荐的是将三种标准文件描述符重定向到<code>/dev/null</code>文件中。这里可以给用户提供自定义空间，也就是给定一个参数让用户决定哪一种方式是合适的</p> <details> <summary>关于<code>/dev/null</code>文件</summary> <p>在Linux中，这个文件是一个数据黑洞，即写入到该文件的任何数据都会被丢弃，系统会返回写入成功，但实际上数据被直接丢弃，不会占用任何磁盘空间。因为其中没有内容，所以这个文件也属于一种空文件，所以读取该文件时会立即返回<code>EOF</code>而不会阻塞进程，最后结果就是永远返回读取成功，但是读不到任何数据</p> </details> <p>所以，上面的代码还需要最后一步：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><span class=c1>// 守护进程化接口</span>
+</span><span id=__span-18-2><span class=kt>void</span><span class=w> </span><span class=nf>daemon</span><span class=p>(</span><span class=kt>bool</span><span class=w> </span><span class=n>ischdir</span><span class=p>,</span><span class=w> </span><span class=kt>bool</span><span class=w> </span><span class=n>isclose</span><span class=p>)</span>
+</span><span id=__span-18-3><span class=p>{</span>
+</span><span id=__span-18-4><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-18-5><span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>isclose</span><span class=p>)</span>
+</span><span id=__span-18-6><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-18-7><span class=w>        </span><span class=n>close</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span><span id=__span-18-8><span class=w>        </span><span class=n>close</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span><span id=__span-18-9><span class=w>        </span><span class=n>close</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+</span><span id=__span-18-10><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-18-11><span class=w>    </span><span class=k>else</span><span class=w> </span>
+</span><span id=__span-18-12><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-18-13><span class=w>        </span><span class=c1>// 读写方式打开黑洞文件</span>
+</span><span id=__span-18-14><span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>open</span><span class=p>(</span><span class=n>default_file</span><span class=p>.</span><span class=n>c_str</span><span class=p>(),</span><span class=w> </span><span class=n>O_RDWR</span><span class=p>);</span>
+</span><span id=__span-18-15><span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>fd</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-18-16><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-18-17><span class=w>            </span><span class=c1>// 重定向</span>
+</span><span id=__span-18-18><span class=w>            </span><span class=n>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>);</span>
+</span><span id=__span-18-19><span class=w>            </span><span class=n>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>);</span>
+</span><span id=__span-18-20><span class=w>            </span><span class=n>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>);</span>
+</span><span id=__span-18-21><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-18-22>
+</span><span id=__span-18-23><span class=w>        </span><span class=n>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span><span id=__span-18-24><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-18-25><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>接下来启动运行代码：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span>
+<span class=normal>7</span>
+<span class=normal>8</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&quot;set_daemon.hpp&quot;</span>
+</span><span id=__span-19-2>
+</span><span id=__span-19-3><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-19-4><span class=p>{</span>
+</span><span id=__span-19-5><span class=w>    </span><span class=n>daemon</span><span class=p>(</span><span class=nb>false</span><span class=p>,</span><span class=w> </span><span class=nb>false</span><span class=p>);</span>
+</span><span id=__span-19-6>
+</span><span id=__span-19-7><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-19-8><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>通过<code>ps</code>命令即可查看到守护进程：</p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_21-24-45.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_21-24-45.png"></a></p> <p>如果想要终止这个守护进程就需要用到<code>sudo + kill</code>，例如：</p> <div class="language-shell highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-20-1>sudo<span class=w> </span><span class=nb>kill</span><span class=w> </span>-9<span class=w> </span><span class=m>6632</span>
+</span></code></pre></div></td></tr></table></div> <h2 id=_7>网络服务进程变成守护进程<a class=headerlink href=#_7 title="Permanent link">&para;</a></h2> <p>以上一节的网络计算器为例，修改主函数逻辑如下：</p> <div class="language-c++ highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-21-1><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>argc</span><span class=p>,</span><span class=w> </span><span class=kt>char</span><span class=w> </span><span class=o>*</span><span class=n>argv</span><span class=p>[])</span>
+</span><span id=__span-21-2><span class=p>{</span>
+</span><span id=__span-21-3><span class=w>    </span><span class=n>daemon</span><span class=p>(</span><span class=nb>false</span><span class=p>,</span><span class=w> </span><span class=nb>false</span><span class=p>);</span>
+</span><span id=__span-21-4>
+</span><span id=__span-21-5><span class=w>    </span><span class=c1>// 更改日志输出</span>
+</span><span id=__span-21-6><span class=w>    </span><span class=n>ENABLEFILELOG</span><span class=p>();</span>
+</span><span id=__span-21-7>
+</span><span id=__span-21-8><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-21-9>
+</span><span id=__span-21-10><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-21-11><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>在上面的代码中需要注意，因为服务器有一些日志输出，所以需要更改日志输出位置为文件而不是默认的控制台</p> <p>测试如下：</p> <p><strong>服务端：</strong></p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_21-30-49.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_21-30-49.png"></a></p> <p><strong>客户端：</strong></p> <p><a class=glightbox href="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_21-30-57.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="25. 进程间关系和守护进程.assets\Snipaste_2025-03-08_21-30-57.png"></a></p> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年3月8日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年3月8日</span> </span> </aside> </div> <script src=https://qiniu.techgrow.cn/readmore/dist/readmore.js type=text/javascript></script> <script>
+        var isExclude = false;
+        var excludePages = ['/网站验证码', '/阅读档案', '/作者', '/网站时间线'];
+        var currentPath = decodeURIComponent(window.location.pathname).replace(/\/$/, '').toLowerCase();
+        isExclude = excludePages.some(page => currentPath.includes(page.toLowerCase()));
+        var isMobile = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
+        var allowMobile = true;
+        if (!isExclude && (!isMobile || (isMobile && allowMobile))) {
+            try {
+                var plugin = new ReadmorePlugin();
+                plugin.init({
+                    id: "readmore-container",
+                    blogId: "36140-2300591443397-093",
+                    name: "阅读档案",
+                    keyword: "验证码",
+                    qrcode: "https://www.help-doc.top/index.assets/qrcode_for_gh_166df3e5da8b_258.jpg",
+                    type: "website",
+                    height: "600",
+                    expires: "31",
+                    interval: "60",
+                    random: "1.0"
+                })
+            } catch (e) {
+                console.warn("readmore plugin occurred error: " + e.name + " | " + e.message);
+            }
+        }
+        let verificationInProgress = false;
+        function isContentUnlocked() {
+            const readmoreWrapper = document.getElementById('readmore-wrapper');
+            const readmoreModel = document.getElementById('readmore-model-wrapper');
+            const readmoreModalMask = document.getElementById('readmore-modal-mask');
+            if (verificationInProgress) {
+                return false;
+            }
+            if (!readmoreWrapper && !readmoreModel && !readmoreModalMask) {
+                return true;
+            }
+            return readmoreWrapper && 
+                window.getComputedStyle(readmoreWrapper).display === 'none' && 
+                (!readmoreModel || window.getComputedStyle(readmoreModel).display === 'none') &&
+                (!readmoreModalMask || window.getComputedStyle(readmoreModalMask).display === 'none');
+        }
+        function showVerificationModal() {
+            const readmoreBtn = document.getElementById('readmore-btn');
+            if (readmoreBtn) {
+                verificationInProgress = true;
+                readmoreBtn.click();
+                const observer = new MutationObserver(() => {
+                    const modalMask = document.getElementById('readmore-modal-mask');
+                    if (!modalMask || window.getComputedStyle(modalMask).display === 'none') {
+                        setTimeout(() => {
+                            if (!isContentUnlocked()) {
+                                verificationInProgress = false;
+                            }
+                        }, 100);
+                    }
+                });
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['style', 'class']
+                });
+            }
+        }
+        function handleAnchorNavigation(e, href) {
+            if (!isContentUnlocked()) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!verificationInProgress) {
+                    showVerificationModal();
+                }
+                return false;
+            }
+            if (href && href.includes('#')) {
+                const targetId = href.split('#')[1];
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+            return true;
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            let searchResultsInitialized = false;
+            const searchObserver = new MutationObserver((mutations) => {
+                if (searchResultsInitialized) return;
+                const searchResults = document.querySelectorAll('.md-search-result__link');
+                if (searchResults.length > 0) {
+                    searchResults.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href && href.includes('#') && !href.includes('#__tabbed_')) {
+                            link.addEventListener('click', (e) => {
+                                const currentPath = window.location.pathname;
+                                const [linkPath, hash] = href.split('#');
+                                if (!linkPath || linkPath === currentPath) {
+                                    handleAnchorNavigation(e, '#' + hash);
+                                }
+                            }, { capture: true, once: true });
+                        }
+                    });
+                    
+                    searchResultsInitialized = true;
+                    setTimeout(() => {
+                        searchResultsInitialized = false;
+                    }, 100);
+                }
+            });
+
+            const searchContainer = document.querySelector('.md-search');
+            if (searchContainer) {
+                searchObserver.observe(searchContainer, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+            function resetSearchState() {
+                searchResultsInitialized = false;
+            }
+            const searchInput = document.querySelector('.md-search__input');
+            if (searchInput) {
+                searchInput.addEventListener('blur', resetSearchState);
+                searchInput.addEventListener('search', resetSearchState);
+            }
+            document.addEventListener('click', (e) => {
+                const target = e.target.closest('a[href*="#"]');
+                if (!target) return;
+                
+                const href = target.getAttribute('href');
+                // 排除以 __tabbed_ 开头的锚点
+                if (href && (href.startsWith('#') || href.includes('/#')) && !href.includes('#__tabbed_')) {
+                    handleAnchorNavigation(e, href);
+                }
+            }, true);
+            setTimeout(() => {
+                const hash = window.location.hash;
+                if (hash && !isContentUnlocked()) {
+                    showVerificationModal();
+                }
+            }, 300);
+            window.addEventListener('hashchange', (e) => {
+                if (!isContentUnlocked()) {
+                    e.preventDefault();
+                    showVerificationModal();
+                }
+            }, false);
+            const modalObserver = new MutationObserver(() => {
+                const modalMask = document.getElementById('readmore-modal-mask');
+                if (modalMask && window.getComputedStyle(modalMask).display === 'none') {
+                    setTimeout(() => {
+                        if (!isContentUnlocked()) {
+                            verificationInProgress = false;
+                        }
+                    }, 100);
+                }
+            });
+            modalObserver.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style']
+            });
+        });
+    </script> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024-2025 EPSDA </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.prune", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script> <script src=../../assets/javascripts/bundle.f1b6f286.min.js></script> <script src=../../javascripts/mathjax.min.js></script> <script src=../../javascripts/particles.min.js></script> <script src=../../javascripts/other.min.js></script> <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body> </html>

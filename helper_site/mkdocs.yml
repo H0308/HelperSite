@@ -241,6 +241,8 @@ nav:
     - Vue:
       - Vue前置知识: vue基础知识/1. vue前置知识/1. vue前置知识.md
       - Vue基础与响应式: vue基础知识/2. vue的响应式基础/2. vue的响应式基础.md
+      - Vue的基本结构: vue基础知识\3. vue的基本结构\3. vue的基本结构.md
+      - 从新结构再看响应式基础: vue基础知识\4. 从新结构再看响应式基础\4. 从新结构再看响应式基础.md
   # - JavaEE应用开发:
   #   - HTTP协议介绍: JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
   #   - Servlet开发: JavaWeb/2. Servlet开发/2. Servlet开发.md

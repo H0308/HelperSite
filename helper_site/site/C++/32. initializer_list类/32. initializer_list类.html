@@ -516,6 +516,77 @@
         .md-content a.custom-tooltip::after {
             display: none !important;
         }
+
+        @media screen and (max-width: 767px) {
+            /* 表格容器限制 */
+            .md-typeset table {
+                display: block;
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin-right: 0 !important;
+                margin-left: 0 !important;
+                box-sizing: border-box;
+                table-layout: fixed;
+                position: relative;
+            }
+            
+            /* 修复LaTeX公式引起的超宽问题 */
+            .md-typeset .arithmatex {
+                display: inline-block;
+                max-width: 100%;
+                overflow-x: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            /* 防止数学公式溢出 */
+            .katex-display {
+                overflow-x: auto;
+                overflow-y: hidden;
+                max-width: 100%;
+                padding: 0.25em 0;
+            }
+            
+            /* 修复表格中的单元格宽度 */
+            .md-typeset table th,
+            .md-typeset table td {
+                min-width: 5em;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+                white-space: normal !important;
+            }
+            
+            /* 修复表格容器的外部空白问题 */
+            .md-typeset table:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+            
+            /* 确保表格容器不会导致页面溢出 */
+            .md-typeset .md-typeset__table {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                overflow: visible;
+            }
+            
+            /* 减小表头字体大小以适应小屏幕 */
+            .md-typeset table th {
+                font-size: 0.85em;
+                padding: 0.6em 0.8em;
+            }
+            
+            /* 修复表格容器的外部空白问题 */
+            .md-typeset .md-typeset__scrollwrap {
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
     </style><script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchEl = document.querySelector('.md-search');

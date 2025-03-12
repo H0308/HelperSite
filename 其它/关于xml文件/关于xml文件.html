@@ -521,7 +521,7 @@
             /* 表格容器限制 */
             .md-typeset table {
                 display: block;
-                width: 100% !important;
+                /* width: 100% !important; */
                 max-width: 100% !important;
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
@@ -534,7 +534,7 @@
             
             /* 修复LaTeX公式引起的超宽问题 */
             .md-typeset .arithmatex {
-                display: inline-block;
+                /* display: inline-block; */
                 max-width: 100%;
                 overflow-x: hidden;
                 text-overflow: ellipsis;
@@ -549,9 +549,9 @@
             }
             
             /* 修复表格中的单元格宽度 */
-            .md-typeset table th,
-            .md-typeset table td {
-                min-width: 5em;
+            .md-md-typeset__table table th,
+            .md-md-typeset__table table td {
+                /* min-width: 5em; */
                 word-wrap: break-word;
                 overflow-wrap: break-word;
                 hyphens: auto;
@@ -559,7 +559,7 @@
             }
             
             /* 修复表格容器的外部空白问题 */
-            .md-typeset table:after {
+            .md-typeset__table table:after {
                 content: "";
                 display: table;
                 clear: both;
@@ -567,7 +567,6 @@
             
             /* 确保表格容器不会导致页面溢出 */
             .md-typeset .md-typeset__table {
-                width: 100% !important;
                 max-width: 100% !important;
                 margin-left: 0 !important;
                 margin-right: 0 !important;
@@ -575,13 +574,13 @@
             }
             
             /* 减小表头字体大小以适应小屏幕 */
-            .md-typeset table th {
+            .md-typeset__table table th {
                 font-size: 0.85em;
                 padding: 0.6em 0.8em;
             }
             
             /* 修复表格容器的外部空白问题 */
-            .md-typeset .md-typeset__scrollwrap {
+            .md-typeset__table .md-typeset__scrollwrap {
                 margin: 0 !important;
                 width: 100% !important;
                 max-width: 100% !important;

@@ -219,11 +219,13 @@ nav:
     - TCP编程接口基本使用: Linux/23. TCP编程接口基本使用/23. TCP编程接口基本使用.md
     - 序列化和反序列化与网络计算器: Linux/24. 序列化问题与网络计算器/24. 序列化问题与网络计算器.md
     - 进程间关系和守护进程: Linux/25. 进程间关系和守护进程/25. 进程间关系和守护进程.md
+    - 应用层协议HTTP:
+      - 介绍HTTP协议基本结构与基本实现HTTPServer: Linux/26. 应用层协议HTTP/1. 介绍HTTP协议基本结构与基本实现HTTPServer/1. 介绍HTTP协议基本结构与基本实现HTTPServer.md
   - 前端:
     - HTML与CSS:
+      - HTML笔记: HTML与CSS/HTML笔记/HTML笔记.md
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md
       - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md
-      - CSS2笔记补充: HTML与CSS/CSS2笔记补充/CSS2笔记补充.md
     - JavaScript:
       - JavaScript语法基础:
         - JavaScript基本语法: JavaScript基础知识/1. JavaScript基础/JavaScript基础.md

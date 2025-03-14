@@ -221,6 +221,7 @@ nav:
     - 进程间关系和守护进程: Linux/25. 进程间关系和守护进程/25. 进程间关系和守护进程.md
     - 应用层协议HTTP:
       - 介绍HTTP协议基本结构与基本实现HTTPServer: Linux/26. 应用层协议HTTP/1. 介绍HTTP协议基本结构与基本实现HTTPServer/1. 介绍HTTP协议基本结构与基本实现HTTPServer.md
+      - 深入HTTP序列化和反序列化: Linux/26. 应用层协议HTTP/2. 深入HTTP序列化和反序列化/2. 深入HTTP序列化和反序列化.md
   - 前端:
     - HTML与CSS:
       - HTML笔记: HTML与CSS/HTML笔记/HTML笔记.md

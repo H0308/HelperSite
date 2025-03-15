@@ -646,7 +646,7 @@ a {
                         src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
                 </a>
                 <br />
-                本作品采用
+                本网站所有文章采用
                 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
                 CC BY-NC-ND 4.0 知识共享 署名-非商业性使用-禁止演绎 4.0 国际许可协议 
                 </a>进行授权。

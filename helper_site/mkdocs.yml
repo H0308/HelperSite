@@ -321,6 +321,7 @@ extra_javascript:
   - javascripts/katex.js
   - javascripts/particles.js
   - javascripts/other.js
+  - javascripts/checkCapcha.js
   - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js
   - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js
 
@@ -355,9 +356,7 @@ plugins:
           - javascripts/katex.js
           - javascripts/other.js
           - javascripts/particles.js
-      # css_files:
-      #     - stylesheets/theme1.css
-      #     - stylesheets/theme1.css
+          - javascripts/checkCapcha.js
   - glightbox:
       touchNavigation: true
       loop: false

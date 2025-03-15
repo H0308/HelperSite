@@ -8,18 +8,12 @@ theme:
   favicon: images/favicon.png
   logo: assets/logo.png
   features:
-    # - navigation.instant 缓慢加载，有bug
-    # - navigation.instant.progress # 加载缓慢时显示进度条，但是目前有bug
     - navigation.prune
-    # - header.autohide
-    - navigation.tabs # 启用navigation-top插件时需要禁用theme1.css中提示的内容，否则启用
-    # - toc.integrate
-    - navigation.top
+    - navigation.tabs 
+    - navigation.top # 启用navigation-top插件时需要禁用theme1.css中提示的内容，否则启用
     - search.suggest
     - search.highlight
     - content.code.copy
-    # - content.code.select # 目前没有效果
-    # - content.tabs.link
   language: zh
   palette:
     - scheme: default
@@ -313,7 +307,6 @@ markdown_extensions:
       generic: true
   - pymdownx.highlight:
       linenums: true  # 启用行号显示
-      # anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
   - toc:
@@ -328,16 +321,12 @@ extra_javascript:
   - javascripts/katex.js
   - javascripts/particles.js
   - javascripts/other.js
-  - https://unpkg.com/katex@0/dist/katex.min.js
-  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js
 
 extra_css:
-  - https://unpkg.com/katex@0/dist/katex.min.css
+  - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css
 
-# extra_css:
-#   - stylesheets/theme1.css
-#   - stylesheets/theme2.css
-  
 extra:
   social:
     - icon: fontawesome/brands/github

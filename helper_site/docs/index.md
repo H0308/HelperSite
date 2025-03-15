@@ -640,18 +640,16 @@ a {
         <div class="content-card">
             <h2>版权声明</h2>
             <div class="copyright-info">
-                <!-- <p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。</p>
-                <p>转载请注明来自<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html">柯懒不是柯南</a>的个人网站！</p> -->
-                <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
                     <img alt="知识共享许可协议" 
                         style="border-width:0" 
-                        src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+                        src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
                 </a>
                 <br />
-                本网站内容采用
-                <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-                知识共享 署名-非商业性使用-相同方式共享 4.0 国际许可协议
-                </a>进行授权
+                本作品采用
+                <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                CC BY-NC-ND 4.0 知识共享 署名-非商业性使用-禁止演绎 4.0 国际许可协议 
+                </a>进行授权。
                 <p>转载请注明来自<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html">柯懒不是柯南</a>的个人网站！</p>
             </div>
         </div>

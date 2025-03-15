@@ -89,7 +89,6 @@ function handleAnchorNavigation(e, href) {
 }
 document.addEventListener('DOMContentLoaded', () => {
     let searchResultsInitialized = false;
-    // 添加搜索框点击检测
     const searchInput = document.querySelector('.md-search__input');
     if (searchInput) {
         searchInput.addEventListener('click', (e) => {
@@ -98,19 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 e.stopPropagation();
                 searchInput.disabled = true;
-
-                // 显示提示或触发验证模态框
                 if (!verificationInProgress) {
                     showVerificationModal();
-
-                    // 验证完成后恢复搜索框
                     const restoreObserver = new MutationObserver(() => {
                         if (isContentUnlocked()) {
                             searchInput.disabled = false;
                             restoreObserver.disconnect();
                         }
                     });
-
                     restoreObserver.observe(document.body, {
                         childList: true,
                         subtree: true,
@@ -166,9 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
         const target = e.target.closest('a[href*="#"]');
         if (!target) return;
-
         const href = target.getAttribute('href');
-        // 排除以 __tabbed_ 开头的锚点
         if (href && (href.startsWith('#') || href.includes('/#')) && !href.includes('#__tabbed_')) {
             handleAnchorNavigation(e, href);
         }
@@ -180,56 +172,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 300);
     window.addEventListener('load', () => {
-        // 使用更精确的标记名称，避免与其他逻辑冲突
         const REFRESH_FLAG = 'readmore_page_refreshed';
         const lastRefreshTime = sessionStorage.getItem(REFRESH_FLAG);
         const currentTime = new Date().getTime();
-
-        // 检查内容是否已经解锁
         const contentAlreadyUnlocked = isContentUnlocked();
-
-        // 如果内容已解锁，清除刷新标记并直接返回
         if (contentAlreadyUnlocked) {
             if (lastRefreshTime) {
                 sessionStorage.removeItem(REFRESH_FLAG);
             }
             return;
         }
-
-        // 防止短时间内重复刷新（限制5秒内只刷新一次）
         if (lastRefreshTime && (currentTime - parseInt(lastRefreshTime)) < 5000) {
-            return; // 不清除标记，但阻止继续刷新
+            return;
         }
-
-        // 检查是否需要刷新（只针对未解锁页面）
         const readmoreElements = document.getElementById('readmore-wrapper') ||
             document.getElementById('readmore-model-wrapper') ||
             document.getElementById('readmore-modal-mask');
-
-        // 只在非排除页面且有readmore元素且未设置刷新标记时刷新
         if (!isExclude && readmoreElements && !lastRefreshTime) {
-            // 标记已刷新，使用时间戳
             sessionStorage.setItem(REFRESH_FLAG, currentTime.toString());
-
-            console.log("检测到需要验证的内容，页面将在0.1秒后刷新...");
-
-            // 延迟刷新以确保页面完全加载
             setTimeout(() => {
                 window.location.reload();
             }, 100);
         }
     });
-
-    // 修改beforeunload事件处理，确保使用相同的标记名称
     window.addEventListener('beforeunload', (e) => {
-        // 获取当前页面URL
         const currentUrl = window.location.href.split('#')[0];
-
-        // 保存到sessionStorage，用于检测是否是页面刷新
         const previousUrl = sessionStorage.getItem('previous_page_url');
         sessionStorage.setItem('previous_page_url', currentUrl);
-
-        // 修改为：
         if (previousUrl && previousUrl !== currentUrl) {
             sessionStorage.removeItem(REFRESH_FLAG);
         }

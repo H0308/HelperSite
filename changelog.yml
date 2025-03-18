@@ -1,4 +1,7 @@
 - "2025":
+    - "2025-03-18":
+      - pageupdate: 移除HTML与CSS文档中关于HTML4和HTML5的PDF
+      - newpage: 新增HTML4和HTML5常见标签总结文档
     - "2025-03-15":
       - function: 修复部分情况下验证功能失效的问题
     - "2025-03-14":

@@ -219,7 +219,7 @@ nav:
       - HTTP报头属性和请求方式: Linux/26. 应用层协议HTTP/3. HTTP报头属性和请求方式/3. HTTP报头属性和请求方式.md
   - 前端:
     - HTML与CSS:
-      - HTML笔记: HTML与CSS/HTML笔记/HTML笔记.md
+      - HTML4和HTML5常见标签总结: HTML与CSS/HTML笔记/HTML笔记.md
       - HTML与CSS基础知识笔记: HTML与CSS/HTML与CSS.md
       - HTML与CSS中的Emmet表达式: HTML与CSS/Emmet表达式/Emmet表达式.md
     - JavaScript:

@@ -338,6 +338,12 @@ extra:
     - icon: fontawesome/brands/qq
       link: https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html
   generator: false
+  consent:
+    title: Cookie请求
+    description: >- 
+      本网站会使用验证码解锁网站内容，验证码需要使用Cookie来保存验证码的状态，但是不会保存您的浏览器信息或者其他任何隐私信息，请放心使用。
+    actions:
+      - accept
   security:
     enable_csp: true
     enable_hsts: true

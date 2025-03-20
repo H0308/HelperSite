@@ -217,6 +217,8 @@ nav:
       - 介绍HTTP协议基本结构与基本实现HTTPServer: Linux/26. 应用层协议HTTP/1. 介绍HTTP协议基本结构与基本实现HTTPServer/1. 介绍HTTP协议基本结构与基本实现HTTPServer.md
       - 深入HTTP序列化和反序列化: Linux/26. 应用层协议HTTP/2. 深入HTTP序列化和反序列化/2. 深入HTTP序列化和反序列化.md
       - HTTP报头属性和请求方式: Linux/26. 应用层协议HTTP/3. HTTP报头属性和请求方式/3. HTTP报头属性和请求方式.md
+      - HTTP中的Cookie和Session: Linux/26. 应用层协议HTTP/4. HTTP中的Cookie和Session/4. HTTP中的Cookie和Session.md
+      - HTTP版本介绍: Linux/26. 应用层协议HTTP/5. HTTP版本介绍/5. HTTP版本介绍.md
     - UDP协议原理: Linux/27. UDP协议原理/27. UDP协议原理.md
   - 前端:
     - HTML与CSS:
@@ -275,7 +277,6 @@ nav:
   - 联系作者: 作者/作者.md
   
 not_in_nav: |
-  JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
   JavaWeb/2. Servlet开发/2. Servlet开发.md
   JavaWeb/3. 乱码问题和路径问题/3. 乱码问题和路径问题.md
   JavaWeb/4. MVC架构模式介绍/4. MVC架构模式介绍.md

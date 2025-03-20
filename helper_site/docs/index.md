@@ -6,57 +6,43 @@ hide:
 ---
 
 <style>
-/* SVG容器样式保持不变 */
 #container {
     width: 100%;
     margin: 50px auto;
 }
-
 #hello-svg {
     width: 100%;
     height: auto;
 }
-
-/* 定义渐变色 */
 #hello-svg {
     --gradient-1: #FF6B6B, #4ECDC4, #45B7D1;
     --gradient-2: #96E6A1, #D4FC79;
     --gradient-3: #FFD93D, #FF6B6B;
 }
-
-/* 路径基础样式 */
 .path {
     fill: none;
     stroke-width: 5;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
-
-/* 路径1动画和渐变 */
 .path-1 {
     stroke: url(#gradient1);
     stroke-dasharray: 1800;
     stroke-dashoffset: 1800;
     animation: drawPath1 3s ease forwards;
 }
-
-/* 路径2动画和渐变 */
 .path-2 {
     stroke: url(#gradient2);
     stroke-dasharray: 600;
     stroke-dashoffset: 600;
     animation: drawPath2 2s ease forwards 3s;
 }
-
-/* 路径3动画和渐变 */
 .path-3 {
     stroke: url(#gradient3);
     stroke-dasharray: 300;
     stroke-dashoffset: 300;
     animation: drawPath3 1.5s ease forwards 5s;
 }
-
-/* 动画关键帧保持不变 */
 @keyframes drawPath1 {
     to {
         stroke-dashoffset: 0;
@@ -74,8 +60,6 @@ hide:
         stroke-dashoffset: 0;
     }
 }
-
-/* 只保留主页特有的布局样式 */
 .welcome-section {
     text-align: center;
     padding: 4rem 0;
@@ -241,12 +225,9 @@ hide:
     padding: 0rem !important;
 }
 
-/* 隐藏readmore-container的第一个直接子div */
-#readmore-container > div:first-child {
+.md-content__inner > div:first-child {
     display: none;
 }
-
-/* 全屏容器布局 */
 .main-content-area {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
@@ -257,22 +238,16 @@ hide:
     overflow: hidden;
     margin-bottom: 0;
 }
-
-/* 左边栏布局 */
 .main-section {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
-
-/* 右边栏布局 */
 .side-section {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
-
-/* 欢迎区域调整 */
 .welcome-section {
     text-align: left;
     padding: 3rem;
@@ -283,8 +258,6 @@ hide:
     position: relative;
     overflow: hidden;
 }
-
-/* SVG容器调整 */
 #container {
     position: absolute;
     top: 50%;
@@ -519,6 +492,15 @@ a {
 }
 </style>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  let mdTypeset = document.querySelector('.md-typeset');
+  if (mdTypeset && mdTypeset.firstElementChild) {
+    mdTypeset.firstElementChild.style.display = 'none';
+  }
+});
+</script>
+
 <div class="content-container">
     <div class="main-content-area">
         <div class="main-section">
@@ -608,11 +590,18 @@ a {
             </div>
             
             <div class="content-card">
-                <h2>网站验证码</h2>
-                <div class="qr-code-section">
-                    <p><strong>关注「阅读档案」微信公众号并回复「验证码」获取验证码</strong></p>
-                    <img src="index.assets/qrcode_for_gh_166df3e5da8b_258.jpg" alt="微信公众号二维码">
-                </div>
+                <h2>版权声明</h2>
+                <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                    <img alt="知识共享许可协议" 
+                        style="border-width:0" 
+                        src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
+                </a>
+                <br />
+                本网站所有文章采用
+                <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                CC BY-NC-ND 4.0 知识共享 署名-非商业性使用-禁止演绎 4.0 国际许可协议 
+                </a>进行授权。
+                <p>转载请注明来自<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html">柯懒不是柯南</a>的个人网站！</p>
             </div>
         </div>
     </div>
@@ -632,25 +621,6 @@ a {
                 <a href="https://quickref.cn/docs/latex.html">LaTeX 符号代码</a>
                 <a href="https://quickref.cn/docs/emmet.html">Emmet 表达式</a>
                 <a href="https://quickref.cn/docs/regex.html">正则表达式</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="copyright-section">
-        <div class="content-card">
-            <h2>版权声明</h2>
-            <div class="copyright-info">
-                <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-                    <img alt="知识共享许可协议" 
-                        style="border-width:0" 
-                        src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
-                </a>
-                <br />
-                本网站所有文章采用
-                <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-                CC BY-NC-ND 4.0 知识共享 署名-非商业性使用-禁止演绎 4.0 国际许可协议 
-                </a>进行授权。
-                <p>转载请注明来自<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html">柯懒不是柯南</a>的个人网站！</p>
             </div>
         </div>
     </div>

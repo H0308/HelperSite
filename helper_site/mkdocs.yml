@@ -219,6 +219,7 @@ nav:
       - HTTP报头属性和请求方式: Linux/26. 应用层协议HTTP/3. HTTP报头属性和请求方式/3. HTTP报头属性和请求方式.md
       - HTTP中的Cookie和Session: Linux/26. 应用层协议HTTP/4. HTTP中的Cookie和Session/4. HTTP中的Cookie和Session.md
       - HTTP版本介绍: Linux/26. 应用层协议HTTP/5. HTTP版本介绍/5. HTTP版本介绍.md
+      - HTTPS协议介绍与原理: Linux/26. 应用层协议HTTP/6. HTTPS协议介绍与原理/6. HTTPS协议介绍与原理.md
     - UDP协议原理: Linux/27. UDP协议原理/27. UDP协议原理.md
   - 前端:
     - HTML与CSS:
@@ -348,6 +349,7 @@ plugins:
   - search:
       jieba_dict: dict.txt.small
   - statistics
+  - toggle-sidebar
   - changelog
   - minify:
       minify_html: true

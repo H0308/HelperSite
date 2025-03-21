@@ -546,13 +546,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2>浏览提示</h2>
                 <p>本网页提供两种主题：</p>
                 <ul>
-                    <li><strong>新版主题：</strong>包含动画和特效，建议在Chrome桌面端使用</li>
-                    <li><strong>旧版主题：</strong>简化版本，适合移动端和性能较弱的设备</li>
+                    <li><strong>新版主题：</strong>包含部分动画和特效，对设备渲染性能要求较高，建议在PC桌面端使用</li>
+                    <li><strong>原生主题：</strong>默认的文档主题，去除大部分动画和特效，保留最基本的文档样式</li>
                 </ul>
                 
-                在新版网页中，对屏幕尺寸较小的设备默认使用旧版主题且不可更改，所以没有看到「切换主题」的按钮属于正常现象
-                
-                <p><span style="color:red">注意：切换主题只改变显示效果，不会改变网页本身的内存占用。后续网站的样式主要更新新版主题</span></p>
+                在新版网页中，对屏幕尺寸较小的设备默认使用原生主题且不可更改，所以没有看到「切换主题」的按钮属于正常现象
             </div>
         </div>
         
@@ -588,20 +586,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2>最近更新</h2>
                 <p>查看<a href="https://www.help-doc.top/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html">网站时间线</a>了解网站最近更新</p>
             </div>
-            
+
             <div class="content-card">
-                <h2>版权声明</h2>
-                <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-                    <img alt="知识共享许可协议" 
-                        style="border-width:0" 
-                        src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
-                </a>
-                <br />
-                本网站所有文章采用
-                <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-                CC BY-NC-ND 4.0 知识共享 署名-非商业性使用-禁止演绎 4.0 国际许可协议 
-                </a>进行授权。
-                <p>转载请注明来自<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html">柯懒不是柯南</a>的个人网站！</p>
+                <h2>使用提示</h2>
+                <p>本网站默认显示左侧内容目录（Menu）和右侧文章大纲（Table Of Content，TOC）</p>
+                <ul>
+                    <li>关闭左侧内容目录：按下键盘按键
+                        <kbd class="key-m">M</kbd>
+                    </li>
+                    <li>关闭右侧文章大纲目录：按下键盘按键
+                        <kbd class="key-t">T</kbd>
+                    <li>同时关闭二者：按下键盘按键
+                        <kbd class="key-b">B</kbd>
+                    </li>
+                </ul>
+
+                <p>注意：网站会保留上一次内容目录或者文章大纲的关闭状态</p>
             </div>
         </div>
     </div>
@@ -615,12 +615,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 <a href="https://developer.mozilla.org/en-US/">MDN Web 文档</a>
                 <a href="https://docs.python.org/zh-cn/3/library/index.html">Python 标准库</a>
                 <a href="https://cn.vuejs.org/guide/introduction.html">Vue 3</a>
-                <a href="https://quickref.cn/docs/git.html">Git 指令参考</a>
-                <a href="https://quickref.cn/docs/github.html">Github 使用技巧</a>
-                <a href="https://quickref.cn/docs/http-status-code.html">HTTP 状态码</a>
                 <a href="https://quickref.cn/docs/latex.html">LaTeX 符号代码</a>
                 <a href="https://quickref.cn/docs/emmet.html">Emmet 表达式</a>
                 <a href="https://quickref.cn/docs/regex.html">正则表达式</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright-section">
+        <div class="content-card">
+            <h2>版权声明</h2>
+            <div class="copyright-info">
+                <p>版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。</p>
+                <p>转载请注明来自<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html">柯懒不是柯南</a>的个人网站！</p>
             </div>
         </div>
     </div>

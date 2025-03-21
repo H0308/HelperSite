@@ -446,8 +446,8 @@
             themeSwitch.className = 'theme-switch';
             themeSwitch.innerHTML = `
                 <button class="theme-btn" onclick="switchTheme()">
-                    <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '旧版主题'}</span>
-                    <span class="target-theme">${savedTheme === 'theme1' ? '旧版主题' : '新版主题'}</span>
+                    <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '原生主题'}</span>
+                    <span class="target-theme">${savedTheme === 'theme1' ? '原生主题' : '新版主题'}</span>
                 </button>
             `;
             searchEl.parentNode.insertBefore(themeSwitch, searchEl);
@@ -503,8 +503,8 @@
             const themeBtn = document.querySelector('.theme-btn');
             const currentThemeEl = themeBtn.querySelector('.current-theme');
             const targetThemeEl = themeBtn.querySelector('.target-theme');
-            currentThemeEl.textContent = newTheme === 'theme1' ? '新版主题' : '旧版主题';
-            targetThemeEl.textContent = newTheme === 'theme1' ? '旧版主题' : '新版主题';
+            currentThemeEl.textContent = newTheme === 'theme1' ? '新版主题' : '原生主题';
+            targetThemeEl.textContent = newTheme === 'theme1' ? '原生主题' : '新版主题';
         }
 
         document.addEventListener('copy', function(e) {

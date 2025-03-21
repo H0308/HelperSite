@@ -285,13 +285,9 @@ body {
     transition: all 0.3s ease !important;
     box-shadow: none !important;
 } */
-.md-content {
-    max-width: 50rem;
-    margin-left: 50px;
-}
 .md-grid {
     margin-left: 20px !important;
-    max-width: -webkit-fill-available;
+    max-width: initial;
 }
 .md-content__inner {
     margin-right: 1.2em !important;

@@ -246,7 +246,7 @@ p.box {
 </body>
 ```
 
-#### 多兄弟选择器
+#### 多兄弟选择器（后兄弟元素）
 
 选择当前元素的所有兄弟元素，兄弟元素之间用`~`分隔：
 
@@ -306,5 +306,197 @@ p.box {
     <div title="apple orange">内容</div>
     <div title="a">内容</div>
     <div title="e">内容</div>
+</body>
+```
+
+#### 伪类选择器
+
+伪类选择器主要作用是选择拥有特殊效果的元素，因为这个特殊效果在DOM中不存在，所以称为「伪类」。常见的伪类有下面几种：
+
+1. 动态伪类选择器
+2. 结构伪类选择器
+3. 否定伪类选择器
+4. UI伪类选择器
+5. 目标伪类选择器（不重点介绍，了解）
+6. 语言伪类选择器（不重点介绍，了解）
+
+**动态伪类选择器：**
+
+动态伪类一般有：
+
+1. `:link`：超链接未被访问的状态
+2. `:visited`：超链接被访问过的状态
+3. `:hover`：鼠标悬浮在该元素时的状态
+4. `:active`：元素<a href="javascript:;" class="custom-tooltip" data-title="按下鼠标不松开">被激活<span style="color: grey;">（鼠标悬浮/手指点击时显示更多信息）</span></a>的状态
+5. `:focus`：元素获取焦点的状态，一般用于表单元素
+
+!!! note
+
+    需要注意，如果需要同时使用前4伪类选择器，一定要按照`LVHA`的顺序，因为前两种用在超链接上，所以这四个伪类一起用一般都是用在超链接上
+
+=== "伪类选择器用在超链接上"
+
+    ```html
+    <style>
+        /* 设置链接本身的样式 */
+        a:link {
+            color: red;
+        }
+
+        /* 设置链接悬浮样式 */
+        a:hover {
+            color: green;
+        }
+
+        /* 设置链接访问过后的样式 */
+        a:visited {
+            color: gray;
+        }
+
+        /* 设置链接激活的样式 */
+        a:active {
+            color: darkcyan;
+        }
+    </style>
+
+    <body>
+        <p>
+            <a href="https://www.baidu.com">百度一下</a>
+        </p>
+    </body>
+    ```
+
+=== "伪类用在表单上"
+
+    ```html
+    <style>
+        /* 输入框没有焦点时内容颜色为灰色 */
+        input {
+            color: grey;
+        }
+
+        /* 输入框获取焦点时内容颜色为红色 */
+        input:focus {
+            color: red;
+        }
+    </style>
+
+    <body>
+        请输入信息：<input type="text">
+    </body>
+    ```
+
+**结构伪类选择器**
+
+结构伪类一般有：
+
+1. `:first-child`：选择作为第一个后代的指定元素
+2. `:last-child`：选择作为最后一个后代的指定元素
+3. `:nth-child(n)`：选择作为第`n`后代的指定元素
+4. `:first-of-type`：选择作为第一个同类型的后代元素
+5. `:last-of-type`：选择作为最后一个同类型的后代元素
+6. `:nth-of-type(n)`：选择作为第`n`个同类型的后代元素
+7. `:root`：选择根元素
+
+其他伪类元素：
+
+1. `:nth-last-child(n)`：选择作为倒数第`n`个子代元素
+2. `:nth-last-of-type(n)`：所有倒数第`n`个同类型的元素
+3. `:only-child`：选择没有兄弟（指定元素作为其父元素的唯一后代元素）的元素
+4. `:only-of-type`：选择没有同类型兄弟（指定元素作为其父元素的唯一同类型元素）的元素
+
+在上面的选择器中，`n`可以写的内容有：
+
+1. 0或者不写：不选中任何内容
+2. `n`：选中所有
+3. `正整数`：选择指定序号的子元素，第一个子元素序号为1
+4. `2n`或者`even`：选择偶数序号的子元素
+5. `2n+1`或者`odd`：选择奇数序号的子元素
+6. `-n+i`：选择前`i`个元素
+
+```html
+<style>
+    /* 选择div中的第一个p元素中的后代元素 */
+    div p:first-child span{
+        color: red;
+    }
+
+    /* 选择div中的前6个p元素和其后代元素 */
+    div p:nth-of-type(-n+6) {
+        color: blue;
+    }
+</style>
+
+<body>
+    <div>
+        <p>
+            内容
+            <span>内容</span>
+        </p>
+        <p>内容</p>
+        <p>内容</p>
+        <p>内容</p>
+        <p>内容</p>
+        <span>内容</span>
+        <span>内容</span>
+        <span>内容</span>
+        <span>内容</span>
+    </div>
+</body>
+```
+
+**否定伪类选择器**
+
+使用`:not(基础选择器)`选择不包括`基础选择器指定的元素`的元素
+
+```html
+<style>
+    /* 选择div中不是p元素的元素 */
+    div :not(p) {
+        color: red;
+    }
+</style>
+
+<body>
+    <div>
+        <p>
+            <!-- p中的内容不变红 -->
+            内容
+            <!-- 下面span元素变红 -->
+            <span>内容</span>
+        </p>
+        <p>
+            内容
+        </p>
+        <p>内容</p>
+        <!-- 下面span元素变红 -->
+        <span>内容</span>
+    </div>
+</body>
+```
+
+**UI伪类选择器**
+
+常见的UI伪类选择器有：
+
+1. `:checked`：选择被选中的复选框或者单选框
+2. `:enable`：选择可用的表单元素（没有使用`disabled`属性）
+3. `:disabled`：选择不可用的表单元素（使用`disabled`属性）
+
+```html
+<style>
+    /* 修改选中元素的选中效果 */
+    /* 注意不能使用color修改单选框或者复选框的文本样式 */
+    input:checked {
+        accent-color: red;
+    }
+</style>
+<body>
+    <input type="checkbox" name="alpha" value="a">a
+    <input type="checkbox" name="alpha" value="a">b
+    <input type="checkbox" name="alpha" value="a">c
+
+    <input type="radio" name="alpha-t">d
+    <input type="radio" name="alpha-t">e
 </body>
 ```

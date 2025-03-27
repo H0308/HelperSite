@@ -1,4 +1,6 @@
 - "2025":
+    - "2025-03-25":
+      - function: 添加新功能：Google Analytics统计功能
     - "2025-03-18":
       - pageupdate: 移除HTML与CSS文档中关于HTML4和HTML5的PDF
       - newpage: 新增HTML4和HTML5常见标签总结文档

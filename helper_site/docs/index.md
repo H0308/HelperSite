@@ -3,6 +3,7 @@ statistics: True
 hide:
   - navigation
   - toc
+  - feedback
 ---
 
 <style>

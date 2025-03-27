@@ -332,6 +332,23 @@ extra_css:
   - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css
 
 extra:
+  extra:
+  analytics:
+    provider: google
+    property: G-9XWRGNRRSY
+    feedback:
+      title: 页面有帮助吗？
+      ratings:
+        - icon: material/thumb-up-outline
+          name: 页面对我有帮助
+          data: 1
+          note: >-
+            谢谢你的反馈！
+        - icon: material/thumb-down-outline
+          name: 页面没有帮助到我
+          data: 0
+          note: >- 
+            谢谢你的反馈！联系<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html">作者</a>提供更详细的信息
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/H0308

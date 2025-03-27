@@ -626,7 +626,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="content-card">
             <h2>版权声明</h2>
             <div class="copyright-info">
-                <p>版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。</p>
+                <p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">CC BY-NC-SA 4.0</a> 许可协议。</p>
                 <p>转载请注明来自<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html">柯懒不是柯南</a>的个人网站！</p>
             </div>
         </div>

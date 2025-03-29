@@ -223,6 +223,7 @@ nav:
     - UDP协议原理: Linux/27. UDP协议原理/27. UDP协议原理.md
     - TCP协议原理: Linux/28. TCP协议原理/28. TCP协议原理.md
     - 网络层IP协议: Linux/29. 网络层IP协议/29. 网络层IP协议.md
+    - 数据链路层协议: Linux/30. 数据链路层协议/30. 数据链路层协议.md
   - 前端:
     - HTML与CSS:
       - HTML4和HTML5常见标签总结: HTML与CSS/HTML笔记/HTML笔记.md
@@ -272,6 +273,8 @@ nav:
     # - Tomcat安装和使用: 工具帮助/Tomcat安装和使用/Tomcat安装和使用.md
     - Sunshine+Moonlight实现屏幕内容串流: 工具帮助/Sunshine+Moonlight实现屏幕内容串流/Sunshine+Moonlight实现屏幕内容串流.md
     - vim使用帮助: 工具帮助/vim使用帮助/vim使用帮助.md
+  - 项目:
+    - Boost库搜索引擎: 项目/1. Boost库搜索引擎/1. Boost库搜索引擎.md
   # - 闲谈:
   #   - C++ 后端需要知道的找工作问题: 面试/C++ 后端需要知道的找工作问题/C++ 后端需要知道的找工作问题.md 
   #   - C++ 学长经验之谈: 面试/C++ 学长经验之谈/C++ 学长经验之谈.md

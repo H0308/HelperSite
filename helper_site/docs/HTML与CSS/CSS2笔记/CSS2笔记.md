@@ -327,7 +327,7 @@ p.box {
 1. `:link`：超链接未被访问的状态
 2. `:visited`：超链接被访问过的状态
 3. `:hover`：鼠标悬浮在该元素时的状态
-4. `:active`：元素<a href="javascript:;" class="custom-tooltip" data-title="按下鼠标不松开">被激活<span style="color: grey;">（鼠标悬浮/手指点击时显示更多信息）</span></a>的状态
+4. `:active`：元素<a href="javascript:;" class="custom-tooltip" data-title="按下鼠标不松开">被激活</a>的状态
 5. `:focus`：元素获取焦点的状态，一般用于表单元素
 
 !!! note

@@ -252,6 +252,7 @@ nav:
       - Vue的基本结构: vue基础知识\3. vue的基本结构\3. vue的基本结构.md
       - 从新结构再看响应式基础: vue基础知识\4. 从新结构再看响应式基础\4. 从新结构再看响应式基础.md
       - Vue基础指令: vue基础知识\5. vue基础指令\5. vue基础指令.md
+      - Vue组件介绍与生命周期: vue基础知识\6.vue组件介绍与生命周期\6. vue组件介绍与生命周期.md
   # - JavaEE应用开发:
   #   - HTTP协议介绍: JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
   #   - Servlet开发: JavaWeb/2. Servlet开发/2. Servlet开发.md

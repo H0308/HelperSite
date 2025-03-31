@@ -13,14 +13,6 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #999;
 }
-.md-content img {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 4px;
-}
-.md-content img:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
 .md-typeset table:not([class]) {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
@@ -32,11 +24,11 @@
 .md-typeset table:not([class]) tr:nth-child(2n) {
     background-color: #f8fafc;
 }
-.md-content a:not(.headerlink) {
+.md-content a:not(.headerlink):not(.glightbox) {
     position: relative;
     text-decoration: none;
 }
-.md-content a:not(.headerlink)::after {
+.md-content a:not(.headerlink):not(.glightbox)::after {
     content: "";
     position: absolute;
     width: 0;
@@ -47,7 +39,7 @@
     transition: width 0.3s ease;
     transform: translateX(-50%);
 }
-.md-content a:not(.headerlink):hover::after {
+.md-content a:not(.headerlink):not(.glightbox):hover::after {
     width: 100%;
 }
 .md-header {

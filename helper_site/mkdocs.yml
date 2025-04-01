@@ -316,11 +316,13 @@ markdown_extensions:
       alternate_style: true 
   - pymdownx.arithmatex:
       generic: true
-  - pymdownx.highlight:
-      linenums: true  # 启用行号显示
-      line_spans: __span
-      pygments_lang_class: true
-      auto_title: true
+  # - pymdownx.highlight:
+  #     linenums: true  # 启用行号显示
+  #     line_spans: __span
+  #     pygments_lang_class: true
+  #     auto_title: true
+  #     use_pygments: true
+  #     pygments_style: colorful
   - toc:
       permalink: true
       baselevel: 1  # 开始级别
@@ -376,6 +378,7 @@ plugins:
       jieba_dict: dict.txt.small
   - statistics
   - toggle-sidebar
+  - plugins.highlight_prerenderer:HighlightPrerenderer
   - changelog
   - minify:
       minify_html: true

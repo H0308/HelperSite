@@ -345,8 +345,8 @@ extra_css:
 extra:
   extra:
   analytics:
-    provider: google
-    property: G-9XWRGNRRSY
+    provider: custom
+    property: foobar
     feedback:
       title: 页面有帮助吗？
       ratings:

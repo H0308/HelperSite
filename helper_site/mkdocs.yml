@@ -4,6 +4,7 @@ use_directory_urls: false
 
 theme:
   name: 'material'
+  font: false
   custom_dir: overrides
   favicon: images/favicon.png
   logo: assets/logo.png
@@ -322,6 +323,7 @@ markdown_extensions:
       pygments_lang_class: true
       auto_title: true
       use_pygments: true
+      pygments_style: sas
   - toc:
       permalink: true
       baselevel: 1  # 开始级别

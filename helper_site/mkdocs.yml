@@ -378,7 +378,6 @@ plugins:
       jieba_dict: dict.txt.small
   - statistics
   - toggle-sidebar
-  - plugins.highlight_prerenderer:HighlightPrerenderer
   - changelog
   - minify:
       minify_html: true

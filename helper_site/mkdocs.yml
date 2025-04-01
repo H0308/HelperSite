@@ -366,13 +366,6 @@ extra:
     - icon: fontawesome/brands/qq
       link: https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html
   generator: false
-  security:
-    enable_csp: true
-    enable_hsts: true
-    policy:
-      referrer: "strict-origin-when-cross-origin"
-      csp: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self' data:; frame-ancestors 'none'; form-action 'self'; base-uri 'self';"
-      hsts: "max-age=31536000; includeSubDomains; preload"
       
 plugins:
   - search:

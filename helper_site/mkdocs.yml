@@ -271,6 +271,7 @@ nav:
     - 关于函数栈帧（C语言演示）: 其它/C语言函数栈帧/关于函数栈帧（C语言演示）.md
     - 关于xml文件: 其它/关于xml文件/关于xml文件.md
     - 关于JSONCPP库: 其它/关于JSONCPP库/关于JSONCPP库.md
+    - Boost库中的谓词函数: 其它/Boost库中的谓词函数/Boost库中的谓词函数.md
   - 工具帮助:
     - vscode中添加代码片段: 工具帮助/vscode中添加代码片段/vscode中添加代码片段.md
     - Windows系统下在VMware中配置Linux环境并通过客户端进行连接: 工具帮助/Windows系统下在VMware中配置Linux环境并通过客户端进行连接/Windows系统下在VMware中配置Linux环境并通过客户端进行连接.md

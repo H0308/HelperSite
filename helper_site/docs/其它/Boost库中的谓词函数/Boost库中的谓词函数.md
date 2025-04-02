@@ -14,7 +14,7 @@
 
 Boost库提供了多种用于创建、组合和使用谓词函数的工具，分布在不同的模块中
 
-### Boost.Function
+### Boost.Function、Boost.Bind和Boost.Lambda
 
 `Boost.Function`允许存储和调用任何可调用对象，包括谓词函数：
 
@@ -30,6 +30,67 @@ int main() {
     boost::function<bool(int)> predicate = is_positive;
     std::cout << "Is 5 positive? " << predicate(5) << std::endl;
     std::cout << "Is -3 positive? " << predicate(-3) << std::endl;
+    return 0;
+}
+```
+
+上面这个功能也可以通过C\+\+11的包装器实现，因为`Boost.Function`是C++11的`function`的前身，例如上面的代码可以使用包装器修改为：
+
+```cpp
+#include <iostream>
+#include <functional>
+bool is_positive(int x)
+{
+    return x > 0;
+}
+
+int main()
+{
+    std::function<bool(int)> predicate = is_positive;
+
+    std::cout << "Is 5 positive? " << predicate(5) << std::endl;
+    std::cout << "Is -3 positive? " << predicate(-3) << std::endl;
+
+    return 0;
+}
+```
+
+但是，Boost库中的绑定与Lambda表达式与C++11中的绑定和Lambda有所区别
+
+```cpp
+#include <boost/bind.hpp>
+#include <boost/lambda/lambda.hpp>
+#include <functional>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+bool is_in_range(int value, int lower, int upper)
+{
+    return lower <= value && value <= upper;
+}
+
+int main()
+{
+    std::vector<int> v = {1, 5, 10, 15, 20, 25, 30};
+
+    // 使用boost::bind创建谓词
+    int count1 = std::count_if(v.begin(), v.end(),
+                               boost::bind(is_in_range, boost::lambda::_1, 10, 20));
+    std::cout << "10到20之间的元素数量 (bind): " << count1 << std::endl;
+    // 使用标准库中的bind创建谓词
+    int count2 = std::count_if(v.begin(), v.end(),
+                               std::bind(is_in_range, std::placeholders::_1, 10, 20));
+    std::cout << "10到20之间的元素数量 (bind): " << count2 << std::endl;
+
+    // 使用boost::lambda创建谓词
+    int count3 = std::count_if(v.begin(), v.end(), boost::lambda::_1 >= 10 && boost::lambda::_1 <= 20);
+    std::cout << "10到20之间的元素数量 (lambda): " << count3 << std::endl;
+    // 使用标准库中的lambda创建谓词
+    int count4 = std::count_if(v.begin(), v.end(), [](int x)
+                               { return x >= 10 && x <= 20; });
+    std::cout << "10到20之间的元素数量 (lambda): " << count4 << std::endl;
+
     return 0;
 }
 ```
@@ -62,38 +123,7 @@ int main() {
 }
 ```
 
-### Boost.Bind和Boost.Lambda
 
-这些库提供了创建和组合谓词函数的灵活方式：
-
-```cpp
-#include <boost/bind.hpp>
-#include <boost/lambda/lambda.hpp>
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-bool is_in_range(int value, int lower, int upper) {
-    return lower <= value && value <= upper;
-}
-
-int main() {
-    std::vector<int> v = {1, 5, 10, 15, 20, 25, 30};
-    
-    // 使用boost::bind创建谓词
-    int count1 = std::count_if(v.begin(), v.end(), 
-                              boost::bind(is_in_range, _1, 10, 20));
-    std::cout << "10到20之间的元素数量 (bind): " << count1 << std::endl;
-    
-    // 使用boost::lambda创建谓词
-    using namespace boost::lambda;
-    int count2 = std::count_if(v.begin(), v.end(), 
-                              _1 >= 10 && _1 <= 20);
-    std::cout << "10到20之间的元素数量 (lambda): " << count2 << std::endl;
-    
-    return 0;
-}
-```
 
 ### Boost.Algorithm
 

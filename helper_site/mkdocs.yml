@@ -227,7 +227,7 @@ nav:
     - 网络层IP协议: Linux/29. 网络层IP协议/29. 网络层IP协议.md
     - 数据链路层协议: Linux/30. 数据链路层协议/30. 数据链路层协议.md
     - NAT技术、代理服务器和内网穿透: Linux/31. NAT技术、代理服务器和内网穿透/31. NAT技术、代理服务器和内网穿透.md
-    - 五种IO模型与Select多路转接: Linux/32. 五种IO模型与Select多路转接/32. 五种IO模型与Select多路转接.md
+    - 五种IO模型与select和poll分别实现多路转接: Linux/32. 五种IO模型与select和poll分别实现多路转接/32. 五种IO模型与select和poll分别实现多路转接.md
   - 前端:
     - HTML与CSS:
       - HTML4和HTML5常见标签总结: HTML与CSS/HTML笔记/HTML笔记.md

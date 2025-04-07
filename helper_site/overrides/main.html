@@ -6,6 +6,7 @@
     media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)">
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.css" media="screen and (max-width: 767px)">
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme1.css" media="screen and (min-width: 1200px)">
+<link rel="stylesheet" href="{{ base_url }}/stylesheets/print.css">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.5.0/dist/mermaid.min.js"></script>
 
 <style>
@@ -50,60 +51,6 @@
     @media screen and (max-width: 1199px) {
         .theme-switch {
             display: none !important;
-        }
-    }
-
-    @media print {
-        a[href]:after {
-            content: "" !important;
-        }
-
-        a {
-            text-decoration: none !important;
-            color: inherit !important;
-            pointer-events: none !important;
-            cursor: default !important;
-        }
-
-        a[title] {
-            position: relative;
-        }
-
-        a[title]:hover:after {
-            display: none !important;
-        }
-
-        a:active,
-        a:hover,
-        a:focus {
-            outline: none !important;
-            text-decoration: none !important;
-        }
-
-        img {
-            max-width: 100% !important;
-            page-break-inside: avoid;
-        }
-
-        .md-header,
-        .md-tabs,
-        .md-sidebar,
-        .md-footer {
-            display: none !important;
-        }
-
-        body::after {
-            content: "柯懒不是柯南的个人网站";
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 60px;
-            font-weight: bold;
-            color: rgba(77, 166, 218, 0.1);
-            z-index: 9999;
-            pointer-events: none;
-            white-space: nowrap;
         }
     }
 

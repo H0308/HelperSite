@@ -52,6 +52,20 @@
     /* 启用navigation-top插件时使用 */
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
+.md-nav__link {
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+.md-nav__link:hover {
+    background: rgba(77, 166, 218, 0.1);
+    transform: translateX(4px);
+}
+
+.md-nav__item--active > .md-nav__link {
+    background: rgba(77, 166, 218, 0.15);
+    font-weight: 600;
+}
 /* 启用navigation-top插件时使用 */
 @media screen and (min-width: 76.25em) {
     .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {

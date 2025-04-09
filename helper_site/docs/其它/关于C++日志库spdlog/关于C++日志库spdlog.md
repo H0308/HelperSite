@@ -680,7 +680,7 @@ SPDLOG_INFO("用户{}登录成功，IP地址：{}", user_id, ip_address);
 
 #### 异步日志的宏函数
 
-如果你启用了异步日志记录功能（通过 `spdlog::init_thread_pool` 初始化线程池），所有宏函数仍然可以正常工作。异步日志记录不会影响宏函数的行为
+如果启用了异步日志记录功能（通过 `spdlog::init_thread_pool` 初始化线程池），所有宏函数仍然可以正常工作。异步日志记录不会影响宏函数的行为
 
 ```cpp
 #include "spdlog/async.h"

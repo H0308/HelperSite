@@ -490,7 +490,7 @@ int main()
 
 ??? info "日志轮转和日志回滚"
 
-    需要注意，**spdlog本身并不支持日志回滚（Log Rollback），但是支持日志轮转（Log Rotation）**。如果想通过spdlog实现日志回滚可以结合C++ 17的filesystem库，具体在[C\+\+ 17相关新特性](https://www.help-doc.top/C%2B%2B/33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7/33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7.html#filesystem)实现，例如：
+    需要注意，**spdlog本身并不支持日志回滚（Log Rollback），但是支持日志轮转（Log Rotation）**。如果想通过spdlog实现日志回滚可以结合C++ 17的filesystem库，关于filesystem具体在[C\+\+ 17相关新特性](https://www.help-doc.top/C%2B%2B/33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7/33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7.html#filesystem)有所介绍，例如：
 
     ```cpp
     #include "spdlog/spdlog.h"

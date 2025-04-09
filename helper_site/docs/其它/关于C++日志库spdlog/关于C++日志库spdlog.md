@@ -1,6 +1,6 @@
 # 关于C++日志库spdlog
 
-spdlog是一个高性能、易于使用的C\+\+日志库，广泛应用于现代C\+\+项目中。它支持多线程、异步日志记录、多种日志格式、以及灵活的输出方式（如控制台、文件、甚至自定义输出）。下面将详细介绍spdlog的安装、配置和使用方法
+[spdlog](https://github.com/gabime/spdlog)是一个高性能、易于使用的C\+\+日志库，广泛应用于现代C\+\+项目中。它支持多线程、异步日志记录、多种日志格式、以及灵活的输出方式（如控制台、文件、甚至自定义输出）。下面将就常用功能方面介绍spdlog的安装、配置和使用方法
 
 ## 在Ubuntu下安装和配置spdlog库
 
@@ -418,9 +418,12 @@ int main() {
 
 ## 异步日志
 
+!!! abstract
+
+    本部分后续会进一步补充，此处给出一个简单的示例，后续会详细介绍异步日志的使用
+
 spdlog支持异步日志记录，可以显著提高性能。需要在初始化时启用异步模式
 
-### 启用异步日志
 ```cpp
 #include "spdlog/async.h"
 #include "spdlog/sinks/basic_file_sink.h"
@@ -463,16 +466,16 @@ int main()
 日志轮转过程模拟，假设配置为保留3个文件，文件名为`mylog.txt`：
 - 初始：`mylog.txt`（当前日志）
 - 第一次轮转：
-  - `mylog.txt.1`（最新备份）
+  - `mylog.txt.1`（最新备份，包含的是最初的`mylog.txt`中的内容）
   - 新建空`mylog.txt`
 - 第二次轮转：
-  - `mylog.txt.2`
-  - `mylog.txt.1`
+  - `mylog.txt.2`（最新备份，最开始的`mylog.txt`中的内容）
+  - `mylog.txt.1`（上一次`mylog.txt`中的内容）
   - `mylog.txt`
 - 第三次轮转：
-  - 删除`mylog.txt.3`
-  - `mylog.txt.2`
-  - `mylog.txt.1 `
+  - 删除`mylog.txt.3`（最新备份，包含的是最初的`mylog.txt`中的内容 ）
+  - `mylog.txt.2`（包含的是第二次`mylog.txt.1`中的内容）
+  - `mylog.txt.1 `（包含的是第二次的`mylog.txt`中的内容）
   - `mylog.txt`
 
 日志轮转的实际应用场景一般有：
@@ -484,6 +487,38 @@ int main()
 
 在spdlog中，轮转是自动完成的，开发者只需配置轮转策略即可。spdlog支持基于文件大小或时间的日志轮转功能
 
+??? info "日志轮转和日志回滚"
+
+    需要注意，**spdlog本身并不支持日志回滚（Log Rollback），但是支持日志轮转（Log Rotation）**。如果想通过spdlog实现日志回滚可以结合C++ 17的filesystem库，具体在[C\+\+ 17相关新特性](https://www.help-doc.top/C%2B%2B/33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7/33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7.html#filesystem)实现，例如：
+
+    ```cpp
+    #include "spdlog/spdlog.h"
+    #include "spdlog/sinks/basic_file_sink.h"
+    #include <filesystem>
+
+    int main() {
+        // 定义日志文件路径
+        std::string log_file = "logs/mylog.txt";
+        std::string backup_file = "logs/mylog_backup.txt";
+
+        // 如果需要回滚，从备份文件恢复
+        if (std::filesystem::exists(backup_file)) {
+            std::filesystem::copy(backup_file, log_file, std::filesystem::copy_options::overwrite_existing);
+        }
+
+        // 创建日志器
+        auto logger = spdlog::basic_logger_mt("logger_name", log_file);
+
+        // 记录日志
+        logger->info("This is a test log message.");
+
+        // 备份当前日志文件
+        std::filesystem::copy(log_file, backup_file, std::filesystem::copy_options::overwrite_existing);
+
+        return 0;
+    }
+    ```
+
 #### 基于文件大小的轮转
 
 ```cpp
@@ -491,8 +526,8 @@ int main()
 
 int main() 
 {
-    // 创建一个轮转文件日志记录器（最大 5MB，保留 3 个文件）
-    auto rotating_logger = spdlog::rotating_logger_mt("rotating_logger", "logs/rotate-log.txt", 1048576 * 5, 3);
+    // 创建一个轮转文件日志记录器（最大5MB，保留3个文件）
+    auto rotating_logger = spdlog::rotating_logger_mt("rotating_logger", "logs/rotate-log.txt", 1024 * 1024 * 5, 3);
 
     // 记录日志
     for (int i = 0; i < 10; ++i) {

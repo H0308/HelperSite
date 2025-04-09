@@ -22,6 +22,12 @@ g++ -std=c++11 -o test test.cpp -lspdlog -lfmt -lpthread
 sudo apt-get install libfmt-dev
 ```
 
+有的Ubuntu系统已经安装了`fmt`库，使用下面的指令可以查看：
+
+```bash
+fmt --version
+```
+
 ## 何为sink
 
 为了后面的理解顺利，首先了解何为sink。在spdlog中，**sink（接收器）** 是一个核心概念，它决定了日志消息最终输出到哪里，每个日志对象可以关联一个或多个sink，其决定了日志的物理存储位置或显示方式

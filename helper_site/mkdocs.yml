@@ -229,6 +229,7 @@ nav:
     - NAT技术、代理服务器和内网穿透: Linux/31. NAT技术、代理服务器和内网穿透/31. NAT技术、代理服务器和内网穿透.md
     - 五种IO模型与select和poll分别实现多路转接: Linux/32. 五种IO模型与select和poll分别实现多路转接/32. 五种IO模型与select和poll分别实现多路转接.md
     - epoll实现多路转接: Linux/33. epoll实现多路转接/33. epoll实现多路转接.md
+    - Reactor模式与完善基于边缘触发模式epoll实现TCP服务器: Linux/34. Reactor模式与完善基于边缘触发模式epoll实现TCP服务器/34. Reactor模式与完善基于边缘触发模式epoll实现TCP服务器.md
   - 前端:
     - HTML与CSS:
       - HTML4和HTML5常见标签总结: HTML与CSS/HTML笔记/HTML笔记.md

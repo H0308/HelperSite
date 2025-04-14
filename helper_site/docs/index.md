@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <ul>
                     <li>导航栏标题：<a href="https://github.com/bytedance/fonts">抖音美好体</a></li>
                     <li>标题：<a href="https://github.com/lxgw/LxgwZhenKai">霞鹜臻楷</a></li>
-                    <li>内容：<a href="https://github.com/googlefonts/lexend">Google lexend</a></li>
+                    <li>内容：<a href="https://github.com/lxgw/975maru">975圆体</a></li>
                     <li>代码：<a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a></li>
                 </ul>
             </div>

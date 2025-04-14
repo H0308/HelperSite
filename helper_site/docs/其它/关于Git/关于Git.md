@@ -51,7 +51,7 @@ sudo apt-get install git -y
 Git可以管理仓库，但是前提是当前目录可以被管理，为了使普通目录变为可以被Git管理的仓库，需要使用下面的命令对当前目录进行初始化，这个过程也称为初始化本地仓库
 
 ```bash
-git init .
+git init
 ```
 
 命令执行完毕后，查看当前目录时可以发现一个隐藏文件`.git`，该文件中会保存与Git相关的文件，一般情况下不要去修改，例如在CentOS下的目录结构
@@ -129,6 +129,154 @@ git config --global --unset user.email
 ```
 
 ## Git中的工作区、暂存区和版本库
+
+工作区：当前电脑的目录（包含了`.git`目录和本地文件）
+暂存区：对工作区中有改变的文件（新增、修改和删除）进行存储的位置。在`.git`目录中存在着对应的`index`文件，所以暂存区也可以称为索引区
+版本库：也称本地仓库，即`.git`目录。其中包含了所有文件的修改内容和对应的版本信息
+
+三者关系如下：
+
+<img src="关于Git.assets/download.png">
+
+在上图中，对于版本库来说，存在一个`HEAD`指针，指向当前分支的最新一次提交。默认情况下，Git会自动将`HEAD`指针指向`master`分支，该分支是Git默认创建的分支。当对工作区中的文件进行修改后，需要使用`git add`命令将修改的文件添加到暂存区，然后使用`git commit`命令将暂存区中的文件提交到版本库中
+
+从上面的过程可以看出，如果在工作区修改了文件，该文件不会被Git管理，只有在使用`git add`命令+`git commit`命令之后，文件才会被Git管理
+
+## 添加文件到暂存区
+
+使用下面的命令可以将工作区中的文件添加到暂存区中，该命令可以添加指定文件，也可以添加所有文件：
+
+```bash
+# 添加指定文件
+git add <file>
+# 添加指定目录
+git add <directory>
+# 添加所有文件
+git add .
+```
+
+例如：
+
+```bash
+# 添加指定文件
+git add test.txt
+```
+
+默认直接使用`git init`命令创建的`.git`目录下是没有`index`文件的，一旦第一次使用`git add`命令添加文件，Git会自动创建`index`文件
+
+## 提交文件到版本库
+
+使用下面的命令可以将暂存区中的文件提交到版本库中，该命令需要添加提交信息：
+
+```bash
+git commit -m "提交信息"
+```
+
+注意，`-m`选项不能省略，建议是给出较为精确且具体的提交信息，便于后续查看
+
+例如：
+
+```bash
+git commit -m "add test.txt"
+```
+
+当然，也可以将暂存区的指定文件提交到版本库中，该命令需要添加提交信息：
+
+```bash
+# 提交指定文件
+git commit <file> -m "提交信息" 
+```
+
+一旦使用`git commit`命令提交文件，会看到类似下面的信息：
+
+```bash
+[master (root-commit) 4ef19d7] add test.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 test.txt
+ ```
+
+如果要查看提交记录，可以使用下面的命令：
+
+```bash
+git log
+```
+
+当前情况下会看到类似下面的信息：
+
+```bash
+commit 4ef19d7c8d4ed8be5e84057dc476c43e368f6a85 (HEAD -> master)
+Author: EPSDA <1848312235@qq.com>
+Date:   Mon Apr 14 10:42:44 2025 +0800
+
+    add test.txt
+```
+
+如果想要查看较为简短的日志信息，可以带上`--pretty=oneline`选项：
+
+```bash
+git log --pretty=oneline
+```
+
+当前情况下会看到类似下面的信息：
+
+```bash
+4ef19d7c8d4ed8be5e84057dc476c43e368f6a85 (HEAD -> master) add test.txt
+```
+
+日志中的长数字代表的就是日志标识符，是一个哈希值
+
+下面进入`.git`目录查看其中的内容可以看到类似下面的结构：
+
+```
+.git
+├── branches
+├── COMMIT_EDITMSG
+├── config
+├── description
+├── HEAD
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── prepare-commit-msg.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── push-to-checkout.sample
+│   ├── sendemail-validate.sample
+│   └── update.sample
+├── index
+├── info
+│   └── exclude
+├── logs
+│   ├── HEAD
+│   └── refs
+│       └── heads
+│           └── master
+├── objects
+│   ├── 4e
+│   │   └── f19d7c8d4ed8be5e84057dc476c43e368f6a85
+│   ├── 5e
+│   │   └── fb9bc29c482e023e40e0a2b3b7e49cec842034
+│   ├── e6
+│   │   └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    │   └── master
+    └── tags
+
+16 directories, 26 files
+```
+
+其中使用`git add`命令会在`objects`目录下创建一个对象，`objects`目录是Git的对象库，在使用`git log`命令查看日志信息中看到的长数字就是当前对象的具体标识，前两位表示目录名称，后面38位表示文件名称
+
+
 
 ## 附录：Git常用命令
 

@@ -76,6 +76,7 @@ nav:
       - C++中的类型转换: C++/29. C++中的类型转换/29. C++中的类型转换.md
       - C++ IO流: C++/30. C++IO流/30. C++IO流.md
       - C++ 17相关新特性: C++/33. C++17相关新特性/33. C++17相关新特性.md
+      - C++时间和随机数相关库: C++/34. C++时间和随机数相关库/34. C++时间和随机数相关库.md
     - Java:
       - Java基础知识: Java/1. Java基础知识/Java基础知识.md
       - Java数组类型: Java/2. Java数组类型/2. Java数组类型.md
@@ -276,6 +277,7 @@ nav:
     - 关于JSONCPP库: 其它/关于JSONCPP库/关于JSONCPP库.md
     - 关于C++日志库spdlog: 其它/关于C++日志库spdlog/关于C++日志库spdlog.md
     - 关于Git: 其它/关于Git/关于Git.md
+    - 关于Muduo库: 其它/关于Muduo库/关于Muduo库.md
     # - Boost库:
     #   - Boost库中的谓词函数: 其它/Boost库中的谓词函数/Boost库中的谓词函数.md
   - 工具帮助:

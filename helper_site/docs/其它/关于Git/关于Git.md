@@ -197,7 +197,7 @@ git commit <file> -m "提交信息"
 [master (root-commit) 4ef19d7] add test.txt
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 test.txt
- ```
+```
 
 如果要查看提交记录，可以使用下面的命令：
 
@@ -623,6 +623,243 @@ git checkout -- <file>
 ```bash
 $ git rm test.txt
 rm 'test.txt'
+```
+
+## 分支管理
+
+### 理解分支
+
+所谓分支，可以理解为一条独立的提交记录线。在当前Git中，只有一个`master`，所有的提交记录都在`master`上，所以说当前提交只有一个分支，即为`master`，示例图如下：
+
+<img src="关于Git.assets/image-20250415103557689.png">
+
+如果现在创建一个新的分支，例如分支名称为`dev`，那么示例图如下：
+
+<img src="关于Git.assets/image-20250415103907928.png">
+
+此时当前Git下就存在着两个分支。既然存在着两个分支，那么Git如何标识当前分支呢？**通过`HEAD`指针**，`HEAD`指针所指向的就是当前分支，假设当前处于`dev`分支，那么`HEAD`指向的就是`dev`分支，如下图所示：
+
+<img src="关于Git.assets/image-20250415104216927.png">
+
+### 查看分支
+
+前面提到，默认情况下Git会创建一个`master`分支，而对应的`HEAD`指向的就是`master`分支，如果想要查看当前分支可以使用下面的命令：
+
+```bash
+git branch
+```
+
+在当前情况下会看到下面的结果：
+
+```
+* master
+```
+
+所以，当前所有的提交都属于`master`分支。其中的`*`表示`HEAD`所指向的分支
+
+### 新增分支
+
+在Git中想要新增分支，可以使用下面的命令：
+
+```bash
+git branch <branch name>
+```
+
+例如，现在想要创建一个新的分支，名称为`dev`，那么可以使用下面的命令：
+
+```bash
+git branch dev
+```
+
+在当前情况下会看到下面的结果：
+
+```
+  dev
+* master
+```
+
+此时Git下面就存在着两个分支，但是因为上面的命令只完成了创建分支并没有完成切换分支，所以`HEAD`依旧指向的是`master`分支
+
+创建分支的过程是基于当前`HEAD`指针的，默认情况下，直接使用`git branch`命令创建的分支在切换后查看对应的`HEAD`会发现该值于`master`分支中查看的`HEAD`是相同的，所以实际上创建新的分支示意图如下：
+
+<img src="关于Git.assets/image-20250415110140590.png">
+
+这一点也可以通过不同分支的`HEAD`值来进行验证，每当创建一个分支就会在`refs/heads`目录下形成一个新的文件，所以分别查看`master`分支下的`HEAD`和`dev`分支下的`HEAD`值如下：
+
+```
+$ cat .git/refs/heads/master 
+2a08600aaf7aeed308c6d9c192a206d68fdd70b4
+$ cat .git/refs/heads/dev
+2a08600aaf7aeed308c6d9c192a206d68fdd70b4
+```
+
+### 切换分支
+
+创建完新的分支就可以使用下面的命令切换分支：
+
+```bash
+git checkout <branch name>
+```
+
+!!! note
+
+    需要注意，此时的`checkout`命令后面不存在`--`
+
+例如，现在想要切换到`dev`分支，那么可以使用下面的命令：
+
+```bash
+git checkout dev
+```
+
+切换完成后，会看到类似下面的结果：
+
+```
+Switched to branch 'dev'
+```
+
+现在`HEAD`指向的就是`dev`分支，接下来所有的文件修改都会在`dev`分支上进行
+
+### 创建+切换分支
+
+在Git中创建分支和切换分支是两个不同的操作，但是在实际使用中经常会同时进行这两个操作，所以Git提供了一个命令可以同时完成这两个操作：
+
+```bash
+git checkout -b <branch name>
+```
+
+!!! note
+
+    需要注意，此时的`checkout`命令后面存在`-b`
+
+例如，现在想要创建一个新的分支，名称为`dev1`，并且切换到`dev1`分支，那么可以使用下面的命令：
+
+```bash
+git checkout -b dev1
+```
+
+在当前情况下会看到下面的结果：
+
+```
+Switched to a new branch 'dev1'
+```
+
+### 合并分支
+
+完成分支的创建和切换后，既然是创建了新的分支，那么肯定是需要在该分支上进行开发，例如当前在`dev`分支上对`test.txt`文件进行修改，当前`test.txt`文件内容如下：
+
+```
+hello git
+hello world
+```
+
+接着在`test.txt`文件中添加一行内容：
+
+```
+hello Linux
+```
+
+修改完成后进行`git add`和`git commit`操作再切换到`master`分支。当前情况下，两个分支示意图如下：
+
+<img src="关于Git.assets/image-20250415111358449.png">
+
+从上图可以看到，当前`dev`分支的`HEAD`和`master`分支的`HEAD`并不指向同一个提交记录，如果此时想要二者保持一致，既需要将`master`分支下的内容与`dev`分支保持一致，可以用到下面的命令：
+
+```bash
+git merge <branch name>
+```
+
+需要注意，合并时需要确定用于合并的分支以及待合并的分支，而合并需要再被合并的分支下进行。在当前例子中，用于合并的分支为`dev`分支，待合并的分支为`master`分支，所以必须先确保处于`master`分支，接着使用下面的命令：
+
+```bash
+git merge dev
+```
+
+在当前情况下会看到下面的结果：
+
+```
+Updating 2a08600..6dd6869
+Fast-forward
+ test.txt | 1 +
+ 1 file changed, 1 insertion(+)
+```
+
+此时再看`master`分支下的`test.txt`中的内容会发现获取到了`dev`分支新添加的内容。当前情况下，两个分支示意图如下：
+
+<img src="关于Git.assets/image-20250415112200041.png">
+
+默认情况下，Git选择的合并策略为`Fast-forward`，这种策略下，Git会直接将`master`分支的`HEAD`指向`dev`分支的`HEAD`的值，所以这种方式的效率比较高
+
+### 合并冲突
+
+在实际开发中，可能会遇到多个分支同时对同一个文件进行修改，此时Git会无法自动合并，因为Git无法确定到底使用哪个分支的内容，所以此时需要手动解决冲突。当前`test.txt`文件内容如下：
+
+```
+hello git
+hello world
+hello Linux
+```
+
+现在`dev`分支和`master`分支同时对`test.txt`文件进行修改，修改内容如下：
+
+=== "`dev`分支"
+
+    ```
+    ...
+    hello dev
+    ```
+
+=== "`master`分支
+
+    ```
+    ...
+    hello master
+    ```
+
+接着，二者都对自己的修改进行`git add`和`git commit`操作，此时两个分支的示意图如下：
+
+<img src="关于Git.assets/image-20250415113250088.png">
+
+同样，现在用于合并的分支为`dev`分支，待合并的分支为`master`分支，在`master`分支下执行合并命令：
+
+```bash
+git merge dev
+```
+
+此时会发现合并失败，提示下面的内容：
+
+```
+Auto-merging test.txt
+CONFLICT (content): Merge conflict in test.txt
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+这个提示中的`CONFLICT (content): Merge conflict in test.txt`就表示合并出现了冲突，对于这个冲突问题需要手动打开文件解决，现在在`master`分支下打开`test.txt`文件，会发现文件内容如下：
+
+```
+hello git
+hello world
+hello Linux
+<<<<<<< HEAD
+hello master
+=======
+hello dev
+>>>>>>> dev
+```
+
+可以看到，Git在文件中添加了一些特殊的标记，这些标记的含义如下：
+
+1. `<<<<<<< HEAD`：表示下面的内容为当前分支的内容
+2. `>>>>>>> dev`：表示上面的内容为`dev`分支的内容
+3. `=======`：表示两个分支内容的分割线
+
+现在需要手动合并冲突，即删除标记并修改内容为期望的结果，例如：
+
+```
+hello git
+hello world
+hello Linux
+hello dev
+hello master
 ```
 
 ## 附录：Git常用命令

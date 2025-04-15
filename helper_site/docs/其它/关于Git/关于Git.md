@@ -787,7 +787,7 @@ Fast-forward
 
 <img src="关于Git.assets/image-20250415112200041.png">
 
-默认情况下，Git选择的合并策略为`Fast-forward`，这种策略下，Git会直接将`master`分支的`HEAD`指向`dev`分支的`HEAD`的值，所以这种方式的效率比较高
+默认情况下，Git选择的合并策略为`Fast-forward`，这种策略下，Git会直接将`master`分支的`HEAD`指向`dev`分支的`HEAD`的值，所以这种方式的效率比较高，并且这种合并方式会自动进行`git commit`操作
 
 ### 合并冲突
 
@@ -860,6 +860,233 @@ hello world
 hello Linux
 hello dev
 hello master
+```
+
+因为存在冲突导致Git无法将两个分支的内容进行合并，一旦处理完冲突还需要使用`git add`和`git commit`操作将内容提交到版本库中。如果想以图形的方式看到分支的提交记录，可以使用下面的命令：
+
+```bash
+git log --graph --abbrev-commit
+```
+
+在当前情况下会看到下面的结果：
+
+```
+*   commit 2cdb9d6 (HEAD -> master)
+|\  Merge: 69b4e41 cf4de6b
+| | Author: EPSDA <1848312235@qq.com>
+| | Date:   Tue Apr 15 18:59:30 2025 +0800
+| | 
+| |     merge dev and master
+| | 
+| * commit cf4de6b (dev)
+| | Author: EPSDA <1848312235@qq.com>
+| | Date:   Tue Apr 15 11:29:37 2025 +0800
+| | 
+| |     dev modify test.txt
+| | 
+* | commit 69b4e41
+|/  Author: EPSDA <1848312235@qq.com>
+|   Date:   Tue Apr 15 11:29:00 2025 +0800
+|   
+|       master modify test.txt
+| 
+* commit 6dd6869
+| Author: EPSDA <1848312235@qq.com>
+| Date:   Tue Apr 15 11:10:09 2025 +0800
+| 
+|     dev modify test.txt
+```
+
+但是，如果使用的是`Fast-forward`合并策略会无法看到合并过程，例如下面的结果：
+
+```
+* commit 8343fb3 (HEAD -> master, dev)
+| Author: EPSDA <1848312235@qq.com>
+| Date:   Tue Apr 15 19:07:42 2025 +0800
+| 
+|     delete dev change
+|   
+*   commit 2cdb9d6 (HEAD -> master)
+|\  Merge: 69b4e41 cf4de6b
+| | Author: EPSDA <1848312235@qq.com>
+| | Date:   Tue Apr 15 18:59:30 2025 +0800
+| | 
+| |     merge dev and master
+| | 
+| * commit cf4de6b (dev)
+| | Author: EPSDA <1848312235@qq.com>
+| | Date:   Tue Apr 15 11:29:37 2025 +0800
+| | 
+| |     dev modify test.txt
+| | 
+* | commit 69b4e41
+|/  Author: EPSDA <1848312235@qq.com>
+|   Date:   Tue Apr 15 11:29:00 2025 +0800
+|   
+|       master modify test.txt
+| 
+* commit 6dd6869
+| Author: EPSDA <1848312235@qq.com>
+| Date:   Tue Apr 15 11:10:09 2025 +0800
+| 
+|     dev modify test.txt
+```
+
+对于这种情况如果想要看到合并过程，需要使用下面的命令进行合并：
+
+```bash
+git merger --no-ff <branch-name>
+```
+
+例如现在`dev`新增内容，`master`进行合并，那么可以使用下面的命令：
+
+```bash
+git merger --no-ff dev
+```
+
+在当前情况下会看到下面的结果：
+
+```
+*   commit 22c8cdc (HEAD -> master)
+|\  Merge: 8343fb3 0208559
+| | Author: EPSDA <1848312235@qq.com>
+| | Date:   Tue Apr 15 19:12:40 2025 +0800
+| | 
+| |     Merge branch 'dev'
+| | 
+| * commit 0208559 (dev)
+|/  Author: EPSDA <1848312235@qq.com>
+|   Date:   Tue Apr 15 19:11:58 2025 +0800
+|   
+|       dev change
+| 
+* commit 8343fb3
+| Author: EPSDA <1848312235@qq.com>
+| Date:   Tue Apr 15 19:07:42 2025 +0800
+| 
+|     delete dev change
+|   
+```
+
+但是，上面的命令直接使用会发现合并时会弹出一个文件编辑器，其中需要写入提交信息，可以使用默认的提交信息：
+
+```
+Merge branch 'dev'
+```
+
+如果想在合并的使用不弹出这个对话框但是又可以自定义提交信息，可以使用下面的命令：
+
+```bash
+git merger --no-ff -m "<message>" <branch-name>
+```
+
+例如：
+
+```bash
+git merger --no-ff -m "dev change merged" dev
+```
+
+### 删除分支
+
+删除分支有两种：
+
+1. 正常删除分支
+2. 强制删除分支
+
+一般来说，想要正常删除分支，必须要保证该分支没有对文件进行任何修改或者修改以及提交（`git add`+`git commit`）到版本库，如果想要删除分支，可以使用下面的命令：
+
+```bash
+git branch -d <branch name>
+```
+
+如果当前分支对文件进行了修改并且没有进行提交，那么使用上面的命令是无法删除指定分支的，此时会提示使用下面的命令：
+
+```bash
+git branch -D <branch name>
+```
+
+需要注意的是，在删除分支时必须确保当前所处的分支不是要删除的分支
+
+### 暂时保存更改
+
+假如有下面的场景，`dev`分支现在是开发分支，`master`是稳定分支，目前`master`分支没有任何问题发生，`dev`分支此时开始添加新内容，例如：
+
+```
+this is a new feature
+```
+
+`dev`分支已经修改完成准备提交时，`master`分支突然发现存在一个严重的问题，需要紧急修复，此时需要切换到`master`分支对该问题进行修复，但是切换到`master`分支后并不能直接在`master`分支上进行修改，在实际开发中也会经常在稳定分支的最新提交上进行分支的创建来修复问题或者添加新的功能，根据这个理念，此时遇到了问题首先创建一个新的分支`bug_fix`：
+
+```bash
+git branch bug_fix
+```
+
+接着，需要切换到`bug_fix`分支并添加下面的内容表示修复问题：
+
+```bash
+this is a bug fix
+```
+
+但是此时会有一个提示：
+
+```
+M	test.txt
+```
+
+这个提示表示当前存在分支修改了`text.txt`文件并且还没有提交，此时需要再`dev`分支下可以使用下面的命令先将修改的内容暂存起来：
+
+```bash
+git stash
+```
+
+例如下面的结果：
+
+```
+Saved working directory and index state WIP on dev: 0208559 dev change
+```
+
+此时会在`.git/refs`目录下添加一个`stash`文件，这个文件保存的就是最新的修改信息，如何判断当前分支是最新的修改信息？**通过使用`git cat-file -p <stash>`查看其中`parent`记录对比`git log`的最新记录**
+
+一旦执行了`git stash`命令，此时`test.txt`文件内容就不会包含最新添加的内容。再切换到`bug_fix`分支即可开始修复问题并提交到版本库
+
+但是现在`dev`分支还没有拿到最新的提交信息，所以切换到`dev`分支后需要先合并再将刚才暂存的内容取出。但是实际上`master`分支也没有得到最新的文件内容，所以真正的顺序是**先将`bug_fix`分支的信息合并到`master`分支，再将`master`分支的信息合并到`dev`分支，最后取出刚才暂存的内容**，取出暂存内容的命令如下：
+
+```bash
+git stash pop
+```
+
+在执行完`git stash pop`命令之前可以先使用`git stash list`命令查看当前暂存的内容，例如下面的结果：
+
+```
+stash@{0}: WIP on dev: 0208559 dev change
+```
+
+可以看到当前有一个暂存的内容，此时再使用`git stash pop`命令会看到下面的结果：
+
+```
+Auto-merging test.txt
+CONFLICT (content): Merge conflict in test.txt
+On branch dev
+Unmerged paths:
+  (use "git restore --staged <file>..." to unstage)
+  (use "git add <file>..." to mark resolution)
+	both modified:   test.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+The stash entry is kept in case you need it again.
+```
+
+接下来手动合并冲突再提交即可。回到`master`分支后，再进行合并即可看到修复问题并且有新功能的文件内容：
+
+```
+hello git
+hello world
+hello Linux
+hello dev
+hello master
+this is dev change
+this is a bug fix
+this is a new feature
 ```
 
 ## 附录：Git常用命令

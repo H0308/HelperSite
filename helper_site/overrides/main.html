@@ -59,19 +59,6 @@
         }
     }
 
-    .md-consent__controls .md-button {
-        border: none !important;
-        background: none !important;
-    }
-
-    .md-consent__controls .md-button:hover {
-        background-color: #00bda4 !important;
-    }
-
-    .md-consent__controls .md-button--primary {
-        background: #4da6da !important;
-    }
-
     .theme-switch {
         display: inline-flex;
         gap: 8px;
@@ -98,11 +85,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #333;
+        /* 创建一个横向的渐变，包含两种状态的颜色 */
+        background-image: linear-gradient(to right, #275796 0%, #4da6da 50%, #4da6da 50%, #00bda4 100%);
+        /* 设置背景尺寸为两倍按钮宽度，这样可以容纳两种状态 */
         background-size: 200% 100%;
-        background-position: right bottom;
+        /* 初始位置显示右半部分（默认颜色） */
+        background-position: 100% 0;
         background-repeat: no-repeat;
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        /* 确保背景位置变化有过渡效果 */
+        transition: background-position 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .theme-btn .current-theme,
@@ -131,8 +123,8 @@
 
     .theme-btn:hover {
         transform: scale(1.05);
-        background-image: linear-gradient(to right, #4da6da 0%, #275796 100%);
-        background-position: left bottom;
+        /* 悬浮时显示左半部分（悬浮颜色） */
+        background-position: 0 0;
     }
 
     .theme-btn:hover .current-theme {

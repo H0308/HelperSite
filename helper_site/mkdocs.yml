@@ -294,7 +294,6 @@ nav:
   #   - C++ 学长经验之谈: 面试/C++ 学长经验之谈/C++ 学长经验之谈.md
   #   - 学习晚一定没机会吗，大三学长有话说: 面试/学习晚一定没机会吗，大三学长有话说/学习晚一定没机会吗，大三学长有话说.md
   # - 阅读档案: 阅读档案/阅读档案.md
-  - 联系作者: 作者/作者.md
   
 not_in_nav: |
   JavaWeb/2. Servlet开发/2. Servlet开发.md
@@ -306,6 +305,7 @@ not_in_nav: |
   MySQL/JDBC/JDBC高级/JDBC高级.md
   工具帮助/Tomcat安装和使用/Tomcat安装和使用.md
   其它/Boost库中的谓词函数/Boost库中的谓词函数.md
+  作者/作者.md
 
 markdown_extensions:
   - admonition

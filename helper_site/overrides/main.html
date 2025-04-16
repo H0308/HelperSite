@@ -24,6 +24,7 @@
     @font-face {
         font-family: "JiangChengHeiTi 400W";
     }
+
     @font-face {
         font-family: 'LXGW ZhenKai';
     }
@@ -93,8 +94,8 @@
         background-position: 100% 0;
         background-repeat: no-repeat;
         /* 确保背景位置变化有过渡效果 */
-        transition: background-position 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: background-position 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+            transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .theme-btn .current-theme,
@@ -546,20 +547,87 @@
             max-width: 100% !important;
         }
     }
+
+    /* 头像样式 */
+    .header-avatar {
+        display: inline-flex;
+        align-items: center;
+        margin-right: 0.8rem;
+        position: relative;
+    }
+    
+    .header-avatar img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .header-avatar:hover img {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(77, 166, 218, 0.3);
+        border-color: rgba(77, 166, 218, 0.8);
+    }
+    
+    .header-avatar::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 10px;
+        height: 10px;
+        /* background-color: #4CAF50; */
+        border-radius: 50%;
+        /* border: 2px solid #fff; */
+        display: block;
+    }
+    
+    @media screen and (max-width: 1199px) {
+        .theme-switch {
+            display: none !important;
+        }
+        
+        .header-avatar {
+            margin-right: 0.5rem;
+        }
+    }
+    
+    @media screen and (max-width: 767px) {
+        .header-avatar img {
+            width: 32px;
+            height: 32px;
+        }
+    }
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const searchEl = document.querySelector('.md-search');
         const savedTheme = localStorage.getItem('preferred-theme') || 'theme1';
+
+        // 创建头像元素
+        const avatarEl = document.createElement('a');
+        avatarEl.href = "/作者/作者.html"; // 跳转到作者页面
+        avatarEl.className = 'header-avatar';
+        avatarEl.innerHTML = `<img src="/作者/作者.assets/20250206-200653.jpg" alt="头像">`;
+
+        // 创建主题切换按钮
         const themeSwitch = document.createElement('div');
         themeSwitch.className = 'theme-switch';
         themeSwitch.innerHTML = `
-                <button class="theme-btn" onclick="switchTheme()">
-                    <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '原生主题'}</span>
-                    <span class="target-theme">${savedTheme === 'theme1' ? '原生主题' : '新版主题'}</span>
-                </button>
-            `;
+            <button class="theme-btn" onclick="switchTheme()">
+                <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '原生主题'}</span>
+                <span class="target-theme">${savedTheme === 'theme1' ? '原生主题' : '新版主题'}</span>
+            </button>
+        `;
+
+        // 插入元素
+        searchEl.parentNode.insertBefore(avatarEl, searchEl);
         searchEl.parentNode.insertBefore(themeSwitch, searchEl);
+
+        // 其他现有代码...
         setTimeout(() => {
             const hash = window.location.hash;
             if (hash) {

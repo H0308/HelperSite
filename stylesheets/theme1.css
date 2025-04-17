@@ -125,7 +125,13 @@
         ) 1;
     }
 }
-
+[dir=ltr] .md-tabs__list {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: fit-content !important;
+}
 .md-content article {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);

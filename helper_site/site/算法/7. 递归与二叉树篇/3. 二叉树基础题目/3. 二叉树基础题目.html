@@ -727,9 +727,9 @@
         avatarEl.innerHTML = `
         <img src="/作者/作者.assets/20250206-200653.jpg" alt="头像">
         <div class="avatar-dropdown">
-            <a href="/作者/联系作者.html" class="avatar-dropdown-item">联系作者</a>
+            <a href="/作者/联系作者/作者.html" class="avatar-dropdown-item">联系作者</a>
             <div class="avatar-dropdown-divider"></div>
-            <a href="/作者/关于作者.html" class="avatar-dropdown-item">关于作者</a>
+            <a href="/作者/关于作者/关于作者.html" class="avatar-dropdown-item">关于作者</a>
         </div>
     `;
 
@@ -803,21 +803,6 @@
         currentThemeEl.textContent = newTheme === 'theme1' ? '新版主题' : '原生主题';
         targetThemeEl.textContent = newTheme === 'theme1' ? '原生主题' : '新版主题';
     }
-
-    document.addEventListener('copy', function (e) {
-        const selectedText = window.getSelection().toString();
-        if (selectedText) {
-            const copyright = '\n\n' +
-                '————————————————\n' +
-                '文章作者：怡晗★\n' +
-                '网站链接：https://www.help-doc.top\n' +
-                '当前文章链接：' + window.location.href + '\n' +
-                '版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-ND 4.0 许可协议。\n' +
-                '转载请注明来自怡晗★的个人网站！';
-            e.preventDefault();
-            e.clipboardData.setData('text/plain', selectedText + copyright);
-        }
-    });
 </script> <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }

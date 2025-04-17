@@ -68,7 +68,7 @@
         border-radius: 8px 8px;
         color: #fff;
         cursor: pointer;
-        min-width: 100px;
+        min-width: 135px;
         height: 36px;
         position: relative;
         overflow: hidden;
@@ -749,8 +749,8 @@
         themeSwitch.className = 'theme-switch';
         themeSwitch.innerHTML = `
         <button class="theme-btn" onclick="switchTheme()">
-            <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '原生主题'}</span>
-            <span class="target-theme">${savedTheme === 'theme1' ? '原生主题' : '新版主题'}</span>
+            <span class="current-theme">${savedTheme === 'theme1' ? '当前：新版主题' : '当前：原生主题'}</span>
+            <span class="target-theme">${savedTheme === 'theme1' ? '切换到：原生主题' : '切换到：新版主题'}</span>
         </button>
     `;
 
@@ -811,8 +811,8 @@
         const themeBtn = document.querySelector('.theme-btn');
         const currentThemeEl = themeBtn.querySelector('.current-theme');
         const targetThemeEl = themeBtn.querySelector('.target-theme');
-        currentThemeEl.textContent = newTheme === 'theme1' ? '新版主题' : '原生主题';
-        targetThemeEl.textContent = newTheme === 'theme1' ? '原生主题' : '新版主题';
+        currentThemeEl.textContent = newTheme === 'theme1' ? '当前：新版主题' : '当前：原生主题';
+        targetThemeEl.textContent = newTheme === 'theme1' ? '切换到：原生主题' : '切换到：新版主题';
     }
 </script> <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }

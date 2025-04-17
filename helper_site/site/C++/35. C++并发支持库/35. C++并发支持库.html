@@ -68,7 +68,7 @@
         border-radius: 8px 8px;
         color: #fff;
         cursor: pointer;
-        min-width: 100px;
+        min-width: 135px;
         height: 36px;
         position: relative;
         overflow: hidden;
@@ -749,8 +749,8 @@
         themeSwitch.className = 'theme-switch';
         themeSwitch.innerHTML = `
         <button class="theme-btn" onclick="switchTheme()">
-            <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '原生主题'}</span>
-            <span class="target-theme">${savedTheme === 'theme1' ? '原生主题' : '新版主题'}</span>
+            <span class="current-theme">${savedTheme === 'theme1' ? '当前：新版主题' : '当前：原生主题'}</span>
+            <span class="target-theme">${savedTheme === 'theme1' ? '切换到：原生主题' : '切换到：新版主题'}</span>
         </button>
     `;
 
@@ -811,8 +811,8 @@
         const themeBtn = document.querySelector('.theme-btn');
         const currentThemeEl = themeBtn.querySelector('.current-theme');
         const targetThemeEl = themeBtn.querySelector('.target-theme');
-        currentThemeEl.textContent = newTheme === 'theme1' ? '新版主题' : '原生主题';
-        targetThemeEl.textContent = newTheme === 'theme1' ? '原生主题' : '新版主题';
+        currentThemeEl.textContent = newTheme === 'theme1' ? '当前：新版主题' : '当前：原生主题';
+        targetThemeEl.textContent = newTheme === 'theme1' ? '切换到：原生主题' : '切换到：新版主题';
     }
 </script> <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
@@ -823,6 +823,762 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#c class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../../index.html title=学习档案 class="md-header__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 学习档案 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> C++并发支持库 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-hidden=true type=radio name=__palette id=__palette_0> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=标签 data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../index.html class=md-tabs__link> 主页 </a> </li> <li class=md-tabs__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-tabs__link> 网站时间线 </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-tabs__link> 编程语言 </a> </li> <li class=md-tabs__item> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-tabs__link> 数据结构与算法 </a> </li> <li class=md-tabs__item> <a href=../../Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-tabs__link> Linux </a> </li> <li class=md-tabs__item> <a href=../../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-tabs__link> 前端 </a> </li> <li class=md-tabs__item> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-tabs__link> MySQL </a> </li> <li class=md-tabs__item> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-tabs__link> 扩展知识 </a> </li> <li class=md-tabs__item> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-tabs__link> 工具帮助 </a> </li> <li class=md-tabs__item> <a href=../../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-tabs__link> 项目 </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=导航栏 data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../../index.html title=学习档案 class="md-nav__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> 学习档案 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../index.html class=md-nav__link> <span class=md-ellipsis> 主页 </span> </a> </li> <li class=md-nav__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-nav__link> <span class=md-ellipsis> 网站时间线 </span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_3 checked> <label class=md-nav__link for=__nav_3 id=__nav_3_label tabindex> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_3_label aria-expanded=true> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> 编程语言 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> C语言 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_3_2 checked> <label class=md-nav__link for=__nav_3_2 id=__nav_3_2_label tabindex=0> <span class=md-ellipsis> C++ </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_2_label aria-expanded=true> <label class=md-nav__title for=__nav_3_2> <span class="md-nav__icon md-icon"></span> C++ </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../1.%20C%E8%AF%AD%E8%A8%80%E8%BF%87%E6%B8%A1C%2B%2B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E8%BF%87%E6%B8%A1C%2B%2B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> C语言过渡C++基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../2.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/2.%20%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1.html class=md-nav__link> <span class=md-ellipsis> C++类和对象 </span> </a> </li> <li class=md-nav__item> <a href=../3.%20C%2B%2B%E9%BB%98%E8%AE%A4%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/3.%20C%2B%2B%E9%BB%98%E8%AE%A4%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0.html class=md-nav__link> <span class=md-ellipsis> C++默认成员函数 </span> </a> </li> <li class=md-nav__item> <a href=../4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9.html class=md-nav__link> <span class=md-ellipsis> C++类和对象相关内容 </span> </a> </li> <li class=md-nav__item> <a href=../5.%20C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/5.%20C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> C++内存管理 </span> </a> </li> <li class=md-nav__item> <a href=../6.%20C%2B%2B%E6%A8%A1%E7%89%88%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/6.%20C%2B%2B%E6%A8%A1%E7%89%88%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89.html class=md-nav__link> <span class=md-ellipsis> C++模版（基础） </span> </a> </li> <li class=md-nav__item> <a href=../7.%20C%2B%2BSTL%E7%AE%80%E4%BB%8B%E4%B8%8Estring%E7%B1%BB/7.%20C%2B%2BSTL%E7%AE%80%E4%BB%8B%E4%B8%8Estring%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> C++STL简介与string类 </span> </a> </li> <li class=md-nav__item> <a href=../8.%20string%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/8.%20string%E7%B1%BB%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> string类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../9.%20vector%E7%B1%BB/9.%20vector%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> vector类 </span> </a> </li> <li class=md-nav__item> <a href=../10.%20vector%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/10.%20vector%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> vector类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../11.%20list%E7%B1%BB/11.%20list%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> list类 </span> </a> </li> <li class=md-nav__item> <a href=../12.%20list%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/12.%20list%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> list类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../13.%20stack%E7%B1%BB/13.%20stack%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> stack类 </span> </a> </li> <li class=md-nav__item> <a href=../14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB/14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> queue与priority_queue类 </span> </a> </li> <li class=md-nav__item> <a href=../15.%20stack%E5%92%8Cqueue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/15.%20stack%E5%92%8Cqueue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> stack和queue模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../16.%20priority_queue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/16.%20priority_queue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> priority_queue模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../17.%20%E5%8F%8D%E5%90%91%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%AE%BE%E8%AE%A1/17.%20reverse_iterator%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1.html class=md-nav__link> <span class=md-ellipsis> 反向迭代器设计 </span> </a> </li> <li class=md-nav__item> <a href=../18.%20C%2B%2B%E6%A8%A1%E6%9D%BF%EF%BC%88%E9%AB%98%E9%98%B6%EF%BC%89/18.%20C%2B%2B%E6%A8%A1%E6%9D%BF%EF%BC%88%E9%AB%98%E9%98%B6%EF%BC%89.html class=md-nav__link> <span class=md-ellipsis> C++模版（高阶） </span> </a> </li> <li class=md-nav__item> <a href=../19.%20C%2B%2B%E7%BB%A7%E6%89%BF/19.%20C%2B%2B%E7%BB%A7%E6%89%BF.html class=md-nav__link> <span class=md-ellipsis> C++继承 </span> </a> </li> <li class=md-nav__item> <a href=../20.%20C%2B%2B%E5%A4%9A%E6%80%81/20.%20C%2B%2B%E5%A4%9A%E6%80%81.html class=md-nav__link> <span class=md-ellipsis> C++多态 </span> </a> </li> <li class=md-nav__item> <a href=../21.%20set%E7%B1%BB/21.%20set%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> set类 </span> </a> </li> <li class=md-nav__item> <a href=../22.%20map%E7%B1%BB/22.%20map%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> map类 </span> </a> </li> <li class=md-nav__item> <a href=../23.%20map%E5%92%8Cset%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/23.%20map%E5%92%8Cset%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> map和set类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../24.%20unordered_map%E5%92%8Cunordered_set%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/24.%20unordered_map%E5%92%8Cunordered_set%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> unordered_map和unordered_set类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../31.%20bitset%E7%B1%BB/31.%20bitset%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> bitset类 </span> </a> </li> <li class=md-nav__item> <a href=../32.%20initializer_list%E7%B1%BB/32.%20initializer_list%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> initializer_list类 </span> </a> </li> <li class=md-nav__item> <a href=../25.%20C%2B%2B11%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7/C%2B%2B%2011%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7.html class=md-nav__link> <span class=md-ellipsis> C++ 11相关新特性 </span> </a> </li> <li class=md-nav__item> <a href=../26.%20C%2B%2B%E5%BC%82%E5%B8%B8/26.%20C%2B%2B%E5%BC%82%E5%B8%B8.html class=md-nav__link> <span class=md-ellipsis> C++ 异常 </span> </a> </li> <li class=md-nav__item> <a href=../27.%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/27.%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.html class=md-nav__link> <span class=md-ellipsis> C++ 智能指针 </span> </a> </li> <li class=md-nav__item> <a href=../28.%20%E7%89%B9%E6%AE%8A%E7%B1%BB%E8%AE%BE%E8%AE%A1/28.%20%E7%89%B9%E6%AE%8A%E7%B1%BB%E8%AE%BE%E8%AE%A1.html class=md-nav__link> <span class=md-ellipsis> 特殊类设计 </span> </a> </li> <li class=md-nav__item> <a href=../29.%20C%2B%2B%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/29.%20C%2B%2B%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html class=md-nav__link> <span class=md-ellipsis> C++中的类型转换 </span> </a> </li> <li class=md-nav__item> <a href=../30.%20C%2B%2BIO%E6%B5%81/30.%20C%2B%2BIO%E6%B5%81.html class=md-nav__link> <span class=md-ellipsis> C++ IO流 </span> </a> </li> <li class=md-nav__item> <a href=../33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7/33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7.html class=md-nav__link> <span class=md-ellipsis> C++ 17相关新特性 </span> </a> </li> <li class=md-nav__item> <a href=../34.%20C%2B%2B%E6%97%B6%E9%97%B4%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9B%B8%E5%85%B3%E5%BA%93/34.%20C%2B%2B%E6%97%B6%E9%97%B4%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9B%B8%E5%85%B3%E5%BA%93.html class=md-nav__link> <span class=md-ellipsis> C++时间和随机数相关库 </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <a href=35.%20C%2B%2B%E5%B9%B6%E5%8F%91%E6%94%AF%E6%8C%81%E5%BA%93.html class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> C++并发支持库 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../Java/1.%20Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> Java </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> Python </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-nav__link> <span class=md-ellipsis> 数据结构与算法 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-nav__link> <span class=md-ellipsis> Linux </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-nav__link> <span class=md-ellipsis> 前端 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-nav__link> <span class=md-ellipsis> 扩展知识 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-nav__link> <span class=md-ellipsis> 工具帮助 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-nav__link> <span class=md-ellipsis> 项目 </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目录> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=c>C++并发支持库<a class=headerlink href=#c title="Permanent link">&para;</a></h1> <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;"> <p><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 38 个字 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间不到 1 分钟</p> </div> <div class="admonition note"> <p class=admonition-title>Note</p> <p>阅读本篇文章之前建议有一定的线程编程基础，此处可以参考<a href=https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C.html#linux>Linux线程部分</a></p> </div> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年4月17日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年4月16日</span> </span> </aside> <form class=md-feedback name=feedback hidden> <fieldset> <legend class=md-feedback__title> 页面有帮助吗？ </legend> <div class=md-feedback__inner> <div class=md-feedback__list> <button class="md-feedback__icon md-icon" type=submit title=页面对我有帮助 data-md-value=1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M5 9v12H1V9zm4 12a2 2 0 0 1-2-2V9c0-.55.22-1.05.59-1.41L14.17 1l1.06 1.06c.27.27.44.64.44 1.05l-.03.32L14.69 8H21a2 2 0 0 1 2 2v2c0 .26-.05.5-.14.73l-3.02 7.05C19.54 20.5 18.83 21 18 21zm0-2h9.03L21 12v-2h-8.79l1.13-5.32L9 9.03z"/></svg> </button> <button class="md-feedback__icon md-icon" type=submit title=页面没有帮助到我 data-md-value=0> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 15V3h4v12zM15 3a2 2 0 0 1 2 2v10c0 .55-.22 1.05-.59 1.41L9.83 23l-1.06-1.06c-.27-.27-.44-.64-.44-1.06l.03-.31.95-4.57H3a2 2 0 0 1-2-2v-2c0-.26.05-.5.14-.73l3.02-7.05C4.46 3.5 5.17 3 6 3zm0 2H5.97L3 12v2h8.78l-1.13 5.32L15 14.97z"/></svg> </button> </div> <div class=md-feedback__note> <div data-md-value=1 hidden> 谢谢你的反馈！ </div> <div data-md-value=0 hidden> 谢谢你的反馈！联系<a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html>作者</a>提供更详细的信息 </div> </div> </div> </fieldset> </form> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024-2025 柯懒不是柯南 </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.prune", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script> <script src=../../assets/javascripts/bundle.c8b220af.min.js></script> <script src=../../javascripts/katex.min.js></script> <script src=../../javascripts/particles.min.js></script> <script src=../../javascripts/other.min.js></script> <script src=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js></script> <script src=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js></script> <script src=../../assets/javascripts/toggle-sidebar.js async></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#c class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../../index.html title=学习档案 class="md-header__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 学习档案 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> C++并发支持库 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-hidden=true type=radio name=__palette id=__palette_0> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=标签 data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../index.html class=md-tabs__link> 主页 </a> </li> <li class=md-tabs__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-tabs__link> 网站时间线 </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-tabs__link> 编程语言 </a> </li> <li class=md-tabs__item> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-tabs__link> 数据结构与算法 </a> </li> <li class=md-tabs__item> <a href=../../Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-tabs__link> Linux </a> </li> <li class=md-tabs__item> <a href=../../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-tabs__link> 前端 </a> </li> <li class=md-tabs__item> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-tabs__link> MySQL </a> </li> <li class=md-tabs__item> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-tabs__link> 扩展知识 </a> </li> <li class=md-tabs__item> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-tabs__link> 工具帮助 </a> </li> <li class=md-tabs__item> <a href=../../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-tabs__link> 项目 </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=导航栏 data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../../index.html title=学习档案 class="md-nav__button md-logo" aria-label=学习档案 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> 学习档案 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../index.html class=md-nav__link> <span class=md-ellipsis> 主页 </span> </a> </li> <li class=md-nav__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-nav__link> <span class=md-ellipsis> 网站时间线 </span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_3 checked> <label class=md-nav__link for=__nav_3 id=__nav_3_label tabindex> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_3_label aria-expanded=true> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> 编程语言 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> C语言 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_3_2 checked> <label class=md-nav__link for=__nav_3_2 id=__nav_3_2_label tabindex=0> <span class=md-ellipsis> C++ </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_2_label aria-expanded=true> <label class=md-nav__title for=__nav_3_2> <span class="md-nav__icon md-icon"></span> C++ </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../1.%20C%E8%AF%AD%E8%A8%80%E8%BF%87%E6%B8%A1C%2B%2B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E8%BF%87%E6%B8%A1C%2B%2B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> C语言过渡C++基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../2.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/2.%20%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1.html class=md-nav__link> <span class=md-ellipsis> C++类和对象 </span> </a> </li> <li class=md-nav__item> <a href=../3.%20C%2B%2B%E9%BB%98%E8%AE%A4%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/3.%20C%2B%2B%E9%BB%98%E8%AE%A4%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0.html class=md-nav__link> <span class=md-ellipsis> C++默认成员函数 </span> </a> </li> <li class=md-nav__item> <a href=../4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9.html class=md-nav__link> <span class=md-ellipsis> C++类和对象相关内容 </span> </a> </li> <li class=md-nav__item> <a href=../5.%20C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/5.%20C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> C++内存管理 </span> </a> </li> <li class=md-nav__item> <a href=../6.%20C%2B%2B%E6%A8%A1%E7%89%88%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/6.%20C%2B%2B%E6%A8%A1%E7%89%88%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89.html class=md-nav__link> <span class=md-ellipsis> C++模版（基础） </span> </a> </li> <li class=md-nav__item> <a href=../7.%20C%2B%2BSTL%E7%AE%80%E4%BB%8B%E4%B8%8Estring%E7%B1%BB/7.%20C%2B%2BSTL%E7%AE%80%E4%BB%8B%E4%B8%8Estring%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> C++STL简介与string类 </span> </a> </li> <li class=md-nav__item> <a href=../8.%20string%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/8.%20string%E7%B1%BB%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> string类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../9.%20vector%E7%B1%BB/9.%20vector%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> vector类 </span> </a> </li> <li class=md-nav__item> <a href=../10.%20vector%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/10.%20vector%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> vector类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../11.%20list%E7%B1%BB/11.%20list%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> list类 </span> </a> </li> <li class=md-nav__item> <a href=../12.%20list%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/12.%20list%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> list类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../13.%20stack%E7%B1%BB/13.%20stack%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> stack类 </span> </a> </li> <li class=md-nav__item> <a href=../14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB/14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> queue与priority_queue类 </span> </a> </li> <li class=md-nav__item> <a href=../15.%20stack%E5%92%8Cqueue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/15.%20stack%E5%92%8Cqueue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> stack和queue模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../16.%20priority_queue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/16.%20priority_queue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> priority_queue模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../17.%20%E5%8F%8D%E5%90%91%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%AE%BE%E8%AE%A1/17.%20reverse_iterator%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1.html class=md-nav__link> <span class=md-ellipsis> 反向迭代器设计 </span> </a> </li> <li class=md-nav__item> <a href=../18.%20C%2B%2B%E6%A8%A1%E6%9D%BF%EF%BC%88%E9%AB%98%E9%98%B6%EF%BC%89/18.%20C%2B%2B%E6%A8%A1%E6%9D%BF%EF%BC%88%E9%AB%98%E9%98%B6%EF%BC%89.html class=md-nav__link> <span class=md-ellipsis> C++模版（高阶） </span> </a> </li> <li class=md-nav__item> <a href=../19.%20C%2B%2B%E7%BB%A7%E6%89%BF/19.%20C%2B%2B%E7%BB%A7%E6%89%BF.html class=md-nav__link> <span class=md-ellipsis> C++继承 </span> </a> </li> <li class=md-nav__item> <a href=../20.%20C%2B%2B%E5%A4%9A%E6%80%81/20.%20C%2B%2B%E5%A4%9A%E6%80%81.html class=md-nav__link> <span class=md-ellipsis> C++多态 </span> </a> </li> <li class=md-nav__item> <a href=../21.%20set%E7%B1%BB/21.%20set%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> set类 </span> </a> </li> <li class=md-nav__item> <a href=../22.%20map%E7%B1%BB/22.%20map%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> map类 </span> </a> </li> <li class=md-nav__item> <a href=../23.%20map%E5%92%8Cset%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/23.%20map%E5%92%8Cset%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> map和set类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../24.%20unordered_map%E5%92%8Cunordered_set%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/24.%20unordered_map%E5%92%8Cunordered_set%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html class=md-nav__link> <span class=md-ellipsis> unordered_map和unordered_set类模拟实现 </span> </a> </li> <li class=md-nav__item> <a href=../31.%20bitset%E7%B1%BB/31.%20bitset%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> bitset类 </span> </a> </li> <li class=md-nav__item> <a href=../32.%20initializer_list%E7%B1%BB/32.%20initializer_list%E7%B1%BB.html class=md-nav__link> <span class=md-ellipsis> initializer_list类 </span> </a> </li> <li class=md-nav__item> <a href=../25.%20C%2B%2B11%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7/C%2B%2B%2011%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7.html class=md-nav__link> <span class=md-ellipsis> C++ 11相关新特性 </span> </a> </li> <li class=md-nav__item> <a href=../26.%20C%2B%2B%E5%BC%82%E5%B8%B8/26.%20C%2B%2B%E5%BC%82%E5%B8%B8.html class=md-nav__link> <span class=md-ellipsis> C++ 异常 </span> </a> </li> <li class=md-nav__item> <a href=../27.%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/27.%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.html class=md-nav__link> <span class=md-ellipsis> C++ 智能指针 </span> </a> </li> <li class=md-nav__item> <a href=../28.%20%E7%89%B9%E6%AE%8A%E7%B1%BB%E8%AE%BE%E8%AE%A1/28.%20%E7%89%B9%E6%AE%8A%E7%B1%BB%E8%AE%BE%E8%AE%A1.html class=md-nav__link> <span class=md-ellipsis> 特殊类设计 </span> </a> </li> <li class=md-nav__item> <a href=../29.%20C%2B%2B%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/29.%20C%2B%2B%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html class=md-nav__link> <span class=md-ellipsis> C++中的类型转换 </span> </a> </li> <li class=md-nav__item> <a href=../30.%20C%2B%2BIO%E6%B5%81/30.%20C%2B%2BIO%E6%B5%81.html class=md-nav__link> <span class=md-ellipsis> C++ IO流 </span> </a> </li> <li class=md-nav__item> <a href=../33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7/33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7.html class=md-nav__link> <span class=md-ellipsis> C++ 17相关新特性 </span> </a> </li> <li class=md-nav__item> <a href=../34.%20C%2B%2B%E6%97%B6%E9%97%B4%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9B%B8%E5%85%B3%E5%BA%93/34.%20C%2B%2B%E6%97%B6%E9%97%B4%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9B%B8%E5%85%B3%E5%BA%93.html class=md-nav__link> <span class=md-ellipsis> C++时间和随机数相关库 </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> C++并发支持库 </span> <span class="md-nav__icon md-icon"></span> </label> <a href=35.%20C%2B%2B%E5%B9%B6%E5%8F%91%E6%94%AF%E6%8C%81%E5%BA%93.html class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> C++并发支持库 </span> </a> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#thread class=md-nav__link> <span class=md-ellipsis> 线程库&lt;thread&gt; </span> </a> <nav class=md-nav aria-label="线程库<thread>"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 构造函数 </span> </a> </li> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 成员函数 </span> </a> </li> <li class=md-nav__item> <a href=#this_thread class=md-nav__link> <span class=md-ellipsis> this_thread命名空间 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#mutex class=md-nav__link> <span class=md-ellipsis> 互斥锁库&lt;mutex&gt; </span> </a> </li> <li class=md-nav__item> <a href=#c11 class=md-nav__link> <span class=md-ellipsis> C++11中的互斥锁类型 </span> </a> </li> <li class=md-nav__item> <a href=#c11_1 class=md-nav__link> <span class=md-ellipsis> C++11中的互斥锁相关工具 </span> </a> </li> <li class=md-nav__item> <a href=#locktry_lock class=md-nav__link> <span class=md-ellipsis> 防止死锁的函数lock和try_lock </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../Java/1.%20Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> Java </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> Python </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-nav__link> <span class=md-ellipsis> 数据结构与算法 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-nav__link> <span class=md-ellipsis> Linux </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-nav__link> <span class=md-ellipsis> 前端 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-nav__link> <span class=md-ellipsis> 扩展知识 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-nav__link> <span class=md-ellipsis> 工具帮助 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-nav__link> <span class=md-ellipsis> 项目 </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#thread class=md-nav__link> <span class=md-ellipsis> 线程库&lt;thread&gt; </span> </a> <nav class=md-nav aria-label="线程库<thread>"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 构造函数 </span> </a> </li> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 成员函数 </span> </a> </li> <li class=md-nav__item> <a href=#this_thread class=md-nav__link> <span class=md-ellipsis> this_thread命名空间 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#mutex class=md-nav__link> <span class=md-ellipsis> 互斥锁库&lt;mutex&gt; </span> </a> </li> <li class=md-nav__item> <a href=#c11 class=md-nav__link> <span class=md-ellipsis> C++11中的互斥锁类型 </span> </a> </li> <li class=md-nav__item> <a href=#c11_1 class=md-nav__link> <span class=md-ellipsis> C++11中的互斥锁相关工具 </span> </a> </li> <li class=md-nav__item> <a href=#locktry_lock class=md-nav__link> <span class=md-ellipsis> 防止死锁的函数lock和try_lock </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=c>C++并发支持库<a class=headerlink href=#c title="Permanent link">&para;</a></h1> <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;"> <p><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 2866 个字 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 640 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3"/></svg></span> 350 行代码 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 14 分钟</p> </div> <div class="admonition note"> <p class=admonition-title>Note</p> <p>阅读本篇文章之前建议有一定的线程编程基础，此处可以参考<a href=https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C.html#linux>Linux线程部分</a></p> </div> <h2 id=thread>线程库<code>&lt;thread&gt;</code><a class=headerlink href=#thread title="Permanent link">&para;</a></h2> <p>在C++11中，引入了线程库<code>&lt;thread&gt;</code>，用于实现多线程编程。该库提供了一组类和函数，用于创建、管理和同步线程</p> <h3 id=_1>构造函数<a class=headerlink href=#_1 title="Permanent link">&para;</a></h3> <p>对于创建一个线程来说，可以使用<code>thread</code>类的构造函数，常见的构造如下：</p> <p>以下是C++11中用于创建线程的<code>std::thread</code>类的构造函数列表，以Markdown表格形式展示，并附上说明：</p> <table> <thead> <tr> <th>构造函数</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>thread() noexcept;</code></td> <td>默认构造函数，创建一个空的线程对象，不关联任何实际线程</td> </tr> <tr> <td><code>template &lt;class Function, class... Args&gt; explicit thread(Function&amp;&amp; f, Args&amp;&amp;... args);</code></td> <td>创建一个线程并执行指定的可调用对象（函数、lambda表达式、函数对象等）及其参数。参数会被完美转发到可调用对象中</td> </tr> <tr> <td><code>thread(const thread&amp;) = delete;</code></td> <td>禁止拷贝构造函数，线程对象不可被复制</td> </tr> <tr> <td><code>thread(thread&amp;&amp; x) noexcept;</code></td> <td>移动构造函数，将另一个线程对象的所有权转移到当前线程对象中。原线程对象变为未关联任何线程的状态</td> </tr> </tbody> </table> <p><strong>默认构造函数</strong> </p> <p><div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><span class=c1>// 简单例子</span>
+</span><span id=__span-0-2><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t</span><span class=p>;</span>
+</span></code></pre></div></td></tr></table></div> 创建一个空的线程对象，此时<code>t</code>不关联任何实际线程并且没有任何交给新线程执行的函数。可以通过后续的移动操作（如<code>std::move</code>）将其与一个实际线程关联，例如下面的代码：</p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;iostream&gt;</span>
+</span><span id=__span-1-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;thread&gt;</span>
+</span><span id=__span-1-3>
+</span><span id=__span-1-4><span class=kt>void</span><span class=w> </span><span class=nf>test</span><span class=p>()</span>
+</span><span id=__span-1-5><span class=p>{</span>
+</span><span id=__span-1-6><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;test&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-1-7><span class=p>}</span>
+</span><span id=__span-1-8>
+</span><span id=__span-1-9><span class=c1>// 注释</span>
+</span><span id=__span-1-10><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-1-11><span class=p>{</span>
+</span><span id=__span-1-12><span class=w>    </span><span class=c1>// 创建空的线程</span>
+</span><span id=__span-1-13><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t</span><span class=p>;</span>
+</span><span id=__span-1-14>
+</span><span id=__span-1-15><span class=w>    </span><span class=c1>// 后续需要使用上面的线程需要单独再创建一个线程</span>
+</span><span id=__span-1-16><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t1</span><span class=p>(</span><span class=n>test</span><span class=p>);</span>
+</span><span id=__span-1-17><span class=w>    </span><span class=n>t</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>move</span><span class=p>(</span><span class=n>t1</span><span class=p>);</span>
+</span><span id=__span-1-18><span class=w>    </span><span class=c1>// 不能单独复制一个非右值对象</span>
+</span><span id=__span-1-19><span class=w>    </span><span class=c1>// t = t1;</span>
+</span><span id=__span-1-20>
+</span><span id=__span-1-21><span class=w>    </span><span class=n>t</span><span class=p>.</span><span class=n>join</span><span class=p>();</span>
+</span><span id=__span-1-22>
+</span><span id=__span-1-23><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-1-24><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p><strong>带可调用对象的构造函数（最常用）</strong></p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><span class=c1>// 简单例子</span>
+</span><span id=__span-2-2><span class=kt>void</span><span class=w> </span><span class=nf>foo</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>x</span><span class=p>)</span><span class=w> </span>
+</span><span id=__span-2-3><span class=p>{</span><span class=w> </span>
+</span><span id=__span-2-4><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>x</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span><span class=w> </span>
+</span><span id=__span-2-5><span class=p>}</span>
+</span><span id=__span-2-6><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=nf>t</span><span class=p>(</span><span class=n>foo</span><span class=p>,</span><span class=w> </span><span class=mi>42</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> <p>第一个参数是一个可调用对象（如函数、lambda表达式、函数对象等），后面的参数是传递给该可调用对象的参数</p> <p><strong>默认情况下，创建一个线程对象后，该线程会立即执行</strong></p> <p>但是，需要注意的是，如果函数的参数需要接收的是引用类型，那么在传递参数时一定要确保传递给线程执行函数的参数也是一个引用才能确保引用有效。存在这个问题的本质原因是创建线程时并不是直接将参数传递给线程执行函数，而是经过了一层拷贝，此时线程执行函数接收到的参数是拷贝后的副本，而不是原始参数的引用。为了解决这个问题，可以使用<code>std::ref</code>函数将参数包装成引用类型，这样在线程执行函数中就可以接收到原始参数的引用</p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;iostream&gt;</span>
+</span><span id=__span-3-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;thread&gt;</span>
+</span><span id=__span-3-3>
+</span><span id=__span-3-4><span class=kt>void</span><span class=w> </span><span class=nf>test1</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=o>&amp;</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-3-5><span class=p>{</span>
+</span><span id=__span-3-6><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;修改前：x为 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>x</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-3-7><span class=w>    </span><span class=o>++</span><span class=n>x</span><span class=p>;</span>
+</span><span id=__span-3-8><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;修改后：x为 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>x</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-3-9><span class=p>}</span>
+</span><span id=__span-3-10>
+</span><span id=__span-3-11><span class=c1>// 注释</span>
+</span><span id=__span-3-12><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-3-13><span class=p>{</span>
+</span><span id=__span-3-14><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>x</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>;</span>
+</span><span id=__span-3-15>
+</span><span id=__span-3-16><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t</span><span class=p>(</span><span class=n>test1</span><span class=p>,</span><span class=w> </span><span class=n>x</span><span class=p>);</span>
+</span><span id=__span-3-17>
+</span><span id=__span-3-18><span class=w>    </span><span class=n>t</span><span class=p>.</span><span class=n>join</span><span class=p>();</span>
+</span><span id=__span-3-19>
+</span><span id=__span-3-20><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-3-21><span class=p>}</span>
+</span><span id=__span-3-22>
+</span><span id=__span-3-23><span class=c1>// 输出</span>
+</span><span id=__span-3-24><span class=n>修改前</span><span class=err>：</span><span class=n>x为</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-3-25><span class=n>修改后</span><span class=err>：</span><span class=n>x为</span><span class=w> </span><span class=mi>2</span>
+</span></code></pre></div></td></tr></table></div> <p><strong>禁止拷贝构造函数</strong> </p> <p><div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=nf>t1</span><span class=p>(</span><span class=n>foo</span><span class=p>,</span><span class=w> </span><span class=mi>42</span><span class=p>);</span>
+</span><span id=__span-4-2><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t2</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>t1</span><span class=p>;</span><span class=w> </span><span class=c1>// 编译错误</span>
+</span></code></pre></div></td></tr></table></div> 线程对象不可被复制，因为线程资源是独占的，不能同时由多个线程对象管理，但是可以将控制权转移，即使用<code>std::move</code>，具体例子在上面已经给出</p> <p><strong>移动构造函数</strong> </p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=nf>t1</span><span class=p>(</span><span class=n>foo</span><span class=p>,</span><span class=w> </span><span class=mi>42</span><span class=p>);</span>
+</span><span id=__span-5-2><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=nf>t2</span><span class=p>(</span><span class=n>t1</span><span class=p>);</span><span class=w> </span><span class=c1>// t1的所有权转移给t2</span>
+</span></code></pre></div></td></tr></table></div> <p>上面的例子中，<code>t1</code>的所有权被转移给<code>t2</code>，<code>t1</code>变为未关联任何线程的状态</p> <h3 id=_2>成员函数<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <p>以下是C++11中<code>std::thread</code>类的成员函数列表：</p> <table> <thead> <tr> <th>成员函数</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>get_id() const noexcept;</code></td> <td>返回线程的ID（<code>std::thread::id</code>类型）。如果线程对象未关联任何线程，则返回默认构造的<code>std::thread::id</code></td> </tr> <tr> <td><code>joinable() const noexcept;</code></td> <td>检查线程是否可被<code>join</code>或<code>detach</code>。如果线程对象关联了一个有效的线程且尚未被<code>join</code>或<code>detach</code>，则返回<code>true</code>；否则返回<code>false</code></td> </tr> <tr> <td><code>join();</code></td> <td>阻塞当前线程，直到被调用的线程完成执行。调用后，线程对象变为不可<code>join</code>状态（即不再关联任何线程）。每个线程对象只能调用一次<code>join</code></td> </tr> <tr> <td><code>detach();</code></td> <td>将线程与线程对象分离，使其在后台独立运行。调用后，线程对象不再关联该线程，无法再通过该对象管理线程。每个线程对象只能调用一次<code>detach</code></td> </tr> <tr> <td><code>swap(thread&amp; other) noexcept;</code></td> <td>交换两个线程对象的内容。</td> </tr> </tbody> </table> <p>示例代码：</p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span>
+<span class=normal>44</span>
+<span class=normal>45</span>
+<span class=normal>46</span>
+<span class=normal>47</span>
+<span class=normal>48</span>
+<span class=normal>49</span>
+<span class=normal>50</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;iostream&gt;</span>
+</span><span id=__span-6-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;thread&gt;</span>
+</span><span id=__span-6-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;chrono&gt;</span>
+</span><span id=__span-6-4>
+</span><span id=__span-6-5><span class=kt>void</span><span class=w> </span><span class=nf>worker</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>n</span><span class=p>)</span><span class=w> </span>
+</span><span id=__span-6-6><span class=p>{</span>
+</span><span id=__span-6-7><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>get_id</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 开始工作，参数: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>n</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-8><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>sleep_for</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>seconds</span><span class=p>(</span><span class=n>n</span><span class=p>));</span>
+</span><span id=__span-6-9><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>get_id</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 工作完成&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-10><span class=p>}</span>
+</span><span id=__span-6-11>
+</span><span id=__span-6-12><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span><span class=w> </span>
+</span><span id=__span-6-13><span class=p>{</span>
+</span><span id=__span-6-14><span class=w>    </span><span class=c1>// 默认构造函数创建空线程</span>
+</span><span id=__span-6-15><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t1</span><span class=p>;</span>
+</span><span id=__span-6-16><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;t1 ID: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>t1</span><span class=p>.</span><span class=n>get_id</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-17><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;t1 是否可join: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>boolalpha</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>t1</span><span class=p>.</span><span class=n>joinable</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-18>
+</span><span id=__span-6-19><span class=w>    </span><span class=c1>// 创建实际工作的线程</span>
+</span><span id=__span-6-20><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t2</span><span class=p>(</span><span class=n>worker</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>);</span>
+</span><span id=__span-6-21><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;t2 ID: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>t2</span><span class=p>.</span><span class=n>get_id</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-22><span class=w>    </span><span class=c1>// std::boolalpha 是一个格式化标志，用于将布尔值输出为 &quot;true&quot; 或 &quot;false&quot;</span>
+</span><span id=__span-6-23><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;t2 是否可join: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>t2</span><span class=p>.</span><span class=n>joinable</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-24>
+</span><span id=__span-6-25><span class=w>    </span><span class=c1>// 创建另一个工作线程</span>
+</span><span id=__span-6-26><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t3</span><span class=p>(</span><span class=n>worker</span><span class=p>,</span><span class=w> </span><span class=mi>3</span><span class=p>);</span>
+</span><span id=__span-6-27>
+</span><span id=__span-6-28><span class=w>    </span><span class=c1>// 使用swap交换两个线程</span>
+</span><span id=__span-6-29><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;交换前 - t2 ID: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>t2</span><span class=p>.</span><span class=n>get_id</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;, t3 ID: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>t3</span><span class=p>.</span><span class=n>get_id</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-30><span class=w>    </span><span class=n>t2</span><span class=p>.</span><span class=n>swap</span><span class=p>(</span><span class=n>t3</span><span class=p>);</span>
+</span><span id=__span-6-31><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;交换后 - t2 ID: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>t2</span><span class=p>.</span><span class=n>get_id</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;, t3 ID: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>t3</span><span class=p>.</span><span class=n>get_id</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-32>
+</span><span id=__span-6-33><span class=w>    </span><span class=c1>// 使用join等待线程完成</span>
+</span><span id=__span-6-34><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>t2</span><span class=p>.</span><span class=n>joinable</span><span class=p>())</span><span class=w> </span>
+</span><span id=__span-6-35><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-6-36><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;等待t2完成...&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-37><span class=w>        </span><span class=n>t2</span><span class=p>.</span><span class=n>join</span><span class=p>();</span>
+</span><span id=__span-6-38><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;t2已完成&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-39><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-6-40>
+</span><span id=__span-6-41><span class=w>    </span><span class=c1>// 使用detach分离线程</span>
+</span><span id=__span-6-42><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>t3</span><span class=p>.</span><span class=n>joinable</span><span class=p>())</span><span class=w> </span>
+</span><span id=__span-6-43><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-6-44><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;分离t3...&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-45><span class=w>        </span><span class=n>t3</span><span class=p>.</span><span class=n>detach</span><span class=p>();</span>
+</span><span id=__span-6-46><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;t3已分离，t3是否可join: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>t3</span><span class=p>.</span><span class=n>joinable</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-6-47><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-6-48>
+</span><span id=__span-6-49><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-6-50><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>参考输出：</p> <div class="language-text highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Text Only</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1>t1 ID: 0
+</span><span id=__span-7-2>t1 是否可join: false
+</span><span id=__span-7-3>t2 ID: 39880
+</span><span id=__span-7-4>t2 是否可join: true
+</span><span id=__span-7-5>交换前 - t2 ID: 39880, t3 ID: 36264
+</span><span id=__span-7-6>交换后 - t2 ID: 36264, t3 ID: 39880
+</span><span id=__span-7-7>等待t2完成...
+</span><span id=__span-7-8>线程 39880 开始工作，参数: 线程 36264 开始工作，参数: 23
+</span><span id=__span-7-9>
+</span><span id=__span-7-10>线程 39880 工作完成
+</span><span id=__span-7-11>线程 36264 工作完成
+</span><span id=__span-7-12>t2已完成
+</span><span id=__span-7-13>分离t3...
+</span><span id=__span-7-14>t3已分离，t3是否可join: false
+</span></code></pre></div></td></tr></table></div> <p>需要注意的是，每个线程对象在其生命周期结束前必须明确调用<code>join</code>或<code>detach</code>，否则程序会调用<code>std::terminate</code>终止运行，例如：</p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=nf>t</span><span class=p>([]</span><span class=w> </span><span class=p>{});</span>
+</span><span id=__span-8-2><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>t</span><span class=p>.</span><span class=n>joinable</span><span class=p>())</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-8-3><span class=w>    </span><span class=n>t</span><span class=p>.</span><span class=n>join</span><span class=p>();</span><span class=w> </span><span class=c1>// 或者 t.detach();</span>
+</span><span id=__span-8-4><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=this_thread><code>this_thread</code>命名空间<a class=headerlink href=#this_thread title="Permanent link">&para;</a></h3> <p>在C++11中，<code>std::this_thread</code>是一个命名空间，提供了与当前线程相关的功能。它主要用于获取当前线程的信息、控制当前线程的执行（如暂停或休眠），以及设置线程的名称（在某些实现中）。以下是<code>std::this_thread</code>命名空间中的主要函数及其功能：</p> <table> <thead> <tr> <th>函数</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>std::this_thread::get_id()</code></td> <td>返回当前线程的ID（<code>std::thread::id</code>类型）</td> </tr> <tr> <td><code>std::this_thread::yield()</code></td> <td>提示调度器让出当前线程的时间片，允许其他线程运行</td> </tr> <tr> <td><code>std::this_thread::sleep_for(const chrono::duration&amp; rel_time)</code></td> <td>让当前线程暂停指定的持续时间</td> </tr> <tr> <td><code>std::this_thread::sleep_until(const chrono::time_point&amp; abs_time)</code></td> <td>让当前线程暂停，直到指定的时间点</td> </tr> </tbody> </table> <div class="admonition note"> <p class=admonition-title>Note</p> <p>在上面的函数中，对于<code>yield</code>函数来说，在不同的操作系统上可能会有不同的表现，具体表现取决于操作系统的调度策略和实现，并不是所有的操作系统都保证<code>yield</code>函数一定会让出时间片</p> </div> <p>示例代码：</p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;iostream&gt;</span>
+</span><span id=__span-9-2><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;thread&gt;</span>
+</span><span id=__span-9-3><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;chrono&gt;</span>
+</span><span id=__span-9-4><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;iomanip&gt;</span><span class=c1> // 用于格式化输出时间</span>
+</span><span id=__span-9-5>
+</span><span id=__span-9-6><span class=kt>void</span><span class=w> </span><span class=nf>print_time</span><span class=p>(</span><span class=k>const</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>&amp;</span><span class=w> </span><span class=n>message</span><span class=p>)</span><span class=w> </span>
+</span><span id=__span-9-7><span class=p>{</span>
+</span><span id=__span-9-8><span class=w>    </span><span class=k>auto</span><span class=w> </span><span class=n>now</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>system_clock</span><span class=o>::</span><span class=n>now</span><span class=p>();</span>
+</span><span id=__span-9-9><span class=w>    </span><span class=k>auto</span><span class=w> </span><span class=n>now_c</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>system_clock</span><span class=o>::</span><span class=n>to_time_t</span><span class=p>(</span><span class=n>now</span><span class=p>);</span>
+</span><span id=__span-9-10><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>message</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; - 时间: &quot;</span><span class=w> </span>
+</span><span id=__span-9-11><span class=w>              </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>put_time</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>localtime</span><span class=p>(</span><span class=o>&amp;</span><span class=n>now_c</span><span class=p>),</span><span class=w> </span><span class=s>&quot;%H:%M:%S&quot;</span><span class=p>)</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-9-12><span class=p>}</span>
+</span><span id=__span-9-13>
+</span><span id=__span-9-14><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span><span class=w> </span>
+</span><span id=__span-9-15><span class=p>{</span>
+</span><span id=__span-9-16><span class=w>    </span><span class=c1>// 1. 获取当前线程ID</span>
+</span><span id=__span-9-17><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;当前线程ID: &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>get_id</span><span class=p>()</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-9-18>
+</span><span id=__span-9-19><span class=w>    </span><span class=c1>// 2. 使用yield让出时间片</span>
+</span><span id=__span-9-20><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;准备让出时间片...&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-9-21><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>yield</span><span class=p>();</span>
+</span><span id=__span-9-22><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;继续执行...&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-9-23>
+</span><span id=__span-9-24><span class=w>    </span><span class=c1>// 3. 使用sleep_for暂停指定时间</span>
+</span><span id=__span-9-25><span class=w>    </span><span class=n>print_time</span><span class=p>(</span><span class=s>&quot;准备休眠2秒&quot;</span><span class=p>);</span>
+</span><span id=__span-9-26><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>sleep_for</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>seconds</span><span class=p>(</span><span class=mi>2</span><span class=p>));</span>
+</span><span id=__span-9-27><span class=w>    </span><span class=n>print_time</span><span class=p>(</span><span class=s>&quot;休眠结束&quot;</span><span class=p>);</span>
+</span><span id=__span-9-28>
+</span><span id=__span-9-29><span class=w>    </span><span class=c1>// 4. 使用sleep_until暂停到指定时间点</span>
+</span><span id=__span-9-30><span class=w>    </span><span class=k>auto</span><span class=w> </span><span class=n>now</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>system_clock</span><span class=o>::</span><span class=n>now</span><span class=p>();</span>
+</span><span id=__span-9-31><span class=w>    </span><span class=k>auto</span><span class=w> </span><span class=n>wake_time</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>now</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>seconds</span><span class=p>(</span><span class=mi>3</span><span class=p>);</span>
+</span><span id=__span-9-32>
+</span><span id=__span-9-33><span class=w>    </span><span class=n>print_time</span><span class=p>(</span><span class=s>&quot;准备休眠到指定时间点(当前时间+3秒)&quot;</span><span class=p>);</span>
+</span><span id=__span-9-34><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>sleep_until</span><span class=p>(</span><span class=n>wake_time</span><span class=p>);</span>
+</span><span id=__span-9-35><span class=w>    </span><span class=n>print_time</span><span class=p>(</span><span class=s>&quot;到达指定时间点，继续执行&quot;</span><span class=p>);</span>
+</span><span id=__span-9-36>
+</span><span id=__span-9-37><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-9-38><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>参考输出：</p> <div class="language-text highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Text Only</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span>
+<span class=normal>7</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1>当前线程ID: 26096
+</span><span id=__span-10-2>准备让出时间片...
+</span><span id=__span-10-3>继续执行...
+</span><span id=__span-10-4>准备休眠2秒 - 时间: 19:23:48
+</span><span id=__span-10-5>休眠结束 - 时间: 19:23:50
+</span><span id=__span-10-6>准备休眠到指定时间点(当前时间+3秒) - 时间: 19:23:50
+</span><span id=__span-10-7>到达指定时间点，继续执行 - 时间: 19:23:53
+</span></code></pre></div></td></tr></table></div> <h2 id=mutex>互斥锁库<code>&lt;mutex&gt;</code><a class=headerlink href=#mutex title="Permanent link">&para;</a></h2> <p>在C++11中，标准库提供了多种互斥锁（mutex）类型和相关工具，用于实现线程间的同步。这些互斥锁和工具位于<code>&lt;mutex&gt;</code>头文件中。以下是C++11中互斥锁库的完整列表，并附上详细说明。</p> <h2 id=c11>C++11中的互斥锁类型<a class=headerlink href=#c11 title="Permanent link">&para;</a></h2> <table> <thead> <tr> <th>互斥锁类型</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>std::mutex</code></td> <td>最基本的互斥锁类型，提供独占锁定功能。支持<code>lock()</code>、<code>unlock()</code>和<code>try_lock()</code>操作</td> </tr> <tr> <td><code>std::recursive_mutex</code></td> <td>递归互斥锁，允许同一线程多次锁定同一个互斥锁，但必须解锁相同次数才能释放锁。</td> </tr> <tr> <td><code>std::timed_mutex</code></td> <td>带超时功能的互斥锁，支持尝试锁定一段时间后放弃（使用<code>try_lock_for</code>和<code>try_lock_until</code>）</td> </tr> <tr> <td><code>std::recursive_timed_mutex</code></td> <td>结合了递归互斥锁和带超时功能的互斥锁特性</td> </tr> </tbody> </table> <p>对于基本的<code>mutex</code>来说，使用方式与Linux下的<code>pthread_mutex_t</code>类似，使用<code>lock()</code>加锁，使用<code>unlock()</code>解锁，使用<code>try_lock()</code>尝试加锁，加锁成功返回<code>true</code>，加锁失败返回<code>false</code>。此处不再赘述</p> <p>下面介绍递归锁和带超时的锁</p> <p>在一般场景下，直接使用普通的锁完全够用，但是在下面的情况下，如果使用普通的锁，可能会出现死锁的情况，例如：</p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><span class=cp>#include</span><span class=w> </span><span class=cpf>&lt;mutex&gt;</span>
+</span><span id=__span-11-2>
+</span><span id=__span-11-3><span class=c1>// 定义一个递归函数</span>
+</span><span id=__span-11-4><span class=kt>void</span><span class=w> </span><span class=nf>recursion</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>n</span><span class=p>,</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>mutex</span><span class=o>&amp;</span><span class=w> </span><span class=n>mtx</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=o>&amp;</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-11-5><span class=p>{</span>
+</span><span id=__span-11-6><span class=w>    </span><span class=c1>// 加锁保护临界区资源</span>
+</span><span id=__span-11-7><span class=w>    </span><span class=n>mtx</span><span class=p>.</span><span class=n>lock</span><span class=p>();</span>
+</span><span id=__span-11-8><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>n</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-11-9><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-11-10><span class=w>        </span><span class=n>mtx</span><span class=p>.</span><span class=n>unlock</span><span class=p>();</span>
+</span><span id=__span-11-11><span class=w>        </span><span class=k>return</span><span class=p>;</span>
+</span><span id=__span-11-12><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-11-13><span class=w>    </span><span class=k>for</span><span class=w> </span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>n</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span>
+</span><span id=__span-11-14><span class=w>        </span><span class=o>++</span><span class=n>x</span><span class=p>;</span>
+</span><span id=__span-11-15><span class=w>    </span><span class=n>recursion</span><span class=p>(</span><span class=n>n</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>10</span><span class=p>,</span><span class=w> </span><span class=n>mtx</span><span class=p>,</span><span class=w> </span><span class=n>x</span><span class=p>);</span>
+</span><span id=__span-11-16><span class=w>    </span><span class=n>mtx</span><span class=p>.</span><span class=n>unlock</span><span class=p>();</span>
+</span><span id=__span-11-17><span class=p>}</span>
+</span><span id=__span-11-18>
+</span><span id=__span-11-19><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-11-20><span class=p>{</span>
+</span><span id=__span-11-21><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>n</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>100</span><span class=p>;</span>
+</span><span id=__span-11-22><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>x</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-11-23><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>mutex</span><span class=w> </span><span class=n>mtx</span><span class=p>;</span>
+</span><span id=__span-11-24><span class=w>    </span><span class=c1>// 注意使用引用传递</span>
+</span><span id=__span-11-25><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t</span><span class=p>(</span><span class=n>recursion</span><span class=p>,</span><span class=w> </span><span class=n>n</span><span class=p>,</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>ref</span><span class=p>(</span><span class=n>mtx</span><span class=p>),</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>ref</span><span class=p>(</span><span class=n>x</span><span class=p>));</span>
+</span><span id=__span-11-26>
+</span><span id=__span-11-27><span class=w>    </span><span class=n>t</span><span class=p>.</span><span class=n>join</span><span class=p>();</span>
+</span><span id=__span-11-28><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-11-29><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>在上面的代码中，第一次调用<code>recursion</code>函数时，会加锁保护临界区资源，但是在第一次递归调用时，因为调用递归的位置在释放锁之前，此时当前线程再次进入<code>recursion</code>函数就会开始尝试加锁，但是因为第一次调用并没有释放锁，这就导致当前线程会一直等待锁的释放，这就导致了死锁的情况。这也侧面说明了当前<code>recursion</code>函数是<a href=https://www.help-doc.top/Linux/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html#_11>不可重入</a>的</p> <p>基于这个问题，就需要使用递归锁：</p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><span class=c1>// 定义一个递归函数</span>
+</span><span id=__span-12-2><span class=kt>void</span><span class=w> </span><span class=nf>recursion</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>n</span><span class=p>,</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>recursive_mutex</span><span class=o>&amp;</span><span class=w> </span><span class=n>mtx</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=o>&amp;</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-12-3><span class=p>{</span>
+</span><span id=__span-12-4><span class=w>    </span><span class=c1>// 加锁保护临界区资源</span>
+</span><span id=__span-12-5><span class=w>    </span><span class=n>mtx</span><span class=p>.</span><span class=n>lock</span><span class=p>();</span>
+</span><span id=__span-12-6><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>n</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-12-7><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-12-8><span class=w>        </span><span class=n>mtx</span><span class=p>.</span><span class=n>unlock</span><span class=p>();</span><span class=w> </span><span class=c1>// 确保在返回前解锁</span>
+</span><span id=__span-12-9><span class=w>        </span><span class=k>return</span><span class=p>;</span>
+</span><span id=__span-12-10><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-12-11><span class=w>    </span><span class=k>for</span><span class=w> </span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>n</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span>
+</span><span id=__span-12-12><span class=w>        </span><span class=o>++</span><span class=n>x</span><span class=p>;</span>
+</span><span id=__span-12-13><span class=w>    </span><span class=n>recursion</span><span class=p>(</span><span class=n>n</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>10</span><span class=p>,</span><span class=w> </span><span class=n>mtx</span><span class=p>,</span><span class=w> </span><span class=n>x</span><span class=p>);</span>
+</span><span id=__span-12-14><span class=w>    </span><span class=n>mtx</span><span class=p>.</span><span class=n>unlock</span><span class=p>();</span>
+</span><span id=__span-12-15><span class=p>}</span>
+</span><span id=__span-12-16>
+</span><span id=__span-12-17><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-12-18><span class=p>{</span>
+</span><span id=__span-12-19><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>n</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>100</span><span class=p>;</span>
+</span><span id=__span-12-20><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>x</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-12-21><span class=w>    </span><span class=c1>// 使用递归锁</span>
+</span><span id=__span-12-22><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>recursive_mutex</span><span class=w> </span><span class=n>mtx</span><span class=p>;</span>
+</span><span id=__span-12-23><span class=w>    </span><span class=c1>// 注意使用引用传递</span>
+</span><span id=__span-12-24><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t</span><span class=p>(</span><span class=n>recursion</span><span class=p>,</span><span class=w> </span><span class=n>n</span><span class=p>,</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>ref</span><span class=p>(</span><span class=n>mtx</span><span class=p>),</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>ref</span><span class=p>(</span><span class=n>x</span><span class=p>));</span>
+</span><span id=__span-12-25>
+</span><span id=__span-12-26><span class=w>    </span><span class=n>t</span><span class=p>.</span><span class=n>join</span><span class=p>();</span>
+</span><span id=__span-12-27><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-12-28><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>接下来是超时锁<code>timed_mutex</code>，超时锁本质就是不让线程持续阻塞，而是在指定的时间内尝试加锁，如果加锁成功就继续执行，如果加锁失败就返回。例如下面的代码：</p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><span class=kt>void</span><span class=w> </span><span class=nf>test</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>n</span><span class=p>,</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>timed_mutex</span><span class=w> </span><span class=o>&amp;</span><span class=n>tmtx</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=o>&amp;</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-13-2><span class=p>{</span>
+</span><span id=__span-13-3><span class=w>    </span><span class=c1>// 不要直接使用lock</span>
+</span><span id=__span-13-4><span class=w>    </span><span class=c1>// tmtx.lock();</span>
+</span><span id=__span-13-5><span class=w>    </span><span class=c1>// 使用try_lock_for</span>
+</span><span id=__span-13-6><span class=w>    </span><span class=k>while</span><span class=w> </span><span class=p>(</span><span class=n>tmtx</span><span class=p>.</span><span class=n>try_lock_for</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>milliseconds</span><span class=p>(</span><span class=mi>1000</span><span class=p>));)</span>
+</span><span id=__span-13-7><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-13-8><span class=w>        </span><span class=k>for</span><span class=w> </span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>n</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span>
+</span><span id=__span-13-9><span class=w>            </span><span class=o>++</span><span class=n>x</span><span class=p>;</span>
+</span><span id=__span-13-10><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-13-11>
+</span><span id=__span-13-12><span class=w>    </span><span class=n>tmtx</span><span class=p>.</span><span class=n>unlock</span><span class=p>();</span>
+</span><span id=__span-13-13><span class=p>}</span>
+</span><span id=__span-13-14>
+</span><span id=__span-13-15><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-13-16><span class=p>{</span>
+</span><span id=__span-13-17><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>timed_mutex</span><span class=w> </span><span class=n>tmtx</span><span class=p>;</span>
+</span><span id=__span-13-18><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>x</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>;</span>
+</span><span id=__span-13-19><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>n</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>100</span><span class=p>;</span>
+</span><span id=__span-13-20>
+</span><span id=__span-13-21><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t</span><span class=p>(</span><span class=n>test</span><span class=p>,</span><span class=w> </span><span class=n>n</span><span class=p>,</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>ref</span><span class=p>(</span><span class=n>tmtx</span><span class=p>),</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>ref</span><span class=p>(</span><span class=n>x</span><span class=p>));</span>
+</span><span id=__span-13-22>
+</span><span id=__span-13-23><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t1</span><span class=p>(</span><span class=n>test</span><span class=p>,</span><span class=w> </span><span class=n>n</span><span class=p>,</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>ref</span><span class=p>(</span><span class=n>tmtx</span><span class=p>),</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>ref</span><span class=p>(</span><span class=n>x</span><span class=p>));</span>
+</span><span id=__span-13-24>
+</span><span id=__span-13-25><span class=w>    </span><span class=n>t</span><span class=p>.</span><span class=n>join</span><span class=p>();</span>
+</span><span id=__span-13-26><span class=w>    </span><span class=n>t1</span><span class=p>.</span><span class=n>join</span><span class=p>();</span>
+</span><span id=__span-13-27>
+</span><span id=__span-13-28><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-13-29><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>需要注意的是，如果使用超时锁想实现防止线程阻塞在等待锁的过程，需要使用<code>try_lock_for</code>或者<code>try_lock_until</code>，如果直接使用<code>timed_mutex</code>的<code>lock</code>系列接口，那么<a href=javascript:; class=custom-tooltip data-title="参考文档对timed_mutex的lock函数的描述：The calling thread locks the timed_mutex, blocking if necessary (it behaves exactly as in mutex)"><code>timed_mutex</code>和普通的<code>mutex</code>没有任何区别</a></p> <h2 id=c11_1>C++11中的互斥锁相关工具<a class=headerlink href=#c11_1 title="Permanent link">&para;</a></h2> <table> <thead> <tr> <th>工具类型</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>std::lock_guard&lt;std::mutex&gt;</code></td> <td>简单的RAII风格锁管理器，自动在构造时加锁，在析构时解锁。不可手动解锁。</td> </tr> <tr> <td><code>std::unique_lock&lt;std::mutex&gt;</code></td> <td>更灵活的RAII风格锁管理器，支持延迟加锁、手动解锁以及与条件变量配合使用。</td> </tr> <tr> <td><code>std::call_once</code> 和 <code>std::once_flag</code></td> <td>用于确保某段代码在多线程环境中仅执行一次。</td> </tr> </tbody> </table> <p>对于<code>lock_guard</code>来说，在<a href=https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/3.%20Linux%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BA%92%E6%96%A5/3.%20Linux%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BA%92%E6%96%A5.html#craii>Linux线程互斥与同步</a>已经模拟实现了一份<code>MutexGuard</code>，基本原理就类似于<code>MutexGuard</code></p> <p>接下来主要看<code>unique_lock</code>。<code>unique_lock</code>可以理解为是<code>lock_guard</code>的一种升级版本，基本使用方式和<code>lock_guard</code>类似，所以这里就不再介绍基本使用方式</p> <p><code>unique_lock</code>的灵活性在于它可以由程序员控制加锁和解锁的时机，例如下面的三种构造函数：</p> <ol> <li><code>unique_lock (mutex_type&amp; m, try_to_lock_t tag);</code>：尝试加锁，如果加锁失败就不会阻塞当前线程，底层调用的是<code>try_lock</code>。但是<code>try_lock_t</code>因为是非阻塞的，不论是否获取到锁，都会返回一个<code>unique_lock</code>对象，即这个<code>unique_lock</code>是否真的已经管理到指定锁对象是未知的，所以需要判断是否加锁成功。具体如何判断在下面会具体介绍</li> <li><code>unique_lock (mutex_type&amp; m, defer_lock_t tag) noexcept;</code>：缓上锁，即<code>unique_lock</code>接收一个锁对象时不会对这个锁进行加锁，具体加锁时机由程序员决定，但是会自动释放锁对象</li> <li><code>unique_lock (mutex_type&amp; m, adopt_lock_t tag);</code>：领养锁，即此时<code>unique_lock</code>可以接受一个（假设）已经加锁的锁对象，并且会自动释放锁对象</li> </ol> <p>要使用上面的三种构造函数，需要使用三种类型：</p> <ol> <li><code>try_to_lock</code></li> <li><code>defer_lock</code></li> <li><code>adopt_lock</code></li> </ol> <p>首先看后两个<code>defer_lock</code>和<code>adopt_lock</code>，示例代码如下：</p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span>
+<span class=normal>44</span>
+<span class=normal>45</span>
+<span class=normal>46</span>
+<span class=normal>47</span>
+<span class=normal>48</span>
+<span class=normal>49</span>
+<span class=normal>50</span>
+<span class=normal>51</span>
+<span class=normal>52</span>
+<span class=normal>53</span>
+<span class=normal>54</span>
+<span class=normal>55</span>
+<span class=normal>56</span>
+<span class=normal>57</span>
+<span class=normal>58</span>
+<span class=normal>59</span>
+<span class=normal>60</span>
+<span class=normal>61</span>
+<span class=normal>62</span>
+<span class=normal>63</span>
+<span class=normal>64</span>
+<span class=normal>65</span>
+<span class=normal>66</span>
+<span class=normal>67</span>
+<span class=normal>68</span>
+<span class=normal>69</span>
+<span class=normal>70</span>
+<span class=normal>71</span>
+<span class=normal>72</span>
+<span class=normal>73</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><span class=n>std</span><span class=o>::</span><span class=n>mutex</span><span class=w> </span><span class=n>mtx</span><span class=p>;</span>
+</span><span id=__span-14-2><span class=c1>// 1. defer_lock_t 示例：延迟加锁</span>
+</span><span id=__span-14-3><span class=kt>void</span><span class=w> </span><span class=nf>defer_lock_example</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>id</span><span class=p>)</span>
+</span><span id=__span-14-4><span class=p>{</span>
+</span><span id=__span-14-5><span class=w>    </span><span class=c1>// 创建锁但不立即加锁</span>
+</span><span id=__span-14-6><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>unique_lock</span><span class=o>&lt;</span><span class=n>std</span><span class=o>::</span><span class=n>mutex</span><span class=o>&gt;</span><span class=w> </span><span class=n>lock</span><span class=p>(</span><span class=n>mtx</span><span class=p>,</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>defer_lock</span><span class=p>);</span>
+</span><span id=__span-14-7>
+</span><span id=__span-14-8><span class=w>    </span><span class=c1>// 执行一些不需要锁的操作</span>
+</span><span id=__span-14-9><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 正在执行不需要锁的操作...&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-14-10><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>sleep_for</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>milliseconds</span><span class=p>(</span><span class=mi>200</span><span class=p>));</span>
+</span><span id=__span-14-11>
+</span><span id=__span-14-12><span class=w>    </span><span class=c1>// 在需要的时候手动加锁</span>
+</span><span id=__span-14-13><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 尝试获取锁...&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-14-14><span class=w>    </span><span class=n>lock</span><span class=p>.</span><span class=n>lock</span><span class=p>();</span>
+</span><span id=__span-14-15><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 获取到了锁&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-14-16>
+</span><span id=__span-14-17><span class=w>    </span><span class=c1>// 执行需要锁保护的操作</span>
+</span><span id=__span-14-18><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>sleep_for</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>milliseconds</span><span class=p>(</span><span class=mi>500</span><span class=p>));</span>
+</span><span id=__span-14-19>
+</span><span id=__span-14-20><span class=w>    </span><span class=c1>// 可以手动解锁</span>
+</span><span id=__span-14-21><span class=w>    </span><span class=n>lock</span><span class=p>.</span><span class=n>unlock</span><span class=p>();</span>
+</span><span id=__span-14-22><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 手动释放了锁&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-14-23>
+</span><span id=__span-14-24><span class=w>    </span><span class=c1>// 执行更多不需要锁的操作</span>
+</span><span id=__span-14-25><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>sleep_for</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>milliseconds</span><span class=p>(</span><span class=mi>200</span><span class=p>));</span>
+</span><span id=__span-14-26>
+</span><span id=__span-14-27><span class=w>    </span><span class=c1>// 可以再次加锁</span>
+</span><span id=__span-14-28><span class=w>    </span><span class=n>lock</span><span class=p>.</span><span class=n>lock</span><span class=p>();</span>
+</span><span id=__span-14-29><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 再次获取到了锁&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-14-30><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>sleep_for</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>milliseconds</span><span class=p>(</span><span class=mi>300</span><span class=p>));</span>
+</span><span id=__span-14-31>
+</span><span id=__span-14-32><span class=w>    </span><span class=c1>// 锁会在unique_lock析构时自动释放</span>
+</span><span id=__span-14-33><span class=p>}</span>
+</span><span id=__span-14-34>
+</span><span id=__span-14-35><span class=c1>// 2. adopt_lock_t 示例：接管已加锁的互斥量</span>
+</span><span id=__span-14-36><span class=kt>void</span><span class=w> </span><span class=nf>adopt_lock_example</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>id</span><span class=p>)</span>
+</span><span id=__span-14-37><span class=p>{</span>
+</span><span id=__span-14-38><span class=w>    </span><span class=c1>// 先手动加锁</span>
+</span><span id=__span-14-39><span class=w>    </span><span class=n>mtx</span><span class=p>.</span><span class=n>lock</span><span class=p>();</span>
+</span><span id=__span-14-40><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 手动获取了锁&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-14-41>
+</span><span id=__span-14-42><span class=w>    </span><span class=c1>// 创建unique_lock并接管已加锁的互斥量</span>
+</span><span id=__span-14-43><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-14-44><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>unique_lock</span><span class=o>&lt;</span><span class=n>std</span><span class=o>::</span><span class=n>mutex</span><span class=o>&gt;</span><span class=w> </span><span class=n>lock</span><span class=p>(</span><span class=n>mtx</span><span class=p>,</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>adopt_lock</span><span class=p>);</span>
+</span><span id=__span-14-45><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 的unique_lock接管了锁的所有权&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-14-46>
+</span><span id=__span-14-47><span class=w>        </span><span class=c1>// 执行需要锁保护的操作</span>
+</span><span id=__span-14-48><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>sleep_for</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>milliseconds</span><span class=p>(</span><span class=mi>800</span><span class=p>));</span>
+</span><span id=__span-14-49>
+</span><span id=__span-14-50><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 即将退出作用域，锁将被自动释放&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-14-51><span class=w>        </span><span class=c1>// 锁会在unique_lock析构时自动释放</span>
+</span><span id=__span-14-52><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-14-53>
+</span><span id=__span-14-54><span class=w>    </span><span class=c1>// 此时锁已被释放，可以执行其他操作</span>
+</span><span id=__span-14-55><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 的锁已被释放&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-14-56><span class=p>}</span>
+</span><span id=__span-14-57>
+</span><span id=__span-14-58><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-14-59><span class=p>{</span>
+</span><span id=__span-14-60><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;</span><span class=se>\n</span><span class=s>=== defer_lock 示例 ===&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-14-61><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-14-62><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t</span><span class=p>(</span><span class=n>defer_lock_example</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>);</span>
+</span><span id=__span-14-63><span class=w>        </span><span class=n>t</span><span class=p>.</span><span class=n>join</span><span class=p>();</span>
+</span><span id=__span-14-64><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-14-65>
+</span><span id=__span-14-66><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;</span><span class=se>\n</span><span class=s>=== adopt_lock 示例 ===&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-14-67><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-14-68><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t</span><span class=p>(</span><span class=n>adopt_lock_example</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>);</span>
+</span><span id=__span-14-69><span class=w>        </span><span class=n>t</span><span class=p>.</span><span class=n>join</span><span class=p>();</span>
+</span><span id=__span-14-70><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-14-71>
+</span><span id=__span-14-72><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-14-73><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>参考输出：</p> <div class="language-text highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Text Only</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1>=== defer_lock 示例 ===
+</span><span id=__span-15-2>线程 1 正在执行不需要锁的操作...
+</span><span id=__span-15-3>线程 1 尝试获取锁...
+</span><span id=__span-15-4>线程 1 获取到了锁
+</span><span id=__span-15-5>线程 1 手动释放了锁
+</span><span id=__span-15-6>线程 1 再次获取到了锁
+</span><span id=__span-15-7>
+</span><span id=__span-15-8>=== adopt_lock 示例 ===
+</span><span id=__span-15-9>线程 1 手动获取了锁
+</span><span id=__span-15-10>线程 1 的unique_lock接管了锁的所有权
+</span><span id=__span-15-11>线程 1 即将退出作用域，锁将被自动释放
+</span><span id=__span-15-12>线程 1 的锁已被释放
+</span></code></pre></div></td></tr></table></div> <p>接下来看<code>try_to_lock</code>，在上面提到过，<code>try_to_lock</code>会尝试加锁，需要判断是否加锁成功，这里可以通过调用<code>owns_lock</code>来判断，当然也可以直接通过<code>operator bool</code>来判断，示例代码如下：</p> <div class="language-cpp highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C++</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><span class=n>std</span><span class=o>::</span><span class=n>mutex</span><span class=w> </span><span class=n>mtx</span><span class=p>;</span>
+</span><span id=__span-16-2>
+</span><span id=__span-16-3><span class=kt>void</span><span class=w> </span><span class=nf>try_lock_example</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>id</span><span class=p>)</span>
+</span><span id=__span-16-4><span class=p>{</span>
+</span><span id=__span-16-5><span class=w>    </span><span class=c1>// 尝试获取锁，如果失败则不阻塞</span>
+</span><span id=__span-16-6><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>unique_lock</span><span class=o>&lt;</span><span class=n>std</span><span class=o>::</span><span class=n>mutex</span><span class=o>&gt;</span><span class=w> </span><span class=n>lock</span><span class=p>(</span><span class=n>mtx</span><span class=p>,</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>try_to_lock</span><span class=p>);</span>
+</span><span id=__span-16-7>
+</span><span id=__span-16-8><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>lock</span><span class=p>.</span><span class=n>owns_lock</span><span class=p>())</span><span class=w> </span><span class=c1>// 可以直接使用if(lock)，调用operator bool</span>
+</span><span id=__span-16-9><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-16-10><span class=w>        </span><span class=c1>// 成功获取到锁</span>
+</span><span id=__span-16-11><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 获取到了锁&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-16-12><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>sleep_for</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>milliseconds</span><span class=p>(</span><span class=mi>1000</span><span class=p>));</span>
+</span><span id=__span-16-13><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 完成工作并释放锁&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-16-14><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-16-15><span class=w>    </span><span class=k>else</span><span class=w> </span>
+</span><span id=__span-16-16><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-16-17><span class=w>        </span><span class=c1>// 未能获取到锁</span>
+</span><span id=__span-16-18><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;线程 &quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot; 未能获取锁，执行替代操作&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-16-19><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>sleep_for</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>milliseconds</span><span class=p>(</span><span class=mi>500</span><span class=p>));</span>
+</span><span id=__span-16-20><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-16-21><span class=w>    </span><span class=c1>// 锁会在unique_lock析构时自动释放（如果已获取）</span>
+</span><span id=__span-16-22><span class=p>}</span>
+</span><span id=__span-16-23>
+</span><span id=__span-16-24><span class=kt>int</span><span class=w> </span><span class=nf>main</span><span class=p>()</span>
+</span><span id=__span-16-25><span class=p>{</span>
+</span><span id=__span-16-26><span class=w>    </span><span class=n>std</span><span class=o>::</span><span class=n>cout</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=s>&quot;=== try_to_lock 示例 ===&quot;</span><span class=w> </span><span class=o>&lt;&lt;</span><span class=w> </span><span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span><span id=__span-16-27><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-16-28><span class=w>        </span><span class=c1>// 创建两个线程同时尝试获取锁</span>
+</span><span id=__span-16-29><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t1</span><span class=p>(</span><span class=n>try_lock_example</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>);</span>
+</span><span id=__span-16-30><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=n>this_thread</span><span class=o>::</span><span class=n>sleep_for</span><span class=p>(</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>milliseconds</span><span class=p>(</span><span class=mi>100</span><span class=p>));</span><span class=w> </span><span class=c1>// 确保t1先运行</span>
+</span><span id=__span-16-31><span class=w>        </span><span class=n>std</span><span class=o>::</span><span class=kr>thread</span><span class=w> </span><span class=n>t2</span><span class=p>(</span><span class=n>try_lock_example</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>);</span>
+</span><span id=__span-16-32>
+</span><span id=__span-16-33><span class=w>        </span><span class=n>t1</span><span class=p>.</span><span class=n>join</span><span class=p>();</span>
+</span><span id=__span-16-34><span class=w>        </span><span class=n>t2</span><span class=p>.</span><span class=n>join</span><span class=p>();</span>
+</span><span id=__span-16-35><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-16-36>
+</span><span id=__span-16-37><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span>
+</span><span id=__span-16-38><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>参考输出：</p> <div class="language-text highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Text Only</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1>=== try_to_lock 示例 ===
+</span><span id=__span-17-2>线程 1 获取到了锁
+</span><span id=__span-17-3>线程 2 未能获取锁，执行替代操作
+</span><span id=__span-17-4>线程 1 完成工作并释放锁
+</span></code></pre></div></td></tr></table></div> <p>除了上面的三种构造函数，<code>unique_lock</code>还提供了一些其他的成员函数：</p> <ol> <li><code>release()</code>：释放当前锁对象，并且返回该锁对象指针，不再管理该锁（需要程序员自己释放锁）</li> <li><code>mutex()</code>：获取<code>unique_lock</code>管理的锁对象的指针</li> </ol> <p>这两个成员函数不具体介绍使用，了解即可</p> <h2 id=locktry_lock>防止死锁的函数<code>lock</code>和<code>try_lock</code><a class=headerlink href=#locktry_lock title="Permanent link">&para;</a></h2> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年4月17日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年4月16日</span> </span> </aside> <form class=md-feedback name=feedback hidden> <fieldset> <legend class=md-feedback__title> 页面有帮助吗？ </legend> <div class=md-feedback__inner> <div class=md-feedback__list> <button class="md-feedback__icon md-icon" type=submit title=页面对我有帮助 data-md-value=1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M5 9v12H1V9zm4 12a2 2 0 0 1-2-2V9c0-.55.22-1.05.59-1.41L14.17 1l1.06 1.06c.27.27.44.64.44 1.05l-.03.32L14.69 8H21a2 2 0 0 1 2 2v2c0 .26-.05.5-.14.73l-3.02 7.05C19.54 20.5 18.83 21 18 21zm0-2h9.03L21 12v-2h-8.79l1.13-5.32L9 9.03z"/></svg> </button> <button class="md-feedback__icon md-icon" type=submit title=页面没有帮助到我 data-md-value=0> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 15V3h4v12zM15 3a2 2 0 0 1 2 2v10c0 .55-.22 1.05-.59 1.41L9.83 23l-1.06-1.06c-.27-.27-.44-.64-.44-1.06l.03-.31.95-4.57H3a2 2 0 0 1-2-2v-2c0-.26.05-.5.14-.73l3.02-7.05C4.46 3.5 5.17 3 6 3zm0 2H5.97L3 12v2h8.78l-1.13 5.32L15 14.97z"/></svg> </button> </div> <div class=md-feedback__note> <div data-md-value=1 hidden> 谢谢你的反馈！ </div> <div data-md-value=0 hidden> 谢谢你的反馈！联系<a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html>作者</a>提供更详细的信息 </div> </div> </div> </fieldset> </form> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024-2025 柯懒不是柯南 </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.prune", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script> <script src=../../assets/javascripts/bundle.c8b220af.min.js></script> <script src=../../javascripts/katex.min.js></script> <script src=../../javascripts/particles.min.js></script> <script src=../../javascripts/other.min.js></script> <script src=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js></script> <script src=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js></script> <script src=../../assets/javascripts/toggle-sidebar.js async></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
 document$.subscribe(() => { lightbox.reload() });
 </script></body> </html>

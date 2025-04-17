@@ -537,14 +537,18 @@
         }
     }
 
-    /* 头像样式 */
+    /* 头像样式 - 增强版 */
+    /* 头像样式 - 增强版，添加悬浮区域控制 */
     .header-avatar {
         display: inline-flex;
         align-items: center;
         margin-right: 0.8rem;
         position: relative;
+        z-index: 10;
+        /* 添加一个内边距以增加可点击区域，但不会影响布局 */
+        padding: 3px;
     }
-    
+
     .header-avatar img {
         width: 36px;
         height: 36px;
@@ -552,42 +556,162 @@
         object-fit: cover;
         border: 2px solid #fff;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        z-index: 5;
     }
-    
-    .header-avatar:hover img {
-        transform: scale(1.1);
-        box-shadow: 0 4px 12px rgba(77, 166, 218, 0.3);
-        border-color: rgba(77, 166, 218, 0.8);
+
+    /* 下拉菜单样式 - 增强版，改进悬浮区域控制 */
+    .avatar-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(25px) scale(0.95);
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+        padding: 45px 0 8px 0;
+        /* 增加更多顶部内边距 */
+        min-width: 140px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 4;
+        /* 低于头像 */
+        margin-top: -10px;
+        /* 让菜单上移覆盖头像下半部分 */
+        /* 添加一个缓冲区，防止鼠标离开时闪烁 */
+        pointer-events: none;
     }
-    
-    .header-avatar::after {
+
+    /* 悬停效果，修改触发条件和过渡延迟 */
+    .header-avatar:hover .avatar-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(15px) scale(1);
+        /* 添加延迟以防止闪烁 */
+        transition-delay: 0.05s;
+        pointer-events: auto;
+    }
+
+    /* 添加间隙区域保持悬停状态 */
+    .avatar-dropdown::after {
         content: '';
         position: absolute;
-        top: -2px;
-        right: -2px;
-        width: 10px;
-        height: 10px;
-        /* background-color: #4CAF50; */
-        border-radius: 50%;
-        /* border: 2px solid #fff; */
-        display: block;
+        top: -20px;
+        /* 创建顶部缓冲区 */
+        left: 0;
+        width: 100%;
+        height: 20px;
+        background: transparent;
     }
-    
+
+    .header-avatar:hover img {
+        transform: scale(1.5) translateY(18px);
+        /* 放大并稍微向下移动 */
+        box-shadow: 0 6px 16px rgba(77, 166, 218, 0.35);
+        border-color: rgba(77, 166, 218, 0.8);
+        /* 添加延迟以防止闪烁 */
+        transition-delay: 0s;
+    }
+
+    /* 菜单三角形指示器 - 隐藏，因为视觉上头像已经作为指示器 */
+    .avatar-dropdown::before {
+        display: none;
+    }
+
+    /* 菜单项样式 */
+    .avatar-dropdown-item {
+        display: block;
+        padding: 10px 16px;
+        color: #333;
+        font-size: 14px;
+        text-decoration: none;
+        transition: all 0.25s ease;
+        text-align: center;
+        position: relative;
+        white-space: nowrap;
+    }
+
+    .avatar-dropdown-item:hover {
+        background-color: rgba(77, 166, 218, 0.08);
+        color: rgba(77, 166, 218, 0.9);
+    }
+
+    .avatar-dropdown-item:hover::after {
+        content: '';
+        position: absolute;
+        left: 8px;
+        width: 3px;
+        height: 70%;
+        background: rgba(77, 166, 218, 0.9);
+        border-radius: 2px;
+        top: 15%;
+    }
+
+    .avatar-dropdown-divider {
+        height: 1px;
+        background-color: rgba(0, 0, 0, 0.06);
+        margin: 4px 8px;
+    }
+
+    /* 响应式设计调整 */
     @media screen and (max-width: 1199px) {
         .theme-switch {
             display: none !important;
         }
-        
+
         .header-avatar {
             margin-right: 0.5rem;
         }
     }
-    
-    @media screen and (max-width: 767px) {
+
+    /* 响应式设计调整 */
+    @media screen and (max-width: 1200px) {
+        .header-avatar {
+            margin-right: 0.3rem;
+            padding: 2px;
+        }
+
         .header-avatar img {
             width: 32px;
             height: 32px;
+        }
+
+        /* 调整菜单位置，靠左侧显示 */
+        .avatar-dropdown {
+            /* 调整left确保显示在左侧 */
+            left: -120px;
+            transform: translateX(0) translateY(25px) scale(0.95);
+            padding-top: 15px;
+            margin-top: 0;
+            min-width: 130px;
+            position: absolute;
+            z-index: 100;
+        }
+
+        /* 点击时的行为，而不是悬停 */
+        .header-avatar:hover .avatar-dropdown {
+            transform: translateX(0) translateY(5px) scale(1);
+        }
+
+        /* 移动端头像不放大，防止页面移动 */
+        .header-avatar:hover img {
+            transform: none;
+            border-color: rgba(77, 166, 218, 0.8);
+            box-shadow: 0 4px 12px rgba(77, 166, 218, 0.3);
+        }
+
+        /* 调整导航栏布局 */
+        .md-header__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 确保下拉菜单不遮挡其他元素 */
+        .avatar-dropdown {
+            max-width: 85vw;
         }
     }
 </style><script>
@@ -595,21 +719,29 @@
         const searchEl = document.querySelector('.md-search');
         const savedTheme = localStorage.getItem('preferred-theme') || 'theme1';
 
-        // 创建头像元素
-        const avatarEl = document.createElement('a');
-        avatarEl.href = "/作者/作者.html"; // 跳转到作者页面
+        // 创建头像元素，包含下拉菜单
+        const avatarEl = document.createElement('div');
         avatarEl.className = 'header-avatar';
-        avatarEl.innerHTML = `<img src="/作者/作者.assets/20250206-200653.jpg" alt="头像">`;
+
+        // 创建头像图片和下拉菜单
+        avatarEl.innerHTML = `
+        <img src="/作者/作者.assets/20250206-200653.jpg" alt="头像">
+        <div class="avatar-dropdown">
+            <a href="/作者/联系作者.html" class="avatar-dropdown-item">联系作者</a>
+            <div class="avatar-dropdown-divider"></div>
+            <a href="/作者/关于作者.html" class="avatar-dropdown-item">关于作者</a>
+        </div>
+    `;
 
         // 创建主题切换按钮
         const themeSwitch = document.createElement('div');
         themeSwitch.className = 'theme-switch';
         themeSwitch.innerHTML = `
-            <button class="theme-btn" onclick="switchTheme()">
-                <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '原生主题'}</span>
-                <span class="target-theme">${savedTheme === 'theme1' ? '原生主题' : '新版主题'}</span>
-            </button>
-        `;
+        <button class="theme-btn" onclick="switchTheme()">
+            <span class="current-theme">${savedTheme === 'theme1' ? '新版主题' : '原生主题'}</span>
+            <span class="target-theme">${savedTheme === 'theme1' ? '原生主题' : '新版主题'}</span>
+        </button>
+    `;
 
         // 插入元素
         searchEl.parentNode.insertBefore(avatarEl, searchEl);

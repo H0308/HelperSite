@@ -644,6 +644,14 @@
         white-space: nowrap;
     }
 
+    .avatar-dropdown p {
+        padding: 10px 16px;
+        color: #333;
+        font-size: 16px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
     .avatar-dropdown-item:hover {
         background-color: rgba(77, 166, 218, 0.08);
         color: rgba(77, 166, 218, 0.9);
@@ -739,9 +747,12 @@
         avatarEl.innerHTML = `
         <img src="/作者/作者.assets/20250206-200653.jpg" alt="头像">
         <div class="avatar-dropdown">
-            <a href="/作者/联系作者/作者.html" class="avatar-dropdown-item">联系作者</a>
+            <p><strong>柯懒不是柯南</strong></p>
+            <a href="/作者/联系作者/作者.html" class="avatar-dropdown-item">吵醒柯懒</a>
             <div class="avatar-dropdown-divider"></div>
-            <a href="/作者/关于作者/关于作者.html" class="avatar-dropdown-item">关于作者</a>
+            <a href="/作者/关于作者/关于作者.html" class="avatar-dropdown-item">柯懒自传</a>
+            <div class="avatar-dropdown-divider"></div>
+            <a href="https://github.com/H0308" class="avatar-dropdown-item">柯懒的零食库</a>
         </div>
     `;
 

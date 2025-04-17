@@ -305,7 +305,8 @@ not_in_nav: |
   MySQL/JDBC/JDBC高级/JDBC高级.md
   工具帮助/Tomcat安装和使用/Tomcat安装和使用.md
   其它/Boost库中的谓词函数/Boost库中的谓词函数.md
-  作者/作者.md
+  作者/关于作者/关于作者.md
+  作者/联系作者/作者.md
 
 markdown_extensions:
   - admonition
@@ -413,4 +414,4 @@ plugins:
       type: date
       exclude:
         - index.md
-        - 作者/作者.md
+        - 作者/联系作者/作者.md

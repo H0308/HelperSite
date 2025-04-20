@@ -271,6 +271,8 @@ nav:
     #   - JDBC基础: MySQL/JDBC/JDBC基础/JDBC基础.md
     #   - JDBC进阶: MySQL/JDBC/JDBC进阶/JDBC进阶.md
     #   - JDBC高级: MySQL/JDBC/JDBC高级/JDBC高级.md
+    - MySQL基础知识:
+      - Ubuntu下安装和卸载MySQL: MySQL/MySQL基础知识/1. Ubuntu下安装和卸载MySQL/1. Ubuntu下安装和卸载MySQL.md
   - 扩展知识: 
     - 关于Shell: 其它/Shell脚本语言/关于Shell.md
     - 关于函数栈帧（C语言演示）: 其它/C语言函数栈帧/关于函数栈帧（C语言演示）.md

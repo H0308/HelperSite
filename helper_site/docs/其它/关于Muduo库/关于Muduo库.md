@@ -213,9 +213,9 @@ public:
     TcpClient(EventLoop* loop, const InetAddress& serverAddr, const string& nameArg);
     ~TcpClient(); // force out-line dtor, for std::unique_ptr members.
     void connect();//连接服务器
-    void disconnect();//关闭连接 void stop();
-    //获取客⼾端对应的通信连接Connection对象的接⼝，发起connect后，有可能还没有连接建⽴成
-    功
+    void disconnect();//关闭连接 
+    // void stop();
+    //获取客⼾端对应的通信连接Connection对象的接⼝，发起connect后，有可能还没有连接建⽴成功
     TcpConnectionPtr connection() const
     {
         MutexLockGuard lock(mutex_); 

@@ -104,37 +104,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-// 计算网站运行时间
-function calculateRuntime() {
-    const start = new Date('2024-08-08T00:00:00+08:00'); // 中国时间2024年8月8日00:00:00
-    const now = new Date();
-    const diff = now - start;
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    return `本站已运行 ${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒`;
-}
-// 添加运行时间到页脚
-document.addEventListener("DOMContentLoaded", () => {
-    const footerInner = document.querySelector(
-        ".md-footer-meta__inner.md-grid"
-    );
-    const copyright = document.querySelector(".md-copyright");
-    const social = document.querySelector(".md-social");
-
-    const runtimeDiv = document.createElement("div");
-    runtimeDiv.className = "md-footer-runtime md-typeset";
-
-    copyright.parentNode.insertBefore(runtimeDiv, social);
-
-    function updateRuntime() {
-        runtimeDiv.textContent = calculateRuntime();
-    }
-
-    updateRuntime();
-    setInterval(updateRuntime, 1000);
-});

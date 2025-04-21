@@ -271,6 +271,8 @@ nav:
     #   - JDBC基础: MySQL/JDBC/JDBC基础/JDBC基础.md
     #   - JDBC进阶: MySQL/JDBC/JDBC进阶/JDBC进阶.md
     #   - JDBC高级: MySQL/JDBC/JDBC高级/JDBC高级.md
+    - MySQL基础知识:
+      - Ubuntu下安装和卸载MySQL: MySQL/MySQL基础知识/1. Ubuntu下安装和卸载MySQL/1. Ubuntu下安装和卸载MySQL.md
   - 扩展知识: 
     - 关于Shell: 其它/Shell脚本语言/关于Shell.md
     - 关于函数栈帧（C语言演示）: 其它/C语言函数栈帧/关于函数栈帧（C语言演示）.md
@@ -305,7 +307,8 @@ not_in_nav: |
   MySQL/JDBC/JDBC高级/JDBC高级.md
   工具帮助/Tomcat安装和使用/Tomcat安装和使用.md
   其它/Boost库中的谓词函数/Boost库中的谓词函数.md
-  作者/作者.md
+  作者/关于作者/关于作者.md
+  作者/联系作者/作者.md
 
 markdown_extensions:
   - admonition
@@ -347,6 +350,7 @@ extra_javascript:
   - javascripts/katex.js
   - javascripts/particles.js
   - javascripts/other.js
+  - javascripts/copyright.js
   - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js
   - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js
 
@@ -392,6 +396,7 @@ plugins:
           - javascripts/katex.js
           - javascripts/other.js
           - javascripts/particles.js
+          - javascripts/copyright.js
   - glightbox:
       touchNavigation: true
       loop: false
@@ -413,4 +418,4 @@ plugins:
       type: date
       exclude:
         - index.md
-        - 作者/作者.md
+        - 作者/联系作者/作者.md

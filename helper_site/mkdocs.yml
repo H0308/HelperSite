@@ -226,6 +226,7 @@ nav:
       - HTTPS协议介绍与原理: Linux/26. 应用层协议HTTP/6. HTTPS协议介绍与原理/6. HTTPS协议介绍与原理.md
     - UDP协议原理: Linux/27. UDP协议原理/27. UDP协议原理.md
     - TCP协议原理: Linux/28. TCP协议原理/28. TCP协议原理.md
+    - 理解Linux如何看待连接以及TCP全连接队列: Linux\35. 理解Linux如何看待连接以及TCP全连接队列\35. 理解Linux如何看待连接以及TCP全连接队列.md
     - 网络层IP协议: Linux/29. 网络层IP协议/29. 网络层IP协议.md
     - 数据链路层协议: Linux/30. 数据链路层协议/30. 数据链路层协议.md
     - NAT技术、代理服务器和内网穿透: Linux/31. NAT技术、代理服务器和内网穿透/31. NAT技术、代理服务器和内网穿透.md
@@ -280,8 +281,8 @@ nav:
     - 关于JSONCPP库: 其它/关于JSONCPP库/关于JSONCPP库.md
     - 关于C++日志库spdlog: 其它/关于C++日志库spdlog/关于C++日志库spdlog.md
     - 关于Git: 
-      - Git基础操作: 关于Git/Git基础操作/Git基础操作.md
-      - Git多人协作: 关于Git/Git多人协作/Git多人协作.md
+      - Git基础操作: 其它/关于Git/Git基础操作/Git基础操作.md
+      - Git多人协作: 其它/关于Git/Git多人协作/Git多人协作.md
     - 关于Muduo库: 其它/关于Muduo库/关于Muduo库.md
     # - Boost库:
     #   - Boost库中的谓词函数: 其它/Boost库中的谓词函数/Boost库中的谓词函数.md

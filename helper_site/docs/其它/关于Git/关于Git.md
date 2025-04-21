@@ -1109,7 +1109,7 @@ this is a bug fix
 this is a new feature
 ```
 
-## 分布式版本控制系统
+## 分布式版本控制系统与远程仓库操作
 
 ### 何为分布式版本控制系统
 
@@ -1356,7 +1356,286 @@ nothing to commit, working tree clean
 
 ### 拉取远程分支
 
+如果此时远程仓库的版本高于当前本地仓库的版本，根据前面的思路就是将远程仓库的代码合并到当前本地仓库中，所以可以使用下面的命令：
 
+```bash
+git pull 远程仓库名 远程分支名:本地分支名
+```
+
+例如：
+
+```bash
+git pull origin master:master
+```
+
+同样，如果本地分支名和远程分支名相同，也可以简写为：
+
+```bash
+git pull origin master
+```
+
+此时会看到类似下面的结果：
+
+```
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 969 bytes | 484.00 KiB/s, done.
+From gitee.com:EPSDA/test_git
+ * branch            master     -> FETCH_HEAD
+   0335f10..6dbcbd3  master     -> origin/master
+Updating 0335f10..6dbcbd3
+Fast-forward
+ test.txt | 1 +
+ 1 file changed, 1 insertion(+)
+```
+
+默认情况下，`git pull`使用的是`Fast-forward`模式，如果此时出现冲突同样需要手动进行合并。因为`git pull`本质就是`git ferch + git merge`
+
+## 配置其他相关内容
+
+### 配置忽略文件`.gitignore`
+
+如果需要Git不关心某一些文件，可以在指定目录下创建一个`.gitignore`文件，关心，其语法如下：
+
+#### 基本语法规则
+
+- 每行指定一个忽略规则
+- 空行会被忽略
+- 以`#`开头的行是注释
+- 可以使用标准的glob模式匹配
+
+#### 通配符
+
+- `*` 匹配零个或多个任意字符（除了`/`）
+- `?` 匹配任意一个字符（除了`/`）
+- `[abc]` 匹配方括号中的任意一个字符
+- `[0-9]` 匹配0到9之间的任意一个数字
+- `**` 匹配任意中间目录
+
+#### 路径规则
+
+- 以`/`开头表示目录根目录
+- 以`/`结尾表示目录
+- 不以`/`开头或结尾则匹配任意路径
+
+#### 取反规则
+
+- 以`!`开头的模式表示取反，即不忽略匹配的文件
+
+#### 常见示例
+
+```
+# 忽略所有.txt文件
+*.txt
+
+# 但是不忽略important.txt
+!important.txt
+
+# 仅忽略当前目录下的TODO文件
+/TODO
+
+# 忽略build目录下的所有文件
+build/
+
+# 忽略doc目录及其所有子目录下的.pdf文件
+doc/**/*.pdf
+
+# 忽略所有以~结尾的临时文件
+*~
+
+# 忽略.vscode目录
+.vscode/
+
+# 忽略node_modules目录
+node_modules/
+
+# 忽略所有.log文件
+*.log
+
+# 忽略所有.temp文件和.tmp文件
+*.temp
+*.tmp
+
+# 忽略build目录下的所有文件，但不忽略build目录
+build/*
+```
+
+#### 注意事项
+
+1. `.gitignore`文件本身通常应该被包含在版本控制中
+2. 如果文件已经被Git跟踪，添加到`.gitignore`不会停止跟踪
+3. 可以在不同目录下创建多个`.gitignore`文件
+4. 规则的优先级：
+   - 后面的规则覆盖前面的规则
+   - `!`取反规则的优先级高于普通规则
+
+#### 常见用途
+
+1. 忽略编译生成的文件（如`.class`, `.o`, `.pyc`）
+2. 忽略依赖目录（如`node_modules/`, `vendor/`）
+3. 忽略IDE和编辑器的配置文件（如`.vscode/`, `.idea/`）
+4. 忽略系统生成的文件（如`.DS_Store`, `Thumbs.db`）
+5. 忽略日志和临时文件
+6. 忽略敏感信息文件（如配置文件中的密码、密钥）
+
+#### 查看文件的忽略规则
+
+如果想要检查某个文件是否被忽略，可以使用：
+
+```bash
+git check-ignore -v <file>
+```
+
+这个命令会显示是哪条规则导致了该文件被忽略
+
+### 给指定指令取别名
+
+在使用Git时，有些命令可能会经常使用但比较长，为了提高效率，Git允许为命令设置别名（alias）。设置别名的方式有两种：
+
+1. 针对当前仓库设置别名
+2. 全局设置别名
+
+#### 针对当前仓库设置别名
+
+在当前仓库下使用以下命令设置别名：
+
+```bash
+git config alias.<别名> <Git命令>
+```
+
+例如，将`git status`设置别名为`git st`：
+
+```bash
+git config alias.st status
+```
+
+设置完成后，就可以使用`git st`来代替`git status`命令。
+
+#### 全局设置别名
+
+如果想要设置全局可用的别名，需要加上`--global`选项：
+
+```bash
+git config --global alias.<别名> <Git命令>
+```
+
+例如，将`git checkout`设置别名为`git co`：
+
+```bash
+git config --global alias.co checkout
+```
+
+#### 常用别名示例
+
+以下是一些常用的Git命令别名设置：
+
+```bash
+# 查看状态简写
+git config --global alias.st status
+
+# 切换分支简写
+git config --global alias.co checkout
+
+# 提交简写
+git config --global alias.ci commit
+
+# 分支简写
+git config --global alias.br branch
+
+# 查看最近的提交记录
+git config --global alias.last 'log -1'
+```
+
+#### 查看已设置的别名
+
+可以通过以下命令查看当前已经设置的所有别名：
+
+```bash
+# 查看当前仓库的别名设置
+git config --get-regexp alias
+
+# 查看全局别名设置
+git config --global --get-regexp alias
+```
+
+#### 删除别名
+
+如果想要删除已经设置的别名，可以使用以下命令：
+
+```bash
+# 删除当前仓库的别名
+git config --unset alias.<别名>
+
+# 删除全局别名
+git config --global --unset alias.<别名>
+```
+
+例如，删除之前设置的`st`别名：
+
+```bash
+git config --unset alias.st
+```
+
+!!! note
+
+    1. 别名可以是简单的命令替换，也可以是包含参数的复杂命令
+    2. 如果别名中包含空格，需要用单引号或双引号括起来
+    3. 设置的别名会保存在Git的配置文件中（全局配置在`~/.gitconfig`，仓库配置在`.git/config`）
+    4. 建议设置的别名要容易记忆，并且与原命令有一定关联性
+
+通过合理使用别名，可以大大提高Git命令的使用效率，减少重复输入长命令的工作量
+
+## 标签管理
+
+上面提到了可以通过`git log`查看提交历史，但是如果提交历史非常多，找某一个相对重要的提交就比较麻烦，为此可以考虑将某一个提交打上标签，使用下面的命令：
+
+```bash
+git tag <tagname>
+```
+
+默认情况下，使用上面的命令是为最新的一次提交打上标签，也可以指定某次提交的`commit id`，命令如下：
+
+```bash
+git tag <tagname> <commit id>
+```
+
+使用上面的命令无法给标签打上描述信息，可以考虑使用下面的命令：
+
+```bash
+git tag -a <tagname> -m "描述信息"
+```
+
+如果需要查看当前有多少个标签，可以使用下面的命令：
+
+```bash
+git tag
+```
+
+如果想要查看某个标签的详细信息，可以使用下面的命令：
+
+```bash
+git show <tagname>
+```
+
+如果想要删除某个标签，可以使用下面的命令：
+
+```bash
+git tag -d <tagname>
+```
+
+如果想要将标签推送到远程仓库，可以使用下面的命令：
+
+```bash
+git push origin <tagname>
+```
+
+如果想要将所有标签推送到远程仓库，可以使用下面的命令：
+
+```bash
+git push origin --tags
+```
 
 ## 附录：Git常用命令
 

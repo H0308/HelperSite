@@ -184,6 +184,26 @@ git commit -m "提交信息"
 git commit -m "add test.txt"
 ```
 
+如果一开始没有设置账户邮箱和账户名，那么会看到提示输入邮箱和用户名，例如：
+
+```
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'epsda@ham-carrier.(none)')
+```
+
+此时只需要按照前面配置`name`和`email`的步骤进行即可，注意`name`不是昵称，而是账户名（`@`后面的内容）
+
 当然，也可以将暂存区的指定文件提交到版本库中，该命令需要添加提交信息：
 
 ```bash
@@ -1088,6 +1108,255 @@ this is dev change
 this is a bug fix
 this is a new feature
 ```
+
+## 分布式版本控制系统
+
+### 何为分布式版本控制系统
+
+上面提到的所有的操作都只是在本地计算机上进行的，但是在实际开发中，往往都需要进行多人协作开发，此时如果只有上面的操作，那么势必会带来效率上的降低，那么有什么办法可以解决这个问题？答案就是将数据提交到一个公共的服务器上，其他人只需要公共服务器上获取和向公共服务器提交即可，但是这里还会存在一个问题，如果这个服务器是一个内网服务器，那么一旦开发者离开了当前内网服务器所在的局域网，那么就无法将自己的修改上传到服务器，也无法看到服务器上最新的修改，所以除了做到提供一个公共服务器之外，还需要确保这个公共服务器是在公网上的。示意图如下：
+
+<img src="关于Git.assets/image-20250421104742794.png" style="width:50%">
+
+在上面这个过程中，每一台开发者的电脑都由完整的版本库，也包含着完整的记录，对应地还有一台服务器进行提交和拉取，所以整个结构就可以看作是分布式，而服务器上的版本会存在改变，所以综合起来看就是分布式版本控制系统
+
+### 远程仓库
+
+既然要实现分布式，首先需要有一个公共的中央仓库作为服务器端，这个中央仓库也被称为远程仓库，典型的中央仓库就是Github、Gitee等，下面以Gitee为例介绍远程仓库
+
+在Gitee上创建仓库需要经过下面的步骤：
+
+1. 登录Gitee账号
+2. 点击右上角的加号，选择`新建仓库`
+3. 填写仓库名称和描述，选择仓库类型，点击`创建仓库`
+
+创建仓库的过程中可以选择对应的仓库初始化选项，例如当前选择设置模板，并且选择模板中的所有内容。另外，本次只演示一个分支，所以可以不勾选「选择分支模型」
+
+创建完成后会看到类似下面的页面：
+
+<img src="关于Git.assets/image-20250421105631878.png">
+
+### 克隆远程仓库
+
+接着，既然需要看到远程仓库上的内容，就需要将远程仓库的内容**克隆**到本地，克隆的方式有很多种，下面主要介绍两种：
+
+1. 使用HTTPS方式克隆
+2. 使用SSH方式克隆
+
+不论是哪一种克隆方式，使用的命令都是一样的，命令如下：
+
+```bash
+git clone <url>
+```
+
+需要注意的是，克隆仓库一定要在一个不含有`.git`的目录下，否则会报错为目录不为空
+
+**使用HTTPS方式克隆**
+
+在当前电脑上找到合适的位置输入克隆命令，例如：
+
+```bash
+git clone https://gitee.com/xxx/xxx.git
+```
+
+使用`tree . -a`查看克隆的目录，会看到类似下面的内容：
+
+```
+test_git/
+├── .git
+│   ├── branches
+│   ├── config
+│   ├── description
+│   ├── HEAD
+│   ├── hooks
+│   │   ├── applypatch-msg.sample
+│   │   ├── commit-msg.sample
+│   │   ├── fsmonitor-watchman.sample
+│   │   ├── post-update.sample
+│   │   ├── pre-applypatch.sample
+│   │   ├── pre-commit.sample
+│   │   ├── pre-merge-commit.sample
+│   │   ├── prepare-commit-msg.sample
+│   │   ├── pre-push.sample
+│   │   ├── pre-rebase.sample
+│   │   ├── pre-receive.sample
+│   │   ├── push-to-checkout.sample
+│   │   ├── sendemail-validate.sample
+│   │   └── update.sample
+│   ├── index
+│   ├── info
+│   │   └── exclude
+│   ├── logs
+│   │   ├── HEAD
+│   │   └── refs
+│   │       ├── heads
+│   │       │   └── master
+│   │       └── remotes
+│   │           └── origin
+│   │               └── HEAD
+│   ├── objects
+│   │   ├── info
+│   │   └── pack
+│   │       ├── pack-bdd402b6bcb8c55e3ee7732451f0b0a1a3c2525d.idx
+│   │       ├── pack-bdd402b6bcb8c55e3ee7732451f0b0a1a3c2525d.pack
+│   │       └── pack-bdd402b6bcb8c55e3ee7732451f0b0a1a3c2525d.rev
+│   ├── packed-refs
+│   └── refs
+│       ├── heads
+│       │   └── master
+│       ├── remotes
+│       │   └── origin
+│       │       └── HEAD
+│       └── tags
+├── .gitee
+│   ├── ISSUE_TEMPLATE.zh-CN.md
+│   └── PULL_REQUEST_TEMPLATE.zh-CN.md
+├── README.en.md
+└── README.md
+```
+
+需要注意的是，新版的Github不再支持HTTPS+账户名和密码的凡是克隆，如果还想用HTTPS方式，可以考虑生成一个个人密钥，在密钥中给定需要的权限，再将密钥填入输入密码的位置即可
+
+**使用SSH方式克隆**
+
+使用SSH方式克隆的步骤比HTTPS方式多一步，首先查看本地是否存在SSH密钥（`id_rsa`和`id_rsa.pub`文件），查看的方式如下：
+
+```bash
+ls .ssh/
+```
+
+如果不存在`.ssh`目录或者目录中不存在密钥文件，则使用下面的命令进行生成：
+
+```bash
+ssh-keygen -t rsa -C "创建仓库的邮箱"
+```
+
+接着一直按++enter++保持默认即可看到类似下面的结果：
+
+```
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/epsda/.ssh/id_rsa): 
+Created directory '/home/epsda/.ssh'.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/epsda/.ssh/id_rsa
+Your public key has been saved in /home/epsda/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:xxx
+The key's randomart image is:
+xxx
+```
+
+此时在用户的家目录下就可以看到`.ssh`目录，其中包含了`id_rsa`和`id_rsa.pub`文件，其中`id_rsa`是私钥，`id_rsa.pub`是公钥：
+
+```
+.ssh
+├── id_rsa
+└── id_rsa.pub
+```
+
+接着，将`id_rsa.pub`文件中的内容复制到Gitee上的SSH公钥中，步骤为：在Gitee的设置中找到`SSH公钥`，点击`添加SSH公钥`，将公钥内容粘贴到输入框中，点击`确定`并输入当前账户密码即可：
+
+<img src="关于Git.assets/image-20250421112404234.png">
+
+最后，使用同样的方式克隆远程仓库即可，但是需要注意使用SSH方式：
+
+```bash
+git clone git@gitee.com:xxx/xxx.git
+```
+
+如果提示类似下面的内容，只需要输入`yes`即可：
+
+```
+Cloning into 'xxx'...
+The authenticity of host 'gitee.com (180.76.199.13)' can't be established.
+xxx key fingerprint is SHA256:xxx
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? 
+```
+
+克隆的结果与使用HTTPS方式克隆的结果是一样的，此处不再展示
+
+### 推送本地分支
+
+现在将本地的文件进行修改，例如在仓库中添加一个`test.txt`文件，内容为：
+
+```
+this is a test
+```
+
+接着，使用`git add`和`git commit`提交到本地仓库中，使用`git status`查看状态会看到类似下面的结果：
+
+```
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+```
+
+此时显示的信息不再是之前只有本地仓库情况的结果，而是提示目前本地仓库的分支比远程仓库的分支领先1个提交，接下来使用下面的命令进行提交到远程仓库：
+
+```bash
+git push 远程仓库名 本地分支名:远程分支名
+```
+
+要获取远程仓库名，可以使用下面的命令：
+
+```bash
+git remote -v
+```
+
+可以看懂类似下面的结果：
+
+```bash
+# 使用SSH克隆
+origin	git@gitee.com:xxx/xxx.git (fetch)
+origin	git@gitee.com:xxx/xxx.git (push)
+```
+
+此处的`origin`就是远程仓库名，后面的`fetch`和`push`表示用户当前存在拉取和推送的权限
+
+当前分支和远程分支都是`master`，所以命令如下：
+
+```bash
+git push origin master:master
+```
+
+当本地分支名和远程分支名相同时，也可以简写为：
+
+```bash
+git push origin master
+```
+
+此时会看到类似下面的结果：
+
+```
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 280 bytes | 280.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Powered by GITEE.COM [1.1.5]
+remote: Set trace flag 9849c69e
+To gitee.com:xxx/xxx.git
+   35d819e..0335f10  master -> master
+```
+
+再使用`git status`查看状态会看到类似下面的结果：
+
+```
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+```
+
+此时会提示当前本地仓库的分支和远程仓库的分支是同步的，推送就完成了，回到Gitee上的仓库中可以看到`test.txt`文件已经添加到仓库中
+
+### 拉取远程分支
+
+
 
 ## 附录：Git常用命令
 

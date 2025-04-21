@@ -1,4 +1,4 @@
-# 关于Git
+# Git基础操作
 
 ## Git介绍
 
@@ -136,7 +136,7 @@ git config --global --unset user.email
 
 三者关系如下：
 
-<img src="关于Git.assets/download.png">
+<img src="Git基础操作.assets/download.png">
 
 在上图中，对于版本库来说，存在一个`HEAD`指针，指向当前分支的最新一次提交。默认情况下，Git会自动将`HEAD`指针指向`master`分支，该分支是Git默认创建的分支。当对工作区中的文件进行修改后，需要使用`git add`命令将修改的文件添加到暂存区，然后使用`git commit`命令将暂存区中的文件提交到版本库中
 
@@ -602,7 +602,7 @@ d278be5 (HEAD -> master) HEAD@{2}: commit: add test.txt
 
 整个过程中`HEAD`的改变如下图所示：
 
-<img src="关于Git.assets\download1.png">
+<img src="Git基础操作.assets\download1.png">
 
 如果回退时使用的是哈希值，那么可以通过`git reflog`命令查看哈希值对应的操作记录从而回到上一次的最新版本，即哈希值前五位为`2a086`的版本，例如：
 
@@ -651,15 +651,15 @@ rm 'test.txt'
 
 所谓分支，可以理解为一条独立的提交记录线。在当前Git中，只有一个`master`，所有的提交记录都在`master`上，所以说当前提交只有一个分支，即为`master`，示例图如下：
 
-<img src="关于Git.assets/image-20250415103557689.png">
+<img src="Git基础操作.assets/image-20250415103557689.png">
 
 如果现在创建一个新的分支，例如分支名称为`dev`，那么示例图如下：
 
-<img src="关于Git.assets/image-20250415103907928.png">
+<img src="Git基础操作.assets/image-20250415103907928.png">
 
 此时当前Git下就存在着两个分支。既然存在着两个分支，那么Git如何标识当前分支呢？**通过`HEAD`指针**，`HEAD`指针所指向的就是当前分支，假设当前处于`dev`分支，那么`HEAD`指向的就是`dev`分支，如下图所示：
 
-<img src="关于Git.assets/image-20250415104216927.png">
+<img src="Git基础操作.assets/image-20250415104216927.png">
 
 ### 查看分支
 
@@ -702,7 +702,7 @@ git branch dev
 
 创建分支的过程是基于当前`HEAD`指针的，默认情况下，直接使用`git branch`命令创建的分支在切换后查看对应的`HEAD`会发现该值于`master`分支中查看的`HEAD`是相同的，所以实际上创建新的分支示意图如下：
 
-<img src="关于Git.assets/image-20250415110140590.png">
+<img src="Git基础操作.assets/image-20250415110140590.png">
 
 这一点也可以通过不同分支的`HEAD`值来进行验证，每当创建一个分支就会在`refs/heads`目录下形成一个新的文件，所以分别查看`master`分支下的`HEAD`和`dev`分支下的`HEAD`值如下：
 
@@ -780,7 +780,7 @@ hello Linux
 
 修改完成后进行`git add`和`git commit`操作再切换到`master`分支。当前情况下，两个分支示意图如下：
 
-<img src="关于Git.assets/image-20250415111358449.png">
+<img src="Git基础操作.assets/image-20250415111358449.png">
 
 从上图可以看到，当前`dev`分支的`HEAD`和`master`分支的`HEAD`并不指向同一个提交记录，如果此时想要二者保持一致，既需要将`master`分支下的内容与`dev`分支保持一致，可以用到下面的命令：
 
@@ -805,7 +805,7 @@ Fast-forward
 
 此时再看`master`分支下的`test.txt`中的内容会发现获取到了`dev`分支新添加的内容。当前情况下，两个分支示意图如下：
 
-<img src="关于Git.assets/image-20250415112200041.png">
+<img src="Git基础操作.assets/image-20250415112200041.png">
 
 默认情况下，Git选择的合并策略为`Fast-forward`，这种策略下，Git会直接将`master`分支的`HEAD`指向`dev`分支的`HEAD`的值，所以这种方式的效率比较高，并且这种合并方式会自动进行`git commit`操作
 
@@ -837,7 +837,7 @@ hello Linux
 
 接着，二者都对自己的修改进行`git add`和`git commit`操作，此时两个分支的示意图如下：
 
-<img src="关于Git.assets/image-20250415113250088.png">
+<img src="Git基础操作.assets/image-20250415113250088.png">
 
 同样，现在用于合并的分支为`dev`分支，待合并的分支为`master`分支，在`master`分支下执行合并命令：
 
@@ -1115,7 +1115,7 @@ this is a new feature
 
 上面提到的所有的操作都只是在本地计算机上进行的，但是在实际开发中，往往都需要进行多人协作开发，此时如果只有上面的操作，那么势必会带来效率上的降低，那么有什么办法可以解决这个问题？答案就是将数据提交到一个公共的服务器上，其他人只需要公共服务器上获取和向公共服务器提交即可，但是这里还会存在一个问题，如果这个服务器是一个内网服务器，那么一旦开发者离开了当前内网服务器所在的局域网，那么就无法将自己的修改上传到服务器，也无法看到服务器上最新的修改，所以除了做到提供一个公共服务器之外，还需要确保这个公共服务器是在公网上的。示意图如下：
 
-<img src="关于Git.assets/image-20250421104742794.png" style="width:50%">
+<img src="Git基础操作.assets/image-20250421104742794.png" style="width:50%">
 
 在上面这个过程中，每一台开发者的电脑都由完整的版本库，也包含着完整的记录，对应地还有一台服务器进行提交和拉取，所以整个结构就可以看作是分布式，而服务器上的版本会存在改变，所以综合起来看就是分布式版本控制系统
 
@@ -1133,7 +1133,7 @@ this is a new feature
 
 创建完成后会看到类似下面的页面：
 
-<img src="关于Git.assets/image-20250421105631878.png">
+<img src="Git基础操作.assets/image-20250421105631878.png">
 
 ### 克隆远程仓库
 
@@ -1256,7 +1256,7 @@ xxx
 
 接着，将`id_rsa.pub`文件中的内容复制到Gitee上的SSH公钥中，步骤为：在Gitee的设置中找到`SSH公钥`，点击`添加SSH公钥`，将公钥内容粘贴到输入框中，点击`确定`并输入当前账户密码即可：
 
-<img src="关于Git.assets/image-20250421112404234.png">
+<img src="Git基础操作.assets/image-20250421112404234.png">
 
 最后，使用同样的方式克隆远程仓库即可，但是需要注意使用SSH方式：
 

@@ -279,7 +279,9 @@ nav:
     - 关于xml文件: 其它/关于xml文件/关于xml文件.md
     - 关于JSONCPP库: 其它/关于JSONCPP库/关于JSONCPP库.md
     - 关于C++日志库spdlog: 其它/关于C++日志库spdlog/关于C++日志库spdlog.md
-    - 关于Git: 其它/关于Git/关于Git.md
+    - 关于Git: 
+      - Git基础操作: 关于Git/Git基础操作/Git基础操作.md
+      - Git多人协作: 关于Git/Git多人协作/Git多人协作.md
     - 关于Muduo库: 其它/关于Muduo库/关于Muduo库.md
     # - Boost库:
     #   - Boost库中的谓词函数: 其它/Boost库中的谓词函数/Boost库中的谓词函数.md

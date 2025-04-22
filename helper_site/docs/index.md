@@ -529,7 +529,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <line class="path path-4" x1="561" y1="181.67" x2="561" y2="181.67"/>
                     </svg>
                 </div>
-                <h1 class="welcome-title">欢迎来到学习档案</h1>
+                <h1 class="welcome-title">欢迎来到柯懒的知识库</h1>
                 <p class="welcome-subtitle">记录学习，分享知识</p>
             </div>
             

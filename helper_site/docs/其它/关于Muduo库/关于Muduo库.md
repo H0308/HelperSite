@@ -6,6 +6,40 @@
 
 ## Ubuntu下安装和使用Muduo库
 
+首先，在Github上克隆Muduo库：
+
+```bash
+git clone https://github.com/chenshuo/muduo.git
+```
+
+接着，进入Muduo库的根目录，然后执行以下命令进行编译和安装：
+
+```bash
+./build.sh
+```
+
+等待一段时间后，再执行下面的命令生成静态库：
+
+```bash
+./build.sh install
+```
+
+此时，会在当前与克隆库的同一级显示`build`目录：
+
+```
+drwxrwxr-x  4 epsda epsda 4096  4月 14 20:15 build/
+drwxrwxr-x  8 epsda epsda 4096  4月 14 20:15 muduo/
+```
+
+此时，在`build`目录中的`release-install-cpp11/`目录就包含了后续要使用到的头文件和静态库文件。而为了避免每次编译时都写上完整的路径，可以考虑在项目路径中添加两个软链接分别指向`release-install-cpp11/include`和`release-install-cpp11/lib`目录，例如
+
+```bash
+ln -s /home/epsda/dependencies/build/release-install-cpp11/include/
+ln -s /home/epsda/dependencies/build/release-install-cpp11/lib/
+```
+
+而因为是静态库，所以还需要带上`-lmuduo_net`和`-lmuduo_base`，这两个静态库是后续主要使用的库，其他的库暂不考虑
+
 ## 核心特点
 
 1. **事件驱动模型**：Muduo基于Reactor模式实现，使用`epoll`（Linux系统调用）作为底层事件通知机制。它通过事件循环（EventLoop）来处理I/O事件，能够高效地管理多个连接
@@ -86,7 +120,7 @@ public:
 介绍完构造函数之后，接下来看常见的四个函数：
 
 1. `setThreadNum`：这个函数表示设置当前服务器内部线程池中线程的个数，如果不设置，那么默认就是主线程负责获取新连接+IO处理，否则就是主线程的`epoll`模型处理获取新连接，新线程的`epoll`处理IO
-2. `start`：这个函数表示启动服务器，但是需要注意的是，这个函数内部不会启动`EventLoop`开启事件关心，可以理解为就是创建套接字、绑定、开启监听以及设置一个标记位标识当前服务器启动，对应的启动`EventLoop`需要单独调用`EventLoop`类中的接口来完成
+2. `start`：这个函数表示启动服务器，但是需要注意的是，这个函数内部不会启动`EventLoop`开启事件关心，可以理解为就是创建套接字、绑定、开启监听以及设置一个标记位标识当前服务器启动，对应的启动`EventLoop`需要单独调用`EventLoop`类中的接口来完成。基于这个原因，需要先启动服务器再启动事件循环，否则先启动循环就无法正常启动服务器
 3. `setConnectionCallback`：这个函数表示在指定的连接状态（连接成功或者连接失败）时需要做出的行为，具体的行为由回调函数来决定
 4. `setMessageCallback`：这个函数表示在客户端给服务端发送信息时需要做出的行为，具体的行为也由回调函数来决定
 
@@ -364,5 +398,228 @@ private:
 
 根据上面的介绍，可以考虑设计下面的服务端程序：
 
+=== "类设计"
+
+    ```cpp
+    namespace dictionary_server
+    {
+        using namespace muduo;
+
+        // 基于TCP的字典服务器端
+        class DictionaryServer
+        {
+        public:
+            DictionaryServer(uint16_t port)
+                :server_(loop_.get(),
+                        net::InetAddress("0.0.0.0", port), 
+                        "dict_server", 
+                        net::TcpServer::kReusePort)
+                , loop_(std::make_shared<net::EventLoop>()) // 一定要确保EventLoop对象先创建
+            {
+                // 初始化字典
+                dict_.insert({"hello", "你好"});
+                dict_.insert({"apple", "苹果"});
+                dict_.insert({"banana", "香蕉"});
+                dict_.insert({"watermelon", "西瓜"});
+                dict_.insert({"orange", "橘子"});
+
+                // 设置回调
+                // 1. 连接回调
+                server_.setConnectionCallback([this](const net::TcpConnectionPtr &con) {
+                    this->connectionCallback(con);
+                });
+                // 2. 消息回调
+                server_.setMessageCallback([this](const net::TcpConnectionPtr &con, net::Buffer *buffer, Timestamp t){
+                    this->messageCallback(con, buffer, t);
+                });
+            }
+
+            // 启动服务器
+            void startServer()
+            {
+                // 启动服务器
+                // 先启动服务器，再开始事件关心
+                // 具体原因见文档介绍
+                server_.start();
+                loop_->loop();
+            }
+
+        private:
+            void connectionCallback(const net::TcpConnectionPtr& con)
+            {
+                // 本次实现：连接成功和断开连接进行提示
+                if(con->connected())
+                    std::cout << "连接成功" << std::endl;
+                else if(con->disconnected())
+                    std::cout << "断开连接" << std::endl;
+            }
+
+            void messageCallback(const net::TcpConnectionPtr& con, net::Buffer* buffer, Timestamp t)
+            {
+                // 本次实现：根据客户端的输入查找哈希表获取到结果返回给客户端
+                // 1. 获取客户端的输入
+                std::string input = buffer->retrieveAllAsString();
+
+                // 2. 查找哈希表
+                auto pos = dict_.find(input);
+                
+                // 3. 不存在返回错误字符串
+                if(pos == dict_.end())
+                {
+                    con->send("无法查找到指定单词");
+                    return ;
+                }
+
+                // 4. 存在返回value
+                con->send(pos->second);
+            }
+
+        private:
+            std::shared_ptr<net::EventLoop> loop_;// 事件模型，先初始化
+            net::TcpServer server_; // 服务器
+            std::unordered_map<std::string, std::string> dict_;
+        };
+    }
+    ```
+
+=== "主函数"
+
+    ```cpp
+    int main(int argc, char* argv[])
+    {
+        if(argc != 2)
+        {
+            std::cout << argv[0] << " port" << std::endl;
+            return 1;
+        }
+        
+        dictionary_server::DictionaryServer server(std::stoi(argv[1]));
+        server.startServer();
+
+        return 0;
+    }
+    ```
+
 ### 客户端
 
+根据上面的介绍，可以考虑设计下面的客户端程序：
+
+=== "类设计"
+
+    ```cpp
+    namespace dictionary_client
+    {
+        using namespace muduo;
+
+        class DictionaryClient
+        {
+        public:
+            DictionaryClient(std::string ip, uint16_t port)
+                // : loop_(std::make_shared<net::EventLoop>())
+                : loopThread_(std::make_shared<net::EventLoopThread>())
+                ,loop_(loopThread_->startLoop())
+                , client_(loop_.get(),
+                        net::InetAddress(ip, port),
+                        "dict_client")
+                , count_(1) // 确保客户端在连接建立成功后发送消息
+            {
+                // 设置回调函数
+                // 1. 连接回调
+                client_.setConnectionCallback(std::bind(&DictionaryClient::connectionCallback, this, std::placeholders::_1));
+                // 2. 消息回调
+                client_.setMessageCallback(std::bind(&DictionaryClient::messgaeCallback, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+
+                client_.connect();
+                // 客户端开始在同步计数器等待，防止未连接时发送信息
+                count_.wait();
+
+                // 不能直接开始loop，一旦开始loop就无法调用send发送数据
+                // 定义EventLoopThread，让新线程自动开始事件关心
+            }
+
+            void send(const std::string& msg)
+            {
+                if(con_->disconnected())
+                {
+                    std::cout << "连接已断开" << std::endl;
+                    return ;
+                }
+
+                con_->send(msg);
+            }
+
+        private:
+            void connectionCallback(const net::TcpConnectionPtr& con)
+            {
+                if(con->connected())
+                {
+                    std::cout << "客户端连接成功" << std::endl;
+                    // 设置连接对象指针，便于接下来调用send
+                    con_ = con;
+                    // 更改同步计数器，减到0表示成功连接，唤醒客户端，可以进行消息发送
+                    count_.countDown();
+                }
+                else if(con->disconnected()) 
+                {
+                    std::cout << "客户端断开连接" << std::endl;
+                    // 重置连接指针
+                    con_.reset();
+                }
+            }
+
+            void messgaeCallback(const net::TcpConnectionPtr& con, net::Buffer* buffer, Timestamp t)
+            {
+                // 收到消息时才会执行，所以此处不能调用send
+                std::string out = buffer->retrieveAllAsString();
+
+                std::cout << out << std::endl;
+            }
+
+        private:
+            std::shared_ptr<net::EventLoopThread> loopThread_;
+            std::shared_ptr<net::EventLoop> loop_;
+            net::TcpClient client_;
+            net::TcpConnectionPtr con_; // 需要调用send接口
+            CountDownLatch count_;
+        };
+    }
+    ```
+
+=== "主函数"
+
+    ```cpp
+    int main(int argc, char* argv[])
+    {
+        if (argc != 2)
+        {
+            std::cout << argv[0] << " port" << std::endl;
+            return 1;
+        }
+        dictionary_client::DictionaryClient client("127.0.0.1", std::stoi(argv[1]));
+        while (1)
+        {
+            std::string msg;
+            std::cin >> msg;
+            client.send(msg);
+        }
+        return 0;
+    }
+    ```
+
+### 测试
+
+使用下面的`Makefile`进行客户端和服务端编译：
+
+```makefile
+all: server client
+server:server.cc
+	g++  $^ -o $@ -I./include -L./lib -lmuduo_net -lmuduo_base  -lpthread
+client:client.cc
+	g++  $^ -o $@ -I./include -L./lib -lmuduo_net -lmuduo_base  -lpthread
+
+.PHONY: clean
+clean:
+	rm -f server client
+```
+
+编译运行后即可发现可以正常通信

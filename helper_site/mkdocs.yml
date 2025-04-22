@@ -229,6 +229,7 @@ nav:
     - 理解Linux如何看待连接以及TCP全连接队列: Linux\35. 理解Linux如何看待连接以及TCP全连接队列\35. 理解Linux如何看待连接以及TCP全连接队列.md
     - 网络层IP协议: Linux/29. 网络层IP协议/29. 网络层IP协议.md
     - 数据链路层协议: Linux/30. 数据链路层协议/30. 数据链路层协议.md
+    - DNS与ICMP: Linux/36. DNS与ICMP/36. DNS与ICMP.md
     - NAT技术、代理服务器和内网穿透: Linux/31. NAT技术、代理服务器和内网穿透/31. NAT技术、代理服务器和内网穿透.md
     - 五种IO模型与select和poll分别实现多路转接: Linux/32. 五种IO模型与select和poll分别实现多路转接/32. 五种IO模型与select和poll分别实现多路转接.md
     - epoll实现多路转接: Linux/33. epoll实现多路转接/33. epoll实现多路转接.md

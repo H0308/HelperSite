@@ -717,6 +717,104 @@
             max-width: 85vw;
         }
     }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #999;
+    }
+
+    /* 主题切换蒙版 - 优化结构和性能 */
+    .theme-transition-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* 简化过渡效果，提高性能 */
+        transition: opacity 0.3s ease-out,
+            visibility 0.3s ease-out,
+            background-color 0.3s ease-out,
+            backdrop-filter 0.3s ease-out;
+        backdrop-filter: blur(0px);
+    }
+
+    .theme-transition-overlay.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+        backdrop-filter: blur(5px);
+    }
+
+    /* 主题切换内容容器 - 整合样式 */
+    .theme-transition-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        transform: scale(0.9);
+        opacity: 0;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+            opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .theme-transition-overlay.active .theme-transition-content {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    /* 简化加载图标结构，移除不必要的嵌套 */
+    .theme-transition-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(77, 166, 218, 0.2);
+        border-top-color: rgba(77, 166, 218, 0.8);
+        border-radius: 50%;
+        animation: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .theme-transition-overlay.active .theme-transition-spinner {
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* 主题切换文字样式 */
+    .theme-transition-text {
+        font-family: var(--md-text-font);
+        color: rgba(77, 166, 218, 0.9);
+        font-size: 16px;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 10px;
+    }
 </style><script>
     document.addEventListener('DOMContentLoaded', () => {
         const searchEl = document.querySelector('.md-search');
@@ -771,6 +869,21 @@
                 }
             }
         }, 300);
+
+        const initialTheme = localStorage.getItem('preferred-theme');
+        if (initialTheme) {
+            const theme1Link = document.querySelector('link[href*="theme1"]');
+            const theme2Link = document.querySelector('link[href*="theme2"]');
+
+            // 关闭过渡动画，直接设置主题
+            if (initialTheme === 'theme1') {
+                theme1Link.removeAttribute('disabled');
+                theme2Link.setAttribute('disabled', 'true');
+            } else {
+                theme2Link.removeAttribute('disabled');
+                theme1Link.setAttribute('disabled', 'true');
+            }
+        }
     });
 
     (function initTheme() {
@@ -791,26 +904,91 @@
     })();
 
     function switchTheme() {
+        // 获取当前和目标主题信息
         const currentTheme = localStorage.getItem('preferred-theme') || 'theme1';
         const newTheme = currentTheme === 'theme1' ? 'theme2' : 'theme1';
+        const targetThemeText = newTheme === 'theme1' ? '新版主题' : '原生主题';
+
+        // 获取主题样式链接
         const theme1Link = document.querySelector('link[href*="theme1"]');
         const theme2Link = document.querySelector('link[href*="theme2"]');
-        if (newTheme === 'theme1') {
-            theme1Link.removeAttribute('disabled');
-            theme2Link.setAttribute('disabled', 'true');
-        } else {
-            theme2Link.removeAttribute('disabled');
-            theme1Link.setAttribute('disabled', 'true');
+
+        if (!theme1Link || !theme2Link) {
+            console.error('无法找到主题样式链接');
+            return;
         }
-        localStorage.setItem('preferred-theme', newTheme);
-        const themeBtn = document.querySelector('.theme-btn');
-        const currentThemeEl = themeBtn.querySelector('.current-theme');
-        const targetThemeEl = themeBtn.querySelector('.target-theme');
-        currentThemeEl.textContent = newTheme === 'theme1' ? '当前：新版主题' : '当前：原生主题';
-        targetThemeEl.textContent = newTheme === 'theme1' ? '切换到：原生主题' : '切换到：新版主题';
+
+        // 创建和添加过渡覆盖层
+        const overlay = document.createElement('div');
+        overlay.className = 'theme-transition-overlay';
+        overlay.innerHTML = `
+        <div class="theme-transition-content">
+            <div class="theme-transition-spinner"></div>
+            <div class="theme-transition-text">正在切换到：${targetThemeText}</div>
+        </div>
+    `;
+        document.body.appendChild(overlay);
+
+        // 确保DOM已更新后再添加active类
+        requestAnimationFrame(() => {
+            // 激活蒙版
+            overlay.classList.add('active');
+
+            // 添加适当的延迟以确保蒙版已完全显示
+            setTimeout(() => {
+                // 切换主题样式
+                if (newTheme === 'theme1') {
+                    theme1Link.removeAttribute('disabled');
+                    theme2Link.setAttribute('disabled', 'true');
+                } else {
+                    theme2Link.removeAttribute('disabled');
+                    theme1Link.setAttribute('disabled', 'true');
+                }
+
+                // 保存主题设置
+                localStorage.setItem('preferred-theme', newTheme);
+
+                // 更新切换按钮文本
+                updateThemeSwitchButton(newTheme);
+
+                // 给予足够的时间加载主题
+                setTimeout(() => {
+                    // 平滑淡出效果
+                    fadeOutOverlay(overlay);
+                }, 450); // 主题加载时间
+            }, 250); // 蒙版显示时间
+        });
     }
 
+    // 更新主题切换按钮文本
+    function updateThemeSwitchButton(theme) {
+        const themeBtn = document.querySelector('.theme-btn');
+        if (themeBtn) {
+            const currentThemeEl = themeBtn.querySelector('.current-theme');
+            const targetThemeEl = themeBtn.querySelector('.target-theme');
 
+            if (currentThemeEl && targetThemeEl) {
+                currentThemeEl.textContent = theme === 'theme1' ? '当前：新版主题' : '当前：原生主题';
+                targetThemeEl.textContent = theme === 'theme1' ? '切换到：原生主题' : '切换到：新版主题';
+            }
+        }
+    }
+
+    // 平滑淡出蒙版
+    function fadeOutOverlay(overlay) {
+        // 先改变背景色，制造渐变效果
+        overlay.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
+
+        // 短暂延迟后淡出
+        setTimeout(() => {
+            overlay.classList.remove('active');
+
+            // 等待淡出动画完成后移除元素
+            setTimeout(() => {
+                document.body.removeChild(overlay);
+            }, 300);
+        }, 150);
+    }
 </script> <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }

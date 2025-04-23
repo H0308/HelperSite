@@ -479,24 +479,15 @@
     }
 
     @media screen and (max-width: 767px) {
-        .md-typeset table {
-            display: block;
-            max-width: 100% !important;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin-right: 0 !important;
-            margin-left: 0 !important;
-            box-sizing: border-box;
-            table-layout: fixed;
-            position: relative;
-        }
 
+        /* 移除可能导致问题的现有样式 */
         .md-typeset .arithmatex {
             max-width: 100%;
             overflow-x: hidden;
             text-overflow: ellipsis;
         }
 
+        /* 修改为更有效的样式 */
         .katex-display {
             overflow-x: auto;
             overflow-y: hidden;
@@ -504,40 +495,44 @@
             padding: 0.25em 0;
         }
 
-        .md-md-typeset__table table th,
-        .md-md-typeset__table table td {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            hyphens: auto;
-            white-space: normal !important;
+        /* 对于行内公式的新样式 */
+        .katex {
+            font-size: 1em !important;
+            /* 减小字体大小 */
         }
 
-        .md-typeset__table table:after {
+        /* 调整整体数学公式容器的样式 */
+        .md-typeset .arithmatex {
+            max-width: 100% !important;
+            overflow-x: auto;
+            padding: 0.1em 0;
+            margin: 0;
+            display: block;
+        }
+
+        /* 确保行内公式不破坏布局 */
+        .katex-inline {
+            display: inline-block;
+            max-width: 100%;
+            overflow-x: auto;
+            vertical-align: middle;
+            white-space: normal;
+            line-break: anywhere;
+        }
+
+        /* 添加淡出效果指示可滚动 */
+        .katex-display::after {
             content: "";
-            display: table;
-            clear: both;
-        }
-
-        .md-typeset .md-typeset__table {
-            max-width: 100% !important;
-            margin-left: 0 !important;
-            margin-right: 0 !important;
-            overflow: visible;
-        }
-
-        .md-typeset__table table th {
-            font-size: 0.85em;
-            padding: 0.6em 0.8em;
-        }
-
-        .md-typeset__table .md-typeset__scrollwrap {
-            margin: 0 !important;
-            width: 100% !important;
-            max-width: 100% !important;
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 20px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7));
+            pointer-events: none;
         }
     }
 
-    /* 头像样式 - 增强版 */
     /* 头像样式 - 增强版，添加悬浮区域控制 */
     .header-avatar {
         display: inline-flex;
@@ -815,7 +810,7 @@
         targetThemeEl.textContent = newTheme === 'theme1' ? '切换到：原生主题' : '切换到：新版主题';
     }
 
-    
+
 </script> <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }

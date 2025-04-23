@@ -352,7 +352,6 @@ markdown_extensions:
 
 extra_javascript:
   - javascripts/katex.js
-  - javascripts/particles.js
   - javascripts/other.js
   - javascripts/copyright.js
   - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js
@@ -399,7 +398,6 @@ plugins:
       js_files:
           - javascripts/katex.js
           - javascripts/other.js
-          - javascripts/particles.js
           - javascripts/copyright.js
   - glightbox:
       touchNavigation: true

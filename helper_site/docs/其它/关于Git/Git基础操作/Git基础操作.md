@@ -91,6 +91,8 @@ git config user.name "name"
 git config user.email "email"
 ```
 
+注意`name`不是昵称，而是账户名（`@`后面的内容）
+
 配置完成后，可以使用下面的命令查看是否已经将`name`和`email`信息存储到配置文件中
 
 ```bash
@@ -202,7 +204,7 @@ Omit --global to set the identity only in this repository.
 fatal: unable to auto-detect email address (got 'epsda@ham-carrier.(none)')
 ```
 
-此时只需要按照前面配置`name`和`email`的步骤进行即可，注意`name`不是昵称，而是账户名（`@`后面的内容）
+此时只需要按照前面配置`name`和`email`的步骤进行即可
 
 当然，也可以将暂存区的指定文件提交到版本库中，该命令需要添加提交信息：
 

@@ -863,25 +863,6 @@
         searchEl.parentNode.insertBefore(avatarEl, searchEl);
         searchEl.parentNode.insertBefore(themeSwitch, searchEl);
 
-        // 其他现有代码...
-        setTimeout(() => {
-            const hash = window.location.hash;
-            if (hash) {
-                const readmoreBtn = document.getElementById('readmore-wrapper');
-                if (!readmoreBtn || window.getComputedStyle(readmoreBtn).display === 'none') {
-                    const targetId = hash.substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        // 平滑滚动到目标元素
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            }
-        }, 300);
-
         const initialTheme = localStorage.getItem('preferred-theme');
         if (initialTheme) {
             const theme1Link = document.querySelector('link[href*="theme1"]');
@@ -967,7 +948,7 @@
                 setTimeout(() => {
                     // 平滑淡出效果
                     fadeOutOverlay(overlay);
-                }, 450); // 主题加载时间
+                }, 2500); // 主题加载时间
             }, 250); // 蒙版显示时间
         });
     }

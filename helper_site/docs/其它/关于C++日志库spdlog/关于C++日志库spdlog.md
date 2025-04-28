@@ -73,6 +73,7 @@ spdlog中的sink工作原理如下：
 ### 包含头文件
 
 在代码中引入spdlog头文件：
+
 ```cpp
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/basic_file_sink.h" // 文件日志
@@ -126,6 +127,20 @@ auto console = spdlog::get("console");
 auto logger = spdlog::get("console");
 if(logger) 
     logger->info("Got existing logger");
+```
+
+默认情况下，spdlog使用的是第三方库fmt进行字符串格式化，如果要使用C++20的std::format，关于二者的介绍可以看[C\+\+中的格式化字符串]，需要使用`SPDLOG_USE_STD_FORMAT`宏定义指定：
+
+```cpp
+// 必须在包含任何spdlog头文件之前定义这个宏
+#define SPDLOG_USE_STD_FORMAT
+#include <spdlog/spdlog.h>
+
+int main()
+{
+    spdlog::info("使用 std::format: {}", 42);
+    return 0;
+}
 ```
 
 #### 文件日志

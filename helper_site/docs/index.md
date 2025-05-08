@@ -491,6 +491,41 @@ a {
         grid-template-columns: 1fr;
     }
 }
+
+@media screen and (min-width:1200px) {
+
+        /* 只保留打字效果，移除飞入效果 */
+        .md-content h1,
+        .md-content__inner h1,
+        .md-typeset h1,
+        article h1 {
+            position: relative;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: none;
+            max-width: 100%;
+            margin-bottom: 0.8em;
+
+            /* 初始状态不再隐藏，直接显示但宽度为0 */
+            opacity: 1;
+            width: 0;
+
+            /* 只保留打字效果动画 */
+            animation: typing 4.5s steps(40) forwards;
+        }
+
+        /* 打字效果动画 - 使用更多步骤让动画更流畅 */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+    }
 </style>
 
 <script>

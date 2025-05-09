@@ -512,7 +512,7 @@ a {
             width: 0;
 
             /* 只保留打字效果动画 */
-            animation: typing 4.5s steps(40) forwards;
+            animation: typing 1.5s steps(20) forwards;
         }
 
         /* 打字效果动画 - 使用更多步骤让动画更流畅 */

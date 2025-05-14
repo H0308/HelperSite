@@ -644,7 +644,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </li>
                 </ul>
 
-                <p>注意：网站会保留上一次内容目录或者文章大纲的关闭状态</p>
+                <p>注意：网站会保留上一次内容目录或者文章大纲的关闭状态，<span style="color: red;">某些浏览器插件会影响到快捷键，如果快捷键不生效请检查插件</span></p>
             </div>
         </div>
     </div>

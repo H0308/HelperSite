@@ -678,7 +678,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="disclaimer-section">
         <div class="content-card">
             <p>
-                <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="vertical-align: -0.15em; fill: currentColor; margin-right: 4px;">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="vertical-align: -0.05em; fill: currentColor; margin-right: 4px;">
                     <path d="M512 64C264.597333 64 64 264.597333 64 512s200.597333 448 448 448 448-200.597333 448-448S759.402667 64 512 64z m-32 232c0-4.394667 3.605333-8 8-8h48c4.394667 0 8 3.605333 8 8v272a8.021333 8.021333 0 0 1-8 8h-48a8.021333 8.021333 0 0 1-8-8v-272zM512 736a48 48 0 1 1 0.021333-96.021333A48 48 0 0 1 512 736z"></path>
                 </svg>
                 本网站的内容不具有权威性，请注意对信息进行甄别

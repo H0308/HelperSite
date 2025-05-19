@@ -204,6 +204,7 @@ hide:
 
 .main-content-area {
     padding: 0rem !important;
+    padding-top: 10px !important;
 }
 
 .md-content__inner > div:first-child {

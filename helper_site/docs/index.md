@@ -105,26 +105,6 @@ hide:
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.qr-code-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.2rem;
-    height: calc(100% - 3.6rem); /* 减去标题和padding的高度 */
-    justify-content: center;
-}
-
-.qr-code-section img {
-    width: 140px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.qr-code-section p {
-    margin: 0;
-}
-
 @keyframes fadeInDown {
     from {
         opacity: 0;

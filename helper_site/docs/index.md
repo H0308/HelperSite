@@ -552,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="content-card">
                 <h2>字体说明</h2>
                 <ul>
-                    <li>导航栏标题：<a href="https://github.com/bytedance/fonts">抖音美好体</a></li>
+                    <li>导航栏标题：<a href="https://github.com/Warren2060/">寒蝉团圆体</a></li>
                     <li>标题：<a href="https://github.com/lxgw/LxgwZhenKai">霞鹜臻楷</a></li>
                     <li>
                         内容：

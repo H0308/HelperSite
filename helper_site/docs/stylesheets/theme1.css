@@ -13,7 +13,7 @@
     position: relative;
     text-decoration: none;
 }
-.md-content a:not(.headerlink):not(.glightbox)::after {
+.md-content a:not(.headerlink):not(.glightbox):not(.tabbed-labels):after {
     content: "";
     position: absolute;
     width: 0;
@@ -23,6 +23,9 @@
     background-color: currentColor;
     transition: width 0.3s ease;
     transform: translateX(-50%);
+}
+.md-content .tabbed-labels a::after {
+    content: none !important;
 }
 .md-content a:not(.headerlink):not(.glightbox):hover::after {
     width: 100%;
@@ -272,16 +275,6 @@ body {
     position: relative;
     background-color: #f8f9fa;
 }
-/* 启用navigation-top插件时不使用 */
-/* .md-nav__title {
-    background: rgba(255, 255, 255, 0.7) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    backdrop-filter: blur(10px) !important;
-    border-radius: 8px !important;
-    padding: 0.6rem 0.8rem !important;
-    transition: all 0.3s ease !important;
-    box-shadow: none !important;
-} */
 .md-grid {
     margin-left: 20px !important;
     max-width: initial;

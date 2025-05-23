@@ -374,23 +374,9 @@
     }
 
     a[href^="#"],
-    /* 站内锚点 */
     a[href*="/#"]
-
-    /* 跨页锚点 */
         {
         scroll-behavior: smooth !important;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        html {
-            scroll-behavior: auto !important;
-        }
-
-        a[href^="#"],
-        a[href*="/#"] {
-            scroll-behavior: auto !important;
-        }
     }
 
     .custom-tooltip {

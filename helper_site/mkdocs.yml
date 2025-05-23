@@ -229,7 +229,7 @@ nav:
       - HTTPS协议介绍与原理: Linux/26. 应用层协议HTTP/6. HTTPS协议介绍与原理/6. HTTPS协议介绍与原理.md
     - UDP协议原理: Linux/27. UDP协议原理/27. UDP协议原理.md
     - TCP协议原理: Linux/28. TCP协议原理/28. TCP协议原理.md
-    - 理解Linux如何看待连接以及TCP全连接队列: Linux\35. 理解Linux如何看待连接以及TCP全连接队列\35. 理解Linux如何看待连接以及TCP全连接队列.md
+    - 理解Linux如何看待连接以及TCP全连接队列: Linux/35. 理解Linux如何看待连接以及TCP全连接队列/35. 理解Linux如何看待连接以及TCP全连接队列.md
     - 网络层IP协议: Linux/29. 网络层IP协议/29. 网络层IP协议.md
     - 数据链路层协议: Linux/30. 数据链路层协议/30. 数据链路层协议.md
     - DNS与ICMP: Linux/36. DNS与ICMP/36. DNS与ICMP.md
@@ -260,10 +260,13 @@ nav:
     - Vue:
       - Vue前置知识: vue基础知识/1. vue前置知识/1. vue前置知识.md
       - Vue基础与响应式: vue基础知识/2. vue的响应式基础/2. vue的响应式基础.md
-      - Vue的基本结构: vue基础知识\3. vue的基本结构\3. vue的基本结构.md
-      - 从新结构再看响应式基础: vue基础知识\4. 从新结构再看响应式基础\4. 从新结构再看响应式基础.md
-      - Vue基础指令: vue基础知识\5. vue基础指令\5. vue基础指令.md
-      - Vue组件介绍与生命周期: vue基础知识\6.vue组件介绍与生命周期\6. vue组件介绍与生命周期.md
+      - Vue的基本结构: vue基础知识/3. vue的基本结构/3. vue的基本结构.md
+      - 从新结构再看响应式基础: vue基础知识/4. 从新结构再看响应式基础/4. 从新结构再看响应式基础.md
+      - Vue基础指令: vue基础知识/5. vue基础指令/5. vue基础指令.md
+      - Vue组件介绍与生命周期: vue基础知识/6.vue组件介绍与生命周期/6. vue组件介绍与生命周期.md
+    - Qt:
+      - Qt环境准备与基础代码解释: Qt基础知识/1. Qt介绍与基础代码解释/1. Qt介绍与基础代码解释.md
+
   # - JavaEE应用开发:
   #   - HTTP协议介绍: JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
   #   - Servlet开发: JavaWeb/2. Servlet开发/2. Servlet开发.md
@@ -299,7 +302,7 @@ nav:
   - 项目:
     - Boost库搜索引擎: 项目/1. Boost库搜索引擎/1. Boost库搜索引擎.md
     - 基于JSON的RPC框架:
-      - （Temporary）项目介绍与准备: 项目/2. 基于JSON的RPC框架/1. 项目介绍与准备/1. 项目介绍与准备.md
+      - 项目介绍与准备: 项目/2. 基于JSON的RPC框架/1. 项目介绍与准备/1. 项目介绍与准备.md
   # - 闲谈:
   #   - C++ 后端需要知道的找工作问题: 面试/C++ 后端需要知道的找工作问题/C++ 后端需要知道的找工作问题.md 
   #   - C++ 学长经验之谈: 面试/C++ 学长经验之谈/C++ 学长经验之谈.md

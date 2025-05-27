@@ -15,7 +15,6 @@
     @import url("https://fonts.cdnfonts.com/css/opposans");
     @import url("https://fontsapi.zeoseven.com/70/main/result.css");
 
-
     @font-face {
         font-family: "OPPOSans";
     }
@@ -374,8 +373,7 @@
     }
 
     a[href^="#"],
-    a[href*="/#"]
-        {
+    a[href*="/#"] {
         scroll-behavior: smooth !important;
     }
 
@@ -831,7 +829,9 @@
         color: rgba(255, 255, 255, 0.85);
         text-align: center;
         border-radius: 8px;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.05));
         backdrop-filter: blur(4px);
         transition: all 0.4s ease;
         overflow: hidden;
@@ -839,7 +839,9 @@
     }
 
     .md-footer-love:hover {
-        background: linear-gradient(135deg, rgba(255, 182, 193, 0.2), rgba(255, 255, 255, 0.1));
+        background: linear-gradient(135deg,
+                rgba(255, 182, 193, 0.2),
+                rgba(255, 255, 255, 0.1));
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(255, 182, 193, 0.15);
     }
@@ -982,6 +984,509 @@
             }
         }
     }
+
+    /* Atom One Light 语法高亮样式 - 仅覆盖代码块语法高亮 */
+    .highlight .hll {
+        background-color: #e5e5e6 !important;
+    }
+
+    .highlight .c {
+        color: #a0a1a7 !important;
+        font-style: italic !important;
+    }
+
+    /* Comment */
+    .highlight .err {
+        color: #ca1243 !important;
+    }
+
+    /* Error */
+    .highlight .k {
+        color: #a626a4 !important;
+    }
+
+    /* Keyword */
+    .highlight .l {
+        color: #986801 !important;
+    }
+
+    /* Literal */
+    .highlight .n {
+        color: #383a42 !important;
+    }
+
+    /* Name */
+    .highlight .o {
+        color: #383a42 !important;
+    }
+
+    /* Operator */
+    .highlight .p {
+        color: #383a42 !important;
+    }
+
+    /* Punctuation */
+    .highlight .ch {
+        color: #a0a1a7 !important;
+        font-style: italic !important;
+    }
+
+    /* Comment.Hashbang */
+    .highlight .cm {
+        color: #a0a1a7 !important;
+        font-style: italic !important;
+    }
+
+    /* Comment.Multiline */
+    .highlight .cp {
+        color: #a626a4 !important;
+    }
+
+    /* Comment.Preproc */
+    .highlight .cpf {
+        color: rgb(80, 161, 79) !important;
+    }
+
+    /* Comment.PreprocFile */
+    .highlight .c1 {
+        color: #a0a1a7 !important;
+        font-style: italic !important;
+    }
+
+    /* Comment.Single */
+    .highlight .cs {
+        color: #a0a1a7 !important;
+        font-style: italic !important;
+    }
+
+    /* Comment.Special */
+    .highlight .gd {
+        color: #ca1243 !important;
+    }
+
+    /* Generic.Deleted */
+    .highlight .ge {
+        font-style: italic !important;
+    }
+
+    /* Generic.Emph */
+    .highlight .gr {
+        color: #ca1243 !important;
+    }
+
+    /* Generic.Error */
+    .highlight .gh {
+        color: #0184bc !important;
+        font-weight: bold !important;
+    }
+
+    /* Generic.Heading */
+    .highlight .gi {
+        color: #50a14f !important;
+    }
+
+    /* Generic.Inserted */
+    .highlight .go {
+        color: #383a42 !important;
+    }
+
+    /* Generic.Output */
+    .highlight .gp {
+        color: #383a42 !important;
+    }
+
+    /* Generic.Prompt */
+    .highlight .gs {
+        font-weight: bold !important;
+    }
+
+    /* Generic.Strong */
+    .highlight .gu {
+        color: #0997b3 !important;
+        font-weight: bold !important;
+    }
+
+    /* Generic.Subheading */
+    .highlight .gt {
+        color: #ca1243 !important;
+    }
+
+    /* Generic.Traceback */
+    .highlight .kc {
+        color: #a626a4 !important;
+    }
+
+    /* Keyword.Constant */
+    .highlight .kd {
+        color: #a626a4 !important;
+    }
+
+    /* Keyword.Declaration */
+    .highlight .kn {
+        color: #a626a4 !important;
+    }
+
+    /* Keyword.Namespace */
+    .highlight .kp {
+        color: #a626a4 !important;
+    }
+
+    /* Keyword.Pseudo */
+    .highlight .kr {
+        color: #a626a4 !important;
+    }
+
+    /* Keyword.Reserved */
+    .highlight .kt {
+        color: #c18401 !important;
+    }
+
+    /* Keyword.Type */
+    .highlight .ld {
+        color: #50a14f !important;
+    }
+
+    /* Literal.Date */
+    .highlight .m {
+        color: #986801 !important;
+    }
+
+    /* Literal.Number */
+    .highlight .s {
+        color: #50a14f !important;
+    }
+
+    /* Literal.String */
+    .highlight .na {
+        color: #c18401 !important;
+    }
+
+    /* Name.Attribute */
+    .highlight .nb {
+        color: #c18401 !important;
+    }
+
+    /* Name.Builtin */
+    .highlight .nc {
+        color: #c18401 !important;
+    }
+
+    /* Name.Class */
+    .highlight .no {
+        color: #ca1243 !important;
+    }
+
+    /* Name.Constant */
+    .highlight .nd {
+        color: #4078f2 !important;
+    }
+
+    /* Name.Decorator */
+    .highlight .ni {
+        color: #383a42 !important;
+    }
+
+    /* Name.Entity */
+    .highlight .ne {
+        color: #ca1243 !important;
+    }
+
+    /* Name.Exception */
+    .highlight .nf {
+        color: #4078f2 !important;
+    }
+
+    /* Name.Function */
+    .highlight .nl {
+        color: #383a42 !important;
+    }
+
+    /* Name.Label */
+    .highlight .nn {
+        color: #383a42 !important;
+    }
+
+    /* Name.Namespace */
+    .highlight .nx {
+        color: #4078f2 !important;
+    }
+
+    /* Name.Other */
+    .highlight .py {
+        color: #383a42 !important;
+    }
+
+    /* Name.Property */
+    .highlight .nt {
+        color: #e45649 !important;
+    }
+
+    /* Name.Tag */
+    .highlight .nv {
+        color: #ca1243 !important;
+    }
+
+    /* Name.Variable */
+    .highlight .ow {
+        color: #a626a4 !important;
+    }
+
+    /* Operator.Word */
+    .highlight .w {
+        color: #383a42 !important;
+    }
+
+    /* Text.Whitespace */
+    .highlight .mb {
+        color: #986801 !important;
+    }
+
+    /* Literal.Number.Bin */
+    .highlight .mf {
+        color: #986801 !important;
+    }
+
+    /* Literal.Number.Float */
+    .highlight .mh {
+        color: #986801 !important;
+    }
+
+    /* Literal.Number.Hex */
+    .highlight .mi {
+        color: #986801 !important;
+    }
+
+    /* Literal.Number.Integer */
+    .highlight .mo {
+        color: #986801 !important;
+    }
+
+    /* Literal.Number.Oct */
+    .highlight .sa {
+        color: #50a14f !important;
+    }
+
+    /* Literal.String.Affix */
+    .highlight .sb {
+        color: #50a14f !important;
+    }
+
+    /* Literal.String.Backtick */
+    .highlight .sc {
+        color: #50a14f !important;
+    }
+
+    /* Literal.String.Char */
+    .highlight .dl {
+        color: #50a14f !important;
+    }
+
+    /* Literal.String.Delimiter */
+    .highlight .sd {
+        color: #a0a1a7 !important;
+        font-style: italic !important;
+    }
+
+    /* Literal.String.Doc */
+    .highlight .s2 {
+        color: #50a14f !important;
+    }
+
+    /* Literal.String.Double */
+    .highlight .se {
+        color: #4078f2 !important;
+    }
+
+    /* Literal.String.Escape */
+    .highlight .sh {
+        color: #50a14f !important;
+    }
+
+    /* Literal.String.Heredoc */
+    .highlight .si {
+        color: #4078f2 !important;
+    }
+
+    /* Literal.String.Interpol */
+    .highlight .sx {
+        color: #50a14f !important;
+    }
+
+    /* Literal.String.Other */
+    .highlight .sr {
+        color: #50a14f !important;
+    }
+
+    /* Literal.String.Regex */
+    .highlight .s1 {
+        color: #50a14f !important;
+    }
+
+    /* Literal.String.Single */
+    .highlight .ss {
+        color: #50a14f !important;
+    }
+
+    /* Literal.String.Symbol */
+    .highlight .bp {
+        color: #c18401 !important;
+    }
+
+    /* Name.Builtin.Pseudo */
+    .highlight .fm {
+        color: #4078f2 !important;
+    }
+
+    /* Name.Function.Magic */
+    .highlight .vc {
+        color: #ca1243 !important;
+    }
+
+    /* Name.Variable.Class */
+    .highlight .vg {
+        color: #ca1243 !important;
+    }
+
+    /* Name.Variable.Global */
+    .highlight .vi {
+        color: #ca1243 !important;
+    }
+
+    /* Name.Variable.Instance */
+    .highlight .vm {
+        color: #ca1243 !important;
+    }
+
+    /* Name.Variable.Magic */
+    .highlight .il {
+        color: #986801 !important;
+    }
+
+    /* Literal.Number.Integer.Long */
+
+    /* 特殊语言的额外样式调整 */
+    .highlight[data-lang="json"] .nt {
+        color: #e45649 !important;
+    }
+
+    /* JSON keys */
+    .highlight[data-lang="yaml"] .na {
+        color: #e45649 !important;
+    }
+
+    /* YAML keys */
+    .highlight[data-lang="yml"] .na {
+        color: #e45649 !important;
+    }
+
+    /* YAML keys */
+    .highlight[data-lang="xml"] .nt {
+        color: #e45649 !important;
+    }
+
+    /* XML tags */
+    .highlight[data-lang="html"] .nt {
+        color: #e45649 !important;
+    }
+
+    /* HTML tags */
+
+    /* CSS特殊处理 */
+    .highlight[data-lang="css"] .nc {
+        color: #c18401 !important;
+    }
+
+    /* CSS class selectors */
+    .highlight[data-lang="css"] .nf {
+        color: #4078f2 !important;
+    }
+
+    /* CSS functions */
+    .highlight[data-lang="css"] .nt {
+        color: #e45649 !important;
+    }
+
+    /* CSS element selectors */
+    .highlight[data-lang="css"] .nd {
+        color: #a626a4 !important;
+    }
+
+    /* CSS pseudo-classes */
+
+    /* JavaScript特殊处理 */
+    .highlight[data-lang="javascript"] .nx {
+        color: #4078f2 !important;
+    }
+
+    /* JS functions and variables */
+    .highlight[data-lang="js"] .nx {
+        color: #4078f2 !important;
+    }
+
+    /* JS functions and variables */
+
+    /* Python特殊处理 */
+    .highlight[data-lang="python"] .nd {
+        color: #4078f2 !important;
+    }
+
+    /* Python decorators */
+    .highlight[data-lang="python"] .nf {
+        color: #4078f2 !important;
+    }
+
+    /* Python functions */
+    .highlight[data-lang="python"] .nc {
+        color: #c18401 !important;
+    }
+
+    /* Python classes */
+
+    /* Shell/Bash特殊处理 */
+    .highlight[data-lang="bash"] .nv {
+        color: #ca1243 !important;
+    }
+
+    /* Bash variables */
+    .highlight[data-lang="shell"] .nv {
+        color: #ca1243 !important;
+    }
+
+    /* Shell variables */
+    .highlight[data-lang="sh"] .nv {
+        color: #ca1243 !important;
+    }
+
+    /* Shell variables */
+
+    /* C/C++特殊处理 */
+    .highlight[data-lang="c"] .kt {
+        color: #a626a4 !important;
+    }
+
+    /* C types */
+    .highlight[data-lang="cpp"] .kt {
+        color: #a626a4 !important;
+    }
+
+    /* C++ types */
+    .highlight[data-lang="c++"] .kt {
+        color: #a626a4 !important;
+    }
+
+    /* C++ types */
+
+    /* Java特殊处理 */
+    .highlight[data-lang="java"] .nc {
+        color: #c18401 !important;
+    }
+
+    /* Java classes */
+    .highlight[data-lang="java"] .kt {
+        color: #a626a4 !important;
+    }
+
+    /* Java types */
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", () => {

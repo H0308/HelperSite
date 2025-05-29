@@ -127,27 +127,6 @@ hide:
     }
 }
 
-.reference-links {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0;
-}
-
-.reference-links a {
-    display: block;
-    padding: 1rem;
-    background: rgba(248, 249, 250, 0.9);
-    border-radius: 8px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.reference-links a:hover {
-    background: #4da6da;
-    color: white;
-}
-
 /* 重置主页内容区域的样式 */
 .md-content article {
     background: none;
@@ -331,41 +310,6 @@ a {
     }
 }
 
-/* 调整参考文档卡片样式 */
-.reference-section {
-    width: 100%;
-    margin-top: 2rem;
-}
-
-.reference-section .content-card {
-    max-width: none;
-    margin: 0;
-}
-
-.reference-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
-    margin: 1rem 0;
-}
-
-.reference-grid a {
-    display: block;
-    padding: 1rem;
-    background: rgba(248, 249, 250, 0.9);
-    border-radius: 8px;
-    text-align: center;
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-
-.reference-grid a:hover {
-    background: #4da6da;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(77, 166, 218, 0.15);
-}
-
 .disclaimer-section {
     width: 100%;
     margin-top: 1rem;
@@ -403,20 +347,6 @@ a {
 .welcome-section {
     background: linear-gradient(135deg, rgba(77, 166, 218, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
     border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* 优化参考链接样式 */
-.reference-grid a {
-    background: rgba(248, 249, 250, 0.8);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.reference-grid a:hover {
-    background: linear-gradient(135deg, #4da6da 0%, #275796 100%);
-    transform: translateY(-3px);
 }
 
 /* 优化免责声明样式 */
@@ -465,10 +395,6 @@ a {
 
 @media (max-width: 640px) {
     .feature-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .reference-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -626,22 +552,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 </ul>
 
                 <p>注意：网站会保留上一次内容目录或者文章大纲的关闭状态，<span style="color: red;">某些浏览器插件会影响到快捷键，如果快捷键不生效请检查插件</span></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="reference-section">
-        <div class="content-card">
-            <h2>帮助文档</h2>
-            <div class="reference-grid">
-                <a href="https://legacy.cplusplus.com/">C/C++ 参考文档</a>
-                <a href="https://docs.oracle.com/javase/8/docs/api/">Java 官方文档</a>
-                <a href="https://developer.mozilla.org/en-US/">MDN Web 文档</a>
-                <a href="https://docs.python.org/zh-cn/3/library/index.html">Python 标准库</a>
-                <a href="https://cn.vuejs.org/guide/introduction.html">Vue 3</a>
-                <a href="https://quickref.cn/docs/latex.html">LaTeX 符号代码</a>
-                <a href="https://quickref.cn/docs/emmet.html">Emmet 表达式</a>
-                <a href="https://quickref.cn/docs/regex.html">正则表达式</a>
             </div>
         </div>
     </div>

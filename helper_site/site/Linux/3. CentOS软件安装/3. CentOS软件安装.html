@@ -2,9 +2,11 @@
     @import url("https://static.zeoseven.com/zsft/2/main/result.css");
     /* 江城黑体备用 */
     @import url("https://fontsapi.zeoseven.com/194/main/result.css");
-    /* @import url("https://static.zeoseven.com/zsft/84/main/result.css"); */
     /* OPPO Sans主字体 */
     @import url("https://fonts.cdnfonts.com/css/opposans");
+    /* Dejavu Sans Mono */
+    @import url('https://fonts.cdnfonts.com/css/dejavu-sans-mono');
+    /* 寒蝉团圆体 Sans */
     @import url("https://fontsapi.zeoseven.com/70/main/result.css");
 
     @font-face {
@@ -17,6 +19,10 @@
 
     @font-face {
         font-family: "LXGW ZhenKai";
+    }
+
+    @font-face {
+        font-family: 'DejaVu Sans Mono';
     }
 
     @font-face {
@@ -34,9 +40,9 @@
     }
 
     :root {
-        --md-text-font: "OPPOSans", "JiangChengHeiTi 400W";
-        --md-header-font: "LXGW ZhenKai";
-        --md-code-font: "JetBrains Mono";
+        --md-text-font: "OPPOSans", "JiangChengHeiTi 400W", sans-serif;
+        --md-header-font: "LXGW ZhenKai", sans-serif;
+        --md-code-font: "DejaVu Sans Mono", "JetBrains Mono";
         --code-font-color: #e96900;
     }
 
@@ -238,6 +244,38 @@
             opacity: 1;
             transform: translateY(0);
         }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .md-content article>*:not(.md-top):not(.md-nav) {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+
+    /* 添加超时后强制显示内容 */
+    .md-content article>*:not(.md-top):not(.md-nav) {
+        animation: flyIn 0.6s ease-out forwards;
+        opacity: 0;
+        /* 添加延迟后的备用显示 */
+        animation-fill-mode: both;
+    }
+
+    /* 确保在3秒后强制显示所有内容 */
+    .md-content {
+        animation: ensureVisible 0.1s ease-out 3s forwards;
+    }
+
+    @keyframes ensureVisible {
+        to {
+            --force-visible: 1;
+        }
+    }
+
+    .md-content[style*="--force-visible"] article>*:not(.md-top):not(.md-nav) {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
     }
 
     li::marker {
@@ -984,7 +1022,6 @@
 
     .highlight .c {
         color: #a0a1a7 !important;
-        font-style: italic !important;
     }
 
     /* Comment */
@@ -1020,13 +1057,11 @@
     /* Punctuation */
     .highlight .ch {
         color: #a0a1a7 !important;
-        font-style: italic !important;
     }
 
     /* Comment.Hashbang */
     .highlight .cm {
         color: #a0a1a7 !important;
-        font-style: italic !important;
     }
 
     /* Comment.Multiline */
@@ -1042,13 +1077,11 @@
     /* Comment.PreprocFile */
     .highlight .c1 {
         color: #a0a1a7 !important;
-        font-style: italic !important;
     }
 
     /* Comment.Single */
     .highlight .cs {
         color: #a0a1a7 !important;
-        font-style: italic !important;
     }
 
     /* Comment.Special */
@@ -1058,7 +1091,6 @@
 
     /* Generic.Deleted */
     .highlight .ge {
-        font-style: italic !important;
     }
 
     /* Generic.Emph */
@@ -1276,7 +1308,6 @@
     /* Literal.String.Delimiter */
     .highlight .sd {
         color: #a0a1a7 !important;
-        font-style: italic !important;
     }
 
     /* Literal.String.Doc */
@@ -1533,6 +1564,15 @@
                 theme1Link.setAttribute("disabled", "true");
             }
         }
+
+        // 添加加载完成后的检测
+        setTimeout(() => {
+            const hiddenElements = document.querySelectorAll('.md-content article>*[style*="opacity: 0"]');
+            hiddenElements.forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        }, 2000); // 2秒后强制显示所有隐藏元素
     });
 
     (function initTheme() {

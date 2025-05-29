@@ -308,9 +308,6 @@ body {
         > .md-nav__list
         > .md-nav__item--active
         .md-nav--secondary {
-        /* 启用navigation-top插件时不使用 */
-        /* background: rgba(255, 255, 255, 0.7) !important;*/
-        /* 否则使用 */
         border-left: none !important;
     }
 }
@@ -324,16 +321,6 @@ body {
 }
 .md-sidebar__scrollwrap {
     scrollbar-color: rgba(77, 166, 218, 0.9) #0000 !important;
-}
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 .md-clipboard {
     opacity: 0;

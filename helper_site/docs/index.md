@@ -483,12 +483,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     <li>
                         内容：
                         <ul>
-                            
                             <li><a href="https://www.coloros.com/article/A00000050/">主字体：OPPO Sans</a></li>
                             <li><a href="https://www.maoken.com/freefonts/5275.html">备用字体：江城黑体</a></li>
                         </ul>
                     </li>
-                    <li>代码：<a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a></li>
+                    <li>
+                        代码：
+                        <ul>
+                            <li><a href="https://github.com/dejavu-fonts/dejavu-fonts">主字体：Dejavu Sans Mono</a></li></li>
+                            <li><a href="https://www.jetbrains.com/lp/mono/">备用字体：JetBrains Mono</a></li></li>
+                        </ul>
+                        
                 </ul>
             </div>
             

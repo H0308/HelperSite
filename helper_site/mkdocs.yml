@@ -26,6 +26,7 @@ copyright: Copyright &copy; 2024-2025 柯懒不是柯南
 
 nav:
   - 主页: index.md
+  - 网站介绍: 网站介绍/网站介绍.md
   - 网站时间线: 网站时间线/网站时间线.md
   - 编程语言:
     - C语言:
@@ -433,3 +434,4 @@ plugins:
       exclude:
         - index.md
         - 作者/联系作者/作者.md
+        - 网站介绍/网站介绍.md

@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/%E7%AE%97%E6%B3%95/10.%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AF%87/1.%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html><link rel=prev href=../../9.%20%E8%B4%AA%E5%BF%83%E7%AF%87/2.%20%E8%B4%AA%E5%BF%83%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E8%B4%AA%E5%BF%83%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html><link rel=next href=../../%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95.html><link rel=icon href=../../../images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.6.12"><title>动态规划理论基础 - 柯懒的知识库</title><link rel=stylesheet href=../../../assets/stylesheets/main.2afb09e1.min.css><link rel=stylesheet href=../../../assets/stylesheets/palette.06af60db.min.css><link rel=stylesheet href=../../../css/timeline.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css><script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><script id=__analytics>function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-9XWRGNRRSY"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-9XWRGNRRSY",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-9XWRGNRRSY",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script><script>"undefined"!=typeof __md_analytics&&__md_analytics()</script><link rel=stylesheet href=../../../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><link rel=stylesheet href=../../../stylesheets/theme2.css media="screen and (max-width: 767px)"><link rel=stylesheet href=../../../stylesheets/theme1.css media="screen and (min-width: 1200px)"><link rel=stylesheet href=../../../stylesheets/print.css><script src=https://cdn.jsdelivr.net/npm/mermaid@11.5.0/dist/mermaid.min.js></script><style>
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D/%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D.html><link rel=prev href=../index.html><link rel=next href=../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html><link rel=icon href=../images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.6.12"><title>网站介绍 - 柯懒的知识库</title><link rel=stylesheet href=../assets/stylesheets/main.2afb09e1.min.css><link rel=stylesheet href=../assets/stylesheets/palette.06af60db.min.css><link rel=stylesheet href=../css/timeline.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css><script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><script id=__analytics>function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-9XWRGNRRSY"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-9XWRGNRRSY",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-9XWRGNRRSY",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script><script>"undefined"!=typeof __md_analytics&&__md_analytics()</script><link rel=stylesheet href=../stylesheets/theme2.css media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)"><link rel=stylesheet href=../stylesheets/theme2.css media="screen and (max-width: 767px)"><link rel=stylesheet href=../stylesheets/theme1.css media="screen and (min-width: 1200px)"><link rel=stylesheet href=../stylesheets/print.css><script src=https://cdn.jsdelivr.net/npm/mermaid@11.5.0/dist/mermaid.min.js></script><style>
     @import url("https://static.zeoseven.com/zsft/2/main/result.css");
     /* 江城黑体备用 */
     @import url("https://fontsapi.zeoseven.com/194/main/result.css");
@@ -1687,7 +1687,7 @@
             }, 300);
         }, 150);
     }
-</script> <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+</script> <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -1696,6 +1696,391 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#_1 class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../../../index.html title=柯懒的知识库 class="md-header__button md-logo" aria-label=柯懒的知识库 data-md-component=logo> <img src=../../../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 柯懒的知识库 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> 动态规划理论基础 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-hidden=true type=radio name=__palette id=__palette_0> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=标签 data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../../index.html class=md-tabs__link> 主页 </a> </li> <li class=md-tabs__item> <a href=../../../%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D/%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D.html class=md-tabs__link> 网站介绍 </a> </li> <li class=md-tabs__item> <a href=../../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-tabs__link> 网站时间线 </a> </li> <li class=md-tabs__item> <a href=../../../C%E8%AF%AD%E8%A8%80/index.html class=md-tabs__link> 编程语言 </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-tabs__link> 数据结构与算法 </a> </li> <li class=md-tabs__item> <a href=../../../Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-tabs__link> Linux </a> </li> <li class=md-tabs__item> <a href=../../../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-tabs__link> 前端 </a> </li> <li class=md-tabs__item> <a href=../../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-tabs__link> MySQL </a> </li> <li class=md-tabs__item> <a href=../../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-tabs__link> 扩展知识 </a> </li> <li class=md-tabs__item> <a href=../../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-tabs__link> 工具帮助 </a> </li> <li class=md-tabs__item> <a href=../../../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-tabs__link> 项目 </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=导航栏 data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../../../index.html title=柯懒的知识库 class="md-nav__button md-logo" aria-label=柯懒的知识库 data-md-component=logo> <img src=../../../assets/logo.png alt=logo> </a> 柯懒的知识库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../../index.html class=md-nav__link> <span class=md-ellipsis> 主页 </span> </a> </li> <li class=md-nav__item> <a href=../../../%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D/%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D.html class=md-nav__link> <span class=md-ellipsis> 网站介绍 </span> </a> </li> <li class=md-nav__item> <a href=../../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-nav__link> <span class=md-ellipsis> 网站时间线 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../../C%E8%AF%AD%E8%A8%80/index.html class=md-nav__link> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_5 checked> <label class=md-nav__link for=__nav_5 id=__nav_5_label tabindex> <span class=md-ellipsis> 数据结构与算法 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_5_label aria-expanded=true> <label class=md-nav__title for=__nav_5> <span class="md-nav__icon md-icon"></span> 数据结构与算法 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-nav__link> <span class=md-ellipsis> 数据结构 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_5_2 checked> <label class=md-nav__link for=__nav_5_2 id=__nav_5_2_label tabindex=0> <span class=md-ellipsis> 算法 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_5_2_label aria-expanded=true> <label class=md-nav__title for=__nav_5_2> <span class="md-nav__icon md-icon"></span> 算法 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../0.%20%E5%B8%B8%E7%94%A8%E5%86%85%E5%AE%B9/0.%20%E5%B8%B8%E7%94%A8%E5%86%85%E5%AE%B9.html class=md-nav__link> <span class=md-ellipsis> 算法比赛常用内容 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/1.%20%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> 数组基础篇 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../2.%20%E9%93%BE%E8%A1%A8%E7%AF%87/1.%20%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> 链表篇 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../3.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E7%AF%87/1.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> 哈希表篇 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../4.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AF%87/1.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/1.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html class=md-nav__link> <span class=md-ellipsis> 字符串篇 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../../5.%20%E5%8F%8C%E6%8C%87%E9%92%88%E7%AF%87/5.%20%E5%8F%8C%E6%8C%87%E9%92%88%E7%AE%97%E6%B3%95.html class=md-nav__link> <span class=md-ellipsis> 双指针 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../6.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%AF%87/1.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> 栈和队列篇 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/0.%20%E9%80%92%E5%BD%92%E4%BB%8B%E7%BB%8D/0.%20%E9%80%92%E5%BD%92%E4%BB%8B%E7%BB%8D.html class=md-nav__link> <span class=md-ellipsis> 递归与二叉树篇 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../8.%20%E5%9B%9E%E6%BA%AF%E7%AF%87/1.%20%E5%9B%9E%E6%BA%AF%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E5%9B%9E%E6%BA%AF%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> 回溯篇 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../9.%20%E8%B4%AA%E5%BF%83%E7%AF%87/1.%20%E8%B4%AA%E5%BF%83%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E8%B4%AA%E5%BF%83%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> 贪心篇 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_5_2_11 checked> <label class=md-nav__link for=__nav_5_2_11 id=__nav_5_2_11_label tabindex=0> <span class=md-ellipsis> 动态规划篇 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_5_2_11_label aria-expanded=true> <label class=md-nav__title for=__nav_5_2_11> <span class="md-nav__icon md-icon"></span> 动态规划篇 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> 动态规划理论基础 </span> <span class="md-nav__icon md-icon"></span> </label> <a href=1.%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> 动态规划理论基础 </span> </a> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 什么是动态规划 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 动态规划的解题步骤 </span> </a> </li> <li class=md-nav__item> <a href=#debug class=md-nav__link> <span class=md-ellipsis> 动态规划应该如何debug </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95.html class=md-nav__link> <span class=md-ellipsis> 其他算法 </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../../Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-nav__link> <span class=md-ellipsis> Linux </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-nav__link> <span class=md-ellipsis> 前端 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-nav__link> <span class=md-ellipsis> 扩展知识 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-nav__link> <span class=md-ellipsis> 工具帮助 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-nav__link> <span class=md-ellipsis> 项目 </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 什么是动态规划 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 动态规划的解题步骤 </span> </a> </li> <li class=md-nav__item> <a href=#debug class=md-nav__link> <span class=md-ellipsis> 动态规划应该如何debug </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=_1>动态规划理论基础<a class=headerlink href=#_1 title="Permanent link">&para;</a></h1> <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;"> <p><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 929 个字 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 3 分钟</p> </div> <div class="admonition abstract"> <p class=admonition-title>Abstract</p> <p>本篇文章引用自<a href=https://programmercarl.com/ >代码随想录</a></p> </div> <h2 id=_2>什么是动态规划<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <p>动态规划，英文：Dynamic Programming，简称DP，如果某一问题有很多重叠子问题，使用动态规划是最有效的。</p> <p>所以动态规划中每一个状态一定是由上一个状态推导出来的，<strong>这一点就区分于贪心</strong>，贪心没有状态推导，而是从局部直接选最优的</p> <p>例如：有N件物品和一个最多能背重量为W的背包。第<code>i</code>件物品的重量是<code>weight[i]</code>，得到的价值是<code>value[i]</code>。<strong>每件物品只能用一次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p> <p>动态规划中<code>dp[j]</code>是由<code>dp[j-weight[i]]</code>推导出来的，然后取<code>max(dp[j], dp[j - weight[i]] + value[i])</code>。</p> <p>但如果是贪心呢，每次拿物品选一个最大的或者最小的就完事了，和上一个状态没有关系。</p> <p>所以贪心解决不了动态规划的问题。</p> <p>不需要记住课本上动态规划的理论，只要知道动规是由前一个状态推导出来的，而贪心是局部直接选最优的，对于刷题来说就够用了。</p> <p>上述提到的背包问题，后序也会具体提到。</p> <h2 id=_3>动态规划的解题步骤<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <p>做动规题目的时候，并不是简单把状态转移公式背下来就开始写代码，甚至把题目AC之后，都不太清楚dp数组和dp数组每一个元素及对应的下标表示的是什么。状态转移公式（递推公式）是很重要，但动规不仅仅只有递推公式。</p> <p>动态规划的题目需要考虑下面五个问题：</p> <ol> <li>确定dp数组以及下标的含义</li> <li>确定递推公式</li> <li>dp数组如何初始化</li> <li>确定遍历顺序</li> <li>打印dp数组判断是否符合预期</li> </ol> <p>注意先确定递推公式，然后在考虑初始化呢，<strong>因为一些情况是递推公式决定了dp数组要如何初始化</strong>。后面的练习也需要考虑这五个问题。从这五步可以看出，其实确定递推公式仅仅是解题里的一步而已。</p> <h2 id=debug>动态规划应该如何debug<a class=headerlink href=#debug title="Permanent link">&para;</a></h2> <p><strong>找问题的最好方式就是把dp数组打印出来，看看究竟是不是按照自己思路推导的！</strong></p> <p>对于dp的学习绝不能是黑盒的状态，就是不清楚dp数组的含义，不懂为什么这么初始化，递推公式背下来了，遍历顺序靠习惯就是这么写的，然后一鼓作气写出代码，如果代码能通过万事大吉，通过不了的话就凭感觉改一改。</p> <p><strong>做动规的题目，写代码之前一定要把状态转移在dp数组的上具体情况模拟一遍，心中有数，确定最后推出的是想要的结果</strong>。然后再写代码，如果代码没通过就打印dp数组，看看是不是和自己预先推导的哪里不一样。如果打印出来和自己预先模拟推导是一样的，那么就是自己的递归公式、初始化或者遍历顺序有问题了。如果和自己预先模拟推导的不一样，那么就是代码实现细节有问题。<strong>这样才是一个完整的思考过程，而不是一旦代码出问题，就毫无头绪的东改改西改改，最后过不了，或者说是稀里糊涂的过了</strong>。</p> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年2月17日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年2月17日</span> </span> </aside> <form class=md-feedback name=feedback hidden> <fieldset> <legend class=md-feedback__title> 页面有帮助吗？ </legend> <div class=md-feedback__inner> <div class=md-feedback__list> <button class="md-feedback__icon md-icon" type=submit title=页面对我有帮助 data-md-value=1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M5 9v12H1V9zm4 12a2 2 0 0 1-2-2V9c0-.55.22-1.05.59-1.41L14.17 1l1.06 1.06c.27.27.44.64.44 1.05l-.03.32L14.69 8H21a2 2 0 0 1 2 2v2c0 .26-.05.5-.14.73l-3.02 7.05C19.54 20.5 18.83 21 18 21zm0-2h9.03L21 12v-2h-8.79l1.13-5.32L9 9.03z"/></svg> </button> <button class="md-feedback__icon md-icon" type=submit title=页面没有帮助到我 data-md-value=0> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 15V3h4v12zM15 3a2 2 0 0 1 2 2v10c0 .55-.22 1.05-.59 1.41L9.83 23l-1.06-1.06c-.27-.27-.44-.64-.44-1.06l.03-.31.95-4.57H3a2 2 0 0 1-2-2v-2c0-.26.05-.5.14-.73l3.02-7.05C4.46 3.5 5.17 3 6 3zm0 2H5.97L3 12v2h8.78l-1.13 5.32L15 14.97z"/></svg> </button> </div> <div class=md-feedback__note> <div data-md-value=1 hidden> 谢谢你的反馈！ </div> <div data-md-value=0 hidden> 谢谢你的反馈！联系<a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html>作者</a>提供更详细的信息 </div> </div> </div> </fieldset> </form> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024-2025 柯懒不是柯南 </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../../..", "features": ["navigation.indexes", "navigation.prune", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script> <script src=../../../assets/javascripts/bundle.c8b220af.min.js></script> <script src=../../../javascripts/katex.min.js></script> <script src=../../../javascripts/other.min.js></script> <script src=../../../javascripts/copyright.min.js></script> <script src=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js></script> <script src=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js></script> <script src=../../../assets/javascripts/toggle-sidebar.js async></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../index.html title=柯懒的知识库 class="md-header__button md-logo" aria-label=柯懒的知识库 data-md-component=logo> <img src=../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 柯懒的知识库 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> 网站介绍 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-hidden=true type=radio name=__palette id=__palette_0> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=标签 data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../index.html class=md-tabs__link> 主页 </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D.html class=md-tabs__link> 网站介绍 </a> </li> <li class=md-tabs__item> <a href=../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-tabs__link> 网站时间线 </a> </li> <li class=md-tabs__item> <a href=../C%E8%AF%AD%E8%A8%80/index.html class=md-tabs__link> 编程语言 </a> </li> <li class=md-tabs__item> <a href=../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-tabs__link> 数据结构与算法 </a> </li> <li class=md-tabs__item> <a href=../Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-tabs__link> Linux </a> </li> <li class=md-tabs__item> <a href=../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-tabs__link> 前端 </a> </li> <li class=md-tabs__item> <a href=../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-tabs__link> MySQL </a> </li> <li class=md-tabs__item> <a href=../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-tabs__link> 扩展知识 </a> </li> <li class=md-tabs__item> <a href=../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-tabs__link> 工具帮助 </a> </li> <li class=md-tabs__item> <a href=../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-tabs__link> 项目 </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation hidden> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=导航栏 data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../index.html title=柯懒的知识库 class="md-nav__button md-logo" aria-label=柯懒的知识库 data-md-component=logo> <img src=../assets/logo.png alt=logo> </a> 柯懒的知识库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../index.html class=md-nav__link> <span class=md-ellipsis> 主页 </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <a href=%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D.html class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> 网站介绍 </span> </a> </li> <li class=md-nav__item> <a href=../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-nav__link> <span class=md-ellipsis> 网站时间线 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../C%E8%AF%AD%E8%A8%80/index.html class=md-nav__link> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-nav__link> <span class=md-ellipsis> 数据结构与算法 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-nav__link> <span class=md-ellipsis> Linux </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-nav__link> <span class=md-ellipsis> 前端 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-nav__link> <span class=md-ellipsis> 扩展知识 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-nav__link> <span class=md-ellipsis> 工具帮助 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-nav__link> <span class=md-ellipsis> 项目 </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc hidden> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目录> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;"> <p><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 975 个字 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 3 分钟</p> </div> <div class=welcome-hero> <div class=hero-content> <div class=hero-icon>🚀</div> <h1 class=hero-title>网站内容介绍</h1> <p class=hero-subtitle>专注于分享编程知识和技术实践的个人网站</p> </div> <div class=hero-animation> <div class=floating-elements> <span class=float-item>💻</span> <span class=float-item>⚡</span> <span class=float-item>🔧</span> <span class=float-item>📚</span> </div> </div> </div> <div class=features-grid> <div class=feature-card data-category=languages> <div class=feature-icon>💻</div> <h3>编程语言基础</h3> <p>深入浅出地讲解C++、C语言、Java、Python语言的基础知识和进阶技巧</p> <div class=feature-tags> <span class=tag> <a href=https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/index.html>C语言</a> </span> <span class=tag> <a href=https://www.help-doc.top/C%2B%2B/index.html>C++</a> </span> <span class=tag> <a href=#>Java</a> </span> <span class=tag> <a href=#>Python</a> </span> </div> </div> <div class=feature-card data-category=algorithms> <div class=feature-icon>🧮</div> <h3>数据结构与算法</h3> <p>提供数据结构和算法相关的学习资料</p> <div class=feature-tags> <span class=tag> <a href=#>数据结构</a> </span> <span class=tag> <a href=#>算法</a> </span> </div> </div> <div class=feature-card data-category=backend> <div class=feature-icon>🖥️</div> <h3>后端技术</h3> <p>包括Linux操作系统、MySQL数据库等后端开发必备技能</p> <div class=feature-tags> <span class=tag> <a>Linux</a> </span> <span class=tag> <a>MySQL</a> </span> </div> </div> <div class=feature-card data-category=frontend> <div class=feature-icon>🎨</div> <h3>前端开发</h3> <p>涉及HTML与CSS、JavaScript、Vue和Qt前端技术</p> <div class=feature-tags> <span class=tag> <a href=#>HTML/CSS</a> </span> <span class=tag> <a href=#>JavaScript</a> </span> <span class=tag> <a href=#>Vue</a> </span> <span class=tag> <a href=#>Qt</a> </span> </div> </div> <div class=feature-card data-category=projects> <div class=feature-icon>🚀</div> <h3>项目实战</h3> <p>分享了C++相关完整的项目案例</p> <div class=feature-tags> <span class=tag> <a href=https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html>Boost搜索引擎</a> </span> <span class=tag> <a href=https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/2.%20%E5%9F%BA%E4%BA%8EJSON%E7%9A%84RPC%E6%A1%86%E6%9E%B6/1.%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%87%86%E5%A4%87/1.%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%87%86%E5%A4%87.html>基于JSON的RPC框架</a> </span> </div> </div> <div class=feature-card data-category=tools> <div class=feature-icon>🔧</div> <h3>工具与资源</h3> <p>提供一些实用的工具帮助和其他有价值的资源</p> <div class=feature-tags> <span class=tag> <a href=#>工具帮助</a> </span> <span class=tag> <a href=#>扩展知识</a> </span> </div> </div> </div> <style>
+.welcome-hero {
+    position: relative;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(77, 166, 218, 0.1), rgba(166, 218, 77, 0.05));
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-icon {
+    font-size: 4rem;
+    animation: bounce 2s ease-in-out infinite;
+    margin-bottom: 1rem;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    margin: 0.5rem 0;
+    background: linear-gradient(135deg, #4da6da, #275796);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 1rem 0 0 0;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.5s forwards;
+}
+
+.hero-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-elements {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.float-item {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: float 6s ease-in-out infinite;
+}
+
+.float-item:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.float-item:nth-child(2) {
+    top: 60%;
+    right: 15%;
+    animation-delay: 1.5s;
+}
+
+.float-item:nth-child(3) {
+    bottom: 30%;
+    left: 20%;
+    animation-delay: 3s;
+}
+
+.float-item:nth-child(4) {
+    top: 30%;
+    right: 25%;
+    animation-delay: 4.5s;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(77, 166, 218, 0.1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(77, 166, 218, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.feature-card:hover::before {
+    left: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(77, 166, 218, 0.15);
+    border-color: rgba(77, 166, 218, 0.3);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+.feature-card h3 {
+    color: #4da6da !important;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.tag {
+    background: linear-gradient(135deg, rgba(77, 166, 218, 0.1), rgba(77, 166, 218, 0.05));
+    color: #4da6da;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(77, 166, 218, 0.2);
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: rgba(77, 166, 218, 0.1);
+    transform: scale(1.05);
+}
+
+/* 动画定义 */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes titleGlow {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.2); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(120deg); }
+    66% { transform: translateY(10px) rotate(240deg); }
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .welcome-hero {
+        padding: 2rem 1rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    .float-item {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+    }
+}
+
+.md-content article {
+    background: none;
+    backdrop-filter: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 2rem 0;
+    margin: 0;
+    padding: 0rem 2rem !important;
+    padding-bottom: 2rem !important;
+}
+
+.md-content h1,
+.md-content h2,
+.md-content h3 {
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: inherit;
+}
+
+.md-content h1::before,
+.md-content h2::before,
+.md-content h3::before,
+.md-content h1::after,
+.md-content h2::after,
+.md-content h3::after {
+    display: none;
+}
+
+.md-content {
+    max-width: none;
+    margin: 0 auto;
+}
+
+.md-content__inner {
+    margin-right: auto !important;
+}
+.md-content__inner > div:first-child {
+    display: none;
+}
+</style> <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 为特色卡片添加点击动画
+    const featureCards = document.querySelectorAll('.feature-card');
+
+    featureCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // 添加点击效果
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+
+            // 添加闪光效果
+            const flash = document.createElement('div');
+            flash.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100px;
+                height: 100px;
+                background: radial-gradient(circle, rgba(77, 166, 218, 0.3), transparent);
+                border-radius: 50%;
+                transform: translate(-50%, -50%) scale(0);
+                pointer-events: none;
+                z-index: 10;
+            `;
+
+            this.appendChild(flash);
+
+            // 闪光动画
+            flash.animate([
+                { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
+                { transform: 'translate(-50%, -50%) scale(4)', opacity: 0 }
+            ], {
+                duration: 600,
+                easing: 'ease-out'
+            }).onfinish = () => flash.remove();
+        });
+    });
+
+    // 滚动视差效果
+    const hero = document.querySelector('.welcome-hero');
+    const floatingElements = document.querySelectorAll('.float-item');
+
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+
+        if (hero) {
+            hero.style.transform = `translate3d(0, ${rate}px, 0)`;
+        }
+
+        floatingElements.forEach((element, index) => {
+            const rate = scrolled * (0.2 + index * 0.1);
+            element.style.transform = `translate3d(0, ${rate}px, 0)`;
+        });
+    }
+
+    // 节流函数
+    let ticking = false;
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+            setTimeout(() => ticking = false, 16);
+        }
+    }
+
+    window.addEventListener('scroll', requestTick);
+
+    // 添加入场动画
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0px)';
+            }
+        });
+    }, observerOptions);
+
+    // 观察所有需要动画的元素
+    const animatedElements = document.querySelectorAll('.feature-card, .highlight-item, .closing-message');
+    animatedElements.forEach((element, index) => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+        observer.observe(element);
+    });
+});
+</script> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024-2025 柯懒不是柯南 </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "..", "features": ["navigation.indexes", "navigation.prune", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script> <script src=../assets/javascripts/bundle.c8b220af.min.js></script> <script src=../javascripts/katex.min.js></script> <script src=../javascripts/other.min.js></script> <script src=../javascripts/copyright.min.js></script> <script src=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js></script> <script src=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js></script> <script src=../assets/javascripts/toggle-sidebar.js async></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
 document$.subscribe(() => { lightbox.reload() });
 </script></body> </html>

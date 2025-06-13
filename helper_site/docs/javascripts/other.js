@@ -71,34 +71,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-// 获取内容
-function getContent() {
-    // 使用HTML标记增强显示效果
-    return `一闪一闪亮晶晶，不及<span class="love-highlight">小亮</span><span class="love-heart">♥</span>照我心。To Li Liang`;
-}
-// 添加内容
-document.addEventListener("DOMContentLoaded", () => {
-    const copyright = document.querySelector(".md-copyright");
-    const social = document.querySelector(".md-social");
-
-    const loveDiv = document.createElement("div");
-    loveDiv.className = "md-footer-love md-typeset";
-    loveDiv.innerHTML = getContent(); // 使用innerHTML渲染HTML标签
-
-    // 添加交互效果
-    loveDiv.addEventListener("mouseenter", () => {
-        const heart = loveDiv.querySelector(".love-heart");
-        if (heart) {
-            heart.style.animationDuration = "0.8s";
-        }
-    });
-
-    loveDiv.addEventListener("mouseleave", () => {
-        const heart = loveDiv.querySelector(".love-heart");
-        if (heart) {
-            heart.style.animationDuration = "1.5s";
-        }
-    });
-
-    copyright.parentNode.insertBefore(loveDiv, social);
-});

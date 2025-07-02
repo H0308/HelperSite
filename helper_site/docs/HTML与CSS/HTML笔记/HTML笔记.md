@@ -193,6 +193,26 @@
 </body>
 ```
 
+如果需要想直接为一个元素设置锚点，只需要给该元素设置`id`属性即可：
+
+```html
+<body>
+    <a href="#t1">锚点1</a>
+    <a href="#t2">锚点2</a>
+    <a href="#t3">锚点3</a>
+    <a href="#t4">锚点4</a>
+
+    <!-- #t1锚点会调转到id为t1的div -->
+    <div id="t1">1</div>
+    <!-- #t2锚点会调转到id为t2的div -->
+    <div id="t2">2</div>
+    <!-- #t3锚点会调转到id为t3的div -->
+    <div id="t3">3</div>
+    <!-- #t4锚点会调转到id为t4的div -->
+    <div id="t4">4</div>
+</body>
+```
+
 常见的其他锚点设置：
 
 ```html

@@ -311,7 +311,7 @@ p.box {
 
 #### 伪类选择器
 
-伪类选择器主要作用是选择拥有特殊效果的元素，因为这个特殊效果在DOM中不存在，所以称为「伪类」。常见的伪类有下面几种：
+伪类选择器主要作用是选择拥有特殊状态的元素，因为这个特殊状态在DOM中并不直接存在，所以称为「伪类」。常见的伪类有下面几种：
 
 1. 动态伪类选择器
 2. 结构伪类选择器
@@ -500,3 +500,387 @@ p.box {
     <input type="radio" name="alpha-t">e
 </body>
 ```
+
+**目标伪类选择器**
+
+例如，`:target`表示选中锚点指向的元素
+
+```html
+<style>
+    /* 所有div的默认样式 */
+    div {
+        background-color: gray;
+        height: 200px;
+        margin: 10px 0;
+        padding: 20px;
+    }
+
+    /* 当div成为目标元素时的样式 */
+    div:target {
+        background-color: green;
+        color: white;
+        font-weight: bold;
+    }
+</style>
+<body>
+    <!-- 设置锚点 -->
+    <nav>
+        <a href="#section1">跳转到第1节</a>
+        <a href="#section2">跳转到第2节</a>
+        <a href="#section3">跳转到第3节</a>
+        <a href="#section4">跳转到第4节</a>
+    </nav>
+
+    <!-- 目标元素 -->
+    <div id="section1">
+        <h2>第1节内容</h2>
+    </div>
+
+    <div id="section2">
+        <h2>第2节内容</h2>
+    </div>
+
+    <div id="section3">
+        <h2>第3节内容</h2>
+    </div>
+
+    <div id="section4">
+        <h2>第4节内容</h2>
+    </div>
+</body>
+```
+
+**语言伪类选择器**
+
+`:lang()`：根据元素的`lang`属性值选择元素
+
+```html
+<style>
+    /* 选择lang属性为en的元素 */
+    :lang(en) {
+        color: red;
+    }
+
+    /* 选择lang属性为fr的元素 */
+    :lang(fr) {
+        color: blue;
+    }
+
+    /* 选择lang属性为es的元素 */
+    :lang(es) {
+        color: green;
+    }
+</style>
+<body>
+    <!-- 选择lang属性为en的元素 -->
+    <p lang="en">English</p>
+    <!-- 选择lang属性为fr的元素 -->
+    <p lang="fr">Français</p>
+    <!-- 选择lang属性为es的元素 -->
+    <p lang="es">Español</p>
+</body>
+```
+
+#### 伪元素选择器
+
+伪元素选择器主要作用是选择元素中的一些特殊位置，但是因为不是直接存在的元素，所以称为「伪元素」。常见的伪元素器有下面的几个：
+
+1. `::first-letter`：选中元素中的第一个文字
+2. `::first-line`：选中元素中的第一行文字
+3. `::selection`：选中被鼠标选中的内容**（CSS3支持）**，如果不指定具体元素，就是针对所有元素中被鼠标选中的内容
+4. `::placeholder`：选中输入框的提示文字**（CSS3支持）**
+5. `::before`：在元素内容最开始的位置创建一个子元素，必须用`content`熟悉指定内容（文字内容不能用鼠标选中）
+6. `::after`：在元素内容最后面的位置创建一个子元素，必须用`content`熟悉指定内容（文字内容不能用鼠标选中）
+
+=== "选中元素中的第一个文字"
+
+    ```html
+    <style>
+        .letter::first-letter {
+            color: red;
+            font-size: 40px;
+        }
+    </style>
+    <body>
+        <!-- “这”被选中 -->
+        <div class="letter">
+            这是一段内容
+        </div>
+    </body>
+    ```
+
+=== "选中元素中的第一行文字"
+
+    ```html
+    <style>
+        .line::first-line {
+            background-color: aqua;
+        }
+    </style>
+    <body>
+        <!-- 选中视口内第一行文字，具体一行内容由视口宽度决定 -->
+        <div class="line">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis nam quasi exercitationem cumque distinctio
+            consequatur? Maiores consequatur, quod placeat impedit voluptatibus tempore quae voluptatum. Excepturi deleniti
+            voluptate nisi eius assumenda.
+        </div>
+    </body>
+    ```
+
+=== "选中被鼠标选中的内容"
+
+    ```html
+    <style>
+        .selected::selection {
+            background-color: blueviolet;
+        }
+    </style>
+    <body>
+        <!-- 选中内容效果 -->
+        <div class="selected">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod porro in nulla ab, eaque iste possimus quos non
+            odio, alias quia fuga mollitia assumenda adipisci laudantium, sint aliquid sapiente inventore?
+        </div>
+    </body>
+    ```
+
+=== "选中输入框的提示文字"
+
+    ```html
+    <style>
+        input::placeholder {
+            color: antiquewhite;
+        }
+    </style>
+    <body>
+        <input placeholder="请输入内容"></input>
+    </body>
+    ```
+
+=== "最开始的位置创建一个子元素"
+
+    ```html
+    <style>
+        p::before {
+            content: '$';
+        }
+    </style>
+    <body>
+        <!-- 元素内容最前添加内容 -->
+        <!-- 实现的效果：<p>$199</p> -->
+        <p>199</p>
+    </body>
+    ```
+
+=== "最后面的位置创建一个子元素"
+
+    ```html
+    <style>
+        p::after {
+            content: '.00';
+        }
+    </style>
+    <body>
+        <!-- 元素内容最后添加内容 -->
+        <!-- 实现的效果：<p>199.00</p> -->
+        <p>199</p>
+    </body>
+    ```
+
+## 选择器优先级
+
+样式冲突：通过不同的选择器，选中相同的元素 ，并且为相同的样式名设置不同的值时，就发生了样式的冲突
+
+简单优先级：`!important` > 行内样式 > ID选择器 > 类选择器 > 元素选择器 > 通配选择器
+
+完整优先级：
+
+每个选择器，都可计算出一组权重，格式为`(a,b,c)`，每个字母分别代表：
+
+- `a`: ID选择器的个数
+- `b`: 类、伪类、属性选择器的个数
+- `c`: 元素、伪元素选择器的个数
+
+例如：
+
+| 选择器                  | 权重      |
+| ----------------------- | --------- |
+| `ul>li`                 | `(0,0,2)` |
+| `div ul>li p a span`    | `(0,0,6)` |
+| `#test .slogan`         | `(1,1,0)` |
+| `#test .slogan a`       | `(1,1,1)` |
+| `#test .slogan a:hover` | `(1,2,1)` |
+
+比较规则：按照从左到右的顺序，依次比较大小，当前位胜出后，后面的不再对比，例如：
+
+1. `(1,0,0)` > `(0,2,2)`
+2. `(1,1,0)` > `(1,0,3)`
+3. `(1,1,3)` > `(1,1,2)`
+
+特殊地，行内样式权重大于所有选择器，而`!important`的优先级最高
+
+!!! note
+
+    需要注意的是，并集选择器的每一个部分是分开计算的，例如：`#container .text, p.text`：计算`#container .text`为`(1,1,0)`和计算`p.text`为`(0,1,1)`，但是并集选择器不会把这两个权重相加变成`(1,2,1)`，而是保持各自独立的权重
+
+## CSS三大特性
+
+1. 层叠性：如果发生了样式冲突，那就会根据一定的规则（选择器优先级），进行样式的层叠（覆盖）
+2. 继承性：元素会自动拥有其父元素或其祖先元素上所设置的某些样式，优先继承离得近的。具体元素是否可以继承，可以参考[MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/inheritance)上每一个元素的`Formal definition`
+3. 优先级：见上一节
+
+## CSS颜色表示
+
+CSS中有多种方式来表示颜色，每种方式都有其特定的用途和优势。以下是主要的颜色表示方法：
+
+### 颜色名称
+
+使用预定义的颜色名称，CSS支持147种标准颜色名称。
+
+```css
+/* 基本颜色 */
+color: red;
+color: blue;
+color: green;
+color: white;
+color: black;
+
+/* 扩展颜色 */
+color: crimson;
+color: lightblue;
+color: forestgreen;
+color: antiquewhite;
+color: darkslategray;
+```
+
+### 十六进制表示法（常用）
+
+使用`#`符号后跟6位或3位十六进制数字表示颜色。
+
+```css
+/* 6位十六进制 */
+color: #FF0000; /* 红色 */
+color: #00FF00; /* 绿色 */
+color: #0000FF; /* 蓝色 */
+color: #FFFFFF; /* 白色 */
+color: #000000; /* 黑色 */
+
+/* 3位十六进制（简写形式） */
+color: #F00; /* 等同于 #FF0000 */
+color: #0F0; /* 等同于 #00FF00 */
+color: #00F; /* 等同于 #0000FF */
+color: #FFF; /* 等同于 #FFFFFF */
+color: #000; /* 等同于 #000000 */
+
+/* 8位十六进制（包含透明度） */
+color: #FF000080; /* 红色，50%透明度 */
+color: #00FF0040; /* 绿色，25%透明度 */
+```
+
+### RGB表示法（常用）
+
+使用红（Red）、绿（Green）、蓝（Blue）三原色的数值组合。
+
+```css
+/* RGB函数，值范围0-255 */
+color: rgb(255, 0, 0);     /* 红色 */
+color: rgb(0, 255, 0);     /* 绿色 */
+color: rgb(0, 0, 255);     /* 蓝色 */
+color: rgb(255, 255, 255); /* 白色 */
+color: rgb(0, 0, 0);       /* 黑色 */
+color: rgb(128, 128, 128); /* 灰色 */
+
+/* 使用百分比 */
+color: rgb(100%, 0%, 0%);     /* 红色 */
+color: rgb(50%, 50%, 50%);    /* 灰色 */
+```
+
+### RGBA表示法（常用）
+
+RGB的扩展，增加了Alpha通道（透明度）。
+
+```css
+/* RGBA函数，Alpha值范围0-1 */
+color: rgba(255, 0, 0, 1);     /* 红色，完全不透明 */
+color: rgba(255, 0, 0, 0.5);   /* 红色，50%透明度 */
+color: rgba(0, 0, 0, 0.8);     /* 黑色，80%不透明度 */
+color: rgba(255, 255, 255, 0); /* 白色，完全透明 */
+
+/* 使用百分比 */
+color: rgba(100%, 0%, 0%, 50%); /* 红色，50%透明度 */
+```
+
+### HSL表示法
+
+使用色相（Hue）、饱和度（Saturation）、亮度（Lightness）表示颜色。
+
+```css
+/* HSL函数 */
+color: hsl(0, 100%, 50%);     /* 红色 */
+color: hsl(120, 100%, 50%);   /* 绿色 */
+color: hsl(240, 100%, 50%);   /* 蓝色 */
+color: hsl(0, 0%, 100%);      /* 白色 */
+color: hsl(0, 0%, 0%);        /* 黑色 */
+color: hsl(0, 0%, 50%);       /* 灰色 */
+
+/* 色相值说明 */
+color: hsl(0, 100%, 50%);     /* 0° = 红色 */
+color: hsl(60, 100%, 50%);    /* 60° = 黄色 */
+color: hsl(120, 100%, 50%);   /* 120° = 绿色 */
+color: hsl(180, 100%, 50%);   /* 180° = 青色 */
+color: hsl(240, 100%, 50%);   /* 240° = 蓝色 */
+color: hsl(300, 100%, 50%);   /* 300° = 洋红色 */
+```
+
+### HSLA表示法
+
+HSL的扩展，增加了Alpha通道（透明度）。
+
+```css
+/* HSLA函数 */
+color: hsla(0, 100%, 50%, 1);     /* 红色，完全不透明 */
+color: hsla(120, 100%, 50%, 0.5); /* 绿色，50%透明度 */
+color: hsla(240, 100%, 50%, 0.3); /* 蓝色，30%不透明度 */
+color: hsla(0, 0%, 0%, 0.8);      /* 黑色，80%不透明度 */
+```
+
+### 特殊颜色值
+
+```css
+/* 透明色 */
+color: transparent;
+
+/* 继承父元素颜色 */
+color: inherit;
+
+/* 使用初始值 */
+color: initial;
+
+/* 当前元素的颜色值 */
+border-color: currentColor;
+```
+
+### CSS3新增颜色函数（了解）
+
+```css
+/* 颜色混合 */
+color: color-mix(in srgb, red 50%, blue 50%);
+
+/* 相对颜色语法 */
+color: rgb(from #ff0000 r g b / 0.5);
+
+/* Lab颜色空间 */
+color: lab(50% 20 -30);
+
+/* LCH颜色空间 */
+color: lch(50% 35 180);
+```
+
+### 颜色表示法选择建议
+
+1. **十六进制**：最常用，简洁明了，适合大多数场景
+2. **RGB/RGBA**：需要动态计算颜色值或需要透明度时使用
+3. **HSL/HSLA**：需要调整色相、饱和度、亮度时使用，更直观
+4. **颜色名称**：适合快速原型开发或基本颜色
+5. **CSS3新函数**：用于高级颜色操作和现代浏览器
+

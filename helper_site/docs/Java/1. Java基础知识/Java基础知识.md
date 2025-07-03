@@ -433,13 +433,13 @@ public class Main {
 
 创建规则：
 
-域名反写，例如www.baidu.com写为com.baidu（去掉www.）
+域名反写，例如`www.baidu.com`写为`com.baidu`（去掉`www.`）
 
-例如www.epsda.com创建一个包为scanner，写为com.espda.scanner
+例如`www.epsda.com`创建一个包为`scanner`，写为`com.espda.scanner`
 
-对于第一个包来说，com.epsda没有二级目录，但是在文件夹下scanner包在com.epsda下
+对于第一个包来说，`com.epsda`没有二级目录，但是在文件夹下`scanner`包在`com.epsda`下
 
-如果需要创建一个与scanner平级的包，则需要右键com.epsda上一级的文件夹，比如src，同样输入com.epsda后面再输入新的包名，例如创建包if_else，写为com.epsda.if_else，创建完成后com.epsda下就会存在两个平级包并且此时会有二级目录，下次再需要创建一个与前两个包平级时只需要右键com.epsda包即可
+如果需要创建一个与`scanner`平级的包，则需要右键`com.epsda`上一级的文件夹，比如`src`，同样输入`com.epsda`后面再输入新的包名，例如创建包`if_else`，写为`com.epsda.if_else`，创建完成后`com.epsda`下就会存在两个平级包并且此时会有二级目录，下次再需要创建一个与前两个包平级时只需要右键`com.epsda`包即可
 
 ## Java中的数据输入
 

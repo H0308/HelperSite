@@ -1071,6 +1071,11 @@ div {
 
 1. 调整多行文字的垂直间距
 2. 调整单行文字的垂直居中（行高=元素高度），**但是只能调整单行文字，并且这个居中并不是绝对垂直居中**
+3. 多行文字垂直居中：见定位部分
+
+!!! note
+
+    底部对齐同样可以使用行高完成，但是也是针对**单行文字**而言，具体方式为：行高=元素高度*2 - 字体大小 - 合适值（随机），但是实际上并不推荐使用行高来控制元素在垂直方向上进行底部对齐，具体的解决方案见定位部分
 
 ### 文本对齐
 
@@ -1090,6 +1095,99 @@ div {
 }
 ```
 
+#### 垂直对齐
+
+使用`vertical-align`属性对行内元素的垂直对齐方式进行控制，常见的有下面四个值：
+
+1. `baseline`（默认值）：使当前行内元素中文字的基线与父元素文字的基线对齐
+2. `top`：使元素的顶部与其所在行的顶部对齐
+3. `middle`：使元素的中心所在位置与父元素的基线加上父元素文字`x`的一半对齐
+4. `bottom`：使元素的底部与其所在行的底部对齐
+
+!!! note
+
+    `vertical-align`属性不可以控制块级元素
+
+现在有下面的结构：
+
+```html
+<style>
+    div {
+        height: 200px;
+        background-color: azure;
+        font-size: 100px;
+    }
+
+    div>span {
+        font-size: 40px;
+        background-color: blanchedalmond;
+    }
+</style>
+
+<body>
+    <div>
+        父元素内容：xxx<span>xx（子元素内容）</span>
+    </div>
+</body>
+```
+
+当`vertical-align`的属性设置给`span`元素并提供上面四个值时，观察每一副图中红色线条位置：
+
+=== "属性值为`baseline`"
+
+    <img src="CSS2笔记.assets/image-20250709211711992.png" style="width: 70%;">
+
+=== "属性值为`top`"
+
+    <img src="CSS2笔记.assets/image-20250709212415693.png" style="width: 70%;">
+
+=== "属性值为`middle`"
+
+    <img src="CSS2笔记.assets/image-20250709212727949.png" style="width: 70%;">
+
+=== "属性值为`bottom`"
+
+    <img src="CSS2笔记.assets/image-20250709212913674.png" style="width: 70%;">
+
+在上面的结构中，子元素也是包裹文字的行内元素，如果是非文字的行内元素，例如图片，一旦属性值为`middle`时，可以发现图片与父元素的`x`中心刚好对齐，因为默认情况下微软雅黑字体中的文字都是偏下的
+
+需要注意的是，如果子元素的内容比父级元素的内容高，那么在子元素中设置`vertical-align`属性时调整的时父元素内容在当前行的位置，例如下面的代码：
+
+```html
+<style>
+    div {
+        height: 200px;
+        background-color: azure;
+        font-size: 100px;
+    }
+
+    .f {
+        background-color: aquamarine;
+    }
+
+    .c {
+        font-size: 150px;
+        background-color: blanchedalmond;
+        /* 行内元素才可以设置vertical-align属性 */
+        /* vertical-align: baseline; */
+        /* vertical-align: top; */
+        /* vertical-align: middle; */
+        vertical-align: top;
+    }
+</style>
+
+<body>
+    <div>
+        <span class="f">父元素内容：xxx</span><span class="c">xx（子元素内容）</span>
+    </div>
+</body>
+```
+
+效果如下：
+
+<img src="CSS2笔记.assets/image-20250709214258262.png" style="width: 70%;">
+
+除了用于调整行内元素的位置以外，`vertical-align`属性还可以用来调整一个单元格中文字垂直方向的位置（顶部、居中和底部），效果与表格单元格属性`valign`效果一致
 
 ### 字体复合属性
 

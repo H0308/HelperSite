@@ -73,11 +73,9 @@ JDK 1.2的版本中就提供`java.lang.ThreadLocal`，为解决多线程程序�
 
 主要使用的方法：
 
-1、方法：`ThreadLocal对象.get`：获取`ThreadLocal`中当前线程共享变量的值
-
-2、方法：`ThreadLocal对象.set`： 设置`ThreadLocal`中当前线程共享变量的值
-
-3、方法：`ThreadLocal对象.remove`： 移除`ThreadLocal`中当前线程共享变量的值
+1. 方法：`ThreadLocal对象.get`：获取`ThreadLocal`中当前线程共享变量的值
+2. 方法：`ThreadLocal对象.set`：设置`ThreadLocal`中当前线程共享变量的值
+3. 方法：`ThreadLocal对象.remove`：移除`ThreadLocal`中当前线程共享变量的值
 
 ## 结合`ThreadLocal`类完善`JDBC`工具类
 

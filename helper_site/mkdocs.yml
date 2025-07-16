@@ -269,13 +269,6 @@ nav:
       - Vue组件介绍与生命周期: vue基础知识/6.vue组件介绍与生命周期/6. vue组件介绍与生命周期.md
     - Qt:
       - Qt环境准备与基础代码解释: Qt基础知识/1. Qt介绍与基础代码解释/1. Qt介绍与基础代码解释.md
-
-  # - JavaEE应用开发:
-  #   - HTTP协议介绍: JavaWeb/1. HTTP协议介绍/1. HTTP协议介绍.md
-  #   - Servlet开发: JavaWeb/2. Servlet开发/2. Servlet开发.md
-  #   - 乱码问题和路径问题: JavaWeb/3. 乱码问题和路径问题/3. 乱码问题和路径问题.md
-  #   - MVC架构模式介绍: JavaWeb/4. MVC架构模式介绍/4. MVC架构模式介绍.md
-  #   - 会话、过滤器和监听器: JavaWeb/5. 会话、过滤器和监听器/5. 会话、过滤器和监听器.md
   - MySQL:
     - MySQL基础: MySQL/MySQL基础使用/MySQL基础使用.md
     - JDBC（Java连接数据库技术）:
@@ -284,6 +277,8 @@ nav:
       - JDBC高级: MySQL/JDBC/JDBC高级/JDBC高级.md
     - MySQL基础知识:
       - Ubuntu下安装和卸载MySQL: MySQL/MySQL基础知识/1. Ubuntu下安装和卸载MySQL/1. Ubuntu下安装和卸载MySQL.md
+  - JavaEE应用开发:
+    - SpringMVC基础: JavaEE/Spring/1. SpringMVC基础/1. SpringMVC基础.md
   - 扩展知识: 
     - 关于Shell: 其它/Shell脚本语言/关于Shell.md
     - 关于函数栈帧（C语言演示）: 其它/C语言函数栈帧/关于函数栈帧（C语言演示）.md
@@ -313,16 +308,10 @@ nav:
       - 功能模块设计（RPC、注册）: 项目/2. 基于JSON的RPC框架/3. 功能模块设计（RPC、注册）/3. 功能模块设计（RPC、注册）.md
       - 功能模块设计（主题、客户端封装、服务端封装）: 项目/2. 基于JSON的RPC框架/5. 功能模块设计（主题、客户端封装、服务端封装）/5. 功能模块设计（主题、客户端封装、服务端封装）.md
       - 功能测试: 项目/2. 基于JSON的RPC框架/4. 功能测试/4. 功能测试.md
-  # - 闲谈:
-  #   - C++ 后端需要知道的找工作问题: 面试/C++ 后端需要知道的找工作问题/C++ 后端需要知道的找工作问题.md 
-  #   - C++ 学长经验之谈: 面试/C++ 学长经验之谈/C++ 学长经验之谈.md
-  #   - 学习晚一定没机会吗，大三学长有话说: 面试/学习晚一定没机会吗，大三学长有话说/学习晚一定没机会吗，大三学长有话说.md
-  # - 阅读档案: 阅读档案/阅读档案.md
-  
+
 not_in_nav: |
   JavaWeb/2. Servlet开发/2. Servlet开发.md
   JavaWeb/3. 乱码问题和路径问题/3. 乱码问题和路径问题.md
-  JavaWeb/4. MVC架构模式介绍/4. MVC架构模式介绍.md
   JavaWeb/5. 会话、过滤器和监听器/5. 会话、过滤器和监听器.md
   工具帮助/Tomcat安装和使用/Tomcat安装和使用.md
   其它/Boost库中的谓词函数/Boost库中的谓词函数.md

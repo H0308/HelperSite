@@ -1177,10 +1177,6 @@ div {
     .c {
         font-size: 150px;
         background-color: blanchedalmond;
-        /* 行内元素才可以设置vertical-align属性 */
-        /* vertical-align: baseline; */
-        /* vertical-align: top; */
-        /* vertical-align: middle; */
         vertical-align: top;
     }
 </style>

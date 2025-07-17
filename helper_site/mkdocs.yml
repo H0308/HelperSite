@@ -276,7 +276,7 @@ nav:
       - JDBC进阶: MySQL/JDBC/JDBC进阶/JDBC进阶.md
       - JDBC高级: MySQL/JDBC/JDBC高级/JDBC高级.md
     - MySQL基础知识:
-      - MySQL基础操作: MySQL/2. MySQL基础操作/2. MySQL基础操作.md
+      - MySQL基础操作: MySQL/MySQL基础知识/2. MySQL基础操作/2. MySQL基础操作.md
       - （补充）Ubuntu下安装和卸载MySQL: MySQL/MySQL基础知识/1. Ubuntu下安装和卸载MySQL/1. Ubuntu下安装和卸载MySQL.md
   - JavaEE应用开发:
     - SpringMVC基础: JavaEE/Spring/1. SpringMVC基础/1. SpringMVC基础.md

@@ -1,4 +1,115 @@
-{% extends "base.html" %} {% block extrahead %} {{ super() }}
+{% extends "base.html" %}
+
+{% block header %}
+<header class="md-header" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="页眉">
+        <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" title="{{ config.site_name | e }}"
+            class="md-header__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
+            {% include "partials/logo.html" %}
+        </a>
+        <label class="md-header__button md-icon" for="__drawer">
+            {% include ".icons/material/menu.svg" %}
+        </label>
+        <div class="md-header__title" data-md-component="header-title">
+            <div class="md-header__ellipsis">
+                <div class="md-header__topic">
+                    <span class="md-ellipsis">
+                        {{ config.site_name }}
+                    </span>
+                </div>
+                <div class="md-header__topic" data-md-component="header-topic">
+                    <span class="md-ellipsis">
+                        {% if page.meta and page.meta.title %}
+                        {{ page.meta.title }}
+                        {% else %}
+                        {{ page.title }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+        {% if config.theme.palette %}
+        {% if not config.theme.palette is mapping %}
+        <form class="md-header__option" data-md-component="palette">
+            {% for option in config.theme.palette %}
+            {% set primary = option.primary | replace(" ", "-") | lower %}
+            {% set accent = option.accent | replace(" ", "-") | lower %}
+            <input class="md-option" data-md-color-media="{{ option.media }}"
+                data-md-color-scheme="{{ option.scheme | replace(' ', '-') | lower }}"
+                data-md-color-primary="{{ primary }}" data-md-color-accent="{{ accent }}" {% if option.toggle %}
+                aria-hidden="true" {% else %} aria-label="{{ option.name }}" {% endif %} type="radio" name="__palette"
+                id="__palette_{{ loop.index }}">
+            {% if option.toggle %}
+            <label class="md-header__button md-icon" title="{{ option.name }}"
+                for="__palette_{{ loop.index0 or loop.length }}" hidden>
+                {% include ".icons/" ~ option.toggle.icon ~ ".svg" %}
+            </label>
+            {% endif %}
+            {% endfor %}
+        </form>
+        {% endif %}
+        {% endif %}
+
+        <!-- 头像元素 - 直接在HTML中定义 -->
+        <div class="header-avatar">
+            <img src="{{ base_url }}/作者/作者.assets/20250206-200653.jpg" alt="头像">
+            <div class="avatar-dropdown">
+                <p><strong>柯懒不是柯南</strong></p>
+                <a href="{{ base_url }}/作者/联系作者/作者.html" class="avatar-dropdown-item">吵醒柯懒</a>
+                <div class="avatar-dropdown-divider"></div>
+                <a href="{{ base_url }}/作者/关于作者/关于作者.html" class="avatar-dropdown-item">柯懒自传</a>
+                <div class="avatar-dropdown-divider"></div>
+                <a href="https://github.com/H0308" class="avatar-dropdown-item">柯懒的零食库</a>
+            </div>
+        </div>
+
+        <!-- 主题切换按钮 - 直接在HTML中定义 -->
+        <div class="theme-switch">
+            <button class="theme-btn" onclick="switchTheme()">
+                <span class="current-theme">当前：新版主题</span>
+                <span class="target-theme">切换到：原生主题</span>
+            </button>
+        </div>
+
+        <label class="md-header__button md-icon" for="__search">
+            {% include ".icons/material/magnify.svg" %}
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+            <label class="md-search__overlay" for="__search"></label>
+            <div class="md-search__inner" role="search">
+                <form class="md-search__form" name="search">
+                    <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索"
+                        autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false"
+                        data-md-component="search-query" required>
+                    <label class="md-search__icon md-icon" for="__search">
+                        {% include ".icons/material/magnify.svg" %}
+                        {% include ".icons/material/arrow-left.svg" %}
+                    </label>
+                    <nav class="md-search__options" aria-label="查找">
+                        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容"
+                            tabindex="-1">
+                            {% include ".icons/material/close.svg" %}
+                        </button>
+                    </nav>
+                    <div class="md-search__suggest" data-md-component="search-suggest"></div>
+                </form>
+                <div class="md-search__output">
+                    <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+                        <div class="md-search-result" data-md-component="search-result">
+                            <div class="md-search-result__meta">
+                                正在初始化搜索引擎
+                            </div>
+                            <ol class="md-search-result__list" role="presentation"></ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
+{% block extrahead %} {{ super() }}
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.css"
     media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)" />
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.css" media="screen and (max-width: 767px)" />
@@ -1524,43 +1635,10 @@
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const searchEl = document.querySelector(".md-search");
         const savedTheme = localStorage.getItem("preferred-theme") || "theme1";
 
-        // 创建头像元素，包含下拉菜单
-        const avatarEl = document.createElement("div");
-        avatarEl.className = "header-avatar";
-
-        // 创建头像图片和下拉菜单
-        avatarEl.innerHTML = `
-        <img src="/作者/作者.assets/20250206-200653.jpg" alt="头像">
-        <div class="avatar-dropdown">
-            <p><strong>柯懒不是柯南</strong></p>
-            <a href="/作者/联系作者/作者.html" class="avatar-dropdown-item">吵醒柯懒</a>
-            <div class="avatar-dropdown-divider"></div>
-            <a href="/作者/关于作者/关于作者.html" class="avatar-dropdown-item">柯懒自传</a>
-            <div class="avatar-dropdown-divider"></div>
-            <a href="https://github.com/H0308" class="avatar-dropdown-item">柯懒的零食库</a>
-        </div>
-    `;
-
-        // 创建主题切换按钮
-        const themeSwitch = document.createElement("div");
-        themeSwitch.className = "theme-switch";
-        themeSwitch.innerHTML = `
-        <button class="theme-btn" onclick="switchTheme()">
-            <span class="current-theme">${savedTheme === "theme1" ? "当前：新版主题" : "当前：原生主题"
-            }</span>
-            <span class="target-theme">${savedTheme === "theme1"
-                ? "切换到：原生主题"
-                : "切换到：新版主题"
-            }</span>
-        </button>
-    `;
-
-        // 插入元素
-        searchEl.parentNode.insertBefore(avatarEl, searchEl);
-        searchEl.parentNode.insertBefore(themeSwitch, searchEl);
+        // 初始化主题按钮文本
+        updateThemeSwitchButton(savedTheme);
 
         const initialTheme = localStorage.getItem("preferred-theme");
         if (initialTheme) {

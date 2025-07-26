@@ -16,9 +16,9 @@ hide:
     height: auto;
 }
 #hello-svg {
-    --gradient-1: #FF6B6B, #4ECDC4, #45B7D1;
-    --gradient-2: #96E6A1, #D4FC79;
-    --gradient-3: #FFD93D, #FF6B6B;
+    --gradient-1: var(--gradient-primary);
+    --gradient-2: var(--gradient-primary-light);
+    --gradient-3: var(--gradient-primary-right);
 }
 .path {
     fill: none;
@@ -66,7 +66,7 @@ hide:
     padding: 4rem 0;
     margin: 2rem auto;
     max-width: 800px;
-    background: linear-gradient(120deg, rgba(77, 166, 218, 0.1), rgba(255, 255, 255, 0.1));
+    background: var(--gradient-primary-light);
     border-radius: 16px;
 }
 
@@ -95,14 +95,14 @@ hide:
 .feature-item {
     text-align: center;
     padding: 1.5rem;
-    background: #f8f9fa;
+    background: var(--bg-primary);
     border-radius: 8px;
     transition: all 0.3s ease;
 }
 
 .feature-item:hover {
-    background: white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background: var(--bg-white);
+    box-shadow: var(--shadow-medium);
 }
 
 @keyframes fadeInDown {
@@ -214,7 +214,7 @@ hide:
     padding: 3rem;
     margin: 0;
     max-width: none;
-    background: rgba(77, 166, 218, 0.05);
+    background: var(--primary-blue-light);
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -241,12 +241,12 @@ hide:
 /* 卡片样式优化 */
 
 .content-card {
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--bg-white-light);
     backdrop-filter: blur(10px);
     border-radius: 16px;
     padding: 1.8rem;
     margin: 11px;
-    border: 1px solid rgba(77, 166, 218, 0.1);
+    border: 1px solid var(--primary-blue-light);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
 }
@@ -261,10 +261,10 @@ hide:
     border-radius: 16px;
     border: 2px solid transparent;
     background-image: linear-gradient(45deg, 
-        rgba(77, 166, 218, 0.5), 
-        rgba(218, 77, 166, 0.5), 
-        rgba(166, 218, 77, 0.5),
-        rgba(77, 166, 218, 0.5)
+        var(--gradient-rainbow-1), 
+        var(--gradient-rainbow-2), 
+        var(--gradient-rainbow-3),
+        var(--gradient-rainbow-1)
     );
     background-size: 300% 300%;
     -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
@@ -277,7 +277,7 @@ hide:
 
 .content-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(77, 166, 218, 0.1);
+    box-shadow: var(--card-shadow-hover);
 }
 .content-card:hover::before {
     opacity: 1;
@@ -319,9 +319,9 @@ a {
 .disclaimer-section .content-card {
     margin: 0;
     padding: 1rem;
-    background: rgba(255, 217, 61, 0.1);
-    background: linear-gradient(135deg, rgba(255, 217, 61, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
-    border: 1px solid rgba(255, 217, 61, 0.2);
+    background: var(--yellow-light);
+    background: var(--gradient-yellow);
+    border: 1px solid var(--yellow-border);
 }
 
 .disclaimer-section p {
@@ -331,28 +331,29 @@ a {
 
 /* 优化特性网格项样式 */
 .feature-item {
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--bg-white-light);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--border-white);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .feature-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(77, 166, 218, 0.15);
+    box-shadow: var(--shadow-primary-strong);
 }
 
 /* 优化欢迎区域 */
 .welcome-section {
-    background: linear-gradient(135deg, rgba(77, 166, 218, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--gradient-primary-light);
+    border: 1px solid var(--border-white);
+    box-shadow: var(--card-shadow);
 }
 
 /* 优化免责声明样式 */
 .disclaimer-section .content-card {
-    background: linear-gradient(135deg, rgba(255, 217, 61, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
-    border: 1px solid rgba(255, 217, 61, 0.2);
+    background: var(--gradient-yellow);
+    border: 1px solid var(--yellow-border);
 }
 
 /* 优化动画效果 */

@@ -405,6 +405,7 @@ plugins:
           - javascripts/other.js
           - javascripts/copyright.js
       css_files:
+        - stylesheets/colors.css
         - stylesheets/theme1.css
         - stylesheets/theme2.css
         - stylesheets/print.css

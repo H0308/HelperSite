@@ -1,9 +1,8 @@
 // 页面阅读进度条
 document.addEventListener("DOMContentLoaded", () => {
-    // 创建阅读进度条
-    const progress = document.createElement("div");
-    progress.className = "reading-progress";
-    document.body.appendChild(progress);
+    // 获取已存在的阅读进度条元素
+    const progress = document.querySelector(".reading-progress");
+    if (!progress) return;
 
     // 阅读进度条逻辑
     let ticking = false;
@@ -25,9 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const indicator = document.createElement("div");
-    indicator.className = "scroll-indicator";
-    document.body.appendChild(indicator);
+    // 获取已存在的滚动指示器元素
+    const indicator = document.querySelector(".scroll-indicator");
+    if (!indicator) return;
 
     const updateScrollIndicator = () => {
         const docHeight = document.documentElement.scrollHeight;
@@ -76,14 +75,11 @@ function getContent() {
     // 使用HTML标记增强显示效果
     return `一闪一闪亮晶晶，不及<span class="love-highlight">小亮</span><span class="love-heart">♥</span>照我心。To Li Liang`;
 }
-// 添加内容
-document.addEventListener("DOMContentLoaded", () => {
-    const copyright = document.querySelector(".md-copyright");
-    const social = document.querySelector(".md-social");
 
-    const loveDiv = document.createElement("div");
-    loveDiv.className = "md-footer-love md-typeset";
-    loveDiv.innerHTML = getContent(); // 使用innerHTML渲染HTML标签
+// 为已存在的爱心元素添加交互效果
+document.addEventListener("DOMContentLoaded", () => {
+    const loveDiv = document.querySelector(".md-footer-love");
+    if (!loveDiv) return;
 
     // 添加交互效果
     loveDiv.addEventListener("mouseenter", () => {
@@ -99,6 +95,4 @@ document.addEventListener("DOMContentLoaded", () => {
             heart.style.animationDuration = "1.5s";
         }
     });
-
-    copyright.parentNode.insertBefore(loveDiv, social);
 });

@@ -404,6 +404,10 @@ plugins:
           - javascripts/katex.js
           - javascripts/other.js
           - javascripts/copyright.js
+      css_files:
+        - stylesheets/theme1.css
+        - stylesheets/theme2.css
+        - stylesheets/print.css
   - glightbox:
       touchNavigation: true
       loop: false

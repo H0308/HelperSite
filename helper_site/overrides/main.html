@@ -109,12 +109,19 @@
 </header>
 {% endblock %}
 
+{% block content %}
+{{ super() }}
+<!-- 阅读进度条 - 直接在HTML中定义 -->
+<div class="reading-progress"></div>
+<!-- 滚动指示器 - 直接在HTML中定义 -->
+<div class="scroll-indicator"></div>
+{% endblock %}
+
 {% block extrahead %} {{ super() }}
-<link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.css"
-    media="screen and (min-width: 768px) and (max-width: 1199px), screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape)" />
-<link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.css" media="screen and (max-width: 767px)" />
-<link rel="stylesheet" href="{{ base_url }}/stylesheets/theme1.css" media="screen and (min-width: 1200px)" />
-<link rel="stylesheet" href="{{ base_url }}/stylesheets/print.css" />
+<link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.min.css" media="screen and (max-width: 767px)" />
+<link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.min.css" media="screen and (min-width: 768px) and (max-width: 1199px)" />
+<link rel="stylesheet" href="{{ base_url }}/stylesheets/theme1.min.css" media="screen and (min-width: 1200px)" />
+<link rel="stylesheet" href="{{ base_url }}/stylesheets/print.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.5.0/dist/mermaid.min.js"></script>
 
 <style>
@@ -144,8 +151,9 @@
         font-family: 'DejaVu Sans Mono';
     }
 
+    /* JetBrains Mono字体 */
     @font-face {
-        font-family: "JetBrains Mono";
+        font-family: "ZSFT-hk";
         src: url("https://static.zeoseven.com/zsft/hk/main.woff2") format("woff2"),
             url("https://static-host.zeoseven.com/zsft/hk/main.woff2") format("woff2");
     }
@@ -161,7 +169,7 @@
     :root {
         --md-text-font: "OPPOSans", "JiangChengHeiTi 400W", sans-serif;
         --md-header-font: "LXGW ZhenKai", sans-serif;
-        --md-code-font: "DejaVu Sans Mono", "JetBrains Mono";
+        --md-code-font: "DejaVu Sans Mono", "ZSFT-hk";
         --code-font-color: #e96900;
     }
 

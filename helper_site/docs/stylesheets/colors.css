@@ -21,6 +21,9 @@
     /* 主题切换按钮多彩渐变 */
     --gradient-theme-button: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 25%, #45b7d1 50%, #96ceb4 75%, #feca57 100%, #ff9ff3 125%, #54a0ff 150%, #5f27cd 175%, #00d2d3 200%);
     
+    /* 字体切换按钮渐变 */
+    --gradient-font-button: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 25%, #7fcdcd 50%, #81c784 75%, #aed581 100%, #c5e1a5 125%, #dcedc8 150%, #f1f8e9 175%, #e8f5e8 200%);
+    
     /* 彩虹渐变 - 用于边框动画 */
     --gradient-rainbow-1: rgba(77, 166, 218, 0.5);
     --gradient-rainbow-2: rgba(218, 77, 166, 0.5);
@@ -130,8 +133,5 @@
     /* 卡片色 */
     --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     --card-shadow-hover: 0 8px 24px rgba(77, 166, 218, 0.1);
-
-    --avatar-dropdown-color: white;
-
     --theme-transition-overlay: white;
 }

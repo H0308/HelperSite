@@ -12,8 +12,6 @@ theme:
     - navigation.indexes
     - navigation.prune
     - navigation.tabs 
-    - navigation.top # 启用navigation-top插件时需要禁用theme1.css中提示的内容，否则启用
-    - search.suggest
     - search.highlight
     - content.code.copy
   language: zh
@@ -405,6 +403,10 @@ plugins:
           - javascripts/other.js
           - javascripts/copyright.js
       css_files:
+        - stylesheets/font-dongguanti.css
+        - stylesheets/font-oppoti.css
+        - stylesheets/font-jiangchengti.css
+        - stylesheets/font-lxgw.css
         - stylesheets/colors.css
         - stylesheets/theme1.css
         - stylesheets/theme2.css

@@ -280,23 +280,6 @@ body {
 .md-search {
     margin-right: 100px;
 }
-.md-top {
-    position: fixed !important;
-    right: 8.5rem !important;
-    bottom: 0.8rem !important;
-    top: unset !important; 
-    transform: none !important;
-    width: 2.5rem !important;
-    height: 2.5rem !important;
-    padding: 0.5rem !important;
-    margin: 0 !important;
-    background: var(--primary-blue-semi) !important;
-    border-radius: 0.6rem !important;
-    box-shadow: 0 4px 12px var(--shadow-strong) !important;
-    transition: all 0.3s ease !important;
-    backdrop-filter: blur(4px) !important;
-    z-index: 99 !important;
-}
 @media screen and (min-width: 76.25em) {
     [dir="ltr"]
         .md-nav--integrated

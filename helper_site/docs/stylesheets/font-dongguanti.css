@@ -1,0 +1,8 @@
+/* 东观体字体样式表 */
+:root {
+    --md-text-font: "STDongGuanTi", "OPPOSans", "JiangChengHeiTi 400W", sans-serif !important;
+}
+
+body, .md-typeset, .md-content {
+    font-family: "STDongGuanTi", "OPPOSans", "JiangChengHeiTi 400W", sans-serif !important;
+}

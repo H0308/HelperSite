@@ -479,20 +479,16 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="content-card">
                 <h2>字体说明</h2>
                 <ul>
-                    <li>导航栏标题：<a href="https://github.com/Warren2060/">寒蝉团圆体</a></li>
-                    <li>标题：<a href="https://github.com/lxgw/LxgwZhenKai">霞鹜臻楷</a></li>
+                    <li>导航栏标题：寒蝉团圆体</li>
+                    <li>标题：霞鹜臻楷</li>
                     <li>
-                        内容：
-                        <ul>
-                            <li><a href="https://www.coloros.com/article/A00000050/">主字体：OPPO Sans</a></li>
-                            <li><a href="https://www.maoken.com/freefonts/5275.html">备用字体：江城黑体</a></li>
-                        </ul>
+                        内容：本网站一共提供四个字体，分别是上图东观体、OPPO Sans、江城黑体和霞鹜臻楷，具体可以通过右侧边栏的字体选项进行效果查看
                     </li>
                     <li>
                         代码：
                         <ul>
-                            <li><a href="https://github.com/dejavu-fonts/dejavu-fonts">主字体：Dejavu Sans Mono</a></li></li>
-                            <li><a href="https://www.jetbrains.com/lp/mono/">备用字体：JetBrains Mono</a></li></li>
+                            <li>主字体：Dejavu Sans Mono</li>
+                            <li>备用字体：JetBrains Mono</li>
                         </ul>
                         
                 </ul>
@@ -506,7 +502,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <li><strong>原生主题：</strong>默认的文档主题，去除大部分动画和特效，保留最基本的文档样式</li>
                 </ul>
                 
-                在新版网页中，对屏幕尺寸较小的设备默认使用原生主题且不可更改，所以没有看到「切换主题」的按钮属于正常现象
+                网站支持主题切换功能，可以通过右侧边栏的主题选项进行切换。需要注意的是，<strong>移动端（手机和部分平板）默认使用原生主题，且不可更改</strong>
             </div>
         </div>
         

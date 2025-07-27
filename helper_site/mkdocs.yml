@@ -404,6 +404,8 @@ plugins:
           - javascripts/other.js
           - javascripts/copyright.js
       css_files:
+        - stylesheets/code-font-dejavu-sans-mono.css
+        - stylesheets/code-font-zsft-hk.css
         - stylesheets/font-dongguanti.css
         - stylesheets/font-oppoti.css
         - stylesheets/font-jiangchengti.css

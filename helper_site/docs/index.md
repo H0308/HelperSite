@@ -485,12 +485,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         内容：本网站一共提供四个字体，分别是上图东观体、OPPO Sans、江城黑体和霞鹜臻楷，具体可以通过右侧边栏的字体选项进行效果查看
                     </li>
                     <li>
-                        代码：
-                        <ul>
-                            <li>主字体：Dejavu Sans Mono</li>
-                            <li>备用字体：JetBrains Mono</li>
-                        </ul>
-                        
+                        代码：本网站一共提供两个字体，分别是Dejavu Sans Mono和JetBrains Mono，具体可以通过右侧边栏的字体选项进行效果查看
+                    </li>
                 </ul>
             </div>
             

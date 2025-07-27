@@ -1,8 +1,16 @@
+/* 上图东观体 */
+@import url("https://fontsapi.zeoseven.com/488/main/result.css");
+@font-face {
+    font-family: "STDongGuanTi";
+}
 /* 东观体字体样式表 */
 :root {
-    --md-text-font: "STDongGuanTi", "OPPOSans", "JiangChengHeiTi 400W", sans-serif !important;
+    --md-text-font: "STDongGuanTi", "OPPOSans", "JiangChengHeiTi 400W",
+        sans-serif !important;
 }
 
-body, .md-typeset, .md-content {
+body,
+.md-typeset,
+.md-content {
     font-family: "STDongGuanTi", "OPPOSans", "JiangChengHeiTi 400W", sans-serif !important;
 }

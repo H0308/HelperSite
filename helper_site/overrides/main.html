@@ -135,6 +135,28 @@
         </div>
     </div>
     
+    <!-- 代码字体切换功能 -->
+    <div class="toolbar-item code-font-switcher">
+        <div class="toolbar-icon">
+            <svg class="code-font-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                <path d="M320 213.333333l-213.333333 213.333334L320 640l60.16-60.16L227.84 426.666667l152.32-153.173334L320 213.333333z m384 0l-60.16 60.16L796.16 426.666667l-152.32 153.173333L704 640l213.333333-213.333333L704 213.333333z m-128 85.333334l-128 426.666666h85.333333l128-426.666666h-85.333333z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <div class="toolbar-label">代码字体</div>
+        <div class="code-font-dropdown-toolbar">
+            <div class="code-font-current-toolbar" onclick="toggleCodeFontDropdownToolbar()">
+                <span class="current-code-font-name-toolbar">DejaVu Sans Mono</span>
+                <svg class="dropdown-arrow-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="12" height="12">
+                    <path d="M878.592 250.88q29.696 0 48.128 11.264t24.576 29.696 0 41.472-26.624 45.568q-82.944 92.16-159.744 180.224t-148.48 164.864q-19.456 20.48-45.568 31.744t-53.76 11.776-53.248-8.704-43.008-28.672q-39.936-44.032-82.944-90.112l-88.064-92.16q-43.008-46.08-85.504-90.624t-79.36-86.528q-17.408-19.456-22.528-40.448t1.024-38.4 23.552-28.672 45.056-11.264q35.84 0 98.816-0.512t137.728-0.512l153.6 0 150.528 0 125.952 0 79.872 0z" fill="currentColor"></path>
+                </svg>
+            </div>
+            <div class="code-font-options-toolbar">
+                <div class="code-font-option-toolbar" data-code-font="dejavu" onclick="selectCodeFontToolbar('dejavu')">DejaVu Sans Mono</div>
+                <div class="code-font-option-toolbar" data-code-font="zsft" onclick="selectCodeFontToolbar('zsft')">JetBrains Mono</div>
+            </div>
+        </div>
+    </div>
+    
     <!-- 主题切换功能 -->
     <div class="toolbar-item theme-switcher" onclick="switchTheme()">
         <div class="toolbar-icon">
@@ -180,50 +202,24 @@
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/font-jiangchengti.min.css" id="font-jiangchengti" disabled />
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/font-lxgw.min.css" id="font-lxgw" disabled />
 
+<!-- 代码字体样式表 -->
+<link rel="stylesheet" href="{{ base_url }}/stylesheets/code-font-dejavu-sans-mono.min.css" id="code-font-dejavu-sans-mono" />
+<link rel="stylesheet" href="{{ base_url }}/stylesheets/code-font-zsft-hk.min.css" id="code-font-zsft-hk" disabled />
+
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.5.0/dist/mermaid.min.js"></script>
 
 <style>
+    /* 霞鹜臻楷 */
     @import url("https://static.zeoseven.com/zsft/2/main/result.css");
-    /* 江城黑体备用 */
-    @import url("https://fontsapi.zeoseven.com/194/main/result.css");
-    /* OPPO Sans主字体 */
-    @import url("https://fonts.cdnfonts.com/css/opposans");
-    /* Dejavu Sans Mono */
-    @import url('https://fonts.cdnfonts.com/css/dejavu-sans-mono');
     /* 寒蝉团圆体 Sans */
     @import url("https://fontsapi.zeoseven.com/70/main/result.css");
-    /* 上图东观体 */
-    @import url("https://fontsapi.zeoseven.com/488/main/result.css");
-
-    @font-face {
-        font-family: "OPPOSans";
-    }
-
-    @font-face {
-        font-family: "JiangChengHeiTi 400W";
-    }
 
     @font-face {
         font-family: "LXGW ZhenKai";
     }
 
     @font-face {
-        font-family: 'DejaVu Sans Mono';
-    }
-
-    /* JetBrains Mono字体 */
-    @font-face {
-        font-family: "ZSFT-hk";
-        src: url("https://static.zeoseven.com/zsft/hk/main.woff2") format("woff2"),
-            url("https://static-host.zeoseven.com/zsft/hk/main.woff2") format("woff2");
-    }
-
-    @font-face {
         font-family: "寒蝉团圆体 Sans";
-    }
-
-    @font-face {
-        font-family: "STDongGuanTi";
     }
 
     .md-header__topic .md-ellipsis {
@@ -242,8 +238,6 @@
     }
 
     @media screen and (max-width: 1199px) {
-
-        
         /* 隐藏功能区的主题切换按钮 */
         .theme-switcher {
             display: none !important;
@@ -497,6 +491,117 @@
     }
 
     .font-option-toolbar.selected {
+        background: var(--primary-blue-medium);
+        color: var(--primary-blue);
+        font-weight: 500;
+    }
+
+    /* 代码字体切换功能样式 */
+    .code-font-switcher {
+        position: relative;
+    }
+
+    .code-font-dropdown-toolbar {
+        position: absolute;
+        right: 100%;
+        top: 0;
+        margin-right: 8px;
+        min-width: 140px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(10px);
+        transition: all 0.3s ease;
+        z-index: 1001;
+    }
+
+    .code-font-switcher:hover .code-font-dropdown-toolbar,
+    .code-font-dropdown-toolbar.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    .code-font-current-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 12px;
+        background: var(--bg-white);
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px var(--shadow-light);
+        white-space: nowrap;
+    }
+
+    .code-font-current-toolbar:hover {
+        border-color: var(--primary-blue);
+        background: var(--primary-blue-light);
+        box-shadow: 0 4px 12px var(--shadow-primary-medium);
+    }
+
+    .current-code-font-name-toolbar {
+        font-weight: 500;
+        margin-right: 8px;
+    }
+
+    .code-font-dropdown-toolbar.active .dropdown-arrow-icon {
+        transform: rotate(180deg) !important;
+    }
+
+    .code-font-options-toolbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-white);
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px var(--shadow-strong);
+        z-index: 1002;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        margin-top: 4px;
+        max-height: 150px;
+        overflow-y: auto;
+    }
+
+    .code-font-dropdown-toolbar.active .code-font-options-toolbar {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .code-font-option-toolbar {
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+        border-bottom: 1px solid var(--border-light);
+        white-space: nowrap;
+    }
+
+    .code-font-option-toolbar:last-child {
+        border-bottom: none;
+        border-radius: 0 0 8px 8px;
+    }
+
+    .code-font-option-toolbar:first-child {
+        border-radius: 8px 8px 0 0;
+    }
+
+    .code-font-option-toolbar:hover {
+        background: var(--primary-blue-light);
+        color: var(--text-primary-blue);
+    }
+
+    .code-font-option-toolbar.selected {
         background: var(--primary-blue-medium);
         color: var(--primary-blue);
         font-weight: 500;
@@ -2098,6 +2203,18 @@
         }
     };
 
+    // 代码字体配置
+    const codeFontConfig = {
+        "dejavu": {
+            name: "DejaVu Sans Mono",
+            id: "code-font-dejavu-sans-mono"
+        },
+        "zsft": {
+            name: "JetBrains Mono",
+            id: "code-font-zsft-hk"
+        }
+    };
+
     // 立即应用保存的字体设置（与主题初始化方式一致）
     (function initFont() {
         const savedFont = localStorage.getItem("preferred-font") || "dongguanti";
@@ -2117,13 +2234,37 @@
         }
     })();
 
+    // 立即应用保存的代码字体设置
+    (function initCodeFont() {
+        const savedCodeFont = localStorage.getItem("preferred-code-font") || "dejavu";
+        
+        // 禁用所有代码字体样式表
+        Object.values(codeFontConfig).forEach(font => {
+            const link = document.getElementById(font.id);
+            if (link) {
+                link.setAttribute("disabled", "true");
+            }
+        });
+        
+        // 启用选中的代码字体样式表
+        const selectedCodeFontLink = document.getElementById(codeFontConfig[savedCodeFont].id);
+        if (selectedCodeFontLink) {
+            selectedCodeFontLink.removeAttribute("disabled");
+        }
+    })();
+
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem("preferred-theme") || "theme1";
         const savedFont = localStorage.getItem("preferred-font") || "dongguanti";
+        const savedCodeFont = localStorage.getItem("preferred-code-font") || "dejavu";
 
         // 初始化功能条字体下拉菜单和字体设置
         updateFontDropdownToolbar(savedFont);
         applyFont(savedFont);
+        
+        // 初始化功能条代码字体下拉菜单和代码字体设置
+        updateCodeFontDropdownToolbar(savedCodeFont);
+        applyCodeFont(savedCodeFont);
         
         // 初始化功能条状态
         initToolbarState();
@@ -2170,69 +2311,112 @@
         }
     })();
 
-    // 功能条字体下拉菜单功能
-    function toggleFontDropdownToolbar() {
-        const dropdown = document.querySelector('.font-dropdown-toolbar');
+    // 通用下拉菜单切换函数
+    function toggleDropdown(targetSelector, otherSelector) {
+        const dropdown = document.querySelector(targetSelector);
+        const otherDropdown = document.querySelector(otherSelector);
         const isActive = dropdown.classList.contains('active');
         
         if (isActive) {
             dropdown.classList.remove('active');
+            return;
+        }
+        
+        // 如果其他下拉菜单打开，先关闭并等待过渡完成
+        if (otherDropdown && otherDropdown.classList.contains('active')) {
+            const handleTransitionEnd = (event) => {
+                if (event.target === otherDropdown && (event.propertyName === 'opacity' || event.propertyName === 'transform')) {
+                    otherDropdown.removeEventListener('transitionend', handleTransitionEnd);
+                    dropdown.classList.add('active');
+                }
+            };
+            
+            otherDropdown.addEventListener('transitionend', handleTransitionEnd);
+            otherDropdown.classList.remove('active');
+            
+            // 超时保护
+            setTimeout(() => {
+                otherDropdown.removeEventListener('transitionend', handleTransitionEnd);
+                if (!dropdown.classList.contains('active')) {
+                    dropdown.classList.add('active');
+                }
+            }, 350);
         } else {
             dropdown.classList.add('active');
         }
     }
 
-    // 功能条字体选择
-    function selectFontToolbar(fontKey) {
-        // 应用新字体
-        applyFont(fontKey);
-        
-        // 保存字体设置
-        localStorage.setItem("preferred-font", fontKey);
-        
-        // 更新下拉菜单显示
-        updateFontDropdownToolbar(fontKey);
-        
-        // 关闭下拉菜单
-        const dropdown = document.querySelector('.font-dropdown-toolbar');
-        dropdown.classList.remove('active');
+    // 字体下拉菜单功能
+    function toggleFontDropdownToolbar() {
+        toggleDropdown('.font-dropdown-toolbar', '.code-font-dropdown-toolbar');
     }
 
-    // 应用字体
-    function applyFont(fontKey) {
+    // 代码字体下拉菜单功能
+    function toggleCodeFontDropdownToolbar() {
+        toggleDropdown('.code-font-dropdown-toolbar', '.font-dropdown-toolbar');
+    }
+
+    // 通用字体应用函数
+    function applyFontStyle(config, fontKey, storageKey) {
         // 禁用所有字体样式表
-        Object.values(fontConfig).forEach(font => {
+        Object.values(config).forEach(font => {
             const link = document.getElementById(font.id);
-            if (link) {
-                link.setAttribute("disabled", "true");
-            }
+            if (link) link.setAttribute("disabled", "true");
         });
         
         // 启用选中的字体样式表
-        const selectedFontLink = document.getElementById(fontConfig[fontKey].id);
-        if (selectedFontLink) {
-            selectedFontLink.removeAttribute("disabled");
-        }
+        const selectedLink = document.getElementById(config[fontKey].id);
+        if (selectedLink) selectedLink.removeAttribute("disabled");
+        
+        // 保存设置
+        localStorage.setItem(storageKey, fontKey);
     }
 
-    // 更新功能条字体下拉菜单显示
-    function updateFontDropdownToolbar(currentFontKey) {
-        const currentFontNameEl = document.querySelector(".current-font-name-toolbar");
-        const fontOptions = document.querySelectorAll(".font-option-toolbar");
+    // 通用下拉菜单更新函数
+    function updateDropdownDisplay(config, fontKey, nameSelector, optionSelector, dataAttr) {
+        const nameEl = document.querySelector(nameSelector);
+        const options = document.querySelectorAll(optionSelector);
         
-        if (currentFontNameEl) {
-            currentFontNameEl.textContent = fontConfig[currentFontKey].name;
-        }
+        if (nameEl) nameEl.textContent = config[fontKey].name;
         
-        // 更新选项的选中状态
-        fontOptions.forEach(option => {
-            const fontKey = option.getAttribute('data-font');
-            if (fontKey === currentFontKey) {
-                option.classList.add('selected');
-            } else {
-                option.classList.remove('selected');
-            }
+        options.forEach(option => {
+            const key = option.getAttribute(dataAttr);
+            option.classList.toggle('selected', key === fontKey);
         });
+    }
+
+    // 字体选择
+    function selectFontToolbar(fontKey) {
+        applyFontStyle(fontConfig, fontKey, "preferred-font");
+        updateDropdownDisplay(fontConfig, fontKey, ".current-font-name-toolbar", ".font-option-toolbar", "data-font");
+        document.querySelector('.font-dropdown-toolbar').classList.remove('active');
+    }
+
+    // 代码字体选择
+    function selectCodeFontToolbar(codeFontKey) {
+        applyFontStyle(codeFontConfig, codeFontKey, "preferred-code-font");
+        updateDropdownDisplay(codeFontConfig, codeFontKey, ".current-code-font-name-toolbar", ".code-font-option-toolbar", "data-code-font");
+        document.querySelector('.code-font-dropdown-toolbar').classList.remove('active');
+    }
+
+    // 应用字体（保持向后兼容）
+    function applyFont(fontKey) {
+        applyFontStyle(fontConfig, fontKey, "preferred-font");
+    }
+
+    // 应用代码字体（保持向后兼容）
+    function applyCodeFont(codeFontKey) {
+        applyFontStyle(codeFontConfig, codeFontKey, "preferred-code-font");
+    }
+
+    // 更新字体下拉菜单显示（保持向后兼容）
+    function updateFontDropdownToolbar(currentFontKey) {
+        updateDropdownDisplay(fontConfig, currentFontKey, ".current-font-name-toolbar", ".font-option-toolbar", "data-font");
+    }
+
+    // 更新代码字体下拉菜单显示（保持向后兼容）
+    function updateCodeFontDropdownToolbar(currentCodeFontKey) {
+        updateDropdownDisplay(codeFontConfig, currentCodeFontKey, ".current-code-font-name-toolbar", ".code-font-option-toolbar", "data-code-font");
     }
 
     // 返回顶部功能
@@ -2295,23 +2479,35 @@
         if (fontDropdown) {
             fontDropdown.classList.remove('active');
         }
+        
+        const codeFontDropdown = document.querySelector('.code-font-dropdown-toolbar');
+        if (codeFontDropdown) {
+            codeFontDropdown.classList.remove('active');
+        }
         // 如果将来有其他子菜单，可以在这里添加
     }
 
     // 点击外部关闭下拉菜单
     document.addEventListener('click', function(event) {
         const fontDropdown = document.querySelector('.font-dropdown-toolbar');
+        const codeFontDropdown = document.querySelector('.code-font-dropdown-toolbar');
         
         // 如果点击的不是字体下拉菜单内部，则关闭字体下拉菜单
         const fontSwitcher = document.querySelector('.font-switcher');
         if (fontSwitcher && fontDropdown && !fontSwitcher.contains(event.target)) {
             fontDropdown.classList.remove('active');
         }
+        
+        // 如果点击的不是代码字体下拉菜单内部，则关闭代码字体下拉菜单
+        const codeFontSwitcher = document.querySelector('.code-font-switcher');
+        if (codeFontSwitcher && codeFontDropdown && !codeFontSwitcher.contains(event.target)) {
+            codeFontDropdown.classList.remove('active');
+        }
     });
 
     // 为功能区的其他功能添加点击和悬浮事件监听器
     document.addEventListener('DOMContentLoaded', function() {
-        const toolbarItems = document.querySelectorAll('.toolbar-item:not(.font-switcher)');
+        const toolbarItems = document.querySelectorAll('.toolbar-item:not(.font-switcher):not(.code-font-switcher)');
         
         toolbarItems.forEach(item => {
             // 点击其他功能时隐藏子菜单
@@ -2324,6 +2520,64 @@
                 hideAllSubmenus();
             });
         });
+        
+        // 延迟隐藏的定时器
+        let fontDropdownTimer = null;
+        let codeFontDropdownTimer = null;
+        
+        // 为字体切换器添加鼠标事件监听器
+        const fontSwitcher = document.querySelector('.font-switcher');
+        if (fontSwitcher) {
+            fontSwitcher.addEventListener('mouseleave', function() {
+                // 清除之前的定时器
+                if (fontDropdownTimer) {
+                    clearTimeout(fontDropdownTimer);
+                }
+                
+                // 设置延迟隐藏
+                fontDropdownTimer = setTimeout(function() {
+                    const fontDropdown = document.querySelector('.font-dropdown-toolbar');
+                    if (fontDropdown) {
+                        fontDropdown.classList.remove('active');
+                    }
+                }, 300); // 300ms延迟
+            });
+            
+            // 鼠标重新进入时取消隐藏
+            fontSwitcher.addEventListener('mouseenter', function() {
+                if (fontDropdownTimer) {
+                    clearTimeout(fontDropdownTimer);
+                    fontDropdownTimer = null;
+                }
+            });
+        }
+        
+        // 为代码字体切换器添加鼠标事件监听器
+        const codeFontSwitcher = document.querySelector('.code-font-switcher');
+        if (codeFontSwitcher) {
+            codeFontSwitcher.addEventListener('mouseleave', function() {
+                // 清除之前的定时器
+                if (codeFontDropdownTimer) {
+                    clearTimeout(codeFontDropdownTimer);
+                }
+                
+                // 设置延迟隐藏
+                codeFontDropdownTimer = setTimeout(function() {
+                    const codeFontDropdown = document.querySelector('.code-font-dropdown-toolbar');
+                    if (codeFontDropdown) {
+                        codeFontDropdown.classList.remove('active');
+                    }
+                }, 150); // 300ms延迟
+            });
+            
+            // 鼠标重新进入时取消隐藏
+            codeFontSwitcher.addEventListener('mouseenter', function() {
+                if (codeFontDropdownTimer) {
+                    clearTimeout(codeFontDropdownTimer);
+                    codeFontDropdownTimer = null;
+                }
+            });
+        }
     });
 
     function switchTheme() {

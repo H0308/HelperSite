@@ -1,8 +1,16 @@
+/* 江城黑体备用 */
+@import url("https://fontsapi.zeoseven.com/194/main/result.css");
+@font-face {
+    font-family: "JiangChengHeiTi 400W";
+}
 /* 江城黑体字体样式表 */
 :root {
-    --md-text-font: "JiangChengHeiTi 400W", "STDongGuanTi", "OPPOSans", sans-serif !important;
+    --md-text-font: "JiangChengHeiTi 400W", "STDongGuanTi", "OPPOSans",
+        sans-serif !important;
 }
 
-body, .md-typeset, .md-content {
+body,
+.md-typeset,
+.md-content {
     font-family: "JiangChengHeiTi 400W", "STDongGuanTi", "OPPOSans", sans-serif !important;
 }

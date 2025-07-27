@@ -33,7 +33,14 @@
     .md-header,
     .md-tabs,
     .md-sidebar,
-    .md-footer {
+    .md-footer,
+    .toolbar-toggle-btn,
+    .floating-toolbar,
+    .header-avatar,
+    .avatar-dropdown,
+    .reading-progress,
+    .scroll-indicator,
+    .theme-transition-overlay {
         display: none !important;
     }
 

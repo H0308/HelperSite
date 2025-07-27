@@ -391,6 +391,7 @@ extra:
 plugins:
   - search:
       jieba_dict: dict.txt.small
+      lang: zh
   - statistics
   - toggle-sidebar
   - changelog

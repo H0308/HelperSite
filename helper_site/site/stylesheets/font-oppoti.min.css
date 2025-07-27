@@ -1,1 +1,1 @@
-:root{--md-text-font:"OPPOSans","STDongGuanTi","JiangChengHeiTi 400W",sans-serif !important}body,.md-typeset,.md-content{font-family:"OPPOSans","STDongGuanTi","JiangChengHeiTi 400W",sans-serif !important}
+@import url("https://fonts.cdnfonts.com/css/opposans");@font-face{font-family:"OPPOSans"}:root{--md-text-font:"OPPOSans","STDongGuanTi","JiangChengHeiTi 400W",sans-serif !important}body,.md-typeset,.md-content{font-family:"OPPOSans","STDongGuanTi","JiangChengHeiTi 400W",sans-serif !important}

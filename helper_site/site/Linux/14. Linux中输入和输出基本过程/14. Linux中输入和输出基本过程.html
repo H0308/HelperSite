@@ -1,45 +1,15 @@
-<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/Linux/14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B/14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B.html><link rel=prev href=../13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80/13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80.html><link rel=next href=../15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.6.12"><title>Linux中输入和输出基本过程 - 柯懒的知识库</title><link rel=stylesheet href=../../assets/stylesheets/main.2afb09e1.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=stylesheet href=../../css/timeline.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><script id=__analytics>function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-9XWRGNRRSY"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-9XWRGNRRSY",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-9XWRGNRRSY",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script><script>"undefined"!=typeof __md_analytics&&__md_analytics()</script><link rel=stylesheet href=../../stylesheets/colors.min.css><link rel=stylesheet href=../../stylesheets/theme2.min.css media="screen and (max-width: 767px)"><link rel=stylesheet href=../../stylesheets/theme2.min.css media="screen and (min-width: 768px) and (max-width: 1199px)"><link rel=stylesheet href=../../stylesheets/theme1.min.css media="screen and (min-width: 1200px)"><link rel=stylesheet href=../../stylesheets/print.min.css><!-- 字体样式表 --><link rel=stylesheet href=../../stylesheets/font-dongguanti.min.css id=font-dongguanti><link rel=stylesheet href=../../stylesheets/font-oppoti.min.css id=font-oppoti disabled><link rel=stylesheet href=../../stylesheets/font-jiangchengti.min.css id=font-jiangchengti disabled><link rel=stylesheet href=../../stylesheets/font-lxgw.min.css id=font-lxgw disabled><script src=https://cdn.jsdelivr.net/npm/mermaid@11.5.0/dist/mermaid.min.js></script><style>
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/Linux/14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B/14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B.html><link rel=prev href=../13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80/13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80.html><link rel=next href=../15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html><link rel=icon href=../../images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.6.12"><title>Linux中输入和输出基本过程 - 柯懒的知识库</title><link rel=stylesheet href=../../assets/stylesheets/main.2afb09e1.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><link rel=stylesheet href=../../css/timeline.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><script id=__analytics>function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-9XWRGNRRSY"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-9XWRGNRRSY",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-9XWRGNRRSY",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script><script>"undefined"!=typeof __md_analytics&&__md_analytics()</script><link rel=stylesheet href=../../stylesheets/colors.min.css><link rel=stylesheet href=../../stylesheets/theme2.min.css media="screen and (max-width: 767px)"><link rel=stylesheet href=../../stylesheets/theme2.min.css media="screen and (min-width: 768px) and (max-width: 1199px)"><link rel=stylesheet href=../../stylesheets/theme1.min.css media="screen and (min-width: 1200px)"><link rel=stylesheet href=../../stylesheets/print.min.css><!-- 字体样式表 --><link rel=stylesheet href=../../stylesheets/font-dongguanti.min.css id=font-dongguanti><link rel=stylesheet href=../../stylesheets/font-oppoti.min.css id=font-oppoti disabled><link rel=stylesheet href=../../stylesheets/font-jiangchengti.min.css id=font-jiangchengti disabled><link rel=stylesheet href=../../stylesheets/font-lxgw.min.css id=font-lxgw disabled><!-- 代码字体样式表 --><link rel=stylesheet href=../../stylesheets/code-font-dejavu-sans-mono.min.css id=code-font-dejavu-sans-mono><link rel=stylesheet href=../../stylesheets/code-font-zsft-hk.min.css id=code-font-zsft-hk disabled><script src=https://cdn.jsdelivr.net/npm/mermaid@11.5.0/dist/mermaid.min.js></script><style>
+    /* 霞鹜臻楷 */
     @import url("https://static.zeoseven.com/zsft/2/main/result.css");
-    /* 江城黑体备用 */
-    @import url("https://fontsapi.zeoseven.com/194/main/result.css");
-    /* OPPO Sans主字体 */
-    @import url("https://fonts.cdnfonts.com/css/opposans");
-    /* Dejavu Sans Mono */
-    @import url('https://fonts.cdnfonts.com/css/dejavu-sans-mono');
     /* 寒蝉团圆体 Sans */
     @import url("https://fontsapi.zeoseven.com/70/main/result.css");
-    /* 上图东观体 */
-    @import url("https://fontsapi.zeoseven.com/488/main/result.css");
-
-    @font-face {
-        font-family: "OPPOSans";
-    }
-
-    @font-face {
-        font-family: "JiangChengHeiTi 400W";
-    }
 
     @font-face {
         font-family: "LXGW ZhenKai";
     }
 
     @font-face {
-        font-family: 'DejaVu Sans Mono';
-    }
-
-    /* JetBrains Mono字体 */
-    @font-face {
-        font-family: "ZSFT-hk";
-        src: url("https://static.zeoseven.com/zsft/hk/main.woff2") format("woff2"),
-            url("https://static-host.zeoseven.com/zsft/hk/main.woff2") format("woff2");
-    }
-
-    @font-face {
         font-family: "寒蝉团圆体 Sans";
-    }
-
-    @font-face {
-        font-family: "STDongGuanTi";
     }
 
     .md-header__topic .md-ellipsis {
@@ -58,8 +28,6 @@
     }
 
     @media screen and (max-width: 1199px) {
-
-        
         /* 隐藏功能区的主题切换按钮 */
         .theme-switcher {
             display: none !important;
@@ -313,6 +281,117 @@
     }
 
     .font-option-toolbar.selected {
+        background: var(--primary-blue-medium);
+        color: var(--primary-blue);
+        font-weight: 500;
+    }
+
+    /* 代码字体切换功能样式 */
+    .code-font-switcher {
+        position: relative;
+    }
+
+    .code-font-dropdown-toolbar {
+        position: absolute;
+        right: 100%;
+        top: 0;
+        margin-right: 8px;
+        min-width: 140px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(10px);
+        transition: all 0.3s ease;
+        z-index: 1001;
+    }
+
+    .code-font-switcher:hover .code-font-dropdown-toolbar,
+    .code-font-dropdown-toolbar.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    .code-font-current-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 12px;
+        background: var(--bg-white);
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px var(--shadow-light);
+        white-space: nowrap;
+    }
+
+    .code-font-current-toolbar:hover {
+        border-color: var(--primary-blue);
+        background: var(--primary-blue-light);
+        box-shadow: 0 4px 12px var(--shadow-primary-medium);
+    }
+
+    .current-code-font-name-toolbar {
+        font-weight: 500;
+        margin-right: 8px;
+    }
+
+    .code-font-dropdown-toolbar.active .dropdown-arrow-icon {
+        transform: rotate(180deg) !important;
+    }
+
+    .code-font-options-toolbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-white);
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px var(--shadow-strong);
+        z-index: 1002;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        margin-top: 4px;
+        max-height: 150px;
+        overflow-y: auto;
+    }
+
+    .code-font-dropdown-toolbar.active .code-font-options-toolbar {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .code-font-option-toolbar {
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+        border-bottom: 1px solid var(--border-light);
+        white-space: nowrap;
+    }
+
+    .code-font-option-toolbar:last-child {
+        border-bottom: none;
+        border-radius: 0 0 8px 8px;
+    }
+
+    .code-font-option-toolbar:first-child {
+        border-radius: 8px 8px 0 0;
+    }
+
+    .code-font-option-toolbar:hover {
+        background: var(--primary-blue-light);
+        color: var(--text-primary-blue);
+    }
+
+    .code-font-option-toolbar.selected {
         background: var(--primary-blue-medium);
         color: var(--primary-blue);
         font-weight: 500;
@@ -1913,6 +1992,18 @@
         }
     };
 
+    // 代码字体配置
+    const codeFontConfig = {
+        "dejavu": {
+            name: "DejaVu Sans Mono",
+            id: "code-font-dejavu-sans-mono"
+        },
+        "zsft": {
+            name: "JetBrains Mono",
+            id: "code-font-zsft-hk"
+        }
+    };
+
     // 立即应用保存的字体设置（与主题初始化方式一致）
     (function initFont() {
         const savedFont = localStorage.getItem("preferred-font") || "dongguanti";
@@ -1932,13 +2023,37 @@
         }
     })();
 
+    // 立即应用保存的代码字体设置
+    (function initCodeFont() {
+        const savedCodeFont = localStorage.getItem("preferred-code-font") || "dejavu";
+        
+        // 禁用所有代码字体样式表
+        Object.values(codeFontConfig).forEach(font => {
+            const link = document.getElementById(font.id);
+            if (link) {
+                link.setAttribute("disabled", "true");
+            }
+        });
+        
+        // 启用选中的代码字体样式表
+        const selectedCodeFontLink = document.getElementById(codeFontConfig[savedCodeFont].id);
+        if (selectedCodeFontLink) {
+            selectedCodeFontLink.removeAttribute("disabled");
+        }
+    })();
+
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem("preferred-theme") || "theme1";
         const savedFont = localStorage.getItem("preferred-font") || "dongguanti";
+        const savedCodeFont = localStorage.getItem("preferred-code-font") || "dejavu";
 
         // 初始化功能条字体下拉菜单和字体设置
         updateFontDropdownToolbar(savedFont);
         applyFont(savedFont);
+        
+        // 初始化功能条代码字体下拉菜单和代码字体设置
+        updateCodeFontDropdownToolbar(savedCodeFont);
+        applyCodeFont(savedCodeFont);
         
         // 初始化功能条状态
         initToolbarState();
@@ -1985,69 +2100,112 @@
         }
     })();
 
-    // 功能条字体下拉菜单功能
-    function toggleFontDropdownToolbar() {
-        const dropdown = document.querySelector('.font-dropdown-toolbar');
+    // 通用下拉菜单切换函数
+    function toggleDropdown(targetSelector, otherSelector) {
+        const dropdown = document.querySelector(targetSelector);
+        const otherDropdown = document.querySelector(otherSelector);
         const isActive = dropdown.classList.contains('active');
         
         if (isActive) {
             dropdown.classList.remove('active');
+            return;
+        }
+        
+        // 如果其他下拉菜单打开，先关闭并等待过渡完成
+        if (otherDropdown && otherDropdown.classList.contains('active')) {
+            const handleTransitionEnd = (event) => {
+                if (event.target === otherDropdown && (event.propertyName === 'opacity' || event.propertyName === 'transform')) {
+                    otherDropdown.removeEventListener('transitionend', handleTransitionEnd);
+                    dropdown.classList.add('active');
+                }
+            };
+            
+            otherDropdown.addEventListener('transitionend', handleTransitionEnd);
+            otherDropdown.classList.remove('active');
+            
+            // 超时保护
+            setTimeout(() => {
+                otherDropdown.removeEventListener('transitionend', handleTransitionEnd);
+                if (!dropdown.classList.contains('active')) {
+                    dropdown.classList.add('active');
+                }
+            }, 350);
         } else {
             dropdown.classList.add('active');
         }
     }
 
-    // 功能条字体选择
-    function selectFontToolbar(fontKey) {
-        // 应用新字体
-        applyFont(fontKey);
-        
-        // 保存字体设置
-        localStorage.setItem("preferred-font", fontKey);
-        
-        // 更新下拉菜单显示
-        updateFontDropdownToolbar(fontKey);
-        
-        // 关闭下拉菜单
-        const dropdown = document.querySelector('.font-dropdown-toolbar');
-        dropdown.classList.remove('active');
+    // 字体下拉菜单功能
+    function toggleFontDropdownToolbar() {
+        toggleDropdown('.font-dropdown-toolbar', '.code-font-dropdown-toolbar');
     }
 
-    // 应用字体
-    function applyFont(fontKey) {
+    // 代码字体下拉菜单功能
+    function toggleCodeFontDropdownToolbar() {
+        toggleDropdown('.code-font-dropdown-toolbar', '.font-dropdown-toolbar');
+    }
+
+    // 通用字体应用函数
+    function applyFontStyle(config, fontKey, storageKey) {
         // 禁用所有字体样式表
-        Object.values(fontConfig).forEach(font => {
+        Object.values(config).forEach(font => {
             const link = document.getElementById(font.id);
-            if (link) {
-                link.setAttribute("disabled", "true");
-            }
+            if (link) link.setAttribute("disabled", "true");
         });
         
         // 启用选中的字体样式表
-        const selectedFontLink = document.getElementById(fontConfig[fontKey].id);
-        if (selectedFontLink) {
-            selectedFontLink.removeAttribute("disabled");
-        }
+        const selectedLink = document.getElementById(config[fontKey].id);
+        if (selectedLink) selectedLink.removeAttribute("disabled");
+        
+        // 保存设置
+        localStorage.setItem(storageKey, fontKey);
     }
 
-    // 更新功能条字体下拉菜单显示
-    function updateFontDropdownToolbar(currentFontKey) {
-        const currentFontNameEl = document.querySelector(".current-font-name-toolbar");
-        const fontOptions = document.querySelectorAll(".font-option-toolbar");
+    // 通用下拉菜单更新函数
+    function updateDropdownDisplay(config, fontKey, nameSelector, optionSelector, dataAttr) {
+        const nameEl = document.querySelector(nameSelector);
+        const options = document.querySelectorAll(optionSelector);
         
-        if (currentFontNameEl) {
-            currentFontNameEl.textContent = fontConfig[currentFontKey].name;
-        }
+        if (nameEl) nameEl.textContent = config[fontKey].name;
         
-        // 更新选项的选中状态
-        fontOptions.forEach(option => {
-            const fontKey = option.getAttribute('data-font');
-            if (fontKey === currentFontKey) {
-                option.classList.add('selected');
-            } else {
-                option.classList.remove('selected');
-            }
+        options.forEach(option => {
+            const key = option.getAttribute(dataAttr);
+            option.classList.toggle('selected', key === fontKey);
         });
+    }
+
+    // 字体选择
+    function selectFontToolbar(fontKey) {
+        applyFontStyle(fontConfig, fontKey, "preferred-font");
+        updateDropdownDisplay(fontConfig, fontKey, ".current-font-name-toolbar", ".font-option-toolbar", "data-font");
+        document.querySelector('.font-dropdown-toolbar').classList.remove('active');
+    }
+
+    // 代码字体选择
+    function selectCodeFontToolbar(codeFontKey) {
+        applyFontStyle(codeFontConfig, codeFontKey, "preferred-code-font");
+        updateDropdownDisplay(codeFontConfig, codeFontKey, ".current-code-font-name-toolbar", ".code-font-option-toolbar", "data-code-font");
+        document.querySelector('.code-font-dropdown-toolbar').classList.remove('active');
+    }
+
+    // 应用字体（保持向后兼容）
+    function applyFont(fontKey) {
+        applyFontStyle(fontConfig, fontKey, "preferred-font");
+    }
+
+    // 应用代码字体（保持向后兼容）
+    function applyCodeFont(codeFontKey) {
+        applyFontStyle(codeFontConfig, codeFontKey, "preferred-code-font");
+    }
+
+    // 更新字体下拉菜单显示（保持向后兼容）
+    function updateFontDropdownToolbar(currentFontKey) {
+        updateDropdownDisplay(fontConfig, currentFontKey, ".current-font-name-toolbar", ".font-option-toolbar", "data-font");
+    }
+
+    // 更新代码字体下拉菜单显示（保持向后兼容）
+    function updateCodeFontDropdownToolbar(currentCodeFontKey) {
+        updateDropdownDisplay(codeFontConfig, currentCodeFontKey, ".current-code-font-name-toolbar", ".code-font-option-toolbar", "data-code-font");
     }
 
     // 返回顶部功能
@@ -2110,23 +2268,35 @@
         if (fontDropdown) {
             fontDropdown.classList.remove('active');
         }
+        
+        const codeFontDropdown = document.querySelector('.code-font-dropdown-toolbar');
+        if (codeFontDropdown) {
+            codeFontDropdown.classList.remove('active');
+        }
         // 如果将来有其他子菜单，可以在这里添加
     }
 
     // 点击外部关闭下拉菜单
     document.addEventListener('click', function(event) {
         const fontDropdown = document.querySelector('.font-dropdown-toolbar');
+        const codeFontDropdown = document.querySelector('.code-font-dropdown-toolbar');
         
         // 如果点击的不是字体下拉菜单内部，则关闭字体下拉菜单
         const fontSwitcher = document.querySelector('.font-switcher');
         if (fontSwitcher && fontDropdown && !fontSwitcher.contains(event.target)) {
             fontDropdown.classList.remove('active');
         }
+        
+        // 如果点击的不是代码字体下拉菜单内部，则关闭代码字体下拉菜单
+        const codeFontSwitcher = document.querySelector('.code-font-switcher');
+        if (codeFontSwitcher && codeFontDropdown && !codeFontSwitcher.contains(event.target)) {
+            codeFontDropdown.classList.remove('active');
+        }
     });
 
     // 为功能区的其他功能添加点击和悬浮事件监听器
     document.addEventListener('DOMContentLoaded', function() {
-        const toolbarItems = document.querySelectorAll('.toolbar-item:not(.font-switcher)');
+        const toolbarItems = document.querySelectorAll('.toolbar-item:not(.font-switcher):not(.code-font-switcher)');
         
         toolbarItems.forEach(item => {
             // 点击其他功能时隐藏子菜单
@@ -2139,6 +2309,64 @@
                 hideAllSubmenus();
             });
         });
+        
+        // 延迟隐藏的定时器
+        let fontDropdownTimer = null;
+        let codeFontDropdownTimer = null;
+        
+        // 为字体切换器添加鼠标事件监听器
+        const fontSwitcher = document.querySelector('.font-switcher');
+        if (fontSwitcher) {
+            fontSwitcher.addEventListener('mouseleave', function() {
+                // 清除之前的定时器
+                if (fontDropdownTimer) {
+                    clearTimeout(fontDropdownTimer);
+                }
+                
+                // 设置延迟隐藏
+                fontDropdownTimer = setTimeout(function() {
+                    const fontDropdown = document.querySelector('.font-dropdown-toolbar');
+                    if (fontDropdown) {
+                        fontDropdown.classList.remove('active');
+                    }
+                }, 300); // 300ms延迟
+            });
+            
+            // 鼠标重新进入时取消隐藏
+            fontSwitcher.addEventListener('mouseenter', function() {
+                if (fontDropdownTimer) {
+                    clearTimeout(fontDropdownTimer);
+                    fontDropdownTimer = null;
+                }
+            });
+        }
+        
+        // 为代码字体切换器添加鼠标事件监听器
+        const codeFontSwitcher = document.querySelector('.code-font-switcher');
+        if (codeFontSwitcher) {
+            codeFontSwitcher.addEventListener('mouseleave', function() {
+                // 清除之前的定时器
+                if (codeFontDropdownTimer) {
+                    clearTimeout(codeFontDropdownTimer);
+                }
+                
+                // 设置延迟隐藏
+                codeFontDropdownTimer = setTimeout(function() {
+                    const codeFontDropdown = document.querySelector('.code-font-dropdown-toolbar');
+                    if (codeFontDropdown) {
+                        codeFontDropdown.classList.remove('active');
+                    }
+                }, 150); // 300ms延迟
+            });
+            
+            // 鼠标重新进入时取消隐藏
+            codeFontSwitcher.addEventListener('mouseenter', function() {
+                if (codeFontDropdownTimer) {
+                    clearTimeout(codeFontDropdownTimer);
+                    codeFontDropdownTimer = null;
+                }
+            });
+        }
     });
 
     function switchTheme() {
@@ -2220,7 +2448,7 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#linux class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../../index.html title=柯懒的知识库 class="md-header__button md-logo" aria-label=柯懒的知识库 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 柯懒的知识库 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> Linux中输入和输出基本过程 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-label type=radio name=__palette id=__palette_1> </form> <!-- 头像元素 - 直接在HTML中定义 --> <div class=header-avatar> <img src=../../作者/作者.assets/20250206-200653.jpg alt=头像> <div class=avatar-dropdown> <p><strong>柯懒不是柯南</strong></p> <a href=../../作者/联系作者/作者.html class=avatar-dropdown-item>吵醒柯懒</a> <div class=avatar-dropdown-divider></div> <a href=../../作者/关于作者/关于作者.html class=avatar-dropdown-item>柯懒自传</a> <div class=avatar-dropdown-divider></div> <a href=https://github.com/H0308 class=avatar-dropdown-item>柯懒的零食库</a> </div> </div> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <!-- 独立的切换按钮 --> <div class=toolbar-toggle-btn id=toolbarToggleBtn onclick=toggleToolbar()> <div class=toggle-icon> <svg class=toggle-arrow-icon viewbox="0 0 1024 1024" version=1.1 xmlns=http://www.w3.org/2000/svg width=16 height=16> <path d="M346.538667 1024L170.666667 853.333333l341.333333-341.333333-341.333333-341.333333 175.872-170.666667L853.333333 512z" fill=currentColor></path> </svg> </div> </div> <!-- 右侧固定功能条 - 独立于内容区 --> <div class=floating-toolbar id=floatingToolbar> <!-- 字体切换功能 --> <div class="toolbar-item font-switcher"> <div class=toolbar-icon> <svg class=font-icon viewbox="0 0 1024 1024" version=1.1 xmlns=http://www.w3.org/2000/svg width=20 height=20> <path d="M913.408 1024l-66.56 0q-29.696 0-51.2-5.12t-36.864-15.872-26.112-27.136-19.968-37.888q-15.36-38.912-28.16-70.656t-22.016-55.296q-11.264-26.624-20.48-49.152l-254.976 0q-7.168 23.552-17.408 51.2-8.192 23.552-21.504 56.832t-30.72 72.192q-20.48 46.08-47.104 63.488t-60.416 17.408l-70.656 0q-45.056 0-60.928-19.968t2.56-68.096q18.432-46.08 43.008-108.544t52.224-132.608 57.344-143.872 57.344-144.384q65.536-164.864 137.216-343.04 7.168-17.408 18.432-31.744 10.24-11.264 27.136-21.504t42.496-10.24q26.624 0 43.52 10.752t28.16 24.064q12.288 15.36 19.456 33.792 72.704 180.224 138.24 345.088 27.648 70.656 57.344 143.872t56.832 142.336 51.2 129.536 41.472 104.448q14.336 34.816 4.096 62.464t-43.008 27.648zM616.448 634.88l-97.28-347.136-1.024 0-108.544 347.136 206.848 0z" fill=currentColor></path> </svg> </div> <div class=toolbar-label>内容字体</div> <div class=font-dropdown-toolbar> <div class=font-current-toolbar onclick=toggleFontDropdownToolbar()> <span class=current-font-name-toolbar>东观体</span> <svg class=dropdown-arrow-icon viewbox="0 0 1024 1024" version=1.1 xmlns=http://www.w3.org/2000/svg width=12 height=12> <path d="M878.592 250.88q29.696 0 48.128 11.264t24.576 29.696 0 41.472-26.624 45.568q-82.944 92.16-159.744 180.224t-148.48 164.864q-19.456 20.48-45.568 31.744t-53.76 11.776-53.248-8.704-43.008-28.672q-39.936-44.032-82.944-90.112l-88.064-92.16q-43.008-46.08-85.504-90.624t-79.36-86.528q-17.408-19.456-22.528-40.448t1.024-38.4 23.552-28.672 45.056-11.264q35.84 0 98.816-0.512t137.728-0.512l153.6 0 150.528 0 125.952 0 79.872 0z" fill=currentColor></path> </svg> </div> <div class=font-options-toolbar> <div class=font-option-toolbar data-font=dongguanti onclick="selectFontToolbar('dongguanti')">上图东观体</div> <div class=font-option-toolbar data-font=oppoti onclick="selectFontToolbar('oppoti')">OPPO Sans</div> <div class=font-option-toolbar data-font=jiangchengti onclick="selectFontToolbar('jiangchengti')">江城黑体</div> <div class=font-option-toolbar data-font=lxgw onclick="selectFontToolbar('lxgw')">霞鹜臻楷</div> </div> </div> </div> <!-- 主题切换功能 --> <div class="toolbar-item theme-switcher" onclick=switchTheme()> <div class=toolbar-icon> <svg class=theme-icon viewbox="0 0 1024 1024" version=1.1 xmlns=http://www.w3.org/2000/svg width=20 height=20> <path d="M876.572788 522.301623c-1.886977 12.375865-9.657964 30.331819-35.880185 45.48903-56.489572 32.697703-150.21828 83.990926-174.010149 96.958262-13.143345 24.431435-66.067718 122.221646-98.141204 178.503487-16.117073 28.124548-36.055171 34.041304-50.030463 34.041304-0.031722 0-0.031722 0-0.031722 0-14.613836 0-29.1806-6.460132-43.234687-19.218714-47.183626-42.643216-125.994576-117.105115-146.013515-136.083351-27.757181-4.732791-138.338718-23.743774-200.584388-35.752272-17.924231-3.533476-32.649608-14.07046-40.372499-29.084409-5.78782-11.256368-10.281157-30.05962 1.471514-55.658647 26.989701-59.047838 74.126254-157.557432 85.957721-182.196599-3.437286-27.117614-16.996093-135.060045-23.760147-198.905142-1.886977-17.460674 3.901867-35.096333 15.829524-48.351218 12.791327-14.278191 30.667463-21.48943 49.854455-19.426445 63.669088 6.332219 173.259042 19.426445 200.584388 22.705118 24.335245-11.879562 121.085776-58.936297 180.133613-86.34146 9.91379-4.573155 19.85828-6.92369 29.596062-6.92369 28.748764 0 52.172243 20.642133 58.328453 51.421136 12.599969 62.997799 30.93864 166.70272 35.639708 193.484689 18.851347 19.682271 91.953272 96.031147 135.060045 143.07151C872.72004 487.125473 879.307062 504.71406 876.572788 522.301623L876.572788 522.301623zM825.375755 499.085876C776.017604 445.314205 687.245791 352.977193 686.365748 352.017332c-2.942005-3.069919-4.956895-6.971785-5.676279-11.208273-0.207731-1.215688-22.193465-127.001509-36.551474-198.936865-0.799202-3.917216-4.285606-16.836457-16.196891-16.836457-3.453658 0-7.30743 1.006933-11.464099 2.942005-67.282383 31.179117-183.955662 88.180342-185.170327 88.771813-3.693112 1.790786-7.850805 2.558265-11.975752 2.01489-1.295506-0.224104-133.63765-16.165168-205.988468-23.424502-0.079818 0-0.207731 0-0.287549 0-7.30743 0-11.128455 2.89391-13.319353 5.40408-3.677762 4.124947-5.644557 9.91379-5.068436 15.110139 7.674796 72.623018 24.255427 202.934922 24.463158 204.325595 0.511653 4.109598-0.159636 8.266267-1.966795 11.960403-0.591471 1.215688-57.657164 120.04712-88.339977 187.201589-3.565199 7.754614-4.41352 14.214746-2.350534 18.131963 1.935072 3.725858 6.588045 5.820566 10.360975 6.53995 70.719668 13.718443 204.644867 36.519752 206.036563 36.727483 4.189416 0.671289 8.058536 2.686179 11.112082 5.580089 1.006933 0.87902 96.414887 91.281983 150.090367 139.889027 8.314363 7.563256 13.143345 8.106632 14.437827 8.106632 3.485381 0 8.314363-4.621251 12.727882-12.391215 36.343743-63.828724 100.011808-181.988868 100.636025-183.155437 1.983167-3.64604 5.004991-6.667863 8.650007-8.650007 1.134847-0.671289 114.418936-62.373583 178.6314-99.516528 8.698103-5.036713 14.278191-10.568706 14.94948-14.854313C834.681702 511.845481 831.49922 505.800811 825.375755 499.085876L825.375755 499.085876zM935.333076 935.670256c-4.157693 4.157693-9.689686 6.299473-15.141862 6.299473-5.548366 0-11.048637-2.142803-15.238053-6.299473l-171.915441-171.915441c-8.362458-8.394181-8.362458-21.98471 0-30.426987 8.394181-8.394181 21.98471-8.394181 30.379914 0l171.915441 171.915441C943.727257 913.684522 943.727257 927.275052 935.333076 935.670256L935.333076 935.670256z" fill=currentColor></path> </svg> </div> <div class=toolbar-label>主题</div> </div> <!-- 返回顶部功能 --> <div class="toolbar-item back-to-top" onclick=scrollToTop()> <div class=toolbar-icon> <svg class=back-to-top-icon viewbox="0 0 1024 1024" xmlns=http://www.w3.org/2000/svg> <path d="M882.688 624.128l-336.896-583.68c-15.872-27.136-54.784-27.136-70.656 0L138.24 624.128c-15.872 27.136 4.096 61.44 35.328 61.44H317.44c22.528 0 40.96 18.432 40.96 40.96v239.616c0 22.528 18.432 40.96 40.96 40.96h223.232c22.528 0 40.96-18.432 40.96-40.96v-239.616c0-22.528 18.432-40.96 40.96-40.96h143.872c30.208 0 50.176-34.304 34.304-61.44z"></path> </svg> </div> <div class=toolbar-label>顶部</div> </div> </div> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=标签 data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../index.html class=md-tabs__link> 主页 </a> </li> <li class=md-tabs__item> <a href=../../%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D/%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D.html class=md-tabs__link> 网站介绍 </a> </li> <li class=md-tabs__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-tabs__link> 网站时间线 </a> </li> <li class=md-tabs__item> <a href=../../C%E8%AF%AD%E8%A8%80/index.html class=md-tabs__link> 编程语言 </a> </li> <li class=md-tabs__item> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-tabs__link> 数据结构与算法 </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-tabs__link> Linux </a> </li> <li class=md-tabs__item> <a href=../../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-tabs__link> 前端 </a> </li> <li class=md-tabs__item> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-tabs__link> MySQL </a> </li> <li class=md-tabs__item> <a href=../../JavaEE/Spring/1.%20SpringMVC%E5%9F%BA%E7%A1%80/1.%20SpringMVC%E5%9F%BA%E7%A1%80.html class=md-tabs__link> JavaEE应用开发 </a> </li> <li class=md-tabs__item> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-tabs__link> 扩展知识 </a> </li> <li class=md-tabs__item> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-tabs__link> 工具帮助 </a> </li> <li class=md-tabs__item> <a href=../../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-tabs__link> 项目 </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=导航栏 data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../../index.html title=柯懒的知识库 class="md-nav__button md-logo" aria-label=柯懒的知识库 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> 柯懒的知识库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../index.html class=md-nav__link> <span class=md-ellipsis> 主页 </span> </a> </li> <li class=md-nav__item> <a href=../../%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D/%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D.html class=md-nav__link> <span class=md-ellipsis> 网站介绍 </span> </a> </li> <li class=md-nav__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-nav__link> <span class=md-ellipsis> 网站时间线 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../C%E8%AF%AD%E8%A8%80/index.html class=md-nav__link> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-nav__link> <span class=md-ellipsis> 数据结构与算法 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_6 checked> <label class=md-nav__link for=__nav_6 id=__nav_6_label tabindex> <span class=md-ellipsis> Linux </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_6_label aria-expanded=true> <label class=md-nav__title for=__nav_6> <span class="md-nav__icon md-icon"></span> Linux </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-nav__link> <span class=md-ellipsis> Linux常用选项和指令 </span> </a> </li> <li class=md-nav__item> <a href=../2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html class=md-nav__link> <span class=md-ellipsis> Linux权限相关 </span> </a> </li> <li class=md-nav__item> <a href=../3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85.html class=md-nav__link> <span class=md-ellipsis> CentOS软件安装 </span> </a> </li> <li class=md-nav__item> <a href=../4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb/4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb.html class=md-nav__link> <span class=md-ellipsis> Linux下的gcc与gdb </span> </a> </li> <li class=md-nav__item> <a href=../5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F/5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F.html class=md-nav__link> <span class=md-ellipsis> Linux下的Makefile与进度条程序 </span> </a> </li> <li class=md-nav__item> <a href=../6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 操作系统基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../7.%20Linux%E8%BF%9B%E7%A8%8B/7.%20Linux%E8%BF%9B%E7%A8%8B.html class=md-nav__link> <span class=md-ellipsis> Linux进程基础 </span> </a> </li> <li class=md-nav__item> <a href=../8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7/8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7.html class=md-nav__link> <span class=md-ellipsis> Linux进程状态与进程优先级 </span> </a> </li> <li class=md-nav__item> <a href=../9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95.html class=md-nav__link> <span class=md-ellipsis> Linux进程切换以及调度算法 </span> </a> </li> <li class=md-nav__item> <a href=../10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.html class=md-nav__link> <span class=md-ellipsis> Linux命令行与环境变量 </span> </a> </li> <li class=md-nav__item> <a href=../11.%20Linux%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4/11.%20%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.html class=md-nav__link> <span class=md-ellipsis> Linux进程地址空间 </span> </a> </li> <li class=md-nav__item> <a href=../12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6.html class=md-nav__link> <span class=md-ellipsis> Linux进程控制 </span> </a> </li> <li class=md-nav__item> <a href=../13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80/13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> Linux文件操作基础 </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> Linux中输入和输出基本过程 </span> <span class="md-nav__icon md-icon"></span> </label> <a href=14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B.html class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> Linux中输入和输出基本过程 </span> </a> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 文件内核级缓冲区 </span> </a> </li> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 何为重定向 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 子进程与缓冲区 </span> </a> </li> <li class=md-nav__item> <a href=#shell2 class=md-nav__link> <span class=md-ellipsis> 手撕一个简单的shell（版本2） </span> </a> <nav class=md-nav aria-label=手撕一个简单的shell（版本2）> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 判断重定向命令与截取 </span> </a> </li> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 执行重定向 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#stdioh class=md-nav__link> <span class=md-ellipsis> 简单实现stdio.h中的文件相关操作 </span> </a> <nav class=md-nav aria-label=简单实现stdio.h中的文件相关操作> <ul class=md-nav__list> <li class=md-nav__item> <a href=#file class=md-nav__link> <span class=md-ellipsis> FILE结构体 </span> </a> </li> <li class=md-nav__item> <a href=#fopen class=md-nav__link> <span class=md-ellipsis> fopen函数 </span> </a> </li> <li class=md-nav__item> <a href=#fwrite class=md-nav__link> <span class=md-ellipsis> fwrite函数 </span> </a> </li> <li class=md-nav__item> <a href=#fflush class=md-nav__link> <span class=md-ellipsis> fflush函数 </span> </a> </li> <li class=md-nav__item> <a href=#fclose class=md-nav__link> <span class=md-ellipsis> fclose函数 </span> </a> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 链接基本使用 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=../15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html class=md-nav__link> <span class=md-ellipsis> Linux文件系统 </span> </a> </li> <li class=md-nav__item> <a href=../16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5.html class=md-nav__link> <span class=md-ellipsis> Linux软链接和硬链接 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../17.%20Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93.html class=md-nav__link> <span class=md-ellipsis> Linux进程间通信 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> Linux信号与操作系统原理 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../19.%20Linux%E7%BA%BF%E7%A8%8B/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C.html class=md-nav__link> <span class=md-ellipsis> Linux线程 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 网络基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> Socket编程基础 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../22.%20UDP%E7%BC%96%E7%A8%8B/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> UDP编程 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> TCP编程接口基本使用 </span> </a> </li> <li class=md-nav__item> <a href=../24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8/24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8.html class=md-nav__link> <span class=md-ellipsis> 序列化和反序列化与网络计算器 </span> </a> </li> <li class=md-nav__item> <a href=../25.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E5%92%8C%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/25.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E5%92%8C%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B.html class=md-nav__link> <span class=md-ellipsis> 进程间关系和守护进程 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../26.%20%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AEHTTP/1.%20%E4%BB%8B%E7%BB%8DHTTP%E5%8D%8F%E8%AE%AE%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E4%B8%8E%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0HTTPServer/1.%20%E4%BB%8B%E7%BB%8DHTTP%E5%8D%8F%E8%AE%AE%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E4%B8%8E%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0HTTPServer.html class=md-nav__link> <span class=md-ellipsis> 应用层协议HTTP </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../27.%20UDP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/27.%20UDP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> UDP协议原理 </span> </a> </li> <li class=md-nav__item> <a href=../28.%20TCP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/28.%20TCP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> TCP协议原理 </span> </a> </li> <li class=md-nav__item> <a href=../35.%20%E7%90%86%E8%A7%A3Linux%E5%A6%82%E4%BD%95%E7%9C%8B%E5%BE%85%E8%BF%9E%E6%8E%A5%E4%BB%A5%E5%8F%8ATCP%E5%85%A8%E8%BF%9E%E6%8E%A5%E9%98%9F%E5%88%97/35.%20%E7%90%86%E8%A7%A3Linux%E5%A6%82%E4%BD%95%E7%9C%8B%E5%BE%85%E8%BF%9E%E6%8E%A5%E4%BB%A5%E5%8F%8ATCP%E5%85%A8%E8%BF%9E%E6%8E%A5%E9%98%9F%E5%88%97.html class=md-nav__link> <span class=md-ellipsis> 理解Linux如何看待连接以及TCP全连接队列 </span> </a> </li> <li class=md-nav__item> <a href=../29.%20%E7%BD%91%E7%BB%9C%E5%B1%82IP%E5%8D%8F%E8%AE%AE/29.%20%E7%BD%91%E7%BB%9C%E5%B1%82IP%E5%8D%8F%E8%AE%AE.html class=md-nav__link> <span class=md-ellipsis> 网络层IP协议 </span> </a> </li> <li class=md-nav__item> <a href=../30.%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8D%8F%E8%AE%AE/30.%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8D%8F%E8%AE%AE.html class=md-nav__link> <span class=md-ellipsis> 数据链路层协议 </span> </a> </li> <li class=md-nav__item> <a href=../36.%20DNS%E4%B8%8EICMP/36.%20DNS%E4%B8%8EICMP.html class=md-nav__link> <span class=md-ellipsis> DNS与ICMP </span> </a> </li> <li class=md-nav__item> <a href=../31.%20NAT%E6%8A%80%E6%9C%AF%E3%80%81%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/31.%20NAT%E6%8A%80%E6%9C%AF%E3%80%81%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F.html class=md-nav__link> <span class=md-ellipsis> NAT技术、代理服务器和内网穿透 </span> </a> </li> <li class=md-nav__item> <a href=../32.%20%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B%E4%B8%8Eselect%E5%92%8Cpoll%E5%88%86%E5%88%AB%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/32.%20%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B%E4%B8%8Eselect%E5%92%8Cpoll%E5%88%86%E5%88%AB%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5.html class=md-nav__link> <span class=md-ellipsis> 五种IO模型与select和poll分别实现多路转接 </span> </a> </li> <li class=md-nav__item> <a href=../33.%20epoll%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/33.%20epoll%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5.html class=md-nav__link> <span class=md-ellipsis> epoll实现多路转接 </span> </a> </li> <li class=md-nav__item> <a href=../34.%20Reactor%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%AE%8C%E5%96%84%E5%9F%BA%E4%BA%8E%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8Fepoll%E5%AE%9E%E7%8E%B0TCP%E6%9C%8D%E5%8A%A1%E5%99%A8/34.%20Reactor%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%AE%8C%E5%96%84%E5%9F%BA%E4%BA%8E%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8Fepoll%E5%AE%9E%E7%8E%B0TCP%E6%9C%8D%E5%8A%A1%E5%99%A8.html class=md-nav__link> <span class=md-ellipsis> Reactor模式与完善基于边缘触发模式epoll实现TCP服务器 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-nav__link> <span class=md-ellipsis> 前端 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../JavaEE/Spring/1.%20SpringMVC%E5%9F%BA%E7%A1%80/1.%20SpringMVC%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> JavaEE应用开发 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-nav__link> <span class=md-ellipsis> 扩展知识 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-nav__link> <span class=md-ellipsis> 工具帮助 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-nav__link> <span class=md-ellipsis> 项目 </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 文件内核级缓冲区 </span> </a> </li> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 何为重定向 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 子进程与缓冲区 </span> </a> </li> <li class=md-nav__item> <a href=#shell2 class=md-nav__link> <span class=md-ellipsis> 手撕一个简单的shell（版本2） </span> </a> <nav class=md-nav aria-label=手撕一个简单的shell（版本2）> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 判断重定向命令与截取 </span> </a> </li> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 执行重定向 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#stdioh class=md-nav__link> <span class=md-ellipsis> 简单实现stdio.h中的文件相关操作 </span> </a> <nav class=md-nav aria-label=简单实现stdio.h中的文件相关操作> <ul class=md-nav__list> <li class=md-nav__item> <a href=#file class=md-nav__link> <span class=md-ellipsis> FILE结构体 </span> </a> </li> <li class=md-nav__item> <a href=#fopen class=md-nav__link> <span class=md-ellipsis> fopen函数 </span> </a> </li> <li class=md-nav__item> <a href=#fwrite class=md-nav__link> <span class=md-ellipsis> fwrite函数 </span> </a> </li> <li class=md-nav__item> <a href=#fflush class=md-nav__link> <span class=md-ellipsis> fflush函数 </span> </a> </li> <li class=md-nav__item> <a href=#fclose class=md-nav__link> <span class=md-ellipsis> fclose函数 </span> </a> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 链接基本使用 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=linux>Linux中输入和输出基本过程<a class=headerlink href=#linux title="Permanent link">&para;</a></h1> <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;"> <p><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 4703 个字 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 640 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3"/></svg></span> 525 行代码 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m12.96-10.71-2.75 3.54-1.96-2.36L8.5 15h11z"/></svg></span> 10 张图片 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 22 分钟</p> </div> <h2 id=_1>文件内核级缓冲区<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <p>前面在如何理解Linux一切皆文件的特点中提到为了保证在Linux中所有进程访问文件时的方式趋近相同，在<code>file</code>结构体中存在一个<code>files_operations</code>结构体指针，对应的结构体保存所有文件操作的函数指针（这个结构体也被称为操作表）</p> <p>每一个<code>file</code>结构体中除了有自己的操作表以外还有一个文件的内核级缓冲区，这个缓冲区不同于语言层面的缓冲区，在调用底层系统接口的读或者写时，会有一方先将内容保存到该缓冲区，再将内容移动到指定设备</p> <p>例如，对于读函数<code>read</code>来说，以从磁盘文件读取文件内容为例，首先操作系统会从磁盘中读取文件内容到缓冲区，再由<code>read</code>函数从缓冲区将内容读取到指定的设备；对于<code>write</code>函数来说，首先操作系统会将内存中需要写入的内容先写入缓冲区，再由<code>write</code>函数从缓冲区写入到磁盘中。除了前面提到的两个单一过程外，还要一种复合过程：对文件的内容进行修改。这一种过程既涉及到读取，也涉及到写入，所以首先需要通过操作系统读入需要修改的内容到内核级缓冲区，由<code>read</code>函数将缓冲区中的数据读到内存，在程序运行中对读取到的内容进行修改，再通过<code>write</code>函数将修改后的内容写入到缓冲区，最后由操作系统从缓冲区写入到磁盘</p> <p>如果抽象化一下<code>read</code>函数和<code>write</code>函数的过程可以发现这两个函数的基本行为就是读写缓冲区，所以这两个函数也可以理解为拷贝函数，<code>read</code>函数即为将缓冲区中的数据拷贝到内存中的指定位置，<code>write</code>函数即为将内存中的数据拷贝到缓冲区</p> <p>上面整个过程中，<code>read</code>函数和<code>write</code>函数只完成对缓冲区中的数据进行处理，但是缓冲区中的数据何时移动到指定的设备由操作系统自主决定</p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>如果用户向自主决定何时将内核级缓冲区中的数据刷新到内核级缓冲区可以使用<code>fsync</code>函数，其原型如下：</p> <div class="language-c highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><span class=kt>int</span><span class=w> </span><span class=nf>fsync</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=p>);</span>
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#linux class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../../index.html title=柯懒的知识库 class="md-header__button md-logo" aria-label=柯懒的知识库 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 柯懒的知识库 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> Linux中输入和输出基本过程 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=teal aria-label type=radio name=__palette id=__palette_1> </form> <!-- 头像元素 - 直接在HTML中定义 --> <div class=header-avatar> <img src=../../作者/作者.assets/20250206-200653.jpg alt=头像> <div class=avatar-dropdown> <p><strong>柯懒不是柯南</strong></p> <a href=../../作者/联系作者/作者.html class=avatar-dropdown-item>吵醒柯懒</a> <div class=avatar-dropdown-divider></div> <a href=../../作者/关于作者/关于作者.html class=avatar-dropdown-item>柯懒自传</a> <div class=avatar-dropdown-divider></div> <a href=https://github.com/H0308 class=avatar-dropdown-item>柯懒的零食库</a> </div> </div> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=查找> <button type=reset class="md-search__icon md-icon" title=清空当前内容 aria-label=清空当前内容 tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <!-- 独立的切换按钮 --> <div class=toolbar-toggle-btn id=toolbarToggleBtn onclick=toggleToolbar()> <div class=toggle-icon> <svg class=toggle-arrow-icon viewbox="0 0 1024 1024" version=1.1 xmlns=http://www.w3.org/2000/svg width=16 height=16> <path d="M346.538667 1024L170.666667 853.333333l341.333333-341.333333-341.333333-341.333333 175.872-170.666667L853.333333 512z" fill=currentColor></path> </svg> </div> </div> <!-- 右侧固定功能条 - 独立于内容区 --> <div class=floating-toolbar id=floatingToolbar> <!-- 字体切换功能 --> <div class="toolbar-item font-switcher"> <div class=toolbar-icon> <svg class=font-icon viewbox="0 0 1024 1024" version=1.1 xmlns=http://www.w3.org/2000/svg width=20 height=20> <path d="M913.408 1024l-66.56 0q-29.696 0-51.2-5.12t-36.864-15.872-26.112-27.136-19.968-37.888q-15.36-38.912-28.16-70.656t-22.016-55.296q-11.264-26.624-20.48-49.152l-254.976 0q-7.168 23.552-17.408 51.2-8.192 23.552-21.504 56.832t-30.72 72.192q-20.48 46.08-47.104 63.488t-60.416 17.408l-70.656 0q-45.056 0-60.928-19.968t2.56-68.096q18.432-46.08 43.008-108.544t52.224-132.608 57.344-143.872 57.344-144.384q65.536-164.864 137.216-343.04 7.168-17.408 18.432-31.744 10.24-11.264 27.136-21.504t42.496-10.24q26.624 0 43.52 10.752t28.16 24.064q12.288 15.36 19.456 33.792 72.704 180.224 138.24 345.088 27.648 70.656 57.344 143.872t56.832 142.336 51.2 129.536 41.472 104.448q14.336 34.816 4.096 62.464t-43.008 27.648zM616.448 634.88l-97.28-347.136-1.024 0-108.544 347.136 206.848 0z" fill=currentColor></path> </svg> </div> <div class=toolbar-label>内容字体</div> <div class=font-dropdown-toolbar> <div class=font-current-toolbar onclick=toggleFontDropdownToolbar()> <span class=current-font-name-toolbar>东观体</span> <svg class=dropdown-arrow-icon viewbox="0 0 1024 1024" version=1.1 xmlns=http://www.w3.org/2000/svg width=12 height=12> <path d="M878.592 250.88q29.696 0 48.128 11.264t24.576 29.696 0 41.472-26.624 45.568q-82.944 92.16-159.744 180.224t-148.48 164.864q-19.456 20.48-45.568 31.744t-53.76 11.776-53.248-8.704-43.008-28.672q-39.936-44.032-82.944-90.112l-88.064-92.16q-43.008-46.08-85.504-90.624t-79.36-86.528q-17.408-19.456-22.528-40.448t1.024-38.4 23.552-28.672 45.056-11.264q35.84 0 98.816-0.512t137.728-0.512l153.6 0 150.528 0 125.952 0 79.872 0z" fill=currentColor></path> </svg> </div> <div class=font-options-toolbar> <div class=font-option-toolbar data-font=dongguanti onclick="selectFontToolbar('dongguanti')">上图东观体</div> <div class=font-option-toolbar data-font=oppoti onclick="selectFontToolbar('oppoti')">OPPO Sans</div> <div class=font-option-toolbar data-font=jiangchengti onclick="selectFontToolbar('jiangchengti')">江城黑体</div> <div class=font-option-toolbar data-font=lxgw onclick="selectFontToolbar('lxgw')">霞鹜臻楷</div> </div> </div> </div> <!-- 代码字体切换功能 --> <div class="toolbar-item code-font-switcher"> <div class=toolbar-icon> <svg class=code-font-icon viewbox="0 0 1024 1024" version=1.1 xmlns=http://www.w3.org/2000/svg width=20 height=20> <path d="M320 213.333333l-213.333333 213.333334L320 640l60.16-60.16L227.84 426.666667l152.32-153.173334L320 213.333333z m384 0l-60.16 60.16L796.16 426.666667l-152.32 153.173333L704 640l213.333333-213.333333L704 213.333333z m-128 85.333334l-128 426.666666h85.333333l128-426.666666h-85.333333z" fill=currentColor></path> </svg> </div> <div class=toolbar-label>代码字体</div> <div class=code-font-dropdown-toolbar> <div class=code-font-current-toolbar onclick=toggleCodeFontDropdownToolbar()> <span class=current-code-font-name-toolbar>DejaVu Sans Mono</span> <svg class=dropdown-arrow-icon viewbox="0 0 1024 1024" version=1.1 xmlns=http://www.w3.org/2000/svg width=12 height=12> <path d="M878.592 250.88q29.696 0 48.128 11.264t24.576 29.696 0 41.472-26.624 45.568q-82.944 92.16-159.744 180.224t-148.48 164.864q-19.456 20.48-45.568 31.744t-53.76 11.776-53.248-8.704-43.008-28.672q-39.936-44.032-82.944-90.112l-88.064-92.16q-43.008-46.08-85.504-90.624t-79.36-86.528q-17.408-19.456-22.528-40.448t1.024-38.4 23.552-28.672 45.056-11.264q35.84 0 98.816-0.512t137.728-0.512l153.6 0 150.528 0 125.952 0 79.872 0z" fill=currentColor></path> </svg> </div> <div class=code-font-options-toolbar> <div class=code-font-option-toolbar data-code-font=dejavu onclick="selectCodeFontToolbar('dejavu')">DejaVu Sans Mono</div> <div class=code-font-option-toolbar data-code-font=zsft onclick="selectCodeFontToolbar('zsft')">JetBrains Mono</div> </div> </div> </div> <!-- 主题切换功能 --> <div class="toolbar-item theme-switcher" onclick=switchTheme()> <div class=toolbar-icon> <svg class=theme-icon viewbox="0 0 1024 1024" version=1.1 xmlns=http://www.w3.org/2000/svg width=20 height=20> <path d="M876.572788 522.301623c-1.886977 12.375865-9.657964 30.331819-35.880185 45.48903-56.489572 32.697703-150.21828 83.990926-174.010149 96.958262-13.143345 24.431435-66.067718 122.221646-98.141204 178.503487-16.117073 28.124548-36.055171 34.041304-50.030463 34.041304-0.031722 0-0.031722 0-0.031722 0-14.613836 0-29.1806-6.460132-43.234687-19.218714-47.183626-42.643216-125.994576-117.105115-146.013515-136.083351-27.757181-4.732791-138.338718-23.743774-200.584388-35.752272-17.924231-3.533476-32.649608-14.07046-40.372499-29.084409-5.78782-11.256368-10.281157-30.05962 1.471514-55.658647 26.989701-59.047838 74.126254-157.557432 85.957721-182.196599-3.437286-27.117614-16.996093-135.060045-23.760147-198.905142-1.886977-17.460674 3.901867-35.096333 15.829524-48.351218 12.791327-14.278191 30.667463-21.48943 49.854455-19.426445 63.669088 6.332219 173.259042 19.426445 200.584388 22.705118 24.335245-11.879562 121.085776-58.936297 180.133613-86.34146 9.91379-4.573155 19.85828-6.92369 29.596062-6.92369 28.748764 0 52.172243 20.642133 58.328453 51.421136 12.599969 62.997799 30.93864 166.70272 35.639708 193.484689 18.851347 19.682271 91.953272 96.031147 135.060045 143.07151C872.72004 487.125473 879.307062 504.71406 876.572788 522.301623L876.572788 522.301623zM825.375755 499.085876C776.017604 445.314205 687.245791 352.977193 686.365748 352.017332c-2.942005-3.069919-4.956895-6.971785-5.676279-11.208273-0.207731-1.215688-22.193465-127.001509-36.551474-198.936865-0.799202-3.917216-4.285606-16.836457-16.196891-16.836457-3.453658 0-7.30743 1.006933-11.464099 2.942005-67.282383 31.179117-183.955662 88.180342-185.170327 88.771813-3.693112 1.790786-7.850805 2.558265-11.975752 2.01489-1.295506-0.224104-133.63765-16.165168-205.988468-23.424502-0.079818 0-0.207731 0-0.287549 0-7.30743 0-11.128455 2.89391-13.319353 5.40408-3.677762 4.124947-5.644557 9.91379-5.068436 15.110139 7.674796 72.623018 24.255427 202.934922 24.463158 204.325595 0.511653 4.109598-0.159636 8.266267-1.966795 11.960403-0.591471 1.215688-57.657164 120.04712-88.339977 187.201589-3.565199 7.754614-4.41352 14.214746-2.350534 18.131963 1.935072 3.725858 6.588045 5.820566 10.360975 6.53995 70.719668 13.718443 204.644867 36.519752 206.036563 36.727483 4.189416 0.671289 8.058536 2.686179 11.112082 5.580089 1.006933 0.87902 96.414887 91.281983 150.090367 139.889027 8.314363 7.563256 13.143345 8.106632 14.437827 8.106632 3.485381 0 8.314363-4.621251 12.727882-12.391215 36.343743-63.828724 100.011808-181.988868 100.636025-183.155437 1.983167-3.64604 5.004991-6.667863 8.650007-8.650007 1.134847-0.671289 114.418936-62.373583 178.6314-99.516528 8.698103-5.036713 14.278191-10.568706 14.94948-14.854313C834.681702 511.845481 831.49922 505.800811 825.375755 499.085876L825.375755 499.085876zM935.333076 935.670256c-4.157693 4.157693-9.689686 6.299473-15.141862 6.299473-5.548366 0-11.048637-2.142803-15.238053-6.299473l-171.915441-171.915441c-8.362458-8.394181-8.362458-21.98471 0-30.426987 8.394181-8.394181 21.98471-8.394181 30.379914 0l171.915441 171.915441C943.727257 913.684522 943.727257 927.275052 935.333076 935.670256L935.333076 935.670256z" fill=currentColor></path> </svg> </div> <div class=toolbar-label>主题</div> </div> <!-- 返回顶部功能 --> <div class="toolbar-item back-to-top" onclick=scrollToTop()> <div class=toolbar-icon> <svg class=back-to-top-icon viewbox="0 0 1024 1024" xmlns=http://www.w3.org/2000/svg> <path d="M882.688 624.128l-336.896-583.68c-15.872-27.136-54.784-27.136-70.656 0L138.24 624.128c-15.872 27.136 4.096 61.44 35.328 61.44H317.44c22.528 0 40.96 18.432 40.96 40.96v239.616c0 22.528 18.432 40.96 40.96 40.96h223.232c22.528 0 40.96-18.432 40.96-40.96v-239.616c0-22.528 18.432-40.96 40.96-40.96h143.872c30.208 0 50.176-34.304 34.304-61.44z"></path> </svg> </div> <div class=toolbar-label>顶部</div> </div> </div> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=标签 data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../index.html class=md-tabs__link> 主页 </a> </li> <li class=md-tabs__item> <a href=../../%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D/%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D.html class=md-tabs__link> 网站介绍 </a> </li> <li class=md-tabs__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-tabs__link> 网站时间线 </a> </li> <li class=md-tabs__item> <a href=../../C%E8%AF%AD%E8%A8%80/index.html class=md-tabs__link> 编程语言 </a> </li> <li class=md-tabs__item> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-tabs__link> 数据结构与算法 </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-tabs__link> Linux </a> </li> <li class=md-tabs__item> <a href=../../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-tabs__link> 前端 </a> </li> <li class=md-tabs__item> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-tabs__link> MySQL </a> </li> <li class=md-tabs__item> <a href=../../JavaEE/Spring/1.%20SpringMVC%E5%9F%BA%E7%A1%80/1.%20SpringMVC%E5%9F%BA%E7%A1%80.html class=md-tabs__link> JavaEE应用开发 </a> </li> <li class=md-tabs__item> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-tabs__link> 扩展知识 </a> </li> <li class=md-tabs__item> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-tabs__link> 工具帮助 </a> </li> <li class=md-tabs__item> <a href=../../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-tabs__link> 项目 </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=导航栏 data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../../index.html title=柯懒的知识库 class="md-nav__button md-logo" aria-label=柯懒的知识库 data-md-component=logo> <img src=../../assets/logo.png alt=logo> </a> 柯懒的知识库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../index.html class=md-nav__link> <span class=md-ellipsis> 主页 </span> </a> </li> <li class=md-nav__item> <a href=../../%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D/%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D.html class=md-nav__link> <span class=md-ellipsis> 网站介绍 </span> </a> </li> <li class=md-nav__item> <a href=../../%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html class=md-nav__link> <span class=md-ellipsis> 网站时间线 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../C%E8%AF%AD%E8%A8%80/index.html class=md-nav__link> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html class=md-nav__link> <span class=md-ellipsis> 数据结构与算法 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_6 checked> <label class=md-nav__link for=__nav_6 id=__nav_6_label tabindex> <span class=md-ellipsis> Linux </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_6_label aria-expanded=true> <label class=md-nav__title for=__nav_6> <span class="md-nav__icon md-icon"></span> Linux </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html class=md-nav__link> <span class=md-ellipsis> Linux常用选项和指令 </span> </a> </li> <li class=md-nav__item> <a href=../2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html class=md-nav__link> <span class=md-ellipsis> Linux权限相关 </span> </a> </li> <li class=md-nav__item> <a href=../3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85.html class=md-nav__link> <span class=md-ellipsis> CentOS软件安装 </span> </a> </li> <li class=md-nav__item> <a href=../4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb/4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb.html class=md-nav__link> <span class=md-ellipsis> Linux下的gcc与gdb </span> </a> </li> <li class=md-nav__item> <a href=../5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F/5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F.html class=md-nav__link> <span class=md-ellipsis> Linux下的Makefile与进度条程序 </span> </a> </li> <li class=md-nav__item> <a href=../6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 操作系统基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../7.%20Linux%E8%BF%9B%E7%A8%8B/7.%20Linux%E8%BF%9B%E7%A8%8B.html class=md-nav__link> <span class=md-ellipsis> Linux进程基础 </span> </a> </li> <li class=md-nav__item> <a href=../8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7/8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7.html class=md-nav__link> <span class=md-ellipsis> Linux进程状态与进程优先级 </span> </a> </li> <li class=md-nav__item> <a href=../9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95.html class=md-nav__link> <span class=md-ellipsis> Linux进程切换以及调度算法 </span> </a> </li> <li class=md-nav__item> <a href=../10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.html class=md-nav__link> <span class=md-ellipsis> Linux命令行与环境变量 </span> </a> </li> <li class=md-nav__item> <a href=../11.%20Linux%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4/11.%20%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.html class=md-nav__link> <span class=md-ellipsis> Linux进程地址空间 </span> </a> </li> <li class=md-nav__item> <a href=../12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6.html class=md-nav__link> <span class=md-ellipsis> Linux进程控制 </span> </a> </li> <li class=md-nav__item> <a href=../13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80/13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> Linux文件操作基础 </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> Linux中输入和输出基本过程 </span> <span class="md-nav__icon md-icon"></span> </label> <a href=14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B.html class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> Linux中输入和输出基本过程 </span> </a> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 文件内核级缓冲区 </span> </a> </li> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 何为重定向 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 子进程与缓冲区 </span> </a> </li> <li class=md-nav__item> <a href=#shell2 class=md-nav__link> <span class=md-ellipsis> 手撕一个简单的shell（版本2） </span> </a> <nav class=md-nav aria-label=手撕一个简单的shell（版本2）> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 判断重定向命令与截取 </span> </a> </li> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 执行重定向 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#stdioh class=md-nav__link> <span class=md-ellipsis> 简单实现stdio.h中的文件相关操作 </span> </a> <nav class=md-nav aria-label=简单实现stdio.h中的文件相关操作> <ul class=md-nav__list> <li class=md-nav__item> <a href=#file class=md-nav__link> <span class=md-ellipsis> FILE结构体 </span> </a> </li> <li class=md-nav__item> <a href=#fopen class=md-nav__link> <span class=md-ellipsis> fopen函数 </span> </a> </li> <li class=md-nav__item> <a href=#fwrite class=md-nav__link> <span class=md-ellipsis> fwrite函数 </span> </a> </li> <li class=md-nav__item> <a href=#fflush class=md-nav__link> <span class=md-ellipsis> fflush函数 </span> </a> </li> <li class=md-nav__item> <a href=#fclose class=md-nav__link> <span class=md-ellipsis> fclose函数 </span> </a> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 链接基本使用 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=../15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html class=md-nav__link> <span class=md-ellipsis> Linux文件系统 </span> </a> </li> <li class=md-nav__item> <a href=../16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5.html class=md-nav__link> <span class=md-ellipsis> Linux软链接和硬链接 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../17.%20Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93.html class=md-nav__link> <span class=md-ellipsis> Linux进程间通信 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> Linux信号与操作系统原理 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../19.%20Linux%E7%BA%BF%E7%A8%8B/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C.html class=md-nav__link> <span class=md-ellipsis> Linux线程 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html class=md-nav__link> <span class=md-ellipsis> 网络基础知识 </span> </a> </li> <li class=md-nav__item> <a href=../21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> Socket编程基础 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../22.%20UDP%E7%BC%96%E7%A8%8B/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> UDP编程 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> TCP编程接口基本使用 </span> </a> </li> <li class=md-nav__item> <a href=../24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8/24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8.html class=md-nav__link> <span class=md-ellipsis> 序列化和反序列化与网络计算器 </span> </a> </li> <li class=md-nav__item> <a href=../25.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E5%92%8C%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/25.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E5%92%8C%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B.html class=md-nav__link> <span class=md-ellipsis> 进程间关系和守护进程 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../26.%20%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AEHTTP/1.%20%E4%BB%8B%E7%BB%8DHTTP%E5%8D%8F%E8%AE%AE%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E4%B8%8E%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0HTTPServer/1.%20%E4%BB%8B%E7%BB%8DHTTP%E5%8D%8F%E8%AE%AE%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E4%B8%8E%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0HTTPServer.html class=md-nav__link> <span class=md-ellipsis> 应用层协议HTTP </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class=md-nav__item> <a href=../27.%20UDP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/27.%20UDP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> UDP协议原理 </span> </a> </li> <li class=md-nav__item> <a href=../28.%20TCP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/28.%20TCP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86.html class=md-nav__link> <span class=md-ellipsis> TCP协议原理 </span> </a> </li> <li class=md-nav__item> <a href=../35.%20%E7%90%86%E8%A7%A3Linux%E5%A6%82%E4%BD%95%E7%9C%8B%E5%BE%85%E8%BF%9E%E6%8E%A5%E4%BB%A5%E5%8F%8ATCP%E5%85%A8%E8%BF%9E%E6%8E%A5%E9%98%9F%E5%88%97/35.%20%E7%90%86%E8%A7%A3Linux%E5%A6%82%E4%BD%95%E7%9C%8B%E5%BE%85%E8%BF%9E%E6%8E%A5%E4%BB%A5%E5%8F%8ATCP%E5%85%A8%E8%BF%9E%E6%8E%A5%E9%98%9F%E5%88%97.html class=md-nav__link> <span class=md-ellipsis> 理解Linux如何看待连接以及TCP全连接队列 </span> </a> </li> <li class=md-nav__item> <a href=../29.%20%E7%BD%91%E7%BB%9C%E5%B1%82IP%E5%8D%8F%E8%AE%AE/29.%20%E7%BD%91%E7%BB%9C%E5%B1%82IP%E5%8D%8F%E8%AE%AE.html class=md-nav__link> <span class=md-ellipsis> 网络层IP协议 </span> </a> </li> <li class=md-nav__item> <a href=../30.%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8D%8F%E8%AE%AE/30.%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8D%8F%E8%AE%AE.html class=md-nav__link> <span class=md-ellipsis> 数据链路层协议 </span> </a> </li> <li class=md-nav__item> <a href=../36.%20DNS%E4%B8%8EICMP/36.%20DNS%E4%B8%8EICMP.html class=md-nav__link> <span class=md-ellipsis> DNS与ICMP </span> </a> </li> <li class=md-nav__item> <a href=../31.%20NAT%E6%8A%80%E6%9C%AF%E3%80%81%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/31.%20NAT%E6%8A%80%E6%9C%AF%E3%80%81%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F.html class=md-nav__link> <span class=md-ellipsis> NAT技术、代理服务器和内网穿透 </span> </a> </li> <li class=md-nav__item> <a href=../32.%20%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B%E4%B8%8Eselect%E5%92%8Cpoll%E5%88%86%E5%88%AB%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/32.%20%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B%E4%B8%8Eselect%E5%92%8Cpoll%E5%88%86%E5%88%AB%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5.html class=md-nav__link> <span class=md-ellipsis> 五种IO模型与select和poll分别实现多路转接 </span> </a> </li> <li class=md-nav__item> <a href=../33.%20epoll%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/33.%20epoll%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5.html class=md-nav__link> <span class=md-ellipsis> epoll实现多路转接 </span> </a> </li> <li class=md-nav__item> <a href=../34.%20Reactor%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%AE%8C%E5%96%84%E5%9F%BA%E4%BA%8E%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8Fepoll%E5%AE%9E%E7%8E%B0TCP%E6%9C%8D%E5%8A%A1%E5%99%A8/34.%20Reactor%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%AE%8C%E5%96%84%E5%9F%BA%E4%BA%8E%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8Fepoll%E5%AE%9E%E7%8E%B0TCP%E6%9C%8D%E5%8A%A1%E5%99%A8.html class=md-nav__link> <span class=md-ellipsis> Reactor模式与完善基于边缘触发模式epoll实现TCP服务器 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html class=md-nav__link> <span class=md-ellipsis> 前端 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html class=md-nav__link> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../JavaEE/Spring/1.%20SpringMVC%E5%9F%BA%E7%A1%80/1.%20SpringMVC%E5%9F%BA%E7%A1%80.html class=md-nav__link> <span class=md-ellipsis> JavaEE应用开发 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html class=md-nav__link> <span class=md-ellipsis> 扩展知识 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html class=md-nav__link> <span class=md-ellipsis> 工具帮助 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html class=md-nav__link> <span class=md-ellipsis> 项目 </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 文件内核级缓冲区 </span> </a> </li> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 何为重定向 </span> </a> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 子进程与缓冲区 </span> </a> </li> <li class=md-nav__item> <a href=#shell2 class=md-nav__link> <span class=md-ellipsis> 手撕一个简单的shell（版本2） </span> </a> <nav class=md-nav aria-label=手撕一个简单的shell（版本2）> <ul class=md-nav__list> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 判断重定向命令与截取 </span> </a> </li> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 执行重定向 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#stdioh class=md-nav__link> <span class=md-ellipsis> 简单实现stdio.h中的文件相关操作 </span> </a> <nav class=md-nav aria-label=简单实现stdio.h中的文件相关操作> <ul class=md-nav__list> <li class=md-nav__item> <a href=#file class=md-nav__link> <span class=md-ellipsis> FILE结构体 </span> </a> </li> <li class=md-nav__item> <a href=#fopen class=md-nav__link> <span class=md-ellipsis> fopen函数 </span> </a> </li> <li class=md-nav__item> <a href=#fwrite class=md-nav__link> <span class=md-ellipsis> fwrite函数 </span> </a> </li> <li class=md-nav__item> <a href=#fflush class=md-nav__link> <span class=md-ellipsis> fflush函数 </span> </a> </li> <li class=md-nav__item> <a href=#fclose class=md-nav__link> <span class=md-ellipsis> fclose函数 </span> </a> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 链接基本使用 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=linux>Linux中输入和输出基本过程<a class=headerlink href=#linux title="Permanent link">&para;</a></h1> <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;"> <p><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 4703 个字 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 640 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3"/></svg></span> 525 行代码 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m12.96-10.71-2.75 3.54-1.96-2.36L8.5 15h11z"/></svg></span> 10 张图片 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 22 分钟</p> </div> <h2 id=_1>文件内核级缓冲区<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <p>前面在如何理解Linux一切皆文件的特点中提到为了保证在Linux中所有进程访问文件时的方式趋近相同，在<code>file</code>结构体中存在一个<code>files_operations</code>结构体指针，对应的结构体保存所有文件操作的函数指针（这个结构体也被称为操作表）</p> <p>每一个<code>file</code>结构体中除了有自己的操作表以外还有一个文件的内核级缓冲区，这个缓冲区不同于语言层面的缓冲区，在调用底层系统接口的读或者写时，会有一方先将内容保存到该缓冲区，再将内容移动到指定设备</p> <p>例如，对于读函数<code>read</code>来说，以从磁盘文件读取文件内容为例，首先操作系统会从磁盘中读取文件内容到缓冲区，再由<code>read</code>函数从缓冲区将内容读取到指定的设备；对于<code>write</code>函数来说，首先操作系统会将内存中需要写入的内容先写入缓冲区，再由<code>write</code>函数从缓冲区写入到磁盘中。除了前面提到的两个单一过程外，还要一种复合过程：对文件的内容进行修改。这一种过程既涉及到读取，也涉及到写入，所以首先需要通过操作系统读入需要修改的内容到内核级缓冲区，由<code>read</code>函数将缓冲区中的数据读到内存，在程序运行中对读取到的内容进行修改，再通过<code>write</code>函数将修改后的内容写入到缓冲区，最后由操作系统从缓冲区写入到磁盘</p> <p>如果抽象化一下<code>read</code>函数和<code>write</code>函数的过程可以发现这两个函数的基本行为就是读写缓冲区，所以这两个函数也可以理解为拷贝函数，<code>read</code>函数即为将缓冲区中的数据拷贝到内存中的指定位置，<code>write</code>函数即为将内存中的数据拷贝到缓冲区</p> <p>上面整个过程中，<code>read</code>函数和<code>write</code>函数只完成对缓冲区中的数据进行处理，但是缓冲区中的数据何时移动到指定的设备由操作系统自主决定</p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>如果用户向自主决定何时将内核级缓冲区中的数据刷新到内核级缓冲区可以使用<code>fsync</code>函数，其原型如下：</p> <div class="language-c highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><span class=kt>int</span><span class=w> </span><span class=nf>fsync</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>fd</span><span class=p>);</span>
 </span></code></pre></div></td></tr></table></div> </div> <p>读或者写过程示意图如下：</p> <p><a class=glightbox href="14. Linux中输入和输出基本过程.assets\image.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="14. Linux中输入和输出基本过程.assets\image.png"></a></p> <h2 id=_2>何为重定向<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <p>前面提到，文件描述符是Linux中每一个文件的唯一标识符，也就是说，通过文件描述符可以唯一确定一个文件，而<code>stdin</code>、<code>stdout</code>和<code>stderr</code>是每一个C语言程序默认打开的三个文件，对应的文件描述符为0、1和2，而之所以文件描述符是从0开始，本质是因为文件描述符是<code>fd_array</code>数组的下标，当用户再打开一个文件时，对应的文件结构指针就会存储到<code>fd_array</code>的指定位置，而因为下标0、1和2已经被占用，所以新开的文件对应的下标只能从3开始</p> <p>现在关闭0号位置的文件，观察效果，例如下面的代码：</p> <div class="language-c highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
 <span class=normal> 2</span>
 <span class=normal> 3</span>

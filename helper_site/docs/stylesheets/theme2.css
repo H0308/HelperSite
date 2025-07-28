@@ -209,7 +209,6 @@ h1 + div > p {
 
 .font-current-toolbar:hover {
     border-color: var(--primary-blue);
-    background: var(--primary-blue-light);
     box-shadow: 0 4px 12px var(--shadow-primary-medium);
 }
 
@@ -328,7 +327,6 @@ h1 + div > p {
 
 .code-font-current-toolbar:hover {
     border-color: var(--primary-blue);
-    background: var(--primary-blue-light);
     box-shadow: 0 4px 12px var(--shadow-primary-medium);
 }
 

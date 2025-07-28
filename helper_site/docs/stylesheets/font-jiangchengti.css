@@ -6,11 +6,11 @@
 /* 江城黑体字体样式表 */
 :root {
     --md-text-font: "JiangChengHeiTi 400W", "STDongGuanTi", "OPPOSans",
-        sans-serif !important;
+        sans-serif;
 }
 
 body,
 .md-typeset,
 .md-content {
-    font-family: "JiangChengHeiTi 400W", "STDongGuanTi", "OPPOSans", sans-serif !important;
+    font-family: "JiangChengHeiTi 400W", "STDongGuanTi", "OPPOSans", sans-serif;
 }

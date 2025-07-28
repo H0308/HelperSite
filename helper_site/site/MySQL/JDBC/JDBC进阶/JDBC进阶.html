@@ -507,7 +507,407 @@
 </span><span id=__span-11-15><span class=w>    </span><span class=c1>// 释放连接</span>
 </span><span id=__span-11-16><span class=w>    </span><span class=n>connection</span><span class=p>.</span><span class=na>close</span><span class=p>();</span>
 </span><span id=__span-11-17><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=_7>其他配置<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <h4 id=druid_1>Druid配置<a class=headerlink href=#druid_1 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>配置</th> <th>缺省</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>name</code></td> <td></td> <td>配置这个属性的意义在于，如果存在多个数据源，监控的时候可以通过名字来区分开来。 如果没有配置，将会生成一个名字，格式是：<code>"DataSource-" + System.identityHashCode(this)</code></td> </tr> <tr> <td><code>jdbcUrl</code></td> <td></td> <td>连接数据库的<code>url</code>，不同数据库不一样。例如：<code>mysql : jdbc:mysql://10.20.153.104:3306/druid2 oracle : jdbc:oracle:thin:@10.20.149.85:1521:ocnauto</code></td> </tr> <tr> <td><code>username</code></td> <td></td> <td>连接数据库的用户名</td> </tr> <tr> <td><code>password</code></td> <td></td> <td>连接数据库的密码。如果你不希望密码直接写在配置文件中，可以使用ConfigFilter。详细看这里：<a href=https://github.com/alibaba/druid/wiki/使用ConfigFilter>https://github.com/alibaba/druid/wiki/%E4%BD%BF%E7%94%A8ConfigFilter</a></td> </tr> <tr> <td><code>driverClassName</code></td> <td></td> <td>根据<code>url</code>自动识别 这一项可配可不配，如果不配置<code>druid</code>会根据<code>url</code>自动识别<code>dbType</code>，然后选择相应的<code>driverClassName</code>(建议配置下)</td> </tr> <tr> <td><code>initialSize</code></td> <td>0</td> <td>初始化时建立物理连接的个数。初始化发生在显示调用<code>init</code>方法，或者第一次<code>getConnection</code>时</td> </tr> <tr> <td><code>maxActive</code></td> <td>8</td> <td>最大连接池数量</td> </tr> <tr> <td><code>maxIdle</code></td> <td>8</td> <td>已经不再使用，配置了也没效果</td> </tr> <tr> <td><code>minIdle</code></td> <td></td> <td>最小连接池数量</td> </tr> <tr> <td><code>maxWait</code></td> <td></td> <td>获取连接时最大等待时间，单位毫秒。配置了<code>maxWait</code>之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置<code>useUnfairLock</code>属性为<code>true</code>使用非公平锁。</td> </tr> <tr> <td><code>poolPreparedStatements</code></td> <td><code>false</code></td> <td>是否缓存<code>preparedStatement</code>，也就是<code>PSCache</code>。<code>PSCache</code>对支持游标的数据库性能提升巨大，比如说<code>oracle</code>。在<code>mysql</code>下建议关闭。</td> </tr> <tr> <td><code>maxOpenPreparedStatements</code></td> <td>-1</td> <td>要启用<code>PSCache</code>，必须配置大于0，当大于0时，<code>poolPreparedStatements</code>自动触发修改为<code>true</code>。在<code>Druid</code>中，不会存在<code>Oracle</code>下<code>PSCache</code>占用内存过多的问题，可以把这个数值配置大一些，比如说100</td> </tr> <tr> <td><code>validationQuery</code></td> <td></td> <td>用来检测连接是否有效的<code>sql</code>，要求是一个查询语句。如果<code>validationQuery</code>为<code>null</code>，<code>testOnBorrow</code>、<code>testOnReturn</code>、<code>testWhileIdle</code>都不会其作用。</td> </tr> <tr> <td><code>testOnBorrow</code></td> <td><code>true</code></td> <td>申请连接时执行<code>validationQuery</code>检测连接是否有效，做了这个配置会降低性能。</td> </tr> <tr> <td><code>testOnReturn</code></td> <td><code>false</code></td> <td>归还连接时执行<code>validationQuery</code>检测连接是否有效，做了这个配置会降低性能</td> </tr> <tr> <td><code>testWhileIdle</code></td> <td><code>false</code></td> <td>建议配置为<code>true</code>，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于<code>timeBetweenEvictionRunsMillis</code>，执行<code>validationQuery</code>检测连接是否有效。</td> </tr> <tr> <td><code>timeBetweenEvictionRunsMillis</code></td> <td></td> <td>有两个含义： <code>Destroy</code>线程会检测连接的间隔时间<code>testWhileIdle</code>的判断依据，详细看<code>testWhileIdle</code>属性的说明</td> </tr> <tr> <td><code>numTestsPerEvictionRun</code></td> <td></td> <td>不再使用，一个<code>DruidDataSource</code>只支持一个<code>EvictionRun</code></td> </tr> <tr> <td><code>minEvictableIdleTimeMillis</code></td> <td></td> <td></td> </tr> <tr> <td><code>connectionInitSqls</code></td> <td></td> <td>物理连接初始化的时候执行的<code>sql</code></td> </tr> <tr> <td><code>exceptionSorter</code></td> <td></td> <td>根据<code>dbType</code>自动识别 当数据库抛出一些不可恢复的异常时，抛弃连接</td> </tr> <tr> <td><code>filters</code></td> <td></td> <td>属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有： 监控统计用的<code>filter:stat</code>日志用的<code>filter:log4j</code>防御<code>sql</code>注入的<code>filter:wall</code></td> </tr> <tr> <td><code>proxyFilters</code></td> <td></td> <td>类型是<code>List</code>，如果同时配置了<code>filters</code>和<code>proxyFilters</code>，是组合关系，并非替换关系</td> </tr> </tbody> </table> <h4 id=hikari_1>Hikari配置<a class=headerlink href=#hikari_1 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>属性</th> <th>默认值</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>isAutoCommit</code></td> <td><code>true</code></td> <td>自动提交从池中返回的连接</td> </tr> <tr> <td><code>connectionTimeout</code></td> <td>30000</td> <td>等待来自池的连接的最大毫秒数</td> </tr> <tr> <td><code>maxLifetime</code></td> <td>1800000</td> <td>池中连接最长生命周期如果不等于0且小于30秒则会被重置回30分钟</td> </tr> <tr> <td><code>minimumIdle</code></td> <td>10</td> <td>池中维护的最小空闲连接数 <code>minIdle</code>&lt;0或者<code>minIdle</code>&gt;<code>maxPoolSize</code>，则被重置为<code>maxPoolSize</code></td> </tr> <tr> <td><code>maximumPoolSize</code></td> <td>10</td> <td>池中最大连接数，包括闲置和使用中的连接</td> </tr> <tr> <td><code>metricRegistry</code></td> <td><code>null</code></td> <td>连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置</td> </tr> <tr> <td><code>healthCheckRegistry</code></td> <td><code>null</code></td> <td>报告当前健康信息</td> </tr> <tr> <td><code>poolName</code></td> <td><code>HikariPool-1</code></td> <td>连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置</td> </tr> <tr> <td><code>idleTimeout</code></td> <td></td> <td>是允许连接在连接池中空闲的最长时间</td> </tr> </tbody> </table> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年9月30日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年9月30日</span> </span> </aside> <form class=md-feedback name=feedback hidden> <fieldset> <legend class=md-feedback__title> 页面有帮助吗？ </legend> <div class=md-feedback__inner> <div class=md-feedback__list> <button class="md-feedback__icon md-icon" type=submit title=页面对我有帮助 data-md-value=1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M5 9v12H1V9zm4 12a2 2 0 0 1-2-2V9c0-.55.22-1.05.59-1.41L14.17 1l1.06 1.06c.27.27.44.64.44 1.05l-.03.32L14.69 8H21a2 2 0 0 1 2 2v2c0 .26-.05.5-.14.73l-3.02 7.05C19.54 20.5 18.83 21 18 21zm0-2h9.03L21 12v-2h-8.79l1.13-5.32L9 9.03z"/></svg> </button> <button class="md-feedback__icon md-icon" type=submit title=页面没有帮助到我 data-md-value=0> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 15V3h4v12zM15 3a2 2 0 0 1 2 2v10c0 .55-.22 1.05-.59 1.41L9.83 23l-1.06-1.06c-.27-.27-.44-.64-.44-1.06l.03-.31.95-4.57H3a2 2 0 0 1-2-2v-2c0-.26.05-.5.14-.73l3.02-7.05C4.46 3.5 5.17 3 6 3zm0 2H5.97L3 12v2h8.78l-1.13 5.32L15 14.97z"/></svg> </button> </div> <div class=md-feedback__note> <div data-md-value=1 hidden> 谢谢你的反馈！ </div> <div data-md-value=0 hidden> 谢谢你的反馈！联系<a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html>作者</a>提供更详细的信息 </div> </div> </div> </fieldset> </form> <!-- 阅读进度条 - 直接在HTML中定义 --> <div class=reading-progress></div> <!-- 滚动指示器 - 直接在HTML中定义 --> <div class=scroll-indicator></div> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> </main> <!--
+</span></code></pre></div></td></tr></table></div> <h3 id=_7>其他配置<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <h4 id=druid_1>Druid配置<a class=headerlink href=#druid_1 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>配置</th> <th>缺省</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>name</code></td> <td></td> <td>配置这个属性的意义在于，如果存在多个数据源，监控的时候可以通过名字来区分开来。 如果没有配置，将会生成一个名字，格式是：<code>"DataSource-" + System.identityHashCode(this)</code></td> </tr> <tr> <td><code>jdbcUrl</code></td> <td></td> <td>连接数据库的<code>url</code>，不同数据库不一样。例如：<code>mysql : jdbc:mysql://10.20.153.104:3306/druid2 oracle : jdbc:oracle:thin:@10.20.149.85:1521:ocnauto</code></td> </tr> <tr> <td><code>username</code></td> <td></td> <td>连接数据库的用户名</td> </tr> <tr> <td><code>password</code></td> <td></td> <td>连接数据库的密码。如果你不希望密码直接写在配置文件中，可以使用ConfigFilter。详细看这里：<a href=https://github.com/alibaba/druid/wiki/使用ConfigFilter>https://github.com/alibaba/druid/wiki/%E4%BD%BF%E7%94%A8ConfigFilter</a></td> </tr> <tr> <td><code>driverClassName</code></td> <td></td> <td>根据<code>url</code>自动识别 这一项可配可不配，如果不配置<code>druid</code>会根据<code>url</code>自动识别<code>dbType</code>，然后选择相应的<code>driverClassName</code>(建议配置下)</td> </tr> <tr> <td><code>initialSize</code></td> <td>0</td> <td>初始化时建立物理连接的个数。初始化发生在显示调用<code>init</code>方法，或者第一次<code>getConnection</code>时</td> </tr> <tr> <td><code>maxActive</code></td> <td>8</td> <td>最大连接池数量</td> </tr> <tr> <td><code>maxIdle</code></td> <td>8</td> <td>已经不再使用，配置了也没效果</td> </tr> <tr> <td><code>minIdle</code></td> <td></td> <td>最小连接池数量</td> </tr> <tr> <td><code>maxWait</code></td> <td></td> <td>获取连接时最大等待时间，单位毫秒。配置了<code>maxWait</code>之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置<code>useUnfairLock</code>属性为<code>true</code>使用非公平锁。</td> </tr> <tr> <td><code>poolPreparedStatements</code></td> <td><code>false</code></td> <td>是否缓存<code>preparedStatement</code>，也就是<code>PSCache</code>。<code>PSCache</code>对支持游标的数据库性能提升巨大，比如说<code>oracle</code>。在<code>mysql</code>下建议关闭。</td> </tr> <tr> <td><code>maxOpenPreparedStatements</code></td> <td>-1</td> <td>要启用<code>PSCache</code>，必须配置大于0，当大于0时，<code>poolPreparedStatements</code>自动触发修改为<code>true</code>。在<code>Druid</code>中，不会存在<code>Oracle</code>下<code>PSCache</code>占用内存过多的问题，可以把这个数值配置大一些，比如说100</td> </tr> <tr> <td><code>validationQuery</code></td> <td></td> <td>用来检测连接是否有效的<code>sql</code>，要求是一个查询语句。如果<code>validationQuery</code>为<code>null</code>，<code>testOnBorrow</code>、<code>testOnReturn</code>、<code>testWhileIdle</code>都不会其作用。</td> </tr> <tr> <td><code>testOnBorrow</code></td> <td><code>true</code></td> <td>申请连接时执行<code>validationQuery</code>检测连接是否有效，做了这个配置会降低性能。</td> </tr> <tr> <td><code>testOnReturn</code></td> <td><code>false</code></td> <td>归还连接时执行<code>validationQuery</code>检测连接是否有效，做了这个配置会降低性能</td> </tr> <tr> <td><code>testWhileIdle</code></td> <td><code>false</code></td> <td>建议配置为<code>true</code>，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于<code>timeBetweenEvictionRunsMillis</code>，执行<code>validationQuery</code>检测连接是否有效。</td> </tr> <tr> <td><code>timeBetweenEvictionRunsMillis</code></td> <td></td> <td>有两个含义： <code>Destroy</code>线程会检测连接的间隔时间<code>testWhileIdle</code>的判断依据，详细看<code>testWhileIdle</code>属性的说明</td> </tr> <tr> <td><code>numTestsPerEvictionRun</code></td> <td></td> <td>不再使用，一个<code>DruidDataSource</code>只支持一个<code>EvictionRun</code></td> </tr> <tr> <td><code>minEvictableIdleTimeMillis</code></td> <td></td> <td></td> </tr> <tr> <td><code>connectionInitSqls</code></td> <td></td> <td>物理连接初始化的时候执行的<code>sql</code></td> </tr> <tr> <td><code>exceptionSorter</code></td> <td></td> <td>根据<code>dbType</code>自动识别 当数据库抛出一些不可恢复的异常时，抛弃连接</td> </tr> <tr> <td><code>filters</code></td> <td></td> <td>属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有： 监控统计用的<code>filter:stat</code>日志用的<code>filter:log4j</code>防御<code>sql</code>注入的<code>filter:wall</code></td> </tr> <tr> <td><code>proxyFilters</code></td> <td></td> <td>类型是<code>List</code>，如果同时配置了<code>filters</code>和<code>proxyFilters</code>，是组合关系，并非替换关系</td> </tr> </tbody> </table> <h4 id=hikari_1>Hikari配置<a class=headerlink href=#hikari_1 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>属性</th> <th>默认值</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>isAutoCommit</code></td> <td><code>true</code></td> <td>自动提交从池中返回的连接</td> </tr> <tr> <td><code>connectionTimeout</code></td> <td>30000</td> <td>等待来自池的连接的最大毫秒数</td> </tr> <tr> <td><code>maxLifetime</code></td> <td>1800000</td> <td>池中连接最长生命周期如果不等于0且小于30秒则会被重置回30分钟</td> </tr> <tr> <td><code>minimumIdle</code></td> <td>10</td> <td>池中维护的最小空闲连接数 <code>minIdle</code>&lt;0或者<code>minIdle</code>&gt;<code>maxPoolSize</code>，则被重置为<code>maxPoolSize</code></td> </tr> <tr> <td><code>maximumPoolSize</code></td> <td>10</td> <td>池中最大连接数，包括闲置和使用中的连接</td> </tr> <tr> <td><code>metricRegistry</code></td> <td><code>null</code></td> <td>连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置</td> </tr> <tr> <td><code>healthCheckRegistry</code></td> <td><code>null</code></td> <td>报告当前健康信息</td> </tr> <tr> <td><code>poolName</code></td> <td><code>HikariPool-1</code></td> <td>连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置</td> </tr> <tr> <td><code>idleTimeout</code></td> <td></td> <td>是允许连接在连接池中空闲的最长时间</td> </tr> </tbody> </table> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年9月30日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年9月30日</span> </span> </aside> <form class=md-feedback name=feedback hidden> <fieldset> <legend class=md-feedback__title> 页面有帮助吗？ </legend> <div class=md-feedback__inner> <div class=md-feedback__list> <button class="md-feedback__icon md-icon" type=submit title=页面对我有帮助 data-md-value=1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M5 9v12H1V9zm4 12a2 2 0 0 1-2-2V9c0-.55.22-1.05.59-1.41L14.17 1l1.06 1.06c.27.27.44.64.44 1.05l-.03.32L14.69 8H21a2 2 0 0 1 2 2v2c0 .26-.05.5-.14.73l-3.02 7.05C19.54 20.5 18.83 21 18 21zm0-2h9.03L21 12v-2h-8.79l1.13-5.32L9 9.03z"/></svg> </button> <button class="md-feedback__icon md-icon" type=submit title=页面没有帮助到我 data-md-value=0> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 15V3h4v12zM15 3a2 2 0 0 1 2 2v10c0 .55-.22 1.05-.59 1.41L9.83 23l-1.06-1.06c-.27-.27-.44-.64-.44-1.06l.03-.31.95-4.57H3a2 2 0 0 1-2-2v-2c0-.26.05-.5.14-.73l3.02-7.05C4.46 3.5 5.17 3 6 3zm0 2H5.97L3 12v2h8.78l-1.13 5.32L15 14.97z"/></svg> </button> </div> <div class=md-feedback__note> <div data-md-value=1 hidden> 谢谢你的反馈！ </div> <div data-md-value=0 hidden> 谢谢你的反馈！联系<a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html>作者</a>提供更详细的信息 </div> </div> </div> </fieldset> </form> <!-- Waline 评论系统 --> <div class=waline-comments-container> <div class=waline-comments-header> <h3>评论区</h3> <p>欢迎在这里留下你的想法和建议！</p> </div> <div id=waline></div> </div> <!-- Waline CSS --> <link rel=stylesheet href=https://unpkg.com/@waline/client@v3/dist/waline.css> <!-- Waline JavaScript --> <script type=module>
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+    init({
+        el: '#waline',
+        serverURL: 'https://waline-g9cd3pdxr-mark-watneys-projects-c5945306.vercel.app/',
+    });
+</script> <style>
+.waline-comments-container {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.waline-comments-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.waline-comments-header h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-header p {
+    margin: 0;
+    color: var(--md-default-fg-color--light);
+    font-size: 0.9rem;
+}
+
+/* 加载状态 */
+.waline-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--md-default-fg-color--lightest);
+    border-top: 3px solid var(--md-primary-fg-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 错误状态 */
+.waline-error {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.error-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.retry-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+}
+
+.details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+.error-details {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--md-default-fg-color--light);
+}
+
+/* 适配网站主题色彩 */
+.waline-comments-container .wl-panel {
+    border-radius: 8px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    background-color: var(--md-default-bg-color);
+}
+
+.waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 6px;
+}
+
+.waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-container .wl-input:focus {
+    border-color: var(--md-primary-fg-color);
+}
+
+.waline-comments-container .wl-btn {
+    background-color: var(--md-primary-fg-color);
+    border-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+.waline-comments-container .wl-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+    border-color: var(--md-primary-fg-color--dark);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .waline-comments-container {
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+    }
+    
+    .waline-comments-header h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* 暗色主题适配 */
+[data-md-color-scheme="slate"] .waline-comments-container {
+    border-top-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-panel {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+[data-md-color-scheme="slate"] .loading-spinner {
+    border-color: var(--md-default-fg-color--lightest);
+    border-top-color: var(--md-primary-fg-color);
+}
+
+[data-md-color-scheme="slate"] .retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+[data-md-color-scheme="slate"] .details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .error-details {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color--light);
+}
+</style> <!-- 阅读进度条 - 直接在HTML中定义 --> <div class=reading-progress></div> <!-- 滚动指示器 - 直接在HTML中定义 --> <div class=scroll-indicator></div> <!-- 评论系统 - 只在文章页面显示，不在首页和索引页显示 --> <!-- Waline 评论系统 --> <div class=waline-comments-container> <div class=waline-comments-header> <h3>评论区</h3> <p>欢迎在这里留下你的想法和建议！</p> </div> <div id=waline></div> </div> <!-- Waline CSS --> <link rel=stylesheet href=https://unpkg.com/@waline/client@v3/dist/waline.css> <!-- Waline JavaScript --> <script type=module>
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+    init({
+        el: '#waline',
+        serverURL: 'https://waline-g9cd3pdxr-mark-watneys-projects-c5945306.vercel.app/',
+    });
+</script> <style>
+.waline-comments-container {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.waline-comments-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.waline-comments-header h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-header p {
+    margin: 0;
+    color: var(--md-default-fg-color--light);
+    font-size: 0.9rem;
+}
+
+/* 加载状态 */
+.waline-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--md-default-fg-color--lightest);
+    border-top: 3px solid var(--md-primary-fg-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 错误状态 */
+.waline-error {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.error-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.retry-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+}
+
+.details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+.error-details {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--md-default-fg-color--light);
+}
+
+/* 适配网站主题色彩 */
+.waline-comments-container .wl-panel {
+    border-radius: 8px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    background-color: var(--md-default-bg-color);
+}
+
+.waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 6px;
+}
+
+.waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-container .wl-input:focus {
+    border-color: var(--md-primary-fg-color);
+}
+
+.waline-comments-container .wl-btn {
+    background-color: var(--md-primary-fg-color);
+    border-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+.waline-comments-container .wl-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+    border-color: var(--md-primary-fg-color--dark);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .waline-comments-container {
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+    }
+    
+    .waline-comments-header h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* 暗色主题适配 */
+[data-md-color-scheme="slate"] .waline-comments-container {
+    border-top-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-panel {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+[data-md-color-scheme="slate"] .loading-spinner {
+    border-color: var(--md-default-fg-color--lightest);
+    border-top-color: var(--md-primary-fg-color);
+}
+
+[data-md-color-scheme="slate"] .retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+[data-md-color-scheme="slate"] .details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .error-details {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color--light);
+}
+</style> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> </main> <!--
   Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy

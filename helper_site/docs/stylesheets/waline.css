@@ -98,21 +98,12 @@
     background: #f5f5f5 !important;
 }
 
-[data-waline] img {
-    max-height: 100px;
-}
-
 .wl-content code[class*=language-], .wl-content pre[class*=language-] {
     color: var(--text-white);
 }
 
 /* 响应式设计 */
 @media screen and (max-width: 768px) {
-    #waline {
-        margin: 1rem;
-        padding: 1rem;
-    }
-
     .wl-editor {
         font-size: 13px !important;
         padding: 10px !important;

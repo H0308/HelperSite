@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 ],
                 lang: 'zh-CN',
                 comment: true,
+                search: false,
                 // 添加错误处理
                 onError: function (error) {
                     console.error('Waline initialization error:', error);

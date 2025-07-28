@@ -10,6 +10,9 @@ hide:
 body {
     background-color: var(--bg-primary);
 }
+#waline{
+    display: none;
+}
 #container {
     width: 100%;
     margin: 50px auto;

@@ -1,20 +1,2 @@
 <!-- Waline 评论系统 -->
 <div id="waline"></div>
-
-<!-- Waline CSS -->
-<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-
-<!-- Waline JavaScript -->
-<script type="module">
-    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-    init({
-        el: '#waline',
-        serverURL: 'https://waline-ten-swart.vercel.app/',
-        emoji: [
-            '//unpkg.com/@waline/emojis@1.2.0/bilibili',
-            '//unpkg.com/@waline/emojis@1.2.0/bmoji',
-        ],
-        lang: 'zh-CN',
-        comment: true,
-    });
-</script>

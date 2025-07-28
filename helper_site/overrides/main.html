@@ -212,37 +212,30 @@
 <!-- 滚动指示器 - 直接在HTML中定义 -->
 <div class="scroll-indicator"></div>
 
-<!-- 评论系统 - 只在文章页面显示，不在首页和索引页显示 -->
-{% if page and page.content and not page.is_homepage and not page.is_index %}
-    {% include "partials/comments.html" %}
-{% endif %}
+<!-- 评论系统 -->
+{% include "partials/comments.html" %}
 
 {% endblock %}
 
 {% block extrahead %} {{ super() }}
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/colors.min.css" />
-<!-- 移动端和平板端始终只加载theme2 -->
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.min.css" media="screen and (max-width: 1199px)" />
-<!-- 桌面端主题切换：新版主题同时加载theme1和theme2，旧版主题只加载theme2 -->
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.min.css" media="screen and (min-width: 1200px)"
     id="theme2-desktop" />
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme1.min.css" media="screen and (min-width: 1200px)"
     id="theme1-desktop" />
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/print.min.css" />
-
-<!-- 字体样式表 -->
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/font-dongguanti.min.css" id="font-dongguanti" />
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/font-oppoti.min.css" id="font-oppoti" disabled />
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/font-jiangchengti.min.css" id="font-jiangchengti" disabled />
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/font-lxgw.min.css" id="font-lxgw" disabled />
-
-<!-- 代码字体样式表 -->
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/code-font-dejavu-sans-mono.min.css"
     id="code-font-dejavu-sans-mono" />
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/code-font-zsft-hk.min.css" id="code-font-zsft-hk" disabled />
-
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="{{ base_url }}/stylesheets/waline.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.5.0/dist/mermaid.min.js"></script>
-
 <script src="{{ base_url }}/javascripts/start.min.js"></script>
+<script type="module" src="{{ base_url }}/javascripts/waline.min.js"></script>
 
 {% endblock %}

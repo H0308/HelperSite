@@ -404,6 +404,7 @@ plugins:
           - javascripts/other.js
           - javascripts/copyright.js
           - javascripts/start.js
+          - javascripts/waline.js
       css_files:
         - stylesheets/code-font-dejavu-sans-mono.css
         - stylesheets/code-font-zsft-hk.css
@@ -415,6 +416,7 @@ plugins:
         - stylesheets/theme1.css
         - stylesheets/theme2.css
         - stylesheets/print.css
+        - stylesheets/waline.css
   - glightbox:
       touchNavigation: true
       loop: false

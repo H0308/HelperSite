@@ -784,10 +784,6 @@ body {
     font-family: var(--md-text-font);
 }
 
-pre code {
-    color: var(--md-code-fg-color) !important;
-}
-
 .highlight pre {
     background-color: var(--md-code-bg-color) !important;
 }

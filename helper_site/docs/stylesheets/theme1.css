@@ -268,7 +268,6 @@ blockquote {
 }
 body {
     position: relative;
-    /* background-color: var(--bg-primary); */
     background-color: var(--bg-white);
 }
 .md-grid {

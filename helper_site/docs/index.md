@@ -7,6 +7,9 @@ hide:
 ---
 
 <style>
+body {
+    background-color: var(--bg-primary);
+}
 #container {
     width: 100%;
     margin: 50px auto;

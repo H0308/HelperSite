@@ -212,6 +212,11 @@
 <!-- 滚动指示器 - 直接在HTML中定义 -->
 <div class="scroll-indicator"></div>
 
+<!-- 评论系统 - 只在文章页面显示，不在首页和索引页显示 -->
+{% if page and page.content and not page.is_homepage and not page.is_index %}
+    {% include "partials/comments.html" %}
+{% endif %}
+
 {% endblock %}
 
 {% block extrahead %} {{ super() }}

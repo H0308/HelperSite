@@ -26,7 +26,407 @@
 </span><span id=__span-0-8>    <span class=p>&lt;</span><span class=nt>a</span> <span class=na>href</span><span class=o>=</span><span class=s>&quot;#&quot;</span><span class=p>&gt;</span>Link Text<span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;</span>
 </span><span id=__span-0-9><span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
 </span><span id=__span-0-10><span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
-</span></code></pre></div></td></tr></table></div> <p>对应的DOM结构如下图所示：</p> <p><a class=glightbox href="7. DOM和BOM介绍.assets\20220808135838431.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="7. DOM和BOM介绍.assets\20220808135838431.png"></a></p> <h2 id=dom_1>DOM中的概念<a class=headerlink href=#dom_1 title="Permanent link">&para;</a></h2> <h3 id=_1>节点<a class=headerlink href=#_1 title="Permanent link">&para;</a></h3> <p>在DOM标准下，网页中的每一个部分都会转换为对象。这些对象有一个共同的称呼——节点（Node）。一个页面将会由多个节点构成，虽然都称为节点，但是它们却有着不同的类型：</p> <ol> <li>文档节点</li> <li>元素节点</li> <li>文本节点</li> <li>属性节点 ...</li> </ol> <p>每一个节点都有其不同的作用，文档节点表示整个网页，元素节点表示某个标签，文本节点表示网页中的文本内容，属性节点表示标签中的各种属性。如果从对象的结构上来讲，这些对象都有一个共同的父类<code>Node</code>。总的来说，都是属于节点，但是具体类型不同</p> <h3 id=_2>关系<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <p>DOM中，对于HTML中的元素有以下的几种关系：</p> <ol> <li>祖先：包含后代元素的元素是祖先元素</li> <li>后代：被祖先元素包含的元素是后代元素</li> <li>父：直接包含子元素的元素是父元素</li> <li>子：直接被父元素包含的元素是子元素</li> <li>兄弟：拥有相同父元素的元素是兄弟元素</li> </ol> <h2 id=bom>BOM<a class=headerlink href=#bom title="Permanent link">&para;</a></h2> <p>BOM是Browser Object Model的缩写，简称浏览器对象模型。BOM提供了独立于内容而与浏览器窗口进行交互的对象，由于BOM主要用于管理窗口与窗口之间的通讯，因此其核心对象是<code>window</code></p> <p>BOM由一系列相关的对象构成，并且每个对象都提供了很多方法与属性。但是BOM缺乏标准，而JavaScript语法的标准化组织是ECMA，DOM的标准化组织是W3C（WHATWG,WebHypertextApplicationTechnologyWorkingGroup——网页超文本应用程序技术工作组目前正在努力促进BOM的标准化）。BOM最初是Netscape浏览器标准的一部分</p> <p>BOM提供了一些访问窗口对象的一些方法，我们可以用它来移动窗口位置，改变窗口大小，打开新窗口和关闭窗口，弹出对话框，进行导航以及获取客户的一些信息如：浏览器品牌版本，屏幕分辨率。但BOM最强大的功能是它提供了一个访问HTML页面的一入口——<code>document</code>对象，以使得可以通过这个入口来使用DOM的强大功能</p> <p><code>window</code>对象是BOM的顶层(核心)对象，所有对象都是通过它延伸出来的，也可以称为<code>window</code>的子对象。由于<code>window</code>是顶层对象，因此调用它的子对象时可以不显示的指明<code>window</code>对象，关于<code>window</code>对象的具体内容见<a href=https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/3.%20JavaScript%E5%87%BD%E6%95%B0/3.%20JavaScript%E5%87%BD%E6%95%B0.html#window>JavaScript语法基础部分</a></p> <p>现在简单认识一下<code>window</code>有哪些子对象：</p> <ol> <li><code>document</code>对象</li> <li><code>frames</code>对象</li> <li><code>history</code>对象</li> <li><code>location</code>对象</li> <li><code>navigator</code>对象</li> <li><code>screen</code>对象</li> </ol> <p>在BOM中，常用的<code>window</code>子对象有<code>navigator</code>、<code>location</code>和<code>history</code>对象，后续会针对这三个对象进行讨论</p> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年12月2日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年11月13日</span> </span> </aside> <form class=md-feedback name=feedback hidden> <fieldset> <legend class=md-feedback__title> 页面有帮助吗？ </legend> <div class=md-feedback__inner> <div class=md-feedback__list> <button class="md-feedback__icon md-icon" type=submit title=页面对我有帮助 data-md-value=1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M5 9v12H1V9zm4 12a2 2 0 0 1-2-2V9c0-.55.22-1.05.59-1.41L14.17 1l1.06 1.06c.27.27.44.64.44 1.05l-.03.32L14.69 8H21a2 2 0 0 1 2 2v2c0 .26-.05.5-.14.73l-3.02 7.05C19.54 20.5 18.83 21 18 21zm0-2h9.03L21 12v-2h-8.79l1.13-5.32L9 9.03z"/></svg> </button> <button class="md-feedback__icon md-icon" type=submit title=页面没有帮助到我 data-md-value=0> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 15V3h4v12zM15 3a2 2 0 0 1 2 2v10c0 .55-.22 1.05-.59 1.41L9.83 23l-1.06-1.06c-.27-.27-.44-.64-.44-1.06l.03-.31.95-4.57H3a2 2 0 0 1-2-2v-2c0-.26.05-.5.14-.73l3.02-7.05C4.46 3.5 5.17 3 6 3zm0 2H5.97L3 12v2h8.78l-1.13 5.32L15 14.97z"/></svg> </button> </div> <div class=md-feedback__note> <div data-md-value=1 hidden> 谢谢你的反馈！ </div> <div data-md-value=0 hidden> 谢谢你的反馈！联系<a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html>作者</a>提供更详细的信息 </div> </div> </div> </fieldset> </form> <!-- 阅读进度条 - 直接在HTML中定义 --> <div class=reading-progress></div> <!-- 滚动指示器 - 直接在HTML中定义 --> <div class=scroll-indicator></div> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> </main> <!--
+</span></code></pre></div></td></tr></table></div> <p>对应的DOM结构如下图所示：</p> <p><a class=glightbox href="7. DOM和BOM介绍.assets\20220808135838431.png" data-type=image data-width=100% data-height=auto data-desc-position=bottom><img src="7. DOM和BOM介绍.assets\20220808135838431.png"></a></p> <h2 id=dom_1>DOM中的概念<a class=headerlink href=#dom_1 title="Permanent link">&para;</a></h2> <h3 id=_1>节点<a class=headerlink href=#_1 title="Permanent link">&para;</a></h3> <p>在DOM标准下，网页中的每一个部分都会转换为对象。这些对象有一个共同的称呼——节点（Node）。一个页面将会由多个节点构成，虽然都称为节点，但是它们却有着不同的类型：</p> <ol> <li>文档节点</li> <li>元素节点</li> <li>文本节点</li> <li>属性节点 ...</li> </ol> <p>每一个节点都有其不同的作用，文档节点表示整个网页，元素节点表示某个标签，文本节点表示网页中的文本内容，属性节点表示标签中的各种属性。如果从对象的结构上来讲，这些对象都有一个共同的父类<code>Node</code>。总的来说，都是属于节点，但是具体类型不同</p> <h3 id=_2>关系<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <p>DOM中，对于HTML中的元素有以下的几种关系：</p> <ol> <li>祖先：包含后代元素的元素是祖先元素</li> <li>后代：被祖先元素包含的元素是后代元素</li> <li>父：直接包含子元素的元素是父元素</li> <li>子：直接被父元素包含的元素是子元素</li> <li>兄弟：拥有相同父元素的元素是兄弟元素</li> </ol> <h2 id=bom>BOM<a class=headerlink href=#bom title="Permanent link">&para;</a></h2> <p>BOM是Browser Object Model的缩写，简称浏览器对象模型。BOM提供了独立于内容而与浏览器窗口进行交互的对象，由于BOM主要用于管理窗口与窗口之间的通讯，因此其核心对象是<code>window</code></p> <p>BOM由一系列相关的对象构成，并且每个对象都提供了很多方法与属性。但是BOM缺乏标准，而JavaScript语法的标准化组织是ECMA，DOM的标准化组织是W3C（WHATWG,WebHypertextApplicationTechnologyWorkingGroup——网页超文本应用程序技术工作组目前正在努力促进BOM的标准化）。BOM最初是Netscape浏览器标准的一部分</p> <p>BOM提供了一些访问窗口对象的一些方法，我们可以用它来移动窗口位置，改变窗口大小，打开新窗口和关闭窗口，弹出对话框，进行导航以及获取客户的一些信息如：浏览器品牌版本，屏幕分辨率。但BOM最强大的功能是它提供了一个访问HTML页面的一入口——<code>document</code>对象，以使得可以通过这个入口来使用DOM的强大功能</p> <p><code>window</code>对象是BOM的顶层(核心)对象，所有对象都是通过它延伸出来的，也可以称为<code>window</code>的子对象。由于<code>window</code>是顶层对象，因此调用它的子对象时可以不显示的指明<code>window</code>对象，关于<code>window</code>对象的具体内容见<a href=https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/3.%20JavaScript%E5%87%BD%E6%95%B0/3.%20JavaScript%E5%87%BD%E6%95%B0.html#window>JavaScript语法基础部分</a></p> <p>现在简单认识一下<code>window</code>有哪些子对象：</p> <ol> <li><code>document</code>对象</li> <li><code>frames</code>对象</li> <li><code>history</code>对象</li> <li><code>location</code>对象</li> <li><code>navigator</code>对象</li> <li><code>screen</code>对象</li> </ol> <p>在BOM中，常用的<code>window</code>子对象有<code>navigator</code>、<code>location</code>和<code>history</code>对象，后续会针对这三个对象进行讨论</p> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年12月2日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年11月13日</span> </span> </aside> <form class=md-feedback name=feedback hidden> <fieldset> <legend class=md-feedback__title> 页面有帮助吗？ </legend> <div class=md-feedback__inner> <div class=md-feedback__list> <button class="md-feedback__icon md-icon" type=submit title=页面对我有帮助 data-md-value=1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M5 9v12H1V9zm4 12a2 2 0 0 1-2-2V9c0-.55.22-1.05.59-1.41L14.17 1l1.06 1.06c.27.27.44.64.44 1.05l-.03.32L14.69 8H21a2 2 0 0 1 2 2v2c0 .26-.05.5-.14.73l-3.02 7.05C19.54 20.5 18.83 21 18 21zm0-2h9.03L21 12v-2h-8.79l1.13-5.32L9 9.03z"/></svg> </button> <button class="md-feedback__icon md-icon" type=submit title=页面没有帮助到我 data-md-value=0> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 15V3h4v12zM15 3a2 2 0 0 1 2 2v10c0 .55-.22 1.05-.59 1.41L9.83 23l-1.06-1.06c-.27-.27-.44-.64-.44-1.06l.03-.31.95-4.57H3a2 2 0 0 1-2-2v-2c0-.26.05-.5.14-.73l3.02-7.05C4.46 3.5 5.17 3 6 3zm0 2H5.97L3 12v2h8.78l-1.13 5.32L15 14.97z"/></svg> </button> </div> <div class=md-feedback__note> <div data-md-value=1 hidden> 谢谢你的反馈！ </div> <div data-md-value=0 hidden> 谢谢你的反馈！联系<a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html>作者</a>提供更详细的信息 </div> </div> </div> </fieldset> </form> <!-- Waline 评论系统 --> <div class=waline-comments-container> <div class=waline-comments-header> <h3>评论区</h3> <p>欢迎在这里留下你的想法和建议！</p> </div> <div id=waline></div> </div> <!-- Waline CSS --> <link rel=stylesheet href=https://unpkg.com/@waline/client@v3/dist/waline.css> <!-- Waline JavaScript --> <script type=module>
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+    init({
+        el: '#waline',
+        serverURL: 'https://waline-g9cd3pdxr-mark-watneys-projects-c5945306.vercel.app/',
+    });
+</script> <style>
+.waline-comments-container {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.waline-comments-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.waline-comments-header h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-header p {
+    margin: 0;
+    color: var(--md-default-fg-color--light);
+    font-size: 0.9rem;
+}
+
+/* 加载状态 */
+.waline-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--md-default-fg-color--lightest);
+    border-top: 3px solid var(--md-primary-fg-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 错误状态 */
+.waline-error {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.error-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.retry-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+}
+
+.details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+.error-details {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--md-default-fg-color--light);
+}
+
+/* 适配网站主题色彩 */
+.waline-comments-container .wl-panel {
+    border-radius: 8px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    background-color: var(--md-default-bg-color);
+}
+
+.waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 6px;
+}
+
+.waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-container .wl-input:focus {
+    border-color: var(--md-primary-fg-color);
+}
+
+.waline-comments-container .wl-btn {
+    background-color: var(--md-primary-fg-color);
+    border-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+.waline-comments-container .wl-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+    border-color: var(--md-primary-fg-color--dark);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .waline-comments-container {
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+    }
+    
+    .waline-comments-header h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* 暗色主题适配 */
+[data-md-color-scheme="slate"] .waline-comments-container {
+    border-top-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-panel {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+[data-md-color-scheme="slate"] .loading-spinner {
+    border-color: var(--md-default-fg-color--lightest);
+    border-top-color: var(--md-primary-fg-color);
+}
+
+[data-md-color-scheme="slate"] .retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+[data-md-color-scheme="slate"] .details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .error-details {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color--light);
+}
+</style> <!-- 阅读进度条 - 直接在HTML中定义 --> <div class=reading-progress></div> <!-- 滚动指示器 - 直接在HTML中定义 --> <div class=scroll-indicator></div> <!-- 评论系统 - 只在文章页面显示，不在首页和索引页显示 --> <!-- Waline 评论系统 --> <div class=waline-comments-container> <div class=waline-comments-header> <h3>评论区</h3> <p>欢迎在这里留下你的想法和建议！</p> </div> <div id=waline></div> </div> <!-- Waline CSS --> <link rel=stylesheet href=https://unpkg.com/@waline/client@v3/dist/waline.css> <!-- Waline JavaScript --> <script type=module>
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+    init({
+        el: '#waline',
+        serverURL: 'https://waline-g9cd3pdxr-mark-watneys-projects-c5945306.vercel.app/',
+    });
+</script> <style>
+.waline-comments-container {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.waline-comments-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.waline-comments-header h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-header p {
+    margin: 0;
+    color: var(--md-default-fg-color--light);
+    font-size: 0.9rem;
+}
+
+/* 加载状态 */
+.waline-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--md-default-fg-color--lightest);
+    border-top: 3px solid var(--md-primary-fg-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 错误状态 */
+.waline-error {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.error-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.retry-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+}
+
+.details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+.error-details {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--md-default-fg-color--light);
+}
+
+/* 适配网站主题色彩 */
+.waline-comments-container .wl-panel {
+    border-radius: 8px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    background-color: var(--md-default-bg-color);
+}
+
+.waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 6px;
+}
+
+.waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-container .wl-input:focus {
+    border-color: var(--md-primary-fg-color);
+}
+
+.waline-comments-container .wl-btn {
+    background-color: var(--md-primary-fg-color);
+    border-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+.waline-comments-container .wl-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+    border-color: var(--md-primary-fg-color--dark);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .waline-comments-container {
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+    }
+    
+    .waline-comments-header h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* 暗色主题适配 */
+[data-md-color-scheme="slate"] .waline-comments-container {
+    border-top-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-panel {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+[data-md-color-scheme="slate"] .loading-spinner {
+    border-color: var(--md-default-fg-color--lightest);
+    border-top-color: var(--md-primary-fg-color);
+}
+
+[data-md-color-scheme="slate"] .retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+[data-md-color-scheme="slate"] .details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .error-details {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color--light);
+}
+</style> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> </main> <!--
   Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy

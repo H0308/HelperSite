@@ -401,7 +401,407 @@
 </span></code></pre></div></td></tr></table></div> <p>该接口接收一个参数表示退出信息</p> <p>除了上面的两种线程退出的方法外，还可以使用下面的接口取消一个线程：</p> <div class="language-c highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><span class=kt>int</span><span class=w> </span><span class=nf>pthread_cancel</span><span class=p>(</span><span class=n>pthread_t</span><span class=w> </span><span class=kr>thread</span><span class=p>);</span>
 </span></code></pre></div></td></tr></table></div> <p>该接口接收一个参数，表示需要取消的线程<code>id</code></p> <p>一般情况下，这个接口是主线程调用，取消其他的新线程，并且必须取消线程之前必须确保指定的线程存在</p> <p>注意，取消的线程依旧需要回收，并且对应线程的退出码为-1，这个值是一个宏，定义如下：</p> <div class="language-c highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><span class=cp>#define PTHREAD_CANCELED ((void*)-1)</span>
 </span></code></pre></div></td></tr></table></div> <h3 id=_18>线程分离<a class=headerlink href=#_18 title="Permanent link">&para;</a></h3> <p>前面回收线程时是阻塞式等待，但是注意回收线程没有非阻塞式等待，所以也就没有对应的非阻塞式等待的接口。在Linux中，线程被等待的状态分为以下两种：</p> <ol> <li>joinable：表示线程需要被阻塞式等待</li> <li>detached：表示线程已经被分离，主线程不再需要等待</li> </ol> <p>需要注意的是，在多执行流的情况下，一定要确保主执行流最后退出，防止分离的线程比主执行流先退出导致分离的线程需要的资源被释放导致错误</p> <p>线程分离操作可以分为两种：</p> <ol> <li>自主分离</li> <li>被动分离</li> </ol> <p>需要分离线程时可以使用下面的接口：</p> <div class="language-c highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>C</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><span class=kt>int</span><span class=w> </span><span class=nf>pthread_detach</span><span class=p>(</span><span class=n>pthread_t</span><span class=w> </span><span class=kr>thread</span><span class=p>);</span>
-</span></code></pre></div></td></tr></table></div> <p>该接口传递一个参数，表示需要分离的线程的<code>id</code>，如果是自主分离，则通过<code>pthread_self</code>接口获取到当前线程的<code>id</code>实现，否则通过直接通过具体的值被其他线程被动分离</p> <p>由于分离后的新线程不需要主线程等待，所以如果一个线程依旧等待分离的线程，那么<code>pthread_join</code>就不再返回0而是返回22</p> <h3 id=_19>线程程序替换<a class=headerlink href=#_19 title="Permanent link">&para;</a></h3> <p>注意，<a href="https://www.help-doc.top/Linux/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6.html?h=exec#_7">进程程序替换</a>是不可以直接发生在线程执行流中的，因为程序替换的本质是替换掉当前进程的代码，此时线程的代码也会被替换从而导致错误，但是可以在线程中创建子进程，再在子进程中使用进程程序替换</p> <h2 id=c>C++中的线程操作<a class=headerlink href=#c title="Permanent link">&para;</a></h2> <p>除了C语言对系统的相关线程操作进行了封装外，其他编程语言也会做同样的事情，这样可以确保语言具有可移植性，同样，C++中也有对应的线程库<code>&lt;thread&gt;</code>，具体接口见<a href=https://www.help-doc.top/C%2B%2B/35.%20C%2B%2B%E5%B9%B6%E5%8F%91%E6%94%AF%E6%8C%81%E5%BA%93/35.%20C%2B%2B%E5%B9%B6%E5%8F%91%E6%94%AF%E6%8C%81%E5%BA%93.html#c>C++并发支持库</a>部分，但是需要注意的是，如果是在Linux下使用C++线程库编写代码，编译该代码时依旧需要携带<code>-lpthread</code>，因为C++线程库本质也是封装了<code>libpthread.so</code></p> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年4月17日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年1月31日</span> </span> </aside> <form class=md-feedback name=feedback hidden> <fieldset> <legend class=md-feedback__title> 页面有帮助吗？ </legend> <div class=md-feedback__inner> <div class=md-feedback__list> <button class="md-feedback__icon md-icon" type=submit title=页面对我有帮助 data-md-value=1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M5 9v12H1V9zm4 12a2 2 0 0 1-2-2V9c0-.55.22-1.05.59-1.41L14.17 1l1.06 1.06c.27.27.44.64.44 1.05l-.03.32L14.69 8H21a2 2 0 0 1 2 2v2c0 .26-.05.5-.14.73l-3.02 7.05C19.54 20.5 18.83 21 18 21zm0-2h9.03L21 12v-2h-8.79l1.13-5.32L9 9.03z"/></svg> </button> <button class="md-feedback__icon md-icon" type=submit title=页面没有帮助到我 data-md-value=0> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 15V3h4v12zM15 3a2 2 0 0 1 2 2v10c0 .55-.22 1.05-.59 1.41L9.83 23l-1.06-1.06c-.27-.27-.44-.64-.44-1.06l.03-.31.95-4.57H3a2 2 0 0 1-2-2v-2c0-.26.05-.5.14-.73l3.02-7.05C4.46 3.5 5.17 3 6 3zm0 2H5.97L3 12v2h8.78l-1.13 5.32L15 14.97z"/></svg> </button> </div> <div class=md-feedback__note> <div data-md-value=1 hidden> 谢谢你的反馈！ </div> <div data-md-value=0 hidden> 谢谢你的反馈！联系<a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html>作者</a>提供更详细的信息 </div> </div> </div> </fieldset> </form> <!-- 阅读进度条 - 直接在HTML中定义 --> <div class=reading-progress></div> <!-- 滚动指示器 - 直接在HTML中定义 --> <div class=scroll-indicator></div> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> </main> <!--
+</span></code></pre></div></td></tr></table></div> <p>该接口传递一个参数，表示需要分离的线程的<code>id</code>，如果是自主分离，则通过<code>pthread_self</code>接口获取到当前线程的<code>id</code>实现，否则通过直接通过具体的值被其他线程被动分离</p> <p>由于分离后的新线程不需要主线程等待，所以如果一个线程依旧等待分离的线程，那么<code>pthread_join</code>就不再返回0而是返回22</p> <h3 id=_19>线程程序替换<a class=headerlink href=#_19 title="Permanent link">&para;</a></h3> <p>注意，<a href="https://www.help-doc.top/Linux/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6.html?h=exec#_7">进程程序替换</a>是不可以直接发生在线程执行流中的，因为程序替换的本质是替换掉当前进程的代码，此时线程的代码也会被替换从而导致错误，但是可以在线程中创建子进程，再在子进程中使用进程程序替换</p> <h2 id=c>C++中的线程操作<a class=headerlink href=#c title="Permanent link">&para;</a></h2> <p>除了C语言对系统的相关线程操作进行了封装外，其他编程语言也会做同样的事情，这样可以确保语言具有可移植性，同样，C++中也有对应的线程库<code>&lt;thread&gt;</code>，具体接口见<a href=https://www.help-doc.top/C%2B%2B/35.%20C%2B%2B%E5%B9%B6%E5%8F%91%E6%94%AF%E6%8C%81%E5%BA%93/35.%20C%2B%2B%E5%B9%B6%E5%8F%91%E6%94%AF%E6%8C%81%E5%BA%93.html#c>C++并发支持库</a>部分，但是需要注意的是，如果是在Linux下使用C++线程库编写代码，编译该代码时依旧需要携带<code>-lpthread</code>，因为C++线程库本质也是封装了<code>libpthread.so</code></p> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年4月17日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=创建日期> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年1月31日</span> </span> </aside> <form class=md-feedback name=feedback hidden> <fieldset> <legend class=md-feedback__title> 页面有帮助吗？ </legend> <div class=md-feedback__inner> <div class=md-feedback__list> <button class="md-feedback__icon md-icon" type=submit title=页面对我有帮助 data-md-value=1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M5 9v12H1V9zm4 12a2 2 0 0 1-2-2V9c0-.55.22-1.05.59-1.41L14.17 1l1.06 1.06c.27.27.44.64.44 1.05l-.03.32L14.69 8H21a2 2 0 0 1 2 2v2c0 .26-.05.5-.14.73l-3.02 7.05C19.54 20.5 18.83 21 18 21zm0-2h9.03L21 12v-2h-8.79l1.13-5.32L9 9.03z"/></svg> </button> <button class="md-feedback__icon md-icon" type=submit title=页面没有帮助到我 data-md-value=0> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 15V3h4v12zM15 3a2 2 0 0 1 2 2v10c0 .55-.22 1.05-.59 1.41L9.83 23l-1.06-1.06c-.27-.27-.44-.64-.44-1.06l.03-.31.95-4.57H3a2 2 0 0 1-2-2v-2c0-.26.05-.5.14-.73l3.02-7.05C4.46 3.5 5.17 3 6 3zm0 2H5.97L3 12v2h8.78l-1.13 5.32L15 14.97z"/></svg> </button> </div> <div class=md-feedback__note> <div data-md-value=1 hidden> 谢谢你的反馈！ </div> <div data-md-value=0 hidden> 谢谢你的反馈！联系<a href=https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html>作者</a>提供更详细的信息 </div> </div> </div> </fieldset> </form> <!-- Waline 评论系统 --> <div class=waline-comments-container> <div class=waline-comments-header> <h3>评论区</h3> <p>欢迎在这里留下你的想法和建议！</p> </div> <div id=waline></div> </div> <!-- Waline CSS --> <link rel=stylesheet href=https://unpkg.com/@waline/client@v3/dist/waline.css> <!-- Waline JavaScript --> <script type=module>
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+    init({
+        el: '#waline',
+        serverURL: 'https://waline-g9cd3pdxr-mark-watneys-projects-c5945306.vercel.app/',
+    });
+</script> <style>
+.waline-comments-container {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.waline-comments-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.waline-comments-header h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-header p {
+    margin: 0;
+    color: var(--md-default-fg-color--light);
+    font-size: 0.9rem;
+}
+
+/* 加载状态 */
+.waline-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--md-default-fg-color--lightest);
+    border-top: 3px solid var(--md-primary-fg-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 错误状态 */
+.waline-error {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.error-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.retry-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+}
+
+.details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+.error-details {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--md-default-fg-color--light);
+}
+
+/* 适配网站主题色彩 */
+.waline-comments-container .wl-panel {
+    border-radius: 8px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    background-color: var(--md-default-bg-color);
+}
+
+.waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 6px;
+}
+
+.waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-container .wl-input:focus {
+    border-color: var(--md-primary-fg-color);
+}
+
+.waline-comments-container .wl-btn {
+    background-color: var(--md-primary-fg-color);
+    border-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+.waline-comments-container .wl-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+    border-color: var(--md-primary-fg-color--dark);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .waline-comments-container {
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+    }
+    
+    .waline-comments-header h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* 暗色主题适配 */
+[data-md-color-scheme="slate"] .waline-comments-container {
+    border-top-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-panel {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+[data-md-color-scheme="slate"] .loading-spinner {
+    border-color: var(--md-default-fg-color--lightest);
+    border-top-color: var(--md-primary-fg-color);
+}
+
+[data-md-color-scheme="slate"] .retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+[data-md-color-scheme="slate"] .details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .error-details {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color--light);
+}
+</style> <!-- 阅读进度条 - 直接在HTML中定义 --> <div class=reading-progress></div> <!-- 滚动指示器 - 直接在HTML中定义 --> <div class=scroll-indicator></div> <!-- 评论系统 - 只在文章页面显示，不在首页和索引页显示 --> <!-- Waline 评论系统 --> <div class=waline-comments-container> <div class=waline-comments-header> <h3>评论区</h3> <p>欢迎在这里留下你的想法和建议！</p> </div> <div id=waline></div> </div> <!-- Waline CSS --> <link rel=stylesheet href=https://unpkg.com/@waline/client@v3/dist/waline.css> <!-- Waline JavaScript --> <script type=module>
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+    init({
+        el: '#waline',
+        serverURL: 'https://waline-g9cd3pdxr-mark-watneys-projects-c5945306.vercel.app/',
+    });
+</script> <style>
+.waline-comments-container {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.waline-comments-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.waline-comments-header h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-header p {
+    margin: 0;
+    color: var(--md-default-fg-color--light);
+    font-size: 0.9rem;
+}
+
+/* 加载状态 */
+.waline-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--md-default-fg-color--lightest);
+    border-top: 3px solid var(--md-primary-fg-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 错误状态 */
+.waline-error {
+    text-align: center;
+    padding: 2rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.error-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.retry-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+}
+
+.details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+.error-details {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--md-default-fg-color--light);
+}
+
+/* 适配网站主题色彩 */
+.waline-comments-container .wl-panel {
+    border-radius: 8px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    background-color: var(--md-default-bg-color);
+}
+
+.waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 6px;
+}
+
+.waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+.waline-comments-container .wl-input:focus {
+    border-color: var(--md-primary-fg-color);
+}
+
+.waline-comments-container .wl-btn {
+    background-color: var(--md-primary-fg-color);
+    border-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+.waline-comments-container .wl-btn:hover {
+    background-color: var(--md-primary-fg-color--dark);
+    border-color: var(--md-primary-fg-color--dark);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .waline-comments-container {
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+    }
+    
+    .waline-comments-header h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* 暗色主题适配 */
+[data-md-color-scheme="slate"] .waline-comments-container {
+    border-top-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-panel {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-editor {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .waline-comments-container .wl-input {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+[data-md-color-scheme="slate"] .loading-spinner {
+    border-color: var(--md-default-fg-color--lightest);
+    border-top-color: var(--md-primary-fg-color);
+}
+
+[data-md-color-scheme="slate"] .retry-btn {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+[data-md-color-scheme="slate"] .details-btn {
+    background-color: transparent;
+    color: var(--md-default-fg-color--light);
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .details-btn:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .error-details {
+    background-color: var(--md-default-bg-color);
+    border-color: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color--light);
+}
+</style> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> </main> <!--
   Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy

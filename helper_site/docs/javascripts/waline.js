@@ -1,8 +1,4 @@
-// 确保DOM完全加载后再初始化Waline
 document.addEventListener('DOMContentLoaded', async function () {
-    // 检查waline容器是否存在
-    const walineContainer = document.getElementById('waline');
-
     const { init } = await import('https://unpkg.com/@waline/client@v3/dist/waline.js');
 
     const locale = {
@@ -11,8 +7,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         latest: "最新评论",
         hottest: "点赞量最多",
     };
-
-    // 添加延迟确保页面完全渲染
     init({
         el: '#waline',
         serverURL: 'https://waline-ten-swart.vercel.app/',
@@ -28,10 +22,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         search: false,
         meta: [],
         requiredMeta: [],
-        locale,
-        // 添加错误处理
-        onError: function (error) {
-            console.error('Waline initialization error:', error);
-        }
+        locale
     });
 });

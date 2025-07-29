@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         search: false,
         meta: [],
         requiredMeta: [],
+        login: 'force',
+        pageSize: 3,
+        noCopyright: true,
         locale
     });
 });

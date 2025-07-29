@@ -28,21 +28,21 @@ nav:
   - 网站时间线: 网站时间线/网站时间线.md
   - 编程语言:
     - C语言:
-      - 章节目录: C语言/index.md
-      - C语言基础知识: C语言/1. C语言基础知识/1. C语言基础知识.md
-      - 进制转换与类型在内存的存储方式: C语言/2. 进制转换与类型在内存中存储方式/2. 进制转换与类型在内存中存储方式.md
-      - C语言数据类型与变量: C语言/3. C语言数据类型和变量/3. C语言数据类型和变量.md
-      - C语言操作符: C语言/4. C语言操作符/4. C语言操作符.md
-      - C语言的标准输入函数scanf及标准输出函数printf: C语言/5. C语言的标准输入函数scanf及标准输出函数printf/5. C语言的标准输入函数scanf及标准输出函数printf.md
-      - C语言中的分支语句: C语言/6. C语言中的分支语句/6. C语言中的分支语句.md
-      - C语言中的循环语句: C语言/7. C语言中的循环语句/7. C语言中的循环语句.md
-      - C语言函数: C语言/8. C语言函数/8. C语言函数.md
-      - C语言指针: C语言/9. C语言指针/9. C语言指针.md
-      - C语言字符函数、字符串函数与内存函数: C语言/10. C语言字符函数、字符串函数与内存函数/10. C语言字符函数、字符串函数与内存函数.md
-      - C语言动态内存管理: C语言/11. C语言动态内存管理/11. C语言动态内存管理.md
-      - C语言文件操作: C语言/12. C语言文件操作/12. C语言文件操作.md
-      - C语言编译与链接（基础）: C语言/13. C语言编译与链接（基础）/13. C语言编译与链接（基础）.md
-      - C语言预处理（部分）: C语言/14. C语言预处理（部分）/14. C语言预处理（部分）.md
+      - 章节目录: c-lang/index.md
+      - C语言基础知识: c-lang/c-base/c-base.md
+      - 进制转换与类型在内存的存储方式: c-lang/num-in-memory/num-in-memory.md
+      - C语言数据类型与变量: c-lang/var-type/var-type.md
+      - C语言操作符: c-lang/op/op.md
+      - C语言的标准输入函数scanf及标准输出函数printf: c-lang/scanf-printf/scanf-printf.md
+      - C语言中的分支语句: c-lang/branch-line/branch-line.md
+      - C语言中的循环语句: c-lang/cycle-line/cycle-line.md
+      - C语言函数: c-lang/func/func.md
+      - C语言指针: c-lang/ptr/ptr.md
+      - C语言字符函数、字符串函数与内存函数: c-lang/char-str-func/char-str-func.md
+      - C语言动态内存管理: c-lang/dynamic-memory/dynamic-memory.md
+      - C语言文件操作: c-lang/fileop/fileop.md
+      - C语言编译与链接（基础）: c-lang/compile-link/compile-link.md
+      - C语言预处理（部分）: c-lang/preprocess/preprocess.md
     - C++: 
       - 章节目录: C++/index.md
       - C语言过渡C++基础知识: C++/1. C语言过渡C++基础知识/1. C语言过渡C++基础知识.md

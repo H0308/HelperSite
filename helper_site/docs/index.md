@@ -500,8 +500,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2>浏览提示</h2>
                 <p>本网页提供两种主题：</p>
                 <ul>
-                    <li><strong>新版主题：</strong>包含部分动画和特效，对设备渲染性能要求较高，建议在PC桌面端使用</li>
-                    <li><strong>原生主题：</strong>默认的文档主题，去除大部分动画和特效，保留最基本的文档样式</li>
+                    <li><strong>新版主题：</strong>优化整体显示阅读性</li>
+                    <li><strong>原生主题：</strong>Material for MkDocs默认的文档主题</li>
                 </ul>
                 
                 网站支持主题切换功能，可以通过右侧边栏的主题选项进行切换。需要注意的是，<strong>移动端（手机和部分平板）默认使用原生主题，且不可更改</strong>

@@ -17,6 +17,9 @@
     border-color: var(--primary-blue, #1976d2) !important;
     box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1) !important;
 }
+.wl-header label {
+    font-size: 0.6em;
+}
 
 /* 评论按钮样式 */
 .wl-btn {
@@ -34,23 +37,43 @@
     background: var(--border-primary-medium) !important;
     transform: translateY(-1px) !important;
 }
-
-/* 评论列表样式 */
-.wl-cards {
-    margin-top: 1.5rem !important;
+.wl-comment {
+    margin-bottom: 0em;
 }
-
+.wl-meta-head {
+    padding-top: 0em;
+}
+/* 评论列表样式 */
 .wl-card {
     border: 1px solid #f0f0f0 !important;
     border-radius: 6px !important;
-    margin-bottom: 1rem !important;
-    padding: 1rem !important;
+    padding: 0.6rem !important;
     background: #fafafa !important;
     transition: all 0.3s ease !important;
 }
 
-.wl-card:hover {
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+.wl-card .wl-head .wl-nick {
+    font-size: 16px;
+}
+
+.wl-card .wl-badge {
+    font-size: 14px;
+}
+
+.wl-card .wl-content {
+    padding-top: 0em;
+}
+
+.wl-card .wl-time {
+    font-size: 12px;
+}
+
+.wl-cards .wl-user {
+    margin-inline-end: 0.35em;
+}
+
+.wl-card-item {
+    padding: 0.2em;
 }
 
 /* 评论内容文字样式 */
@@ -72,6 +95,7 @@
     width: 50px !important;
     height: 40px !important;
     border-radius: 50% !important;
+    margin: 9px auto;
 }
 
 .wl-cards .wl-user .wl-user-avatar {
@@ -81,7 +105,6 @@
 
 /* 评论工具栏样式 */
 .wl-panel {
-    border-top: 1px solid #f0f0f0 !important;
     padding-top: 12px !important;
     margin-top: 12px !important;
 }
@@ -100,6 +123,10 @@
 
 .wl-content code[class*=language-], .wl-content pre[class*=language-] {
     color: var(--text-white);
+}
+
+.wl-count {
+    font-size: 1em;
 }
 
 /* 响应式设计 */

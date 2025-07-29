@@ -2,36 +2,36 @@
 document.addEventListener('DOMContentLoaded', async function () {
     // 检查waline容器是否存在
     const walineContainer = document.getElementById('waline');
-    if (!walineContainer) {
-        console.warn('Waline container not found');
-        return;
-    }
 
-    try {
-        const { init } = await import('https://unpkg.com/@waline/client@v3/dist/waline.js');
+    const { init } = await import('https://unpkg.com/@waline/client@v3/dist/waline.js');
 
-        // 添加延迟确保页面完全渲染
-        setTimeout(() => {
-            init({
-                el: '#waline',
-                serverURL: 'https://bejewelled-medovik-c829bd.netlify.app/.netlify/functions/comment',
-                emoji: [
-                    '//unpkg.com/@waline/emojis@1.2.0/bilibili',
-                    '//unpkg.com/@waline/emojis@1.2.0/bmoji',
-                    '//unpkg.com/@waline/emojis@1.2.0/qq',
-                    'https://unpkg.com/@waline/emojis@1.2.0/tw-emoji',
-                    '//unpkg.com/@waline/emojis@1.2.0/weibo',
-                ],
-                lang: 'zh-CN',
-                comment: true,
-                search: false,
-                // 添加错误处理
-                onError: function (error) {
-                    console.error('Waline initialization error:', error);
-                }
-            });
-        }, 100);
-    } catch (error) {
-        console.error('Failed to load Waline:', error);
-    }
+    const locale = {
+        placeholder: "欢迎评论（登录后才可发布评论）",
+        oldest: "最早评论",
+        latest: "最新评论",
+        hottest: "点赞量最多",
+    };
+
+    // 添加延迟确保页面完全渲染
+    init({
+        el: '#waline',
+        serverURL: 'https://waline-ten-swart.vercel.app/',
+        emoji: [
+            '//unpkg.com/@waline/emojis@1.2.0/bilibili',
+            '//unpkg.com/@waline/emojis@1.2.0/bmoji',
+            '//unpkg.com/@waline/emojis@1.2.0/qq',
+            'https://unpkg.com/@waline/emojis@1.2.0/tw-emoji',
+            '//unpkg.com/@waline/emojis@1.2.0/weibo',
+        ],
+        lang: 'zh-CN',
+        comment: true,
+        search: false,
+        meta: [],
+        requiredMeta: [],
+        locale,
+        // 添加错误处理
+        onError: function (error) {
+            console.error('Waline initialization error:', error);
+        }
+    });
 });

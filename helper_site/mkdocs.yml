@@ -17,7 +17,7 @@ theme:
   language: zh
   palette:
     - scheme: default
-      accent: teal
+      accent: cyan
       primary: white
 
 copyright: Copyright &copy; 2024-2025 柯懒不是柯南

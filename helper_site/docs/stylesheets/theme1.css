@@ -266,10 +266,6 @@ blockquote {
     position: relative;
     z-index: 3;
 }
-body {
-    position: relative;
-    background-color: var(--bg-white);
-}
 .md-grid {
     margin-left: 20px !important;
     max-width: initial;

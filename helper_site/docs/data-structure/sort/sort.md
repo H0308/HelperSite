@@ -457,7 +457,7 @@ int main()
 
 ### 堆排序
 
-[见堆](https://help-doc.top/HelperSite/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8.%20%E5%A0%86/8.%20%E5%A0%86.html#_13)
+[见堆](https://help-doc.top/data-structure/heap/heap.html#_13)
 
 ## 交换排序
 

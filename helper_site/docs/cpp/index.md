@@ -63,7 +63,7 @@
 ## priority_queue模拟实现
 
 !!! note
-    本节需要有[数据结构：堆](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8.%20%E5%A0%86/8.%20%E5%A0%86.html)的基础
+    本节需要有[数据结构：堆](https://www.help-doc.top/data-structure/heap/heap.html)的基础
 
 本节对priority_queue进行了简单的模拟实现，在模拟实现的过程中，对priority_queue的底层原理进行了深入的理解。本节还介绍了仿函数的概念和使用
 
@@ -95,7 +95,7 @@
 
 !!! note
 
-    本节需要有[数据结构：红黑树](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%20%E7%BA%A2%E9%BB%91%E6%A0%91/12.%20%E7%BA%A2%E9%BB%91%E6%A0%91.html)的基础
+    本节需要有[数据结构：红黑树](https://www.help-doc.top/data-structure/red-black-tree/red-black-tree.html)的基础
 
 本节对map和set类进行了模拟实现，参考的是SGI版本的STL中对map和set的设计
 
@@ -103,7 +103,7 @@
 
 !!! note
 
-    本节需要有[数据结构：哈希表](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%20%E5%93%88%E5%B8%8C%E8%A1%A8/13.%20%E5%93%88%E5%B8%8C%E8%A1%A8.html)的基础
+    本节需要有[数据结构：哈希表](https://www.help-doc.top/data-structure/hash-table/hash-table.html)的基础
 
 本节基于数据结构部分设计的哈希表对unordered_map和unordered_set类进行了简单的模拟实现
 

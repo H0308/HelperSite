@@ -1,0 +1,699 @@
+# string类的模拟实现
+
+## string类的模拟实现
+
+### string类最大元素个数
+在C++标准库中，定义了一个名为`npos`的变量，该变量的原型如下：
+```c++
+class string
+{
+    // ...
+public:
+    static const size_t npos = -1;
+    // ...
+}
+```
+在前面提到，类内定义为`static`的变量初始化必须在类外赋值，但是此时使用`const`就可以在类内初始化，之所以这个行为可行，是因为在C++中，被`const`修饰的变量具有内部链接属性，所以其修饰的变量在值为字面量或者是编译期可以确定值时，可以作为在编译期确定值的常量，而因为是常量，则必须要初始化。但是现在就有第二个问题，为什么`const`修饰的变量都具有常量属性了，还需要再用`static`修饰一遍，这里是因为`const`修饰的变量只是其值可以在编译期确定，但是其生命周期还是跟随对象的，而`static`变量在类加载时就创建了，而不需要等到创建对象，如果在创建类对象时，某一个成员使用到了`const`变量，但是这个变量创建的顺序在使用到`const`变量的成员之前，此时就会出现成员属性链接错误，所以为了防止这个问题出现，就需要使用`static`修饰
+
+!!! note
+    上面的说法只能适用于常量类型为整型，所以为了更加强调上面的情况，在C++11中引出了`constexpr`关键字，更加强调某一个变量的值是可以在编译时期计算的，具体见C\+\+11新特性，此时上面的代码就可以修改为`constexpr size_t npos = -1`
+
+### string类的构造函数
+
+在设计string类的构造函数时，需要考虑到下面三个问题：
+
+1. 是否需要传递参数，即是否需要提供有参及无参构造函数
+2. 如何为字符串数组开辟空间，空间开辟的大小为多少
+3. 字符串数组的容量和有效数据个数之间的关系如何
+
+针对上面三个问题，提出以下的解决方案：
+
+1. 在提供类构造函数时，需要为类提供两种构造函数：1. 有参构造 2. 无参构造。对于有参构造来说可以实现以类对象来构造或者以常量字符串来构造，而对于无参构造函数来说，可以不需要额外提供，只需要在以常量字符串构造的函数给一个空字符串`""`（空字符串不是没有内容，默认包含`\0`）作为缺省值即可
+2. 对于第二个问题，字符串数组开辟多大空间，对于无参构造函数来说，如果确保有缺省值可以防止出现空指针解引用的问题；而对于有参的构造函数来说，因为已经确定参数是个字符串，所以参数字符串的长度（不包括`\0`）作为初始大小以确保在开始时有足够空间
+3. 因为标准库中的`capacity`不计入`\0`占用的大小，所以本次模拟实现时`capacity`也不计入\0的个数，那么`capacity`即为字符串长度+1，但是第二个问题：因为使用的是缺省参数，所以无参就使用缺省值，而因为缺省值为1，如果在尾插时涉及到使用`capacity`进行扩容，那么会导致只能插入一个字符，后续字符将无法插入，所以综上`capacity`也需要给缺省值
+
+```c++
+//构造函数
+string(const char* str = "", size_t capacity = 4)
+    :_size(strlen(str))
+{
+    _capacity = (_size == 0 ? capacity : _size);
+    //为字符串数组开辟空间
+    _str = new char[_capacity + 1];
+    strcpy(_str, str);
+}
+```
+
+### string类拷贝构造函数
+
+虽然编译器默认会提供拷贝构造函数，但是该构造函数只能完成浅拷贝，如果对字符串数组进行浅拷贝，那么会出现两个问题：
+
+1. 两个指针指向同一个位置，当一个指针修改数组中的内容时，另一个指针指向的数组中的内容也会改变
+2. 当调用析构函数时，因为两个指针指向同一个位置，当一个指针被析构后，另一个指针并不会不析构，此时导致程序崩溃
+
+所以为了避免上面的问题，string类的拷贝构造函数需要自行设计从而进行深拷贝
+
+在设计string类的拷贝构造函数需要考虑到空间开辟的问题，因为是拷贝某一个对象中的内容，所以可以考虑使用该对象的`capacity`，但是注意需要+1，因为`capacity`不包括`\0`的占用空间
+
+!!! note
+    注意拷贝构造函数的初始化列表为`_size`初始化
+
+```C++
+//拷贝构造函数
+string(const string& s)
+    :_size(s._size)//注意拷贝构造也需要初始化列表
+    ,_capacity(s._capacity)
+{
+    _str = new char[s._capacity + 1];
+    strcpy(_str, s._str);
+}
+```
+
+### string类析构函数
+
+对于析构函数来说，只需要释放开辟的空间即可，因为使用的是`new[]`进行的空间开辟，所以需要使用`delete[]`进行空间释放
+
+```C++
+~string()
+{
+    delete[] _str;
+    _size = _capacity = 0;
+}
+```
+
+### string类`c_str()`函数
+
+因为C形式字符串是内置类型，所以使用`cout`打印时编译器会自动识别类型，相当于使用`%s`进行打印字符串，只需要返回字符串数组首字符地址即可
+
+```C++
+//返回C形式字符串
+const char* c_str()
+{
+    return _str;//返回字符数组的首元素地址
+}
+```
+
+### string类中的`[]`运算符重载函数
+
+对于下标引用操作符来说，只需要返回当前下标对应位置的字符即可，但是需要注意的是要判断传入的位置是否合法
+
+!!! note
+    为了减少返回值拷贝到临时变量的消耗，推荐使用引用返回
+
+非`const`版本：
+
+```C++
+//重载[]
+char& operator[](size_t pos)
+{
+    //确保pos不会越界
+    assert(pos <= _size);
+    return _str[pos];
+}
+```
+
+`const`版本：
+
+```C++
+//重载[]——const
+const char& operator[](size_t pos) const
+{
+    assert(pos <= _size);
+    return _str[pos];
+}
+```
+
+### string类中的赋值运算符重载
+
+虽然编译器默认会生成赋值运算符重载函数，但是对于内置类型和自定义类型都是浅拷贝，所以需要自行重载赋值运算符。
+
+对于赋值运算符重载函数来说，需要考虑到空间是否足够的问题，有下面三种情况需要考虑：
+
+1. 源字符串和目标字符串所在空间大小基本一致
+
+    <img src="image\image.png">
+
+2. 源字符串远大于目标字符串所在空间大小
+
+    <img src="image\image1.png">
+
+3. 源字符串远小于目标字符串所在空间大小
+
+    <img src="image\image2.png">
+
+对于上面的三种情况来说，可以考虑的解决方式为：
+
+1. 对于第一种情况，使用大的一方的空间
+2. 对于第二种情况，扩容目标字符串空间，再将源字符串空间的内容赋值到目标字符串空间
+3. 对于第三种情况，释放目标字符串空间，再为目标字符串重新开辟空间，将源字符串空间的内容拷贝到目标字符串空间
+
+但是，上面的解决方式过于复杂，所以考虑下面的思路：
+
+不论是哪一种情况，先以目标字符串空间为基础开辟新的空间，再将源字符串中的内容直接拷贝到新的空间，这一步可以确保如果空间开辟失败不会影响源字符串中的内容，释放源字符串的空间，接着使源字符串的指针指向新的空间
+
+!!! note
+
+    1. 注意处理自己给自己赋值的情况
+    2. 至于为什么要「释放源字符串的空间」，因为`this`当前指向的是赋值运算符左侧的变量，该变量在赋值之前还指向着原来开辟的空间，如果不进行释放就会出现原来开辟的空间因为赋值覆盖失去了唯一的变量指向导致空间持续占用产生的内存泄漏问题
+
+```C++
+//重载赋值运算符
+string& operator=(const string& s)
+{
+    if (this != &s)
+    {
+        char* tmp = new char[s._capacity + 1];
+        //此处new失败将会抛异常
+        strcpy(tmp, s._str);
+        delete[] _str;
+        _str = tmp;
+        _size = s._size;
+        _capacity = s._capacity;
+    }
+
+    //最后不要忘记修改目标字符串的_size和_capacity
+    return *this;
+}
+```
+
+### string类中获取字符串有效字符个数
+
+对于`_size`来说，在函数外是不可以被修改的，所以返回`const`类型的变量，为了非`const`对象和`const`对象都可以调用该函数，用`const`修饰`this`指针
+
+```C++
+//返回字符串的有效字符个数
+const size_t size() const
+{
+    return _size;
+}
+```
+
+### string类中获取字符串存储空间大小（不包括`\0`）
+
+对于`_capacity`来说，在函数外是不可以被修改的，所以返回`const`类型的变量，为了非`const`对象和`const`对象都可以调用该函数，用`const`修饰`this`指针
+
+```C++
+//返回字符串的容量大小
+const size_t capacity() const
+{
+    return _capacity;
+}
+```
+
+### string类`reserve()`函数
+
+对于扩容函数来说，只需要处理好原始空间的释放以及原始空间的内容不丢失即可
+
+!!! note
+    注意，当扩容的大小小于原始大小时不能进行缩容
+
+```C++
+//扩容reserve()函数
+void reserve(size_t capacity)
+{
+    //当扩容的容量小于_capacity时不进行缩容
+    if (capacity <= _capacity)
+    {
+        return;
+    }
+    char* tmp = new char[capacity + 1];
+    //new失败抛异常
+    strcpy(tmp, _str);
+    delete[] _str;
+    _str = tmp;
+    _capacity = capacity;
+}
+```
+
+### string类`push_back()`函数
+
+对于`push_back()`函数来说，需要考虑的问题是插入数据时是否需要扩容
+
+解决思路也很简单，因为直插入一个字符串，所以只需要将原来的容量+1即可
+
+何时需要进行扩容
+
+<img src="image\image3.png">
+
+```C++
+//字符串末尾追加字符
+void push_back(char c)
+{
+    //判断是否需要扩容
+    //因为_capacity是不包括\0的大小，如果_size+1>_capacity，那么意味着当前_size指向的位置即为\0的位置
+    if (_size + 1 > _capacity)
+    {
+        reserve(_size + 1);//扩容一个字符即可，如果不想频繁扩容可以扩容_capacity*2
+    }
+
+    _str[_size++] = c;//在_size的位置插入字符c
+    _str[_size] = '\0';
+}
+```
+
+### string类`append()`函数
+
+对于`append()`函数的分析与`push_back()`函数相同，此处不再分析
+
+```C++
+//字符串末尾追加字符串
+void append(const char* s)
+{
+    size_t len = strlen(s);
+    //需要判断是否需要扩容
+    if (_size + len > _capacity)
+    {
+        reserve(_size + len);
+    }
+
+    strcpy(_str + _size, s);
+    _size += len;
+}
+```
+
+### string类+=运算符重载函数
+
+```C++
+//重载+=_字符串
+string& operator+=(const char* s)
+{
+    //复用append()
+    append(s);
+    return *this;
+}
+
+//重载+=_字符
+string& operator+=(const char c)
+{
+    //复用push_back()
+    push_back(c);
+    return *this;
+}
+```
+
+### string类关系运算符重载
+
+底层直接调用`strcmp()`函数
+
+```C++
+//模拟实现strcmp
+const int strcmp(const char* s1, const char* s2) const
+{
+    int i = 0;
+
+    while (*s1 == *s2)
+    {
+        //如果两个都走到了\0的位置，那么说明二者相等
+        if (!(*s1))
+        {
+            return 0;
+        }
+        s1++;
+        s2++;
+    }
+
+    //走出循环后，说明当前两个指针指向的位置不同
+    if (*s1 > *s2)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+//重载关系运算符
+bool operator>(const string& s) const
+{
+    return strcmp(_str, s._str) > 0;
+}
+
+bool operator==(const string& s) const
+{
+    return strcmp(_str, s._str) == 0;
+}
+
+bool operator>=(const string& s) const
+{
+    //return *this > s || *this == s;
+    return *this > s || s == *this;
+}
+
+bool operator<(const string& s) const
+{
+    return !(*this >= s);
+}
+
+bool operator<=(const string& s) const
+{
+    return !(*this > s);
+}
+
+bool operator!=(const string& s) const
+{
+    return !(*this == s);
+}
+```
+
+### string类基础迭代器实现
+
+当前实现的迭代器是模拟指针的方式进行实现
+
+```C++
+//重载begin()_非const
+iterator begin()
+{
+    return _str;
+}
+
+//重载end()_非const
+iterator end()
+{
+    return _str + _size;//_size总是指向有效数据的下一个位置，一般为\0的位置
+}
+
+//重载begin()_const
+const_iterator begin() const
+{
+    return _str;
+}
+
+//重载end()_const
+const_iterator end() const
+{
+    return _str + _size;
+}
+```
+
+### string类`resize()`函数
+
+在模拟实现`resize()`函数时，需要注意`resize()`不同于`reserve()`函数
+
+`reserve()`函数只是对原有的字符串空间进行扩容，并且如果扩容的大小小于原始大小，那么将不执行扩容，而`resize()`函数需要分为下面三种情况：
+
+1. 当扩容的大小小于`size`时，将对原始字符串进行删除，直到只剩下给定大小个数的字符构成的字符串
+
+    <img src="image\image4.png">
+
+2. 当扩容的大小介于`size`和`capacity`之间时，在原始字符串末尾进行初始化
+
+    <img src="image\image5.png">
+
+3. 当扩容大小大于`capacity`时，则需要对原始空间先进行扩容，再对扩充的空间进行初始化
+
+    <img src="image\image6.png">
+
+```C++
+//resize()函数
+void resize(size_t size, char c = '\0')
+{
+    //当size小于等于_size时对于第一种情况
+    if (size <= _size)
+    {
+        _str[size] = '\0';
+        _size = size;
+    }
+    else
+    {
+        //需要扩容时对应第三种情况
+        if (size > _capacity)
+        {
+            reserve(size);
+        }
+
+        size_t end = _size;
+        while (end < size)
+        {
+            _str[end++] = c;
+        }
+        //注意需要更改_size到\0的位置
+        _size = size;
+        _str[size] = '\0';
+    }
+}
+```
+
+### string类`insert()`函数
+
+对于`insert()`函数来说有插入字符和插入字符串两种类型
+
+首先对于插入字符来说，基本思路如下：
+
+<img src="image\image7.png">
+
+```C++
+//insert()函数
+void insert(size_t pos, const char c)
+{
+    assert(pos <= _size);
+    //判断是否需要扩容
+
+    if (_size + 1 > _capacity)
+    {
+        reserve(_capacity * 2);
+    }
+
+    //挪动pos位置之后的数据
+    size_t end = _size;
+    while (end + 1 >= pos)
+    {
+        _str[end + 1] = _str[end];
+        end--;
+    }
+    _str[pos] = c;
+    _size++;
+}
+```
+
+但是需要注意一点，上面的方法在头部插入字符时会出现死循环以及越界访问(当前`pos`和`end`均为`size_t`类型)，因为当`end`走到-1的位置时本应是最后一次循环，但是由于其为`size_t`类型，导致-1表示整型的最大值，从而造成`end+1`依旧大于`pos`，并且`_str[end + 1] = _str[end]`此时越界访问
+
+可以考虑下面的修改方式
+
+```C++
+//insert()函数
+void insert(size_t pos, const char c)
+{
+    assert(pos <= _size);
+    //判断是否需要扩容
+
+    if (_size + 1 > _capacity)
+    {
+        reserve(_capacity * 2);
+    }
+
+    //挪动pos位置之后的数据
+    size_t end = _size;
+    //当end为npos时跳出循环
+    while (end + 1 >= pos && end != npos)
+    {
+        _str[end + 1] = _str[end];
+        end--;
+    }
+    //单独在起始位置插入数据
+    if (end == npos)
+    {
+        _str[0] = c;
+    }
+    _str[pos] = c;
+    _size++;
+}
+```
+
+也可以将上方代码优化成下面的代码，思路如下
+
+<img src="image\image8.png">
+
+```C++
+//insert()函数_插入一个字符
+void insert(size_t pos, const char c)
+{
+    assert(pos <= _size);
+    //判断是否需要扩容
+
+    if (_size + 1 > _capacity)
+    {
+        reserve(_capacity * 2);
+    }
+
+    //挪动pos位置之后的数据
+    size_t end = _size + 1;
+    while (end > pos)
+    {
+        _str[end] = _str[end - 1];
+        end--;
+    }
+
+    _str[pos] = c;
+    _size++;
+}
+```
+
+插入字符串的思路也是一样，只是挪动数据的个数以及插入字符串的方式改变
+
+<img src="image\image9.png">
+
+```C++
+//insert()函数_插入一个字符串
+void insert(size_t pos, const char* s)
+{
+    assert(pos <= _size);
+    //判断是否需要扩容
+    size_t len = strlen(s);
+    if (_size + len > _capacity)
+    {
+        reserve(_size + len);
+    }
+
+    //挪动pos位置之后的数据
+    size_t end = _size + len;
+    while (end > pos + len - 1)
+    {
+        _str[end] = _str[end - len];
+        end--;
+    }
+
+    strncpy(_str + pos, s, len);
+    _size += len;
+}
+```
+
+### string类`erase()`函数
+
+`erase()`函数只是删除字符或者字符串的功能，注意需要分情况讨论：
+
+1. 当需要删除字符的个数小于字符串字符个数时，直接向前覆盖，再最后一个位置加入`\0`改变`_size`即可
+2. 当需要删除的字符个数大于字符串字符个数时，全部删除，此时只需要在`pos`位置加入`\0`改变`_size`即可
+
+```C++
+//erase()函数
+void erase(size_t pos, size_t len = npos)
+{
+    assert(pos <= _size);
+
+    //对应第二种情况
+    if (len == npos || len + pos >= _size)
+    {
+        _str[pos] = '\0';
+        _size = pos;
+        return;
+    }
+
+    //对应第一种情况
+    //size_t start = pos + len;
+    //while (start <= _size)
+    //{
+    //    _str[pos++] = _str[start++];
+    //}
+    strcpy(_str + pos, _str + pos + len);
+    _size -= len;
+}
+```
+
+### string类`find()`函数
+
+`find()`函数也有两种类型，一种是找字符，另一种是找字符串
+
+首先是找字符，直接挨个比较即可
+
+```C++
+//find()函数_找字符
+size_t find(const char c, size_t pos = 0)
+{
+    assert(pos <= _size);
+    for (size_t i = 0; i < _size; i++)
+    {    
+        if (_str[i] == c)
+        {
+            return i;
+        }
+    }
+    return npos;
+}
+```
+
+接着是找字符串，调用`strstr()`函数即可
+
+```C++
+//find()函数_找字符串
+size_t find(const char* s, size_t pos = 0)
+{
+    char* ptr = strstr(_str, s);
+    if (ptr == NULL)
+    {
+        return npos;
+    }
+    return ptr - _str;//两个指针相减返回差值
+}
+```
+
+### string类`swap()`函数
+
+```C++
+void swap(string& s)
+{
+    std::swap(_str, s._str);
+    std::swap(_size, s._size);
+    std::swap(_capacity, s._capacity);
+}
+```
+
+### string类`clear()`函数
+
+```C++
+//clear()函数
+void clear()
+{
+    _str[0] = '\0';
+    _size = 0;
+}
+```
+
+### string类流插入运算符重载
+
+设计思路参考[C++默认成员函数](https://www.help-doc.top/cpp/member-func/member-func.html#_22)，下面直接给出代码：
+
+```c++
+//流插入运算符重载
+ostream& operator<<(ostream& cout, string& s)
+{
+    for (auto ch : s)
+    {
+        cout << ch;
+    }
+    return cout;
+}
+```
+
+### string类流提取运算符重载
+
+重载流提取运算符时需要注意使用`cin`对象中的`get()`函数，将空格当做有效字符处理，否则直接使用`cin`将无法读取空白字符导致死循环
+
+```C++
+//流提取运算符重载
+istream& operator>>(istream& cin, string& s)
+{
+    s.clear();
+    char ch = cin.get();
+    char _buf[128] = {0};
+    size_t i = 0;
+    while (ch != ' ' && ch != '\n')
+    {
+        _buf[i++] = ch;
+        if (i == 127)
+        {
+            s += _buf;
+            i = 0;
+        }
+        ch = cin.get();
+    }
+
+    //如果输入结束i不为127时，将数据拷贝给字符串s
+    if (i != 0)
+    {
+        s += _buf;
+    }
+
+    return cin;
+}
+```

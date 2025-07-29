@@ -576,11 +576,11 @@ console.log(4 !== "4"); // true
 
 ### 条件运算符
 
-与Java相同，见[Java基础知识](https://www.help-doc.top/Java/1. Java基础知识/Java基础知识.html#_7)
+与Java相同，见[Java基础知识](https://www.help-doc.top/Java/java-basic/java-basic.html#_7)
 
 ### 位运算符
 
-与Java相同，见[Java基础知识](https://www.help-doc.top/Java/1. Java基础知识/Java基础知识.html#_7)
+与Java相同，见[Java基础知识](https://www.help-doc.top/Java/java-basic/java-basic.html#_7)
 
 ### 运算符优先级
 
@@ -590,6 +590,6 @@ console.log(4 !== "4"); // true
 
 ## JavaScript分支和循环语句
 
-语法与Java相同，见[Java基础知识](https://www.help-doc.top/Java/1. Java基础知识/Java基础知识.html#_11)
+语法与Java相同，见[Java基础知识](https://www.help-doc.top/Java/java-basic/java-basic.html#_11)
 
 此处开始涉及到块级作用域，需要注意`let`和`var`的使用区别

@@ -1,0 +1,783 @@
+# C++模版（基础）
+
+## C++泛型编程思想
+
+泛型编程：编写与类型无关的通用代码，是代码复用的一种手段。
+
+模板是泛型编程的基础。
+
+虽然可以直接使用函数重载来解决不同类型的问题，但是使用函数重载会出现可能不好的地方
+
+1. 重载的函数仅仅是类型不同，代码复用率比较低，只要有新类型出现时，就需要用户自己增加对应的函数
+2. 代码的可维护性比较低，一个出错可能所有的重载均出错
+
+## C++模版介绍
+
+在C语言中，当需要交换两个变量的数据时需要考虑到不同类型，例如下面的代码
+
+```C++
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#include <stdio.h>
+
+//交换int类型数据
+void swap_int(int* num1, int* num2)
+{
+    int tmp = *num1;
+    *num1 = *num2;
+    *num2 = tmp;
+}
+
+//交换double类型的数据
+void swap_double(double* num1, double* num2)
+{
+    double tmp = *num1;
+    *num1 = *num2;
+    *num2 = tmp;
+}
+
+int main()
+{
+    int num1 = 1, num2 = 2;
+    printf("num1=%d num2=%d\n", num1, num2);
+    swap_int(&num1, &num2);
+    printf("num1=%d num2=%d\n", num1, num2);
+    double num3 = 4.1, num4 = 4.5;
+    printf("num3=%.1f num4=%.1f\n", num3, num4);
+    swap_double(&num3, &num4);
+    printf("num3=%.1f num4=%.1f\n", num3, num4);
+
+    return 0;
+}
+输出结果：
+num1=1 num2=2
+num1=2 num2=1
+num3=4.1 num4=4.5
+num3=4.5 num4=4.1
+```
+
+在上面的C语言代码中，当需要交换`int`类型的数据时需要`int`类型交换函数，需要`double`类型的数据时需要`double`类型的交换函数，但是这两个函数除了类型不同以外其他代码都一样，增加了工作量，并且因为C语言不支持函数重载，所以两个交换函数的函数名不能相同
+
+为了解决上面的问题，C++中提出了一种模版函数，如下面代码
+
+```C++
+#include <iostream>
+using namespace std;
+
+template<class T>
+void Swap(T& num1, T& num2)
+{
+    T tmp = num1;
+    num1 = num2;
+    num2 = tmp;
+}
+
+int main()
+{
+    int num1 = 1, num2 = 2;
+    printf("num1=%d num2=%d\n", num1, num2);
+    Swap(num1, num2);
+    printf("num1=%d num2=%d\n", num1, num2);
+    double num3 = 4.1, num4 = 4.5;
+    printf("num3=%.1f num4=%.1f\n", num3, num4);
+    Swap(num3, num4);
+    printf("num3=%.1f num4=%.1f\n", num3, num4);
+
+    return 0;
+}
+输出结果：
+num1=1 num2=2
+num1=2 num2=1
+num3=4.1 num4=4.5
+num3=4.5 num4=4.1
+```
+
+在上面的代码中，将`Swap`函数作为一种模版，当调用`Swap`函数时，根据传入的参数类型自动实例化函数从而完成函数执行
+
+## 函数模版
+
+### 函数模版基础语法
+
+```C++
+template<typename name1, typename name2, ...>
+函数返回类型 函数名(形式参数)
+{
+    //函数体
+}
+
+//typename也可以用class代替，但是不可以用struct
+```
+
+在C++中，使用`template`关键字创建模版，使用`<>`包裹函数体中需要使用到类型，`typename name1`用于指代类型，在函数调用时自动匹配类型，默认不会隐式类型转换，模版下方正常写函数即可
+
+!!! note
+    模版函数的下方也可以写其他普通函数
+
+```C++
+#include <iostream>
+using namespace std;
+
+//模版
+template<class T>
+void Swap(T& num1, T& num2)
+{
+    T tmp = num1;
+    num1 = num2;
+    num2 = tmp;
+}
+
+//普通函数
+int add(const int num1, const int num2)
+{
+    return num1 + num2;
+}
+
+int main()
+{
+    int num1 = 1, num2 = 2;
+    printf("num1=%d num2=%d\n", num1, num2);
+    Swap(num1, num2);
+    printf("num1=%d num2=%d\n", num1, num2);
+    double num3 = 4.1, num4 = 4.5;
+    printf("num3=%.1f num4=%.1f\n", num3, num4);
+    Swap(num3, num4);
+    printf("num3=%.1f num4=%.1f\n", num3, num4);
+
+    cout << add(num1, num2) << endl;//可以正常使用
+
+    return 0;
+}
+输出结果：
+num1=1 num2=2
+num1=2 num2=1
+num3=4.1 num4=4.5
+num3=4.5 num4=4.1
+3
+```
+
+### 函数模版原理
+
+函数模板是一个蓝图，它本身并不是函数，是编译器用使用方式产生特定具体类型函数的模具。所以其实模板就是将本来应该我们做的重复的事情交给了编译器
+
+在函数调用的过程中，直接调试时不论是`int`类型还是`double`类型都会走到模版，但是进入反汇编可以看到当形参是`int`类型时，编译器会进入`int`类型的函数，同样`double`类型类似
+
+<img src="image\image.png">
+
+<img src="image\image1.png">
+
+所以，函数模版是告诉编译器应该生成何种类型的函数，如下图所示
+
+<img src="image\image2.png">
+
+在编译器编译阶段，对于模板函数的使用，编译器需要根据传入的实参类型来推演生成对应类型的函数以供调用
+
+### 函数模版实例化
+
+用不同类型的参数使用函数模板时，称为函数模板的实例化。
+
+模板参数实例化分为：隐式实例化和显式实例化
+
+隐式实例化：让编译器根据实参类型自动推演出形式参数类型
+
+```C++
+#include <iostream>
+using namespace std;
+
+template<class T>
+void Swap(T& num1, T& num2)
+{
+    T tmp = num1;
+    num1 = num2;
+    num2 = tmp;
+}
+
+int main()
+{
+    int num1 = 1, num2 = 2;
+    printf("num1=%d num2=%d\n", num1, num2);
+    Swap(num1, num2);//自动推演出int类型
+    printf("num1=%d num2=%d\n", num1, num2);
+
+    return 0;
+}
+输出结果：
+num1=1 num2=2
+num1=2 num2=1
+```
+
+但是，当模版参数类型种类个数与实参种类个数不匹配时，编译器将无法自动推演
+
+```C++
+#include <iostream>
+using namespace std;
+
+template<class T>
+void add(T& num1, T& num2)
+{
+    return num1 + num2;
+}
+
+int main()
+{
+    int num1 = 1;
+    double num2 = 2.0;
+    add(num1, num2);//无法自动推演
+
+    return 0;
+}
+报错信息：
+没有与参数列表匹配的 函数模板 "Swap" 实例
+```
+
+在上面的代码中，函数模版中只有一种类型，但是实际调用函数传递的实际参数对应两种类型，此时因为类型不对应编译报错
+
+第一种解决方式：添加额外种类的模版参数
+
+```C++
+#include <iostream>
+using namespace std;
+
+template<class T, class R>
+T add(T& num1, R& num2)
+{
+    return num1 + num2;
+}
+
+int main()
+{
+    int num1 = 1;
+    double num2 = 2.0;
+    cout << add(num1, num2) << endl;//当函数模版有两种参数时可以自动推演
+    return 0;
+}
+输出结果：
+3
+```
+
+在上面的代码中，类型`T`被推演为`int`，类型`R`被推演为`double`，但是有个返回值问题，因为函数返回值只能为一种，所以存在精度丢失
+
+第二种解决方式：对某一种类型进行强制转换
+
+以强制转换`int`类型为例
+
+```C++
+#include <iostream>
+using namespace std;
+
+template<class T>
+T add(T num1, T num2)
+{
+    return num1 + num2;
+}
+
+int main()
+{
+    int num1 = 1;
+    double num2 = 2.2;
+    cout << add((double)num1, num2); << endl;//将int类型转换为double类型
+    return 0;
+}
+输出结果：
+3.2
+```
+
+第三种解决方式：显式实例化
+
+```C++
+#include <iostream>
+using namespace std;
+
+template<class T>
+T add(T num1, T num2)
+{
+    return num1 + num2;
+}
+
+int main()
+{
+    int num1 = 1;
+    double num2 = 2.2;
+    cout << add<double>(num1, num2) << endl;//强制指定T为double类型此时会隐式转换
+    return 0;
+}
+输出结果：
+3.2
+```
+
+对于显式实例化来说，如果此时类型依旧不匹配，编译器会尝试进行隐式类型转换，如果无法转换成功编译器将会报错
+
+!!! note
+    注意，第二种方式和第三种方式都有强制性，指定的类型时何种类型函数模版就一定是何种类型，当需要使用同类型的引用时，要加上`const`修饰引用
+
+```C++
+#include <iostream>
+using namespace std;
+
+template<class T>
+T add(const T& num1, const T& num2)
+{
+    return num1 + num2;
+}
+
+int main()
+{
+    int num1 = 1;
+    double num2 = 2.2;
+    const double& ret = add((double)num1, num2);
+    cout << ret << endl;//当函数模版有两种参数时可以自动推演
+    return 0;
+}
+输出结果：
+3.2
+```
+
+### 模版参数匹配规则
+
+1. 一个非模板函数可以和一个同名的函数模板同时存在，而且该函数模板还可以被实例化为这个非模板函数
+2. 对于非模板函数和同名函数模板，如果其他条件都相同，在调动时会优先调用非模板函数而不会从该模板产生出一个实例。如果模板可以产生一个具有更好匹配的函数， 那么将选择模板
+
+```C++
+#include <iostream>
+using namespace std;
+//同名函数模版和非模版函数
+//函数模版
+template<class T, class R>
+R add(T num1, R num2)
+{
+    return num1 + num2;
+}
+
+//单独处理整型加法
+int add(int num1, int num2)
+{
+    return num1 + num2;
+}
+
+int main()
+{
+    int num1 = 1;
+    int num2 = 2;
+    cout << add(num1, num2) << endl;//此时编译器会调用单独处理整型加法的函数，而不是根据函数模版推演出新的int形参函数
+    double num3 = 2.2;
+    cout << add(num1, num3) << endl;//编译器直接推演出不需要强制转换的函数
+    return 0;
+}
+输出结果：
+3
+3.2
+```
+
+## 类模版
+
+### 类模版基础语法
+
+```C++
+template<typename name1, typename name2>
+class 类名
+{
+    //类体
+};
+```
+
+在C++中，使用`template`关键字创建模版，使用`<>`包裹类体体中需要使用到的类型，`typename name1`用于指代类型，在使用类时自动匹配数据类型，默认不会隐式类型转换，模版下方正常写类即可
+
+!!! note
+    注意，使用模版类创建类对象时必须显式指定类型
+
+```C++
+#include <iostream>
+using namespace std;
+
+template<class T>
+class SeqList
+{    
+private:
+    T* _a;
+    int _size;
+    int _capacity = 4;
+public:
+    SeqList()
+        :_a(nullptr)
+    {
+        _a = new T[_capacity];
+    }
+
+    ~SeqList()
+    {
+        delete[] _a;
+        _size = _capacity = 0;
+    }
+};
+
+int main()
+{
+    //类模版必须显式制定类型
+    SeqList<int> s1;//存放int类型数据的顺序表
+    SeqList<double> s2;//存放double类型的顺序表
+
+    return 0;
+}
+```
+
+!!! note
+    类模板实例化与函数模板实例化不同，类模板实例化需要在类模板名字后跟`<>`，然后将实例化的类型放在`<>`中即可，类模板名字不是真正的类，而实例化的结果才是真正的类
+    例如上面的代码中有两个类，一个是`SeqList<int>`，一个是`SeqList<double>`
+
+如果声明和定义分开时，域作用限定符左侧的域名一定要带上模版参数列表
+
+```C++
+//不指定具体类型
+SeqList<T>::~SeqList()
+{
+    delete[] _a;
+    _size = _capacity = 0;
+}
+
+//指定具体类型
+SeqList<int>::~SeqList()
+{
+    delete[] _a;
+    _size = _capacity = 0;
+}
+
+SeqList<double>::~SeqList()
+{
+    delete[] _a;
+    _size = _capacity = 0;
+}
+```
+
+!!! note
+    注意，类模版的声明和定义不能放在两个文件中（即声明在头文件，定义在源文件中），否则会出现链接错误
+
+## `class` 与 `typename` 在模板参数中的注意事项
+
+在模板参数中，`class`关键字用于声明一个类型参数，这与类定义中的`class`关键字不同。这里的`class`并不意味着参数必须是一个类类型；它同样可以是任何类型，包括基本数据类型、指针、引用等。
+
+`typename`关键字也用于模板参数列表中声明类型参数，但它主要用于依赖类型的情况，即模板内部依赖于模板参数的类型。`typename`的使用主要是为了解决编译器解析依赖类型名称时的歧义。
+
+```c++
+template <typename T>
+class Container {
+    typedef typename T::iterator Iterator; // 使用typename指定依赖类型
+    ...
+};
+```
+
+`class` 与 `typename` 的区别
+
+1. **依赖类型**：`typename`用于指定依赖类型，而`class`不能用于这种情况。依赖类型是指依赖于模板参数的类型，如`T::iterator`。
+
+2. **关键字用途**：`class`在模板参数中的用途仅限于声明类型参数，而`typename`除了这个用途外，还用于其他上下文，如指定依赖类型或模板模板参数中的类型。
+3. **语义清晰性**：虽然二者可互换，但在某些情况下使用`typename`可以提高代码的语义清晰性，尤其是在处理依赖类型时
+
+具体例子可以参考[list模拟实现中的迭代器结构部分](https://www.help-doc.top/cpp/sim-list/sim-list.html#_5)
+
+## 非类型模版参数
+
+前面的模版中，使用的都是针对对象类型设计的模版参数，从而便于编译器针对不同类型推演出不同类型的函数或者类
+
+但是有一种模版参数比较特殊，即非类型模版参数，有以下特点：
+
+1. 只可以定义为整型类型的常量
+2. 非类型的模板参数必须在编译期就能确认结果
+
+示例代码：
+
+```c++
+template<class T, size_t N = 10>
+class A
+{
+
+private:
+    T arr[N];
+};
+```
+
+在上面的代码中，`T`即为类型模板参数，而`N`即为非类型模板参数，并且因为`size_t`代表无符号整型，所以属于整型系列，编译通过
+
+非类型模板参数主要使用在为数组开辟空间，当需要使用该类中的数组时，可以使用默认的10作为数组大小，也可以自定义`N`的大小从而确定数组的大小
+
+在C++11中，新增了一个容器名为`array`，底层就是对数组进行了一个封装，目的是方便处理数组的相关问题，比如越界访问
+
+`array`容器的定义：
+
+```C++
+template < class T, size_t N > class array;
+```
+
+原来的数组是C类型的数组，该数组对越界访问的控制并不严格，甚至有时并不能发现是越界访问，所以针对这个问题，C++11添加了`array`容器，从而更好地处理越界访问等问题
+
+## 模板特化
+
+在C++中，除了可以对任意类型使用模板以外，还可以使用模板特化来针对某一种类或者函数提供特殊的模板
+
+模板特化分为全特化和偏特化，而对于类和函数来说，也分为类模板全特化和偏特化以及函数模板全特化和偏特化
+
+函数模板的特化步骤：
+
+1. 必须要先有一个基础的函数模板
+2. 关键字`template`后面接一对空的尖括号`<>`
+3. 函数名后跟一对尖括号，尖括号中指定需要特化的类型
+4. 函数形参表: 必须要和模板函数的基础参数类型完全相同，如果不同编译器可能会报一些奇怪的错误。
+
+### 类模板全特化
+
+所谓全特化，即特化的模板参数类型全部用指定的类型替换普通模板中的类型
+
+例如下面的代码：
+
+```c++
+#include <iostream>
+using namespace std;
+
+//普通模板
+template<class T1, class T2>
+class A
+{
+public:
+    A(T1 val1, T2 val2)
+        :num1(val1)
+        , num2(val2)
+    {}
+
+private:
+    T1 num1;
+    T2 num2;
+};
+
+//全特化为int类型
+template<>
+class A<int, int>
+{
+public:
+    A(int val1, int val2)
+        :num1(val1)
+        ,num2(val2)
+    {}
+
+private:
+    int num1;
+    int num2;
+};
+
+int main()
+{
+    A<double, int> a(1.9, 2);//调用普通模板
+    A<int, int> a1(1, 2);//调用全特化模板
+    return 0;
+}
+```
+
+在上面的代码中，针对`int`类型使用了全特化的类，此时如果使用两个`int`类型的值创建对象，那么编译器会直接调用全特化的类进行构造
+
+此时考虑下面的仿函数
+
+```c++
+//仿函数
+template<class T>
+class less
+{
+public:
+    bool operator()(T val1, T val2)
+    {
+        return val1 < val2;
+    }
+};
+```
+
+对于`int`类型，`double`类型这种普通的数值类型来说，直接比较并不会有什么问题（此处不考虑浮点数精度问题），但是如果为指针类型，那么比较方式会有不同，因为比较指针除了比较二者地址以外，还有比较指针指向的内容，而对于上面的比较大小的仿函数，如果直接将指针类型作为模板参数，那么比较的就是指针本身存的地址，如果此时想比较指针指向的内容时就需要用到全特化，参考下面的代码：
+
+```c++
+//仿函数
+//Date为自定义类型，并且已经重载*和<
+template<>
+class less<Date*>
+{
+public:
+    bool operator()(Date* val1, Date* val2)
+    {
+        return *val1 < *val2;
+    }
+};
+```
+
+### 类模板偏特化
+
+对比全特化，偏特化就是只有一部分是指定的类型，其余的部分还是普通的模板参数类型，例如下面的代码：
+
+```c++
+//偏特化为T和int类型
+template<class T>
+class A<T, int>
+{
+public:
+    A(T val1, int val2)
+        :num1(val1)
+        , num2(val2)
+    {}
+
+private:
+    T num1;
+    int num2;
+};
+```
+
+在上面代码中，只要第二个模板参数类型时`int`类型时，就会走偏特化构造函数
+
+现在有了下面三种模板：
+
+```c++
+//普通模板
+template<class T1, class T2>
+class A
+{
+public:
+    A(T1 val1, T2 val2)
+        :num1(val1)
+        , num2(val2)
+    {}
+
+private:
+    T1 num1;
+    T2 num2;
+};
+
+//全特化为int类型
+template<>
+class A<int, int>
+{
+public:
+    A(int val1, int val2)
+        :num1(val1)
+        ,num2(val2)
+    {}
+
+private:
+    int num1;
+    int num2;
+};
+
+//偏特化为T和int类型
+template<class T>
+class A<T, int>
+{
+public:
+    A(T val1, int val2)
+        :num1(val1)
+        , num2(val2)
+    {}
+
+private:
+    T num1;
+    int num2;
+};
+```
+
+下面有三个对象：
+
+```c++
+A<double, double> a1(1.2, 1.2);//调用普通模板
+A<int, int> a2(1, 2);//调用全特化模板
+A<double, int> a3(1.9, 2);//调用偏特化
+```
+
+因为`double`和`double`类型没有偏特化和全特化，所以走普通模板，而`int`和`int`类型有全特化，所以走全特化模板，对于`double`和`int`类型，因为有偏特化，所以走偏特化模板
+
+所以在普通模板、偏特化模板和全特化模板中，匹配顺序依次是：
+
+1. 全特化
+2. 偏特化
+3. 普通模板
+
+### 函数模板全特化与偏特化
+
+函数模板的全特化与偏特化方式参考下面的代码：
+
+```c++
+//普通函数模板
+template<class T1, class T2>
+T1 add(T1 val1, T2 val2)
+{
+    return val1 + val2;
+}
+
+//全特化函数模板
+template<>
+int add<int, int>(int val1, int val2)
+{
+    return val1 + val2;
+}
+
+//偏特化函数模板
+template<class T>
+T add<int, T>(int val1, int val2)
+{
+    return val1 + val2;
+}
+```
+
+但是对于函数模板来说，一般不需要用到特化，只需要用函数重载＋最匹配原则即可
+
+## 模板分离编译
+
+在C++中本身是不支持模板的声明和定义分别放在两个文件中，所以一般的处理方式有以下两种：
+
+1. 不写声明直接定义放在`.h`文件中
+2. 将声明写在定义之前，一般放在`.hpp`文件中
+
+!!! note
+    一般的`.hpp`文件即为声明和定义在一起，表示该文件中既有类和函数模板的声明，也有对应的定义
+
+例如下面的`.hpp`文件
+
+```c++
+//函数模板声明
+template<class T>
+T Add(const T& left, const T& right);
+
+//普通函数声明
+void func();
+
+//类模板声明
+template<class T>
+class Stack 
+{
+public:
+    //成员函数声明
+    void Push(const T& x);
+    void Pop();
+private:
+    T* _a = nullptr;
+    int _top = 0;
+    int _capacity = 0;
+};
+
+//函数模板定义
+template<class T>
+T Add(const T& left, const T& right)
+{
+    cout << "T Add(const T& left, const T& right)" << endl;
+    return left + right;
+}
+
+//普通函数定义
+void func()
+{
+    cout << "void func()" << endl;
+}
+
+//成员函数定义
+template<class T>
+void Stack<T>::Push(const T& x)
+{
+    cout << "void Stack<T>::Push(const T& x)" << endl;
+}
+
+//成员函数定义
+template<class T>
+void Stack<T>::Pop()
+{
+    cout << "void Pop()" << endl;
+}
+```

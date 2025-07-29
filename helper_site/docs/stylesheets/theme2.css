@@ -3,14 +3,6 @@
 /* 寒蝉团圆体 Sans */
 @import url("https://fontsapi.zeoseven.com/70/main/result.css");
 
-@font-face {
-    font-family: "LXGW ZhenKai";
-}
-
-@font-face {
-    font-family: "寒蝉团圆体 Sans";
-}
-
 .md-header__topic .md-ellipsis {
     font-family: "寒蝉团圆体 Sans" !important;
 }

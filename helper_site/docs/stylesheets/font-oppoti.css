@@ -1,8 +1,5 @@
 /* OPPO Sans主字体 */
 @import url("https://fonts.cdnfonts.com/css/opposans");
-@font-face {
-    font-family: "OPPOSans";
-}
 /* OPPO Sans字体样式表 */
 :root {
     --md-text-font: "OPPOSans", "STDongGuanTi", "JiangChengHeiTi 400W", sans-serif;

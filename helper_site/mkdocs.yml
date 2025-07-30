@@ -291,6 +291,8 @@ nav:
     - Windows系统下在VMware中配置Linux环境并通过客户端进行连接: tooltips/windows-vmware-linux/windows-vmware-linux.md
     - Sunshine+Moonlight实现屏幕内容串流: tooltips/sunshine-moonlight/sunshine-moonlight.md
     - vim使用帮助: tooltips/vim/vim.md
+  - 测试加密功能:
+    - 加密测试页面: test-encrypt/test-encrypt.md
   - 项目:
     - Boost库搜索引擎: projects/boost-searching-engine/boost-searching-engine.md
     - 仿Muduo库的高并发服务器: 
@@ -386,6 +388,15 @@ plugins:
   - search:
       jieba_dict: dict.txt.small
       lang: zh
+  - encryptcontent:
+      title_prefix: '[加密] '
+      summary: '加密页面'
+      placeholder: '按下回车键提交密码'
+      mermaid2: True
+      esm: true
+      arithmatex: True
+      decryption_failure_message: '密码错误，请重新输入'
+      encryption_info_message: '请联系作者获取密码'
   - statistics
   - toggle-sidebar
   - changelog

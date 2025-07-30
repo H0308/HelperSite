@@ -2,7 +2,7 @@
 
 ## 本篇介绍
 
-在[JavaScript内建对象部分](https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20JavaScript%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1/6.%20JavaScript%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1.html#json)已经介绍过什么是JSON对象以及JSON的相关格式要求，本篇文档不涉及到写一个JSON字符串，只是介绍如何在后端实现JSON字符串和Java对象的相互转换
+在[JavaScript内建对象部分](https://www.help-doc.top/javascript-lang/js-built-in-object/js-built-in-object.html#json)已经介绍过什么是JSON对象以及JSON的相关格式要求，本篇文档不涉及到写一个JSON字符串，只是介绍如何在后端实现JSON字符串和Java对象的相互转换
 
 ## Java对象转换为JSON字符串
 

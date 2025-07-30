@@ -13,6 +13,7 @@
       - pageupdate: 优化网站部分元素样式
     - "2025-07-24":
       - function: 对部分使用JavaScript生成的元素进行优化
+      - pageupdate: 恢复「JavaEE应用开发」栏目
     - "2025-06-03":
       - pageupdate: 添加网站介绍页面
     - "2025-05-20":

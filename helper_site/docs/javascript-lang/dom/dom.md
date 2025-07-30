@@ -1,0 +1,1077 @@
+# JavaScript与DOM操作
+
+## `document`对象
+
+在介绍部分提到过：BOM最强大的功能是它提供了一个访问HTML页面的一入口——`document`对象，下面就来讨论关于`document`对象的内容
+
+`document`对象表示的是整个网页，在JavaScript中，`document`对象的原型链如下：
+
+`HTMLDocument` -> `Document` -> `Node` -> `EventTarget` -> `Object.prototype` -> `null`
+
+前面在继承部分提到，JavaScript实现继承的方式就是通过原型链，所以现在根据这个原型链就可以知道：凡是在原型链上存在的对象的属性和方法都可以通过`document`去调用
+
+下面是`document`对象的常见属性：
+
+1. `documentElement`：表示`html`根元素
+2. `head`：表示`head`元素
+3. `title`：表示`title`元素
+4. `body`：表示`body`元素
+5. `links`：获取页面中所有的超链接，即所有的`a`元素
+
+## 元素节点
+
+元素节点对象：在网页中，每一个HTML标签都是一个元素节点，而为了通过JavaScript操作这些元素节点，在DOM操作中，有下面的两个方式操作元素节点
+
+1. 通过`document`对象来获取元素节点
+2. 通过`document`对象来创建元素节点
+
+对于获取元素节点来说，有下面的几种`document`对象方法：
+
+1. `getElementById()`：通过HTML元素中的`id`属性获取到指定元素节点，参数传递一个字符串，字符串中的内容即为元素的`id`名称，该方法返回一个获取到的节点对象。注意：传递`id`时不要携带`#`
+2. `getElementsByClassName()`：通过HTML元素中的`class`属性获取到指定的元素节点，参数传递一个字符串，字符串中的内容即为元素的`class`名称，该方法返回一个实时更新的类数组对象，所谓的实时更新表示当网页中新添加元素时，集合也会实时的刷新。注意：传递`class`时不要携带`.`
+3. `getElementsByTagName()`：通过HTML元素的名称获取到指定的元素节点，该方法返回一个实时更新的类数组对象，如果想获取到页面中所有的元素节点，可以在参数中传递`*`。
+4. `getElementsByName()`：通过HTML元素的`name`属性的键值对获取到指定的元素节点，该方法返回一个实时更新的类数组对象，因为`name`属性并不是所有的HTML元素都有，所以一般本方法用于表单
+5. `querySelectorAll()`：根据指定的选择器去页面中查询所有符合选择器的元素，参数传递一个选择器字符串，因为代表选择器，所以该有的符号修饰不可以省略，例如`id`选择器对应的字符串为`#id`，该方法返回一个数组，但是这个数组并不会实时更新
+6. `querySelector()`：根据指定的选择器去页面中查询第一个符合选择器的元素，该方法返回一个元素节点对象，同样不可以省略选择器修饰符
+
+因为DOM操作涉及到页面，所以给出HTML和JavaScript的代码例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div id="box"></div>
+        <div class="box1"></div>
+        <div class="box2"></div>
+    
+        <form>
+            <input type="text" name="username" id="username">
+            <input type="password" name="password" id="password">
+            <input type="submit" value="提交">
+        </form>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    // getElementById()方法
+    let elementById = document.getElementById("box");
+    console.log(elementById); // <div id="box"></div>
+    
+    // getElementsByClassName()方法
+    let elementsByClassName = document.getElementsByClassName("box1");
+    console.log(elementsByClassName); // HTMLCollection [div.box1]
+    
+    // getElementsByTagName()方法
+    let elementsByTagName = document.getElementsByTagName("div");
+    console.log(elementsByTagName);
+    
+    // getElementsByName()方法
+    let elementsByName = document.getElementsByName("username");
+    console.log(elementsByName); // NodeList [input#username]
+    
+    // querySelectorAll()方法
+    let nodeListOf = document.querySelectorAll("div");
+    for (const nodeListOfElement of nodeListOf) {
+        console.log(nodeListOfElement);
+        /*
+        * <div id="box"></div>
+        * <div class="box1"></div>
+        * <div class="box2"></div>
+        * */
+    }
+    
+    // querySelector()方法
+    let querySelector = document.querySelector("div");
+    console.log(querySelector); // <div id="box"></div>
+    ```
+
+对于创建元素节点来说，可以使用`document`对象方法：`createElement()`，但是这个方法只会创建一个元素节点，并不会将节点添加到页面中，后面会具体介绍[在页面中添加元素节点](https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/8.%20JavaScript%E4%B8%8EDOM%E6%93%8D%E4%BD%9C/8.%20JavaScript%E4%B8%8EDOM%E6%93%8D%E4%BD%9C.html#_6)
+
+前面通过`document`对象中的方法可以获得一个元素节点对象，有时需要根据这一个元素节点对象访问到其他元素节点对象，根据DOM中的关系可以使用下面的属性获取其他元素节点：
+
+1. `childNodes`：元素节点对象方法，返回指定节点的孩子节点（会包含空白的子节点）
+2. `children`：元素节点对象方法，返回指定节点的孩子节点（只会包含HTML元素节点）
+3. `firstElementChild`：元素节点对象方法，获取当前元素的第一个子元素
+4. `lastElementChild`：元素节点对象方法，获取当前元素的最后一个子元素
+5. `nextElementSibling`：元素节点对象方法，获取当前元素的下一个兄弟元素
+6. `previousElementSibling`：元素节点对象方法，获取当前元素的前一个兄弟元素
+7. `parentNode`：元素节点对象方法，获取当前元素的父亲节点
+8. `tagName`：元素节点对象方法，获取当前元素的标签名
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```HTML
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div class="box1">
+            <p></p>
+            <div class="box2">
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+                <span></span>
+            </div>
+        </div>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    let elementsByClassName = document.getElementsByClassName("box1");
+    // 获取到第一个元素
+    let current = elementsByClassName[0];
+
+    // 获取元素的父节点
+    let parentNode = current.parentNode;
+    console.log(parentNode);
+
+    // 获取元素的子节点
+    let childNodes = current.childNodes;
+    console.log(childNodes);
+    let children = current.children;
+    console.log(children);
+
+    // 获取第二个孩子
+    current = document.getElementsByClassName("box2")[0].children[0];
+    // 获取当前元素的标签名
+    console.log(current.tagName);
+
+    // 获取元素的第一个子元素
+    let firstElementChild = current.firstElementChild;
+    console.log(firstElementChild);
+    // 获取元素的最后一个子元素
+    let lastElementChild = current.lastElementChild;
+    console.log(lastElementChild);
+
+    // 获取元素的下一个兄弟元素
+    let nextElementSibling = current.nextElementSibling;
+    console.log(nextElementSibling);
+    // 获取元素的前一个兄弟元素
+    let previousSibling = current.previousSibling;
+    console.log(previousSibling);
+    ```
+
+输出结果如下：
+
+<img src="8. JavaScript与DOM操作.assets/image-20241113164334356.png"/>
+
+对于删除元素节点，可以调用元素节点对象的`remove()`方法，该方法没有参数，具体见[在页面中删除元素节点](https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/8.%20JavaScript%E4%B8%8EDOM%E6%93%8D%E4%BD%9C/8.%20JavaScript%E4%B8%8EDOM%E6%93%8D%E4%BD%9C.html#_7)
+
+## 文本节点
+
+在DOM中，网页中所有的文本内容都是文本节点对象，可以通过元素来获取其中的文本节点对象，但是通常不会这么做。在JavaScript中，可以直接通过元素去修改其中的文本，一般有三个属性用于修改文本：
+
+1. `textContent`：获取或修改元素中的文本内容，但是这个属性获取的是标签中的文本内容，不会考虑CSS样式
+2. `innerText`：获取或修改元素中的文本内容，不同于上一个属性，该属性会获取到CSS样式，另外，当使用本属性读取文本内容时，如果内容中有标签，会自动对标签通过实体进行转义。在修改文本内容方面，本属性和上一个属性没有区别
+3. `innerHTML`：获取或修改元素中的HTML代码，可以直接向元素中添加HTML代码。但是，使用本属性插入内容时，有被xss注入的风险
+
+!!! note
+    因为`innerText`属性会读取到CSS样式，所以每一次通过`innerText`属性获取内容时都会触发网页的重排，即重新计算CSS样式
+
+!!! info "xss注入简介"
+
+    当通过`innerHTML`获取用户的输入时，如果用户输入的内容时JavaScript代码，则此时可能会对网页产生影响，这个过程就被称为xss注入
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```HTML
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div id="box" style="color: red"><span></span>
+            这是一个盒子
+        </div>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    let elementById = document.getElementById("box");
+    // 读取
+    console.log(elementById.innerText);
+    console.log(elementById.textContent);
+    console.log(elementById.innerHTML);
+    // 修改
+    elementById.innerText="Hello";
+    elementById.innerHTML="<h1>Hello World</h1>"
+    ```
+
+## 属性节点
+
+属性节点在DOM也是一个对象，通常不需要获取对象而是直接通过元素即可完成对其的各种操作，在JavaScript中有两种方式获取和修改属性节点：
+
+1. `元素.属性名`（需要注意`class`属性需要使用`className`来读取和修改）：需要注意，如果读取到的属性是一个类似于`disabled`属性值为布尔值时，该属性会返回`true`或者`false`，修改时，只需要传递`true`（或者强制转换后的结果为`true`）或者`false`（或者强制转换的结果为`false`）即可
+2. 元素方法（参数传递的都是字符串）：
+   1. 读取：`getAttribute(属性名)`
+   2. 修改：`setAttribute(属性名, 属性值)`
+   3. 删除：`removeAttribute(属性名)`
+
+!!! note
+    使用`setAttribute(属性名, 属性值)`设置属性值是布尔值的属性时，第二个参数一般传递的是与属性名相同的字符串，因为这个方法不论是传递`true`还是`false`，最后都会使该属性值为`true`，如果想通过方法的方式取消属性值是布尔值的属性，则需要使用删除方法
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <form>
+            输入文字：<input class="input1" type="radio">
+            <input type="checkbox" value="sing" name="sng">唱歌
+            <input class="input3" type="checkbox" value="dance" name="dnc">跳舞
+        </form>
+
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```JavaScript
+    // 修改radio属性为text
+    let input1 = document.getElementsByClassName("input1")[0];
+    input1.type="text";
+    input1.placeholder="please input";
+
+    // 修改第一个多选框为禁用
+    // 获取属性name为sng的元素节点
+    let input2 = document.querySelector("[name='sng']");
+    console.log(input2.disabled);
+    input2.disabled = 1;
+    // 修改第二个多选框为禁用
+    let input3 = document.getElementsByClassName("input3")[0];
+    console.log(input3.getAttribute("disabled"));
+    input3.setAttribute("disabled", "disabled");
+    console.log(input3.getAttribute("disabled"));
+    // 删除第二个多选框的禁用属性
+    input3.removeAttribute("disabled");
+    console.log(input3.getAttribute("disabled"));
+    ```
+
+需要注意，第二种方式中的方法只会获取、修改和删除到页面本身已经存在的属性，但是如果这个属性是用户交互行为触发的，那么第二种方式无法识别触发后对应的属性值，例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="zh-cn">
+    <head>
+        <meta charset="UTF-8">
+        <title>选项功能实现</title>
+    </head>
+    <script defer src="./test.js"></script>
+    <body>
+        <form>
+            Please choose your hobby:
+            <input class="ppb" type="checkbox" name="hobby"> Ping Ping Ball
+            <input class="bskball" type="checkbox" name="hobby"> Basketball
+            <input class="bmt" type="checkbox" name="hobby"> Badminton
+            <input class="ftb" type="checkbox" name="hobby"> Football<br/>
+            <button class="co" type="button">Check oppsite</button>
+        </form>
+    </body>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    // 处理反选按钮
+    let oppsite = document.getElementsByClassName("co")[0];
+    // console.log(oppsite);
+    oppsite.addEventListener("click", () => {
+    // 遍历找到爱好选项框，如果选中则取消选中，否则选中
+        for (const hobby of hobbies) {
+            if (!hobby.checked)
+                hobby.checked = true;
+            else
+                hobby.checked = false;
+        }
+    });
+    ```
+
+在上面的代码中，如果JavaScript中的代码：
+
+```javascript
+if (!hobby.checked)
+    hobby.checked = true;
+else
+    hobby.checked = false;
+```
+
+写成如下形式：
+
+```javascript
+if(hobby.getAttribute("checked") == null)
+    hobby.setAttribute("checked", "checked");
+else
+    hobby.removeAttribute("checked");
+```
+
+如果用户在点击按钮之前已经通过点击行为选择了某一个单选框，则会因为一开始所有的按钮没有`checked`属性，所以`getAttribute`获取到的就是`null`，而之后通过`setAttribute`添加了`checked`属性，下一次就会执行`else`分支移除通过`setAttribute`添加的`checked`属性
+
+
+## 事件基础
+
+事件就是用户和页面之间发生的交互行为，例如：点击按钮、鼠标移动、双击按钮、敲击键盘、松开按键……
+
+在JavaScript中，可以通过为事件绑定响应函数（回调函数），来完成和用户之间的交互，有常见的三种绑定响应函数的方式：
+
+1. 可以直接在元素的属性中设置，例如设置元素的`onclick`属性，表示鼠标点击事件
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <button onclick="console.log('hello');">按钮</button>
+    </body>
+    </html>
+    ```
+
+2. 可以通过为元素的指定属性设置回调函数的形式来绑定事件（一个事件只能绑定一个响应函数），例如`onclick`属性表示鼠标单击事件
+
+    === "HTML"
+
+        ```HTML
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Title</title>
+        </head>
+        <body>
+            <button id="btn">按钮</button>
+        </body>
+        <script src="test.js"></script>
+        </html>
+        ```
+
+    === "JavaScript"
+
+        ```JavaScript
+        let element = document.querySelector("#btn");
+        element.onclick = function () {
+            console.log("Hello World");
+        };
+        ```
+
+3. 可以通过元素`addEventListener()`方法来绑定事件，该方法第一个参数传递一个字符串，表示事件名称，一般是元素的事件属性去掉`on`后的事件，例如`onclick`变为`click`，第二个参数传递一个回调函数，回调函数中的代码即为事件触发时执行的内容
+
+    === "HTML"
+
+        ```HTML
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Title</title>
+        </head>
+        <body>
+            <button id="btn">按钮</button>
+        </body>
+        <script src="test.js"></script>
+        </html>
+        ```
+
+    === "JavaScript"
+
+        ```JavaScript
+        let element = document.querySelector("#btn");
+        element.addEventListener("click", () => {
+            console.log("Hello World");
+        });
+        ```
+
+## 文档的加载过程
+
+在上面的HTML代码中，为了保证JavaScript代码可以正常获取到HTML中的元素节点，需要将JavaScript标签放置到`body`标签的下方，`html`标签的上方
+
+之所以需要这样做是因为网页在加载时是自上而下加载的，如果将JavaScript代码写在`head`标签内，则加载`body`中的元素之前就会执行JavaScript代码，但是因为此时`body`中的元素还没创建，所以此时JavaScript的代码可能会出现问题，而如果将JavaScript代码放在后面就可以防止这个问题的出现
+
+理论上只要将JavaScript代码放到`body`标签内的最后位置就可以，没有必要放置到与`body`标签下方作为`body`的兄弟标签。但是根据网页标准，应该将JavaScript的代码标签放置到`body`标签下方作为`body`的兄弟标签
+
+如果还是想将JavaScript代码放置到head标签内部，则需要保证JavaScript代码在网页元素全部加载完毕后再加载，而控制这一行为的方式有下面几种：
+
+1. 将代码编写到`window.onload`的回调函数中
+2. 将代码编写到`document`对象的`DOMContentLoaded`的回调函数中（执行时机早于`window.onload`的回调函数）
+3. 将代码编写到外部的`.js`文件中，然后以`defer`的形式进行引入（执行时机更早，早于`DOMContentLoaded`）（最常用）
+
+例如下面的代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        // 第一种方式
+        window.onload = function () {
+            const btn = document.getElementById("btn")
+            console.log(btn)
+        }
+
+        // 等价于第一种方式
+        window.addEventListener("load", function () {
+            const btn = document.getElementById("btn")
+            alert(btn)
+        })
+
+        // 第二种方式
+        document.addEventListener("DOMContentLoaded", function () {
+            const btn = document.getElementById("btn")
+            alert(btn)
+        })
+    </script>
+
+    <!-- 第三种方式 -->
+    <!-- <script defer src="test.js"></script> -->
+    
+</head>
+<body>
+    <button id="btn">按钮</button>
+</body>
+</html>
+```
+
+综上所述，在实际开发中，更推荐将使用外部引入的方式，而在外部引入时，可以考虑两种方式：
+
+1. 使用外部引入的标签`script.src`，并将标签放置到`body`标签的下方
+2. 使用外部引入的标签`script.src`并加上`defer`属性，将标签放置到`head`标签内部
+
+## 练习1和练习2
+
+可以考虑完成[（附加）DOM和BOM小练习](https://www.help-doc.top/javascript-lang/dom-bom-practice/dom-bom-practice.html#1dom)中的第一个练习和第二个练习
+
+## DOM的修改
+
+### 在网页中添加元素节点
+
+前面的操作都是针对网页中已有的节点，但是修改网页的内容不仅仅涉及到修改已有的内容，还包括新增新的内容，而新增内容就被称为DOM的修改
+
+在元素节点处提到，在DOM中可以通过`document`对象方法：`createElement()`创建元素节点，但是这个创建并不会将指定的节点添加到网页中，所以接下来就主要考虑如何将新增的元素节点插入到网页中
+
+在DOM中，有下面的方法可以将指定的元素节点添加到网页中：
+
+1. `appendChild(待插入的新节点)`：元素对象方法，调用对象为父亲节点，表示在一个父亲节点中的最后一个孩子节点之后添加一个新的节点
+2. `insertAdjacentElement()`：元素对象方法，表示在指定元素节点的指定位置添加一个新的节点，该方法有两个参数，第二个参数表示需要插入的新节点，第一个参数表示需要添加的位置，一共有四个值：
+
+    1. `beforeend`表示指定元素的尾标签的前方（即作为最后一个孩子节点）
+    2. `afterbegin`表示指定元素的开始标签的后方（即作为第一个孩子节点）
+    3. `beforebegin`表示指定元素的开始标签前方（即出现在指定元素前方作为其兄弟节点）
+    4. `afterend`表示指定元素的开始标签后方（即出现在指定元素后方作为其兄弟节点）
+   
+!!! note
+
+    需要注意，同一个新建的元素节点不可以同时插入到多个位置，如果插入到多个位置，则后设定的位置会作为最终位置，先前位置上相应的元素节点会被移除
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div id="box">
+            <ul id="list">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    // appendChild
+    let div = document.getElementById("box");
+    let div1 = document.createElement("div");
+    div1.innerText="this is a span";
+    div.appendChild(div1);
+
+    // insertAdjacentElement
+    let list = document.getElementById("list");
+    let li = document.createElement("li");
+    // 获取到最后一个节点的数值
+    let number = Number(list.lastElementChild.innerText);
+    li.innerText = `${++number}`;
+    // 作为最后一个孩子节点
+    list.insertAdjacentElement("beforeend", li);
+
+    // 作为第一个孩子节点
+    let li1 = document.createElement("li");
+    li1.innerText = `${++number}`;
+    list.insertAdjacentElement("afterbegin", li1);
+
+    // 作为ul的兄弟节点
+    let span1 = document.createElement("span");
+    span1.innerHTML = "<a href='javascript:;'>this is a link</a>"
+    // 前方
+    list.insertAdjacentElement("beforebegin", span1);
+
+    // 后方
+    let span2 = document.createElement("span");
+    span2.innerHTML = span1.innerHTML;
+    list.insertAdjacentElement("afterend", span2);
+    ```
+
+添加结果如下：
+
+<img src="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_16-15-30.png" style="zoom:50%">
+
+### 在网页中删除元素节点
+
+删除元素节点就需要用到元素节点对象的`remove()`方法
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div id="box">
+            <ul id="list">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    let list = document.getElementById("list");
+    let child = list.firstElementChild;
+    child.remove();
+    ```
+
+删除结果如下：
+
+<img src="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_16-44-22.png" style="zoom:70%">
+
+### 替换网页中的元素节点
+
+替换网页中的元素节点可以使用元素节点对象方法：`replaceWith()`，该方法有一个参数，表示用于替换的元素节点对象，表示使用参数中的元素节点替换调用元素节点对象
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div id="box">
+            <ul id="list">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    let div = document.getElementById("box");
+    let list = div.firstElementChild;
+    let para = document.createElement("p");
+    para.innerText = "this is a paragraph, using to replace unordered list";
+    list.replaceWith(para);
+    ```
+
+替换结果如下：
+
+<img src="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_17-40-48.png">
+
+### 元素节点的复制
+
+在DOM中，如果想对某一个节点进行赋值，可以使用元素节点对象方法：`cloneNode()`，该函数有一个参数，该参数值为`true`或者`false`，表示是否复制当前元素节点对象的子节点对象
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div id="box">
+            <ul id="list">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    let list = document.getElementById("list");
+    let list1 = list.firstElementChild;
+    // 不包含节点内部的内容，因为文本节点属于该节点的子节点
+    let newNode = list1.cloneNode();
+    list.appendChild(newNode);
+    // 包含节点内部的内容
+    let newNode1 = list1.cloneNode(true);
+    list.appendChild(newNode1);
+    ```
+
+复制结果如下：
+
+<img src="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_17-47-17.png" style="zoom:70%">
+
+### CSS样式的读取和修改
+
+在DOM中，有下面几种读取和修改样式的方法：
+
+1. 通过元素节点`style`属性读取和修改内联样式。注意，这种修改样式的方式对于样式是多个单词使用`-`连接的需要将其名称转换为驼峰命名，例如`background-color`转换为`backgroundColor`，并且部分属性值有单位的，赋值时需要带单位
+2. 通过`getComputedStyle()`函数读取当前元素所有生效的样式，该函数有两个参数：第一个参数表示要获取样式的对象，第二个参数表示要获取的伪元素，该函数返回一个对象，其中存储了当前元素的样式。注意，本方法返回的样式值不一定能直接参与运算，所以有时需要考虑强制转换
+3. 通过元素属性获取和修改样式：
+    
+    1. `clientHeight`：获取元素内部的高度，包括内容区和内边距
+    2. `clientWidth`：获取元素内部的宽度，包括内容区和内边距
+    3. `offsetHeight`：获取元素的可见框的高度，包括内容区、内边距和边框
+    4. `offsetWidth`：获取元素的可见框的宽度，包括内容区、内边距和边框
+    5. `scrollHeight`：获取元素滚动区域的高度
+    6. `scrollWidth`：获取元素滚动区域的宽度
+    7. `offsetParent`：获取当前元素的定位父元素
+    8. `offsetTop`：获取元素相对于其定位父元素的上方偏移量
+    9. `offsetLeft`：获取元素相对于其定位父元素的左方偏移量
+    10. `scrollTop`：获取或设置元素滚动条的上方偏移量
+    11. `scrollLeft`：获取或设置元素滚动条的左方偏移量
+   
+
+上面的方式简单了解即可，大部分情况下会使用`class`属性修改CSS样式，在DOM中，元素对象中存在一个对象`classList`，其中提供了对当前元素的类的各种操作方法，常见的方法如下：
+
+1. `add()`：表示向元素中添加一个或多个`class`
+2. `remove()`：表示移除元素中的一个或多个`class`
+3. `toggle()`：在已有的多个`class`名中切换元素的`class`，参数中指定某一个`class`
+4. `replace()`：表示使用一个`class`替换已有的`class`，该方法有两个参数，第一个参数表示被替换的`class`，第二个参数表示用于替换的`class`
+5. `contains()`：表示检查某一个元素对象是否含有指定的`class`，参数指定要查找的`class`，该方法返回一个布尔值
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            .box1 {
+                height: 100px;
+                width: 100px;
+                background-color: green;
+            }
+
+            .box2 {
+                background-color: yellow;
+            }
+
+            .box3 {
+                background-color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box"></div>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    let box = document.getElementsByClassName("box")[0];
+    // 添加box1
+    box.classList.add("box1");
+    // 多个class切换
+    box.classList.toggle("box2");
+    // 替换
+    box.classList.replace("box", "box3");
+    // 移除
+    box.classList.remove("box");
+    // 包含
+    console.log(box.classList.contains("box")); // false
+    ```
+
+## 练习3
+
+可以考虑完成[（附加）DOM和BOM小练习](https://www.help-doc.top/javascript-lang/dom-bom-practice/dom-bom-practice.html#3)中的练习3
+
+## 事件对象
+
+在前面事件基础部分已经对事件进行了简单的介绍，本节将细谈DOM中的事件对象`event`
+
+事件对象：由浏览器在事件触发时所创建的对象，这个对象中封装了事件相关的各种信息，通过事件对象可以获取到事件的详细信息，例如鼠标的坐标、键盘的按键……
+
+浏览器在创建事件对象后，会将事件对象作为响应函数的参数传递，所以我们可以在事件的回调函数中定义一个形参来接收事件对象
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <button id="btn">A button</button>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    let btn = document.getElementById("btn");
+    // 鼠标悬浮时打印当前鼠标的坐标
+    btn.addEventListener("mouseover", (event) => {
+        console.log(event.x, event.y);
+    });
+    ```
+
+除了前面的`event`最大的事件对象外，在DOM中还存在着许多小的事件对象，这些对象的父亲就是`Event`，下面介绍两种常见的事件对象：
+
+1. `event.target`：触发事件的对象
+2. `event.currentTarget`：绑定事件的对象（同普通函数的`this`）
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <button id="btn">A button</button>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    let btn = document.getElementById("btn");
+
+    function fn(event) {
+        console.log(this); // <button id="btn">A button</button>
+        console.log(event.currentTarget); // <button id="btn">A button</button>
+        console.log(event.target); // <button id="btn">A button</button>
+    }
+
+    // 鼠标悬浮时打印
+    btn.addEventListener("mouseover", fn);
+    ```
+
+这里拓展两个事件对象中的方法：
+
+1. `event.stopPropagation()`：阻止事件的传导
+2. `event.preventDefault()`：取消部分元素对象的默认行为，例如链接`a`元素节点的链接跳转
+
+在了解什么是事件的传导以及分清`event.target`和`event.currentTarget`的区别之前，先介绍一下何为事件冒泡：事件的冒泡就是指事件从当前触发的元素的向上依次传导给其祖先元素，即当元素上的某个事件被触发后，其祖先元素上的相同事件也会同时被触发，在DOM中，事件冒泡的存在大大的简化了代码的编写，因为不需要考虑某些情况下某个子元素的事件在触发位置为其祖先元素时单独为其祖先元素编写同样的代码。但是在一些场景下并不希望冒泡存在，此时不希望事件冒泡时，就可以通过事件对象来取消冒泡，使用的方法就是`stopPropagation()`
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            .box1 {
+                height: 100px;
+                width: 100px;
+                background-color: green;
+            }
+
+            .box2 {
+                height: 200px;
+                width: 200px;
+                background-color: yellow;
+            }
+
+            .box3 {
+                height: 300px;
+                width: 300px;
+                background-color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box3">
+            <div class="box2">
+                <div class="box1"></div>
+            </div>
+        </div>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    // 有冒泡时
+    document.addEventListener("click", (event) => {
+        console.log(event.x, event.y);
+    });
+    ```
+
+在上面的代码中，因为单击事件绑定给了`document`对象，所以在整个网页内点击都会打印鼠标的坐标，因为冒泡的存在，当鼠标进入`box1`、`box2`或者`box3`时，`box1`、`box2`或者`box3`的单击事件会依次冒泡给其父元素，最后被`document`对象的事件绑定接收从而触发打印鼠标坐标的事件，但是如果没有事件冒泡，当鼠标进入`box1`、`box2`或者`box3`时都无法触发鼠标坐标的打印，例如修改后的代码：
+
+```javascript
+// ...
+
+// 阻止box1、box2和box3的冒泡行为
+let boxes = document.querySelectorAll("div");
+boxes[0].addEventListener("click", (event) => {
+    event.stopPropagation();
+});
+
+boxes[1].addEventListener("click", (event) => {
+    event.stopPropagation();
+});
+
+boxes[2].addEventListener("click", (event) => {
+    event.stopPropagation();
+});
+```
+
+此时再在三个`div`中点击就无法触发鼠标坐标的打印
+
+了解了什么是事件冒泡，现在就可以解释前面提出的两个问题：
+
+1. 所谓事件传导，就是事件从当前事件触发的位置依次传给祖先元素
+2. `event.target`和`event.currentTarget`的区别：`event.target`表示当前触发事件的对象，可能有时事件绑定给了某一个父元素，但是触发位置是其子元素，此时`event.target`就是子元素，而`event.currentTarget`始终不变，就是事件的绑定对象，就算是存在事件冒泡，触发位置是其子元素，`event.currentTarget`依旧是绑定事件的元素节点
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            .box1 {
+                height: 100px;
+                width: 100px;
+                background-color: green;
+            }
+
+            .box2 {
+                height: 200px;
+                width: 200px;
+                background-color: yellow;
+            }
+
+            .box3 {
+                height: 300px;
+                width: 300px;
+                background-color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box3">
+            <div class="box2">
+                <div class="box1"></div>
+            </div>
+        </div>
+    </body>
+    <script src="test.js"></script>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    document.addEventListener("click", function (event) {
+        console.log(event.target);
+        console.log(event.currentTarget);
+    });
+    ```
+
+依次点击`box1`、`box2`、`box3`和`document`结果如下：
+
+<img src="8. JavaScript与DOM操作.assets\Snipaste_2024-11-14_21-28-46.png">
+
+## 事件委派
+
+事件的委派就是将本该绑定给多个元素的事件，统一绑定给`document`，这样可以降低代码复杂度方便维护
+
+例如假设现在有一个需求： 只绑定一次事件，既可以让所有的超链接，包括当前的和未来新建的超链接都具有这个事件。可以考虑：将事件统一绑定给`document`，这样点击超链接时由于事件的冒泡，从而出现`document`上的点击事件被触发，通过这样的方式就可以实现只绑定一次，所有的超链接都会具有这些事件
+
+例如下面的代码：
+
+=== "HTML"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="zh">
+        <head>
+            <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Document</title>
+        </head>
+        <body>
+            <button id="btn">点我一下</button>
+
+            <hr />
+
+            <ul id="list">
+                <li><a href="javascript:;">链接一</a></li>
+                <li><a href="javascript:;">链接二</a></li>
+                <li><a href="javascript:;">链接三</a></li>
+                <li><a href="javascript:;">链接四</a></li>
+            </ul>
+
+            <script>
+                
+            </script>
+        </body>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const list = document.getElementById("list");
+    const btn = document.getElementById("btn");
+
+    // 获取list中的所有链接
+    const links = list.getElementsByTagName("a");
+
+
+    document.addEventListener("click", (event) => {
+        // 在执行代码前，先来判断一下事件是由谁触发
+        // 并且检查每一个链接中的event.target是否存在
+
+        // console.log(Array.from(links))
+
+        if([...links].includes(event.target)){
+            alert(event.target.textContent);
+        }
+    })
+
+    // 点击按钮后，在ul中添加一个新的li
+    btn.addEventListener("click", () => {
+        list.insertAdjacentHTML(
+            "beforeend",
+            "<li><a href='javascript:;'>新超链接</a></li>"
+        );
+    });
+    ```
+
+## 事件的传播机制（了解）
+
+在DOM中，事件的传播可以分为三个阶段：
+
+1. 捕获阶段（由祖先元素向目标元素进行事件的捕获）（默认情况下，事件不会在捕获阶段触发）
+2. 目标阶段（触发事件的对象）
+3. 冒泡阶段（由目标元素向祖先元素进行事件的冒泡）
+
+事件的捕获，指事件从外向内的传导，当前元素触发事件以后，会先从当前元素最大的祖先元素开始向当前元素进行事件的捕获，这一过程发生在第一阶段
+
+如果希望在捕获阶段触发事件，可以将`addEventListener`的第三个参数设置为`true`， 一般情况下并不希望事件在捕获阶段触发，所有通常都不需要设置第三个参数

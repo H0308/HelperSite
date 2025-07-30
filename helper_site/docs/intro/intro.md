@@ -60,13 +60,13 @@ hide:
     <div class="feature-card" data-category="backend">
         <div class="feature-icon">🖥️</div>
         <h3>后端技术</h3>
-        <p>包括Linux操作系统、MySQL数据库等后端开发必备技能</p>
+        <p>目前包括Linux操作系统、MySQL数据库、</p>
         <div class="feature-tags">
             <span class="tag">
-                <a>Linux</a>
+                <a href="#">Linux</a>
             </span>
             <span class="tag">
-                <a>MySQL</a>
+                <a href="#">MySQL</a>
             </span>
         </div>
     </div>

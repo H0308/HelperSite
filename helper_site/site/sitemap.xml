@@ -2,990 +2,982 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://www.help-doc.top/index.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/index.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/collection/collection.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/1.%20C%E8%AF%AD%E8%A8%80%E8%BF%87%E6%B8%A1C%2B%2B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E8%BF%87%E6%B8%A1C%2B%2B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/common-class-packed-class/common-class-packed-class.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/10.%20vector%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/10.%20vector%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/generic/generic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/11.%20list%E7%B1%BB/11.%20list%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/java-array/java-array.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/12.%20list%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/12.%20list%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/java-basic/java-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/13.%20stack%E7%B1%BB/13.%20stack%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/javaio/javaio.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB/14.%20queue%E4%B8%8Epriority_queue%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/json-in-java/json-in-java.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/15.%20stack%E5%92%8Cqueue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/15.%20stack%E5%92%8Cqueue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/junit-reflect-annotation-enum/junit-reflect-annotation-enum.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/16.%20priority_queue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/16.%20priority_queue%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/map/map.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/17.%20%E5%8F%8D%E5%90%91%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%AE%BE%E8%AE%A1/17.%20reverse_iterator%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/multi-thread/multi-thread.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/19.%20C%2B%2B%E7%BB%A7%E6%89%BF/19.%20C%2B%2B%E7%BB%A7%E6%89%BF.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/net-reg-design-lombok/net-reg-design-lombok.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/2.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/2.%20%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/new-jdk8-and-after/new-jdk8-and-after.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/20.%20C%2B%2B%E5%A4%9A%E6%80%81/20.%20C%2B%2B%E5%A4%9A%E6%80%81.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/obj-oriented-and-encapsulation/obj-oriented-and-encapsulation.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/21.%20set%E7%B1%BB/21.%20set%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/obj-oriented-and-exception/obj-oriented-and-exception.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/22.%20map%E7%B1%BB/22.%20map%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/obj-oriented-and-inheritance/obj-oriented-and-inheritance.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/23.%20map%E5%92%8Cset%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/23.%20map%E5%92%8Cset%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/obj-oriented-and-interface/obj-oriented-and-interface.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/24.%20unordered_map%E5%92%8Cunordered_set%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/24.%20unordered_map%E5%92%8Cunordered_set%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/obj-oriented-and-method/obj-oriented-and-method.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/25.%20C%2B%2B11%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7/C%2B%2B%2011%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/obj-oriented-and-polymorphic/obj-oriented-and-polymorphic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/26.%20C%2B%2B%E5%BC%82%E5%B8%B8/26.%20C%2B%2B%E5%BC%82%E5%B8%B8.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/object-class-method-interface/object-class-method-interface.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/27.%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/27.%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/permission-modifier-final-internal-class/permission-modifier-final-internal-class.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/28.%20%E7%89%B9%E6%AE%8A%E7%B1%BB%E8%AE%BE%E8%AE%A1/28.%20%E7%89%B9%E6%AE%8A%E7%B1%BB%E8%AE%BE%E8%AE%A1.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/string-constant-pool/string-constant-pool.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/29.%20C%2B%2B%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/29.%20C%2B%2B%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Java/string-stringbuilder/string-stringbuilder.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/C%2B%2B/3.%20C%2B%2B%E9%BB%98%E8%AE%A4%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/3.%20C%2B%2B%E9%BB%98%E8%AE%A4%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/30.%20C%2B%2BIO%E6%B5%81/30.%20C%2B%2BIO%E6%B5%81.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/31.%20bitset%E7%B1%BB/31.%20bitset%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/32.%20initializer_list%E7%B1%BB/32.%20initializer_list%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7/33.%20C%2B%2B17%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/34.%20C%2B%2B%E6%97%B6%E9%97%B4%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9B%B8%E5%85%B3%E5%BA%93/34.%20C%2B%2B%E6%97%B6%E9%97%B4%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9B%B8%E5%85%B3%E5%BA%93.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/35.%20C%2B%2B%E5%B9%B6%E5%8F%91%E6%94%AF%E6%8C%81%E5%BA%93/35.%20C%2B%2B%E5%B9%B6%E5%8F%91%E6%94%AF%E6%8C%81%E5%BA%93.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/36.%20C%2B%2B%E4%B8%AD%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/36.%20C%2B%2B%E4%B8%AD%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/5.%20C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/5.%20C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/6.%20C%2B%2B%E6%A8%A1%E7%89%88%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/6.%20C%2B%2B%E6%A8%A1%E7%89%88%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/7.%20C%2B%2BSTL%E7%AE%80%E4%BB%8B%E4%B8%8Estring%E7%B1%BB/7.%20C%2B%2BSTL%E7%AE%80%E4%BB%8B%E4%B8%8Estring%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/8.%20string%E7%B1%BB%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/8.%20string%E7%B1%BB%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%2B%2B/9.%20vector%E7%B1%BB/9.%20vector%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/index.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/10.%20C%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0%E4%B8%8E%E5%86%85%E5%AD%98%E5%87%BD%E6%95%B0/10.%20C%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0%E4%B8%8E%E5%86%85%E5%AD%98%E5%87%BD%E6%95%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/11.%20C%E8%AF%AD%E8%A8%80%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/11.%20C%E8%AF%AD%E8%A8%80%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/12.%20C%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/12.%20C%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/13.%20C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/13.%20C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/14.%20C%E8%AF%AD%E8%A8%80%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%88%E9%83%A8%E5%88%86%EF%BC%89/14.%20C%E8%AF%AD%E8%A8%80%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%88%E9%83%A8%E5%88%86%EF%BC%89.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/2.%20%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%8E%E7%B1%BB%E5%9E%8B%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/2.%20%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%8E%E7%B1%BB%E5%9E%8B%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/3.%20C%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8F%98%E9%87%8F/3.%20C%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8F%98%E9%87%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/5.%20C%E8%AF%AD%E8%A8%80%E7%9A%84%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%87%BD%E6%95%B0scanf%E5%8F%8A%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0printf/5.%20C%E8%AF%AD%E8%A8%80%E7%9A%84%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%87%BD%E6%95%B0scanf%E5%8F%8A%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0printf.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/6.%20C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5/6.%20C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/7.%20C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/7.%20C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/8.%20C%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0/8.%20C%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/9.%20C%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88/9.%20C%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/HTML%E4%B8%8ECSS/HTML%E4%B8%8ECSS.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/HTML%E4%B8%8ECSS/CSS2%E7%AC%94%E8%AE%B0/CSS2%E7%AC%94%E8%AE%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/HTML%E4%B8%8ECSS/Emmet%E8%A1%A8%E8%BE%BE%E5%BC%8F/Emmet%E8%A1%A8%E8%BE%BE%E5%BC%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/HTML%E4%B8%8ECSS/HTML%E7%AC%94%E8%AE%B0/HTML%E7%AC%94%E8%AE%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/1.%20Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/10.%20Java%E4%B8%AD%E7%9A%84Object%E7%B1%BB%E5%92%8C%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E3%80%81%E7%BB%8F%E5%85%B8%E6%8E%A5%E5%8F%A3/10.%20Java%E4%B8%AD%E7%9A%84Object%E7%B1%BB%E5%92%8C%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E3%80%81%E7%BB%8F%E5%85%B8%E6%8E%A5%E5%8F%A3.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/11.%20Java.lang%E4%B8%AD%E7%9A%84String%E7%B1%BB%E5%92%8CStringBuilder%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/11.%20Java.lang%E4%B8%AD%E7%9A%84String%E7%B1%BB%E5%92%8CStringBuilder%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/12.%20Java%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%8F%8A%E5%8C%85%E8%A3%85%E7%B1%BB/12.%20Java%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%8F%8A%E5%8C%85%E8%A3%85%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/13.%20Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/13.%20Java%E5%A4%9A%E7%BA%BF%E7%A8%8B.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/14.%20Java%E5%8D%95%E5%88%97%E9%9B%86%E5%90%88/14.%20Java%E5%8D%95%E5%88%97%E9%9B%86%E5%90%88.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/15.%20Java%E5%8F%8C%E5%88%97%E9%9B%86%E5%90%88/15.%20Java%E5%8F%8C%E5%88%97%E9%9B%86%E5%90%88.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/16.%20Java%E7%9A%84IO%E6%B5%81/16.%20Java%E7%9A%84IO%E6%B5%81.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/17.%20Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E3%80%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8ELombok/17.%20Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E3%80%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8ELombok.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/18.%20Java%E4%B8%AD%E7%9A%84JDK8%E5%8F%8A%E5%90%8E%E7%BB%AD%E7%9A%84%E9%87%8D%E8%A6%81%E6%96%B0%E7%89%B9%E6%80%A7/18.%20Java%E4%B8%AD%E7%9A%84JDK8%E5%8F%8A%E5%90%8E%E7%BB%AD%E7%9A%84%E9%87%8D%E8%A6%81%E6%96%B0%E7%89%B9%E6%80%A7.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/19.%20Java%E4%B8%AD%E7%9A%84Junit%E3%80%81%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%97%B6%E6%9C%BA%E4%B8%8E%E6%9C%BA%E5%88%B6%E3%80%81%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E5%8F%8A%E6%9E%9A%E4%B8%BE/19.%20Java%E4%B8%AD%E7%9A%84Junit%E3%80%81%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%97%B6%E6%9C%BA%E4%B8%8E%E6%9C%BA%E5%88%B6%E3%80%81%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E5%8F%8A%E6%9E%9A%E4%B8%BE.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/2.%20Java%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B/2.%20Java%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/20.%20%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89JSON%E5%9C%A8%E5%90%8E%E7%AB%AF%E7%9A%84%E5%BA%94%E7%94%A8/20.%20%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89JSON%E5%9C%A8%E5%90%8E%E7%AB%AF%E7%9A%84%E5%BA%94%E7%94%A8.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/21.%20Java%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/21.%20Java%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/22.%20%E4%BA%86%E8%A7%A3Java%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0/22.%20%E4%BA%86%E8%A7%A3Java%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/3.%20Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%96%B9%E6%B3%95/3.%20Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%96%B9%E6%B3%95.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/4.%20Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%B0%81%E8%A3%85/4.%20Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%B0%81%E8%A3%85.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/5.%20Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%A7%E6%89%BF/5.%20Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%A7%E6%89%BF.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/6.%20Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%8E%A5%E5%8F%A3/6.%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%8E%A5%E5%8F%A3.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/7.%20Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%A4%9A%E6%80%81/7.%20Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%A4%9A%E6%80%81.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/8.%20Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6%E3%80%81final%E3%80%81%E4%BB%A3%E7%A0%81%E5%9D%97%E5%8F%8A%E5%86%85%E9%83%A8%E7%B1%BB/8.%20Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6%E3%80%81final%E3%80%81%E4%BB%A3%E7%A0%81%E5%9D%97%E5%8F%8A%E5%86%85%E9%83%A8%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/Java/9.%20Java%E5%BC%82%E5%B8%B8%E7%B1%BB/9.%20Java%E5%BC%82%E5%B8%B8%E7%B1%BB.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaEE/Spring/1.%20SpringMVC%E5%9F%BA%E7%A1%80/1.%20SpringMVC%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20JavaScript%E5%9F%BA%E7%A1%80/JavaScript%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/10.%20JavaScript%E4%B8%8EJQuery/10.%20JavaScript%E4%B8%8EJQuery.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/11.%20%EF%BC%88%E9%99%84%E5%8A%A0%EF%BC%89DOM%E5%92%8CBOM%E5%B0%8F%E7%BB%83%E4%B9%A0/11.%20%EF%BC%88%E9%99%84%E5%8A%A0%EF%BC%89DOM%E5%92%8CBOM%E5%B0%8F%E7%BB%83%E4%B9%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/2.%20JavaScript%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/2.%20JavaScript%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/3.%20JavaScript%E5%87%BD%E6%95%B0/3.%20JavaScript%E5%87%BD%E6%95%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/4.%20JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/4.%20JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/5.%20JavaScript%E6%95%B0%E7%BB%84/5.%20JavaScript%E6%95%B0%E7%BB%84.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20JavaScript%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1/6.%20JavaScript%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/7.%20DOM%E5%92%8CBOM%E4%BB%8B%E7%BB%8D/7.%20DOM%E5%92%8CBOM%E4%BB%8B%E7%BB%8D.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/8.%20JavaScript%E4%B8%8EDOM%E6%93%8D%E4%BD%9C/8.%20JavaScript%E4%B8%8EDOM%E6%93%8D%E4%BD%9C.html</loc>
-         <lastmod>2025-07-29</lastmod>
-    </url>
-    <url>
-         <loc>https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/9.%20JavaScript%E4%B8%8EBOM%E6%93%8D%E4%BD%9C/9.%20JavaScript%E4%B8%8EBOM%E6%93%8D%E4%BD%9C.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/JavaEE/Spring/springmvc-basic/springmvc-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
          <loc>https://www.help-doc.top/JavaWeb/2.%20Servlet%E5%BC%80%E5%8F%91/2.%20Servlet%E5%BC%80%E5%8F%91.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
          <loc>https://www.help-doc.top/JavaWeb/3.%20%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E5%92%8C%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/3.%20%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E5%92%8C%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
          <loc>https://www.help-doc.top/JavaWeb/5.%20%E4%BC%9A%E8%AF%9D%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8/5.%20%E4%BC%9A%E8%AF%9D%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4/1.%20Linux%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%92%8C%E6%8C%87%E4%BB%A4.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/com-process/com-anonymous-pipe/com-anonymous-pipe.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/10.%20Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/com-process/com-message-queue-semaphore/com-message-queue-semaphore.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/11.%20Linux%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4/11.%20%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/com-process/com-named-pipe-shm/com-named-pipe-shm.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/com-process/com-system-v-resources/com-system-v-resources.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80/13.%20Linux%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/command-line-env/command-line-env.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B/14.%20Linux%E4%B8%AD%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/datalink/datalink.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/15.%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/dns-icmp/dns-icmp.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/16.%20Linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/epoll/epoll.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/17.%20Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/1.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/file-system/file-system.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/17.%20Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/2.%20%E5%91%BD%E5%90%8D%E7%AE%A1%E9%81%93%E4%B8%8E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98/2.%20%E5%91%BD%E5%90%8D%E7%AE%A1%E9%81%93%E4%B8%8E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/gcc-gdb/gcc-gdb.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/17.%20Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/3.%20%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BF%A1%E5%8F%B7%E9%87%8F/3.%20%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%92%8C%E4%BF%A1%E5%8F%B7%E9%87%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/http/http-basic-httpserver/http-basic-httpserver.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/17.%20Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/4.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86System%20V%E6%A0%87%E5%87%86%E4%B8%AD%E4%B8%89%E7%A7%8D%E8%B5%84%E6%BA%90%E7%9A%84%E6%96%B9%E5%BC%8F/4.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86System%20V%E6%A0%87%E5%87%86%E4%B8%AD%E4%B8%89%E7%A7%8D%E8%B5%84%E6%BA%90%E7%9A%84%E6%96%B9%E5%BC%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/http/http-cookie-session/http-cookie-session.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/http/http-header-request-method/http-header-request-method.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/http/http-serialization/http-serialization.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/10.%20%E8%87%AA%E6%97%8B%E9%94%81/10.%20%E8%87%AA%E6%97%8B%E9%94%81.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/http/http-version/http-version.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/2.%20Linux%E7%BA%BF%E7%A8%8B%E5%BA%93%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%BA%93%E5%B0%81%E8%A3%85/2.%20Linux%E7%BA%BF%E7%A8%8B%E5%BA%93%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%BA%93%E5%B0%81%E8%A3%85.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/http/https/https.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/3.%20Linux%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BA%92%E6%96%A5/3.%20Linux%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BA%92%E6%96%A5.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/io-model-select-poll/io-model-select-poll.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/4.%20Linux%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/4.%20Linux%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/io-process/io-process.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/5.%20%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%EF%BC%88Producer-Consumer%20Model%EF%BC%89/5.%20%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%EF%BC%88Producer-Consumer%20Model%EF%BC%89.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/ip/ip.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/6.%20%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/6.%20%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/linux-fileop/linux-fileop.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/7.%20Linux%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B8%8E%E6%AD%BB%E9%94%81/7.%20Linux%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B8%8E%E6%AD%BB%E9%94%81.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/linux-thread/log/log.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/8.%20Linux%E7%BA%BF%E7%A8%8B%E6%B1%A0/8.%20Linux%E7%BA%BF%E7%A8%8B%E6%B1%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/linux-thread/thread-concept-op/thread-concept-op.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/9.%20%E8%AF%BB%E8%80%85%E5%86%99%E8%80%85%E9%97%AE%E9%A2%98%E4%B8%8E%E8%AF%BB%E5%86%99%E9%94%81/9.%20%E8%AF%BB%E8%80%85%E5%86%99%E8%80%85%E9%97%AE%E9%A2%98%E4%B8%8E%E8%AF%BB%E5%86%99%E9%94%81.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/linux-thread/thread-lib/thread-lib.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/2.%20Linux%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/linux-thread/thread-pc/thread-pc.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/linux-thread/thread-pool/thread-pool.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/21.%20Socket%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/linux-thread/thread-rw/thread-rw.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/22.%20UDP%E7%BC%96%E7%A8%8B/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/linux-thread/thread-safe-deadlock/thread-safe-deadlock.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/22.%20UDP%E7%BC%96%E7%A8%8B/2.%20UDP%E5%BA%94%E7%94%A81%EF%BC%9A%E7%BF%BB%E8%AF%91%E8%BD%AF%E4%BB%B6/2.%20UDP%E5%BA%94%E7%94%A81%EF%BC%9A%E7%BF%BB%E8%AF%91%E8%BD%AF%E4%BB%B6.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/linux-thread/thread-semaphore/thread-semaphore.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/22.%20UDP%E7%BC%96%E7%A8%8B/3.%20UDP%E5%BA%94%E7%94%A82%EF%BC%9A%E7%AE%80%E6%98%93%E8%81%8A%E5%A4%A9%E5%AE%A4/3.%20UDP%E5%BA%94%E7%94%A82%EF%BC%9A%E7%AE%80%E6%98%93%E8%81%8A%E5%A4%A9%E5%AE%A4.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/linux-thread/thread-spin/thread-spin.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/23.%20TCP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/linux-thread/thread-sync/thread-sync.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8/24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/makefile-progress-bar/makefile-progress-bar.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/25.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E5%92%8C%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/25.%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E5%92%8C%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/nat-proxy/nat-proxy.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/26.%20%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AEHTTP/1.%20%E4%BB%8B%E7%BB%8DHTTP%E5%8D%8F%E8%AE%AE%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E4%B8%8E%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0HTTPServer/1.%20%E4%BB%8B%E7%BB%8DHTTP%E5%8D%8F%E8%AE%AE%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E4%B8%8E%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0HTTPServer.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/net-basic/net-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/26.%20%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AEHTTP/2.%20%E6%B7%B1%E5%85%A5HTTP%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/2.%20%E6%B7%B1%E5%85%A5HTTP%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/options-commands/options-commands.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/26.%20%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AEHTTP/3.%20HTTP%E6%8A%A5%E5%A4%B4%E5%B1%9E%E6%80%A7%E5%92%8C%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F/3.%20HTTP%E6%8A%A5%E5%A4%B4%E5%B1%9E%E6%80%A7%E5%92%8C%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/os-basic/os-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/26.%20%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AEHTTP/4.%20HTTP%E4%B8%AD%E7%9A%84Cookie%E5%92%8CSession/4.%20HTTP%E4%B8%AD%E7%9A%84Cookie%E5%92%8CSession.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/permission/permission.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/26.%20%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AEHTTP/5.%20HTTP%E7%89%88%E6%9C%AC%E4%BB%8B%E7%BB%8D/5.%20HTTP%E7%89%88%E6%9C%AC%E4%BB%8B%E7%BB%8D.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/process-address-space/process-address-space.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/26.%20%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AEHTTP/6.%20HTTPS%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8E%9F%E7%90%86/6.%20HTTPS%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8E%9F%E7%90%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/process-basic/process-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/27.%20UDP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/27.%20UDP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/process-control/process-control.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/28.%20TCP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/28.%20TCP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/process-relationship-daemon/process-relationship-daemon.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/29.%20%E7%BD%91%E7%BB%9C%E5%B1%82IP%E5%8D%8F%E8%AE%AE/29.%20%E7%BD%91%E7%BB%9C%E5%B1%82IP%E5%8D%8F%E8%AE%AE.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/process-state-priority/process-state-priority.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/3.%20CentOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/process-switch-scheduling/process-switch-scheduling.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/30.%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8D%8F%E8%AE%AE/30.%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8D%8F%E8%AE%AE.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/reactor-et/reactor-et.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/31.%20NAT%E6%8A%80%E6%9C%AF%E3%80%81%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/31.%20NAT%E6%8A%80%E6%9C%AF%E3%80%81%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/serialization-net-cal/serialization-net-cal.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/32.%20%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B%E4%B8%8Eselect%E5%92%8Cpoll%E5%88%86%E5%88%AB%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/32.%20%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B%E4%B8%8Eselect%E5%92%8Cpoll%E5%88%86%E5%88%AB%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/signals-os-principles/signals-os-principles.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/33.%20epoll%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/33.%20epoll%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/socket-basic/socket-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/34.%20Reactor%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%AE%8C%E5%96%84%E5%9F%BA%E4%BA%8E%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8Fepoll%E5%AE%9E%E7%8E%B0TCP%E6%9C%8D%E5%8A%A1%E5%99%A8/34.%20Reactor%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%AE%8C%E5%96%84%E5%9F%BA%E4%BA%8E%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8Fepoll%E5%AE%9E%E7%8E%B0TCP%E6%9C%8D%E5%8A%A1%E5%99%A8.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/soft-hard-link/soft-hard-link.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/35.%20%E7%90%86%E8%A7%A3Linux%E5%A6%82%E4%BD%95%E7%9C%8B%E5%BE%85%E8%BF%9E%E6%8E%A5%E4%BB%A5%E5%8F%8ATCP%E5%85%A8%E8%BF%9E%E6%8E%A5%E9%98%9F%E5%88%97/35.%20%E7%90%86%E8%A7%A3Linux%E5%A6%82%E4%BD%95%E7%9C%8B%E5%BE%85%E8%BF%9E%E6%8E%A5%E4%BB%A5%E5%8F%8ATCP%E5%85%A8%E8%BF%9E%E6%8E%A5%E9%98%9F%E5%88%97.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/software-installation/software-installation.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/36.%20DNS%E4%B8%8EICMP/36.%20DNS%E4%B8%8EICMP.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/tcp-basic/tcp-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb/4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/tcp-connection-backlog/tcp-connection-backlog.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F/5.%20Linux%E4%B8%8B%E7%9A%84Makefile%E4%B8%8E%E8%BF%9B%E5%BA%A6%E6%9D%A1%E7%A8%8B%E5%BA%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/tcp-principles/tcp-principles.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/udp/udp-app1/udp-app1.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/7.%20Linux%E8%BF%9B%E7%A8%8B/7.%20Linux%E8%BF%9B%E7%A8%8B.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/udp/udp-app2/udp-app2.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7/8.%20Linux%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/udp/udp-basic/udp-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Linux/9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/9.%20Linux%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/Linux/udp-principles/udp-principles.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/MySQL/JDBC/JDBC%E5%9F%BA%E7%A1%80/JDBC%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/MySQL/JDBC/JDBC-advanced/JDBC-advanced.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/MySQL/JDBC/JDBC%E8%BF%9B%E9%98%B6/JDBC%E8%BF%9B%E9%98%B6.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/MySQL/JDBC/JDBC-basic/JDBC-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/MySQL/JDBC/JDBC%E9%AB%98%E7%BA%A7/JDBC%E9%AB%98%E7%BA%A7.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/MySQL/JDBC/JDBC-intermediate/JDBC-intermediate.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/MySQL/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/MySQL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/MySQL/mysql-op/basic-op/basic-op.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/MySQL/MySQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BDMySQL/1.%20Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BDMySQL.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/MySQL/mysql-op/install-uninstall-mysql-ubuntu/install-uninstall-mysql-ubuntu.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/MySQL/MySQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/2.%20MySQL%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/2.%20MySQL%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/array-basic/array-concept/array-concept.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/array-basic/binary-search/binary-search.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/2.%20Python%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/2.%20Python%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/array-basic/bit-operation/bit-operation.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/3.%20Python%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/3.%20Python%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/array-basic/prefix-sum/prefix-sum.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/4.%20Python%E5%87%BD%E6%95%B0/4.%20Python%E5%87%BD%E6%95%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/array-basic/remove-element/remove-element.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/5.%20Python%E6%A8%A1%E5%9D%97/5.%20Python%E6%A8%A1%E5%9D%97.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/array-basic/simulation/simulation.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.%20Python%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/6.%20Python%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/array-basic/sliding-window/sliding-window.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/7.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/backtracking/backtracking-advanced/backtracking-advanced.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/8.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/8.%20Python%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/backtracking/backtracking-basic/backtracking-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/Qt%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20Qt%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E8%A7%A3%E9%87%8A/1.%20Qt%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E8%A7%A3%E9%87%8A.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/backtracking/backtracking-concept/backtracking-concept.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20vue%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/1.%20vue%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/common/common.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/2.%20vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%9F%BA%E7%A1%80/2.%20vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/dp/dp-concept/dp-concept.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/3.%20vue%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/3.%20vue%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/greedy/greedy-basic/greedy-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/4.%20%E4%BB%8E%E6%96%B0%E7%BB%93%E6%9E%84%E5%86%8D%E7%9C%8B%E5%93%8D%E5%BA%94%E5%BC%8F%E5%9F%BA%E7%A1%80/4.%20%E4%BB%8E%E6%96%B0%E7%BB%93%E6%9E%84%E5%86%8D%E7%9C%8B%E5%93%8D%E5%BA%94%E5%BC%8F%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/greedy/greedy-concept/greedy-concept.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/5.%20vue%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/5.%20vue%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/hash-table/hash-table-advanced/hash-table-advanced.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.vue%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/6.%20vue%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/hash-table/hash-table-basic/hash-table-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E5%85%B3%E4%BA%8E%E4%BD%9C%E8%80%85/%E5%85%B3%E4%BA%8E%E4%BD%9C%E8%80%85.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/hash-table/hash-table-concept/hash-table-concept.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E8%81%94%E7%B3%BB%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/list/list-advanced/list-advanced.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%85%B6%E5%AE%83/C%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0%E6%A0%88%E5%B8%A7/%E5%85%B3%E4%BA%8E%E5%87%BD%E6%95%B0%E6%A0%88%E5%B8%A7%EF%BC%88C%E8%AF%AD%E8%A8%80%E6%BC%94%E7%A4%BA%EF%BC%89.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/list/list-basic/list-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%85%B6%E5%AE%83/Shell%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EShell.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/list/list-concept/list-concept.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%85%B6%E5%AE%83/%E5%85%B3%E4%BA%8EC%2B%2B%E6%97%A5%E5%BF%97%E5%BA%93spdlog/%E5%85%B3%E4%BA%8EC%2B%2B%E6%97%A5%E5%BF%97%E5%BA%93spdlog.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/other/big-number-op/big-number-op.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%85%B6%E5%AE%83/%E5%85%B3%E4%BA%8EGit/Git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/Git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/other/gcd-lcm/gcd-lcm.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%85%B6%E5%AE%83/%E5%85%B3%E4%BA%8EGit/Git%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C/Git%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/other/hall/hall.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%85%B6%E5%AE%83/%E5%85%B3%E4%BA%8EJSONCPP%E5%BA%93/%E5%85%B3%E4%BA%8EJSONCPP%E5%BA%93.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/other/kmp/kmp.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%85%B6%E5%AE%83/%E5%85%B3%E4%BA%8EMuduo%E5%BA%93/%E5%85%B3%E4%BA%8EMuduo%E5%BA%93.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/other/modulo/modulo.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%85%B6%E5%AE%83/%E5%85%B3%E4%BA%8Exml%E6%96%87%E4%BB%B6/%E5%85%B3%E4%BA%8Exml%E6%96%87%E4%BB%B6.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/other/number-sum/number-sum.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/Sunshine%2BMoonlight%E5%AE%9E%E7%8E%B0%E5%B1%8F%E5%B9%95%E5%86%85%E5%AE%B9%E4%B8%B2%E6%B5%81/Sunshine%2BMoonlight%E5%AE%9E%E7%8E%B0%E5%B1%8F%E5%B9%95%E5%86%85%E5%AE%B9%E4%B8%B2%E6%B5%81.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/other/polish-notation/polish-notation.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/Tomcat%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/Tomcat%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/Windows%E7%B3%BB%E7%BB%9F%E4%B8%8B%E5%9C%A8VMware%E4%B8%AD%E9%85%8D%E7%BD%AELinux%E7%8E%AF%E5%A2%83%E5%B9%B6%E9%80%9A%E8%BF%87%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9B%E8%A1%8C%E8%BF%9E%E6%8E%A5/Windows%E7%B3%BB%E7%BB%9F%E4%B8%8B%E5%9C%A8VMware%E4%B8%AD%E9%85%8D%E7%BD%AELinux%E7%8E%AF%E5%A2%83%E5%B9%B6%E9%80%9A%E8%BF%87%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9B%E8%A1%8C%E8%BF%9E%E6%8E%A5.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-bst/binary-tree-bst.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vim%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9/vim%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-concept/binary-tree-concept.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E5%B7%A5%E5%85%B7%E5%B8%AE%E5%8A%A9/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/vscode%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-traversal/binary-tree-traversal.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.%20%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/recursion-binary-tree/recursion-in-regular/recursion-in-regular.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/10.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/recursion-binary-tree/recursion-intro/recursion-intro.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%20AVL%E6%A0%91/11.%20AVL%E6%A0%91.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/stack-queue/stack-queue-basic/stack-queue-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%20%E7%BA%A2%E9%BB%91%E6%A0%91/12.%20%E7%BA%A2%E9%BB%91%E6%A0%91.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/stack-queue/stack-queue-concept/stack-queue-concept.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%20%E5%93%88%E5%B8%8C%E8%A1%A8/13.%20%E5%93%88%E5%B8%8C%E8%A1%A8.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/string/string-advanced/string-advanced.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/14.%20%E4%BD%8D%E5%9B%BE/14.%20%E4%BD%8D%E5%9B%BE.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/string/string-basic/string-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/15.%20%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E4%B8%8E%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/15.%20%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E4%B8%8E%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/algorithm/two-pointers/two-pointers.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/2.%20%E9%A1%BA%E5%BA%8F%E8%A1%A8/2.%20%E9%A1%BA%E5%BA%8F%E8%A1%A8.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/author/about/about.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%20%E9%93%BE%E8%A1%A8/3.%20%E9%93%BE%E8%A1%A8.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/author/contact/contact.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/4.%20%E6%A0%88/4.%20%E6%A0%88.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/index.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.%20%E9%98%9F%E5%88%97/5.%20%E9%98%9F%E5%88%97.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/branch-line/branch-line.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/6.%20%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/6.%20%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/c-base/c-base.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/7.%20%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/7.%20%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/char-str-func/char-str-func.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8.%20%E5%A0%86/8.%20%E5%A0%86.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/compile-link/compile-link.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/9.%20%E6%8E%92%E5%BA%8F/9.%20%E6%8E%92%E5%BA%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/cycle-line/cycle-line.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/0.%20%E5%B8%B8%E7%94%A8%E5%86%85%E5%AE%B9/0.%20%E5%B8%B8%E7%94%A8%E5%86%85%E5%AE%B9.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/dynamic-memory/dynamic-memory.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/1.%20%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/fileop/fileop.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/2.%20%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/2.%20%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/func/func.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/3.%20%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/3.%20%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/num-in-memory/num-in-memory.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/4.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/4.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/op/op.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/5.%20%E5%89%8D%E7%BC%80%E5%92%8C/5.%20%E5%89%8D%E7%BC%80%E5%92%8C.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/preprocess/preprocess.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/6.%20%E6%A8%A1%E6%8B%9F/6.%20%E6%A8%A1%E6%8B%9F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/ptr/ptr.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/7.%20%E4%BD%8D%E8%BF%90%E7%AE%97/7.%20%E4%BD%8D%E8%BF%90%E7%AE%97.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/scanf-printf/scanf-printf.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/10.%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AF%87/1.%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/c-lang/var-type/var-type.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/2.%20%E9%93%BE%E8%A1%A8%E7%AF%87/1.%20%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/index.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/2.%20%E9%93%BE%E8%A1%A8%E7%AF%87/2.%20%E9%93%BE%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E9%93%BE%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/bitset/bitset.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/2.%20%E9%93%BE%E8%A1%A8%E7%AF%87/3.%20%E9%93%BE%E8%A1%A8%E8%BF%9B%E9%98%B6%E7%BB%83%E4%B9%A0/3.%20%E9%93%BE%E8%A1%A8%E8%BF%9B%E9%98%B6%E7%BB%83%E4%B9%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/c-to-cpp/c-to-cpp.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/3.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E7%AF%87/1.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/class-obj/class-obj.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/3.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E7%AF%87/2.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/class-obj-other/class-obj-other.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/3.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E7%AF%87/3.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E8%BF%9B%E9%98%B6%E7%BB%83%E4%B9%A0/3.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E8%BF%9B%E9%98%B6%E7%BB%83%E4%B9%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/cppio/cppio.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/4.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AF%87/1.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/1.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/exception/exception.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/4.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AF%87/2.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9B%E9%98%B6%E7%BB%83%E4%B9%A0/2.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9B%E9%98%B6%E7%BB%83%E4%B9%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/extend/extend.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/5.%20%E5%8F%8C%E6%8C%87%E9%92%88%E7%AF%87/5.%20%E5%8F%8C%E6%8C%87%E9%92%88%E7%AE%97%E6%B3%95.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/format/format.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/6.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%AF%87/1.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/initializer-list/initializer-list.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/6.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%AF%87/2.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/list/list.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/0.%20%E9%80%92%E5%BD%92%E4%BB%8B%E7%BB%8D/0.%20%E9%80%92%E5%BD%92%E4%BB%8B%E7%BB%8D.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/map/map.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/1.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/member-func/member-func.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/memory/memory.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/3.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/3.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/multi-thread/multi-thread.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/4.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/4.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/new-in-cpp11/new-in-cpp11.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/5.%20%E5%B8%B8%E8%A7%84%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E9%80%92%E5%BD%92/5.%20%E5%B8%B8%E8%A7%84%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E9%80%92%E5%BD%92.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/new-in-cpp17/new-in-cpp17.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/8.%20%E5%9B%9E%E6%BA%AF%E7%AF%87/1.%20%E5%9B%9E%E6%BA%AF%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E5%9B%9E%E6%BA%AF%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/polymorphic/polymorphic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/8.%20%E5%9B%9E%E6%BA%AF%E7%AF%87/2.%20%E5%9B%9E%E6%BA%AF%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E5%9B%9E%E6%BA%AF%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/queue-priority-queue/queue-priority-queue.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/8.%20%E5%9B%9E%E6%BA%AF%E7%AF%87/3.%20%E5%9B%9E%E6%BA%AF%E8%BF%9B%E9%98%B6%E7%BB%83%E4%B9%A0/3.%20%E5%9B%9E%E6%BA%AF%E8%BF%9B%E9%98%B6%E7%BB%83%E4%B9%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/reverse-iterator/reverse-iterator.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/9.%20%E8%B4%AA%E5%BF%83%E7%AF%87/1.%20%E8%B4%AA%E5%BF%83%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E8%B4%AA%E5%BF%83%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/set/set.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/9.%20%E8%B4%AA%E5%BF%83%E7%AF%87/2.%20%E8%B4%AA%E5%BF%83%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E8%B4%AA%E5%BF%83%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/sim-list/sim-list.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/sim-map-set/sim-map-set.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/%E5%8F%96%E6%A8%A1%E4%B8%8E%E5%8F%96%E4%BD%99/%E5%8F%96%E6%A8%A1%E4%B8%8E%E5%8F%96%E4%BD%99.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/sim-priority-queue/sim-priority-queue.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/%E5%A4%A7%E6%95%B0%E8%BF%90%E7%AE%97/%E5%A4%A7%E6%95%B0%E8%BF%90%E7%AE%97.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/sim-stack-queue/sim-stack-queue.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%97%E5%92%8C%E4%B8%8E%E6%95%B0%E5%AD%97%E6%A0%B9/%E6%95%B0%E5%AD%97%E5%92%8C%E4%B8%8E%E6%95%B0%E5%AD%97%E6%A0%B9.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/sim-string/sim-string.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%9B%A0%E6%95%B0%E5%92%8C%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%9B%A0%E6%95%B0%E5%92%8C%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/sim-unordered-map-set/sim-unordered-map-set.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/sim-vector/sim-vector.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%AE%97%E6%B3%95/%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/%E9%9C%8D%E5%B0%94%E6%B3%95%E5%88%99/%E9%9C%8D%E5%B0%94%E6%B3%95%E5%88%99.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/smart-ptr/smart-ptr.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D/%E7%BD%91%E7%AB%99%E4%BB%8B%E7%BB%8D.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/special-class-design/special-class-design.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/stack/stack.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/stl-intro-string/stl-intro-string.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/2.%20%E5%9F%BA%E4%BA%8EJSON%E7%9A%84RPC%E6%A1%86%E6%9E%B6/1.%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%87%86%E5%A4%87/1.%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%87%86%E5%A4%87.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/template/template.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/2.%20%E5%9F%BA%E4%BA%8EJSON%E7%9A%84RPC%E6%A1%86%E6%9E%B6/2.%20%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1/2.%20%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/time-rand/time-rand.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/2.%20%E5%9F%BA%E4%BA%8EJSON%E7%9A%84RPC%E6%A1%86%E6%9E%B6/3.%20%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%EF%BC%88RPC%E3%80%81%E6%B3%A8%E5%86%8C%EF%BC%89/3.%20%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%EF%BC%88RPC%E3%80%81%E6%B3%A8%E5%86%8C%EF%BC%89.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/type-cast/type-cast.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/2.%20%E5%9F%BA%E4%BA%8EJSON%E7%9A%84RPC%E6%A1%86%E6%9E%B6/4.%20%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95/4.%20%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/cpp/vector/vector.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/2.%20%E5%9F%BA%E4%BA%8EJSON%E7%9A%84RPC%E6%A1%86%E6%9E%B6/5.%20%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%BB%E9%A2%98%E3%80%81%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B0%81%E8%A3%85%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%B0%81%E8%A3%85%EF%BC%89/5.%20%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%BB%E9%A2%98%E3%80%81%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B0%81%E8%A3%85%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%B0%81%E8%A3%85%EF%BC%89.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/data-structure/avl-tree/avl-tree.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/3.%20%E4%BB%BFMuduo%E5%BA%93%E7%9A%84%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/1.%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%87%86%E5%A4%87/1.%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%87%86%E5%A4%87.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/data-structure/binary-search-tree/binary-search-tree.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
     <url>
-         <loc>https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/3.%20%E4%BB%BFMuduo%E5%BA%93%E7%9A%84%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/2.%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BA%95%E5%B1%82%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1/2.%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BA%95%E5%B1%82%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1.html</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://www.help-doc.top/data-structure/binary-tree/binary-tree.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/bitset/bitset.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/bloom-filter/bloom-filter.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/hash-table/hash-table.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/heap/heap.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/linked-list/linked-list.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/queue/queue.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/red-black-tree/red-black-tree.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/sequential-structure-and-sequential-table/sequential-structure-and-sequential-table.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/sort/sort.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/stack/stack.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/time-space-complexity/time-space-complexity.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/data-structure/tree-basic-concept/tree-basic-concept.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/html-css/css2/css2.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/html-css/emmet/emmet.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/html-css/html/html.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/intro/intro.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/javascript-lang/bom/bom.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/javascript-lang/dom/dom.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/javascript-lang/dom-bom/dom-bom.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/javascript-lang/dom-bom-practice/dom-bom-practice.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/javascript-lang/jquery/jquery.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/javascript-lang/js-array/js-array.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/javascript-lang/js-basic/js-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/javascript-lang/js-built-in-object/js-built-in-object.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/javascript-lang/js-function/js-function.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/javascript-lang/js-obj-basic/js-obj-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/javascript-lang/js-oop/js-oop.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/other/func-stack-c/func-stack-c.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/other/git/git-basic/git-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/other/git/git-collaboration/git-collaboration.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/other/jsoncpp/jsoncpp.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/other/muduo/muduo.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/other/shell/shell.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/other/spdlog/spdlog.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/other/xml/xml.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/projects/boost-searching-engine/boost-searching-engine.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/projects/json-rpc/basic-module-design/basic-module-design.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/projects/json-rpc/function-module-design-1/function-module-design-1.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/projects/json-rpc/function-module-design-2/function-module-design-2.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/projects/json-rpc/function-test/function-test.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/projects/json-rpc/intro/intro.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/projects/reactor-server/intro/intro.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/projects/reactor-server/server-module-design/server-module-design.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/python/class-obj-advanced/class-obj-advanced.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/python/class-obj-basic/class-obj-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/python/composite-data-type/composite-data-type.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/python/exception/exception.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/python/func/func.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/python/module/module.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/python/output-format-fileop/output-format-fileop.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/python/python-basic/python-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/qt/pre-qt/pre-qt.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/timeline/timeline.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/tooltips/sunshine-moonlight/sunshine-moonlight.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/tooltips/tomcat/tomcat.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/tooltips/vim/vim.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/tooltips/vscode-snippets/vscode-snippets.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/tooltips/windows-vmware-linux/windows-vmware-linux.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/vue/basic-command/basic-command.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/vue/basic-structure/basic-structure.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/vue/component-lifecycle/component-lifecycle.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/vue/new-structure-reactive-basic/new-structure-reactive-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/vue/pre-vue/pre-vue.html</loc>
+         <lastmod>2025-07-30</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/vue/reactive-basic/reactive-basic.html</loc>
+         <lastmod>2025-07-30</lastmod>
     </url>
 </urlset>

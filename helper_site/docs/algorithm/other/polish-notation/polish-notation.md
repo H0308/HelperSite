@@ -34,9 +34,9 @@
 
 ## 后缀表达法（逆波兰表达式）
 
-**逆波兰表示法**（英语：Reverse Polish notation，缩写**RPN**，或**波兰记法**、**逆卢卡西维茨记法**），是一种由[波兰](https://zh.wikipedia.org/wiki/波兰)数学家[扬·卢卡西维茨](https://zh.wikipedia.org/wiki/扬·卢卡西维茨)于1920年引入的数学[表达式](https://zh.wikipedia.org/wiki/表達式)形式，在逆波兰记法中，所有[操作符](https://zh.wikipedia.org/wiki/運算子)置于[操作数](https://zh.wikipedia.org/wiki/操作数)的后面，因此也被称为**后缀表示法**、**后序表示法**[[1\]](https://zh.wikipedia.org/wiki/逆波兰表示法#cite_note-1)。逆波兰记法不需要括号来标识操作符的优先级。
+**逆波兰表示法**（英语：Reverse Polish notation，缩写**RPN**，或**波兰记法**、**逆卢卡西维茨记法**），是一种由[波兰](https://zh.wikipedia.org/wiki/波兰)数学家[扬·卢卡西维茨](https://zh.wikipedia.org/wiki/扬·卢卡西维茨)于1920年引入的数学[表达式](https://zh.wikipedia.org/wiki/表達式)形式，在逆波兰记法中，所有[操作符](https://zh.wikipedia.org/wiki/運算子)置于[操作数](https://zh.wikipedia.org/wiki/操作数)的后面，因此也被称为**后缀表示法**、**后序表示法**[1](https://zh.wikipedia.org/wiki/逆波兰表示法#cite_note-1)。逆波兰记法不需要括号来标识操作符的优先级。
 
-逆波兰结构由[弗里德里希·L·鲍尔](https://zh.wikipedia.org/w/index.php?title=弗里德里希·L·鲍尔&action=edit&redlink=1)和[艾兹格·迪科斯彻](https://zh.wikipedia.org/wiki/艾兹格·迪科斯彻)在1960年代早期提议用于表达式求值，以利用[堆栈结构](https://zh.wikipedia.org/wiki/堆栈)减少计算机[内存](https://zh.wikipedia.org/wiki/内存)访问。逆波兰记法和相应的[算法](https://zh.wikipedia.org/wiki/算法)由[澳大利亚](https://zh.wikipedia.org/wiki/澳大利亚)哲学家、计算机学家[查尔斯·伦纳德·汉布尔](https://zh.wikipedia.org/w/index.php?title=查尔斯·伦纳德·汉布林&action=edit&redlink=1)在1960年代中期扩充[[2\]](https://zh.wikipedia.org/wiki/逆波兰表示法#cite_note-2)[[3\]](https://zh.wikipedia.org/wiki/逆波兰表示法#cite_note-3)。
+逆波兰结构由[弗里德里希·L·鲍尔](https://zh.wikipedia.org/w/index.php?title=弗里德里希·L·鲍尔&action=edit&redlink=1)和[艾兹格·迪科斯彻](https://zh.wikipedia.org/wiki/艾兹格·迪科斯彻)在1960年代早期提议用于表达式求值，以利用[堆栈结构](https://zh.wikipedia.org/wiki/堆栈)减少计算机[内存](https://zh.wikipedia.org/wiki/内存)访问。逆波兰记法和相应的[算法](https://zh.wikipedia.org/wiki/算法)由[澳大利亚](https://zh.wikipedia.org/wiki/澳大利亚)哲学家、计算机学家[查尔斯·伦纳德·汉布尔](https://zh.wikipedia.org/w/index.php?title=查尔斯·伦纳德·汉布林&action=edit&redlink=1)在1960年代中期扩充[2](https://zh.wikipedia.org/wiki/逆波兰表示法#cite_note-2)[3](https://zh.wikipedia.org/wiki/逆波兰表示法#cite_note-3)。
 
 在1960和1970年代，逆波兰记法广泛地被用于台式[计算器](https://zh.wikipedia.org/wiki/计算器)，因此也在普通公众（如[工程](https://zh.wikipedia.org/wiki/工程)、[商业](https://zh.wikipedia.org/wiki/商业)和[金融](https://zh.wikipedia.org/wiki/金融)等领域）中使用。
 

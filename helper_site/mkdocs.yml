@@ -374,12 +374,12 @@ extra:
           name: 页面没有帮助到我
           data: 0
           note: >- 
-            谢谢你的反馈！联系<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html">作者</a>提供更详细的信息
+            谢谢你的反馈！联系<a href="https://www.help-doc.top/author/contact/contact.html">作者</a>提供更详细的信息
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/H0308
     - icon: fontawesome/brands/qq
-      link: https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html
+      link: https://www.help-doc.top/author/contact/contact.html
   generator: false
       
 plugins:
@@ -428,7 +428,7 @@ plugins:
       shadow: true
       manual: false
   - git-revision-date-localized:
-      enable_creation_date: true
+      # enable_creation_date: true
       type: date
       exclude:
         - index.md

@@ -179,65 +179,65 @@ nav:
         - 大数运算: algorithm/other/big-number-op/big-number-op.md
         - 取模与取余: algorithm/other/modulo/modulo.md
   - Linux:
-    - Linux常用选项和指令: Linux/1. Linux常用选项和指令/1. Linux常用选项和指令.md
-    - Linux权限相关: Linux/2. Linux权限相关/2. Linux权限相关.md
-    - CentOS软件安装: Linux/3. CentOS软件安装/3. CentOS软件安装.md
-    - Linux下的gcc与gdb: Linux/4. Linux下的gcc与gdb/4. Linux下的gcc与gdb.md
-    - Linux下的Makefile与进度条程序: Linux/5. Linux下的Makefile与进度条程序/5. Linux下的Makefile与进度条程序.md
-    - 操作系统基础知识: Linux/6. 操作系统基础知识/6. 操作系统基础知识.md
-    - Linux进程基础: Linux/7. Linux进程/7. Linux进程.md
-    - Linux进程状态与进程优先级: Linux/8. Linux进程状态与进程优先级/8. Linux进程状态与进程优先级.md
-    - Linux进程切换以及调度算法: Linux/9. Linux进程切换以及调度算法/9. Linux进程切换以及调度算法.md
-    - Linux命令行与环境变量: Linux/10. Linux命令行与环境变量/10. Linux命令行与环境变量.md
-    - Linux进程地址空间: Linux/11. Linux进程地址空间/11. 进程地址空间.md
-    - Linux进程控制: Linux/12. Linux进程控制/12. Linux进程控制.md
-    - Linux文件操作基础: Linux/13. Linux文件操作基础/13. Linux文件操作基础.md
-    - Linux中输入和输出基本过程: Linux/14. Linux中输入和输出基本过程/14. Linux中输入和输出基本过程.md
-    - Linux文件系统: Linux/15. Linux文件系统/15. Linux文件系统.md
-    - Linux软链接和硬链接: Linux/16. Linux软链接和硬链接/16. Linux软链接和硬链接.md
+    - Linux常用选项和指令: Linux/options-commands/options-commands.md
+    - Linux权限相关: Linux/permission/permission.md
+    - CentOS软件安装: Linux/software-installation/software-installation.md
+    - Linux下的gcc与gdb: Linux/gcc-gdb/gcc-gdb.md
+    - Linux下的Makefile与进度条程序: Linux/makefile-progress-bar/makefile-progress-bar.md
+    - 操作系统基础知识: Linux/os-basic/os-basic.md
+    - Linux进程基础: Linux/process-basic/process-basic.md
+    - Linux进程状态与进程优先级: Linux/process-state-priority/process-state-priority.md
+    - Linux进程切换以及调度算法: Linux/process-switch-scheduling/process-switch-scheduling.md
+    - Linux命令行与环境变量: Linux/command-line-env/command-line-env.md
+    - Linux进程地址空间: Linux/process-address-space/process-address-space.md
+    - Linux进程控制: Linux/process-control/process-control.md
+    - Linux文件操作基础: Linux/linux-fileop/linux-fileop.md
+    - Linux中输入和输出基本过程: Linux/io-process/io-process.md
+    - Linux文件系统: Linux/file-system/file-system.md
+    - Linux软链接和硬链接: Linux/soft-hard-link/soft-hard-link.md
     - Linux进程间通信: 
-      - 进程间通信介绍与匿名管道: Linux/17. Linux进程间通信/1. 进程间通信介绍与匿名管道/1. 进程间通信介绍与匿名管道.md
-      - 命名管道与共享内存: Linux/17. Linux进程间通信/2. 命名管道与共享内存/2. 命名管道与共享内存.md
-      - 消息队列与信号量: Linux/17. Linux进程间通信/3. 消息队列和信号量/3. 消息队列和信号量.md
-      - 操作系统管理System V标准中三种资源的方式: Linux/17. Linux进程间通信/4. 操作系统管理System V标准中三种资源的方式/4. 操作系统管理System V标准中三种资源的方式.md
-    - Linux信号与操作系统原理: Linux/18. Linux信号与操作系统原理/18. Linux信号与操作系统原理.md
+      - 进程间通信介绍与匿名管道: Linux/com-process/com-anonymous-pipe/com-anonymous-pipe.md
+      - 命名管道与共享内存: Linux/com-process/com-named-pipe-shm/com-named-pipe-shm.md
+      - 消息队列与信号量: Linux/com-process/com-message-queue-semaphore/com-message-queue-semaphore.md
+      - 操作系统管理System V标准中三种资源的方式: Linux/com-process/com-system-v-resources/com-system-v-resources.md
+    - Linux信号与操作系统原理: Linux/signals-os-principles/signals-os-principles.md
     - Linux线程:
-      - Linux线程概念与线程操作: Linux/19. Linux线程/1. Linux线程概念与线程操作/1. Linux线程概念与线程操作.md
-      - Linux线程库与线程库封装: Linux/19. Linux线程/2. Linux线程库与线程库封装/2. Linux线程库与线程库封装.md
-      - Linux线程互斥与同步: Linux/19. Linux线程/3. Linux线程同步与互斥/3. Linux线程同步与互斥.md
-      - Linux线程与信号量: Linux/19. Linux线程/4. Linux线程与信号量/4. Linux线程与信号量.md
-      - 生产者消费者模型（Producer-Consumer Model）: Linux/19. Linux线程/5. 生产者消费者模型（Producer-Consumer Model）/5. 生产者消费者模型（Producer-Consumer Model）.md
-      - 日志系统: Linux/19. Linux线程/6. 日志系统/6. 日志系统.md
-      - Linux线程安全与死锁: Linux/19. Linux线程/7. Linux线程安全与死锁/7. Linux线程安全与死锁.md
-      - Linux线程池: Linux/19. Linux线程/8. Linux线程池/8. Linux线程池.md
-      - 读者写者问题与读写锁: Linux/19. Linux线程/9. 读者写者问题与读写锁/9. 读者写者问题与读写锁.md
-      - 自旋锁: Linux/19. Linux线程/10. 自旋锁/10. 自旋锁.md
-    - 网络基础知识: Linux/20. 网络基础知识/20. 网络基础知识.md
-    - Socket编程基础: Linux/21. Socket编程基础/21. Socket编程基础.md
+      - Linux线程概念与线程操作: Linux/linux-thread/thread-concept-op/thread-concept-op.md
+      - Linux线程库与线程库封装: Linux/linux-thread/thread-lib/thread-lib.md
+      - Linux线程互斥与同步: Linux/linux-thread/thread-sync/thread-sync.md
+      - Linux线程与信号量: Linux/linux-thread/thread-semaphore/thread-semaphore.md
+      - 生产者消费者模型（Producer-Consumer Model）: Linux/linux-thread/thread-pc/thread-pc.md
+      - 日志系统: Linux/linux-thread/log/log.md
+      - Linux线程安全与死锁: Linux/linux-thread/thread-safe-deadlock/thread-safe-deadlock.md
+      - Linux线程池: Linux/linux-thread/thread-pool/thread-pool.md
+      - 读者写者问题与读写锁: Linux/linux-thread/thread-rw/thread-rw.md
+      - 自旋锁: Linux/linux-thread/thread-spin/thread-spin.md
+    - 网络基础知识: Linux/net-basic/net-basic.md
+    - Socket编程基础: Linux/socket-basic/socket-basic.md
     - UDP编程:
-      - UDP编程接口基本使用: Linux/22. UDP编程/1. UDP编程接口基本使用/1. UDP编程接口基本使用.md
-      - UDP应用1：翻译软件: Linux/22. UDP编程/2. UDP应用1：翻译软件/2. UDP应用1：翻译软件.md
-      - UDP应用2：简易聊天室: Linux/22. UDP编程/3. UDP应用2：简易聊天室/3. UDP应用2：简易聊天室.md
-    - TCP编程接口基本使用: Linux/23. TCP编程接口基本使用/23. TCP编程接口基本使用.md
-    - 序列化和反序列化与网络计算器: Linux/24. 序列化问题与网络计算器/24. 序列化问题与网络计算器.md
-    - 进程间关系和守护进程: Linux/25. 进程间关系和守护进程/25. 进程间关系和守护进程.md
+      - UDP编程接口基本使用: Linux/udp/udp-basic/udp-basic.md
+      - UDP应用1：翻译软件: Linux/udp/udp-app1/udp-app1.md
+      - UDP应用2：简易聊天室: Linux/udp/udp-app2/udp-app2.md
+    - TCP编程接口基本使用: Linux/tcp-basic/tcp-basic.md
+    - 序列化和反序列化与网络计算器: Linux/serialization-net-cal/serialization-net-cal.md
+    - 进程间关系和守护进程: Linux/process-relationship-daemon/process-relationship-daemon.md
     - 应用层协议HTTP:
-      - 介绍HTTP协议基本结构与基本实现HTTPServer: Linux/26. 应用层协议HTTP/1. 介绍HTTP协议基本结构与基本实现HTTPServer/1. 介绍HTTP协议基本结构与基本实现HTTPServer.md
-      - 深入HTTP序列化和反序列化: Linux/26. 应用层协议HTTP/2. 深入HTTP序列化和反序列化/2. 深入HTTP序列化和反序列化.md
-      - HTTP报头属性和请求方式: Linux/26. 应用层协议HTTP/3. HTTP报头属性和请求方式/3. HTTP报头属性和请求方式.md
-      - HTTP中的Cookie和Session: Linux/26. 应用层协议HTTP/4. HTTP中的Cookie和Session/4. HTTP中的Cookie和Session.md
-      - HTTP版本介绍: Linux/26. 应用层协议HTTP/5. HTTP版本介绍/5. HTTP版本介绍.md
-      - HTTPS协议介绍与原理: Linux/26. 应用层协议HTTP/6. HTTPS协议介绍与原理/6. HTTPS协议介绍与原理.md
-    - UDP协议原理: Linux/27. UDP协议原理/27. UDP协议原理.md
-    - TCP协议原理: Linux/28. TCP协议原理/28. TCP协议原理.md
-    - 理解Linux如何看待连接以及TCP全连接队列: Linux/35. 理解Linux如何看待连接以及TCP全连接队列/35. 理解Linux如何看待连接以及TCP全连接队列.md
-    - 网络层IP协议: Linux/29. 网络层IP协议/29. 网络层IP协议.md
-    - 数据链路层协议: Linux/30. 数据链路层协议/30. 数据链路层协议.md
-    - DNS与ICMP: Linux/36. DNS与ICMP/36. DNS与ICMP.md
-    - NAT技术、代理服务器和内网穿透: Linux/31. NAT技术、代理服务器和内网穿透/31. NAT技术、代理服务器和内网穿透.md
-    - 五种IO模型与select和poll分别实现多路转接: Linux/32. 五种IO模型与select和poll分别实现多路转接/32. 五种IO模型与select和poll分别实现多路转接.md
-    - epoll实现多路转接: Linux/33. epoll实现多路转接/33. epoll实现多路转接.md
-    - Reactor模式与完善基于边缘触发模式epoll实现TCP服务器: Linux/34. Reactor模式与完善基于边缘触发模式epoll实现TCP服务器/34. Reactor模式与完善基于边缘触发模式epoll实现TCP服务器.md
+      - 介绍HTTP协议基本结构与基本实现HTTPServer: Linux/http/http-basic-httpserver/http-basic-httpserver.md
+      - 深入HTTP序列化和反序列化: Linux/http/http-serialization/http-serialization.md
+      - HTTP报头属性和请求方式: Linux/http/http-header-request-method/http-header-request-method.md
+      - HTTP中的Cookie和Session: Linux/http/http-cookie-session/http-cookie-session.md
+      - HTTP版本介绍: Linux/http/http-version/http-version.md
+      - HTTPS协议介绍与原理: Linux/http/https/https.md
+    - UDP协议原理: Linux/udp-principles/udp-principles.md
+    - TCP协议原理: Linux/tcp-principles/tcp-principles.md
+    - 理解Linux如何看待连接以及TCP全连接队列: Linux/tcp-connection-backlog/tcp-connection-backlog.md
+    - 网络层IP协议: Linux/ip/ip.md
+    - 数据链路层协议: Linux/datalink/datalink.md
+    - DNS与ICMP: Linux/dns-icmp/dns-icmp.md
+    - NAT技术、代理服务器和内网穿透: Linux/nat-proxy/nat-proxy.md
+    - 五种IO模型与select和poll分别实现多路转接: Linux/io-model-select-poll/io-model-select-poll.md
+    - epoll实现多路转接: Linux/epoll/epoll.md
+    - Reactor模式与完善基于边缘触发模式epoll实现TCP服务器: Linux/reactor-et/reactor-et.md
   - 前端:
     - HTML与CSS:
       - HTML4和HTML5常见标签总结: HTML与CSS/HTML笔记/HTML笔记.md

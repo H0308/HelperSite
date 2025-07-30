@@ -95,7 +95,7 @@ public:
 };
 ```
 
-首先，该类继承了一个`noncopyable`类，该类的作用就是禁止该类的对象被拷贝，具体实现思想可以参考[UDP编程接口基本使用](https://www.help-doc.top/Linux/22.%20UDP%E7%BC%96%E7%A8%8B/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/1.%20UDP%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html#_16)一节的介绍，此处不再提及
+首先，该类继承了一个`noncopyable`类，该类的作用就是禁止该类的对象被拷贝，具体实现思想可以参考[UDP编程接口基本使用](https://www.help-doc.top/Linux/udp/udp-basic/udp-basic.html#_16)一节的介绍，此处不再提及
 
 接着是创建对象的构造函数，正如前面提到的思路，Muduo库中的`TcpServer`本身不进行阻塞监听等待，而是利用`epoll`模型关心监听套接字，所以需要传递一个`EventLoop`类的对象地址作为其中的一个初始化参数，而在适当的时机就需要通过该对象启动`EventLoop`开始进行事件关心
 

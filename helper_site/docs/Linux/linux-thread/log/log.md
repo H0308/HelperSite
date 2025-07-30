@@ -1,0 +1,555 @@
+# 日志系统
+
+## 日志与日志系统介绍
+
+计算机中的日志是记录系统和软件运行中发生事件的文件，主要作用是监控运行状态、记录异常信息，帮助快速定位问题并支持程序员进行问题修复。它是系统维护、故障排查和安全管理的重要工具
+
+一般情况下，日志会包含以下的内容：
+
+- 时间
+- 日志等级
+- 日志内容
+
+有些日志也有可能还包含下面的内容：
+
+- 文件名
+- 当前日志在文件中所在的行号
+- 进程或者线程信息
+
+在Linux操作系统中也会有一些日志信息，可以使用下面的指令查看当前操作系统的日志文件：
+
+```shell
+ll /var/log/
+```
+
+查看日志文件内容例如：
+
+```shell
+# 开机之后操作系统运行的日志信息
+cat /var/log/dmesg
+# 软件的日志信息（需要管理员权限）
+sudo cat/var/log/syslog
+```
+
+日志实际上也有一些现成的解决方案，例如spdlog、glog、Boost.Log、Log4cXx等等。本次日志系统就是为了实现一个简易版的日志系统，显示出来的日志效果如下：
+
+```c++
+[可读性很好的时间][日志等级][进程pid][打印对应日志的文件名][行号] - 消息内容，支持可变参数
+[2024-08-04 12:27:03] [DEBUG] [202938] [main.cc][16] - hello world
+[2024-08-04 12:27:03] [DEBUG] [202938] [main.cc][17] - hello world
+[2024-08-04 12:27:03] [DEBUG] [202938] [main.cc][18] - hello world
+[2024-08-04 12:27:03] [DEBUG] [202938] [main.cc][20] - hello world
+[2024-08-04 12:27:03] [DEBUG] [202938] [main.cc][21] - hello world
+[2024-08-04 12:27:03] [WARNING] [202938] [main.cc][23] - hello world
+```
+
+## 设计日志系统
+
+根据上面的日志效果，考虑让系统自动生成除了消息内容以外的信息，包括时间、日志等级、进程`pid`、文件名和行号
+
+本次设计日志系统考虑使用一种设计模式：策略模式。策略模式是一种行为型设计模式，其核心思想是将算法或行为封装为独立对象，使它们可以在运行时动态替换，从而避免复杂的条件判断并提升代码扩展性。
+
+一般来说，策略模式核心组成如下：
+
+1. 抽象策略类（Strategy）：用于定义算法的公共接口，声明策略的通用行为。
+2. 具体策略类（ConcreteStrategy）：实现抽象策略接口，封装具体算法（如不同的支付方式、折扣策略）。
+3. 上下文类（Context）：持有策略对象的引用，通过接口调用具体策略的算法，对外屏蔽实现细节
+
+根据这个策略模式，考虑整体的设计思路：
+
+首先是定义一个抽象策略类，类名设为`LogStrategy`，既然这个类作为了抽象策略类，那么根据抽象策略类的作用考虑定义日志系统的日志处理方式的抽象虚函数`printLog(const std::string &message)`，该函数的作用是让具体策略类实现具体的日志处理方式，在本次日志系统中，日志处理方式分为两种：
+
+1. 将日志打印到控制台
+2. 将日志写入指定目录下的指定文件中（目录和文件均可以由用户额外指定）
+
+既然有两种日志处理方式，那么对应的具体策略类就有两种：
+
+1. `ConsoleLogStrategy`类：表示日志输出到控制台，对应地实现方法`printLog(const std::string &message)`，函数内部主要逻辑就是将日志内容输出到控制台
+2. `FileLogStrategy`类：表示日志输出到文件，对应地实现方法`printLog(const std::string &message)`，函数内部主要逻辑就是将日志输出到文件
+
+设计完这两个类后，整体的日志系统就有了处理方式，但是现在还缺少处理日志方式控制的类，所以还需要一个类用于处理日志方式控制，定义为`LogHandle`类，这个类就是策略模式中的上下文类
+
+既然是处理日志信息控制，那么肯定少不了的就是确定日志信息的输出位置，本次考虑默认输出位置为控制台，同时提供两个函数`enableConsoleLog()`和`enableFileLog()`分别表示启用控制台打印和启用输出到文件
+
+有了日志输出方式的定义和控制，接下来就是考虑如何确定日志信息内容，对于日志信息内容，原则上并不属于控制输出位置类，所以考虑单独创建一个类，但是如果单独创建一个类，那么该类中就需要有`LogHandle`类的对象作为成员以便可以在输出时可以直到输出位置。这里可以考虑两种方式：
+
+1. 组合
+2. 内部类
+
+本次考虑使用内部类的方式，类名设定为`LogMessage`，这个类主要用于合成日志信息
+
+以上就是日志系统的基本思路和相关的类，下面针对每个类的具体设计进行详细介绍
+
+## 实现日志系统
+
+### 前置工作
+
+在日志系统中需要使用日志等级，所以可以考虑使用一个枚举类，类名为`LogLevel`，一共包括5种等级：
+
+1. `DEBUG`
+2. `INFO`
+3. `WARNING`
+4. `ERROR`
+5. `FATAL`
+
+参考代码如下：
+
+```c++
+// 日志等级
+enum class LogLevel
+{
+    // 默认从1开始
+    DEBUG = 1,
+    INFO,
+    WARNING,
+    ERROR,
+    FATAL
+};
+```
+
+### 策略模式（抽象策略类）
+
+根据对策略模式的认识设计抽象策略类，可以考虑下面的思路：
+
+1. 需要一个抽象虚函数`printLog()`，后面这个虚函数要被子类重写
+2. 将虚构函数设计为虚函数，确保先析构子类再析构父类防止有内存泄漏问题
+
+参考代码如下：
+
+```c++
+class LogStrategy
+{
+public:
+    // 使用默认析构函数
+    virtual ~LogStrategy() = default;
+    // 定义抽象虚函数
+    virtual void printLog(const std::string &message) = 0;
+};
+```
+
+### 策略模式（具体策略类）
+
+根据前面的描述，具体策略类需要有两个类，分别是`ConsoleLogStrategy`类和`FileLogStrategy`类，具体作用见上方设计日志系统部分，下面考虑设计思路：
+
+对于`ConsoleLogStrategy`类来说，首先继承父类`LogStrategy`，因为该类需要将日志内容打印到控制台中，所以少不了需要重写并且实现父类的方法，在该方法中，根据前面多线程打印的经验：「如果多个线程同时打印，那么内容会出现错乱的问题」，所以在打印之前需要先使用互斥锁，每个线程需要先拿到这把锁才能开始打印。根据这个思路，在`ConsoleLogStrategy`类中，需要一个互斥锁成员，在实现`printLog()`函数时先抢锁，再开始打印，参考代码如下：
+
+!!! note
+
+    需要注意，下面的代码使用到了前面封装的[互斥锁](https://www.help-doc.top/Linux/linux-thread/thread-sync/thread-sync.html#_6)
+
+```c++
+class ConsoleLogStrategy : public LogStrategy
+{
+public:
+    ConsoleLogStrategy() = default;
+
+    virtual void printLog(const std::string &message) override
+    {
+        // 先申请锁
+        MutexGuard guard(_lock);
+        std::cout << message << std::endl;
+    }
+
+    ~ConsoleLogStrategy() = default;
+
+private:
+    Mutex _lock;
+};
+```
+
+对于`FileLogStrategy`来说，同样是先继承父类`LogStrategy`，因为该类是为了将日志信息输出到文件中，在本日志系统中，考虑将日志文件`log.txt`放在一个单独的目录`log`中，其中的`log.txt`和`log`表示默认的文件名和路径名，所以可以考虑设置为缺省参数，对应地就需要两个变量分别记录用户指定位置和指定文件名，初始化时使用`log`和`log.txt`作为初始值。但是需要注意的是这一步只是完成了指定目录名和文件名，并没有实际创建一个实际的目录和文件，所以可以考虑在创建`FileLogStrategy`类时就创建对应的目录和文件，此时就需要判断目录和文件是否存在
+
+对于判断目录是否存在可以使用`<filesystem>`库中的`exists`接口，该接口接收一个参数，表示目录位置，如果目录不在就可以使用系统接口`mkdir`创建目录，也可以考虑使用`<filesystem>`库中的`create_directories`接口，该接口接收一个参数，表示目录位置，考虑到这个函数可能会因为创建失败抛出异常，可以考虑使用`try_catch`捕捉异常，异常类型为`filesystem_error`
+
+!!! note
+
+    需要注意，`<filesystem>`库是C++17才支持的
+
+对于判断文件是否存在其实不需要，因为如果文件存在就在该文件中写，如果不存在就新建，所以不需要单独判断文件是否存在，只需要考虑不存在就创建，否则就追加的思路
+
+!!! note
+
+    注意，日志文件中的写不建议是覆盖写，如果覆盖写就会导致之前的日志被清除
+
+本次考虑使用[C++ IO流](https://www.help-doc.top/C%2B%2B/30.%20C%2B%2BIO%E6%B5%81/30.%20C%2B%2BIO%E6%B5%81.html)打开文件，本次考虑使用既可以输入又可以输出的`fstream`，对于写方法，可以考虑使用`write`函数，但是更方便的还是使用流插入`<<`，写完文件后关闭文件即可
+
+同样，如果是多个线程，此时就只能允许一个线程写文件防止文件内容错乱，既然如此，同样需要考虑在哪加锁，为了防止一个文件被多个线程重复打开，所以考虑在打开文件直接就进行加锁，文件关闭后再解锁
+
+参考代码如下：
+
+```c++
+// 默认的目录路径和文件路径
+const std::string d_dir_path = "./log/";
+const std::string d_file_path = "log.txt";
+
+// 具体策略类——文件输出
+class FileLogStrategy : public LogStrategy
+{
+public:
+    FileLogStrategy(const std::string &dir_path = d_dir_path, const std::string &file_path = d_file_path)
+        : _dir_path(dir_path), _file_path(file_path)
+    {
+        // 先申请锁
+        MutexGuard guard(_lock);
+
+        // 判断目录是否存在
+        if (std::filesystem::exists(_dir_path))
+            return; // 存在直接返回
+        else
+        {
+            try
+            {
+                // 创建目录
+                std::filesystem::create_directories(_dir_path);
+            }
+            catch (const std::filesystem::filesystem_error &e)
+            {
+                std::cerr << e.what() << '\n';
+            }
+        }
+    }
+
+    virtual void printLog(const std::string &message) override
+    {
+        // 先申请锁
+        MutexGuard guard(_lock);
+
+        // 打开文件并追加写入
+        const std::string path = _dir_path + _file_path;
+        std::fstream out(path, std::ios::app);
+        out << message << "\n";
+
+        // 关闭文件
+        out.close();
+    }
+
+    ~FileLogStrategy()
+    {
+    }
+
+private:
+    std::string _dir_path;
+    std::string _file_path;
+
+    Mutex _lock;
+};
+```
+
+### 策略模式（上下文类）
+
+对于上下文类`LogHandler`，少不了的就是父类指针或者引用作为成员指向子类成员，因为默认考虑的是将日志输出到控制台，所以当该类创建对象时，其父类指针或者引用成员指向`ConsoleLogStrategy`类对象，这里可以考虑使用智能指针，在初始化时使用`ConsoleLogStrategy`类对象：
+
+```c++
+class LogHandler
+{
+public:
+    // 默认使用ConsoleLogStrategy类初始化
+    LogHandler()
+        : _log(std::make_shared<ConsoleLogStrategy>())
+    {
+    }
+    ~LogHandler()
+    {
+    }
+
+private:
+    std::shared_ptr<LogStrategy> _log;
+};
+```
+
+接着，在设计日志系统部分提到，`LogHandler`类需要提供两个函数，分别为`enableConsoleLog()`和`enableFileLog()`，表示启用控制台打印和启用输出到文件，这个切换实际上就是改变父类指针的指向，所以在`enableConsoleLog`函数中让成员`_log`指向`ConsoleLogStrategy`对象，在`enableFileLog()`函数中让成员`_log`指向`FileLogStrategy`对象：
+
+=== "启用控制台输出函数"
+
+    ```c++
+    void enableConsoleLog()
+    {
+        _log = std::make_shared<ConsoleLogStrategy>();
+    }
+    ```
+
+=== "启用文件输出函数"
+
+    ```c++
+    // 启用文件输出
+    void enableFileLog()
+    {
+        _log = std::make_shared<FileLogStrategy>();
+    }
+    ```
+
+!!! note
+
+    默认的就是启用控制台输出，提供`enableConsoleLog`是便于从文件输出切换回控制台输出
+
+上面已经解决了日志信息的控制，接下来就是处理日志信息内容，在设计日志系统部分已经提到过使用内部类的方式完成本部分，所以接下来主要考虑内部类的实现思路：
+
+定义一个`LogMessage`类，该类就是用于处理日志信息内容，在日志信息内容中，时间和进程`pid`是可以直接通过函数调用获取的，但是日志等级、文件名、行号都必须通过外部行为获取，所以在`LogMessage`构造函数中需要对这些进行接收。添加需要相关的成员和实现，整体代码如下：
+
+!!! note
+
+    下面的代码使用到了前面封装的[获取时间函数](https://www.help-doc.top/Linux/17.%20Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/2.%20%E5%91%BD%E5%90%8D%E7%AE%A1%E9%81%93%E4%B8%8E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98/2.%20%E5%91%BD%E5%90%8D%E7%AE%A1%E9%81%93%E4%B8%8E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98.html#_8)，但是对细节进行了修改：
+
+    ```c++
+    // 获取时间函数
+    std::string getCurrentTime()
+    {
+        // ...
+        // 将时间戳转换为时间，考虑使用localtime_r而不是localtime，确保多线程下安全
+        struct tm time_struct;
+        localtime_r(&time_stamp, &time_struct);
+        // ...
+    }
+    ```
+
+```c++
+class LogHandler
+{
+public:
+    // ...
+
+    class LogMessage
+    {
+    public:
+        LogMessage(LogLevel level, const std::string &filename, int lineno)
+            : _time(getCurrentTime()), _level(level), _pid(getpid()), _filename(filename), _lineno(lineno)
+        {
+        }
+
+    private:
+        std::string _time;     // 时间
+        LogLevel _level;       // 日志等级
+        pid_t _pid;            // 进程pid
+        std::string _filename; // 文件名
+        int _lineno;           // 行号
+    };
+
+    // ...
+};
+```
+
+接下来就是根据已有的信息按照需要的格式进行拼接，本次考虑在`LogMessage`对象初始化时就进行拼接，因为上面的数据涉及到各种数据类型，所以考虑使用字符串流`stringstream`完成拼接，拼接的结果放到一个成员变量`_message`中，用于之后与日志的自定义内容进行拼接。但是拼接之前还要考虑一个问题，在日志系统的预期效果中，日志等级是显示日志等级对应的名称而不是编号，但是日志等级枚举类直接获取为一个编号，其次枚举类型不能直接输出到流中，所以考虑额外定义一个函数`level2string`处理这种情况
+
+这个函数的主要思路就是根据不同的枚举值返回不同的字符串，所以直接穷举结果即可，因为枚举值是一个常量，所以可以考虑使用`switch_case`语句：
+
+```c++
+// 将枚举值转换为对应的字符串
+std::string level2string(LogLevel level)
+{
+    switch (level)
+    {
+    case LogLevel::DEBUG:
+        return "DEBUG";
+    case LogLevel::INFO:
+        return "INFO";
+    case LogLevel::WARNING:
+        return "WARNING";
+    case LogLevel::ERROR:
+        return "WARNING";
+    case LogLevel::FATAL:
+        return "FATAL";
+    default:
+        return "";
+    }
+    return "";
+}
+```
+
+拼接代码如下：
+
+```c++
+class LogMessage
+{
+public:
+    LogMessage(LogLevel level, const std::string &filename, int lineno)
+        : _time(getCurrentTime()), _level(level), _pid(getpid()), _filename(filename), _lineno(lineno)
+    {
+        std::stringstream ss;
+        ss << "[" << _time << "] "
+           << "[" << level2string(_level) << "] "
+           << "[" << _pid << "] "
+           << "[" << _filename << "] "
+           << "[" << _lineno << "] - ";
+
+        _message = ss.str();
+    }
+
+private:
+    // ...
+    std::string _message;  // 记录结果
+};
+```
+
+有了基本信息之后，接下来就是获取用户输入的基本信息，本次考虑基本的使用方法是通过流插入的方式，即类似于下面的方式：
+
+```c++
+LogMessage对象 << 自定义信息;
+```
+
+所以需要在`LogMessage`类中重载流插入函数，但是考虑到自定义信息可能不止一种内置数据类型，所以需要使用到模板，因为只有当前函数才需要使用到模板，所以只需要在当前函数中使用模板即可。在流插入重载函数中，同样使用`stringstream`流处理字符串拼接问题，最后将整个字符串放到成员`_message`中：
+
+```c++
+// 重载流插入函数
+template <class T>
+LogMessage &operator<<(const T &content)
+{
+    std::stringstream ss;
+    ss << content;
+    _message += ss.str();
+
+    return *this;
+}
+```
+
+现在，`LogMessage`就已经完成了基本的设计，但是目前`LogHandler`和`LogMessage`并没有具体的联系，所以接下来的目标就是让二者建立联系，而二者所谓的联系就是`LogMessage`类根据当前`LogHandler`的策略将日志输出到指定位置，所以在`LogMessage`中需要有一个`LogHandler`对象成员引用，并在构造时，需要外部传入一个`LogHandler`对象初始化当前`LogMessage`中的`LogHandler`对象成员引用：
+
+!!! note
+
+    [注意，内部类中不可以创建外部类对象](https://www.help-doc.top/C%2B%2B/4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9.html?h=%E5%86%85%E9%83%A8#_4)
+
+```c++
+class LogHandler
+{
+public:
+    // ...
+
+    class LogMessage
+    {
+    public:
+        LogMessage(/* ... */, LogHandler &loghandler)
+            : // ...
+            , _loghandler(loghandler)
+        {
+            //...
+        }
+
+        // ...
+
+    private:
+        // ...
+        LogHandler &_loghandler;
+    };
+
+private:
+    std::shared_ptr<LogStrategy> _log;
+};
+```
+
+完成上面的步骤之后，接下来就是将日志输出到指定位置，既然要输出信息，那么肯定需要创建`LogMessage`对象先构建信息，本次考虑一种思路：通过`LogMessage`临时对象析构时自动调用日志输出。这个思路涉及到一个知识点：临时对象的生命周期会延长
+
+在C++中，临时对象可以支持流插入操作。这是因为临时对象在语句结束之前都是有效的,可以安全地进行流插入操作。而此时的临时对象的声明周期就被延长到流插入操作结束后，一旦流插入重载函数返回对象的引用，就可以进行链式调用
+
+所以根据这个知识考虑在`LogMessage`的析构函数中写入日志输出的逻辑：
+
+```c++
+~LogMessage()
+{
+    // 如果父类引用不为空指针，就可以实现日志输出到指定为止
+    if (_loghandler._log)
+        _loghandler._log->printLog(_message);
+}
+```
+
+接着考虑构建出一个临时对象，本次日志系统希望用户以如下的方式使用：
+
+```c++
+LogHandler对象(日志等级) << 自定义信息
+```
+
+因为`LogHandler`类本身没有重载流插入`<<`，所以`LogHandler对象(日志等级)`就必须是重载了流插入的`LogMessage`对象，所以在`LogHandler`中需要重载`()`，该函数返回一个`LogMessage`对象，接收一个日志等级参数、一个文件名参数和一个行号参数
+
+但是，如果`LogHandler`的`()`重载函数只有三个参数，那么在构造`LogMessage`对象时就会出现还有`loghandler`无法初始化。这就是接下来需要考虑的问题，对于`loghandler`来说，因为`LogMessage`类是`LogHandler`类的内部类，并且`()`重载函数是`LogHandler`类的成员函数，所以可以使用`*this`作为参数传递给`loghandler`，此时的`*this`代表的就是`LogHandler`类的对象
+
+所以，整个函数的设计如下：
+
+```c++
+LogMessage operator()(LogLevel level, const std::string filename, int lineno)
+{
+    return LogMessage(level, filename, lineno, *this);
+}
+```
+
+至此，基于策略模式的日志系统基本框架已经形成
+
+### 宏函数设定
+
+虽然已经写好了基本的日志系统，但是为了让日志系统更利于使用，在原来期望的使用方式的基础之上：
+
+```c++
+LogHandler对象(日志等级) << 自定义信息;
+```
+
+再修改为如下的使用方式：
+
+```c++
+LOG(日志等级) << 自定义信息;
+```
+
+先创建一个`LogHandler`对象：
+
+```c++
+// 创建LogHandler对象
+LogHandler loghandler;
+```
+
+可以考虑使用一个宏函数：
+
+```c++
+#define LOG(LEVEL) loghandler(LEVEL, __FILE__, __LINE__)
+```
+
+这个宏函数的作用是通过`LogHandler`类对象调用其中的`operator()`函数根据传递的日志等级创建`LogMessage`类对象，并且也可以利用到C语言宏中提供的一个`__FILE__`和一个`__LINE__`，二者分别表示的就是当前文件名和当前行号，这样可以获取到当前文件名和当前行号，并且因为是宏，所以其替换的位置就是最终结果。此时只要想在指定行打日志，那么最后日志所表示的行就是对应该日志代码所在的行
+
+此外，还可以将`enableConsoleLog`和`enableFileLog`分别封装成宏函数方便使用：
+
+```c++
+#define ENABLECONSOLELOG() loghandler.enableConsoleLog()
+#define ENABLEFILELOG() loghandler.enableFileLog()
+```
+
+## 测试日志系统
+
+使用下面的代码测试：
+
+```c++
+#include "log.hpp"
+
+using namespace LogSystemModule;
+
+int main()
+{
+    ENABLECONSOLELOG();
+
+    LOG(LogLevel::DEBUG) << "hello console";
+    LOG(LogLevel::DEBUG) << "hello console";
+    LOG(LogLevel::DEBUG) << "hello console";
+    LOG(LogLevel::DEBUG) << "hello console";
+
+    ENABLEFILELOG();
+    LOG(LogLevel::DEBUG) << "hello file";
+    LOG(LogLevel::DEBUG) << "hello file";
+    LOG(LogLevel::DEBUG) << "hello file";
+    LOG(LogLevel::DEBUG) << "hello file";
+    return 0;
+}
+```
+
+一共有两个输出结果：
+
+=== "控制台"
+
+    ```c++
+    [2025-02-19 20-26-50] [DEBUG] [6351] [main.cc] [9] - hello console
+    [2025-02-19 20-26-50] [DEBUG] [6351] [main.cc] [10] - hello console
+    [2025-02-19 20-26-50] [DEBUG] [6351] [main.cc] [11] - hello console
+    [2025-02-19 20-26-50] [DEBUG] [6351] [main.cc] [12] - hello console
+    ```
+
+=== "当前源文件所在目录的`log/log.txt`"
+
+    ```c++
+    [2025-02-19 20-26-50] [DEBUG] [6351] [main.cc] [15] - hello file
+    [2025-02-19 20-26-50] [DEBUG] [6351] [main.cc] [16] - hello file
+    [2025-02-19 20-26-50] [DEBUG] [6351] [main.cc] [17] - hello file
+    [2025-02-19 20-26-50] [DEBUG] [6351] [main.cc] [18] - hello file
+    ```

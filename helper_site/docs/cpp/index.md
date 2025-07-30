@@ -141,7 +141,7 @@
 4. 创建一个无法被继承的父类
 5. 单例模式（包括饿汉和懒汉）
 
-但是需要注意的是，本节涉及到的单例模式并不是线程安全的，如果要了解线程安全的单例模式，可以参考[Linux线程池](https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/8.%20Linux%E7%BA%BF%E7%A8%8B%E6%B1%A0/8.%20Linux%E7%BA%BF%E7%A8%8B%E6%B1%A0.html#_15)部分
+但是需要注意的是，本节涉及到的单例模式并不是线程安全的，如果要了解线程安全的单例模式，可以参考[Linux线程池](https://www.help-doc.top/Linux/linux-thread/thread-pool/thread-pool.html#_15)部分
 
 ## C++中的类型转换
 

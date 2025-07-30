@@ -410,7 +410,7 @@ int main()
 | `std::lock_guard<std::mutex>`        | 简单的RAII风格锁管理器，自动在构造时加锁，在析构时解锁。不可手动解锁。   |
 | `std::unique_lock<std::mutex>`       | 更灵活的RAII风格锁管理器，支持延迟加锁、手动解锁以及与条件变量配合使用。 |
 
-对于`lock_guard`来说，在[Linux线程互斥与同步](https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/3.%20Linux%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BA%92%E6%96%A5/3.%20Linux%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BA%92%E6%96%A5.html#craii)已经模拟实现了一份`MutexGuard`，基本原理就类似于`MutexGuard`
+对于`lock_guard`来说，在[Linux线程互斥与同步](https://www.help-doc.top/Linux/linux-thread/thread-sync/thread-sync.html#craii)已经模拟实现了一份`MutexGuard`，基本原理就类似于`MutexGuard`
 
 接下来主要看`unique_lock`。`unique_lock`可以理解为是`lock_guard`的一种升级版本，基本使用方式和`lock_guard`类似，所以这里就不再介绍基本使用方式
 
@@ -918,7 +918,7 @@ true
 
 ### 原子操作原理
 
-原子操作的基本原理是基于硬件的，在现代的大多数CPU中，都提供了比较交换指令来支持CAS（Compare and Swap）操作，这一点在[Linux线程互斥与同步](https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/3.%20Linux%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BA%92%E6%96%A5/3.%20Linux%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BA%92%E6%96%A5.html#_5)也有提及，在Linux系统和Windows系统下也提供了相应的CAS系统调用：
+原子操作的基本原理是基于硬件的，在现代的大多数CPU中，都提供了比较交换指令来支持CAS（Compare and Swap）操作，这一点在[Linux线程互斥与同步](https://www.help-doc.top/Linux/linux-thread/thread-sync/thread-sync.html#_5)也有提及，在Linux系统和Windows系统下也提供了相应的CAS系统调用：
 
 === "Linux"
 

@@ -8,7 +8,7 @@
 
 回溯法也可以叫做回溯搜索法，它是一种搜索的方式
 
-在二叉树时也涉及到了一些回溯的题目，例如[力扣257：二叉树的所有路径](https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/3.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/3.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html#257)
+在二叉树时也涉及到了一些回溯的题目，例如[力扣257：二叉树的所有路径](https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html#257)
 
 实际上，回溯是递归的副产品，只要有递归就会有回溯
 

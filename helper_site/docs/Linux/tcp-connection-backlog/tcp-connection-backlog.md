@@ -135,7 +135,7 @@ struct sock
 };
 ```
 
-在这个结构中就存在着UDP和TCP需要用到的缓冲区成员`sk_receive_queue`（接收缓冲区）和`sk_write_queue`（发送缓冲区），这两个缓冲区在[序列化和反序列化与网络计算机](https://www.help-doc.top/Linux/24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8/24.%20%E5%BA%8F%E5%88%97%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E7%BD%91%E7%BB%9C%E8%AE%A1%E7%AE%97%E5%99%A8.html?h=%E7%BC%93%E5%86%B2#socketfd)一节已经有所提及，此处不再赘述
+在这个结构中就存在着UDP和TCP需要用到的缓冲区成员`sk_receive_queue`（接收缓冲区）和`sk_write_queue`（发送缓冲区），这两个缓冲区在[序列化和反序列化与网络计算器](https://www.help-doc.top/Linux/serialization-net-cal/serialization-net-cal.html#socketfd)一节已经有所提及，此处不再赘述
 
 如果看得到UDP套接字和TCP套接字的相关结构定义：
 

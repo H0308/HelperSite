@@ -2,7 +2,7 @@
 
 !!! note
 
-    阅读本篇文章之前建议有一定的线程编程基础，此处可以参考[Linux线程部分](https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/1.%20Linux%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C.html#linux)
+    阅读本篇文章之前建议有一定的线程编程基础，此处可以参考[Linux线程部分](https://www.help-doc.top/linux-thread/thread-concept-op/thread-concept-op.html)
 
 ## 线程库`<thread>`
 
@@ -332,7 +332,7 @@ int main()
 }
 ```
 
-在上面的代码中，第一次调用`recursion`函数时，会加锁保护临界区资源，但是在第一次递归调用时，因为调用递归的位置在释放锁之前，此时当前线程再次进入`recursion`函数就会开始尝试加锁，但是因为第一次调用并没有释放锁，这就导致当前线程会一直等待锁的释放，这就导致了死锁的情况。这也侧面说明了当前`recursion`函数是[不可重入](https://www.help-doc.top/Linux/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html#_11)的
+在上面的代码中，第一次调用`recursion`函数时，会加锁保护临界区资源，但是在第一次递归调用时，因为调用递归的位置在释放锁之前，此时当前线程再次进入`recursion`函数就会开始尝试加锁，但是因为第一次调用并没有释放锁，这就导致当前线程会一直等待锁的释放，这就导致了死锁的情况。这也侧面说明了当前`recursion`函数是[不可重入](https://www.help-doc.top/Linux/signals-os-principles/signals-os-principles.html#_11)的
 
 基于这个问题，就需要使用递归锁：
 

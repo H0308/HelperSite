@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <div class="content-card">
                 <h2>最近更新</h2>
-                <p>查看<a href="https://www.help-doc.top/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF/%E7%BD%91%E7%AB%99%E6%97%B6%E9%97%B4%E7%BA%BF.html">网站时间线</a>了解网站最近更新</p>
+                <p>查看<a href="https://www.help-doc.top/timeline/timeline.html">网站时间线</a>了解网站最近更新</p>
             </div>
 
             <div class="content-card">
@@ -565,7 +565,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <h2>版权声明</h2>
             <div class="copyright-info">
                 <p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">CC BY-NC-SA 4.0</a> 许可协议。</p>
-                <p>转载请注明来自<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E8%81%94%E7%B3%BB%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html">柯懒不是柯南</a>的个人网站！</p>
+                <p>转载请注明来自<a href="https://www.help-doc.top/author/contact/contact.html">柯懒不是柯南</a>的个人网站！</p>
             </div>
         </div>
     </div>

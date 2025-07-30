@@ -100,7 +100,7 @@ D n/2
 
 1. 顺序存储
 
-    顺序结构存储就是使用数组来存储，一般使用数组只适合表示完全二叉树，因为不是完全二叉树会有空间的浪费。而现实中使用中只有[堆](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8.%20%E5%A0%86/8.%20%E5%A0%86.html)才会使用数组来存储。二叉树顺序存储在物理上是一个数组，在逻辑上是一颗二叉树
+    顺序结构存储就是使用数组来存储，一般使用数组只适合表示完全二叉树，因为不是完全二叉树会有空间的浪费。而现实中使用中只有[堆](https://www.help-doc.top/data-structure/heap/heap.html)才会使用数组来存储。二叉树顺序存储在物理上是一个数组，在逻辑上是一颗二叉树
 
 2. 链式结构
 
@@ -310,7 +310,7 @@ BTN* createTree()
 
 <img src="images\image5.png">
 
-前序遍历、中序遍历和后序遍历的迭代版本见[算法：二叉树基础练习篇](https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html#_3)
+前序遍历、中序遍历和后序遍历的迭代版本见[算法：二叉树基础练习篇](https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html#_3)
 
 #### 层序遍历
 
@@ -324,7 +324,7 @@ BTN* createTree()
 
 !!! note
 
-    注意，下面的代码使用到了前面使用[C语言模拟实现的队列](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.%20%E9%98%9F%E5%88%97/5.%20%E9%98%9F%E5%88%97.html)
+    注意，下面的代码使用到了前面使用[C语言模拟实现的队列](https://www.help-doc.top/data-structure/queue/queue.html)
 
 ```c
 //层序遍历
@@ -643,31 +643,31 @@ bool BinaryTreeComplete(BTN* root)
 
 ### 单值二叉树
 
-具体见[算法：二叉树基础练习篇](https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html#965)
+具体见[算法：二叉树基础练习篇](https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html#965)
 
 ### 检查两棵树是否相同
 
-具体见[算法：二叉树基础练习篇](https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html#100)
+具体见[算法：二叉树基础练习篇](https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html#100)
 
 ### 对称二叉树
 
-具体见[算法：二叉树基础练习篇](https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html#101)
+具体见[算法：二叉树基础练习篇](https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html#101)
 
 ### 二叉树的前序遍历
 
-具体见[算法：二叉树基础练习篇](https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html#144)
+具体见[算法：二叉树基础练习篇](https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html#144)
 
 ### 二叉树的中序遍历
 
-具体见[算法：二叉树基础练习篇](https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html#94)
+具体见[算法：二叉树基础练习篇](https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html#94)
 
 ### 二叉树的后序遍历
 
-具体见[算法：二叉树基础练习篇](https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html#145)
+具体见[算法：二叉树基础练习篇](https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html#145)
 
 ### 另一棵树的子树
 
-具体见[算法：二叉树基础练习篇](https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/2.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html#572)
+具体见[算法：二叉树基础练习篇](https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html#572)
 
 ### 二叉树前序构建
 

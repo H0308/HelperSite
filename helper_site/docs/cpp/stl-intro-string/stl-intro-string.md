@@ -67,7 +67,7 @@ STL(standard template libaray-标准模板库)：是C++标准库的重要组成�
 
     ```
     
-    上面的代码中使用了[原始字符串](https://www.help-doc.top/C%2B%2B/25.%20C%2B%2B11%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7/C%2B%2B%2011%E7%9B%B8%E5%85%B3%E6%96%B0%E7%89%B9%E6%80%A7.html#_1)
+    上面的代码中使用了[原始字符串](https://www.help-doc.top/cpp/new-in-cpp11/new-in-cpp11.html#_1)
 
 !!! note
     注意，string类独立于所使用的编码来处理字节:如果用来处理多字节或变长字符(如UTF-8)的序列，这个类的所有成员(如长度或大小)以及它的迭代器，将仍然按照字节(而不是实际编码的字符)来操作。
@@ -1363,7 +1363,7 @@ int main()
 
 ### `getline()`函数
 
-使用`getline()`函数可以获取到指定字符（默认`'\n'`）结尾之前的字符串，具体内容见[C++ IO流](https://www.help-doc.top/C%2B%2B/30.%20C%2B%2BIO%E6%B5%81/30.%20C%2B%2BIO%E6%B5%81.html#c_2)部分
+使用`getline()`函数可以获取到指定字符（默认`'\n'`）结尾之前的字符串，具体内容见[C++ IO流](https://www.help-doc.top/cpp/cppio/cppio.html#c_2)部分
 
 !!! note
     不同于`cin`，`cin`遇到空白字符时就会停止读入，`getline()`函数遇到`'\n'`（或者指定字符）才结束

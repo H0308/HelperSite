@@ -29,10 +29,10 @@ hide:
         <p>深入浅出地讲解C++、C语言、Java、Python语言的基础知识和进阶技巧</p>
         <div class="feature-tags">
             <span class="tag">
-                <a href="https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/index.html">C语言</a>
+                <a href="https://www.help-doc.top/c-lang/index.html">C语言</a>
             </span>
             <span class="tag">
-                <a href="https://www.help-doc.top/C%2B%2B/index.html">C++</a>
+                <a href="https://www.help-doc.top/cpp/index.html">C++</a>
             </span>
             <span class="tag">
                 <a href="#">Java</a>
@@ -97,10 +97,10 @@ hide:
         <p>分享了C++相关完整的项目案例</p>
         <div class="feature-tags">
             <span class="tag">
-                <a href="https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/1.%20Boost%E5%BA%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html">Boost搜索引擎</a>
+                <a href="https://www.help-doc.top/projects/boost-searching-engine/boost-searching-engine.html">Boost搜索引擎</a>
             </span>
             <span class="tag">
-                <a href="https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/2.%20%E5%9F%BA%E4%BA%8EJSON%E7%9A%84RPC%E6%A1%86%E6%9E%B6/1.%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%87%86%E5%A4%87/1.%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%87%86%E5%A4%87.html">基于JSON的RPC框架</a>
+                <a href="https://www.help-doc.top/projects/json-rpc/intro/intro.html">基于JSON的RPC框架</a>
             </span>
         </div>
     </div>

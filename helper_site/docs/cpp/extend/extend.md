@@ -444,7 +444,7 @@ int main()
 
 上面的子类赋值给父类，父类访问部分的现象称为赋值兼容转换，这种转换是继承中的一种针对类型转换的特殊处理，也有个形象的说法叫做切割或者切片
 
-但是需要注意的是，如果子类对象不能直接赋值给父类引用或者指针就变为了[多态](https://www.help-doc.top/C%2B%2B/20.%20C%2B%2B%E5%A4%9A%E6%80%81/20.%20C%2B%2B%E5%A4%9A%E6%80%81.html#c)
+但是需要注意的是，如果子类对象不能直接赋值给父类引用或者指针就变为了[多态](https://www.help-doc.top/cpp/polymorphic/polymorphic.html#c)
 
 ## 继承中的作用域
 
@@ -581,7 +581,7 @@ name = 姓名
 
 !!! note
 
-	对于成员函数也是如此，只是成员函数的隐藏只需要满足同名[多态中具体介绍](https://www.help-doc.top/C%2B%2B/20.%20C%2B%2B%E5%A4%9A%E6%80%81/20.%20C%2B%2B%E5%A4%9A%E6%80%81.html#_2)
+	对于成员函数也是如此，只是成员函数的隐藏只需要满足同名[多态中具体介绍](https://www.help-doc.top/cpp/polymorphic/polymorphic.html#_2)
 
 !!! warning
 	实际开发中不建议定义重名的成员

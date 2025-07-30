@@ -173,7 +173,7 @@ struct sockaddr_in
 typedef unsigned short int sa_family_t;
 ```
 
-这个宏利用到了[C语言的`##`运算符](https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/14.%20C%E8%AF%AD%E8%A8%80%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%88%E9%83%A8%E5%88%86%EF%BC%89/14.%20C%E8%AF%AD%E8%A8%80%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%88%E9%83%A8%E5%88%86%EF%BC%89.html#_7)，其含义是将sa_prefix##替换为宏传递的值，因为在`__SOCKADDR_COMMON (sin_)`设置`sa_prefix`对应的`sin_`，所以拼接后为`sin_family`，因为`sa_family_t`代表的是`unsigned short int`，所以`sin_family`就是一个`unsigned short int`的值
+这个宏利用到了[C语言的`##`运算符](https://www.help-doc.top/c-lang/preprocess/preprocess.html#_7)，其含义是将sa_prefix##替换为宏传递的值，因为在`__SOCKADDR_COMMON (sin_)`设置`sa_prefix`对应的`sin_`，所以拼接后为`sin_family`，因为`sa_family_t`代表的是`unsigned short int`，所以`sin_family`就是一个`unsigned short int`的值
 
 因为当前是网络通信，所以对应值就是`AF_INET`，但是需要注意，这里传递的`AF_INET`和前面在`socket`接口传递的`AF_INET`含义不同，在使用`socket`时，指定`AF_INET`表明了`socket`所使用的协议族，它决定了内部数据结构和通信规则，而在调用`bind`时，指定`AF_INET`是因为需要通过这个成员来正确解析后续的地址信息
 
@@ -964,7 +964,7 @@ int main(int argc, char *argv[])
 
 ### 不同操作系统（客户端为Windows，服务端为Linux）
 
-因为Windows和Linux尽管系统底层不同，但是使用的都是同一个网络协议栈，所以二者可以通信，这一点在前面[网络基础部分](https://www.help-doc.top/Linux/20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20.%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html#_7)已经提到过此处不再赘述，有了上面通信的基础，下面演示Windows作为客户端连接Linux上的服务端，因为Windows中使用接口和Linux中差不多，所以不会再详细介绍，下面直接给出Windows客户端代码：
+因为Windows和Linux尽管系统底层不同，但是使用的都是同一个网络协议栈，所以二者可以通信，这一点在前面[网络基础部分](https://www.help-doc.top/Linux/net-basic/net-basic.html#_7)已经提到过此处不再赘述，有了上面通信的基础，下面演示Windows作为客户端连接Linux上的服务端，因为Windows中使用接口和Linux中差不多，所以不会再详细介绍，下面直接给出Windows客户端代码：
 
 ```c++
 #include <iostream>

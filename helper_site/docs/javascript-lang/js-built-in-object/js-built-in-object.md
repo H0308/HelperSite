@@ -848,7 +848,7 @@ for(let item of result){
 
 !!! info
 
-    了解此部分内容先了解[JavaScript中的定时器](https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/9.%20JavaScript%E4%B8%8EBOM%E6%93%8D%E4%BD%9C/9.%20JavaScript%E4%B8%8EBOM%E6%93%8D%E4%BD%9C.html?h=%E5%AE%9A#_1)
+    了解此部分内容先了解[JavaScript中的定时器](https://www.help-doc.top/javascript-lang/bom/bom.html#_1)
 
 在编写定时器时，因为其中需要用到回调函数，所以假设有需求：设置三个定时器，延迟2秒之后输出1, 完了之后延迟1秒输出2, 完了之后延迟1秒输出3，那么直接使用定时器写出的代码如下：
 

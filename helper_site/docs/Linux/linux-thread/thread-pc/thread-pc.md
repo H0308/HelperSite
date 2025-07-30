@@ -524,7 +524,7 @@ private:
 
 !!! note
 
-    需要注意，下面的代码使用到上一节[封装的信号量](https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/4.%20Linux%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/4.%20Linux%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F.html#_10)
+    需要注意，下面的代码使用到上一节[封装的信号量](https://www.help-doc.top/Linux/linux-thread/thread-semaphore/thread-semaphore.html#_10)
 
 ```c++
 CycleQueue(int val = 5)

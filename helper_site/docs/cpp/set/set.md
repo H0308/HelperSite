@@ -212,9 +212,9 @@ int main()
 
 #### 环形链表Ⅱ
 
-具体见[算法：链表部分](https://www.help-doc.top/%E7%AE%97%E6%B3%95/2.%20%E9%93%BE%E8%A1%A8%E7%AF%87/2.%20%E9%93%BE%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E9%93%BE%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html#142ii)
+具体见[算法：链表部分](https://www.help-doc.top/data-structure/linked-list/linked-list.html#142ii)
 
 #### 两个数组的交集
 
-具体见[算法：哈希表部分](https://www.help-doc.top/%E7%AE%97%E6%B3%95/3.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E7%AF%87/2.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html#349)
+具体见[算法：哈希表部分](https://www.help-doc.top/algorithm/hash-table/hash-table-basic/hash-table-basic.html#349)
 

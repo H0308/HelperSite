@@ -150,7 +150,7 @@ ls -ai
 
 ## 动态库和静态库
 
-在[Linux下的gcc和gdb](https://www.help-doc.top/Linux/4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb/4.%20Linux%E4%B8%8B%E7%9A%84gcc%E4%B8%8Egdb.html#_2)部分提到何为动态库以及何为静态库，此处不再赘述
+在[Linux下的gcc和gdb](https://www.help-doc.top/Linux/gcc-gdb/gcc-gdb.html#_2)部分提到何为动态库以及何为静态库，此处不再赘述
 
 在Linux中，除了可以使用库中内置的静态库和动态库外，也可以由用户自己创建动态库和静态库，下面使用常见的三种方式创建动态库和静态库
 
@@ -697,7 +697,7 @@ objdump -S 可执行程序名
 <img src="16. Linux软链接和硬链接.assets\image41.png">
 
 
-但是这个地址依旧是虚拟地址，所以依旧需要使用页表进行映射，对应着的就是反汇编代码中的`<_start>`地址（此处`<_start>`相当于[关于函数栈帧：`main`函数被其他函数调用](https://www.help-doc.top/%E5%85%B6%E5%AE%83/C%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0%E6%A0%88%E5%B8%A7/%E5%85%B3%E4%BA%8E%E5%87%BD%E6%95%B0%E6%A0%88%E5%B8%A7%EF%BC%88C%E8%AF%AD%E8%A8%80%E6%BC%94%E7%A4%BA%EF%BC%89.html#main)的`__tmainCRTStartup()`）
+但是这个地址依旧是虚拟地址，所以依旧需要使用页表进行映射，对应着的就是反汇编代码中的`<_start>`地址（此处`<_start>`相当于[关于函数栈帧：`main`函数被其他函数调用](https://www.help-doc.top/other/func-stack-c/func-stack-c.html#main)的`__tmainCRTStartup()`）
 
 所以，不论是进程还是CPU的PC寄存器，二者访问到的都是虚拟地址，但是这个虚拟地址要和物理地址在页表中建立映射关系。同时CPU内部还有一个寄存器，称为CR3寄存器，其中存储的就是页表本身的物理地址，这个寄存器是操作系统本身使用的。有了CR3寄存器后，就需要一个硬件配合其完成查表的工作，这个硬件称为MMU，也是在CPU内部
 

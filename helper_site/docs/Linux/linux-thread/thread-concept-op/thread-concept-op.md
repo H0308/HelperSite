@@ -559,7 +559,7 @@ int pthread_detach(pthread_t thread);
 
 ### 线程程序替换
 
-注意，[进程程序替换](https://www.help-doc.top/Linux/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/12.%20Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6.html?h=exec#_7)是不可以直接发生在线程执行流中的，因为程序替换的本质是替换掉当前进程的代码，此时线程的代码也会被替换从而导致错误，但是可以在线程中创建子进程，再在子进程中使用进程程序替换
+注意，[进程程序替换](https://www.help-doc.top/Linux/process-control/process-control.html#_7)是不可以直接发生在线程执行流中的，因为程序替换的本质是替换掉当前进程的代码，此时线程的代码也会被替换从而导致错误，但是可以在线程中创建子进程，再在子进程中使用进程程序替换
 
 ## C++中的线程操作
 

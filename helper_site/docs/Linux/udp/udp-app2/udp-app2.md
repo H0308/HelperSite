@@ -40,7 +40,7 @@
 
 对于第一个任务，服务器可以完全胜任，因为完全就是调用主题实现类的添加方法，这一步不会有很大的消耗，但是对于第二个任务，因为`socketfd`是双工的，那么就会存在既接收信息又分发信息，而分发信息需要遍历到每一个观察者，此时只有服务器一个线程，那么这一个线程开销就会非常大，所以为了避免这个问题就可以考虑使用线程池完成分发任务
 
-需要注意，本次会使用前面[封装的单例线程池](https://www.help-doc.top/Linux/19.%20Linux%E7%BA%BF%E7%A8%8B/8.%20Linux%E7%BA%BF%E7%A8%8B%E6%B1%A0/8.%20Linux%E7%BA%BF%E7%A8%8B%E6%B1%A0.html#_16)
+需要注意，本次会使用前面[封装的单例线程池](https://www.help-doc.top/Linux/linux-thread/thread-pool/thread-pool.html#_16)
 
 ## 实现用户模块
 

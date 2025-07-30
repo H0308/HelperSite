@@ -132,4 +132,4 @@ head->val = 5;
 
 ## 链表具体实现
 
-有关链表的具体内容，在[数据结构部分](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%20%E9%93%BE%E8%A1%A8/3.%20%E9%93%BE%E8%A1%A8.html)已经很详细了，此处不再赘述
+有关链表的具体内容，在[数据结构部分](https://www.help-doc.top/data-structure/linked-list/linked-list.html)已经很详细了，此处不再赘述

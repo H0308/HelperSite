@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 line-height: 1.6;
                 margin-bottom: 20px;
                 color: #333;
-            ">转载请注明来自<a href="https://www.help-doc.top/%E4%BD%9C%E8%80%85/%E4%BD%9C%E8%80%85.html" style="
+            ">转载请注明来自<a href="https://www.help-doc.top/author/contact/contact.html" style="
                 color: #4da6da;
                 text-decoration: none;
                 border-bottom: 1px solid rgba(77, 166, 218, 0.3);

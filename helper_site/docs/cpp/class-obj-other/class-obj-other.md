@@ -442,7 +442,7 @@ int main()
     !!! note
         若C是B的友元类（即C想使用B类中的成员），B是A的友元类（即B想使用A类中的成员），不能推出C是A的友元类（即C依旧无法使用A中的成员）
 
-3. 友元关系不能继承（[见继承章节](https://www.help-doc.top/C%2B%2B/19.%20C%2B%2B%E7%BB%A7%E6%89%BF/19.%20C%2B%2B%E7%BB%A7%E6%89%BF.html#_10)）
+3. 友元关系不能继承（[见继承章节](https://www.help-doc.top/cpp/extend/extend.html#_10)）
 
 ```C++
 #include <iostream>

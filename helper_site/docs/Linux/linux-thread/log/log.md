@@ -171,7 +171,7 @@ private:
 
     注意，日志文件中的写不建议是覆盖写，如果覆盖写就会导致之前的日志被清除
 
-本次考虑使用[C++ IO流](https://www.help-doc.top/C%2B%2B/30.%20C%2B%2BIO%E6%B5%81/30.%20C%2B%2BIO%E6%B5%81.html)打开文件，本次考虑使用既可以输入又可以输出的`fstream`，对于写方法，可以考虑使用`write`函数，但是更方便的还是使用流插入`<<`，写完文件后关闭文件即可
+本次考虑使用[C++ IO流](https://www.help-doc.top/os-basic/os-basic.html)打开文件，本次考虑使用既可以输入又可以输出的`fstream`，对于写方法，可以考虑使用`write`函数，但是更方便的还是使用流插入`<<`，写完文件后关闭文件即可
 
 同样，如果是多个线程，此时就只能允许一个线程写文件防止文件内容错乱，既然如此，同样需要考虑在哪加锁，为了防止一个文件被多个线程重复打开，所以考虑在打开文件直接就进行加锁，文件关闭后再解锁
 
@@ -288,7 +288,7 @@ private:
 
 !!! note
 
-    下面的代码使用到了前面封装的[获取时间函数](https://www.help-doc.top/Linux/17.%20Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/2.%20%E5%91%BD%E5%90%8D%E7%AE%A1%E9%81%93%E4%B8%8E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98/2.%20%E5%91%BD%E5%90%8D%E7%AE%A1%E9%81%93%E4%B8%8E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98.html#_8)，但是对细节进行了修改：
+    下面的代码使用到了前面封装的[获取时间函数](https://www.help-doc.top/Linux/com-process/com-named-pipe-shm/com-named-pipe-shm.html#_8)，但是对细节进行了修改：
 
     ```c++
     // 获取时间函数
@@ -405,7 +405,7 @@ LogMessage &operator<<(const T &content)
 
 !!! note
 
-    [注意，内部类中不可以创建外部类对象](https://www.help-doc.top/C%2B%2B/4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/4.%20C%2B%2B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9.html?h=%E5%86%85%E9%83%A8#_4)
+    [注意，内部类中不可以创建外部类对象](https://www.help-doc.top/cpp/class-obj-other/class-obj-other.html#_4)
 
 ```c++
 class LogHandler

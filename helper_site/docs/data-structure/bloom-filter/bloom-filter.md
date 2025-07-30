@@ -228,7 +228,7 @@ namespace BLOOM_FILTER
 
 - 10亿个整数里面求最大的前100个。
 
-    经典Top-k问题，用堆解决，具体见[堆](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8.%20%E5%A0%86/8.%20%E5%A0%86.html#topk)
+    经典Top-k问题，用堆解决，具体见[堆](https://www.help-doc.top/data-structure/heap/heap.html#topk)
 
 - 给两个文件，分别有100亿个query，我们只有1G内存，如何找到两个文件交集
 

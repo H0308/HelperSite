@@ -277,39 +277,39 @@ nav:
   - JavaEE应用开发:
     - SpringMVC基础: JavaEE/Spring/springmvc-basic/springmvc-basic.md
   - 扩展知识: 
-    - 关于Shell: 其它/Shell脚本语言/关于Shell.md
-    - 关于函数栈帧（C语言演示）: 其它/C语言函数栈帧/关于函数栈帧（C语言演示）.md
-    - 关于xml文件: 其它/关于xml文件/关于xml文件.md
-    - 关于JSONCPP库: 其它/关于JSONCPP库/关于JSONCPP库.md
-    - 关于C++日志库spdlog: 其它/关于C++日志库spdlog/关于C++日志库spdlog.md
+    - 关于Shell: other/shell/shell.md
+    - 关于函数栈帧（C语言演示）: other/func-stack-c/func-stack-c.md
+    - 关于xml文件: other/xml/xml.md
+    - 关于JSONCPP库: other/jsoncpp/jsoncpp.md
+    - 关于C++日志库spdlog: other/spdlog/spdlog.md
     - 关于Git: 
-      - Git基础操作: 其它/关于Git/Git基础操作/Git基础操作.md
-      - Git多人协作: 其它/关于Git/Git多人协作/Git多人协作.md
-    - 关于Muduo库: 其它/关于Muduo库/关于Muduo库.md
+      - Git基础操作: other/git/git-basic/git-basic.md
+      - Git多人协作: other/git/git-collaboration/git-collaboration.md
+    - 关于Muduo库: other/muduo/muduo.md
   - 工具帮助:
-    - vscode中添加代码片段: 工具帮助/vscode中添加代码片段/vscode中添加代码片段.md
-    - Windows系统下在VMware中配置Linux环境并通过客户端进行连接: 工具帮助/Windows系统下在VMware中配置Linux环境并通过客户端进行连接/Windows系统下在VMware中配置Linux环境并通过客户端进行连接.md
-    - Sunshine+Moonlight实现屏幕内容串流: 工具帮助/Sunshine+Moonlight实现屏幕内容串流/Sunshine+Moonlight实现屏幕内容串流.md
-    - vim使用帮助: 工具帮助/vim使用帮助/vim使用帮助.md
+    - vscode中添加代码片段: tooltips/vscode-snippets/vscode-snippets.md
+    - Windows系统下在VMware中配置Linux环境并通过客户端进行连接: tooltips/windows-vmware-linux/windows-vmware-linux.md
+    - Sunshine+Moonlight实现屏幕内容串流: tooltips/sunshine-moonlight/sunshine-moonlight.md
+    - vim使用帮助: tooltips/vim/vim.md
   - 项目:
-    - Boost库搜索引擎: 项目/1. Boost库搜索引擎/1. Boost库搜索引擎.md
+    - Boost库搜索引擎: projects/boost-searching-engine/boost-searching-engine.md
     - 仿Muduo库的高并发服务器: 
-      - 项目介绍与准备: 项目/3. 仿Muduo库的高并发服务器/1. 项目介绍与准备/1. 项目介绍与准备.md
-      - 服务器底层模块设计: 项目/3. 仿Muduo库的高并发服务器/2. 服务器底层模块设计/2. 服务器底层模块设计.md
+      - 项目介绍与准备: projects/reactor-server/intro/intro.md
+      - 服务器底层模块设计: projects/reactor-server/server-module-design/server-module-design.md
     - 基于JSON的RPC框架:
-      - 项目介绍与准备: 项目/2. 基于JSON的RPC框架/1. 项目介绍与准备/1. 项目介绍与准备.md
-      - 基础模块设计: 项目/2. 基于JSON的RPC框架/2. 基础模块设计/2. 基础模块设计.md
-      - 功能模块设计（RPC、注册）: 项目/2. 基于JSON的RPC框架/3. 功能模块设计（RPC、注册）/3. 功能模块设计（RPC、注册）.md
-      - 功能模块设计（主题、客户端封装、服务端封装）: 项目/2. 基于JSON的RPC框架/5. 功能模块设计（主题、客户端封装、服务端封装）/5. 功能模块设计（主题、客户端封装、服务端封装）.md
-      - 功能测试: 项目/2. 基于JSON的RPC框架/4. 功能测试/4. 功能测试.md
+      - 项目介绍与准备: projects/json-rpc/intro/intro.md
+      - 基础模块设计: projects/json-rpc/basic-module-design/basic-module-design.md
+      - 功能模块设计（RPC、注册）: projects/json-rpc/function-module-design-1/function-module-design-1.md
+      - 功能模块设计（主题、客户端封装、服务端封装）: projects/json-rpc/function-module-design-2/function-module-design-2.md
+      - 功能测试: projects/json-rpc/function-test/function-test.md
 
 not_in_nav: |
   JavaWeb/2. Servlet开发/2. Servlet开发.md
   JavaWeb/3. 乱码问题和路径问题/3. 乱码问题和路径问题.md
   JavaWeb/5. 会话、过滤器和监听器/5. 会话、过滤器和监听器.md
-  工具帮助/Tomcat安装和使用/Tomcat安装和使用.md
-  作者/关于作者/关于作者.md
-  作者/联系作者/作者.md
+  tooltips/tomcat/tomcat.md
+  author/about/about.md
+  author/contact/contact.md
 
 markdown_extensions:
   - admonition
@@ -432,5 +432,5 @@ plugins:
       type: date
       exclude:
         - index.md
-        - 作者/联系作者/作者.md
-        - 网站介绍/网站介绍.md
+        - author/contact/contact.md
+        - intro/intro.md

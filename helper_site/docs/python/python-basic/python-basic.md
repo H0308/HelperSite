@@ -423,7 +423,7 @@ print(num[::-1]) # 9876543210
 
 !!! note
 
-    注意，在Python中，`%`代表的是取模运算，而不是取余运算，具体可见[取余运算和取模运算](https://www.help-doc.top/%E7%AE%97%E6%B3%95/%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/%E5%8F%96%E6%A8%A1%E4%B8%8E%E5%8F%96%E4%BD%99/%E5%8F%96%E6%A8%A1%E4%B8%8E%E5%8F%96%E4%BD%99.html)
+    注意，在Python中，`%`代表的是取模运算，而不是取余运算，具体可见[取余运算和取模运算](https://www.help-doc.top/algorithm/other/modulo/modulo.html)
 
 ### 赋值运算符
 
@@ -455,7 +455,7 @@ a >= 1 && a <= 2
 1 <= a <= 2 # 表示a在1和2之间
 ```
 
-另外，Python的逻辑运算符运算结果参考[JavaScript逻辑运算符的运算方式](https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%20JavaScript%E5%9F%BA%E7%A1%80/JavaScript%E5%9F%BA%E7%A1%80.html#_11)，二者完全相同
+另外，Python的逻辑运算符运算结果参考[JavaScript逻辑运算符的运算方式](https://www.help-doc.top/javascript-lang/js-basic/js-basic.html#_11)，二者完全相同
 
 除了名字不同、计算结果和链式法则，使用和其他编程语言基本一样，但是注意，在Python中没有条件运算符`? :`
 

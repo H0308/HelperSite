@@ -162,7 +162,7 @@ struct sock {
 
 对于请求类来说，主要需要实现的就是序列化和反序列化。在C++中，实现序列化和反序列化的方式有很多种，本次以JSON字符串为例，后面的其他项目会考虑使用别的序列化工具例如protobuf
 
-本次使用的JSON转换方案为jsoncpp库，基本使用和介绍见[关于JSONCPP库](https://www.help-doc.top/%E5%85%B6%E5%AE%83/%E5%85%B3%E4%BA%8EJSONCPP%E5%BA%93/%E5%85%B3%E4%BA%8EJSONCPP%E5%BA%93.html#jsoncpp)
+本次使用的JSON转换方案为jsoncpp库，基本使用和介绍见[关于JSONCPP库](https://www.help-doc.top/other/jsoncpp/jsoncpp.html#jsoncpp)
 
 对于序列化函数，参数为一个输出型参数，将当前类中的字段组合为一个完整的JSON字符串，再将该字符串赋值给输出型参数即可，代码如下：
 

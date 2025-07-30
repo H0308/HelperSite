@@ -178,7 +178,7 @@
 
 <img src="8. JavaScript与DOM操作.assets/image-20241113164334356.png"/>
 
-对于删除元素节点，可以调用元素节点对象的`remove()`方法，该方法没有参数，具体见[在页面中删除元素节点](https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/8.%20JavaScript%E4%B8%8EDOM%E6%93%8D%E4%BD%9C/8.%20JavaScript%E4%B8%8EDOM%E6%93%8D%E4%BD%9C.html#_7)
+对于删除元素节点，可以调用元素节点对象的`remove()`方法，该方法没有参数，具体见[在页面中删除元素节点](https://www.help-doc.top/javascript-lang/dom/dom.html#_7)
 
 ## 文本节点
 

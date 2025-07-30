@@ -1476,7 +1476,7 @@ public:
 
 2. 解法2：map+priority_queue
 
-    本题就是典型的[TopK问题](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8.%20%E5%A0%86/8.%20%E5%A0%86.html#topk)，可以直接使用堆解决，在C++中，优先级队列priority_queue底层就是堆结构。但是本题需要注意，堆中的比较基准是按照出现的频次，所以要单独实现一个比较仿函数
+    本题就是典型的[TopK问题](https://www.help-doc.top/data-structure/heap/heap.html#topk)，可以直接使用堆解决，在C++中，优先级队列priority_queue底层就是堆结构。但是本题需要注意，堆中的比较基准是按照出现的频次，所以要单独实现一个比较仿函数
 
 **参考代码：**
 

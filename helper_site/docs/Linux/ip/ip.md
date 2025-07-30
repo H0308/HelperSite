@@ -25,7 +25,7 @@
 
 ### 4位首部长度
 
-这个值与TCP协议中的首部长度概念是一致的：都是描述协议报（包括选项）的总长度，同TCP协议报一样，如果直接使用这4位表示，那么连最基本的部分都无法完整表示，所以此处的单位依旧是4字节，具体计算方式与[TCP协议](https://www.help-doc.top/Linux/28.%20TCP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/28.%20TCP%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86.html#tcp_1)一样，此处不再具体解释
+这个值与TCP协议中的首部长度概念是一致的：都是描述协议报（包括选项）的总长度，同TCP协议报一样，如果直接使用这4位表示，那么连最基本的部分都无法完整表示，所以此处的单位依旧是4字节，具体计算方式与[TCP协议](https://www.help-doc.top/Linux/tcp-principles/tcp-principles.html#tcp_1)一样，此处不再具体解释
 
 ### 8位服务类型（TOS）
 
@@ -370,4 +370,4 @@ else if(3位标志的第三位 != 0 || 13位片偏移值 != 0)
 
 <img src="29. 网络层IP协议.assets/image-20250327210921415.png">
 
-至于为什么数据链路层需要规定这个MTU值在下一节[数据链路层](https://www.help-doc.top/Linux/30.%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8D%8F%E8%AE%AE/30.%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8D%8F%E8%AE%AE.html)会具体讲解
+至于为什么数据链路层需要规定这个MTU值在下一节[数据链路层](https://www.help-doc.top/Linux/datalink/datalink.html)会具体讲解

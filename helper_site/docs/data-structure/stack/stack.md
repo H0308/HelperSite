@@ -203,8 +203,8 @@ int STSize(ST* st)
 
 ### 有效的括号
 
-见[算法：栈和队列基础练习](https://www.help-doc.top/%E7%AE%97%E6%B3%95/6.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%AF%87/2.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html#20)
+见[算法：栈和队列基础练习](https://www.help-doc.top/algorithm/stack-queue/stack-queue-basic/stack-queue-basic.html#20)
 
 ### 逆波兰表达式
 
-见文档[波兰表达式与逆波兰表达式](https://www.help-doc.top/%E7%AE%97%E6%B3%95/%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95/%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F.html)
+见文档[波兰表达式与逆波兰表达式](https://www.help-doc.top/algorithm/other/polish-notation/polish-notation.html)

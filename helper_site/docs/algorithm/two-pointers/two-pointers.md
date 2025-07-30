@@ -1,0 +1,781 @@
+# 双指针篇
+
+## 介绍
+
+在前面[移动元素部分](https://www.help-doc.top/algorithm/array-basic/remove-element/remove-element.html#_1)已经简单了解过双指针算法的工作模式，大部分情况下，双指针只会有两种工作模式：
+
+1. 同向双指针，表示两个指针都向同一个方向移动，其中有两种移动方式：
+
+    1. 快慢双指针
+    2. 同速双指针
+
+2. 对撞双指针，表示两个指针分别从头部和尾部向中间移动直到相遇
+
+根据上面的分类，实际上在前面学习到的内容中，[滑动窗口](https://www.help-doc.top/algorithm/array-basic/sliding-window/sliding-window.html#_1)属于同向双指针，只是因为这两个指针中间的区域围成的内容时持续被关注的，从动画中可以看到相当于是一个窗口在滑动，所以也被称为滑动窗口
+
+双指针算法常见于数组和双向链表的题型。在数组中，双指针中的指针代表数组元素的下标，而不是真正的指针类型变量；在双向链表中，双指针中的指针即为真正意义上的指针，该指针一般是双向链表节点类型的指针
+
+实际上，双指针算法严格意义上来讲是一种优化思想，将原来需要进行两层循环或者需要异地处理的进行一定的优化，在原来的基础上尽可能地降低其时间复杂度和空间复杂度
+
+## 示例题目
+
+因为前面已经了解过双指针算法的工作模式，结合上面对双指针进行的概念化就可以直接开始进行双指针相关题目的练习，下面是前面遇到的与双指针有关的题目：
+
+1. [数组基础篇：移动元素（双指针基础）](https://www.help-doc.top/algorithm/array-basic/remove-element/remove-element.html#_1)：同向双指针和对撞双指针
+2. [数组基础篇：滑动窗口](https://www.help-doc.top/algorithm/array-basic/sliding-window/sliding-window.html#_1)：同向双指针
+3. [力扣38.外观数列](https://www.help-doc.top/algorithm/array-basic/simulation/simulation.html#38)：同向双指针
+4. [力扣206.反转链表](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#206)：同向双指针
+5. [力扣876.链表的中间结点](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#876)：同向双指针
+6. [力扣19.删除链表的倒数第N个结点](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#19n)：同向双指针，类似的题目还有[牛客网.倒数第k个节点](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#k)
+7. [力扣160.相交链表](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#160)：本题的双指针是分别指向两个空间的情况（同向双指针），类似的还有[力扣21.合并两个有序链表](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#21)
+8. [力扣面试题02.04.分割链表](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#0204)：同向双指针
+9.  [力扣234.回文链表](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#234)：找中间节点（同向双指针）
+10. [力扣24.两两交换链表中的节点](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#24)：同向双指针
+11. [力扣141.环形链表](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#141)：同向双指针，类似的还有[力扣142.环形链表Ⅱ](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#142ii)
+12. [力扣125.验证回文串](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#125)：对撞双指针
+13. [力扣344.反转字符串](https://www.help-doc.top/algorithm/string/string-basic/string-basic.html#344)：对撞双指针
+14. [力扣151. 反转字符串中的单词](https://www.help-doc.top/algorithm/string/string-basic/string-basic.html#151)：移除元素思路（同向双指针）+翻转字符串（对撞双指针）
+
+## 相关题目
+
+### 力扣80.删除有序数组中的重复项Ⅱ
+
+[力扣80.删除有序数组中的重复项Ⅱ](https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/description/?envType=study-plan-v2&envId=top-interview-150)
+
+**问题描述：**
+
+!!! quote
+
+    给你一个有序数组`nums`，请你原地删除重复出现的元素，使得出现次数超过两次的元素只出现两次，返回删除后数组的新长度。
+
+    不要使用额外的数组空间，你必须在原地修改输入数组 并在使用O(1)额外空间的条件下完成。
+
+    示例 1：
+
+    ```c++
+    输入：nums = [1,1,1,2,2,3]
+    输出：5, nums = [1,1,2,2,3]
+    解释：函数应返回新长度 length = 5, 并且原数组的前五个元素被修改为 1, 1, 2, 2, 3。 不需要考虑数组中超出新长度后面的元素。
+    ```
+
+    示例 2：
+
+    ```c++
+    输入：nums = [0,0,1,1,1,1,2,3,3]
+    输出：7, nums = [0,0,1,1,2,3,3]
+    解释：函数应返回新长度 length = 7, 并且原数组的前七个元素被修改为 0, 0, 1, 1, 2, 3, 3。不需要考虑数组中超出新长度后面的元素。
+    ```
+
+**思路分析：**
+
+1. 解法1：暴力解法
+    
+    通过计数器判断一个元素出现的次数，如果等于3次，就将不等于当前数字的剩余数字向前覆盖
+
+2. 解法2：双指针
+
+    既然是至少出现两次，那么数组的前两个元素一定不会出现第三个数字，所以可以考虑从数组第三个数值开始，如果数组只有两个数值，则直接返回原数组长度，否则考虑下面的思路，假设`slow`表示待复写的位置，`fast`表示当前位置：
+
+       1. `nums[slow - 2] == nums[fast]`，说明一定出现了3个重复的数字，此时不进行复写，直到`fast`走到与`nums[slow - 2]`不同的位置再开始
+       2. `nums[slow - 2] != nums[fast]`，说明`fast`找到了与`nums[slow - 2]`不同的位置，此时将`nums[fast]`更新到需要复写的起始位置，也就是`slow`的位置，再让`slow`向后移动
+    
+    重复上面的两个步骤，直到最后`fast`走到数组的末尾，说明复写结束，此时`slow`的位置就是复写后的数组长度
+
+**参考代码：**
+
+```c++
+class Solution80
+{
+public:
+    int removeDuplicates(vector<int>& nums) 
+    {
+        if(nums.size() <= 2)
+            return nums.size();
+        int slow = 2, fast = 2;
+
+        while(fast < nums.size())
+        {
+            if(nums[slow - 2] != nums[fast])
+            {
+                nums[slow] = nums[fast];
+                slow++;
+            }
+            fast++;
+        }
+
+        return slow;
+    }
+};
+```
+
+### 力扣1089.复写零
+
+[力扣1089.复写零](https://leetcode.cn/problems/duplicate-zeros/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给你一个长度固定的整数数组`arr`，请你将该数组中出现的每个零都复写一遍，并将其余的元素向右平移。
+
+    注意：请不要在超过该数组长度的位置写入元素。请对输入的数组就地进行上述修改，不要从函数返回任何东西。
+
+    示例 1：
+
+    ```c++
+    输入：arr = [1,0,2,3,0,4,5,0]
+    输出：[1,0,0,2,3,0,0,4]
+    解释：调用函数后，输入的数组将被修改为：[1,0,0,2,3,0,0,4]
+    ```
+
+    示例 2：
+
+    ```c++
+    输入：arr = [1,2,3]
+    输出：[1,2,3]
+    解释：调用函数后，输入的数组将被修改为：[1,2,3]
+    ```
+
+**思路分析：**
+
+1. 解法1：暴力移动
+
+    使用两层`for`循环，第一层`for`循环遍历原数组，如果当前元素为0，则使用第二层`for`循环将当前位置的下一个位置作为起始点，向后移动剩余元素，再覆写当前位置的下一个位置为0
+
+2. 解法2：异地复写
+
+    异地复写的思路也使用到了类似双指针的方式，但是这两个指针分别指向两个不同的空间，如果当前位置为0，则在新数组中复写两个0，否则直接在新数组中复写一次当前元素即可，最后因为要改变原数组，所以需要将新数组赋值给原数组
+
+3. 解法3：双指针复写
+
+    前面提到，双指针实际上是一种优化思路，在本题中便是如此，双指针复写就是为了在保证时间复杂度为O(N)的前提下优化异地复写所产生的额外空间消耗。因为涉及到添加元素，在[数组基础的理论基础篇](https://www.help-doc.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/1.%20%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1.%20%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html#_1)已经提到过「如果要在数组中间插入元素就必须从最后一个元素开始依次将当前元素向后移动为新添加的元素腾出位置」，所以本次的双指针应该从末尾向前遍历，复写0的过程还是很容易想到，和前面异地复写的思路一致：
+
+     1. 当前元素为0，复写2次0
+     2. 当前元素不为0，复写1次当前元素
+    
+    但是因为本题存在「将其余的元素向右平移」的条件，并且数组的大小在整个过程中是不可以改变的，所以就涉及到某些情况下末尾元素被删除，例如题目示例中的`[1,0,2,3,0,4,5,0]`在复写后变为：`[1,0,0,2,3,0,0,4]`，删除了元素5和0，但是在使用双指针复写的思路时一开始并不知道哪一个元素是复写后数组的最后一个元素，所以就需要先找到哪一个元素是数组复写后的最后一个元素。下面提供一种解决这个问题的思路：
+
+    考虑一次正向遍历，但是在这一次遍历中不进行任何的复写操作，假设`left`表示复写后数组的最后一个元素，`right`表示最后一个复写位置，具体操作为：
+
+    1. `left`所在位置是非0的数字：`right`移动一步
+    2. `left`所在位置是数字0：`right`移动两步
+    3. 判断`right`是否到最后一个元素的位置，如果`right`的值大于等于数组最后一个元素的位置值就结束循环
+    4. `left`移动一步
+
+    !!! note
+
+        注意，`right`初始位置在-1，而不是0，因为`right`需要指向的位置是最后一个元素的位置而不是最后一个元素的下一个位置
+
+    遍历完成后`left`所指向的位置即为最后一个待复写的元素，而`right`所指向的位置即为最后一个元素的位置，如图所示：
+    
+    <img src="5. 双指针算法.assets/image4.png">
+
+    但是此时需要注意一种特殊情况：
+
+    <img src="5. 双指针算法.assets/image5.png">
+
+    当指向的待复写元素是0时，那么此时`right`指向的位置已经超出了数组的范围，如果此时在`right`位置复写时就会出现越界访问的情况，那么此时需要进行边界修正，修正方法如下：
+
+    5. 在`right-1`的位置处覆写数字0
+    6. `left`向前走动一步
+    7. `right`向前走动两步
+
+    处理完边界情况后就可以进行正常的复写操作过程
+
+**参考代码：**
+
+=== "暴力复写"
+
+    ```c++
+    class Solution1089_1
+    {
+    public:
+        void duplicateZeros(vector<int> &arr)
+        {
+            for (int i = 0; i < arr.size(); i++)
+            {
+                if (arr[i] == 0)
+                {
+                    for (int j = arr.size() - 1; j > i; j--)
+                        arr[j] = arr[j - 1];
+                    i++;
+                }
+            }
+        }
+    };
+    ```
+
+=== "异地复写"
+
+    ```c++
+    class Solution1089_2
+    {
+    public:
+        void duplicateZeros(vector<int> &arr)
+        {
+            vector<int> nums(arr.size());
+
+            for (int i = 0, j = 0; i < arr.size() && j < nums.size(); i++, j++)
+            {
+                if (arr[i] == 0 && j + 1 < nums.size())
+                {
+                    nums[j] = nums[j + 1] = 0;
+                    j++;
+                }
+                else
+                    nums[j] = arr[i];
+            }
+
+            arr = nums;
+        }
+    };
+    ```
+
+=== "双指针复写"
+
+    ```c++
+    class Solution1089_3
+    {
+    public:
+        void duplicateZeros(vector<int> &arr)
+        {
+            int left = 0;
+            int right = -1;
+
+            // 找到待复写的位置
+            while (left < arr.size())
+            {
+                if (arr[left])
+                    right++;
+                else
+                    right += 2;
+
+                if (right >= arr.size() - 1)
+                    break;
+                left++;
+            }
+
+            // 修正边界情况
+            if (right == arr.size())
+            {
+                arr[right - 1] = 0;
+                left--;
+                right -= 2;
+            }
+
+            // 复写
+            while (left >= 0)
+            {
+                if (arr[left])
+                    arr[right--] = arr[left--];
+                else
+                {
+                    arr[right--] = 0;
+                    arr[right--] = 0;
+                    left--;
+                }
+            }
+        }
+    };
+    ```
+
+### 力扣202.快乐数
+
+[力扣202.快乐数](https://leetcode.cn/problems/happy-number/description/)
+
+**问题描述：**
+
+!!! quote
+
+    编写一个算法来判断一个数`n`是不是快乐数。
+
+    「快乐数」 定义为：
+
+    对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果这个过程结果为1，那么这个数就是快乐数。
+
+    如果`n`是快乐数就返回`true`；不是，则返回`false`。
+
+    示例 1：
+
+    ```c++
+    输入：n = 19
+    输出：true
+    ```
+
+    解释：
+
+    $1^2 + 9^2 = 82$
+
+    $8^2 + 2^2 = 68$
+
+    $6^2 + 8^2 = 100$
+    
+    $1^2 + 0^2 + 0^2 = 1$
+
+    示例 2：
+
+    ```c++
+    输入：n = 2
+    输出：false
+    ```
+
+**思路分析：**
+
+1. 解法1：哈希表
+
+    哈希表的思路可以在[哈希表基础练习章节](https://www.help-doc.top/algorithm/hash-table/hash-table-basic/hash-table-basic.html#202)中回顾，此处不再赘述
+
+2. 解法2：双指针算法
+
+    本题根据所给条件可以推出两种情况：
+
+    1. 结果为1
+    2. 结果不为1成环
+
+    <img src="5. 双指针算法.assets/image6.png">
+
+    如果将结果为1的看作为环，那么可以将上面两种情况归纳为一种情况：最后的计算结果一定会在环中，如果结果为1，那么环中的所有数值均为1，如果结果不为1，那么环中即为其他数值，如图所示：
+
+    <img src="5. 双指针算法.assets/image7.png">
+
+    通过将题目中对上面的结果进行抽象后，可以发现结果一定会成环，联系到题目：[力扣141. 环形链表](https://www.help-doc.top/%E7%AE%97%E6%B3%95/2.%20%E9%93%BE%E8%A1%A8%E7%AF%87/2.%20%E9%93%BE%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E9%93%BE%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html#141)可以考虑使用双指针算法中的快慢指针解决本题目，具体思路如下：
+
+    1. 定义一个慢指针`slow`和一个快指针`fast`
+    2. `slow`指针走一步（计算一次数字平方和），`fast`指针走两步（计算两次数字平方和）
+    3. 因为整个过程一定会成环，所以`fast`和`slow`指针一定会在环中的某一个位置相遇，判断相遇位置的数值是否为1
+
+**思考问题：**
+
+除了结果为1的另一种结果就是死循环，思考是否存在一种可能结果不是成环导致的死循环，而是无限增大导致的死循环？
+
+本题中并不会出现因为数值无限增大而导致死循环，即一定会成环，可以使用[鸽巢原理](https://www.help-doc.top/%E7%AE%97%E6%B3%95/1.%20%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E7%AF%87/7.%20%E4%BD%8D%E8%BF%90%E7%AE%97/7.%20%E4%BD%8D%E8%BF%90%E7%AE%97.html?h=%E9%B8%BD%E5%B7%A2#0101)进行分析：
+
+题目中给到的提示数字范围为INT_MAX（32位系统下），假设现在一个有一个远大于INT_MAX的数值，例如9999999999(10个9)，此时该数值的和为$9^2\times 10$，即810，那么说明在计算快乐数时，所有的给定数值因为是小于等于INT_MAX，所以最后的结果都会出现在[1, 810]这个范围中（810个鸽子巢）。既然如此，根据鸽巢原理，假设数字变化的次数为811（811个鸽子），因为范围固定，那么最后一个数值肯定会再一次出现在[1, 810]这个范围中，此时就会出现结果循环，所以一定会出现至少一个数值是重复出现导致成环，所以不存在因为数值无限增大而导致死循环
+
+**参考代码：**
+
+```c++
+class Solution202
+{
+public:
+    int calQrt(int n)
+    {
+        int temp = n;
+        int sum = 0;
+        while (temp)
+        {
+            int r = temp % 10;
+            temp /= 10;
+
+            sum += (r * r);
+        }
+
+        return sum;
+    }
+
+    bool isHappy(int n)
+    {
+        int slow = n;
+        int fast = n;
+
+        while (slow != 1)
+        {
+            slow = calQrt(slow);
+            fast = calQrt(calQrt(fast));
+
+            if (slow == fast && slow != 1)
+                return false;
+        }
+
+        return true;
+    }
+};
+```
+
+### 力扣11.盛最多水的容器
+
+[力扣11.盛最多水的容器](https://leetcode.cn/problems/container-with-most-water/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给定一个长度为`n`的整数数组`height`。有`n`条垂线，第`i`条线的两个端点是`(i, 0)`和`(i, height[i])`。
+
+    找出其中的两条线，使得它们与`x`轴共同构成的容器可以容纳最多的水。
+
+    返回容器可以储存的最大水量。
+
+    说明：你不能倾斜容器。
+
+    示例 1：
+
+    <img src="5. 双指针算法.assets\question_11.jpg">
+
+    ```c++
+    输入：[1,8,6,2,5,4,8,3,7]
+    输出：49 
+    解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。
+    ```
+
+    示例 2：
+
+    ```c++
+    输入：height = [1,1]
+    输出：1
+    ```
+
+**思路分析：**
+
+首先分析题目要求，本题基本意思是取出一个容器的两边高，根据两边高之间的距离作为容器的宽度，因为需要确保放入的水不会漏出容器并且不能倾斜容器（即往高的地方倾斜确保超过短高的部分流向长高），所以v = min{左侧高，右侧高} * distance(左侧高，右侧高)
+
+1. 解法1：暴力解法
+
+    通过外层`for`循环枚举其中一条高，再固定内层`for`循环枚举另一条高，求出体积的最大值即可，但是直接使用暴力枚举的时间复杂度为$O(N^2)$会出现超时
+
+2. 解法2：双指针算法
+
+    本题也是双指针算法优化暴力算法最典型的例子，通过双指针算法结合规律就可以在保证空间复杂度不变的情况下，将暴力解法的时间复杂度降到O(N)
+
+    根据体积的计算公式$V = height \times width$以及单调递减性可以得出两种使得v减小的情况：
+    
+       1. 当$height$固定时，$width$减小，则$V$就会减小
+       2. 当$width$固定时，$height$减小，则$V$就会减小
+
+    以区间`[ 6,2,5,4 ]`为例
+    
+    <img src="5. 双指针算法.assets/image9.png">
+    
+    根据上面的规律可以得出，因为遍历数组的过程中一定会出现$width$在减小的情况，为了使最后的$V$不变或者变大，只有改变$height$，如果出现一侧高度比另一侧高度小时，为了使$height$增大，需要移动小的一侧高度从而找到更高的高度，此时可以考虑使用双指针算法，左指针`left`代表左侧高度，右侧`right`代表右侧高度，当$width$（`left`与`right`的距离）不断减小时，通过两个指针控制高度$height$的取值，直到找到最大的体积
+
+    根据上面的规律就可以得到下面的过程：
+    
+     1. 固定`left`指针指向起始位置，固定`right`指针指向终止位置
+     2. 固定高度：当`height[left]<=height[right]`时，因为此时体积会随着宽度的减小而减小，所以可以让left++，但是每一次改变`left`前需要先计算最大体积，更新`left`可以是一个持续的过程，因为在找到下一个`height[left] > height[right]`之前，宽度一直在减小
+     3. 固定宽度：当`height[left]>height[right]`时，因为此时体积会随着高度的减小而减小，此时可以循环`right--`直到找到`height[left]<=height[right]`，同样，更新`right`之前也需要计算最大体积
+
+**参考代码：**
+
+```c++
+class Solution11
+{
+public:
+    int maxArea(vector<int> &height)
+    {
+        int maxV = 0;
+        for (int left = 0, right = height.size() - 1; left < right;)
+        {
+            while (left < right && height[left] <= height[right])
+            {
+                // 必须先计算体积，防止漏计算
+                maxV = max(maxV, (right - left) * height[left]);
+                left++;
+            }
+
+            while (left < right && height[left] > height[right])
+            {
+                maxV = max(maxV, (right - left) * height[right]);
+                right--;
+            }
+        }
+
+        return maxV;
+    }
+};
+```
+
+### 力扣611.有效三角形的个数
+
+[力扣611.有效三角形的个数](https://leetcode.cn/problems/valid-triangle-number/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给定一个包含非负整数的数组`nums`，返回其中可以组成三角形三条边的三元组个数。
+
+    示例 1:
+
+    ```c++
+    输入: nums = [2,2,3,4]
+    输出: 3
+    解释:有效的组合是: 
+    2,3,4 (使用第一个 2)
+    2,3,4 (使用第二个 2)
+    2,2,3
+    ```
+
+    示例 2:
+
+    ```c++
+    输入: nums = [4,2,3,4]
+    输出: 4
+    ```
+
+**思路分析：**
+
+1. 解法1：暴力枚举
+
+    通过三层`for`循环一次枚举出所有有效的三角形组合，但是此时的时间复杂度为$O(N^3)$，另外在判断是否能构成三角形时使用的三次判断，那么时间复杂度准确来说是$O(3N^3)$，如果此时对原数组进行排序，那么时间复杂度可以变为$O(Nlog_{2}{N}+N^3)$
+
+2. 解法2：排序+双指针
+
+    在介绍双指针算法的步骤之前，先了解一下为什么需要先进行排序：
+
+    在判断三个整数是否可以构成三角形时，假设三边分别为`a`、`b`和`c`，此时需要判断任意两边之和是否大于第三边，即`a + b > c && a +c > b && b + c > a`。如果此时确定一个最大的数值，假设此处`c`最大，那么只需要判断`a + b > c`，对于其余两种情况来说，因为`c`已经大于`b`和`a`，那么`c + b`或者`c + a`均会大于其余两边。对于排序之后的数组来说可以很容易确定最大值的位置，将最大值作为第三边后就只需要判断其余两边之和是否大于这个最大值即可
+
+    排序后本题可以考虑采用二分算法进行求解，但是使用双指针的算法会更优，下面重点讲解一下双指针算法的思路：
+
+    因为数组已经排序，所以除去作为第三边的最大值，接着还有第二大的数值，将其作为`right`指针位置为第二条边，将`left`指针作为第一条边，如图所示：
+    
+    <img src="5. 双指针算法.assets/image10.png">
+    
+    1. 如果`left位置的数值＋right位置的数值>c`，则说明可以构成三角形，而因为数组有序，所以`left`和`right`中间的数值均会出现`left+right>c`，所以直接计算个数即可，计算完个数后，因为`right`位置的情况已经枚举完，使`right--`即可
+    2. 如果`left+right<=c`，此时说明不可以构成三角形，但是不是更新最大值，因为如果更新最大值，那么此时全部要重新判断并且可能会漏算当前`right`作为第二条边的情况，所以需要更新`left`，因为`left`后面的数值比当前`left`位置的数值大，所以可能存在有效的三元组
+    3. 当`left`和`right`相遇时，说明最大值为9时的所有情况均被计算，注意`left`不可以等于`right`，此时根据题目描述并不算做三元组
+    4. 更新第三边，重复上面三步操作计算所有结果
+    
+    !!! note
+
+        固定一个第三边，但是这个第三边不能是起始位置的值，固定到起始位置就无法使用单调性解决
+    
+    中间过程示意图如下：
+
+    <img src="5. 双指针算法.assets/image11.png">
+
+**参考代码：**
+
+```c++
+class Solution611
+{
+public:
+    int triangleNumber(vector<int> &nums)
+    {
+        sort(nums.begin(), nums.end());
+        int count = 0;
+        for (int i = nums.size() - 1; i >= 0; i--)
+        {
+            for (int left = 0, right = i - 1; left <= right;)
+            {
+                if (nums[right] + nums[left] > nums[i])
+                {
+                    count += right - left;
+                    right--;
+                }
+                else
+                    left++;
+            }
+        }
+
+        return count;
+    }
+};
+```
+
+### 力扣LCR179.查找总价格为目标值的两个商品
+
+见[哈希表基础题目：力扣1.两数之和](https://www.help-doc.top/%E7%AE%97%E6%B3%95/3.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E7%AF%87/2.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E5%93%88%E5%B8%8C%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html#1)部分的**思路拓展**
+
+### 力扣15.三数之和
+
+[力扣15.三数之和](https://leetcode.cn/problems/3sum/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给你一个整数数组`nums`，判断是否存在三元组`[nums[i], nums[j], nums[k]]`满足`i != j、i != k 且 j != k`，同时还满足`nums[i] + nums[j] + nums[k] == 0`。请你返回所有和为0且不重复的三元组。
+
+    注意：答案中不可以包含重复的三元组。
+
+    示例 1：
+
+    ```c++
+    输入：nums = [-1,0,1,2,-1,-4]
+    输出：[[-1,-1,2],[-1,0,1]]
+    解释：
+    nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0 。
+    nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0 。
+    nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
+    不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。
+    注意，输出的顺序和三元组的顺序并不重要。
+    ```
+
+    示例 2：
+
+    ```c++
+    输入：nums = [0,1,1]
+    输出：[]
+    解释：唯一可能的三元组和不为 0 。
+    ```
+
+    示例 3：
+
+    ```c++
+    输入：nums = [0,0,0]
+    输出：[[0,0,0]]
+    解释：唯一可能的三元组和为 0 。
+    ```
+
+**思路分析：**
+
+1. 解法1：暴力解法
+
+    排序+暴力枚举+使用`set`进行去重，但是这个思路的时间复杂度为$O(N^3)$导致代码超时
+
+2. 解法2：排序+双指针算法
+
+    !!! note
+        之所以需要在开始处写排序是为了后面方便去重操作，如果数组无序，那么可能同样的数值会出现数组的任意位置，从而增加去重的难度
+
+    因为双指针可以取出连个数值，所以需要一层循环用于固定第三个数作为基数，假设为`target`，而两个指针计算的和为`sum`，因为三个数计算的结果为0，所以有`nums[i]+nums[j]+nums[k] = 0`，将`nums[i]`移动到等式的右侧后变为`nums[j]+nums[k] = -nums[i]`，所以可以考虑定义一个`left`指针代表`nums[j]`的位置，一个`right`指针代表`nums[k]`的位置，定义一个`target = -nums[i]`，接下来就是判断`nums[left] + nums[right]`是否等于`target`。而因为数组已经经过了排序，所以可以参考[力扣LCR179.查找总价格为目标值的两个商品](#)中的思路，此处不再赘述
+
+    因为本题还需要进行去重操作，下面考虑去重的思路：
+
+     1. `left`和`right`在向中间移动时结束条件是`left>=right`而不只是`left>right`
+     2. 对于`left`和`right`中遇到重复的情况，因为当前数组已经有序，所以相同的组合中的相同数值也会在数组中连续出现，如果左右指针均指向相同的数值，说明此时遇到了相同的组合，可以考虑当遇到和上一次数据相同时一直更新`left`和`right`直到二者各自遇到不同的数字再重复前面的步骤
+     3. 对于基数`target`出现重复的情况，如果当前作为基数的数字和上一次作为基数的数字相同时，那么更新生成基数的下标`i`，直到当前基数与上一次基数不同为止。此处需要注意，如果下标`i`是`for`循环中存在的循环下标更新的表达式，那么会出现两次下标`i`更新，所以需要去掉`for`循环中的下标更新表达式
+
+**参考代码：**
+
+```c++
+class Solution15
+{
+public:
+    vector<vector<int>> threeSum(vector<int> &nums)
+    {
+        // 记录结果
+        vector<vector<int>> ret;
+        // 排序数组
+        sort(nums.begin(), nums.end());
+
+        // 枚举最大值
+        for (int i = nums.size() - 1; i >= 0;)
+        {
+            for (int left = 0, right = i - 1; left < right;)
+            {
+                int sum = nums[left] + nums[right] + nums[i];
+                if (sum < 0)
+                    left++;
+                else if (sum > 0)
+                    right--;
+                else
+                {
+                    ret.push_back({nums[left], nums[right], nums[i]});
+                    // 更新到新加数
+                    left++;
+                    right--;
+                    // 对left和right区间中去重，注意越界问题的处理
+                    while (left < right && nums[left] == nums[left - 1])
+                        left++;
+                    while (right > left && nums[right] == nums[right + 1])
+                        right--;
+                }
+            }
+
+            i--;
+            // 对基数去重，注意越界问题的处理
+            while (i >= 0 && nums[i] == nums[i + 1])
+                i--;
+        }
+
+        return ret;
+    }
+};
+```
+
+### 力扣18.四数之和
+
+[力扣18.四数之和](https://leetcode.cn/problems/4sum/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给你一个由`n`个整数组成的数组`nums`，和一个目标值`target`。请你找出并返回满足下述全部条件且不重复的四元组`[nums[a], nums[b], nums[c], nums[d]]`（若两个四元组元素一一对应，则认为两个四元组重复）：
+
+    1. 0 <= a, b, c, d < n
+    2. a、b、c 和 d 互不相同
+    3. `nums[a] + nums[b] + nums[c] + nums[d] == target`
+
+    你可以按任意顺序返回答案。
+
+    示例 1：
+
+    ```c++
+    输入：nums = [1,0,-1,0,-2,2], target = 0
+    输出：[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+    ```
+
+    示例 2：
+
+    ```c++
+    输入：nums = [2,2,2,2,2], target = 8
+    输出：[[2,2,2,2]]
+    ```
+
+**思路分析：**
+
+1. 解法1：暴力解法
+
+    和上题一致
+
+2. 解法2：排序+双指针
+   
+   本题与上题基本一致，根据表达式`nums[a]+nums[b]+nums[c]+nums[d] = target`，所以可以得出算式`nums[c]+nums[d] = target-nums[a]-nums[b]`，所以先确定两个基数`nums[a]`和`nums[b]`，再通过双指针算法得到`nums[c]和nums[d]`
+
+!!! note
+
+    注意本题有数据溢出的情况
+
+**参考代码：**
+
+```c++
+class Solution18
+{
+public:
+    vector<vector<int>> fourSum(vector<int> &nums, int target)
+    {
+        vector<vector<int>> ret;
+        sort(nums.begin(), nums.end());
+        int sz = nums.size();
+        for (int i = 0; i < sz;)
+        {
+            //  三数之和思路
+            for (int j = i + 1; j < sz;)
+            {
+                // 注意整型范围
+                long long rest = (long long)target - nums[i] - nums[j];
+                int left = j + 1;
+                int right = sz - 1;
+                // 两数之和思路
+                while (left < right)
+                {
+                    int sum = nums[left] + nums[right];
+                    if (sum > rest)
+                        right--;
+                    else if (sum < rest)
+                        left++;
+                    else
+                    {
+                        ret.push_back({nums[i], nums[j], nums[left], nums[right]});
+                        left++;
+                        right--;
+                        while (left < right && nums[left] == nums[left - 1])
+                            left++;
+                        while (left < right && nums[right] == nums[right + 1])
+                            right--;
+                    }
+                }
+                j++;
+                while (j < sz && nums[j] == nums[j - 1])
+                    j++;
+            }
+            i++;
+            while (i < sz && nums[i] == nums[i - 1])
+                i++;
+        }
+        return ret;
+    }
+};
+```

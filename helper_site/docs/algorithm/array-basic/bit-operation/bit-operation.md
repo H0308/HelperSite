@@ -4,12 +4,12 @@
 
 在部分算法题中，使用位运算可能可以更好得达到题目的要求，在C/C++中，常见的位运算符有下面几种：
 
-1. [左移运算`<<`](https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6.html#_8)
-2. [右移运算`>>`](https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6.html#_9)
-3. [按位与`&`](https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6.html#_19)
-3. [按位或`|`](https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6.html#_20)
-4. [按位异或`^`](https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6.html#_21)
-5. [按位取反`~`](https://www.help-doc.top/C%E8%AF%AD%E8%A8%80/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6/4.%20C%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C%E7%AC%A6.html#_22)
+1. [左移运算`<<`](https://www.help-doc.top/c-lang/op/op.html#_8)
+2. [右移运算`>>`](https://www.help-doc.top/c-lang/op/op.html#_9)
+3. [按位与`&`](https://www.help-doc.top/c-lang/op/op.html#_19)
+3. [按位或`|`](https://www.help-doc.top/c-lang/op/op.html#_20)
+4. [按位异或`^`](https://www.help-doc.top/c-lang/op/op.html#_21)
+5. [按位取反`~`](https://www.help-doc.top/c-lang/op/op.html#_22)
 
 其中，对于按位与来说，其规律就是「有0则0」；对于按位或来说，其规律就是「有1则1」；对于按位异或来说，其基本规律就是「相同则0，相异则1」，实际上按位异或还可以理解为「无进位相加」
 

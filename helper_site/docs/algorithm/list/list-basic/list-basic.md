@@ -1,0 +1,2497 @@
+# 链表基础练习
+
+## 本篇介绍
+
+前面了解了链表的基础结构，下面通过基础的练习巩固前面学习到的基础知识。链表处的题目没有特别显著的统一解法，大部分都是对链表结构的增删改，所以通过题目具体分析链表的题目类型
+
+## 力扣203.移除链表元素
+
+[力扣203.移除链表元素](https://leetcode.cn/problems/remove-linked-list-elements/description/)
+
+**问题描述：**
+
+!!! quote
+    给你一个链表的头节点`head`和一个整数`val`，请你删除链表中所有满足`Node.val == val`的节点，并返回 新的头节点 。
+
+    示例 1：
+    
+    ```c++
+    输入：head = [1,2,6,3,4,5,6], val = 6
+    输出：[1,2,3,4,5]
+    ```
+    
+    示例 2：
+    
+    ```c++
+    输入：head = [], val = 1
+    输出：[]
+    ```
+    
+    示例 3：
+    
+    ```c++
+    输入：head = [7,7,7,7], val = 7
+    输出：[]
+    ```
+
+**思路分析：**
+
+1. 解法1：原地处理
+    从题目就可以看出，本题涉及链表结构的数据删除，需要注意，力扣中`head`不是头节点，而是第一个有效数据节点，所以此处需要考虑两种情况：
+
+    1. 删除的是第一个有效数据节点
+    2. 删除的是非第一个有效数据节点
+
+    但是为了可以实现统一处理，这里引入一个虚拟头结点`dummy`，使其指向第一个有效数据节点，这个做法在后面涉及到与链表的数据删除或者更改时非常常见。这样做可以保证第一个有效数据节点的删除逻辑和非第一个有效数据节点一致。剩余的逻辑就是链表的元素删除了，力扣中的链表大部分默认都是单链表，具体可以参考[单链表数据结构头删部分](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%20%E9%93%BE%E8%A1%A8/3.%20%E9%93%BE%E8%A1%A8.html#_12)和[单链表数据结构尾删部分](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%20%E9%93%BE%E8%A1%A8/3.%20%E9%93%BE%E8%A1%A8.html#_13)
+
+2. 解法2：异地处理
+
+    异地处理就不是删除的逻辑，而是尾插的逻辑，具体可见[单链表数据结构尾插](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%20%E9%93%BE%E8%A1%A8/3.%20%E9%93%BE%E8%A1%A8.html#_11)，为了方便插入，这里同样需要引入一个虚拟头结点`dummy`
+
+**参考代码：**
+
+=== "原地处理（不使用虚拟头节点）"
+
+    ```c++
+    class Solution203_1_1
+    {
+    public:
+        ListNode *removeElements(ListNode *head, int val)
+        {
+            if (head == nullptr)
+            {
+                return head;
+            }
+    
+            // 引入新节点指向头节点
+            ListNode *dummy = new ListNode;
+            dummy->next = head;
+
+
+            // 定义前驱节点
+            ListNode *prev = dummy;
+            // 定义起始节点
+            ListNode *cur = dummy->next;
+    
+            while (cur)
+            {
+                if (cur->val == val)
+                {
+                    // 删除节点
+                    ListNode *toDelete = cur;
+                    prev->next = cur->next;
+                    delete toDelete;
+                }
+                else
+                {
+                    prev = cur;
+                }
+                cur = prev->next;
+            }
+
+
+            return dummy->next;
+        }
+    };
+    ```
+
+=== "原地处理（使用头节点）"
+
+    ```c++
+    class Solution203_1_2
+    {
+    public:
+        ListNode *removeElements(ListNode *head, int val)
+        {
+            // 删除头结点
+            while (head != NULL && head->val == val)
+            {
+                // 注意这里不是if
+                ListNode *tmp = head;
+                head = head->next;
+                delete tmp;
+            }
+    
+            // 删除非头结点
+            ListNode *cur = head;
+            while (cur != NULL && cur->next != NULL)
+            {
+                if (cur->next->val == val)
+                {
+                    ListNode *tmp = cur->next;
+                    cur->next = cur->next->next;
+                    delete tmp;
+                }
+                else
+                {
+                    cur = cur->next;
+                }
+            }
+            return head;
+        }
+    };
+    ```
+
+=== "异地处理"
+
+    ```c++
+    class Solution203_2
+    {
+    public:
+        ListNode *removeElements(ListNode *head, int val)
+        {
+            ListNode *copyHead = new ListNode;
+            ListNode *curA = head;
+            ListNode *curB = copyHead;
+            while (curA)
+            {
+                if (curA->val != val)
+                {
+                    ListNode *newNode = new ListNode(curA->val);
+                    curB->next = newNode;
+                    curB = curB->next;
+                }
+                curA = curA->next;
+            }
+    
+            return copyHead->next;
+        }
+    };
+    ```
+
+## 力扣707.设计链表
+
+[力扣707.设计链表](https://leetcode.cn/problems/design-linked-list/description/)
+
+**问题描述：**
+
+!!! quote
+    
+    你可以选择使用单链表或者双链表，设计并实现自己的链表。
+    
+    单链表中的节点应该具备两个属性：`val`和`next`。`val`是当前节点的值，`next`是指向下一个节点的指针/引用。
+    
+    如果是双向链表，则还需要属性`prev`以指示链表中的上一个节点。假设链表中的所有节点下标从0开始。
+    
+    实现`MyLinkedList`类：
+    
+    `MyLinkedList()`初始化`MyLinkedList`对象。
+
+    `int get(int index)`获取链表中下标为`index`的节点的值。如果下标无效，则返回-1。
+
+    `void addAtHead(int val)`将一个值为`val`的节点插入到链表中第一个元素之前。在插入完成后，新节点会成为链表的第一个节点。
+
+    `void addAtTail(int val)`将一个值为`val`的节点追加到链表中作为链表的最后一个元素。
+
+    `void addAtIndex(int index, int val)`将一个值为 val 的节点插入到链表中下标为index的节点之前。如果index等于链表的长度，那么该节点会被追加到链表的末尾。如果index比长度更大，该节点将 不会插入 到链表中。
+    
+    `void deleteAtIndex(int index)`如果下标有效，则删除链表中下标为`index`的节点。
+
+
+    示例：
+    
+    **输入**
+    
+    ```c++
+    ["MyLinkedList", "addAtHead", "addAtTail", "addAtIndex", "get", "deleteAtIndex", "get"]
+    [[], [1], [3], [1, 2], [1], [1], [1]]
+    ```
+    
+    **输出**
+    
+    ```c++
+    [null, null, null, null, 2, null, 3]
+    ```
+    
+    **解释**
+    
+    ```c++
+    MyLinkedList myLinkedList = new MyLinkedList();
+    myLinkedList.addAtHead(1);
+    myLinkedList.addAtTail(3);
+    myLinkedList.addAtIndex(1, 2);    // 链表变为 1->2->3
+    myLinkedList.get(1);              // 返回 2
+    myLinkedList.deleteAtIndex(1);    // 现在，链表变为 1->3
+    myLinkedList.get(1);              // 返回 3
+    ```
+
+**思路分析：**
+
+本题就是根据对链表结构的理解设计一个自己的链表结构，既可以是单链表也可以双链表，但是需要注意，本题`get()`、`addAtIndex()`和`deleteAtIndex()`三个函数需要用到下标，但是链表本身没有下标，所以需要考虑用循环依次枚举下标直到其值等于所给下标为止，其余思路与链表数据结构相关操作基本一致
+
+需要注意，力扣本身有一个单链表节点结构`ListNode`结构，结构如下：
+
+```c++
+// 单向链表节点
+struct ListNode
+{
+    // 数据域
+    int val;
+    ListNode *next;
+
+    // 构造函数
+    ListNode(int _val = 0, ListNode *_next = nullptr)
+        : val(_val)
+        , next(_next)
+    {}
+};
+```
+
+但是对于双向链表节点结构则需要自行设计，根据题目要求设计出数据域和指针域即可
+
+**参考代码：**
+
+=== "单链表"
+
+    ```c++
+    class MyLinkedList
+    {
+    public:
+        MyLinkedList()
+            : _size(0)
+        {
+            // 使用头结点
+            _head = new ListNode;
+        }
+    
+        int get(int index)
+        {
+            // 无效下标返回-1
+            if (index < 0 || index >= _size)
+            {
+                return -1;
+            }
+    
+            // 当前位置
+            ListNode *cur = _head->next;
+            while (cur && index >= 0)
+            {
+                if (index == 0)
+                {
+                    return cur->val;
+                }
+                cur = cur->next;
+                index--;
+            }
+    
+            return -1;
+        }
+    
+        void addAtHead(int val)
+        {
+            // 插入到头结点后
+            ListNode *newNode = new ListNode(val);
+    
+            if (_head->next == nullptr)
+            {
+                _head->next = newNode;
+            }
+            else
+            {
+                ListNode *cur = _head->next;
+                newNode->next = cur;
+                _head->next = newNode;
+            }
+    
+            ++_size;
+        }
+    
+        void addAtTail(int val)
+        {
+            ListNode *newNode = new ListNode(val);
+    
+            ListNode *cur = _head;
+            if (cur->next == nullptr)
+            {
+                cur->next = newNode;
+                ++_size;
+                return;
+            }
+    
+            // 找到尾节点
+            while (cur->next)
+            {
+                cur = cur->next;
+            }
+    
+            cur->next = newNode;
+            ++_size;
+        }
+    
+        void addAtIndex(int index, int val)
+        {
+            // 非法下标阻止插入
+            if (index < 0 || index > _size)
+            {
+                return;
+            }
+    
+            // 刚好等于链表长度时相当于尾插
+            if (index == _size)
+            {
+                addAtTail(val);
+                // 注意此处不要再处理_size
+                return;
+            }
+    
+            // 等于0代表头插
+            if (index == 0)
+            {
+                addAtHead(val);
+                // 注意此处不要再处理_size
+                return;
+            }
+    
+            // 否则加入到指定节点之前
+            // 获取指定元素
+            int target = get(index);
+            // 没有指定元素，不允许插入
+            if (target == -1)
+            {
+                return;
+            }
+    
+            ListNode *cur = _head->next;
+            ListNode *prev = _head;
+            while (cur)
+            {
+                if (cur->val == target && index == 0)
+                {
+                    break;
+                }
+                prev = cur;
+                cur = cur->next;
+                --index;
+            }
+    
+            ListNode *newNode = new ListNode(val);
+    
+            newNode->next = cur;
+            prev->next = newNode;
+    
+            ++_size;
+        }
+    
+        void deleteAtIndex(int index)
+        {
+            // 非法下标阻止插入
+            if (index < 0 || index >= _size)
+            {
+                return;
+            }
+    
+            // 获取index对应的元素
+            int target = get(index);
+    
+            // 找到指定元素删除
+            ListNode *prev = _head;
+            ListNode *cur = _head->next;
+    
+            while (cur)
+            {
+                if (cur->val == target && index == 0)
+                {
+                    ListNode *toDelete = cur;
+                    prev->next = cur->next;
+                    delete toDelete;
+                    --_size;
+                    break;
+                }
+    
+                prev = cur;
+                cur = cur->next;
+                --index;
+            }
+        }
+    
+    private:
+        // 创建头结点
+        ListNode *_head;
+        // 链表有效数据个数
+        int _size;
+    };
+    ```
+
+=== "双向链表"
+
+    ```c++
+    struct DoubleListNode
+    {
+        // 数据域
+        int val;
+        // 指针域
+        DoubleListNode *next;
+        DoubleListNode *prev;
+    
+        DoubleListNode(int _val = 0)
+            : val(_val)
+            , next(nullptr)
+            , prev(nullptr)
+        {}
+    };
+    
+    class MyLinkedList
+    {
+    public:
+        MyLinkedList()
+            : _size(0)
+        {
+            _head = new DoubleListNode;
+            _head->next = _head;
+            _head->prev = _head;
+        }
+    
+        int get(int index)
+        {
+            if (index < 0 || index >= _size)
+                return -1;
+    
+            DoubleListNode *cur = _head->next;
+    
+            for (int i = 1; i <= index; i++)
+            {
+                cur = cur->next;
+            }
+    
+            if (cur == _head)
+            {
+                return -1;
+            }
+    
+            return cur->val;
+        }
+    
+        void addAtHead(int val)
+        {
+            // 创建新节点
+            DoubleListNode *newNode = new DoubleListNode(val);
+            // 将节点插入到头结点的后方
+            if (_head->next == _head)
+            {
+                // 处理头结点
+                _head->next = newNode;
+                _head->prev = newNode;
+    
+                // 处理新节点
+                newNode->prev = _head;
+                newNode->next = _head;
+            }
+            else
+            {
+                DoubleListNode *cur = _head->next;
+                // 处理新节点连接
+                newNode->next = cur;
+                newNode->prev = _head;
+                // 处理旧节点的连接
+                cur->prev = newNode;
+                _head->next = newNode;
+            }
+    
+            ++_size;
+        }
+    
+        void addAtTail(int val)
+        {
+            // 创建新节点
+            DoubleListNode *newNode = new DoubleListNode(val);
+            // 找到尾节点
+            if (_head->prev == _head)
+            {
+                // 处理头结点
+                _head->prev = newNode;
+                _head->next = newNode;
+    
+                // 处理新结点
+                newNode->prev = _head;
+                newNode->next = _head;
+            }
+            else
+            {
+                DoubleListNode *cur = _head->prev;
+                // 处理新节点
+                newNode->prev = cur;
+                newNode->next = _head;
+                // 处理旧节点
+                cur->next = newNode;
+                _head->prev = newNode;
+            }
+    
+            ++_size;
+        }
+    
+        void addAtIndex(int index, int val)
+        {
+            // 非法下标阻止插入
+            if (index < 0 || index > _size)
+            {
+                return;
+            }
+    
+            // 刚好等于链表长度时相当于尾插
+            if (index == _size)
+            {
+                addAtTail(val);
+                // 注意此处不要再处理_size
+                return;
+            }
+    
+            // 等于0代表头插
+            if (index == 0)
+            {
+                addAtHead(val);
+                // 注意此处不要再处理_size
+                return;
+            }
+    
+            // 创建新节点
+            DoubleListNode *newNode = new DoubleListNode(val);
+    
+            DoubleListNode *cur = _head->next;
+    
+            for (int i = 0; i < index; i++)
+            {
+                cur = cur->next;
+            }
+    
+            DoubleListNode *curPrev = cur->prev;
+            // 处理新节点
+            newNode->next = cur;
+            newNode->prev = curPrev;
+    
+            // 处理旧节点
+            cur->prev = newNode;
+            curPrev->next = newNode;
+    
+            ++_size;
+        }
+    
+        void deleteAtIndex(int index)
+        {
+            // 非法下标阻止删除
+            if (index < 0 || index >= _size)
+            {
+                return;
+            }
+    
+            DoubleListNode *cur = _head->next;
+            for (int i = 0; i < index; i++)
+            {
+                cur = cur->next;
+            }
+    
+            // 删除当前cur
+            DoubleListNode *toDelete = cur;
+            DoubleListNode *curPrev = cur->prev;
+            DoubleListNode *curNext = cur->next;
+    
+            curPrev->next = curNext;
+            curNext->prev = curPrev;
+    
+            --_size;
+        }
+    
+    private:
+        // 头结点
+        DoubleListNode *_head;
+        // 链表大小
+        int _size;
+    };
+    ```
+
+## 力扣206.反转链表
+
+[力扣206.反转链表](https://leetcode.cn/problems/reverse-linked-list/description/)
+
+**问题描述：**
+
+!!! quote
+    给你单链表的头节点`head`，请你反转链表，并返回反转后的链表。
+    
+
+    示例 1：
+
+    <img src="2. 链表基础练习.assets\rev1ex1.jpg">
+    
+    ```c++
+    输入：head = [1,2,3,4,5]
+    输出：[5,4,3,2,1]
+    ```
+    
+    示例 2：
+
+    <img src="2. 链表基础练习.assets\rev1ex2.jpg">
+    
+    ```c++
+    输入：head = [1,2]
+    输出：[2,1]
+    ```
+    
+    示例 3：
+    
+    ```c++
+    输入：head = []
+    输出：[]
+    ```
+
+**思路分析：**
+
+1. 解法1：异地处理
+
+    对于异地处理来说，反转链表本质就是第一个元素作为最后一个元素，第二个元素作为倒数第二个元素，第三个元素作为倒数第三个元素……，所以可以考虑使用头插的方式解决本题。遍历原链表，此处可以考虑为对每一个节点进行深拷贝，将对应的值通过新节点头插到新链表，保证每个节点的链接不会出现问题
+
+2. 解法2：原地处理
+
+    对于原地处理来说，必须处理好每一个节点的链接和断开。原地处理的具体操作是：因为是单链表，所以处理记录当前节点`cur`，还需要记录前一个节点`prev`，使用一个临时变量`temp`记录当前节点的下一个节点地址，防止接着断开链接时找不到下一个节点，再将当前节点的指针指向前一个节点，此时就完成一次一个节点的指针反向，让`prev`走到`cur`的位置，接着再让`cur`走到`temp`的位置重复上面的步骤即可
+
+    需要注意的是，`prev`指针的起始位置不同，处理方式也不相同
+
+**写法进阶：**
+
+上面的两个方式最常见的写法就是迭代，但是对于第二个方法来说，还可以使用递归来解决，建议先用迭代实现，再根据迭代写出递归的代码，也可以参考[算法：递归](https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/5.%20%E5%B8%B8%E8%A7%84%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E9%80%92%E5%BD%92/5.%20%E5%B8%B8%E8%A7%84%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E9%80%92%E5%BD%92.html#206)中的递归思路
+
+下面是根据循环转递归写法的思路：
+
+在循环中需要使用到两个指针，分别是`cur`表示当前节点，`prev`表示上一个节点，为了保证翻转后的链表的最后一个节点指向空，需要将`prev`初始化为`nullptr`，因为要返回翻转后的链表的头节点，所以函数头设计为`ListNode* _reverseList(ListNode* cur, ListNode* prev)`，接着考虑函数体，根据循环的思路，先记录当前节点的下一个节点，防止反转后找不到下一个节点，再将当前节点的`next`指向当前节点的前一个节点，这样就完成了两个节点的翻转，接着就是翻转后面的节点，翻转后面的节点的逻辑和翻转当前两个节点的逻辑相同，所以再次调用函数完成，最后考虑递归函数的结束条件，因为要返回头结点，所以当前`cur`走到空的时候，`prev`指向的就是翻转后的链表的头结点，返回`prev`即可
+
+**参考代码：**
+
+=== "异地处理"
+
+    ```c++
+    class Solution206_1
+    {
+    public:
+        ListNode *reverseList(ListNode *head)
+        {
+            ListNode *copyHead = new ListNode;
+    
+            ListNode *curA = head;
+    
+            // 头插思路
+            while (curA)
+            {
+                // 创建新节点
+                ListNode *newNode = new ListNode(curA->val);
+                if (copyHead->next == nullptr)
+                {
+                    copyHead->next = newNode;
+                }
+                else
+                {
+                    ListNode *cur = copyHead->next;
+                    newNode->next = cur;
+                    copyHead->next = newNode;
+                }
+                curA = curA->next;
+            }
+    
+            return copyHead->next;
+        }
+    };
+    ```
+
+=== "原地处理（写法1：`prev`起始指向第一个有效数据节点）"
+
+    ```c++
+    class Solution206_2_1
+    {
+    public:
+        ListNode *reverseList(ListNode *head)
+        {
+            if (head == nullptr)
+                return nullptr;
+            ListNode *prev = head;
+            ListNode *cur = head;
+    
+            while (cur)
+            {
+                if (cur == head)
+                {
+                    cur = cur->next;
+                    prev->next = nullptr;
+                }
+                else
+                {
+                    ListNode *temp = cur->next;
+                    cur->next = prev;
+                    prev = cur;
+                    cur = temp;
+                }
+            }
+    
+            head = prev;
+    
+            return head;
+        }
+    };
+    ```
+
+=== "原地处理（写法2：`prev`起始指向`nullptr`）"
+
+    ```c++
+    class Solution206_2_2
+    {
+    public:
+        ListNode *reverseList(ListNode *head)
+        {
+            if (head == nullptr)
+                return nullptr;
+            // 直接将prev初始化为nullptr
+            // 使cur每一次更改next时指向prev即可
+            ListNode *prev = nullptr;
+            ListNode *cur = head;
+    
+            while (cur)
+            {
+                ListNode *temp = cur->next;
+                cur->next = prev;
+                prev = cur;
+                cur = temp;
+            }
+    
+            head = prev;
+    
+            return head;
+        }
+    };
+    ```
+
+=== "递归写法"
+
+    ```c++
+    class Solution206_3
+    {
+    public:
+        ListNode *_reverseList(ListNode *cur, ListNode *prev)
+        {
+            // 递归终止条件——循环终止条件
+            if (cur == nullptr)
+                // 循环结束后的步骤
+                return prev;
+    
+            // 反转——循环中的过程
+            ListNode *temp = cur->next;
+            cur->next = prev;
+            // 再次的赋值操作相当于为下一次的循环做准备
+            // 在递归中相当于再次调用翻转函数
+            return _reverseList(temp, cur);
+        }
+    
+        ListNode *reverseList(ListNode *head)
+        {
+            // 相当于双指针中创建cur和prev并初始化
+            return _reverseList(head, nullptr);
+        }
+    };
+    ```
+
+## 力扣876.链表的中间结点
+
+**问题分析：**
+
+!!! quote
+    给你单链表的头结点`head`，请你找出并返回链表的中间结点。
+
+    如果有两个中间结点，则返回第二个中间结点。
+    
+    示例 1：
+    
+    ```c++
+    输入：head = [1,2,3,4,5]
+    输出：[3,4,5]
+    解释：链表只有一个中间结点，值为 3 。
+    ```
+    
+    示例 2：
+    
+    ```c++
+    输入：head = [1,2,3,4,5,6]
+    输出：[4,5,6]
+    解释：该链表有两个中间结点，值分别为 3 和 4 ，返回第二个结点。
+    ```
+
+**思路分析：**
+
+本题考虑使用快慢指针法，快指针一次走两步，慢指针一次走一步，最后返回慢指针即可，注意循环条件是`fast && fast->next`，而不是`fast->next && fast`，因为对于偶数个节点的链表来说，在走到了`fast`需要走到空才停止，而奇数个节点的链表走到`next`节点为空停止即可，如果是第二种，那么当链表为偶数个节点的链表，当`slow`走到第二个中间节点时，`fast`已经在空的位置，此时对于循环条件`fast->next && fast`来说，会先判断`fast->next`，由于此时`fast == NULL`，故此时会出现空指针解引用错误
+
+**参考代码：**
+
+=== "C语言"
+
+    ```c
+    typedef struct ListNode SLN;
+    struct ListNode* middleNode(struct ListNode* head) {
+        //快慢指针法
+        SLN* fast = head, *slow = head;
+        while(fast && fast->next)
+        {
+            //慢指针走一步，快指针走两步
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+    ```
+
+=== "C++"
+
+    ```c++
+    class Solution 
+    {
+    public:
+        ListNode* middleNode(ListNode* head) {
+            ListNode* fast = head;
+            ListNode* slow = head;
+    
+            while(fast && fast->next)
+            {
+                fast = fast->next->next;
+                slow = slow->next;
+            }
+    
+            return slow;
+        }
+    };
+    ```
+
+## 力扣19.删除链表的倒数第N个结点
+
+**问题描述：**
+
+!!! quote
+    给你一个链表，删除链表的倒数第`n`个结点，并且返回链表的头结点。
+
+    示例 1：
+    
+    ```c++
+    输入：head = [1,2,3,4,5], n = 2
+    输出：[1,2,3,5]
+    ```
+    
+    示例 2：
+    
+    ```c++
+    输入：head = [1], n = 1
+    输出：[]
+    ```
+    
+    示例 3：
+    
+    ```c++
+    输入：head = [1,2], n = 1
+    输出：[1]
+    ```
+
+**思路分析：**
+
+1. 计算链表长度反向找到倒数第`n`个节点
+
+    假设链表长度为`size`，倒数第`n`个节点代表前面有`size-n`个节点，假设现在第一个节点的下标为0，则`size-n`刚好就是倒数第`n`个节点的下标，利用这个结合前面设计链表题目中的下标思路即可解决本题
+
+2. 快慢指针
+
+    定义`fast`指针和`slow`指针分别表示快指针和慢指针，倒数第`n`个节点，说明该节点距离最后一个节点相差`n-1`节点，所以先让`fast`指针走n步，保证在`slow`和`fast`同时走时，`fast`到链表结尾，`slow`和`fast`相差`n-1`个节点。为了便于删除，依旧是引入虚拟头节点指向链表的第一个节点，并且因为在单链表中删除节点时，获取到待删除节点的前一个节点会更加方便，所以让`slow`和`fast`在一开始就相差1
+
+**参考代码：**
+
+=== "计算链表长度反向找到倒数第n个节点"
+
+    ```c++
+    class Solution19_1
+    {
+    public:
+        ListNode *removeNthFromEnd(ListNode *head, int n)
+        {
+            // 获取链表的长度
+            int sz = 0;
+            ListNode *cur = head;
+            while (cur)
+            {
+                cur = cur->next;
+                sz++;
+            }
+    
+            // 获取下标
+            int index = sz - n;
+    
+            // 根据下标删除对应的节点
+            ListNode *dummy = new ListNode;
+    
+            dummy->next = head;
+            ListNode *prev = dummy;
+            cur = dummy->next;
+    
+            for (int i = 0; i < index; i++)
+            {
+                prev = cur;
+                cur = cur->next;
+            }
+    
+            // 删除节点
+            if (index == 0)
+            {
+                // 如果index为0，说明删除的是第一个节点
+                dummy->next = head->next;
+                delete head;
+            }
+            else
+            {
+                prev->next = cur->next;
+                delete cur;
+            }
+    
+            return dummy->next;
+        }
+    };
+    ```
+
+=== "快慢指针"
+
+    ```c++
+    class Solution19_2
+    {
+    public:
+        ListNode *removeNthFromEnd(ListNode *head, int n)
+        {
+            ListNode *dummy = new ListNode;
+            dummy->next = head;
+    
+            ListNode *fast = dummy->next;
+            ListNode *slow = dummy;
+            // 先让fast走n步
+            while (n)
+            {
+                fast = fast->next;
+                --n;
+            }
+    
+            // slow和fast同时走
+            while (fast)
+            {
+                slow = slow->next;
+                fast = fast->next;
+            }
+    
+            // slow指向待删除节点的前一个节点
+            ListNode *toDelete = slow->next;
+            slow->next = slow->next->next;
+            delete toDelete;
+    
+            return dummy->next;
+        }
+    };
+    ```
+
+## 牛客网.倒数第k个节点
+
+!!! note
+
+    本题牛客网已下线，所以没有具体的题目链接，但是思路与力扣19题一致，只提供C语言版本
+
+**问题描述：**
+
+!!! quote
+
+    输入一个链表，输出该链表中倒数第`k`个结点
+
+**参考代码：**
+
+```c
+typedef struct ListNode SLN;
+
+SLN* FindKthToTail(SLN* head, int k) {
+    if(!head || k <= 0)
+    {
+        return NULL;
+    }
+    SLN* slow = head, *fast = head;
+    while (k--) 
+    {
+        if (fast)
+        {
+            fast = fast->next;
+        }
+        else 
+        {
+            return NULL;
+        }
+    }
+    while (fast) 
+    {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    return slow;
+}
+```
+
+## 力扣21.合并两个有序链表
+
+[力扣21.合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists/description/)
+
+**问题描述：**
+
+!!! quote
+
+    将两个升序链表合并为一个新的升序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+    
+    示例 1：
+
+    <img src="2. 链表基础练习.assets\merge_ex1.jpg">
+    
+    ```c++
+    输入：l1 = [1,2,4], l2 = [1,3,4]
+    输出：[1,1,2,3,4,4]
+    ```
+    
+    示例 2：
+    
+    ```c++
+    输入：l1 = [], l2 = []
+    输出：[]
+    ```
+    
+    示例 3：
+    
+    ```c++
+    输入：l1 = [], l2 = [0]
+    输出：[0]
+    ```
+
+**思路分析：**
+
+本题可以考虑使用双指针的思路，但是这两个指针是分别在两个链表上而不是在同一个链表上，假设这两个指针分别为`curA`和`curB`，代表的就是当前节点。接下来就是比较逻辑：
+
+1. `curA > curB`：因为要保证链表升序，所以`curB`节点链接到新链表上，向后移动`curB`，但是不要移动`curA`，因为`curA`较大，不能保证下一次的`curB`一定比`curA`大，所以当前的`curA`还需要继续和`curB`比较直到其满足`curA < curB`
+2. `curA <= curB`：与上面的过程刚好相反
+
+本题可以直接将原链表的节点链接到新链表上，也可以考虑通过当前值创建新节点，再将新节点链接到新链表上
+
+**写法优化：**
+
+本题可以结合上面的写法写出迭代版本，也可以使用递归写法，具体见[算法：常规题目中的递归](https://www.help-doc.top/algorithm/recursion-binary-tree/recursion-in-regular/recursion-in-regular.html#21)
+
+**参考代码：**
+
+=== "创建新节点"
+
+    ```c++
+    class Solution21_1
+    {
+    public:
+        ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
+        {
+            // 新链表的头结点
+            ListNode *mergeHead = new ListNode;
+            // 定义两个头结点从前往后遍历
+            ListNode *curA = list1;
+            ListNode *curB = list2;
+            // 定义一个节点指向新链表的尾结点
+            ListNode *tail = mergeHead;
+    
+            // 有一个节点到结尾就停止
+            while (curA && curB)
+            {
+                if (curA->val > curB->val)
+                {
+                    // curB小尾插到新链表
+                    ListNode *newNode = new ListNode(curB->val);
+    
+                    if (mergeHead->next == nullptr)
+                    {
+                        mergeHead->next = newNode;
+                    }
+                    else
+                    {
+                        tail->next = newNode;
+                    }
+                    curB = curB->next;
+                }
+                else
+                {
+                    // curA较小或者与curB相等
+                    ListNode *newNode = new ListNode(curA->val);
+    
+                    if (mergeHead->next == nullptr)
+                    {
+                        mergeHead->next = newNode;
+                    }
+                    else
+                    {
+                        tail->next = newNode;
+                    }
+                    curA = curA->next;
+                }
+                tail = tail->next;
+            }
+    
+            // 走完循环后肯定存在一个链表未走完
+            while (curA)
+            {
+                ListNode *newNode = new ListNode(curA->val);
+    
+                if (mergeHead->next == nullptr)
+                {
+                    mergeHead->next = newNode;
+                }
+                else
+                {
+                    tail->next = newNode;
+                }
+                tail = tail->next;
+    
+                curA = curA->next;
+            }
+    
+            while (curB)
+            {
+                ListNode *newNode = new ListNode(curB->val);
+    
+                if (mergeHead->next == nullptr)
+                {
+                    mergeHead->next = newNode;
+                }
+                else
+                {
+                    tail->next = newNode;
+                }
+                tail = tail->next;
+    
+                curB = curB->next;
+            }
+    
+            return mergeHead->next;
+        }
+    };
+    ```
+
+=== "不创建新节点"
+
+    ```c++
+    // 不创建新节点
+    class Solution21_2
+    {
+    public:
+        ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
+        {
+            // 新链表的头结点
+            ListNode *mergeHead = new ListNode;
+            // 定义两个头结点从前往后遍历
+            ListNode *curA = list1;
+            ListNode *curB = list2;
+            // 定义一个节点指向新链表的尾结点
+            ListNode *tail = mergeHead;
+    
+            // 有一个节点到结尾就停止
+            while (curA && curB)
+            {
+                if (curA->val > curB->val)
+                {
+                    // curB小尾插到新链表
+                    tail->next = curB;
+                    curB = curB->next;
+                }
+                else
+                {
+                    // curA较小或者与curB相等
+                    tail->next = curA;
+                    curA = curA->next;
+                }
+                tail = tail->next;
+            }
+    
+            // 走完循环后肯定存在一个链表未走完
+            if (curA)
+            {
+                tail->next = curA;
+            }
+            else if (curB)
+            {
+                tail->next = curB;
+            }
+    
+            return mergeHead->next;
+        }
+    };
+    ```
+
+=== "C语言迭代版本"
+
+    ```c++
+    typedef struct ListNode SLN;
+    struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
+        //当某一个链表为空时，直接返回另外一个链表
+        if(!list1)
+        {
+            return list2;
+        }
+        if(!list2)
+        {
+            return list1;
+        }
+    
+        SLN* head = NULL;
+        SLN* tail = NULL;
+        //当二者不为空时进行尾插
+        while(list1 && list2)
+        {
+            if(list1->val < list2->val)
+            {
+                //当链表的头为空时，直接添加
+                if(!head)
+                {
+                    head = tail = list1;
+                }
+                else
+                {
+                    //当链表的头不为空时，进行尾插
+                    tail->next = list1;
+                    tail = tail->next;
+                }
+                list1 = list1->next;//移动到下一个节点比较
+            }
+            else
+            {
+                //当链表的头为空时，直接添加
+                if(!head)
+                {
+                    head = tail = list2;
+                }
+                else
+                {
+                    //当链表的头不为空时，进行尾插
+                    tail->next = list2;
+                    tail = tail->next;
+                }
+                list2 = list2->next;//移动到下一个节点进行比较
+            }
+        }
+    
+        //此时可能存在某一个节点还未走完
+        if(list1)
+        {
+            tail->next = list1;
+        }
+        if(list2)
+        {
+            tail->next = list2;
+        }
+    
+        return head;
+    }
+    ```
+
+## 力扣面试题02.04.分割链表
+
+[力扣面试题02.04.分割链表](https://leetcode.cn/problems/partition-list-lcci/description/)
+
+**问题描述：**
+
+!!! quote
+    给你一个链表的头节点`head`和一个特定值`x`，请你对链表进行分隔，使得所有小于`x`的节点都出现在大于或等于`x`的节点之前。
+
+    你不需要保留每个分区中各节点的初始相对位置。
+    
+    示例 1：
+
+    <img src="2. 链表基础练习.assets\partition.jpg">
+
+    ```c++
+    输入：head = [1,4,3,2,5,2], x = 3
+    输出：[1,2,2,4,3,5]
+    ```
+    
+    示例 2：
+    
+    ```c++
+    输入：head = [2,1], x = 2
+    输出：[1,2]
+    ```
+
+**思路分析：**
+
+根据题目的描述「所有小于`x`的节点都出现在大于或等于`x`的节点之前」，可以考虑小于`x`的插入到大于等于`x`的前面，大于等于`x`的直接尾插，所以需要两个指针指向新链表中的节点，一个指针指向最后一个小于`x`的节点，便于接下来插入新的小于`x`的节点，另一个指针指向最后一个大于等于`x`的节点，便于尾插下一个大于等于`x`的节点
+
+因为涉及到链表的尾插，所以可以考虑使用一个虚拟头结点`dummy`便于分析
+
+**参考代码：**
+
+```c++
+class Solution0204
+{
+public:
+    ListNode *partition(ListNode *head, int x)
+    {
+        // 创建虚拟节点构建新链表
+        ListNode *dummy = new ListNode;
+        // 保存上一个小的节点
+        ListNode *little = dummy;
+        // 指针记录新链表的尾节点
+        ListNode *tail = dummy;
+        // 遍历原链表
+        // 小于x的插入到大于等于x的前面，大于等于x的直接尾插
+        ListNode *cur = head;
+        while (cur)
+        {
+            if (cur->val < x)
+            {
+                // 小的向前插
+                ListNode *newNode = new ListNode(cur->val);
+                if (dummy->next == nullptr)
+                {
+                    dummy->next = newNode;
+                    little = newNode;
+                }
+                else
+                {
+                    newNode->next = little->next;
+                    little->next = newNode;
+                    little = little->next;
+                }
+
+                if (little->next == nullptr)
+                {
+                    tail = little;
+                }
+            }
+            else
+            {
+                // 大的直接尾插
+                ListNode *newNode = new ListNode(cur->val);
+                if (dummy->next == nullptr)
+                {
+                    dummy->next = newNode;
+                }
+                else
+                {
+                    tail->next = newNode;
+                }
+                tail = tail->next;
+            }
+            cur = cur->next;
+        }
+
+        return dummy->next;
+    }
+};
+```
+
+## 力扣234.回文链表
+
+[力扣234.回文链表](https://leetcode.cn/problems/palindrome-linked-list/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给你一个单链表的头节点`head`，请你判断该链表是否为回文（回文序列是向前和向后读都相同的序列）链表。如果是，返回`true`；否则，返回`false`。
+
+    示例 1：
+
+    ```c++
+    输入：head = [1,2,2,1]
+    输出：true
+    ```
+
+    示例 2：
+
+    ```c++
+    输入：head = [1,2]
+    输出：false
+    ```
+
+**思路分析：**
+
+本题的思路很简单，找到链表的中间结点，再根据中间节点将原始链表分割成两部分，同时比较这两部分的值是否相同，如果完全相同就是回文链表，否则就不是。对于找链表的中间节点需要考虑到两种情况：
+
+1. 当链表的元素个数是偶数，此时慢指针指向的第二个中间节点，在回文链表中，该节点作为第二部分链表的最后一个节点
+2. 当链表的元素个数是奇数，此时慢指针指向的中间结点，在回文链表中，该节点的下一个位置才是第二部分链表的最后一个节点
+
+所以在分割链表前要确定链表的长度，判断其元素是奇数还是偶数，判断出中间节点后进行分割链表，剩余的思路就是链表结构的基础操作思路
+
+**参考代码：**
+
+=== "C++"
+
+    ```c++
+    class Solution234_1
+    {
+    public:
+        bool isPalindrome(ListNode *head)
+        {
+            // 计算链表长度
+            int count = 0;
+            ListNode *cur = head;
+            while (cur)
+            {
+                count++;
+                cur = cur->next;
+            }
+            // 先找到中间结点
+            ListNode *fast = head;
+            ListNode *slow = head;
+
+            while (fast && fast->next)
+            {
+                slow = slow->next;
+                fast = fast->next->next;
+            }
+
+            // 根据中间结点遍历链表
+            ListNode *front = head;
+            ListNode *back = count % 2 == 0 ? slow : slow->next;
+
+            // 将后部分的链表构建为新的链表——头插
+            ListNode *copyHead = new ListNode;
+            cur = copyHead;
+            while (cur && back)
+            {
+                ListNode *newNode = new ListNode(back->val);
+                if (copyHead->next == nullptr)
+                {
+                    copyHead->next = newNode;
+                }
+                else
+                {
+                    newNode->next = cur;
+                    copyHead->next = newNode;
+                }
+                cur = newNode;
+                back = back->next;
+            }
+
+            back = copyHead->next;
+
+            while (front && back)
+            {
+                if (front->val != back->val)
+                    return false;
+
+                front = front->next;
+                back = back->next;
+            }
+
+            return true;
+        }
+    };
+    ```
+=== "C语言"
+
+    ```c++
+    typedef struct ListNode SLN;
+
+    bool isPalindrome(struct ListNode *head)
+    {
+        if (!head)
+        {
+            return true;
+        }
+
+        // 找出链表的中间节点
+        SLN *slow = head;
+        SLN *fast = head;
+        SLN *prev = head;
+        while (fast && fast->next)
+        {
+            prev = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        // 将中间节点的前一个节点置为空
+        prev->next = NULL;
+        // 记录中间节点的位置
+        SLN *mid = slow;
+
+        // 逆置包括中间节点在内的后面的链表
+        prev = NULL;
+        SLN *phead = mid;
+        SLN *cur = mid;
+        while (cur)
+        {
+            cur = cur->next;
+            phead->next = prev;
+            prev = phead;
+            if (cur != NULL)
+            {
+                phead = cur;
+            }
+        }
+
+        // 遍历新的链表与原链表比较，如果相同返回true，不同返回false
+        cur = head;
+        while (cur)
+        {
+            if(cur->val != phead->val)
+            {
+                return false;
+            }
+            cur = cur->next;
+            phead = phead->next;
+        }
+
+        return true;
+    }
+    ```
+
+## 力扣24.两两交换链表中的节点
+
+[力扣24.两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。
+
+    示例 1：
+
+    <img src="2. 链表基础练习.assets\swap_ex1.jpg">
+
+    ```c++
+    输入：head = [1,2,3,4]
+    输出：[2,1,4,3]
+    ```
+
+    示例 2：
+
+    ```c++
+    输入：head = []
+    输出：[]
+    ```
+
+    示例 3：
+
+    ```c++
+    输入：head = [1]
+    输出：[1]
+    ```
+
+**思路分析：**
+
+1. 解法1：迭代
+    
+    根据题目的描述以及第一个样例可以看出「两两交换」的意思是「没有进行过交换两个的节点进行相互转换」，此外还有一个言外之意「如果只有一个节点则不进行交换」，理解题意后就可以考虑思路：让当前节点的前一个节点指向当前节点的后一个节点，再让当前节点的指针指向前一个节点即可实现两个节点交换，但是需要注意，如果节点不够两个时不需要交换，而这个情况只会出现在最后一次交换，直接退出交换过程即可
+
+2. 解法2：递归
+
+    见[算法：常规题目中的递归](https://www.help-doc.top/algorithm/recursion-binary-tree/recursion-in-regular/recursion-in-regular.html#24)
+
+**参考代码：**
+
+```c++
+class Solution24
+{
+public:
+    ListNode *swapPairs(ListNode *head)
+    {
+        if (head == nullptr || head->next == nullptr)
+            return head;
+        ListNode *dummy = new ListNode;
+        dummy->next = head;
+
+        ListNode *prev = dummy;
+        ListNode *cur = dummy->next;
+
+        while (prev && cur)
+        {
+            // 交换
+            ListNode *curNext = cur->next;
+            // curNext为空，说明剩余的节点数量为奇数
+            // 直接退出
+            if (curNext == nullptr)
+                break;
+            prev->next = curNext;
+            cur->next = curNext->next;
+            curNext->next = cur;
+            // 移动前修正
+            cur = prev->next;
+            // 移动
+            prev = prev->next->next;
+            cur = cur->next->next;
+        }
+
+        return dummy->next;
+    }
+};
+```
+
+## 力扣160.相交链表
+
+[力扣160. 相交链表](https://leetcode.cn/problems/intersection-of-two-linked-lists/description/)
+
+!!! note
+    本题同力扣面试题02.07.链表相交
+
+**问题描述：**
+
+!!! quote
+
+    给你两个单链表的头节点`headA`和`headB`，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回`null`。
+
+    图示两个链表在节点`c1`开始相交：
+
+    <img src="2. 链表基础练习.assets\160_statement.png" style="zoom: 50%">
+
+    题目数据保证整个链式结构中不存在环。
+
+    注意，函数返回结果后，链表必须保持其原始结构。
+
+    自定义评测：
+
+    评测系统 的输入如下（你设计的程序 不适用 此输入）：
+
+    `intersectVal` - 相交的起始节点的值。如果不存在相交节点，这一值为 0
+    `listA` - 第一个链表
+    `listB` - 第二个链表
+    `skipA` - 在`listA`中（从头节点开始）跳到交叉节点的节点数
+    `skipB` - 在`listB`中（从头节点开始）跳到交叉节点的节点数
+    评测系统将根据这些输入创建链式数据结构，并将两个头节点`headA`和`headB`传递给你的程序。如果程序能够正确返回相交节点，那么你的解决方案将被视作正确答案。
+
+    示例 1：
+
+    <img src="2. 链表基础练习.assets\160_example_1_1.png" style="zoom: 50%">
+
+    ```c++
+    输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3
+    输出：Intersected at '8'
+    解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。
+    从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,6,1,8,4,5]。
+    在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
+    — 请注意相交节点的值不为 1，因为在链表 A 和链表 B 之中值为 1 的节点 (A 中第二个节点和 B 中第三个节点) 是不同的节点。换句话说，它们在内存中指向两个不同的位置，而链表 A 和链表 B 中值为 8 的节点 (A 中第三个节点，B 中第四个节点) 在内存中指向相同的位置。
+    ```
+
+    示例 2：
+
+    <img src="2. 链表基础练习.assets\160_example_2.png" style="zoom: 50%">
+
+    ```c++
+    输入：intersectVal = 2, listA = [1,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
+    输出：Intersected at '2'
+    解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。
+    从各自的表头开始算起，链表 A 为 [1,9,1,2,4]，链表 B 为 [3,2,4]。
+    在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。
+    ```
+
+    示例 3：
+
+    <img src="2. 链表基础练习.assets\160_example_3.png" style="zoom: 50%">
+
+    ```c++
+    输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
+    输出：No intersection
+    解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。
+    由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。
+    这两个链表不相交，因此返回 null 。
+    ```
+
+**思路分析：**
+
+本题实际上有两个问题，第一个问题：两个链表是否相交，第二个问题：两个链表相交时相交的节点是哪一个
+
+对于第一个问题，两个链表如果相交，说明两个链表的最后一个节点一定相等（即为同一个节点，注意不是值相等，而是节点相等），通过判断两个链表的最后一个节点是否相等即可判断两个链表是否相交
+
+对于第二个问题，如何找相交节点，回忆数学中的相遇问题，相遇的本质是走到了同一个位置，那么对于链表来说，即为走到了同一个节点，而因为两个链表相交前的节点个数是不一定相同的，所以在前面判断是否相交时，可以同时计算两个链表的长度，而如果一个链表长，那么多出来的节点个数即为长链表中的多余部分，先让长链表遍历多出来的个数次，再同时遍历长链表和短链表，如果二者遇到了相同的节点，则说明这个节点时相交的节点
+
+示意图如下：
+
+<img src="2. 链表基础练习.assets\image.png">
+
+**参考代码：**
+
+=== "C++"
+
+    ```c++
+    class Solution160
+    {
+    public:
+        ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
+        {
+            // 获取两个链表的长度
+            int lengthA = 0;
+            ListNode *curA = headA;
+            while (curA)
+            {
+                lengthA++;
+                curA = curA->next;
+            }
+            int lengthB = 0;
+            ListNode *curB = headB;
+            while (curB)
+            {
+                lengthB++;
+                curB = curB->next;
+            }
+
+            // 获取差值
+            int diff = lengthA > lengthB ? lengthA - lengthB : lengthB - lengthA;
+
+            ListNode *longList = headA;
+            ListNode *shortList = headB;
+            if (lengthA < lengthB)
+            {
+                longList = headB;
+                shortList = headA;
+            }
+            // 让长链表先走diff步
+            while (diff--)
+            {
+                longList = longList->next;
+            }
+
+            // 再让二者一起走直到相遇
+            while (longList && shortList)
+            {
+                if (longList == shortList)
+                {
+                    return longList;
+                }
+
+                longList = longList->next;
+                shortList = shortList->next;
+            }
+
+            return nullptr;
+        }
+    };
+    ```
+
+=== "C语言"
+
+    ```c
+    typedef struct ListNode SLN;
+    struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB)
+    {
+        // 因为存在不相交的情况，所以将问题分成两部分
+        SLN *curA = headA;
+        SLN *curB = headB;
+        // 记录A链表和B链表的长度
+        int lenA = 1;
+        int lenB = 1;
+        // 1.判断是否相交
+        // 如果相交代表最后一个节点相等
+        //注意使用cur->next进行判断而不是cur，如果是cur则走到结尾为空，此时curA和curB都为空，即使最后一个节点不相同也不会返回没有交点的NULL
+        while (curA->next)
+        {
+            curA = curA->next;
+            lenA++;
+        }
+
+        while (curB->next)
+        {
+            curB = curB->next;
+            lenB++;
+        }
+
+        // 最后一个节点不同时说明两个链表没有交点
+        if (curA != curB)
+        {
+            return NULL;
+        }
+
+        // 2.找到交点
+        // 求出两个链表之间的差值
+        int dis = abs(lenA - lenB);
+        // 定义长链表和短链表，先假设，若不满足再修改
+        SLN *longList = headA;
+        SLN *shortList = headB;
+        if (lenA < lenB)
+        {
+            longList = headB;
+            shortList = headA;
+        }
+
+        //先让长的链表走差距步
+        while (dis--)
+        {
+            longList = longList->next;
+        }
+
+        //再同时走
+        while (longList != shortList)
+        {
+            longList = longList->next;
+            shortList = shortList->next;
+        }
+        //走完循环则代表肯定会有交点，因为没有交点时上面的if已经判断过了
+        return longList;
+    }
+    ```
+
+## 力扣141.环形链表
+
+[力扣141.环形链表](https://leetcode.cn/problems/linked-list-cycle/description/)
+
+**问题描述：**
+
+!!! quote
+    给你一个链表的头节点`head`，判断链表中是否有环。
+
+    如果链表中有某个节点，可以通过连续跟踪`next`指针再次到达，则链表中存在环。为了表示给定链表中的环，评测系统内部使用整数`pos`来表示链表尾连接到链表中的位置（索引从0开始）。注意：`pos`不作为参数进行传递。仅仅是为了标识链表的实际情况。
+
+    如果链表中存在环 ，则返回`true`。 否则，返回`false`。
+
+    示例 1：
+
+    <img src="2. 链表基础练习.assets\circularlinkedlist.png">
+
+    ```c++
+    输入：head = [3,2,0,-4], pos = 1
+    输出：true
+    解释：链表中有一个环，其尾部连接到第二个节点。
+    ```
+
+    示例 2：
+
+    <img src="2. 链表基础练习.assets\circularlinkedlist_test2.png">
+
+    ```c++
+    输入：head = [1,2], pos = 0
+    输出：true
+    解释：链表中有一个环，其尾部连接到第一个节点。
+    ```
+
+    示例 3：
+
+    <img src="2. 链表基础练习.assets\circularlinkedlist_test3.png">
+
+    ```c++
+    输入：head = [1], pos = -1
+    输出：false
+    解释：链表中没有环。
+    ```
+
+**思路分析：**
+
+本题可以利用[Floyd判圈算法](https://zh.wikipedia.org/wiki/Floyd%E5%88%A4%E5%9C%88%E7%AE%97%E6%B3%95)，具体思路如下：
+
+使用快慢指针，快指针每次走两步，慢指针每次走一步，当快指针和慢指针都没有进环，并且当快指针走到空时如果二者依旧没有相遇，那么说明链表没有环，而当快指针进环时，慢指针可能没有进环，此时也不可能相遇，所以当两个指针都在环内时才会相遇，而如果二者相遇，说明二者指向的节点相同，此时即有环
+
+!!! info "Floyd判圈算法"
+
+    Floyd判圈算法(Floyd Cycle Detection Algorithm)，又称龟兔赛跑算法(Tortoise and Hare Algorithm)，是一个可以在有限状态机、迭代函数或者链表上判断是否存在环，求出该环的起点与长度的算法。该算法据高德纳称由美国科学家罗伯特·弗洛伊德发明，但这一算法并没有出现在罗伯特·弗洛伊德公开发表的著作中
+
+    如果有限状态机、迭代函数或者链表上存在环，那么在某个环上以不同速度前进的2个指针必定会在某个时刻相遇。同时显然地，如果从同一个起点(即使这个起点不在某个环上)同时开始以不同速度前进的2个指针最终相遇，那么可以判定存在一个环，且可以求出2者相遇处所在的环的起点与长度
+
+**思考问题：**
+
+1. `slow`和`fast`为什么走两步会相遇
+
+    `slow`和`fast`走两步会相遇是因为`slow`和`fast`之间的步数差距为1（每次跳过一个节点），也就是说，两个指针的距离（单位长度）每次都会减少1，例如，假设`slow`指针当前在第五个节点，`fast`指针在第一个节点，两个指针相差4个单位长度（3个节点），当`slow`走一步时，`slow`到达第六个节点，而`fast`此时走两步，`fast`到达第三个节点，两个指针相差3个单位长度，当`slow`再走一步时，`slow`到达第七个节点，而`fast`此时走到第五个节点，两个指着相差2个单位长度，而当`slow`走到第八个节点时，此时`fast`走到第七个节点，两个节点相差1个单位长度，当`slow`走到第九个节点时，`fast`此时也走到第九个节点，此时二者相遇，而推广到有`n`个节点，每次`slow`走一步，`fast`走两步，二者之间的单位长度个数减少1，即距离减少1，最后终将会相遇
+   
+2. 如果`fast`走2步以上的步数是否会出现相遇，如果会什么时候相遇，什么时候不相遇
+
+    对于第二个问题，如果`fast`走两步以上的步数，则`fast`和`slow`之间的距离差值每次减少二者之间的步数差值，如果`fast`和`slow`本身相差偶数个节点，并且二者之间的步数差值为2，那么会相遇，如果`fast`和`slow`相差奇数个单位长度时，此时到当`slow`到最后一个节点时，`fast`比`slow`多走两步，走到了`slow`的下一个节点的下一个节点，则二者错过相遇点，同理可得更多的步数差值，而因为二者步数相差1时，每次距离减少1，无论二者之间的距离差值为奇数还是偶数都会相遇
+
+**参考代码：**
+
+=== "C语言"
+
+    ```c
+    typedef struct ListNode SLN;
+    bool hasCycle(struct ListNode *head) {
+        //快慢指针法
+        SLN* slow = head;
+        SLN* fast = head;
+        
+        while(fast && fast->next)
+        {
+            //先让慢指针和快指针进行移动，避免出现因为都指向头结点而误以为有环
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast)
+            {
+                //当快指针和慢指针相遇时，说明有环
+                return true;
+            }
+        }
+        //走到了尽头说明没环
+        return false;
+    }
+    ```
+
+=== "C++"
+
+    ```c++
+    class Solution141
+    {
+    public:
+        bool hasCycle(ListNode *head)
+        {
+            if (head == nullptr)
+                return false;
+            ListNode *fast = head;
+            ListNode *slow = head;
+
+            while (fast && fast->next)
+            {
+                fast = fast->next->next;
+                slow = slow->next;
+
+                if (fast == slow)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    };
+    ```
+
+## 力扣142.环形链表Ⅱ
+
+[力扣142.环形链表Ⅱ](https://leetcode.cn/problems/linked-list-cycle-ii/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给定一个链表的头节点`head`，返回链表开始入环的第一个节点。 如果链表无环，则返回`null`。
+
+    如果链表中有某个节点，可以通过连续跟踪`next`指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数`pos`来表示链表尾连接到链表中的位置（索引从0开始）。如果`pos`是-1，则在该链表中没有环。注意：`pos`不作为参数进行传递，仅仅是为了标识链表的实际情况。
+
+    不允许修改链表。
+
+    示例 1：
+
+    ```c++
+    输入：head = [3,2,0,-4], pos = 1
+    输出：返回索引为 1 的链表节点
+    解释：链表中有一个环，其尾部连接到第二个节点。
+    ```
+
+    示例 2：
+
+    ```c++
+    输入：head = [1,2], pos = 0
+    输出：返回索引为 0 的链表节点
+    解释：链表中有一个环，其尾部连接到第一个节点。
+    ```
+
+    示例 3：
+
+    ```c++
+    输入：head = [1], pos = -1
+    输出：返回 null
+    解释：链表中没有环。
+    ```
+
+**思路分析：**
+
+1. 解法1：双指针解法
+    本题是前一个题目的变型版本，前面一题只需要判断是否有环，本题是在判断有环的基础上找到环的开始节点，所以本题一共两个问题，依旧可以使用Floyd判圈算法找到相遇位置，因为慢指针每次走一步，快指针每次走两步，所以快指针走过的路程即为慢指针的两倍，如果二者从相遇点开始起步，则有：
+
+    <img src="2. 链表基础练习.assets\image2.png">
+
+    假设链表环前的距离为L，slow进环后的位置与环的起点的位置的距离为X，环的周长为C
+
+    那么对于慢指针来说，其走过的距离为L+X，因为快指针每次走两步，那么`slow`和`fast`相遇之前，`fast`至少已经走了一圈，因为`fast`在`slow`的前面，如果没有走一圈，不可能回到`slow`的位置，那么快指针走过的距离为L+nC+X（先走没有环的部分，再走一定数量的圈数，再从起点走X距离追上`slow`），故有等式L+X+nC = 2*(L+X)，化简可得nC  = L + X，故L = nC-X = (n - 1)C + C - X(先走n-1圈，再走去掉X的部分回到进环点)，极限情况下，n = 1，则有L = C - X，即此时`fast`从相遇点开始走，走了C-X的距离刚好走到进环点，此时即为入环的第一个节点
+
+2. 解法2：哈希表
+
+    结合set后可以考虑思路：所谓链表是否有环，即是否有重复的节点，而第一个重复的节点即为环的入口点，如果不成环则会一直走到空为止。那么利用set可以考虑将每一个节点插入到set中，因为set在插入时会保证数据不冗余，所以插入失败的第一个节点即为成环，也为环的入口点
+
+**参考代码：**
+
+=== "C语言"
+
+    ```c
+    typedef struct ListNode SLN;
+    struct ListNode *detectCycle(struct ListNode *head) {
+        //第一种方法：快慢指针法
+        SLN* slow = head;
+        SLN* fast = head;
+        while(fast && fast->next)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast)
+            {
+                //相等时说明相遇
+                SLN* meet = slow;//保存第一次相遇点
+                while (head != meet)
+                {
+                    //一次次和相遇点比较，如果进环前的点和环中的点相等，说明是环的入口
+                    head = head->next;//相当于等式中L，从第一个节点开始走L个长度
+                    meet = meet->next;//相当于等式中的C-X，从相遇点开始走C-X个长度
+                }
+                return meet;
+            }
+        }
+
+        //无环时返回空
+        return NULL;
+    }
+    ```
+
+=== "C++"
+
+    ```c++
+    class Solution142_1
+    {
+    public:
+        ListNode *detectCycle(ListNode *head)
+        {
+            if (head == nullptr)
+                return nullptr;
+            ListNode *fast = head->next;
+            ListNode *slow = head;
+
+            while (fast && fast->next)
+            {
+                if (fast == slow)
+                {
+                    ListNode *index1 = head;
+                    ListNode *index2 = slow;
+
+                    while (index1 != index2)
+                    {
+                        index1 = index1->next;
+                        index2 = index2->next;
+                    }
+
+                    return index1;
+                }
+
+                fast = fast->next->next;
+                slow = slow->next;
+            }
+
+            return nullptr;
+        }
+    };
+    ```
+
+=== "哈希表"
+
+    ```c++
+    class Solution142_2
+    {
+    public:
+        ListNode *detectCycle(ListNode *head) 
+        {
+            set<ListNode*> nodeSet;
+            ListNode* cur = head;
+            while(cur)
+            {
+                // 将数据插入到set中
+                pair<set<ListNode*>::iterator, bool> ret = nodeSet.insert(cur);
+                // 如果插入失败证明是入口点
+                if(ret.second == false)
+                {
+                    return cur;
+                }
+
+                cur = cur->next;
+            }
+
+            // 无环返回false
+            return NULL;
+        }
+    };
+    ```
+
+## 力扣138.随机链表的复制
+
+[力扣138.随机链表的复制](https://leetcode.cn/problems/copy-list-with-random-pointer/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给你一个长度为`n`的链表，每个节点包含一个额外增加的随机指针`random`，该指针可以指向链表中的任何节点或空节点。
+
+    构造这个链表的 深拷贝。 深拷贝应该正好由`n`个 全新 节点组成，其中每个新节点的值都设为其对应的原节点的值。新节点的`next`指针和`random`指针也都应指向复制链表中的新节点，并使原链表和复制链表中的这些指针能够表示相同的链表状态。复制链表中的指针都不应指向原链表中的节点 。
+
+    例如，如果原链表中有`X`和`Y`两个节点，其中`X.random --> Y`。那么在复制链表中对应的两个节点`x`和`y`，同样有`x.random --> y`。
+
+    返回复制链表的头节点。
+
+    用一个由`n`个节点组成的链表来表示输入/输出中的链表。每个节点用一个`[val, random_index]`表示：
+
+    `val`：一个表示`Node.val`的整数。
+    `random_index`：随机指针指向的节点索引（范围从0到`n-1`）；如果不指向任何节点，则为`null`。
+    你的代码只接受原链表的头节点`head`作为传入参数。
+
+    示例 1：
+
+    <img src="2. 链表基础练习.assets\e1.png">
+
+    ```c++
+    输入：head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+    输出：[[7,null],[13,0],[11,4],[10,2],[1,0]]
+    ```
+
+    示例 2：
+
+    <img src="2. 链表基础练习.assets\e2.png">
+
+    ```c++
+    输入：head = [[1,1],[2,1]]
+    输出：[[1,1],[2,1]]
+    ```
+
+    示例 3：
+
+    <img src="2. 链表基础练习.assets\e3.png">
+
+    ```c++
+    输入：head = [[3,null],[3,0],[3,null]]
+    输出：[[3,null],[3,0],[3,null]]
+    ```
+
+**思路分析：**
+
+本题可以将原链表的每一个节点都进行一次拷贝，然后插入到对应的原节点的后面，接下来分三步走：
+
+1. 拷贝链表节点并将对应的节点链接到原链表对应节点之后
+2. 拷贝`random`节点
+3. 断开新链表和原链表的链接
+
+定义两个指针`copyHead`和`copyTail`分别指向由新的节点组成的链表，根据尾插的思想一步一步先进行拷贝，再处理`random`，对于此题来说，当原链表节点的`random`为空时，拷贝链表的`random`也为空，当原链表的`random`不为空，此时观察规律可得`copyTail->random = cur->random->next`
+
+例如，对于拷贝链表的第二个节点来说，其`random`应该指向拷贝链表的第一个节点（注意不能只比较值，因为值可能重复，但是`random`链接的顺序只有一个），而该第一个节点时原链表`cur->random`指向的第一个节点的`next`的节点），最后断开原链表和拷贝链表的相互链接，使二者变为两个链表，返回拷贝的链表即可
+
+示意图如下：
+
+<img src="2. 链表基础练习.assets\image3.png">
+
+**优化思路：**
+
+在上面的思路中，使用到了一步「拷贝链表节点并将对应的节点链接到原链表对应节点之后」，这一步本质就是为了让拷贝后的新节点的`random`更容易找到其指向的节点，但是这一步需要考虑好链接以及后面的断开链接，过程有点繁琐且细节颇多，可以考虑使用map建立原节点和拷贝节点映射，这样就可以做到根据原节点找到拷贝节点
+
+**参考代码：**
+
+=== "C语言"
+
+    ```c++
+    typedef struct Node SN;
+    struct Node *copyRandomList(struct Node *head)
+    {
+        SN *copyHead = NULL;
+        SN *copyTail = NULL;
+        SN *cur = head;
+        // 1.复制原链表并插入
+        while (cur)
+        {
+            // 复制链表
+            if (copyHead == NULL)
+            {
+                copyHead = copyTail = (SN *)malloc(sizeof(SN));
+            }
+            else
+            {
+                copyTail = (SN *)malloc(sizeof(SN));
+            }
+            // 插入
+            copyTail->val = cur->val;
+            copyTail->next = cur->next;
+            cur->next = copyTail;
+            // 使指针移动
+            cur = copyTail->next;
+        }
+
+        // 2.处理random
+        cur = head;
+        while (cur)
+        {
+            //因为copyTail和cur指向同一个链表，故在循环中处理copyTail的位置，因为cur会移动，所以直接使用cur->next给copyTail就可以使其移动，不需要单独用语句让copyTail移动
+            copyTail = cur->next;
+            // 单独处理cur->random为空的情况，防止出现空指针解引用问题
+            if (cur->random == NULL)
+            {
+                copyTail->random = NULL;
+            }
+            else
+            {
+                copyTail->random = cur->random->next;
+            }
+
+            cur = copyTail->next;
+        }
+
+        // 3.恢复原来的链表并让新链表节点彼此连接
+        cur = head;
+        copyTail = copyHead;
+        while (cur)
+        {
+            cur->next = copyTail->next;
+            //注意要处理cur->next为空的问题，否则会出现空指针解引用错误
+            if (cur->next != NULL)
+            {
+                copyTail->next = cur->next->next;
+            }
+            else
+            {
+                copyTail->next = NULL;
+            }
+            cur = cur->next;
+            copyTail = copyTail->next;
+        }
+        return copyHead;
+    }
+    ```
+
+=== "C++"
+
+    ```c++
+    class Solution138_1
+    {
+    public:
+        Node *copyRandomList(Node *head)
+        {
+            if (!head)
+                return nullptr;
+            // 1. 拷贝链表节点并将对应的节点链接到原链表
+            Node *cur = head;
+            while (cur)
+            {
+                // 创建新链表
+                Node *newNode = new Node(cur->val);
+                // 新链表节点链接到原链表
+                newNode->next = cur->next;
+                Node *next = cur->next;
+                cur->next = newNode;
+
+                // 移动
+                cur = next;
+            }
+
+            // 2. 拷贝random节点
+            cur = head;
+            while (cur && cur->next)
+            {
+                if (cur->random == nullptr)
+                    cur->next->random = nullptr;
+                else
+                    cur->next->random = cur->random->next;
+
+                cur = cur->next->next;
+            }
+
+            // 3. 断开新链表和原链表的链接
+            cur = head;
+            Node *copyHead = cur->next;
+            while (cur)
+            {
+                Node *copy = cur->next;
+                Node *next = copy->next;
+                if (next == nullptr)
+                {
+                    copy->next = nullptr;
+                }
+                else
+                {
+                    copy->next = next->next;
+                }
+                cur->next = next;
+
+                cur = cur->next;
+            }
+
+            return copyHead;
+        }
+    };
+    ```
+
+=== "使用map优化"
+
+    ```c++
+    class Solution138_2
+    {
+    public:
+        Node *copyRandomList(Node *head)
+        {
+            if (!head)
+                return nullptr;
+            // 使用map建立连接
+            map<Node*, Node*> ori_copy;
+            // 1. 拷贝链表节点并将拷贝的节点和原链表节点建立连接
+            // 目的是在链接random时通过原链表节点中random的指向找到拷贝后的节点
+            Node *cur = head;
+            Node* copyHead = new Node(0);
+            Node* curCopy = copyHead;
+            while (cur)
+            {
+                // 创建新链表
+                Node *copyNode = new Node(cur->val);
+                if(copyHead->next == nullptr)
+                    copyHead->next = copyNode;
+                else
+                    curCopy->next = copyNode;
+
+                // 新链表节点和原链表节点建立连接
+                ori_copy.insert({cur, copyNode});
+
+                // 移动
+                cur = cur->next;
+                curCopy = curCopy->next;
+            }
+
+            // 2. 拷贝random节点
+            cur = head;
+            while (cur)
+            {
+                if (cur->random == nullptr)
+                    ori_copy[cur]->random = nullptr;
+                else
+                    // 找到原链表中random的指向
+                    ori_copy[cur]->random = ori_copy[cur->random];
+
+                cur = cur->next;
+            }
+
+            return copyHead->next;
+        }
+    };
+    ```
+
+## 牛客网.环形链表的约瑟夫问题
+
+[牛客网.环形链表的约瑟夫问题](https://www.nowcoder.com/practice/41c399fdb6004b31a6cbb047c641ed8a)
+
+**问题描述：**
+
+!!! quote
+
+    描述
+    编号为1到`n`的 n 个人围成一圈。从编号为1的人开始报数，报到`m`的人离开。
+
+    下一个人继续从 1 开始报数。
+
+    `n-1`轮结束以后，只剩下一个人，问最后留下的这个人编号是多少？
+
+    数据范围： 
+
+    $1 \le n, m \le 10000$
+
+    示例1:
+
+    ```c++
+    输入：5,2
+    返回值：3
+    说明：
+    开始5个人 1，2，3，4，5 ，从1开始报数，1->1，2->2编号为2的人离开
+    1，3，4，5，从3开始报数，3->1，4->2编号为4的人离开
+    1，3，5，从5开始报数，5->1，1->2编号为1的人离开
+    3，5，从3开始报数，3->1，5->2编号为5的人离开
+    最后留下人的编号是3
+    ```
+
+    示例2：
+
+    ```c++
+    输入：
+    1,1
+    返回值：
+    1
+    ```
+
+**思路分析：**
+
+本题可以考虑使用单向循环链表来实现，也可以考虑使用双向链表，本题关键就是当计数器等于报数值`m`时，就删除节点直到最后只剩一个节点时结束
+
+**参考代码：**
+
+=== "C语言与单链表"
+
+    ```c++
+    typedef struct ListNode STL;
+    //创建新节点申请空间
+    STL* applySpace(int x)
+    {
+        STL* newNode = (STL*)malloc(sizeof(STL));
+        if (newNode == NULL)
+        {
+            exit(1);
+        }
+        newNode->val = x;
+        //将节点的next指针指向自身防止空指针
+        //代替newNode->next = NULL;
+        newNode->next = newNode;
+        return newNode;
+    }
+    int Josephus(int n, int m) 
+    {
+        int count = 1;
+        //创建约瑟夫环
+        STL* phead = applySpace(1);
+        STL* pcur = phead;
+        for (int i = 2; i <= n; i++)
+        {
+            pcur->next = applySpace(i);
+            pcur = pcur->next;
+        }
+        //使链表循环
+        //使prev指向最后一个节点的前一节点，防止在后续代码中出现空指针使用问题，因为当前链表是循环链表，故依旧可以遍历链表
+        STL* prev = pcur;
+        pcur->next = phead;
+
+        //解决问题
+        pcur = phead;
+        while (pcur->next != pcur)
+        {
+            if (count == m)
+            {
+                //释放空间
+                prev->next = pcur->next;
+                free(pcur);
+                //走到prev的next指针，此时不是pcur的next指针了
+                pcur = prev->next;
+                //count重置
+                count = 1;
+            }
+            else
+            {
+                prev = pcur;
+                count++;
+                pcur = pcur->next;
+            }
+        }
+        return pcur->val;
+    }
+    ```
+
+=== "C++与list"
+
+    ```c++
+    class Solution
+    {
+    public:
+        int ysf(int n, int m)
+        {
+            list<int> q;
+            // 添加节点
+            for (int i = 1; i <= n; i++)
+            {
+                q.push_back(i);
+            }
+
+            // 报数
+            int count = 1;
+            for (auto it = q.begin(); q.size() > 1;)
+            {
+                if (count == m)
+                {
+                    it = q.erase(it);
+                    if (it == q.end())
+                    {
+                        it = q.begin();
+                    }
+                    count = 1;
+                }
+                else
+                {
+                    if (++it == q.end())
+                    {
+                        it = q.begin();
+                    }
+                    count++;
+                }
+            }
+
+            return q.back();
+        }
+    };
+    ```

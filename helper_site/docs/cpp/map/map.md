@@ -216,12 +216,12 @@ int main()
 
 #### 随机链表的复制
 
-本题可以使用map进行优化，具体见[链表算法部分](https://www.help-doc.top/%E7%AE%97%E6%B3%95/2.%20%E9%93%BE%E8%A1%A8%E7%AF%87/2.%20%E9%93%BE%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E9%93%BE%E8%A1%A8%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html#138)
+本题可以使用map进行优化，具体见[链表算法部分](https://www.help-doc.top/algorithm/list/list-basic/list-basic.html#138)
 
 #### 前K个高频元素
 
-见[算法：栈和队列基础练习](https://www.help-doc.top/%E7%AE%97%E6%B3%95/6.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%AF%87/2.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html#347k)
+见[算法：栈和队列基础练习](https://www.help-doc.top/algorithm/stack-queue/stack-queue-basic/stack-queue-basic.html#347k)
 
 #### 前K个高频单词
 
-见[算法：栈和队列基础练习](https://www.help-doc.top/%E7%AE%97%E6%B3%95/6.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%AF%87/2.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/2.%20%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0.html#692k)
+见[算法：栈和队列基础练习](https://www.help-doc.top/algorithm/stack-queue/stack-queue-basic/stack-queue-basic.html#692k)

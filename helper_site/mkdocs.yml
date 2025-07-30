@@ -140,44 +140,44 @@ nav:
         - 模拟: algorithm/array-basic/simulation/simulation.md
         - 位运算: algorithm/array-basic/bit-operation/bit-operation.md
       - 链表篇:
-        - 链表理论基础: algorithm/2. 链表篇/1. 链表理论基础/1. 链表理论基础.md
-        - 链表基础练习: algorithm/2. 链表篇/2. 链表基础练习/2. 链表基础练习.md
-        - 链表进阶练习: algorithm/2. 链表篇/3. 链表进阶练习/3. 链表进阶练习.md
+        - 链表理论基础: algorithm/list/list-concept/list-concept.md
+        - 链表基础练习: algorithm/list/list-basic/list-basic.md
+        - 链表进阶练习: algorithm/list/list-advanced/list-advanced.md
       - 哈希表篇:
-        - 哈希表理论基础: algorithm/3. 哈希表篇/1. 哈希表理论基础/1. 哈希表理论基础.md
-        - 哈希表基础练习: algorithm/3. 哈希表篇/2. 哈希表基础练习/2. 哈希表基础练习.md
-        - 哈希表进阶练习: algorithm/3. 哈希表篇/3. 哈希表进阶练习/3. 哈希表进阶练习.md
+        - 哈希表理论基础: algorithm/hash-table/hash-table-concept/hash-table-concept.md
+        - 哈希表基础练习: algorithm/hash-table/hash-table-basic/hash-table-basic.md
+        - 哈希表进阶练习: algorithm/hash-table/hash-table-advanced/hash-table-advanced.md
       - 字符串篇:
-        - 字符串基础练习: algorithm/4. 字符串篇/1. 字符串基础练习/1. 字符串基础练习.md
-        - 字符串进阶练习: algorithm/4. 字符串篇/2. 字符串进阶练习/2. 字符串进阶练习.md
-      - 双指针: algorithm/5. 双指针篇/5. 双指针算法.md
+        - 字符串基础练习: algorithm/string/string-basic/string-basic.md
+        - 字符串进阶练习: algorithm/string/string-advanced/string-advanced.md
+      - 双指针: algorithm/two-pointers/two-pointers.md
       - 栈和队列篇:
-        - 栈和队列理论基础: algorithm/6. 栈和队列篇/1. 栈和队列理论基础/1. 栈和队列理论基础.md
-        - 栈和队列基础练习: algorithm/6. 栈和队列篇/2. 栈和队列基础练习/2. 栈和队列基础练习.md
+        - 栈和队列理论基础: algorithm/stack-queue/stack-queue-concept/stack-queue-concept.md
+        - 栈和队列基础练习: algorithm/stack-queue/stack-queue-basic/stack-queue-basic.md
       - 递归与二叉树篇:
-        - 递归介绍: algorithm/7. 递归与二叉树篇/0. 递归介绍/0. 递归介绍.md
-        - 二叉树理论基础: algorithm/7. 递归与二叉树篇/1. 二叉树理论基础/1. 二叉树理论基础.md
-        - 二叉树遍历相关题目: algorithm/7. 递归与二叉树篇/2. 二叉树遍历相关题目/2. 二叉树遍历相关题目.md
-        - 二叉树基础题目: algorithm/7. 递归与二叉树篇/3. 二叉树基础题目/3. 二叉树基础题目.md
-        - 二叉搜索树相关题目: algorithm/7. 递归与二叉树篇/4. 二叉搜索树相关题目/4. 二叉搜索树相关题目.md
-        - 常规题目中的递归: algorithm/7. 递归与二叉树篇/5. 常规题目中的递归/5. 常规题目中的递归.md
+        - 递归介绍: algorithm/recursion-binary-tree/recursion-intro/recursion-intro.md
+        - 二叉树理论基础: algorithm/recursion-binary-tree/binary-tree-concept/binary-tree-concept.md
+        - 二叉树遍历相关题目: algorithm/recursion-binary-tree/binary-tree-traversal/binary-tree-traversal.md
+        - 二叉树基础题目: algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.md
+        - 二叉搜索树相关题目: algorithm/recursion-binary-tree/binary-tree-bst/binary-tree-bst.md
+        - 常规题目中的递归: algorithm/recursion-binary-tree/recursion-in-regular/recursion-in-regular.md
       - 回溯篇:
-        - 回溯理论基础: algorithm/8. 回溯篇/1. 回溯理论基础/1. 回溯理论基础.md
-        - 回溯基础练习: algorithm/8. 回溯篇/2. 回溯基础练习/2. 回溯基础练习.md
-        - 回溯进阶练习: algorithm/8. 回溯篇/3. 回溯进阶练习/3. 回溯进阶练习.md
+        - 回溯理论基础: algorithm/backtracking/backtracking-concept/backtracking-concept.md
+        - 回溯基础练习: algorithm/backtracking/backtracking-basic/backtracking-basic.md
+        - 回溯进阶练习: algorithm/backtracking/backtracking-advanced/backtracking-advanced.md
       - 贪心篇:
-        - 贪心理论基础: algorithm/9. 贪心篇/1. 贪心理论基础/1. 贪心理论基础.md
-        - 贪心基础练习: algorithm算法/9. 贪心篇/2. 贪心基础练习/2. 贪心基础练习.md
+        - 贪心理论基础: algorithm/greedy/greedy-concept/greedy-concept.md
+        - 贪心基础练习: algorithm/greedy/greedy-basic/greedy-basic.md
       - 动态规划篇:
-        - 动态规划理论基础: algorithm/10. 动态规划篇/1. 动态规划理论基础/1. 动态规划理论基础.md
+        - 动态规划理论基础: algorithm/dp/dp-concept/dp-concept.md
       - 其他算法:
-        - KMP算法: algorithm/其他算法/KMP算法/KMP算法.md
-        - 波兰表达式与逆波兰表达式: algorithm/其他算法/波兰表达式与逆波兰表达式/波兰表达式与逆波兰表达式.md
-        - 霍尔法则: algorithm/其他算法/霍尔法则/霍尔法则.md
-        - 数字和与数字根: algorithm/其他算法/数字和与数字根/数字和与数字根.md
-        - 最大公因数和最小公倍数: algorithm/其他算法/最大公因数和最小公倍数/最大公因数和最小公倍数.md
-        - 大数运算: algorithm/其他算法/大数运算/大数运算.md
-        - 取模与取余: algorithm/其他算法/取模与取余/取模与取余.md
+        - KMP算法: algorithm/other/kmp/kmp.md
+        - 波兰表达式与逆波兰表达式: algorithm/other/polish-notation/polish-notation.md
+        - 霍尔法则: algorithm/other/hall/hall.md
+        - 数字和与数字根: algorithm/other/number-sum/number-sum.md
+        - 最大公因数和最小公倍数: algorithm/other/gcd-lcm/gcd-lcm.md
+        - 大数运算: algorithm/other/big-number-op/big-number-op.md
+        - 取模与取余: algorithm/other/modulo/modulo.md
   - Linux:
     - Linux常用选项和指令: Linux/1. Linux常用选项和指令/1. Linux常用选项和指令.md
     - Linux权限相关: Linux/2. Linux权限相关/2. Linux权限相关.md

@@ -1,0 +1,1966 @@
+# 栈和队列基础练习
+
+## 本篇介绍
+
+栈和队列在其工作逻辑的特殊性可以让某些题目的解答更简单，下面是最基础或最典型的栈和队列的使用题目。本篇将根据这些题目加深对栈和队列的使用熟练度
+
+## 力扣225.用队列实现栈
+
+[力扣225.用队列实现栈](https://leetcode.cn/problems/implement-stack-using-queues/description/)
+
+**问题描述：**
+
+!!! quote
+
+    请你仅使用两个队列实现一个后入先出（LIFO）的栈，并支持普通栈的全部四种操作（`push`、`top`、`pop` 和`empty`）。
+    
+    实现`MyStack`类：
+    
+    `void push(int x)`将元素 x 压入栈顶。
+    `int pop()`移除并返回栈顶元素。
+    `int top()`返回栈顶元素。
+    `boolean empty()`如果栈是空的，返回`true`；否则，返回`false`。
+    
+    注意：
+    
+    你只能使用队列的标准操作 —— 也就是`push to back`、`peek/pop from front`、`size`和`is empty`这些操作。
+    你所使用的语言也许不支持队列。你可以使用`list`（列表）或者`deque`（双端队列）来模拟一个队列，只要是标准的队列操作即可。
+    
+    示例：
+    
+    ```c++
+    输入：
+    ["MyStack", "push", "push", "top", "pop", "empty"]
+    [[], [1], [2], [], [], []]
+    输出：
+    [null, null, null, 2, 2, false]
+    
+    解释：
+    MyStack myStack = new MyStack();
+    myStack.push(1);
+    myStack.push(2);
+    myStack.top(); // 返回 2
+    myStack.pop(); // 返回 2
+    myStack.empty(); // 返回 False
+    ```
+
+**思路分析：**
+
+本题要求用两个队列实现一个栈，队列的入队和出队顺序为先进先出，而栈的入栈和出栈顺序为后进先出，则在设计时可以参考以下思路：
+
+<img src="2. 栈和队列基础练习.assets/image1.jpeg"/>
+
+因为队列满足先进先出，所以一个队列中的数据转移到另一个队列时不改变原来队列中数据的排列顺序，但是栈的数据是后进先出，所以当非空队列向空队列转移数据时只需要保留非空队列中的最后一个数据，再让该数据出队即可，而栈和队列的添加数据顺序相同，都是放在最后一个数据后的位置，所以插入数据只需要插入到当前非空队列的尾部即可
+
+**思路优化：**
+
+本题也可以考虑使用一个队列实现栈，可以考虑：遍历过程中，将元素从尾部弹出，再从头部插入直到最后一个元素为止。因为需要确保队列中至少还有一个数，该数值代表的就是栈顶元素，所以还需要的一个变量用于统计当前队列的元素个数，当该变量值为1时就停止前面的操作，此时队头元素就是栈顶元素
+
+**参考代码：**
+
+=== "C语言版本（两个队列）"
+
+    ```c
+    // 队列头文件
+    // 定义队列数据类型
+    typedef int QDataType;
+    
+    // 定义队列的数据节点
+    typedef struct QueueNode
+    {
+        QDataType data;
+        struct QueueNode *next; // 下一个数据节点的位置
+    } QNode;
+    
+    // 定义管理队列的结构
+    typedef struct Queue
+    {
+        QNode *phead; // 队列头
+        QNode *ptail; // 队列尾，便于找尾结点，省去每次入队都需要遍历队列
+        int size;     // 队列的数据个数
+    } Queue;
+    
+    // 初始化队列
+    void QueueInit(Queue *q);
+    // 销毁队列
+    void QueueDestroy(Queue *q);
+    // 数据入队
+    void QueuePush(Queue *q, QDataType x);
+    // 数据出队
+    void QueuePop(Queue *q);
+    // 获取队尾数据
+    QDataType QueueRear(Queue *q);
+    // 获取队头数据
+    QDataType QueueFront(Queue *q);
+    // 判断队列是否为空
+    bool QueueEmpty(Queue *q);
+    // 获取队列元素个数
+    int QueueSize(Queue *q);
+    
+    // 队列实现
+    // 初始化队列
+    void QueueInit(Queue *q)
+    {
+        // 判断是否存在队列
+        assert(q);
+    
+        q->phead = q->ptail = NULL;
+        q->size = 0;
+    }
+    // 销毁队列
+    void QueueDestroy(Queue *q)
+    {
+        // 确保有队列的存在
+        assert(q);
+        // 删除队列的每一个节点
+        // 注意循环条件不要用!QueueEmpty(q)，因为如果!QueueEmpty(q)只能说明队列不为空，但是q->phead是否为空不确定
+        while (q->phead)
+        {
+            QNode *next = q->phead->next;
+            free(q->phead);
+            q->phead = next;
+        }
+        q->phead = q->ptail = NULL;
+        q->size = 0;
+    }
+    // 数据入队
+    void QueuePush(Queue *q, QDataType x)
+    {
+        // 确保存在队列
+        assert(q);
+    
+        // 为数据创建节点
+        QNode *newNode = (QNode *)malloc(sizeof(QNode));
+        assert(newNode);
+        newNode->data = x;
+        newNode->next = NULL;
+        // 插入数据
+        // 队列为空，更新头和尾节点
+        // 队列不为空，更新尾结点
+        // 尾插思路
+        if (!q->ptail)
+            q->phead = q->ptail = newNode;
+        else
+        {
+            q->ptail->next = newNode;
+            q->ptail = q->ptail->next; // 更新ptail到新的节点
+        }
+    
+        // 注意更新size
+        q->size++;
+    }
+    // 数据出队
+    void QueuePop(Queue *q)
+    {
+        // 确保有队列存在
+        assert(q);
+        // 如果队列为空不执行删除
+        assert(!QueueEmpty(q));
+    
+        // 头删思路
+        if (q->phead == q->ptail)
+            // 注意考虑到最后一个指针的ptail需要置空问题，防止野指针
+            q->ptail = NULL;
+        QNode *next = q->phead->next;
+        free(q->phead);
+        q->phead = next;
+    
+        // 注意更新size
+        q->size--;
+    }
+    // 获取队尾数据
+    QDataType QueueRear(Queue *q)
+    {
+        // 确保有队列存在
+        assert(q);
+        // 确保队列不为空
+        assert(!QueueEmpty(q));
+    
+        // 返回ptail指向的位置的值
+        return q->ptail->data;
+    }
+    // 获取队头数据
+    QDataType QueueFront(Queue *q)
+    {
+        // 确保有队列存在
+        assert(q);
+        // 确保队列不为空
+        assert(!QueueEmpty(q));
+    
+        // 返回phead指向的位置的值
+        return q->phead->data;
+    }
+    // 判断队列是否为空
+    bool QueueEmpty(Queue *q)
+    {
+        // 确保有队列的存在
+        assert(q);
+    
+        //&&只有全部满足才返回为真
+        return q->phead == NULL && q->ptail == NULL && q->size == 0;
+    }
+    // 获取队列元素个数
+    int QueueSize(Queue *q)
+    {
+        // 确保有队列的存在
+        assert(q);
+    
+        return q->size;
+    }
+    
+    typedef struct
+    {
+        // 定义两个队列结构
+        Queue q1;
+        Queue q2;
+    } MyStack;
+    
+    MyStack *myStackCreate()
+    {
+        // 初始化队列和栈
+        MyStack *stack = (MyStack *)malloc(sizeof(MyStack));
+    
+        // 初始化维护队列指针
+        QueueInit(&(stack->q1));
+        QueueInit(&(stack->q2));
+    
+        return stack;
+    }
+    
+    void myStackPush(MyStack *obj, int x)
+    {
+        assert(obj);
+        // 向非空的队列中插入数据
+        if (QueueEmpty(&(obj->q1)))
+            QueuePush(&(obj->q2), x);
+        else
+            QueuePush(&(obj->q1), x);
+    }
+    
+    int myStackPop(MyStack *obj)
+    {
+        assert(obj);
+        // 向非空的队列中插入数据
+        // 获取非空队列和空队列
+        Queue *pNotEmpty = &(obj->q1);
+        Queue *pEmpty = &(obj->q2);
+        if (QueueEmpty(&(obj->q1)))
+        {
+            pNotEmpty = &(obj->q2);
+            pEmpty = &(obj->q1);
+        }
+    
+        // 非空队列中留下一个数据，剩余数据转移到空队列
+        while (pNotEmpty->phead != pNotEmpty->ptail)
+        {
+            QueuePush(pEmpty, QueueFront(pNotEmpty));
+            QueuePop(pNotEmpty);
+        }
+    
+        int data = pNotEmpty->ptail->data;
+        QueuePop(pNotEmpty);
+    
+        return data;
+    }
+    
+    int myStackTop(MyStack *obj)
+    {
+        assert(obj);
+        // 获取非空队列的队头数据
+        if (QueueEmpty(&(obj->q1)))
+            return obj->q2.ptail->data;
+        
+        return obj->q1.ptail->data;
+    }
+    
+    bool myStackEmpty(MyStack *obj)
+    {
+        assert(obj);
+        return QueueEmpty(&(obj->q1)) && QueueEmpty(&(obj->q2));
+    }
+    
+    void myStackFree(MyStack *obj)
+    {
+        assert(obj);
+        QueueDestroy(&(obj->q1));
+        QueueDestroy(&(obj->q2));
+        free(obj);
+    }
+    ```
+
+=== "C++（两个队列）"
+
+    ```c++
+    class MyStack225_1
+    {
+    private:
+        queue<int> q1;
+        queue<int> q2;
+    
+    public:
+        MyStack225_1()
+        {
+        }
+    
+        void push(int x)
+        {
+            // 插入到不为空的队列末尾
+            if (!q1.empty())
+                q1.push(x);
+            else
+                q2.push(x);
+        }
+    
+        int pop()
+        {
+            int back = 0;
+            // 找到非空队列的最后一个
+            while (!q1.empty())
+            {
+                back = q1.front();
+                if (q1.size() == 1)
+                {
+                    q1.pop();
+                    return back;
+                }
+                q2.push(back);
+                q1.pop();
+            }
+    
+            while (!q2.empty())
+            {
+                back = q2.front();
+                if (q2.size() == 1)
+                {
+                    q2.pop();
+                    break;
+                }
+                q1.push(back);
+                q2.pop();
+            }
+    
+            return back;
+        }
+    
+        int top()
+        {
+            // 找到非空队列的对头元素
+            if (!q1.empty())
+                return q1.back();
+    
+            return q2.back();
+        }
+    
+        bool empty()
+        {
+            return q1.empty() && q2.empty();
+        }
+    };
+    ```
+
+=== "C++（一个队列）"
+
+    ```c++
+    class MyStack225_2
+    {
+    public:
+        queue<int> que;
+    
+        MyStack225_2()
+        {
+    
+        }
+    
+        void push(int x)
+        {
+            que.push(x);
+        }
+    
+        int pop()
+        {
+            int size = que.size();
+            size--;
+            while (size--)
+            {
+                que.push(que.front()); // 将队列头部的元素（除了最后一个元素外） 重新添加到队列尾部
+                que.pop();
+            }
+            int result = que.front(); // 此时弹出的元素顺序就是栈的顺序了
+            que.pop();
+            return result;
+        }
+    
+        int top()
+        {
+            int size = que.size();
+            size--;
+            while (size--)
+            {
+                // 将队列头部的元素（除了最后一个元素外） 重新添加到队列尾部
+                que.push(que.front());
+                que.pop();
+            }
+            int result = que.front(); // 此时获得的元素就是栈顶的元素了
+            que.push(que.front());    // 将获取完的元素也重新添加到队列尾部，保证数据结构没有变化
+            que.pop();
+            return result;
+        }
+    
+        bool empty()
+        {
+            return que.empty();
+        }
+    };
+    ```
+
+## 力扣232.用栈实现队列
+
+[力扣232.用栈实现队列](https://leetcode.cn/problems/implement-queue-using-stacks/description/)
+
+**问题描述：**
+
+!!! quote
+
+    请你仅使用两个栈实现先入先出队列。队列应当支持一般队列支持的所有操作（`push`、`pop`、`peek`、`empty`）：
+    
+    实现`MyQueue`类：
+    
+    `void push(int x)`将元素 x 推到队列的末尾
+    `int pop()`从队列的开头移除并返回元素
+    `int peek()`返回队列开头的元素
+    `boolean empty()`如果队列为空，返回`true`；否则，返回`false`
+    说明：
+    
+    你只能使用标准的栈操作 —— 也就是只有`push to top`, `peek/pop from top`, `size`, 和`is empty`操作是合法的。
+    你所使用的语言也许不支持栈。你可以使用`list`或者`deque`（双端队列）来模拟一个栈，只要是标准的栈操作即可。
+    
+    示例 1：
+    
+    ```c++
+    输入：
+    ["MyQueue", "push", "push", "peek", "pop", "empty"]
+    [[], [1], [2], [], [], []]
+    输出：
+    [null, null, null, 1, 1, false]
+    
+    解释：
+    MyQueue myQueue = new MyQueue();
+    myQueue.push(1); // queue is: [1]
+    myQueue.push(2); // queue is: [1, 2] (leftmost is front of the queue)
+    myQueue.peek(); // return 1
+    myQueue.pop(); // return 1, queue is [2]
+    myQueue.empty(); // return false
+    ```
+
+**思路分析：**
+
+定义两个栈，但是不同于上题的两个队列（两个队列没有区分），本题中的两个栈需要作区分，一个栈作为数据出模拟队列的栈，称为`pushSt`，另一个作为数据入模拟队列的栈，称为`popSt`
+
+<img src="2. 栈和队列基础练习.assets\image2.jpeg">
+
+因为数据出栈顺序为后进先出，所以在`pushSt`中的数据转移到`popSt`中后会改变原数据的顺序，而改变后的顺序中数据出栈刚好和队列中的数据出队相同，所以可以区分两个不同的栈，一个专用为存储进队列的数据，另一个专用为存储出队列的数据，当`popSt`数据全部出完后再将`pushSt`中数据转移到`popSt`进行下一次的数据出队
+
+**参考代码：**
+
+=== "C语言"
+
+    ```c++
+    // 栈的实现
+    typedef int STDataType;
+    typedef struct stack
+    {
+        STDataType *data;
+        int top;      // 栈顶位置
+        int capacity; // 元素个数
+    } ST;
+    
+    // 栈的初始化
+    void STInit(ST *st);
+    // 栈的销毁
+    void STDestroy(ST *st);
+    // 数据入栈
+    void STPush(ST *st, STDataType x);
+    // 数据出栈
+    void STPop(ST *st);
+    // 判断栈是否为空
+    bool STEmpty(ST *st);
+    // 获取栈顶元素
+    STDataType STTop(ST *st);
+    // 获取栈内数据个数
+    int STSize(ST *st);
+    
+    // 栈的初始化
+    void STInit(ST *st)
+    {
+        // 判断是否存在队列
+        assert(st);
+        // 初始化队列
+        st->data = NULL;
+        st->top = 0; // 栈顶指针指向存储数据的下一个位置，代表栈内无数据
+        // st->top = -1;//栈顶指针指向存储数据的位置，代表栈内无数据
+        st->capacity = 0;
+    }
+    
+    // 栈的销毁
+    void STDestroy(ST *st)
+    {
+        // 确保有栈的存在
+        assert(st);
+        // 销毁栈
+        free(st->data);
+        st->data = NULL;
+        // top和capacity更改为无数据的位置
+        st->top = st->capacity = 0;
+    }
+    
+    // 数据入栈
+    void STPush(ST *st, STDataType x)
+    {
+        // 确保有栈的存在
+        assert(st);
+        // 向top位置增加数据，并使top向后移动
+        // 需要判断栈的容量大小
+        if (st->top == st->capacity)
+        {
+            // 如果栈的空间为0，则开辟四个空间，如果栈容量不为0，则扩容原来容量的2倍
+            int newCapacity = st->capacity == 0 ? 4 : st->capacity * 2;
+            STDataType *tmp = (STDataType *)realloc(st->data, sizeof(STDataType) * newCapacity);
+            assert(tmp);
+            st->data = tmp;
+            // 注意更新容量大小
+            st->capacity = newCapacity;
+        }
+    
+        // 数据压栈并改变top
+        st->data[st->top++] = x;
+    }
+    // 数据出栈
+    void STPop(ST *st)
+    {
+        // 确保有栈的存在
+        assert(st);
+        // 确保栈不会越界
+        assert(!STEmpty(st));
+    
+        // 直接移动top指针，“看不见即删除”
+        st->top--;
+    }
+    // 判断栈是否为空
+    bool STEmpty(ST *st)
+    {
+        // 确保有栈的存在
+        assert(st);
+        // 栈为空返回真，栈不为空返回假
+        return st->top == 0; // 判断表达式返回值只有1和0，如果为真返回1(true)，如果为假返回0(false)
+    }
+    // 获取栈顶元素
+    STDataType STTop(ST *st)
+    {
+        // 确保栈存在
+        assert(st);
+        // 确保栈不为空
+        assert(!STEmpty(st));
+        // top为栈内数据的下一个位置，要获取当前位置的元素需要-1操作
+        return st->data[st->top - 1];
+    }
+    
+    // 获取栈内数据个数
+    int STSize(ST *st)
+    {
+        assert(st);
+        return st->top;
+    }
+    
+    typedef struct
+    {
+        ST pushST;
+        ST popST;
+    } MyQueue;
+    
+    MyQueue *myQueueCreate()
+    {
+        // 初始化栈
+        MyQueue *Queue = (MyQueue *)malloc(sizeof(MyQueue));
+        STInit(&(Queue->pushST));
+        STInit(&(Queue->popST));
+    
+        return Queue;
+    }
+    
+    void myQueuePush(MyQueue *obj, int x)
+    {
+        assert(obj);
+    
+        // 向pushSt栈中插入数据
+        STPush(&(obj->pushST), x);
+    }
+    
+    int myQueuePop(MyQueue *obj)
+    {
+        assert(obj);
+        // 复用myQueuePeek函数
+        int data = myQueuePeek(obj);
+        STPop(&(obj->popST));
+        return data;
+    }
+    
+    int myQueuePeek(MyQueue *obj)
+    {
+        assert(obj);
+        int data = 0;
+        // 获取队列的头元素相当于栈的顶部元素
+        // 如果popST不为空先执行popST
+        if (!STEmpty(&(obj->popST)))
+        {
+            data = STTop(&(obj->popST));
+            return data;
+        }
+        //  如果pushST中有数据并且popST为空，将数据移到popST中
+        while (!STEmpty(&(obj->pushST)))
+        {
+            STPush(&(obj->popST), STTop(&(obj->pushST)));
+            STPop(&(obj->pushST));
+        }
+    
+        // 从popST中出数据
+        data = STTop(&(obj->popST));
+        return data;
+    }
+    
+    bool myQueueEmpty(MyQueue *obj)
+    {
+        assert(obj);
+        return STEmpty(&(obj->pushST)) && STEmpty(&(obj->popST));
+    }
+    
+    void myQueueFree(MyQueue *obj)
+    {
+        assert(obj);
+        STDestroy(&(obj->pushST));
+        STDestroy(&(obj->popST));
+    
+        free(obj);
+    }
+    ```
+
+=== "C++"
+
+    ```c++
+    class MyQueue
+    {
+    private:
+        // 创建两个栈
+        stack<int> pushSt;
+        stack<int> popSt;
+    
+    public:
+        MyQueue()
+        {}
+    
+        void push(int x)
+        {
+            // 向pushSt插入数据
+            pushSt.push(x);
+        }
+    
+        int pop()
+        {
+            // 判断popSt是否为空
+            if (popSt.empty())
+            {
+                // 将pushSt中的数据移动到popSt
+                int top = 0;
+                while (!pushSt.empty())
+                {
+                    top = pushSt.top();
+                    pushSt.pop();
+                    popSt.push(top);
+                }
+            }
+    
+            // popSt不为空时直接弹出数据
+            int top = popSt.top();
+            popSt.pop();
+            return top;
+        }
+    
+        int peek()
+        {
+            // 如果popSt不为空，返回该栈顶元素
+            if (!popSt.empty())
+            {
+                return popSt.top();
+            }
+    
+            // 将pushSt中的数据移动到popSt
+            int top = 0;
+            while (!pushSt.empty())
+            {
+                top = pushSt.top();
+                pushSt.pop();
+                popSt.push(top);
+            }
+    
+            return popSt.top();
+        }
+    
+        bool empty()
+        {
+            return pushSt.empty() && popSt.empty();
+        }
+    };
+    ```
+
+## 力扣622.设计循环队列
+
+[力扣622.设计循环队列](https://leetcode.cn/problems/design-circular-queue/description/)
+
+**问题描述：**
+
+!!! quote
+
+    设计你的循环队列实现。循环队列是一种线性数据结构，其操作表现基于FIFO（先进先出）原则并且队尾被连接在队首之后以形成一个循环。它也被称为“环形缓冲器”。
+    
+    循环队列的一个好处是我们可以利用这个队列之前用过的空间。在一个普通队列里，一旦一个队列满了，我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。
+    
+    你的实现应该支持如下操作：
+    
+    `MyCircularQueue(k)`：构造器，设置队列长度为k。
+    `Front`：从队首获取元素。如果队列为空，返回-1。
+    `Rear`：获取队尾元素。如果队列为空，返回-1。
+    `enQueue(value)`：向循环队列插入一个元素。如果成功插入则返回真。
+    `deQueue()`：从循环队列中删除一个元素。如果成功删除则返回真。
+    `isEmpty()`：检查循环队列是否为空。
+    `isFull()`：检查循环队列是否已满。
+
+
+    示例：
+    
+    ```c++
+    MyCircularQueue circularQueue = new MyCircularQueue(3); // 设置长度为 3
+    circularQueue.enQueue(1);  // 返回 true
+    circularQueue.enQueue(2);  // 返回 true
+    circularQueue.enQueue(3);  // 返回 true
+    circularQueue.enQueue(4);  // 返回 false，队列已满
+    circularQueue.Rear();  // 返回 3
+    circularQueue.isFull();  // 返回 true
+    circularQueue.deQueue();  // 返回 true
+    circularQueue.enQueue(4);  // 返回 true
+    circularQueue.Rear();  // 返回 4
+    ```
+
+**思路分析：**
+
+1. C语言思路：
+
+    设计一个循环队列时需要考虑如何区分什么时候代表队列为满和队列为空，因为本题可以用数组来实现，故可以考虑当最后一个数据的位置的下一个位置为第一个元素所在的位置即为队列满状态，同样，可以定义一个记录有效数据的变量，当有效数据值为0时说明循环队列为空（注意不要使用该变量判断是否未满，因为数据在存储到数组中的最后一个有效位置时，还可以因为是循环回到数组的第一个有效位置开始继续存），下面是本题的每一个函数的基本思路：
+
+      1. 循环队列的结构体设计
+
+          在循环队列中，需要有一个队列存在，故需要一个指向数组的指针`data`，另外需要一个数据的位置的下一个位置，故需要一个变量`rear`记录该位置，而因为需要获取队头数据，故需要一个变量`front`记录该位置（切忌认为数组的第一个数据即为队头数据），再者需要一个变量记录当前队列中的有效数据个数`size`，最后因为题目并未固定循环队列的大小，故需要一个变量`k`来确定数组在开辟时的大小
+
+      2. 循环队列的初始化
+
+          在循环队列的初始化函数`MyCircularQueue *myCircularQueueCreate(int k)`中，函数参数为循环队列的大小，所以初始化过程中不可遗忘将该`k`给结构中的`k`，另外在初始化过程中，开辟的数组大小为`k+1`，但是数组的最后一个有效位置（即第`k`个位置）在队头指针`front`为数组的第一个元素的位置时不存储数据，其作用是在判断数组的下一个数据的位置时不会是因为循环回到了front的位置从而使`rear == front`
+
+          <img src="2. 栈和队列基础练习.assets\image3.jpeg">
+
+          因为数组本身的物理结构是不可循环的（即数组下标不会在下一次访问越界时直接回到开头位置，需要人为控制），所以本题的主要思路是通过求余运算结果来代替数组的下标，而因为当前数组的有效大小为`k+1`，此时数组最后一个有效数据下一个位置的下标为`k`（也即当前的`rear`位置），那么构成循环队列就是让`rear`指针指向的下一个有效数据位置为数组第一个元素的位置，那么因为数组实际开辟了6个空间，最后一个位置的下标为5，则有规律：小于6的数值取6的模可以得到原来被除数（即余数），大于等于6的数值取6的模可以得到被除数大于6的部分（即余数），此时直接用`rear`当做被除数，而`k+1`为除数来使下标构成循环，从而达到循环队列的目的，特殊情况例如，当`rear`越界为6时取6的模可以直接回到数组的第一个元素的位置，即`rear % (k+1)`
+
+      3. 判断队列为空和判断队列为满
+
+          队列为空说明`size == 0`（或者`front == rear`时（注意这个判断用在开辟的空间为`k+1`时））； 队列为满说明`front == (rear + 1) % (k + 1)`，即当前`rear`所在位置的下一个位置
+
+      4. 数据入队和数据出队
+
+          数据入队时，首先需要判断是否队列为满，如果队列为满直接返回`false`，不为满时向`rear % (k + 1)`的位置添加数据，同时更新`rear = (rear + 1) % (k + 1)和size`；数据出队时，需要判断队列是否为空，如果队列为空则直接放回false，不为空才可以删除数据，队列删除数据时会改变头的位置，所以需要更新`front`，即`front = (front + 1) % (k + 1)`，同时需要更新`size`
+
+      5. 获取队列头数据和获取队列尾数据
+
+          如果队列不为空，则队列头数据即为`front`所在的位置的数据，否则无数据返回-1；如果队列不为空，则队列尾数据为`rear`所在位置的前一个位置的数据，但是注意`rear`为有效数据的下一个位置，所以需要获取`rear`的上一个位置的下标，参考取模思路，因为数组的最后一个元素下标为`k`，而模为`k + 1`，此时被除数取`k + 1`的模可以得到`0 ~ k`值，因为`rear % (k + 1)`可以取到的范围已经是`0 ~ k`，所以此时需要加最大模值使被除数增大才可以使模从0开始，而最大增加数为`k`，所以此时取`(rear + k) % (k + 1)`即可返回到`rear`上一个元素的位置
+
+      6. 循环队列空间释放
+
+          释放空间需要先释放数组的空间，再释放循环队列结构的空间
+
+2. C++思路：
+   
+    所需成员：
+
+    1. 使用`vector<int>`作为循环队列的底层结构，在初始化时使用`resize`函数提前开辟`k`个空间。
+    2. `front`和`back`：因为需要找到队列的队尾元素和队头元素，所以使用`front`成员和`back`成员作为循环队列的两个属性分别指向队头元素和队尾元素
+    3. `maxLen`：需要注意，因为`vector<int>`在空间不够时会进行扩容，但是在本题的循环队列中不能出现扩容的情况，所以考虑使用一个成员`maxLen`记录当前循环队列最多能存储的元素个数，就算出现扩容，只要元素个数大于`maxLen`都不允许插入。
+    4. 最后就是一个成员`num`记录当前循环队列中的元素个数
+
+    总体思路：当`num == maxLen`时代表当前循环队列已经插满，需要注意，初始状态下`front`和`back`也指向同一个位置，所以不可以仅仅判断`front`和`back`都指向同一个位置时循环队列已满
+    
+    5. 插入元素时，先判断循环队列是否已满，接着判断`back`是否已经到达最后一个元素的下一个位置，如果已经到达则需要使用取余进行修正，此时只需要使用`back % maxLen`即可，剩下的就是插入元素的逻辑
+    6. 删除元素时，先判断循环队列是否为空，接着因为是数组，只需要移动`front`即可。注意删除的元素有可能是当前数组的最后一个元素，此时向后`front`就导致`front`越界，按照循环队列的特点，此时`front`应该在数组第一个元素的位置
+    7. 取出队头元素时，先判断循环队列是否为空。因为`front`指向的就是当前元素，所以直接返回`front`对应的元素即可
+    8. 取出队尾元素时，先判断循环队列是否为空。因为`back`指向的是当前元素的下一个元素（但是除去第一个元素），所以对于第一个元素来说，直接取出`back`对应的元素即可，否则取出`back - 1`对应的元素
+    9. 判断循环队列是否为空只需要判断有效数据个数`num`是否为0即可，判断循环队列是否已满只需要判断有效数据个数是否满足`num == maxLen`即可
+
+!!! note
+
+    注意上面的两个思路都可以使用任何一个语言都可以实现，上面的分类只是思路对应的代码使用的语言不同而已
+
+**参考代码：**
+
+=== "C语言"
+
+    ```c
+    typedef struct
+    {
+        int *data; // 存储队列数据
+        int k;     // 队列大小
+        int size;  // 有效数据个数
+        int front; // 队列头
+        int rear;  // 队列尾
+    } MyCircularQueue;
+    
+    MyCircularQueue *myCircularQueueCreate(int k)
+    {
+        MyCircularQueue *Queue = (MyCircularQueue *)malloc(sizeof(MyCircularQueue));
+        Queue->data = (int *)malloc(sizeof(int) * (k + 1));
+        Queue->front = Queue->rear = 0;
+        Queue->size = 0;
+        Queue->k = k;
+    
+        return Queue;
+    }
+    
+    bool myCircularQueueIsEmpty(MyCircularQueue *obj)
+    {
+        assert(obj);
+        if (obj->size == 0)
+            return true;
+    
+        return false;
+    }
+    
+    bool myCircularQueueIsFull(MyCircularQueue *obj)
+    {
+        assert(obj);
+        // 当rear的下一个为front时为队列满
+        if (obj->front == (obj->rear + 1) % (obj->k + 1))
+            return true;
+        
+        return false;
+    }
+    
+    bool myCircularQueueEnQueue(MyCircularQueue *obj, int value)
+    {
+        assert(obj);
+        if (!myCircularQueueIsFull(obj))
+        {
+            // 队列未满时插入数据
+            obj->data[obj->rear % (obj->k + 1)] = value;
+            obj->rear = (obj->rear + 1) % (obj->k + 1);
+            obj->size++;
+            return true;
+        }
+    
+        return false;
+    }
+    
+    bool myCircularQueueDeQueue(MyCircularQueue *obj)
+    {
+        assert(obj);
+        if (!myCircularQueueIsEmpty(obj))
+        {
+            // 队列不为空时删除数据
+            obj->front = (obj->front + 1) % (obj->k + 1);
+            obj->size--;
+            return true;
+        }
+    
+        return false;
+    }
+    
+    int myCircularQueueFront(MyCircularQueue *obj)
+    {
+        assert(obj);
+        if (!myCircularQueueIsEmpty(obj))
+            return obj->data[obj->front % (obj->k + 1)];
+    
+        return -1;
+    }
+    
+    int myCircularQueueRear(MyCircularQueue *obj)
+    {
+        assert(obj);
+        if (!myCircularQueueIsEmpty(obj))
+            return obj->data[(obj->rear + obj->k) % (obj->k + 1)];
+    
+        return -1;
+    }
+    
+    void myCircularQueueFree(MyCircularQueue *obj)
+    {
+        assert(obj);
+        free(obj->data);
+        free(obj);
+    }
+    ```
+
+=== "C++"
+
+    ```c++
+    class MyCircularQueue
+    {
+    private:
+        // 队头指针
+        int front = 0;
+        // 队尾指针
+        int back = 0;
+        // 最大元素个数
+        int maxLen = 0;
+        // 元素个数
+        int num = 0;
+        vector<int> cir;
+    
+    public:
+        MyCircularQueue(int k)
+        {
+            maxLen = k;
+            cir.resize(k);
+        }
+    
+        bool enQueue(int value)
+        {
+            // 判断队列是否已满
+            if (isFull())
+                return false;
+    
+            // 否则在指定位置插入
+            // 位置修正
+            if (back >= maxLen)
+                back = back % maxLen;
+    
+            cir[back++] = value;
+            num++;
+            return true;
+        }
+    
+        bool deQueue()
+        {
+            if (isEmpty())
+                return false;
+            front++;
+            num--;
+            if (front >= maxLen)
+                front = front % maxLen;
+    
+            return true;
+        }
+    
+        int Front()
+        {
+            if (num == 0)
+                return -1;
+    
+            return cir[front];
+        }
+    
+        int Rear()
+        {
+            if (num == 0)
+                return -1;
+    
+            int ret = back == 0 ? cir[back] : cir[back - 1];
+    
+            return ret;
+        }
+    
+        bool isEmpty()
+        {
+            return num == 0;
+        }
+    
+        bool isFull()
+        {
+            return num == maxLen;
+        }
+    };
+    ```
+
+## 力扣20.有效的括号
+
+[力扣20.有效的括号](https://leetcode.cn/problems/valid-parentheses/description/)
+
+**问题描述：**
+
+!!! quote
+
+    定一个只包括`'('`，`')'`，`'{'`，`'}'`，`'['，']'`的字符串`s`，判断字符串是否有效。
+    
+    有效字符串需满足：
+    
+    左括号必须用相同类型的右括号闭合。
+    左括号必须以正确的顺序闭合。
+    每个右括号都有一个对应的相同类型的左括号。
+
+
+    示例 1：
+    
+    ```c++
+    输入：s = "()"
+    
+    输出：true
+    ```
+    
+    示例 2：
+    
+    ```c++
+    输入：s = "()[]{}"
+    
+    输出：true
+    ```
+    
+    示例 3：
+    
+    ```c++
+    输入：s = "(]"
+    
+    输出：false
+    ```
+    
+    示例 4：
+    
+    ```c++
+    输入：s = "([])"
+    
+    输出：true
+    ```
+
+**思路分析：**
+
+本题可以使用栈来解决，当括号为左侧括号时，将括号存入栈内，当括号为右侧括号时，将该括号与栈顶的括号进行比较，比较一次进行一次出栈操作
+
+**错误思路：哈希表**
+
+本题不可以使用哈希表，所谓有效的括号是指**左括号中指定括号的顺序必须和右括号中指定括号出现的顺序刚好匹配**， 例如，左括号先为`"(["`，那么此时右括号的顺序应该就是`"])"`，而不是`")]"`。可以理解为右括号翻转后与左括号个数相同且刚好是回文串就属于有效括号，根据上面的理解，此时哈希表就不可以使用，因为哈希表主要是判断个数是否存在，但是不会考虑出现顺序 
+
+**参考代码：**
+
+=== "C语言"
+
+    ```c
+    // 使用C语言和栈解决问题
+    // 栈的声明
+    typedef char STDataType;
+    typedef struct stack
+    {
+        STDataType *data;
+        int top;      // 栈顶位置
+        int capacity; // 元素个数
+    } ST;
+    
+    // 栈的初始化
+    void STInit(ST *st);
+    // 栈的销毁
+    void STDestroy(ST *st);
+    // 数据入栈
+    void STPush(ST *st, STDataType x);
+    // 数据出栈
+    void STPop(ST *st);
+    // 判断栈是否为空
+    bool STEmpty(ST *st);
+    // 获取栈元素
+    STDataType STTop(ST *st);
+    
+    // 栈的实现
+    // 栈的初始化
+    void STInit(ST *st)
+    {
+        // 判断是否存在队列
+        assert(st);
+        // 初始化队列
+        st->data = NULL;
+        st->top = 0; // 栈顶指针指向存储数据的下一个位置，代表栈内无数据
+        // st->top = -1;//栈顶指针指向存储数据的位置，代表栈内无数据
+        st->capacity = 0;
+    }
+    
+    // 栈的销毁
+    void STDestroy(ST *st)
+    {
+        // 确保有栈的存在
+        assert(st);
+        // 销毁栈
+        free(st->data);
+        st->data = NULL;
+        st->top = st->capacity = 0;
+    }
+    
+    // 数据入栈
+    void STPush(ST *st, STDataType x)
+    {
+        // 确保有栈的存在
+        assert(st);
+        // 向top位置增加数据，并使top向后移动
+        // 需要判断栈的容量大小
+        if (st->top == st->capacity)
+        {
+            // 如果栈的空间为0，则开辟四个空间，如果栈容量不为0，则扩容原来容量的2倍
+            int newCapacity = st->capacity == 0 ? 4 : st->capacity * 2;
+            STDataType *tmp = (STDataType *)realloc(st->data, sizeof(STDataType) * newCapacity);
+            assert(tmp);
+            st->data = tmp;
+            st->capacity = newCapacity;
+        }
+    
+        // 数据压栈并改变top
+        st->data[st->top++] = x;
+    }
+    // 数据出栈
+    void STPop(ST *st)
+    {
+        // 确保有栈的存在
+        assert(st);
+        // 确保栈不会越界
+        assert(!STEmpty(st));
+    
+        // 直接移动top指针，“看不见即删除”
+        st->top--;
+    }
+    // 判断栈是否为空
+    bool STEmpty(ST *st)
+    {
+        // 确保有栈的存在
+        assert(st);
+        // 栈为空返回真，栈不为空返回假
+        return st->top == 0; // 判断表达式返回值只有1和0，如果为真返回1(true)，如果为假返回0(false)
+    }
+    // 获取栈元素
+    STDataType STTop(ST *st)
+    {
+        // 确保栈存在
+        assert(st);
+        // 确保栈不为空
+        assert(!STEmpty(st));
+        // top为栈内数据的下一个位置，要获取当前位置的元素需要-1操作
+        return st->data[st->top - 1];
+    }
+    
+    // 判断是否是有效括号
+    bool isValid(char *s)
+    {
+        // 基本思路：左括号入栈，右括号时左括号出栈与右括号比较
+        // 创建栈用于保存数据
+        ST st = {0};
+        // 初始化栈
+        STInit(&st);
+        // 数据入栈
+        while (*s)
+        {
+            if (*s == '(' || *s == '[' || *s == '{')
+            {
+                // 当是左括号时数据入栈
+                STPush(&st, *s);
+            }
+            else
+            {
+                // 如果栈为空直接返回false
+                if (STEmpty(&st))
+                {
+                    // 返回前释放空间，因为尽管没有数据，但是栈的空间已经开辟
+                    STDestroy(&st);
+                    return false;
+                }
+                // 当是右括号时数据出栈与右括号比较
+                char top = STTop(&st);
+                // 更新栈内元素
+                STPop(&st);
+                if ((*s == ')' && top != '(') || (*s == ']' && top != '[') || (*s == '}' && top != '{'))
+                {
+                    // 此处找不同，如果此处找相同，那么但凡出现一对满足的括号就会进入返回true
+                    //  返回之前销毁栈防止内存泄漏
+                    STDestroy(&st);
+                    return false;
+                }
+            }
+    
+            ++s;
+        }
+    
+        // 如果栈为空，则说明匹配完成，如果不为空说明栈内仍有括号没有匹配到，此时说明存在单独的括号
+        bool ret = STEmpty(&st);
+        // 返回之前销毁栈
+        STDestroy(&st);
+        return ret;
+    }
+    ```
+
+=== "C++"
+
+    ```c++
+    class Solution
+    {
+    public:
+        bool isValid(string s)
+        {
+            // 奇数个数的括号肯定不匹配
+            if (s.size() % 2 != 0)
+                return false;
+            // 左括号进栈，右括号出栈匹配
+            // 如果在判断过程中栈为空，或者括号不匹配都不属于有效括号
+            // 此时栈为空说明此时左括号多了
+            stack<char> st;
+    
+            for (char i : s)
+            {
+                if (i == '(' || i == '[' || i == '{')
+                    st.push(i);
+                else if (i == ')')
+                {
+                    if (st.empty() ||st.top() != '(')
+                        return false;
+                    st.pop();
+                }
+                else if (i == ']')
+                {
+                    if (st.empty() || st.top() != '[')
+                        return false;
+                    st.pop();
+                }
+                else if (i == '}')
+                {
+                    if (st.empty() ||st.top() != '{')
+                        return false;
+                    st.pop();
+                }
+            }
+    
+            // 判断结果如果栈不为空，说明栈内还有左括号
+            // 右括号与左括号个数不匹配，不属于有效括号
+            if (!st.empty())
+                return false;
+    
+            return true;
+        }
+    };
+    ```
+
+## 力扣1047.删除字符串中的所有相邻重复项
+
+[力扣1047.删除字符串中的所有相邻重复项](https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给出由小写字母组成的字符串`s`，重复项删除操作会选择两个相邻且相同的字母，并删除它们。
+    
+    在`s`上反复执行重复项删除操作，直到无法继续删除。
+    
+    在完成所有重复项删除操作后返回最终的字符串。答案保证唯一。
+    
+    示例：
+    
+    ```c++
+    输入："abbaca"
+    输出："ca"
+    解释：
+    例如，在 "abbaca" 中，我们可以删除 "bb" 由于两字母相邻且相同，这是此时唯一可以执行删除操作的重复项。之后我们得到字符串 "aaca"，其中又只有 "aa" 可以执行重复项删除操作，所以最后的字符串为 "ca"。
+    ```
+
+**思路分析：**
+
+本题可以使用栈结构，遍历原字符串，依次向栈内插入字符，如果即将插入的字符与栈顶的字符相同，那么就不插入当前字符并且弹出当前栈顶的字符，一直持续到字符串遍历结束。最后栈内的字符就是结果，只需要逆序存储到原字符串中即可
+
+**代码优化：**
+
+因为C++中的string也支持`push_back`和`pop_back`，所以可以直接string模拟栈结构
+
+**参考代码：**
+
+=== "使用栈结构"
+
+    ```c++
+    class Solution1047_1
+    {
+    public:
+        string removeDuplicates(string s)
+        {
+            stack<char> st;
+            for (int i = 0; i < s.size(); i++)
+            {
+                if (st.empty() || st.top() != s[i])
+                    st.push(s[i]);
+                else
+                    st.pop();
+            }
+    
+            // 遍历当前栈取出其中的元素
+            s.resize(st.size());
+            int i = s.size() - 1;
+            while (!st.empty())
+            {
+                s[i] = st.top();
+                i--;
+                st.pop();
+            }
+    
+            return s;
+        }
+    };
+    ```
+
+=== "使用string模拟栈"
+
+    ```c++
+    class Solution1047_2
+    {
+    public:
+        string removeDuplicates(string s)
+        {
+            string ret;
+            for (auto ch: s)
+            {
+                if (ret.empty() || ret.back() != ch)
+                    ret.push_back(ch);
+                else
+                    ret.pop_back();
+            }
+    
+            return ret;
+        }
+    };
+    ```
+
+## 力扣150.逆波兰表达式求值
+
+见[其他算法：波兰表达式与逆波兰表达式](https://www.help-doc.top/algorithm/other/polish-notation/polish-notation.html)
+
+## 力扣239.滑动窗口最大值
+
+[力扣239.滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给你一个整数数组`nums`，有一个大小为`k`的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的`k`个数字。滑动窗口每次只向右移动一位。
+    
+    返回滑动窗口中的最大值。
+    
+    示例 1：
+    
+    ```c++
+    输入：nums = [1,3,-1,-3,5,3,6,7], k = 3
+    输出：[3,3,5,5,6,7]
+    解释：
+    滑动窗口的位置                最大值
+    ---------------               -----
+    [1  3  -1] -3  5  3  6  7       3
+    1 [3  -1  -3] 5  3  6  7       3
+    1  3 [-1  -3  5] 3  6  7       5
+    1  3  -1 [-3  5  3] 6  7       5
+    1  3  -1  -3 [5  3  6] 7       6
+    1  3  -1  -3  5 [3  6  7]      7
+    ```
+    
+    示例 2：
+    
+    ```c++
+    输入：nums = [1], k = 1
+    输出：[1]
+    ```
+
+**思路分析：**
+
+1. 解法1：暴力解法
+
+    两次`for`循环，第一层`for`循环遍历原数组，第二层`for`循环遍历对应的窗口找出最大值
+
+2. 解法2：单调队列
+
+    所谓单调队列，就是队列中的元素满足某一种单调性，一般为单调递增或者单调递减。单调队列也是一种队列，但是这个队列比较特殊，其队头和队列都会存在移除元素，所以不能直接使用queue作为底层结构。在C++中，支持队头插入元素和删除元素以及队尾插入元素和删除元素，并且高效的结构是deque，本次实现单调队列同样使用到deque而不是queue
+
+    在本题中，因为要找到滑动窗口中的最大值，所以可以考虑如果待插入的元素大于当前队头元素就移除队头元素一直到队头元素大于待插入的元素，此时队尾一定就是滑动窗口的最大值，这就是单调队列插入元素的思路。当下一个最大值要插入时，因为要保证一直从队尾中取到新的最大值，就需要在插入下一个最大值之前移除之前的最大值，这就是单调队列移除元素的思路。还可以实现一个函数表示获取到最大值，最大值就是队尾的元素，直接返回队尾元素即可
+
+    以示例1为例，下面是单调队列的执行过程：
+
+    <img src="2. 栈和队列基础练习.assets/image-20241209175156717.png" alt="image-20241209175156717" >
+
+    在执行上面的过程中就可以看到单调队列中，从队尾开始到队头，单调队列的元素都是单调递减的，因为最大值在队尾
+
+**关键步骤：**
+
+本题使用单调队列一定要注意何时获取最大值，因为k至少为1，所以在i<=k时，滑动窗口一定不会移动，此时单独处理即可。后面的过程中，先弹出已有的元素，如果是最大值就会正常弹出，接着插入元素，因为插入元素会涉及到移除原来的最大值，所以下一步就可以获取一次最大值保证每一次获取最大值都在移动窗口之前
+
+**参考代码：**
+
+```c++
+class Solution
+{
+private:
+    deque<int> dq;
+
+    // 弹出最大元素
+    void pop_max(int val)
+    {
+        if (!dq.empty() && val == dq.front())
+            dq.pop_front();
+    }
+
+    // 插入较大元素，删除较小元素
+    void push_val(int val)
+    {
+        while (!dq.empty() && val > dq.back())
+            dq.pop_back();
+        dq.push_back(val);
+    }
+
+    // 获取最大值
+    int get_max()
+    {
+        return dq.front();
+    }
+
+public:
+    vector<int> maxSlidingWindow(vector<int> &nums, int k)
+    {
+        vector<int> ret;
+        // 先向单调队列中插入前k个元素
+        for (int i = 0; i < k; i++)
+            push_val(nums[i]);
+
+        // 获取当前最大值
+        ret.push_back(get_max());
+
+        // 移动窗口
+        for (int i = k; i < nums.size(); i++)
+        {
+            // 移除滑动窗口的第一个值，如果是最大值就成功移除
+            pop_max(nums[i - k]);
+            // 插入数据
+            push_val(nums[i]);
+            // 获取到最大值
+            ret.push_back(get_max());
+        }
+
+        return ret;
+    }
+};
+```
+
+## 力扣347.前K个高频元素
+
+**问题描述：**
+
+!!! quote
+
+    给你一个整数数组`nums`和一个整数`k`，请你返回其中出现频率前`k`高的元素。你可以按任意顺序返回答案。
+
+    示例 1:
+
+    ```c++
+    输入: nums = [1,1,1,2,2,3], k = 2
+    输出: [1,2]
+    ```
+
+    示例 2:
+
+    ```c++
+    输入: nums = [1], k = 1
+    输出: [1]
+    ```
+
+**思路分析：**
+
+1. 解法1：map+排序：
+
+    使用map用于统计元素出现的次数，接着根据元素出现的次数进行排序，最后取出前k个即可
+
+2. 解法2：map+priority_queue
+
+    本题就是典型的[TopK问题](https://www.help-doc.top/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8.%20%E5%A0%86/8.%20%E5%A0%86.html#topk)，可以直接使用堆解决，在C++中，优先级队列priority_queue底层就是堆结构。但是本题需要注意，堆中的比较基准是按照出现的频次，所以要单独实现一个比较仿函数
+
+**参考代码：**
+
+=== "map+排序（写法1：使用仿函数）"
+
+    ```c++
+    class Solution347_1_1
+    {
+    public:
+        // 比较仿函数
+        struct Compare
+        {
+            bool operator()(const pair<int, int> &p1, const pair<int, int> &p2)
+            {
+                return p1.second > p2.second;
+            }
+        };
+        vector<int> topKFrequent(vector<int> &nums, int k)
+        {
+            map<int, int> m;
+            for (auto num : nums)
+                m[num]++;
+
+            // 插入到vector中排序
+            vector<pair<int, int>> v(m.begin(), m.end());
+            sort(v.begin(), v.end(), Compare());
+
+            vector<int> ret;
+            auto it = v.begin();
+            int i = 0;
+            while (it != v.end() && i < k)
+            {
+                ret.push_back(it->first);
+                it++;
+                i++;
+            }
+
+            return ret;
+        }
+    };
+    ```
+
+=== "map+排序（写法2：使用lambda表达式）"
+
+    ```c++
+    class Solution347_1_2
+    {
+    public:
+        vector<int> topKFrequent(vector<int> &nums, int k)
+        {
+            map<int, int> freq;
+            vector<int> freqs;
+            vector<int> ret;
+            // 统计字符个数
+            for (auto &num: nums)
+                freq[num]++;
+
+            auto it = freq.begin();
+            while (it != freq.end())
+            {
+                freqs.push_back(it->first);
+                ++it;
+            }
+
+            // 按照出现频率进行排序
+            sort(freqs.begin(), freqs.end(), [&](const int &num1, const int &num2) -> bool
+            {
+                return freqs[num1] > freqs[num2];
+            });
+
+            for (int i = 0; i < k; i++)
+                ret.push_back(freqs[i]);
+
+            return ret;
+        }
+    };
+    ```
+
+=== "map+priority_queue"
+
+    ```c++
+    // 自定义比较函数——仿函数
+    struct Compare
+    {
+        bool operator()(const pair<int, int> &p1, const pair<int, int> &p2)
+        {
+            return p1.second > p2.second;
+        }
+    };
+
+    class Solution347_2
+    {
+    public:
+        vector<int> topKFrequent(vector<int> &nums, int k)
+        {
+            priority_queue<pair<int, int>, vector<pair<int, int>>, Compare> que;
+            map<int, int> fre;
+
+            // 统计出现次数
+            for (const auto &num: nums)
+            {
+                fre[num]++;
+            }
+
+            // 向堆内插入数据
+            for (const auto &kv: fre)
+            {
+                que.push(kv);
+                // 弹出出现频率较小的元素
+                if (que.size() > k)
+                    que.pop();
+            }
+
+            // 记录返回值，为了保证输出顺序和出现频率大小一致，先开辟空间
+            vector<int> ret(k);
+            for (int i = k - 1; i >= 0; i--)
+            {
+                ret[i] = que.top().first;
+                que.pop();
+            }
+
+            return ret;
+        }
+    };
+    ```
+
+## 力扣692.前K个高频单词
+
+[力扣692.前K个高频单词](https://leetcode.cn/problems/top-k-frequent-words/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给定一个单词列表`words`和一个整数`k`，返回前`k`个出现次数最多的单词。
+
+    返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率，按字典顺序排序。
+
+    示例 1：
+
+    ```c++
+    输入: words = ["i", "love", "leetcode", "i", "love", "coding"], k = 2
+    输出: ["i", "love"]
+    解析: "i" 和 "love" 为出现次数最多的两个单词，均为2次。
+        注意，按字母顺序 "i" 在 "love" 之前。
+    ```
+
+    示例 2：
+
+    ```c++
+    输入: ["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"], k = 4
+    输出: ["the", "is", "sunny", "day"]
+    解析: "the", "is", "sunny" 和 "day" 是出现次数最多的四个单词，
+        出现次数依次为 4, 3, 2 和 1 次。
+    ```
+
+**思路分析：**
+
+1. 解法1：map+排序
+   
+    思路和上一题基本一致，但是需要注意一个题目要求**如果不同的单词有相同出现频率，按字典顺序排序**，如果本题直接照搬前一题的思路，最后会出现一个问题：当出现相同出现频率的单词时，会因为`sort`的不稳定性导致排序之后的出现相同出现频率的单词顺序发生了改变，在map插入统计的过程中其实已经按照了字典顺序排序，只是因为排序的不稳定导致，所以可以考虑两种方案：1. 使用稳定的排序函数`stable_sort()` 2. 改变排序的逻辑：按照出现频率进行比较，出现频率大的排在前面，如果出现频率相同，则按照ASCII码进行比较排序
+
+2. 解法2：map+priority_queue
+
+    思路和上一题基本一致，但是需要注意一个题目要求**如果不同的单词有相同出现频率，按字典顺序排序**
+
+**参考代码：**
+
+=== "map+排序（写法1：使用仿函数）"
+
+    ```c++
+    class Solution692_1
+    {
+    public:
+        struct Compare
+        {
+            bool operator()(const pair<string, int> &p1, const pair<string, int> &p2)
+            {
+                return p1.second > p2.second || (p1.second == p2.second && p1.first < p2.first);
+            }
+        };
+        vector<string> topKFrequent(vector<string> &words, int k)
+        {
+            // 插入到map中统计每个单词出现的次数
+            map<string, int> m;
+            for (auto &e : words)
+            {
+                m[e]++;
+            }
+
+            // 将元素插入到vector中进行排序
+            vector<pair<string, int>> v(m.begin(), m.end());
+            sort(v.begin(), v.end(), Compare());
+
+            vector<string> ret;
+            auto it = v.begin();
+            int i = 0;
+            while (it != v.end() && i < k)
+            {
+                ret.push_back(it->first);
+                ++it;
+                ++i;
+            }
+
+            return ret;
+        }
+    };
+    ```
+
+=== "map+排序（写法2：使用lambda表达式）"
+
+    ```c++
+    class Solution
+    {
+    public:
+        vector<string> topKFrequent(vector<string> &words, int k)
+        {
+            // 插入到map中统计每个单词出现的次数
+            map<string, int> m;
+            for (auto &e : words)
+            {
+                m[e]++;
+            }
+
+            // 将元素插入到vector中进行排序
+            vector<pair<string, int>> v(m.begin(), m.end());
+            sort(v.begin(), v.end(), 
+            [](const pair<string, int>& p1, const pair<string, int>& p2)->bool 
+            {
+                return p1.second > p2.second || (p1.second == p2.second && p1.first < p2.first);
+            });
+
+            vector<string> ret;
+            auto it = v.begin();
+            int i = 0;
+            while (it != v.end() && i < k)
+            {
+                ret.push_back(it->first);
+                ++it;
+                ++i;
+            }
+
+            return ret;
+        }
+    };
+    ```
+
+=== "map+排序（stable_sort）"
+
+    ```c++
+    class Solution
+    {
+    public:
+        vector<string> topKFrequent(vector<string> &words, int k)
+        {
+            // 插入到map中统计每个单词出现的次数
+            map<string, int> m;
+            for (auto &e : words)
+            {
+                m[e]++;
+            }
+
+            // 将元素插入到vector中进行排序
+            vector<pair<string, int>> v(m.begin(), m.end());
+            stable_sort(v.begin(), v.end(), [](const pair<string, int>& p1, const pair<string, int>& p2)->bool {return p1.second > p2.second;});
+
+            vector<string> ret;
+            auto it = v.begin();
+            int i = 0;
+            while (it != v.end() && i < k)
+            {
+                ret.push_back(it->first);
+                ++it;
+                ++i;
+            }
+
+            return ret;
+        }
+    };
+    ```
+
+=== "map+priority_queue"
+
+    ```c++
+    using psi = pair<string, int>;
+
+    struct Compare
+    {
+        bool operator()(const psi &p1, const psi &p2)
+        {
+            return p1.second > p2.second || p1.second == p2.second && p1.first < p2.first;
+        }
+    };
+
+    class Solution692_2
+    {
+    public:
+        vector<string> topKFrequent(vector<string> &words, int k)
+        {
+            priority_queue<psi, vector<psi>, Compare> que;
+
+            // map统计单词的次数
+            map<string, int> fre;
+
+            for (const auto &str: words)
+            {
+                fre[str]++;
+            }
+
+            // 向队列中插入数据
+            for (const auto &it: fre)
+            {
+                que.push(it);
+                if (que.size() > k)
+                {
+                    que.pop();
+                }
+            }
+
+            // 存储返回值
+            vector<string> ret(k);
+            for (int i = ret.size() - 1; i >= 0; i--)
+            {
+                ret[i] = que.top().first;
+                que.pop();
+            }
+
+            return ret;
+        }
+    };
+    ```
+
+## 力扣215.数组中的第K个最大元素
+
+[力扣215.数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/description/)
+
+**问题描述：**
+
+!!! quote
+
+    给定整数数组`nums`和整数`k`，请返回数组中第`k`个最大的元素。
+
+    请注意，你需要找的是数组排序后的第`k`个最大的元素，而不是第`k`个不同的元素。
+
+    你必须设计并实现时间复杂度为O(n)的算法解决此问题。
+
+    示例 1:
+
+    ```c++
+    输入: [3,2,1,5,6,4], k = 2
+    输出: 5
+    ```
+
+    示例 2:
+
+    ```c++
+    输入: [3,2,3,1,2,4,5,5,6], k = 4
+    输出: 4
+    ```
+
+**思路分析：**
+
+本题并不是单纯得获取到前K个最大元素，而是第前K个最大元素，还需要考虑如何取到第前K个。可以考虑使用数组元素个数减去k代表优先级队列需要弹出的元素，最后留下的堆顶元素就是第前K个最大元素
+
+**参考代码：**
+
+```c++
+class Solution
+{
+public:
+    int findKthLargest(vector<int> &nums, int k)
+    {
+        // 建小堆
+        priority_queue<int, vector<int>, greater<int>> que(nums.begin(), nums.end());
+
+        // 弹出指定个数的元素
+        int i = nums.size() - k;
+        while (i--)
+            que.pop();
+
+        return que.top();
+    }
+};
+```
+
+## 力扣155.最小栈
+
+[力扣155.最小栈](https://leetcode.cn/problems/min-stack/description/)
+
+**问题描述：**
+
+!!! quote
+
+    设计一个支持`push`，`pop`，`top`操作，并能在常数时间内检索到最小元素的栈
+
+    实现`MinStack`类:
+
+    `MinStack()`初始化堆栈对象。
+    `void push(int val)`将元素`val`推入堆栈。
+    `void pop()`删除堆栈顶部的元素。
+    `int top()`获取堆栈顶部的元素。
+    `int getMin()`获取堆栈中的最小元素。
+    
+
+    示例 1:
+
+    输入：
+
+    ```cpp
+    ["MinStack","push","push","push","getMin","pop","top","getMin"]
+    [[],[-2],[0],[-3],[],[],[],[]]
+    ```
+
+    输出：
+
+    ```cpp
+    [null,null,null,null,-3,null,0,-2]
+    ```
+
+    解释：
+    ```cpp
+    MinStack minStack = new MinStack();
+    minStack.push(-2);
+    minStack.push(0);
+    minStack.push(-3);
+    minStack.getMin();   --> 返回 -3.
+    minStack.pop();
+    minStack.top();      --> 返回 0.
+    minStack.getMin();   --> 返回 -2.
+    ```
+
+**思路分析：**
+
+使用两个栈，一个作为普通数据栈，一个作为最小数据栈，最小数据栈的栈顶元素就是当前栈中的最小元素
+
+当普通数据入栈时，判断最小数据栈是否为空或者插入的数据小于当前最小数据栈的栈顶元素就插入到最小数据栈，其他元素正常插入到普通数据栈
+
+当普通数据出栈时，判断最小数据栈是否为空或者弹出的数据等于当前最小数据栈的栈顶元素就弹出最小数据栈，其他元素正常弹出普通数据栈
+
+**参考代码：**
+
+```c++
+class MinStack
+{
+public:
+    MinStack()
+    {
+        // 调用栈结构的构造函数初始化
+    }
+
+    void push(int val)
+    {
+        // 如果当前最小数据栈为空或者插入的数据小于当前最小数据栈的栈顶元素就插入到最小数据栈
+        // 相等最小元素也要插入，防止后续统一数据弹栈出现异常
+        if(min_st_.empty() || min_st_.top() >= val)
+            min_st_.push(val);
+        // 其他元素正常插入到普通数据栈
+        st_.push(val);
+    }
+
+    void pop()
+    {
+        // 弹出普通数据栈的元素
+        // 一旦遇到了与最小数据栈相同的元素也需要弹出该元素
+        // 便于下一次入栈
+        if(!min_st_.empty() && min_st_.top() == st_.top())
+            min_st_.pop();
+
+        // 直接弹出普通数据栈
+        st_.pop();
+    }
+
+    int top()
+    {
+        return st_.top();
+    }
+
+    int getMin()
+    {
+        return min_st_.top();
+    }
+
+private:
+    stack<int> st_; // 普通数据栈
+    stack<int> min_st_; // 存储最小数据栈
+};
+```

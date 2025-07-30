@@ -436,4 +436,4 @@ int main()
 
 ### 深入理解递归
 
-见[算法：递归介绍](https://www.help-doc.top/%E7%AE%97%E6%B3%95/7.%20%E9%80%92%E5%BD%92%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AF%87/0.%20%E9%80%92%E5%BD%92%E4%BB%8B%E7%BB%8D/0.%20%E9%80%92%E5%BD%92%E4%BB%8B%E7%BB%8D.html)
+见[算法：递归介绍](https://www.help-doc.top/algorithm/recursion-binary-tree/recursion-intro/recursion-intro.html)

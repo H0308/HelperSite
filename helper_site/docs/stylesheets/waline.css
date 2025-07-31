@@ -36,6 +36,7 @@
 .wl-btn:hover {
     background: var(--border-primary-medium) !important;
     transform: translateY(-1px) !important;
+    color: var(--text-primary-blue);
 }
 .wl-comment {
     margin-bottom: 0em;
@@ -129,6 +130,20 @@
     font-size: 1em;
 }
 
+[data-waline] a {
+    color: var(--primary-blue-semi);
+}
+
+[data-waline] a:hover {
+    color: var(--primary-blue);
+}
+
+.wl-action:hover {
+    color: var(--primary-blue);
+}
+.wl-sort li.active {
+    color: var(--primary-blue);
+}
 /* 响应式设计 */
 @media screen and (max-width: 768px) {
     .wl-editor {

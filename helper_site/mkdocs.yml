@@ -393,7 +393,7 @@ plugins:
       summary: '加密页面'
       placeholder: '按下回车键提交密码'
       mermaid2: True
-      esm: true
+      esm: True
       arithmatex: True
       decryption_failure_message: '密码错误，请重新输入'
       encryption_info_message: '请联系作者获取密码'

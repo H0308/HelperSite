@@ -239,15 +239,3 @@ vim下快速取消注释的方法：
 ### 分屏
 
 在底行模式下使用`vs 文件名`可以调出分屏，使用 ++ctrl+w+w++或++ctrl+w+h++/++l++切换焦点屏
-
-## Vim的配置
-
-vim配置需要用到`.vimrc`文件，该文件放置在用户的家户目录下，也可以放置在`/etc/vimrc`作为系统级配置，常见的配置有：
-
-```shell
-设置语法高亮: syntax on
-显示行号: set nu
-设置缩进的空格数为4: set shiftwidth=4
-```
-
-CentOS下vim的配置教程：[HGtz2222/VimForCpp - 码云 - 开源中国 (gitee.com)](https://gitee.com/HGtz2222/VimForCpp)

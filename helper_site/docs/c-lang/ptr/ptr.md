@@ -1018,55 +1018,59 @@ int array_dual[3][4] = {0};
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 将变量中的内容传递给函数，此时在函数中做的一切对该接收该变量的形参的操作不影响调用者传入的实参的内容 | 将变量的地址传递给函数，函数通过该地址找到实际参数的位置对其内容进行操作，此时可以直接修改调用者传入的实参的内容`` |
 
-```C
-//传值调用
-#include <stdio.h>
-void Swap1(int x, int y)
-{
-    int tmp = x;
-    x = y;
-    y = tmp;
-}
-int main()
-{
-    int a = 0;
-    int b = 0;
-    scanf("%d %d", &a, &b);
-    printf("交换前：a=%d b=%d\n", a, b);
-    Swap1(a, b);
-    printf("交换后：a=%d b=%d\n", a, b);
-    return 0;
-}
-输入：
-1 2
-输出结果：
-交换前：a=1 b=2
-交换后：a=1 b=2
+=== "传值调用"
 
-//传址调用
-#include <stdio.h>
-void Swap1(int* x, int* y)
-{
-    int tmp = *x;
-    *x = *y;
-    *y = *tmp;
-}
-int main()
-{
-    int a = 0;
-    int b = 0;
-    scanf("%d %d", &a, &b);
-    printf("交换前：a=%d b=%d\n", a, b);
-    Swap1(&a, &b);
-    printf("交换后：a=%d b=%d\n", a, b);
-    return 0;
-}
-输入:
-1 2
-输出结果:
-交换前：a=1 b=2
-交换后：a=2 b=1
-```
+    ```C
+    #include <stdio.h>
+    void Swap1(int x, int y)
+    {
+        int tmp = x;
+        x = y;
+        y = tmp;
+    }
+    int main()
+    {
+        int a = 0;
+        int b = 0;
+        scanf("%d %d", &a, &b);
+        printf("交换前：a=%d b=%d\n", a, b);
+        Swap1(a, b);
+        printf("交换后：a=%d b=%d\n", a, b);
+        return 0;
+    }
+    输入：
+    1 2
+    输出结果：
+    交换前：a=1 b=2
+    交换后：a=1 b=2
+    ```
+
+=== "传址调用"
+
+    ```c
+    #include <stdio.h>
+    void Swap1(int* x, int* y)
+    {
+        int tmp = *x;
+        *x = *y;
+        *y = *tmp;
+    }
+    int main()
+    {
+        int a = 0;
+        int b = 0;
+        scanf("%d %d", &a, &b);
+        printf("交换前：a=%d b=%d\n", a, b);
+        Swap1(&a, &b);
+        printf("交换后：a=%d b=%d\n", a, b);
+        return 0;
+    }
+    输入:
+    1 2
+    输出结果:
+    交换前：a=1 b=2
+    交换后：a=2 b=1
+    ```
 
 <img src="images\image11.png">
 
@@ -1594,157 +1598,155 @@ int main()
 
 把函数的指针（地址）作为参数传递给另⼀个函数，当这个指针被用来调用其所指向的函数时，被调用的函数就是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应
 
-```C
-#include <stdio.h>
-int add(int a, int b)
-{
-    return a + b;
-}
-int sub(int a, int b)
-{
-    return a - b;
-}
-int mul(int a, int b)
-{
-    return a*b;
-}
-int div(int a, int b)
-{
-    return a / b;
-}
-int main()
-{
-    int x, y;
-    int input = 1;
-    int ret = 0;
-    int(*p[5])(int x, int y) = { 0, add, sub, mul, div }; //转移表 
-    do
+=== "不使用回调函数"
+
+    ```C
+    #include <stdio.h>
+    int add(int a, int b)
     {
-        printf("*************************\n");
-        printf("  1:add           2:sub  \n");
-        printf("  3:mul           4:div  \n");
-        printf("  0:exit                 \n");
-        printf("*************************\n");
-        printf( "请选择：" );
-        scanf("%d", &input);
-        if ((input <= 4 && input >= 1))
-        {
-            printf( "输⼊操作数：" );
-            scanf( "%d %d", &x, &y);
-            ret = (*p[input])(x, y);//将输入值作为数组下标
-            printf( "ret = %d\n", ret);
-        }
-        else if(input == 0)
-        {
-            printf("退出计算器\n");
-        }
-        else
-        {
-            printf( "输⼊有误\n" );        
-        }
-    }while (input);
-    return 0;
-}
-//使⽤回调函数改造后 
-#define _CRT_SECURE_NO_WARNINGS 1
-
-#include <stdio.h>
-
-int add(int a, int b)
-{
-    return a + b;
-}
-
-int sub(int a, int b)
-{
-    return a - b;
-}
-
-int mul(int a, int b)
-{
-    return a * b;
-}
-
-int div(int a, int b)
-{
-    return a / b;
-}
-
-//改造处
-void calc(int(*pf)(int, int))//参数是函数指针，通过函数指针调用函数
-{
-    int ret = 0;
-    int x, y;
-    printf("输⼊操作数：");
-    scanf("%d %d", &x, &y);
-    ret = pf(x, y);
-    printf("ret = %d\n", ret);
-}
-
-int main()
-{
-    int input = 1;
-    do
+        return a + b;
+    }
+    int sub(int a, int b)
     {
-        printf("*************************\n");
-        printf("  1:add           2:sub  \n");
-        printf("  3:mul           4:div  \n");
-        printf("  0:exit                 \n");
-        printf("*************************\n");
-        printf( "请选择：" );
-        scanf("%d", &input);
-        switch (input)
+        return a - b;
+    }
+    int mul(int a, int b)
+    {
+        return a*b;
+    }
+    int div(int a, int b)
+    {
+        return a / b;
+    }
+    int main()
+    {
+        int x, y;
+        int input = 1;
+        int ret = 0;
+        int(*p[5])(int x, int y) = { 0, add, sub, mul, div }; //转移表 
+        do
         {
-        case 1:
-            calc(add);
-            break;
-        case 2:
-            calc(sub);
-            break;
-        case 3:
-            calc(mul);
-            break;
-        case 4:
-            calc(div);
-            break;
-        case 0:
-            printf("退出程序\n");
-            break;
-        default:
-            printf("选择错误\n");
-            break;
-        }
-    } while (input);
-    return 0;
-}
-```
+            printf("*************************\n");
+            printf("  1:add           2:sub  \n");
+            printf("  3:mul           4:div  \n");
+            printf("  0:exit                 \n");
+            printf("*************************\n");
+            printf( "请选择：" );
+            scanf("%d", &input);
+            if ((input <= 4 && input >= 1))
+            {
+                printf( "输⼊操作数：" );
+                scanf( "%d %d", &x, &y);
+                ret = (*p[input])(x, y);//将输入值作为数组下标
+                printf( "ret = %d\n", ret);
+            }
+            else if(input == 0)
+            {
+                printf("退出计算器\n");
+            }
+            else
+            {
+                printf( "输⼊有误\n" );        
+            }
+        }while (input);
+        return 0;
+    }
+    ```
 
-### `qsort`函数
+=== "使用回调函数"
 
-#### `qsort`函数介绍
+    ```c
+    #define _CRT_SECURE_NO_WARNINGS 1
 
-```C
-函数作用
-将存放某种类型（包括自定义类型）的数组的元素进行排序
+    #include <stdio.h>
 
-函数原型
+    int add(int a, int b)
+    {
+        return a + b;
+    }
+
+    int sub(int a, int b)
+    {
+        return a - b;
+    }
+
+    int mul(int a, int b)
+    {
+        return a * b;
+    }
+
+    int div(int a, int b)
+    {
+        return a / b;
+    }
+
+    //改造处
+    void calc(int(*pf)(int, int))//参数是函数指针，通过函数指针调用函数
+    {
+        int ret = 0;
+        int x, y;
+        printf("输⼊操作数：");
+        scanf("%d %d", &x, &y);
+        ret = pf(x, y);
+        printf("ret = %d\n", ret);
+    }
+
+    int main()
+    {
+        int input = 1;
+        do
+        {
+            printf("*************************\n");
+            printf("  1:add           2:sub  \n");
+            printf("  3:mul           4:div  \n");
+            printf("  0:exit                 \n");
+            printf("*************************\n");
+            printf( "请选择：" );
+            scanf("%d", &input);
+            switch (input)
+            {
+            case 1:
+                calc(add);
+                break;
+            case 2:
+                calc(sub);
+                break;
+            case 3:
+                calc(mul);
+                break;
+            case 4:
+                calc(div);
+                break;
+            case 0:
+                printf("退出程序\n");
+                break;
+            default:
+                printf("选择错误\n");
+                break;
+            }
+        } while (input);
+        return 0;
+    }
+    ```
+
+### `qsort`函数介绍和使用
+
+函数作用：将存放某种类型（包括自定义类型）的数组的元素进行排序。函数声明如下：
+
+```c
 void qsort (void* base, size_t num, size_t size,
             int (*compar)(const void*, const void*));
-返回类型：void
-第一个参数：需要排序的数组
-第二个参数：数组元素个数
-第三个参数：数组每一个元素的数据类型的大小
-第四个参数：需要自行实现的比较函数
-
-第四个参数设计时需要满足：
-指针p1比p2大时返回非0正值
-指针p1与p2相等时返回0
-指针p1比p2小时返回非0负值
-
-当返回非0正值时进行交换，函数默认以从小到大的升序进行排列，如果想以从大到小的降序排列，调换函数指针指向的函数返回的两个指针参数p1和p2的计算顺序即可
 ```
 
-#### `qsort`函数使用
+其中：第一个参数表示需要排序的数组，第二个参数表示数组元素个数，第三个参数表示数组每一个元素的数据类型的大小，第四个参数表示需要自行实现的比较函数。对于传递给第四个参数的比较函数来说，需要指定两个参数（下面以`p1`和`p2`为例）：
+
+1. 指针`p1`比`p2`大时返回非0正值
+2. 指针`p1`与`p2`相等时返回0
+3. 指针`p1`比`p2`小时返回非0负值
+
+当返回非0正值时进行交换，函数默认以从小到大的升序进行排列，如果想以从大到小的降序排列，调换函数指针指向的函数返回的两个指针参数`p1`和`p2`的计算顺序即可
+
+基本使用如下：
 
 ```C
 #define _CRT_SECURE_NO_WARNINGS 1
@@ -1754,7 +1756,7 @@ void qsort (void* base, size_t num, size_t size,
 //qosrt函数的使⽤者得实现⼀个⽐较函数 
 int int_cmp(const void * p1, const void * p2)
 {
-     return (*( int *)p1 - *(int *) p2);//p1 - p2>0为真进行交换，否则不交换，默认从小到大排序
+     return (*( int *)p1 - *(int *) p2);// p1 - p2>0为真进行交换，否则不交换，默认从小到大排序
 }
 
 int main()

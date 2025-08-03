@@ -341,6 +341,7 @@ TCP连接保活(Keepalive)是一种检测空闲连接状态的机制，用于维
 - **资源回收**：避免维护大量实际已失效的"僵尸连接"
 
 在Linux中主要通过三个内核参数控制：
+
 - `tcp_keepalive_time`：空闲多久开始发送探测包
 - `tcp_keepalive_intvl`：两次探测间隔时间
 - `tcp_keepalive_probes`：探测失败次数阈值

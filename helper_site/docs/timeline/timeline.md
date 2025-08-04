@@ -1,5 +1,7 @@
 ---
 changelog: True
+search:
+    exclude: true
 ---
 
 # 网站时间线

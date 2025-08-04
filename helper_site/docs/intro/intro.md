@@ -1,5 +1,7 @@
 ---
 statistics: True
+search:
+    exclude: true
 hide:
   - navigation
   - toc

@@ -345,6 +345,7 @@ markdown_extensions:
       permalink: true
       baselevel: 1  # 开始级别
       toc_depth: 6  # 最大深度
+      title: 本节目录
   - def_list
   - pymdownx.tasklist:
       custom_checkbox: true
@@ -385,11 +386,13 @@ extra:
     - icon: fontawesome/brands/qq
       link: https://www.help-doc.top/author/contact/contact.html
   generator: false
-      
+
 plugins:
   - search:
-      jieba_dict: dict.txt.small
-      lang: zh
+      jieba_dict_user: dict.txt.small
+      lang: 
+        - zh
+        - en
   - encryptcontent:
       title_prefix: '[加密] '
       summary: '加密页面'
@@ -441,7 +444,6 @@ plugins:
       shadow: true
       manual: false
   - git-revision-date-localized:
-      # enable_creation_date: true
       type: date
       exclude:
         - index.md

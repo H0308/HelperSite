@@ -389,10 +389,11 @@ extra:
 
 plugins:
   - search:
-      jieba_dict_user: dict.txt.small
       lang: 
         - zh
         - en
+      jieba_dict: dict.it.txt
+      jieba_dict_user: dict.it.txt
   - encryptcontent:
       title_prefix: '[加密] '
       summary: '加密页面'

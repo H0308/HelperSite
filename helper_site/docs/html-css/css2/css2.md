@@ -898,7 +898,7 @@ div {
 
 实际上，虽然字面意思上`font-size`控制的是字体大小，但是实际上`font-size`控制的是字体设计框的大小，而大部分的字体中心相对于字体设计框的中心位置都是偏下的，而以小写字母`x`为例，有一条水平直线紧贴`x`的下边缘，这条线也被称为[基线](https://zh.wikipedia.org/wiki/%E5%9F%BA%E7%B7%9A)，如下图所示：
 
-<img src="CSS2笔记.assets/baseline.png">
+<img src="css2.assets/baseline.png">
 
 ### 字体族
 
@@ -1144,19 +1144,19 @@ div {
 
 === "属性值为`baseline`"
 
-    <img src="CSS2笔记.assets/image-20250709211711992.png" style="width: 70%;">
+    <img src="css2.assets/image-20250709211711992.png" style="width: 70%;">
 
 === "属性值为`top`"
 
-    <img src="CSS2笔记.assets/image-20250709212415693.png" style="width: 70%;">
+    <img src="css2.assets/image-20250709212415693.png" style="width: 70%;">
 
 === "属性值为`middle`"
 
-    <img src="CSS2笔记.assets/image-20250709212727949.png" style="width: 70%;">
+    <img src="css2.assets/image-20250709212727949.png" style="width: 70%;">
 
 === "属性值为`bottom`"
 
-    <img src="CSS2笔记.assets/image-20250709212913674.png" style="width: 70%;">
+    <img src="css2.assets/image-20250709212913674.png" style="width: 70%;">
 
 在上面的结构中，子元素也是包裹文字的行内元素，如果是非文字的行内元素，例如图片，一旦属性值为`middle`时，可以发现图片与父元素的`x`中心刚好对齐，因为默认情况下微软雅黑字体中的文字都是偏下的
 
@@ -1190,7 +1190,7 @@ div {
 
 效果如下：
 
-<img src="CSS2笔记.assets/image-20250709214258262.png" style="width: 70%;">
+<img src="css2.assets/image-20250709214258262.png" style="width: 70%;">
 
 除了用于调整行内元素的位置以外，`vertical-align`属性还可以用来调整一个单元格中文字垂直方向的位置（顶部、居中和底部），效果与表格单元格属性`valign`效果一致
 
@@ -1297,7 +1297,8 @@ div {
     - `margin`、`padding`：相对于父元素的宽度（注意：垂直方向也是相对于宽度）
     - `font-size`：相对于父元素的字体大小
     - `line-height`：相对于当前元素的字体大小
-   
+     
+    
     例如父元素宽度为`width: 200px;`，当前元素宽度为`width: 50%;`，则当前元素计算出的宽度值为`width: 100px;`
 
 ### 元素显示模式介绍与修改
@@ -1347,3 +1348,130 @@ a {
     display: block;
 }
 ```
+
+### 盒子模型的组成
+
+在CSS中，所有的HTML元素会被当作一个盒子，所有的样式也都是基于这个盒子，这个盒子一般有下面的组成部分：
+
+1. 外边距：当前元素与其他元素的距离
+2. 边框：当前元素的边框。设置背景颜色时会填充到边框的宽度
+3. 内边距：当前元素的内容与边框之间的距离。设置背景颜色时会填充到内边距的宽度
+4. 内容区：当前元素的实际内容。给元素设置宽和高实际上就是在改变内容区的大小
+
+例如下面的代码形成的盒子：
+
+```html
+<style>
+    div {
+        height: 400px;
+        width: 400px;
+        padding: 20px;
+        border: 10px dashed black;
+        background-color: goldenrod;
+        margin: 20px;
+    }
+</style>
+<body>
+    <div>这是一段内容</div>
+</body>
+```
+
+得到的效果如下：
+
+<img src="css2.assets/Snipaste_2025-08-04_10-08-07.png" style="width: 70%;">
+
+需要注意的是，边框和内边距的值都会改变盒子本身的大小，但是外边距的值不会改变盒子本身的大小。例如上面的代码中，盒子实际的宽和高都是460px而不再是一开始的400px。所以，以宽度为例（高度同理），有下面的两个公式：
+
+1. 当前盒子的宽度 = 父元素的内容区宽度 - 当前元素的外边距
+2. 当前盒子的内容区宽度 = 当前元素的宽度 - 边框宽度 - 内边距的宽度
+
+### 内容区
+
+默认情况下，内容区有自己的宽度和高度，默认高度由盒子中的内容撑开，默认宽度随着浏览器视口的宽度变化而变化，而所谓的默认宽度和高度就是不设置`width`和`height`属性时的宽度和高度
+
+除了使用`width`和`height`设置盒子内容区高度和宽度以外，还有其他的属性可以设置内容区的大小：
+
+- `min-width`：内容区的最小宽度，一旦浏览器的视口宽度小于当前值，默认就会出现横向滚动条
+- `max-width`：内容区的最大宽度，一旦浏览器的视口宽度大于当前值，盒子不再随浏览器视口的宽度变化而变化
+- `min-height`：内容区的最小高度
+- `max-height`：内容区的最大高度
+
+`min-width`和`max-width`表示内容区宽度的取值区间，即`[min-width, max-width]`，同理得`min-height`和`max-height`为`[min-height, max-height]`
+
+一般来说，`min-width`和`max-width`不会与`width`一起出现在同一个元素上，`min-height`和`max-height`不会与`height`一起出现在同一个元素上
+
+### 内边距
+
+前面已经使用了`padding`设置内边距，实际上这个属性是内边距的复合属性，单独的四个属性如下：
+
+- `padding-top`：上内边距
+- `padding-right`：右内边距
+- `padding-bottom`：下内边距
+- `padding-left`：左内边距
+
+另外，`padding`除了可以给定一个值以外，还可以给定多个值：
+
+1. 给定一个值时，四个方向的内边距都是这个值
+2. 给定两个值时，第一个值表示**上和下**，第二个值表示**左和右**
+3. 给定三个值时，第一个值表示**上**，第二个值表示**左右**，第三个值表示**下**
+4. 给定四个值时，分别表示**上、右、下、左**，即**顺时针**方向
+
+在使用`padding`时需要注意下面的注意点：
+
+1. `padding`值**不可以为负数**
+2. 对于**行内元素**来说，给其左右设置内边距没有问题，但是上下内边距会出现内边距与其他元素重叠的问题，所以**不建议给行内元素设置上下内边距**
+
+### 边框
+
+边框颜色的设置有下面单独的属性：
+
+1. `border-left-color`：左边框颜色
+2. `border-right-color`：右边框颜色
+3. `border-top-color`：上边框颜色
+4. `border-bottom-color`：下边框颜色
+
+边框的颜色可以使用`border-color`属性来设置，该属性是边框颜色的复合属性
+
+边框宽度的设置有下面单独的属性：
+
+1. `border-left-width`：左边框宽度
+2. `border-right-width`：右边框宽度
+3. `border-top-width`：上边框宽度
+4. `border-bottom-width`：下边框宽度
+
+边框的宽度可以使用`border-width`属性来设置，该属性是边框宽度的复合属性
+
+边框样式的设置有下面单独的属性：
+
+1. `border-left-style`：左边框样式
+2. `border-right-style`：右边框样式
+3. `border-top-style`：上边框样式
+4. `border-bottom-style`：下边框样式
+
+边框的样式可以使用`border-style`属性来设置，该属性是边框样式的复合属性
+
+也可以使用四个方向的符合属性来设置边框颜色、样式和宽度：
+
+1. `border-left`：左边框的颜色、样式和宽度
+2. `border-right`：右边框的颜色、样式和宽度
+3. `border-top`：上边框的颜色、样式和宽度
+4. `border-bottom`：下边框的颜色、样式和宽度
+
+常用的是边框的总体复合属性`border`，该属性是边框颜色、样式和宽度的复合属性
+
+### 外边距
+
+前面已经使用了`margin`设置内边距，实际上这个属性是外边距的复合属性，单独的四个属性如下：
+
+- `margin-top`：上外边距
+- `margin-right`：右外边距
+- `margin-bottom`：下外边距
+- `margin-left`：左外边距
+
+另外，`margin`除了可以给定一个值以外，还可以给定多个值：
+
+1. 给定一个值时，四个方向的外边距都是这个值
+2. 给定两个值时，第一个值表示**上和下**，第二个值表示**左和右**
+3. 给定三个值时，第一个值表示**上**，第二个值表示**左右**，第三个值表示**下**
+4. 给定四个值时，分别表示**上、右、下、左**，即**顺时针**方向
+

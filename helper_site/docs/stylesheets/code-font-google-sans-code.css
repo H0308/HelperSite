@@ -1,0 +1,16 @@
+@font-face {
+    font-family: "ZSFT-669";
+    src: url("https://fontsapi.zeoseven.com/669/main.woff2") format("woff2"),
+        url("https://fontsapi-storage.zeoseven.com/669/main.woff2") format("woff2");
+    font-display: swap;
+}
+
+:root {
+    --md-code-font: "ZSFT-669", "DejaVu Sans Mono";
+}
+
+.md-typeset code,
+.md-typeset pre code,
+.highlight pre {
+    font-family: "ZSFT-669", "DejaVu Sans Mono";
+}

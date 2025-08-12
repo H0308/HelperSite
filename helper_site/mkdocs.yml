@@ -27,6 +27,7 @@ nav:
   - 网站介绍: intro/intro.md
   - 网站时间线: timeline/timeline.md
   - 编程语言:
+    - 章节目录: languages/index.md
     - C语言:
       - 章节目录: c-lang/index.md
       - C语言基础知识: c-lang/c-base/c-base.md
@@ -81,6 +82,7 @@ nav:
       - C++并发支持库: cpp/multi-thread/multi-thread.md
       - C++中的格式化字符串: cpp/format/format.md
     - Java:
+      - 章节目录: Java/index.md
       - Java基础知识: Java/java-basic/java-basic.md
       - Java数组类型: Java/java-array/java-array.md
       - Java面向对象与方法: Java/obj-oriented-and-method/obj-oriented-and-method.md
@@ -96,6 +98,7 @@ nav:
       - Java中的泛型: Java/generic/generic.md
       - Java单列集合: Java/collection/collection.md
       - Java双列集合: Java/map/map.md
+      - Java中的BitSet类: Java/bitset/bitset.md
       - 了解Java字符串常量池: Java/string-constant-pool/string-constant-pool.md
       - Java多线程: Java/multi-thread/multi-thread.md
       - Java的IO流: Java/javaio/javaio.md
@@ -104,6 +107,7 @@ nav:
       - Java中的Junit、类加载时机与机制、反射、注解及枚举: Java/junit-reflect-annotation-enum/junit-reflect-annotation-enum.md
       - （补充）JSON在后端的应用: Java/json-in-java/json-in-java.md
     - Python:
+      - 章节目录: python/index.md
       - Python基础知识: python/python-basic/python-basic.md
       - Python组合数据类型: python/composite-data-type/composite-data-type.md
       - Python异常处理: python/exception/exception.md
@@ -113,14 +117,16 @@ nav:
       - Python类和对象基础: python/class-obj-basic/class-obj-basic.md
       - Python类和对象进阶: python/class-obj-advanced/class-obj-advanced.md
   - 数据结构与算法:
+    - 章节目录: data-structure-algo/index.md
     - 数据结构:
+      - 章节目录: data-structure/index.md
       - 数据结构基础: data-structure/time-space-complexity/time-space-complexity.md
       - 顺序结构与顺序表: data-structure/sequential-structure-and-sequential-table/sequential-structure-and-sequential-table.md
       - 链表: data-structure/linked-list/linked-list.md
       - 栈: data-structure/stack/stack.md
       - 队列: data-structure/queue/queue.md
       - 树的基本概念: data-structure/tree-basic-concept/tree-basic-concept.md
-      - 二叉树（基础）: data-structure/binary-tree/binary-tree.md
+      - 二叉树的基础实现: data-structure/binary-tree/binary-tree.md
       - 堆: data-structure/heap/heap.md
       - 排序: data-structure/sort/sort.md
       - 二叉搜索树: data-structure/binary-search-tree/binary-search-tree.md
@@ -130,6 +136,7 @@ nav:
       - 位图: data-structure/bitset/bitset.md
       - 布隆过滤器与海量数据处理: data-structure/bloom-filter/bloom-filter.md
     - 算法:
+      - 章节目录: algorithm/index.md
       - 算法比赛常用内容: algorithm/common/common.md
       - 数组基础篇:
         - 数组理论基础: algorithm/array-basic/array-concept/array-concept.md
@@ -179,6 +186,7 @@ nav:
         - 大数运算: algorithm/other/big-number-op/big-number-op.md
         - 取模与取余: algorithm/other/modulo/modulo.md
   - Linux:
+    - 章节目录: Linux/index.md
     - Linux常用选项和指令: Linux/options-commands/options-commands.md
     - Linux权限相关: Linux/permission/permission.md
     - CentOS软件安装: Linux/software-installation/software-installation.md
@@ -239,11 +247,14 @@ nav:
     - epoll实现多路转接: Linux/epoll/epoll.md
     - Reactor模式与完善基于边缘触发模式epoll实现TCP服务器: Linux/reactor-et/reactor-et.md
   - 前端:
+    - 章节目录: front-end/index.md
     - HTML与CSS:
+      - 章节目录: html-css/index.md
       - HTML4和HTML5常见标签总结: html-css/html/html.md
       - CSS2笔记: html-css/css2/css2.md
       - Emmet表达式: html-css/emmet/emmet.md
     - JavaScript:
+      - 章节目录: javascript-lang/index.md
       - JavaScript语法基础:
         - JavaScript基本语法: javascript-lang/js-basic/js-basic.md
         - JavaScript对象基础: javascript-lang/js-obj-basic/js-obj-basic.md
@@ -258,6 +269,7 @@ nav:
         - DOM和BOM小练习: javascript-lang/dom-bom-practice/dom-bom-practice.md
       - JavaScript与JQuery（了解）: javascript-lang/jquery/jquery.md
     - Vue:
+      - 章节目录: vue/index.md
       - Vue前置知识: vue/pre-vue/pre-vue.md
       - Vue基础与响应式: vue/reactive-basic/reactive-basic.md
       - Vue的基本结构: vue/basic-structure/basic-structure.md
@@ -265,18 +277,22 @@ nav:
       - Vue基础指令: vue/basic-command/basic-command.md
       - Vue组件介绍与生命周期: vue/component-lifecycle/component-lifecycle.md
     - Qt:
+      - 章节目录: qt/index.md
       - Qt环境准备与基础代码解释: qt/pre-qt/pre-qt.md
   - MySQL:
+    - 章节目录: MySQL/index.md
+    - MySQL操作:
+      - MySQL基础操作: MySQL/mysql-op/basic-op/basic-op.md
+      - （补充）Ubuntu下安装和卸载MySQL: MySQL/mysql-op/install-uninstall-mysql-ubuntu/install-uninstall-mysql-ubuntu.md
     - JDBC（Java连接数据库技术）:
       - JDBC基础: MySQL/JDBC/JDBC-basic/JDBC-basic.md
       - JDBC进阶: MySQL/JDBC/JDBC-intermediate/JDBC-intermediate.md
       - JDBC高级: MySQL/JDBC/JDBC-advanced/JDBC-advanced.md
-    - MySQL操作:
-      - MySQL基础操作: MySQL/mysql-op/basic-op/basic-op.md
-      - （补充）Ubuntu下安装和卸载MySQL: MySQL/mysql-op/install-uninstall-mysql-ubuntu/install-uninstall-mysql-ubuntu.md
   - JavaEE应用开发:
+    - 章节目录: JavaEE/index.md
     - SpringMVC基础: JavaEE/Spring/springmvc-basic/springmvc-basic.md
   - 扩展知识: 
+    - 章节目录: other/index.md
     - 关于Shell: other/shell/shell.md
     - 关于函数栈帧（C语言演示）: other/func-stack-c/func-stack-c.md
     - 关于xml文件: other/xml/xml.md
@@ -287,6 +303,7 @@ nav:
       - Git多人协作: other/git/git-collaboration/git-collaboration.md
     - 关于Muduo库: other/muduo/muduo.md
   - 工具帮助:
+    - 章节目录: tooltips/index.md
     - vscode中添加代码片段: tooltips/vscode-snippets/vscode-snippets.md
     - Windows系统下在VMware中配置Linux环境并通过客户端进行连接: tooltips/windows-vmware-linux/windows-vmware-linux.md
     - Sunshine+Moonlight实现屏幕内容串流: tooltips/sunshine-moonlight/sunshine-moonlight.md
@@ -294,6 +311,7 @@ nav:
   - 测试加密功能:
     - 加密测试页面: test-encrypt/test-encrypt.md
   - 项目:
+    - 章节目录: projects/index.md
     - Boost库搜索引擎: projects/boost-searching-engine/boost-searching-engine.md
     - 仿Muduo库的高并发服务器: 
       - 项目介绍与准备: projects/reactor-server/intro/intro.md
@@ -428,6 +446,7 @@ plugins:
         - stylesheets/theme2.css
         - stylesheets/print.css
         - stylesheets/waline.css
+        - stylesheets/code-font-google-sans-code.css
   - glightbox:
       touchNavigation: true
       loop: false

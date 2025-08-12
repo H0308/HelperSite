@@ -10,7 +10,9 @@ search:
   <div class="indicator-header" onclick="toggleTimeView()">
     <div class="indicator-pill">
       <span id="runtime-display-short">加载中...</span>
-      <i class="indicator-icon">▼</i>
+      <svg class="indicator-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+        <path d="M512 0C794.770286 0 1024 229.229714 1024 512S794.770286 1024 512 1024 0 794.770286 0 512 229.229714 0 512 0z m259.900952 447.000381a28.623238 28.623238 0 0 0-39.984762 0l-221.476571 217.331809-218.258286-214.211047a28.623238 28.623238 0 0 0-40.033523 0 27.452952 27.452952 0 0 0 0 39.302095l238.250666 233.862095a28.623238 28.623238 0 0 0 40.033524 0l241.468952-236.982857a27.40419 27.40419 0 0 0 0-39.302095z" fill="currentColor"/>
+      </svg>
     </div>
   </div>
   <div class="time-details">
@@ -56,10 +58,10 @@ search:
     
     if (timeDetails.classList.contains('expanded')) {
       timeDetails.classList.remove('expanded');
-      icon.textContent = '▼';
+      icon.style.transform = 'rotate(0deg)';
     } else {
       timeDetails.classList.add('expanded');
-      icon.textContent = '▲';
+      icon.style.transform = 'rotate(180deg)';
     }
   }
 
@@ -144,10 +146,11 @@ search:
   
   .indicator-icon {
     margin-left: 0.5rem;
-    font-style: normal;
-    font-size: 0.7rem;
-    color: var(--md-default-fg-color--light);
-    transition: transform 0.2s ease;
+    width: 14px;
+    height: 14px;
+    color: #4A90E2;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
   }
   
   .time-details {
@@ -181,7 +184,7 @@ search:
   }
   
   .cell-value {
-    font-family: var(--md-code-font-family);
+    font-family: "MaokenZhuyuanTi";
     font-size: 1.8rem;
     font-weight: 600;
     color: rgba(77, 166, 218, 0.9);

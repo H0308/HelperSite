@@ -23,15 +23,19 @@
 
 分离式：将JavaScript代码写入一个后缀为`.js`的文件中，通过将`.js`代码引入的方式引入即可，引入时需要使用到`script`标签的属性`script:src`，例如下面的代码：
 
-```html
-<!-- HTML文件中引入 -->
-<script src="./分离式.js"></script>
-```
+=== "HTML代码"
 
-```javascript
-// 外部的JavaScript文件
-alert('外部的js文件');
-```
+    ```html
+    <!-- HTML文件中引入 -->
+    <script src="./分离式.js"></script>
+    ```
+
+=== "JavaScript代码"
+
+    ```javascript
+    // 外部的JavaScript文件
+    alert('外部的js文件');
+    ```
 
 内联式：也称行内式，直接写在标签内部，可以是在动作触发的属性值中，也可以是在链接`a:href`属性中，例如下面的代码：
 

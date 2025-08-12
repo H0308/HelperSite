@@ -37,10 +37,10 @@ hide:
                 <a href="https://www.help-doc.top/cpp/index.html">C++</a>
             </span>
             <span class="tag">
-                <a href="#">Java</a>
+                <a href="https://www.help-doc.top/Java/index.html">Java</a>
             </span>
             <span class="tag">
-                <a href="#">Python</a>
+                <a href="https://www.help-doc.top/python/index.html">Python</a>
             </span>
         </div>
     </div>
@@ -51,10 +51,10 @@ hide:
         <p>提供数据结构和算法相关的学习资料</p>
         <div class="feature-tags">
             <span class="tag">
-                <a href="#">数据结构</a>
+                <a href="https://www.help-doc.top/data-structure/index.html">数据结构</a>
             </span>
             <span class="tag">
-                <a href="#">算法</a>
+                <a href="https://www.help-doc.top/algorithm/index.html">算法</a>
             </span>
         </div>
     </div>
@@ -65,10 +65,10 @@ hide:
         <p>目前包括Linux操作系统、MySQL数据库、</p>
         <div class="feature-tags">
             <span class="tag">
-                <a href="#">Linux</a>
+                <a href="https://www.help-doc.top/Linux/index.html">Linux</a>
             </span>
             <span class="tag">
-                <a href="#">MySQL</a>
+                <a href="https://www.help-doc.top/MySQL/index.html">MySQL</a>
             </span>
         </div>
     </div>
@@ -79,16 +79,16 @@ hide:
         <p>涉及HTML与CSS、JavaScript、Vue和Qt前端技术</p>
         <div class="feature-tags">
             <span class="tag">
-                <a href="#">HTML/CSS</a>
+                <a href="https://www.help-doc.top/html-css/index.html">HTML/CSS</a>
             </span>
             <span class="tag">
-                <a href="#">JavaScript</a>
+                <a href="https://www.help-doc.top/javascript-lang/index.html">JavaScript</a>
             </span>
             <span class="tag">
-                <a href="#">Vue</a>
+                <a href="https://www.help-doc.top/vue/index.html">Vue</a>
             </span>
             <span class="tag">
-                <a href="#">Qt</a>
+                <a href="https://www.help-doc.top/qt/index.html">Qt</a>
             </span>
         </div>
     </div>
@@ -113,10 +113,10 @@ hide:
         <p>提供一些实用的工具帮助和其他有价值的资源</p>
         <div class="feature-tags">
             <span class="tag">
-                <a href="#">工具帮助</a>
+                <a href="https://www.help-doc.top/tooltips/index.html">工具帮助</a>
             </span>
             <span class="tag">
-                <a href="#">扩展知识</a>
+                <a href="https://www.help-doc.top/other/index.html">扩展知识</a>
             </span>
         </div>
     </div>

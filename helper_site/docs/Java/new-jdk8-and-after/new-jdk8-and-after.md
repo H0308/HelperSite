@@ -779,9 +779,9 @@ public class Test {
 }
 ```
 
-### `try...catch`升级
+### `try-with-resources`
 
-之前提过JDK 1.7引入了`trywith-resources`的新特性，可以实现资源的自动关闭，此时要求：
+之前提过JDK 1.7引入了`try-with-resources`的新特性，可以实现资源的自动关闭，此时要求：
 
 - 该资源必须实现`java.io.Closeable`接口
 - 在`try`子句中声明并初始化资源对象
@@ -795,7 +795,7 @@ try(IO流对象1声明和初始化;IO流对象2声明和初始化){
 }
 ```
 
-JDK1.9又对`trywith-resources`的语法升级了
+JDK1.9又对`try-with-resources`的语法升级了
 
 - 该资源必须实现`java.io.Closeable`接口
 - 在`try`子句中声明并初始化资源对象，也可以直接使用已初始化的资源对象
@@ -984,11 +984,9 @@ private static void method04() {
 
 ### 文本块
 
-预览的新特性文本块在Java 15中被最终确定下来，Java 15之后就可以放心使用该文本块了
+预览的新特性文本块
 
-### Java13文本块
-
-JDK 12引入了Raw String Literals特性，但在其发布之前就放弃了这个特性。这个JEP与引入多行字符串文字（文本块）在意义上是类似的。Java 13中引入了文本块（预览特性），这个新特性跟Kotlin中的文本块是类似的
+JDK 12引入了Raw String Literals特性，但在其发布之前就放弃了这个特性。这个JEP与引入多行字符串文字（文本块）在意义上是类似的。Java 13中引入了文本块（预览特性），在Java 15中被最终确定下来，Java 15之后就可以放心使用该文本块了。这个新特性跟Kotlin中的文本块是类似的。
 
 **现实问题**
 

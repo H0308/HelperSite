@@ -6,7 +6,7 @@
 
 在Java中，`Math`在`java.lang`包下，所以可以不引包
 
-## `Math`类常用方法
+### `Math`类常用方法
 
 1. 求绝对值：`static int abs(int a)`
 2. 向上取整：`static double ceil(double a)`
@@ -543,10 +543,8 @@ public class Test {
 
 `Period`类和`Duration`类都是计算不同日期之间的差值
 
-```
-Period`类中计算差值的方法：`static Period between(LocalDate d1,LocalDate d2)
-Duration`类中计算差值的方法：`static Duration between(Temporal startInclusive, Temporal endExclusive)
-```
+`Period`类中计算差值的方法：`static Period between(LocalDate d1,LocalDate d2)`
+`Duration`类中计算差值的方法：`static Duration between(Temporal startInclusive, Temporal endExclusive)`
 
 !!! note
     需要注意，对于`Duration`类来说，`Temporal`是`LocalDate`和`LocalDateTime`类实现的接口，所以`Duration`类计算差值的方法可以传递`LocalDate`类和`LocalDateTime`类对象，但是因为`Duration`类计算精确时间偏差,所以需要传递能操作精确时间的 `LocalDateTime`类对象

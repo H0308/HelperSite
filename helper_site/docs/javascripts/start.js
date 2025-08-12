@@ -20,6 +20,10 @@ const fontConfig = {
 
 // 代码字体配置
 const codeFontConfig = {
+    "google-sans-code": {
+        name: "Google Sans Code",
+        id: "code-font-google-sans-code"
+    },
     "dejavu": {
         name: "DejaVu Sans Mono",
         id: "code-font-dejavu-sans-mono"

@@ -487,13 +487,13 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="content-card">
                 <h2>字体说明</h2>
                 <ul>
-                    <li>导航栏标题：寒蝉团圆体</li>
+                    <li>导航栏标题：猫啃珠圆体</li>
                     <li>标题：霞鹜臻楷</li>
                     <li>
                         内容：本网站一共提供四个字体，分别是上图东观体、OPPO Sans、江城黑体和霞鹜臻楷，具体可以通过右侧边栏的字体选项进行效果查看
                     </li>
                     <li>
-                        代码：本网站一共提供两个字体，分别是Dejavu Sans Mono和JetBrains Mono，具体可以通过右侧边栏的字体选项进行效果查看
+                        代码：本网站一共提供三个字体，分别是Dejavu Sans Mono、Google Sans Code和JetBrains Mono，具体可以通过右侧边栏的字体选项进行效果查看
                     </li>
                 </ul>
             </div>

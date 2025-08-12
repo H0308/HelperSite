@@ -303,136 +303,6 @@ Person{age=20, name='王五'}=老三
 
 <img src="15. Java双列集合.assets\image2.png">
 
-## `Map`练习案例
-
-### 案例1：统计字符串每一个字符出现的次数
-
-统计字符串：`abcdsaasdhubsdiwb`中每一个字符出现的次数
-
-思路：
-
-遍历字符串依次插入`HashMap<String, Integer>`（或者`LinkedHashMap<String, Integer>`）中，这个过程中会出现两种情况：
-
-1. 字符不存在与`HashMap`中，属于第一次插入，将计数器记为1
-2. 字符存在于`HashMap`中，代表非第一次插入，将计数器加1重新插入到`HashMap`中
-
-代码实例：
-
-```java
-public class Test01 {
-    public static void main(String[] args) {
-        String str = "abcdsaasdhubsdiwb";
-        HashMap<Character, Integer> counter = new HashMap<>();
-
-        // 将字符串存入数组中，注意存入的是字符，而不是字符对应的ASCII码
-        char[] chars = str.toCharArray();
-        for (char c : chars) {
-            // 遍历HashMap，如果不存在字符就插入，存在就将value值加1
-            if (!counter.containsKey(c)) {
-                counter.put(c, 1);
-            } else {
-                counter.put(c, counter.get(c) + 1);
-            }
-        }
-
-        // 打印结果
-        Set<Character> characters = counter.keySet();
-        for (Character character : characters) {
-            System.out.println(character + "=" + counter.get(character));
-        }
-
-    }
-}
-```
-
-### 案例2：斗地主案例`HashMap`版本
-
-思路：
-
-使用`HashMap`存储每一张牌（包括值和样式），`key`存储牌的序号（从0开始），`value`存储牌面，使用前面同样的方式组合牌并存入`HashMap`中，存储过程中每存一张牌，key位置的数值加1。为了保证可以打乱牌，需要将牌面对应的序号存入一个单列容器，再调用`shuffle`方法。打乱后的牌通过序号从`HashMap`中取出，此时遍历`HashMap`通过`key`获取`value`即可
-
-其中，有些一小部分可以适当修改，例如每一个玩家的牌面按照序号排序，查看玩家牌可以通过调用一个函数完成相应的行为等
-
-!!! note
-    此处当`key`是有序数值，会出现插入顺序与存储数据相同
-
-<img src="15. Java双列集合.assets\image3.png">
-
-示例代码：
-
-```java
-public class Test_Poker02 {
-    public static void main(String[] args) {
-        // 创建花色
-        String[] color = "黑桃-红心-梅花-方块".split("-");
-        // 创建号牌
-        String[] number = "2-3-4-5-6-7-8-9-10-J-Q-K-A".split("-");
-
-        HashMap<Integer, String> count_poker = new HashMap<Integer, String>();
-
-        int key = 2;// 从2开始，保留两张牌给大王和小王
-        // 组合牌
-        for (String c : color) {
-            for (String n : number) {
-                // 插入到HashMap中
-                count_poker.put(key++, c+n);
-            }
-        }
-
-        count_poker.put(0, "大王");
-        count_poker.put(1, "小王");
-        // 创建一个ArrayList专门存牌号，便于打乱牌面
-        ArrayList<Integer> count = new ArrayList<>();
-        Set<Integer> integers = count_poker.keySet();
-        for (Integer integer : integers) {
-            count.add(integer);
-        }
-
-        // 打乱牌号，从而实现打乱牌面
-        Collections.shuffle(count);
-
-        // 创建玩家
-        ArrayList<Integer> player1 = new ArrayList<>();
-        ArrayList<Integer> player2 = new ArrayList<>();
-        ArrayList<Integer> player3 = new ArrayList<>();
-        // 创建底牌
-        ArrayList<Integer> last = new ArrayList<>();
-
-        // 发牌
-        for (int i = 0; i < count.size(); i++) {
-            if(i >= 51) {
-                last.add(count.get(i));
-            } else if(i % 3 == 0) {
-                player1.add(count.get(i));
-            } else if(i % 3 == 1) {
-                player2.add(count.get(i));
-            } else if(i % 3 == 2) {
-                player3.add(count.get(i));
-            }
-        }
-
-        // 对玩家的牌进行排序
-        Collections.sort(player1);
-        Collections.sort(player2);
-        Collections.sort(player3);
-
-        // 显示玩家牌
-        show("玩家1", player1, count_poker);
-        show("玩家2", player2, count_poker);
-        show("玩家3", player3, count_poker);
-        show("底牌", last, count_poker);
-    }
-
-    public static void show(String name, ArrayList<Integer> any, HashMap<Integer, String> poker) {
-        System.out.print(name + "：" +"[ ");
-        for (Integer i : any) {
-            System.out.print(poker.get(i)+" ");
-        }
-        System.out.println("]");
-    }
-}
-```
-
 ## 哈希表结构存储过程分析
 
 `HashMap`底层的数据结构是哈希表，但是不同的JDK版本，实现哈希表的方式有所不同：
@@ -628,7 +498,16 @@ if (p.hash == hash && ((k = p.key) == key || (key != null && key.equals(k))))
 
 首先比较哈希值，如果哈希值相同，则比较`key`对应的`value`，为了防止出现`key`为空导致的空指针问题，先判断`key`不为空，再比较`key`
 
-上面过程即「先比较哈希值，相同再比较内容」
+上面过程即「先比较哈希值（重写`hashCode`方法），相同再比较内容（重写`equals`方法）」，所以插入元素的过程如下
+
+1. 先比较哈希值，如果哈希值不一样，存入集合中
+2. 如果哈希值一样,再比较内容
+    1. 如果哈希值一样，内容不一样，直接存入集合
+    2. 如果哈希值一样，内容也一样，去重复内容，留一个存入集合
+
+所以前面之所以重写了`equals`方法的同时还需要重写`hashCode`就是为了尽可能保证内容比较和去重的可靠性
+
+总结：对于自定义类型来说，如果不需要打印对象的地址而是打印对象的内容就重写`toString`方法，而需要比较对象是否相同除了内容比较还需要进行`hashCode`比较，所以需要重写`equals`和`hashCode`方法
 
 ## `HashTable`与`Vector`
 
@@ -694,6 +573,136 @@ public class Test08 {
         for (String key : set) {
             System.out.println(properties.getProperty(key));
         }
+    }
+}
+```
+
+## `Map`练习案例
+
+### 案例1：统计字符串每一个字符出现的次数
+
+统计字符串：`abcdsaasdhubsdiwb`中每一个字符出现的次数
+
+思路：
+
+遍历字符串依次插入`HashMap<String, Integer>`（或者`LinkedHashMap<String, Integer>`）中，这个过程中会出现两种情况：
+
+1. 字符不存在与`HashMap`中，属于第一次插入，将计数器记为1
+2. 字符存在于`HashMap`中，代表非第一次插入，将计数器加1重新插入到`HashMap`中
+
+代码实例：
+
+```java
+public class Test01 {
+    public static void main(String[] args) {
+        String str = "abcdsaasdhubsdiwb";
+        HashMap<Character, Integer> counter = new HashMap<>();
+
+        // 将字符串存入数组中，注意存入的是字符，而不是字符对应的ASCII码
+        char[] chars = str.toCharArray();
+        for (char c : chars) {
+            // 遍历HashMap，如果不存在字符就插入，存在就将value值加1
+            if (!counter.containsKey(c)) {
+                counter.put(c, 1);
+            } else {
+                counter.put(c, counter.get(c) + 1);
+            }
+        }
+
+        // 打印结果
+        Set<Character> characters = counter.keySet();
+        for (Character character : characters) {
+            System.out.println(character + "=" + counter.get(character));
+        }
+
+    }
+}
+```
+
+### 案例2：斗地主案例`HashMap`版本
+
+思路：
+
+使用`HashMap`存储每一张牌（包括值和样式），`key`存储牌的序号（从0开始），`value`存储牌面，使用前面同样的方式组合牌并存入`HashMap`中，存储过程中每存一张牌，key位置的数值加1。为了保证可以打乱牌，需要将牌面对应的序号存入一个单列容器，再调用`shuffle`方法。打乱后的牌通过序号从`HashMap`中取出，此时遍历`HashMap`通过`key`获取`value`即可
+
+其中，有些一小部分可以适当修改，例如每一个玩家的牌面按照序号排序，查看玩家牌可以通过调用一个函数完成相应的行为等
+
+!!! note
+    此处当`key`是有序数值，会出现插入顺序与存储数据相同
+
+<img src="15. Java双列集合.assets\image3.png">
+
+示例代码：
+
+```java
+public class Test_Poker02 {
+    public static void main(String[] args) {
+        // 创建花色
+        String[] color = "黑桃-红心-梅花-方块".split("-");
+        // 创建号牌
+        String[] number = "2-3-4-5-6-7-8-9-10-J-Q-K-A".split("-");
+
+        HashMap<Integer, String> count_poker = new HashMap<Integer, String>();
+
+        int key = 2;// 从2开始，保留两张牌给大王和小王
+        // 组合牌
+        for (String c : color) {
+            for (String n : number) {
+                // 插入到HashMap中
+                count_poker.put(key++, c+n);
+            }
+        }
+
+        count_poker.put(0, "大王");
+        count_poker.put(1, "小王");
+        // 创建一个ArrayList专门存牌号，便于打乱牌面
+        ArrayList<Integer> count = new ArrayList<>();
+        Set<Integer> integers = count_poker.keySet();
+        for (Integer integer : integers) {
+            count.add(integer);
+        }
+
+        // 打乱牌号，从而实现打乱牌面
+        Collections.shuffle(count);
+
+        // 创建玩家
+        ArrayList<Integer> player1 = new ArrayList<>();
+        ArrayList<Integer> player2 = new ArrayList<>();
+        ArrayList<Integer> player3 = new ArrayList<>();
+        // 创建底牌
+        ArrayList<Integer> last = new ArrayList<>();
+
+        // 发牌
+        for (int i = 0; i < count.size(); i++) {
+            if(i >= 51) {
+                last.add(count.get(i));
+            } else if(i % 3 == 0) {
+                player1.add(count.get(i));
+            } else if(i % 3 == 1) {
+                player2.add(count.get(i));
+            } else if(i % 3 == 2) {
+                player3.add(count.get(i));
+            }
+        }
+
+        // 对玩家的牌进行排序
+        Collections.sort(player1);
+        Collections.sort(player2);
+        Collections.sort(player3);
+
+        // 显示玩家牌
+        show("玩家1", player1, count_poker);
+        show("玩家2", player2, count_poker);
+        show("玩家3", player3, count_poker);
+        show("底牌", last, count_poker);
+    }
+
+    public static void show(String name, ArrayList<Integer> any, HashMap<Integer, String> poker) {
+        System.out.print(name + "：" +"[ ");
+        for (Integer i : any) {
+            System.out.print(poker.get(i)+" ");
+        }
+        System.out.println("]");
     }
 }
 ```

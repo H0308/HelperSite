@@ -1265,232 +1265,6 @@ private static int hugeCapacity(int minCapacity) {
 
 如果容量小于64时，是按照`oldCapacity`的2倍方式扩容的，如果容量大于等于64，是按照`oldCapacity`的1.5倍方式扩容的。如果容量超过`MAX_ARRAY_SIZE`，按照`MAX_ARRAY_SIZE`来进行扩容
 
-## 增强`for`循环
-
-增强`for`循环对于集合来说，本质是使用到了迭代器，而对于数组来说，本质是数组的下标遍历
-
-使用格式如下：
-
-```java
-for(集合/数组元素的类型 存储元素的变量名 : 集合/数组名) {
-    // 遍历操作
-}
-```
-
-基本使用如下：
-
-```java
-public class Test07 {
-    public static void main(String[] args) {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("张三");
-        list.add("李四");
-        list.add("王五");
-        list.add("赵六");
-        for (String s : list) {
-            System.out.println(s);
-        }
-
-        System.out.println("=====================");
-
-        int[] arr = {1,2,3,4,5};
-        for (int i : arr) {
-            System.out.println(i);
-        }
-    }
-}
-```
-
-反编译查看底层：
-
-<img src="14. Java单列集合.assets\image5.png">
-
-## `Collections`集合工具类
-
-不同于`Collection`，`Collections`是一个工具类，所以其构造方法为私有方法，成员方法为静态
-
-常用方法：
-
-1. `static <T> boolean addAll(Collection<? super T> c, T... elements)`：批量向指定集合添加数据，第二个参数为一个可变参数列表，表示可以一次性添加多个元素
-2. `static void shuffle(List<?> list)`：随机打乱单列集合中的元素（每一次运行结果都不一样）
-3. `static <T> void sort(List<T> list)`：使用单列集合中的泛型实现的`Comparable`接口中的方法对集合中的数据进行排序。如果泛型对应的类没有实现`Comparable`接口，则编译报错
-4. `static <T> void sort(List<T> list, Comparator<? super T> c)`：使用自定义实现`Comparator`接口中的方法对指定集合中的数据进行排序
-
-基本使用如下：
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        ArrayList<String> strings = new ArrayList<>();
-
-        // 1. static <T> boolean addAll(Collection<? super T> c, T... elements)
-        Collections.addAll(strings,"abc","sac","bsd");
-        for (String string : strings) {
-            System.out.println(string);
-        }
-        System.out.println();
-
-        // 2. static void shuffle(List<?> list)
-        Collections.shuffle(strings);
-        for (String string : strings) {
-            System.out.println(string);
-        }
-        System.out.println();
-
-        // 3. static <T> void sort(List<T> list)
-        Collections.sort(strings); // String 实现了 Comparable接口
-        for (String string : strings) {
-            System.out.println(string);
-        }
-        System.out.println();
-
-        // 4. static <T> void sort(List<T> list, Comparator<? super T> c)
-        ArrayList<Person> people = new ArrayList<>();
-        people.add(new Person(23,"张三"));
-        people.add(new Person(12,"李四"));
-        people.add(new Person(45,"王五"));
-        Collections.sort(people, new Comparator<Person>() {
-            @Override
-            public int compare(Person o1, Person o2) {
-                return o1.getAge() - o2.getAge();
-            }
-        });
-
-        for (Person person : people) {
-            System.out.println(person);
-        }
-    }
-}
-```
-
-## 斗地主案例
-
-案例介绍：
-
-按照斗地主的规则，完成洗牌发牌的动作。 具体规则：
-
-使用54张牌打乱顺序，三个玩家参与游戏，三人交替摸牌，每人17张牌，最后三张留作底牌
-
-案例分析：
-
-- 准备牌：
-
-    牌可以设计为一个`ArrayList<String>`，每个字符串为一张牌。 每张牌由花色数字两部分组成，我们可以使用花色集合与数字集合嵌套迭代完成每张牌的组装。 牌由`Collections`类的`shuffle`方法进行随机排序。
-
-- 发牌
-
-    将每个人以及底牌设计为`ArrayList<String>`，将最后3张牌直接存放于底牌，剩余牌通过对3取模依次发牌。
-
-- 看牌
-
-    直接打印每个集合
-
-    <img src="14. Java单列集合.assets\image6.png">
-
-```java
-public class Test_Poker {
-    public static void main(String[] args) {
-        // 创建花色
-        ArrayList<String> color = new ArrayList<>();
-        Collections.addAll(color, "黑桃", "红心", "梅花", "方块");
-        // 创建号牌
-        ArrayList<String> number = new ArrayList<>();
-        Collections.addAll(number, "2", "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3");
-        // 创建牌盒
-        ArrayList<String> pokerBox = new ArrayList<>();
-        // 大小王
-        pokerBox.add("大王");
-        pokerBox.add("小王");
-        // 发牌
-        for (String s : color) {
-            for (String string : number) {
-                pokerBox.add(s + string);
-            }
-        }
-
-        // 打乱牌盒
-        Collections.shuffle(pokerBox);
-
-        // 创建玩家
-        ArrayList<String> player1 = new ArrayList<>();
-        ArrayList<String> player2 = new ArrayList<>();
-        ArrayList<String> player3 = new ArrayList<>();
-        ArrayList<String> last = new ArrayList<>();
-
-        System.out.println(pokerBox.size());
-        // 发牌，留三张底牌
-        for (int i = 0; i < pokerBox.size(); i++) {
-            if (i >= 51) {
-                last.add(pokerBox.get(i));
-            } else if (i % 3 == 0) {
-                player1.add(pokerBox.get(i));
-            } else if (i % 3 == 1) {
-                player2.add(pokerBox.get(i));
-            } else {
-                player3.add(pokerBox.get(i));
-            }
-        }
-
-        // 查看
-        System.out.println("player1: " + player1);
-        System.out.println("player2: " + player2);
-        System.out.println("player3: " + player3);
-        System.out.println("last: " + last);
-    }
-}
-```
-
-也可以使用字符分割方法对创建花色和创建号牌进行优化
-
-```java
-public class Test_Poker01 {
-    public static void main(String[] args) {
-        // 创建花色
-        String[] color = "黑桃-红心-梅花-方块".split("-");
-        // 创建号牌
-        String[] number = "2-3-4-5-6-7-8-9-10-J-Q-K-A".split("-");
-
-        // 创建牌盒
-        ArrayList<String> pokerBox = new ArrayList<>();
-        // 添加大小王
-        pokerBox.add("大王");
-        pokerBox.add("小王");
-
-        // 组合其他牌
-        for (String s : color) {
-            for (String n : number) {
-                pokerBox.add(s+n);
-            }
-        }
-
-        // 创建玩家并发牌
-        ArrayList<String> player1 = new ArrayList<>();
-        ArrayList<String> player2 = new ArrayList<>();
-        ArrayList<String> player3 = new ArrayList<>();
-        // 底牌
-        ArrayList<String> last = new ArrayList<>();
-
-        for (int i = 0; i < pokerBox.size(); i++) {
-            if(i >= 51) {
-                last.add(pokerBox.get(i));
-            } else if(i % 3 == 0) {
-                player1.add(pokerBox.get(i));
-            } else if(i % 3 == 1) {
-                player2.add(pokerBox.get(i));
-            } else {
-                player3.add(pokerBox.get(i));
-            }
-        }
-
-        // 查看
-        System.out.println("player1: " + player1);
-        System.out.println("player2: " + player2);
-        System.out.println("player3: " + player3);
-        System.out.println("last: " + last);
-    }
-}
-```
-
 ## `Set`接口
 
 `Set`接口实际上并没有对`Collection`接口进行功能上的扩充，而且所有的`Set`集合底层都是依靠`Map`实现，部分内容将在`Map`中具体介绍
@@ -1818,7 +1592,7 @@ public class Test {
 
 在上面的代码中，因为`Person`类的两个对象内容一致，并且因为`Person`类重写了`hashCode`方法，方法中是根据成员内容进行`hashCode`计算的，所以打印的`hashcode`是相同的
 
-但是，有些特殊情况，内容不同时，`hashCode`可能相同，这个现象被称为哈希冲突或哈希碰撞，例如下面的代码：
+但是，有些特殊情况，内容不同时，`hashCode`可能相同，这个现象被称为**哈希冲突（或哈希碰撞）**，例如下面的代码：
 
 ```java
 public class Test {
@@ -1875,19 +1649,229 @@ public int hashCode() {
 !!! note
     计算`hashCode`时，之所以使用31可以简单理解为31是一个质数，31这个数通过大量的计算和统计，认为用31，可以尽量降低内容不一样但是哈希值一样的情况
 
-## `HashSet`去重的方式
+## 增强`for`循环
 
-!!! note
-    本部分简单介绍，在`Map`部分会进行详细介绍
+增强`for`循环对于集合来说，本质是使用到了迭代器，而对于数组来说，本质是数组的下标遍历
 
-1. 先计算元素的哈希值（重写`hashCode`方法），再比较内容（重写`equals`方法）
-2. 先比较哈希值，如果哈希值不一样，存入集合中
-3. 如果哈希值一样,再比较内容
-    1. 如果哈希值一样，内容不一样，直接存入集合
-    2. 如果哈希值一样，内容也一样，去重复内容，留一个存入集合
+使用格式如下：
 
-所以前面之所以重写了`equals`方法的同时还需要重写`hashCode`就是为了尽可能保证内容比较和去重的可靠性
+```java
+for(集合/数组元素的类型 存储元素的变量名 : 集合/数组名) {
+    // 遍历操作
+}
+```
 
-总结：
+基本使用如下：
 
-对于自定义类型来说，如果不需要打印对象的地址而是打印对象的内容就重写`toString`方法，而需要比较对象是否相同除了内容比较还需要进行`hashCode`比较，所以需要重写`equals`和`hashCode`方法
+```java
+public class Test07 {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("张三");
+        list.add("李四");
+        list.add("王五");
+        list.add("赵六");
+        for (String s : list) {
+            System.out.println(s);
+        }
+
+        System.out.println("=====================");
+
+        int[] arr = {1,2,3,4,5};
+        for (int i : arr) {
+            System.out.println(i);
+        }
+    }
+}
+```
+
+反编译查看底层：
+
+<img src="14. Java单列集合.assets\image5.png">
+
+## `Collections`集合工具类
+
+不同于`Collection`，`Collections`是一个工具类，所以其构造方法为私有方法，成员方法为静态
+
+常用方法：
+
+1. `static <T> boolean addAll(Collection<? super T> c, T... elements)`：批量向指定集合添加数据，第二个参数为一个可变参数列表，表示可以一次性添加多个元素
+2. `static void shuffle(List<?> list)`：随机打乱单列集合中的元素（每一次运行结果都不一样）
+3. `static <T> void sort(List<T> list)`：使用单列集合中的泛型实现的`Comparable`接口中的方法对集合中的数据进行排序。如果泛型对应的类没有实现`Comparable`接口，则编译报错
+4. `static <T> void sort(List<T> list, Comparator<? super T> c)`：使用自定义实现`Comparator`接口中的方法对指定集合中的数据进行排序
+
+基本使用如下：
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        ArrayList<String> strings = new ArrayList<>();
+
+        // 1. static <T> boolean addAll(Collection<? super T> c, T... elements)
+        Collections.addAll(strings,"abc","sac","bsd");
+        for (String string : strings) {
+            System.out.println(string);
+        }
+        System.out.println();
+
+        // 2. static void shuffle(List<?> list)
+        Collections.shuffle(strings);
+        for (String string : strings) {
+            System.out.println(string);
+        }
+        System.out.println();
+
+        // 3. static <T> void sort(List<T> list)
+        Collections.sort(strings); // String 实现了 Comparable接口
+        for (String string : strings) {
+            System.out.println(string);
+        }
+        System.out.println();
+
+        // 4. static <T> void sort(List<T> list, Comparator<? super T> c)
+        ArrayList<Person> people = new ArrayList<>();
+        people.add(new Person(23,"张三"));
+        people.add(new Person(12,"李四"));
+        people.add(new Person(45,"王五"));
+        Collections.sort(people, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.getAge() - o2.getAge();
+            }
+        });
+
+        for (Person person : people) {
+            System.out.println(person);
+        }
+    }
+}
+```
+
+## 斗地主案例
+
+案例介绍：
+
+按照斗地主的规则，完成洗牌发牌的动作。 具体规则：
+
+使用54张牌打乱顺序，三个玩家参与游戏，三人交替摸牌，每人17张牌，最后三张留作底牌
+
+案例分析：
+
+- 准备牌：
+
+    牌可以设计为一个`ArrayList<String>`，每个字符串为一张牌。 每张牌由花色数字两部分组成，我们可以使用花色集合与数字集合嵌套迭代完成每张牌的组装。 牌由`Collections`类的`shuffle`方法进行随机排序。
+
+- 发牌
+
+    将每个人以及底牌设计为`ArrayList<String>`，将最后3张牌直接存放于底牌，剩余牌通过对3取模依次发牌。
+
+- 看牌
+
+    直接打印每个集合
+
+    <img src="14. Java单列集合.assets\image6.png">
+
+```java
+public class Test_Poker {
+    public static void main(String[] args) {
+        // 创建花色
+        ArrayList<String> color = new ArrayList<>();
+        Collections.addAll(color, "黑桃", "红心", "梅花", "方块");
+        // 创建号牌
+        ArrayList<String> number = new ArrayList<>();
+        Collections.addAll(number, "2", "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3");
+        // 创建牌盒
+        ArrayList<String> pokerBox = new ArrayList<>();
+        // 大小王
+        pokerBox.add("大王");
+        pokerBox.add("小王");
+        // 发牌
+        for (String s : color) {
+            for (String string : number) {
+                pokerBox.add(s + string);
+            }
+        }
+
+        // 打乱牌盒
+        Collections.shuffle(pokerBox);
+
+        // 创建玩家
+        ArrayList<String> player1 = new ArrayList<>();
+        ArrayList<String> player2 = new ArrayList<>();
+        ArrayList<String> player3 = new ArrayList<>();
+        ArrayList<String> last = new ArrayList<>();
+
+        System.out.println(pokerBox.size());
+        // 发牌，留三张底牌
+        for (int i = 0; i < pokerBox.size(); i++) {
+            if (i >= 51) {
+                last.add(pokerBox.get(i));
+            } else if (i % 3 == 0) {
+                player1.add(pokerBox.get(i));
+            } else if (i % 3 == 1) {
+                player2.add(pokerBox.get(i));
+            } else {
+                player3.add(pokerBox.get(i));
+            }
+        }
+
+        // 查看
+        System.out.println("player1: " + player1);
+        System.out.println("player2: " + player2);
+        System.out.println("player3: " + player3);
+        System.out.println("last: " + last);
+    }
+}
+```
+
+也可以使用字符分割方法对创建花色和创建号牌进行优化
+
+```java
+public class Test_Poker01 {
+    public static void main(String[] args) {
+        // 创建花色
+        String[] color = "黑桃-红心-梅花-方块".split("-");
+        // 创建号牌
+        String[] number = "2-3-4-5-6-7-8-9-10-J-Q-K-A".split("-");
+
+        // 创建牌盒
+        ArrayList<String> pokerBox = new ArrayList<>();
+        // 添加大小王
+        pokerBox.add("大王");
+        pokerBox.add("小王");
+
+        // 组合其他牌
+        for (String s : color) {
+            for (String n : number) {
+                pokerBox.add(s+n);
+            }
+        }
+
+        // 创建玩家并发牌
+        ArrayList<String> player1 = new ArrayList<>();
+        ArrayList<String> player2 = new ArrayList<>();
+        ArrayList<String> player3 = new ArrayList<>();
+        // 底牌
+        ArrayList<String> last = new ArrayList<>();
+
+        for (int i = 0; i < pokerBox.size(); i++) {
+            if(i >= 51) {
+                last.add(pokerBox.get(i));
+            } else if(i % 3 == 0) {
+                player1.add(pokerBox.get(i));
+            } else if(i % 3 == 1) {
+                player2.add(pokerBox.get(i));
+            } else {
+                player3.add(pokerBox.get(i));
+            }
+        }
+
+        // 查看
+        System.out.println("player1: " + player1);
+        System.out.println("player2: " + player2);
+        System.out.println("player3: " + player3);
+        System.out.println("last: " + last);
+    }
+}
+```
+

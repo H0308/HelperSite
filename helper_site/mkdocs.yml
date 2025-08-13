@@ -256,6 +256,7 @@ nav:
     - JavaScript:
       - 章节目录: javascript-lang/index.md
       - JavaScript语法基础:
+        - 章节目录: javascript-lang/lang-basic/index.md
         - JavaScript基本语法: javascript-lang/js-basic/js-basic.md
         - JavaScript对象基础: javascript-lang/js-obj-basic/js-obj-basic.md
         - JavaScript函数: javascript-lang/js-function/js-function.md
@@ -263,6 +264,7 @@ nav:
         - JavaScript数组: javascript-lang/js-array/js-array.md
         - JavaScript内建对象: javascript-lang/js-built-in-object/js-built-in-object.md
       - JavaScript与DOM和BOM操作:
+        - 章节目录: javascript-lang/dom-bom/index.md
         - DOM和BOM介绍: javascript-lang/dom-bom/dom-bom.md
         - DOM操作: javascript-lang/dom/dom.md
         - BOM操作: javascript-lang/bom/bom.md
@@ -282,9 +284,11 @@ nav:
   - MySQL:
     - 章节目录: MySQL/index.md
     - MySQL操作:
+      - 章节目录: MySQL/mysql-op/index.md
       - MySQL基础操作: MySQL/mysql-op/basic-op/basic-op.md
-      - （补充）Ubuntu下安装和卸载MySQL: MySQL/mysql-op/install-uninstall-mysql-ubuntu/install-uninstall-mysql-ubuntu.md
+      - Ubuntu下安装和卸载MySQL: MySQL/mysql-op/install-uninstall-mysql-ubuntu/install-uninstall-mysql-ubuntu.md
     - JDBC（Java连接数据库技术）:
+      - 章节目录: MySQL/JDBC/index.md
       - JDBC基础: MySQL/JDBC/JDBC-basic/JDBC-basic.md
       - JDBC进阶: MySQL/JDBC/JDBC-intermediate/JDBC-intermediate.md
       - JDBC高级: MySQL/JDBC/JDBC-advanced/JDBC-advanced.md

@@ -1033,4 +1033,4 @@ struct pollfd
 
 ## `poll`的缺陷
 
-虽然`epoll`的确解决了`select`存在的问题，但是`epoll`底层还是需要大量的遍历，例如遍历`struct pollfd`数组
+虽然`poll`的确解决了`select`存在的问题，但是`poll`底层还是需要大量的遍历，例如遍历`struct pollfd`数组

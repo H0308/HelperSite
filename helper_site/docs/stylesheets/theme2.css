@@ -746,8 +746,8 @@ li::marker {
     border-top: 5px solid var(--overlay-dark);
 }
 
-:not(pre) > code {
-    color: var(--text-orange) !important;
+.md-typeset code, .md-typeset kbd, .md-typeset pre {
+    color: var(--text-orange);
     font-weight: normal;
 }
 
@@ -760,6 +760,14 @@ li::marker {
 .md-typeset details {
     border-width: 0;
     border-left-width: 4px;
+}
+
+.md-typeset .admonition-title, .md-typeset summary {
+    font-family: "MaokenZhuyuanTi";
+}
+
+.md-typeset .admonition p {
+    font-size: .75rem;
 }
 
 h1,
@@ -839,6 +847,10 @@ html {
 
 strong {
     color: var(--text-purple);
+}
+
+.md-typeset strong > code, .md-typeset kbd, .md-typeset pre  {
+    font-weight: bold;
 }
 
 a[href^="#"],

@@ -9,11 +9,11 @@
 .md-typeset table:not([class]) tr:nth-child(2n) {
     background-color: var(--bg-table-row);
 }
-.md-content a:not(.headerlink):not(.glightbox) {
+.md-content a:not(.headerlink):not(.glightbox):not(.tabbed-labels):not(.wl-login-nick) {
     position: relative;
     text-decoration: none;
 }
-.md-content a:not(.headerlink):not(.glightbox):not(.tabbed-labels):after {
+.md-content a:not(.headerlink):not(.glightbox):not(.tabbed-labels):not(.wl-login-nick):after {
     content: "";
     position: absolute;
     width: 0;
@@ -27,7 +27,7 @@
 .md-content .tabbed-labels a::after {
     content: none !important;
 }
-.md-content a:not(.headerlink):not(.glightbox):hover::after {
+.md-content a:not(.headerlink):not(.glightbox):not(.tabbed-labels):not(.wl-login-nick):hover::after {
     width: 100%;
 }
 .md-header {

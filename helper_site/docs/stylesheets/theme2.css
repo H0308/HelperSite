@@ -752,6 +752,10 @@ a code {
     font-weight: normal;
 }
 
+.md-typeset .md-code__content {
+    color: var(--md-code-fg-color) !important;
+}
+
 .highlight .c1,
 .highlight .cm {
     color: var(--text-gray);

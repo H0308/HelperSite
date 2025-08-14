@@ -746,7 +746,9 @@ li::marker {
     border-top: 5px solid var(--overlay-dark);
 }
 
-.md-typeset code, .md-typeset pre {
+.md-typeset code,
+.md-typeset pre,
+.md-typeset a code {
     color: var(--text-orange);
     font-weight: normal;
 }
@@ -763,7 +765,7 @@ li::marker {
 }
 
 .md-typeset .admonition p {
-    font-size: .75rem;
+    font-size: 0.75rem;
 }
 
 h1,
@@ -845,7 +847,7 @@ strong {
     color: var(--text-purple);
 }
 
-.md-typeset strong > code, .md-typeset pre  {
+.md-typeset strong > code {
     font-weight: bold;
 }
 

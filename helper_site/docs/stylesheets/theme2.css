@@ -762,10 +762,6 @@ li::marker {
     border-left-width: 4px;
 }
 
-.md-typeset .admonition-title, .md-typeset summary {
-    font-family: "MaokenZhuyuanTi";
-}
-
 .md-typeset .admonition p {
     font-size: .75rem;
 }

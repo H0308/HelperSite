@@ -386,6 +386,179 @@ h1 + div > p {
     font-weight: 500;
 }
 
+/* 历史记录功能样式 */
+.history-viewer {
+    position: relative;
+}
+
+.history-dropdown-toolbar {
+    position: absolute;
+    right: 100%;
+    top: 0;
+    margin-right: 8px;
+    min-width: 280px;
+    max-width: 350px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    background: var(--bg-white);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--shadow-strong);
+}
+
+.history-viewer:hover .history-dropdown-toolbar,
+.history-dropdown-toolbar.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.history-header-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-light);
+    border-radius: 8px 8px 0 0;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.history-clear-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.history-clear-btn:hover {
+    background: var(--bg-danger-light);
+    color: var(--text-danger);
+}
+
+.history-clear-btn svg {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+}
+
+.history-list-toolbar {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 8px 0;
+}
+
+.history-empty-toolbar {
+    padding: 20px 16px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.history-item-toolbar {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.history-item-toolbar:last-child {
+    border-bottom: none;
+}
+
+.history-item-toolbar:hover {
+    background: var(--primary-blue-light);
+}
+
+.history-content {
+    flex: 1;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+.history-delete {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    margin-left: 8px;
+    border-radius: 3px;
+    -webkit-tap-highlight-color: rgba(231, 76, 60, 0.2);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+.history-delete:hover {
+    opacity: 1;
+    color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.history-delete svg {
+    width: 12px;
+    height: 12px;
+}
+
+.history-title-toolbar {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    line-height: 1.4;
+    word-break: break-word;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+}
+
+.history-time-toolbar {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+}
+
+.history-last-visit {
+    font-size: 10px;
+    color: var(--primary-blue);
+    margin-bottom: 2px;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.history-url-toolbar {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-family: var(--md-code-font);
+    word-break: break-all;
+    line-height: 1.3;
+}
+
 /* 独立的切换按钮样式 */
 .toolbar-toggle-btn {
     position: fixed;
@@ -516,6 +689,31 @@ h1 + div > p {
     .font-current-toolbar {
         padding: 6px 10px;
         font-size: 12px;
+    }
+
+    /* 移动端历史记录优化 */
+    .history-item-toolbar {
+        padding: 16px;
+        min-height: 60px;
+    }
+
+    .history-content {
+        min-height: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .history-delete {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .history-delete svg {
+        width: 16px;
+        height: 16px;
     }
 }
 

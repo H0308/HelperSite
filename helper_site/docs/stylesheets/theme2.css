@@ -747,9 +747,8 @@ li::marker {
 }
 
 .md-typeset code,
-.md-typeset pre,
-.md-typeset a code {
-    color: var(--text-orange);
+a code {
+    color: var(--text-orange) !important;
     font-weight: normal;
 }
 

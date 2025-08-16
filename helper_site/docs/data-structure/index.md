@@ -8,7 +8,7 @@
 2. [链表](https://www.help-doc.top/data-structure/linked-list/linked-list.html)：例如[C++中的`list`](https://www.help-doc.top/cpp/list/list.html)和[Java中的`LinkedList`](https://www.help-doc.top/Java/collection/collection.html#linkedlist)
 3. [栈](https://www.help-doc.top/data-structure/stack/stack.html)：例如[C++中的`stack`](https://www.help-doc.top/cpp/stack/stack.html)和[Java中的`Stack`](https://www.help-doc.top/Java/collection/collection.html#stack)
 4. [队列](https://www.help-doc.top/data-structure/queue/queue.html)：例如[C++中的`queue`](https://www.help-doc.top/cpp/queue-priority-queue/queue-priority-queue.html)和[Java中基于`LinkedList`实现的队列](https://www.help-doc.top/Java/collection/collection.html#linkedlist_3)
-5. [二叉树的基本概念](https://www.help-doc.top/data-structure/tree/tree.html)和[二叉树的基础实现](https://www.help-doc.top/data-structure/binary-tree/binary-tree.html)：介绍了二叉树的相关概念和代码实现
+5. [树基础与二叉树的实现](https://www.help-doc.top/data-structure/binary-tree/binary-tree.html)：介绍了树的相关概念和二叉树的代码实现
 6. [堆](https://www.help-doc.top/data-structure/heap/heap.html)：例如[C++中的`priority_queue`](https://www.help-doc.top/cpp/queue-priority-queue/queue-priority-queue.html)和[Java中的`PriorityQueue`](https://www.help-doc.top/Java/collection/collection.html#priorityqueue)
 7. [二叉搜索树](https://www.help-doc.top/data-structure/binary-search-tree/binary-search-tree.html)：介绍了二叉搜索树的概念、基本实现以及实际使用场景
 8. [AVL树](https://www.help-doc.top/data-structure/avl-tree/avl-tree.html)：介绍了AVL树的特点和基本实现

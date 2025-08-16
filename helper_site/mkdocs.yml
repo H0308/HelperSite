@@ -125,16 +125,15 @@ nav:
       - 链表: data-structure/linked-list/linked-list.md
       - 栈: data-structure/stack/stack.md
       - 队列: data-structure/queue/queue.md
-      - 树的基本概念: data-structure/tree-basic-concept/tree-basic-concept.md
-      - 二叉树的基础实现: data-structure/binary-tree/binary-tree.md
+      - 树基础与二叉树的实现: data-structure/binary-tree/binary-tree.md
       - 堆: data-structure/heap/heap.md
-      - 排序: data-structure/sort/sort.md
       - 二叉搜索树: data-structure/binary-search-tree/binary-search-tree.md
       - AVL树: data-structure/avl-tree/avl-tree.md
       - 红黑树: data-structure/red-black-tree/red-black-tree.md
       - 哈希表: data-structure/hash-table/hash-table.md
       - 位图: data-structure/bitset/bitset.md
       - 布隆过滤器与海量数据处理: data-structure/bloom-filter/bloom-filter.md
+      - 排序: data-structure/sort/sort.md
     - 算法:
       - 章节目录: algorithm/index.md
       - 算法比赛常用内容: algorithm/common/common.md

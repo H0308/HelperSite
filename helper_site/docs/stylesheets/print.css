@@ -38,9 +38,8 @@
     .floating-toolbar,
     .header-avatar,
     .avatar-dropdown,
-    .reading-progress,
-    .scroll-indicator,
-    .theme-transition-overlay {
+    .theme-transition-overlay,
+    #waline {
         display: none !important;
     }
 

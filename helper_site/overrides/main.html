@@ -49,17 +49,15 @@
         </form>
         {% endif %}
         {% endif %}
-
-        <!-- 头像元素 - 直接在HTML中定义 -->
         <div class="header-avatar">
             <img src="{{ base_url }}/author/作者.assets/20250206-200653.jpg" alt="头像">
             <div class="avatar-dropdown">
                 <p><strong>柯懒不是柯南</strong></p>
-                <a href="{{ base_url }}/author/contact/contact.html" class="avatar-dropdown-item">吵醒柯懒</a>
+                <a href="{{ base_url }}/author/contact/contact.html" class="avatar-dropdown-item">联系作者</a>
                 <div class="avatar-dropdown-divider"></div>
-                <a href="{{ base_url }}/author/about/about.html" class="avatar-dropdown-item">柯懒自传</a>
+                <a href="{{ base_url }}/author/about/about.html" class="avatar-dropdown-item">关于作者</a>
                 <div class="avatar-dropdown-divider"></div>
-                <a href="https://github.com/H0308" class="avatar-dropdown-item">柯懒的零食库</a>
+                <a href="https://github.com/H0308" class="avatar-dropdown-item">Github仓库</a>
             </div>
         </div>
 
@@ -99,8 +97,6 @@
         </div>
     </nav>
 </header>
-
-<!-- 独立的切换按钮 -->
 <div class="toolbar-toggle-btn" id="toolbarToggleBtn" onclick="toggleToolbar()">
     <div class="toggle-icon">
         <svg class="toggle-arrow-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -111,10 +107,7 @@
         </svg>
     </div>
 </div>
-
-<!-- 右侧固定功能条 - 独立于内容区 -->
 <div class="floating-toolbar" id="floatingToolbar">
-    <!-- 字体切换功能 -->
     <div class="toolbar-item font-switcher">
         <div class="toolbar-icon">
             <svg class="font-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="20"
@@ -146,8 +139,6 @@
             </div>
         </div>
     </div>
-
-    <!-- 代码字体切换功能 -->
     <div class="toolbar-item code-font-switcher">
         <div class="toolbar-icon">
             <svg t="1753672111433" class="icon code-font-icon" viewBox="0 0 1024 1024" version="1.1"
@@ -179,8 +170,6 @@
             </div>
         </div>
     </div>
-
-    <!-- 主题切换功能 -->
     <div class="toolbar-item theme-switcher" onclick="switchTheme()">
         <div class="toolbar-icon">
             <svg class="theme-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="20"
@@ -192,8 +181,6 @@
         </div>
         <div class="toolbar-label">主题切换</div>
     </div>
-
-    <!-- 返回顶部功能 -->
     <div class="toolbar-item back-to-top" onclick="scrollToTop()">
         <div class="toolbar-icon">
             <svg class="back-to-top-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
@@ -210,10 +197,6 @@
 
 {% block content %}
 {{ super() }}
-<!-- 阅读进度条 - 直接在HTML中定义 -->
-<div class="reading-progress"></div>
-<!-- 滚动指示器 - 直接在HTML中定义 -->
-<div class="scroll-indicator"></div>
 
 <!-- 评论系统 -->
 {% include "partials/comments.html" %}

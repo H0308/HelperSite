@@ -555,23 +555,6 @@ h1 + div > p {
     }
 }
 
-.md-content > * {
-    animation: flyIn 0.3s ease-out forwards;
-    opacity: 0;
-}
-
-@keyframes flyIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 li::marker {
     color: var(--primary-blue-semi);
 }
@@ -718,31 +701,15 @@ body {
     display: flex;
     align-items: center;
 }
-
 ::selection {
     background: var(--primary-blue-strong);
 }
-
-html {
-    scroll-behavior: smooth !important;
-    /* 强制启用平滑滚动 */
-    scroll-padding-top: 53px;
-    /* 设置滚动偏移量,避免标题被导航栏遮挡 */
-}
-
 strong {
     color: var(--text-purple);
 }
-
 .md-typeset strong > code {
     font-weight: bold;
 }
-
-a[href^="#"],
-a[href*="/#"] {
-    scroll-behavior: smooth !important;
-}
-
 .custom-tooltip {
     position: relative;
     display: inline-block;
@@ -1422,10 +1389,6 @@ a[href*="/#"] {
 /* Comment.Special */
 .highlight .gd {
     color: var(--code-string) !important;
-}
-
-/* Generic.Deleted */
-.highlight .ge {
 }
 
 /* Generic.Emph */

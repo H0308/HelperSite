@@ -144,6 +144,13 @@
 .wl-sort li.active {
     color: var(--primary-blue);
 }
+.wl-editor {
+    font-family: var(--md-text-font);
+}
+.wl-preview h4 {
+    font-family: var(--md-text-font);
+    font-size: 0.85rem;
+}
 /* 响应式设计 */
 @media screen and (max-width: 768px) {
     .wl-editor {

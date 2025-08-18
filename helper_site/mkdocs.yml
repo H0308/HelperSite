@@ -285,6 +285,7 @@ nav:
     - MySQL操作:
       - 章节目录: MySQL/mysql-op/index.md
       - MySQL基础操作: MySQL/mysql-op/basic-op/basic-op.md
+      - MySQL索引与事务: MySQL/mysql-op/index-routine/index-routine.md
       - Ubuntu下安装和卸载MySQL: MySQL/mysql-op/install-uninstall-mysql-ubuntu/install-uninstall-mysql-ubuntu.md
     - JDBC（Java连接数据库技术）:
       - 章节目录: MySQL/JDBC/index.md

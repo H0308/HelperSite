@@ -555,93 +555,9 @@ h1 + div > p {
     }
 }
 
-.md-content article > *:not(.md-top):not(.md-nav) {
-    animation: flyIn 0.6s ease-out forwards;
+.md-content > * {
+    animation: flyIn 0.3s ease-out forwards;
     opacity: 0;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(1) {
-    animation-delay: 0.1s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(2) {
-    animation-delay: 0.15s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(3) {
-    animation-delay: 0.2s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(4) {
-    animation-delay: 0.25s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(5) {
-    animation-delay: 0.3s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(6) {
-    animation-delay: 0.35s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(7) {
-    animation-delay: 0.4s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(8) {
-    animation-delay: 0.45s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(9) {
-    animation-delay: 0.5s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(10) {
-    animation-delay: 0.55s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(11) {
-    animation-delay: 0.6s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(12) {
-    animation-delay: 0.65s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(13) {
-    animation-delay: 0.7s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(14) {
-    animation-delay: 0.75s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(15) {
-    animation-delay: 0.8s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(16) {
-    animation-delay: 0.85s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(17) {
-    animation-delay: 0.9s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(18) {
-    animation-delay: 0.95s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(19) {
-    animation-delay: 1s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(20) {
-    animation-delay: 1.05s;
-}
-
-.md-content article > *:not(.md-top):not(.md-nav):nth-child(n + 21) {
-    animation-delay: 1.1s;
 }
 
 @keyframes flyIn {
@@ -654,38 +570,6 @@ h1 + div > p {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .md-content article > *:not(.md-top):not(.md-nav) {
-        animation: none !important;
-        opacity: 1 !important;
-        transform: none !important;
-    }
-}
-
-/* 添加超时后强制显示内容 */
-.md-content article > *:not(.md-top):not(.md-nav) {
-    animation: flyIn 0.6s ease-out forwards;
-    opacity: 0;
-    /* 添加延迟后的备用显示 */
-    animation-fill-mode: both;
-}
-
-/* 确保在3秒后强制显示所有内容 */
-.md-content {
-    animation: ensureVisible 0.1s ease-out 3s forwards;
-}
-
-@keyframes ensureVisible {
-    to {
-        --force-visible: 1;
-    }
-}
-
-.md-content[style*="--force-visible"] article > *:not(.md-top):not(.md-nav) {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
 }
 
 li::marker {

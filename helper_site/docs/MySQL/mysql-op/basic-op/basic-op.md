@@ -269,6 +269,17 @@ insert into student values
 
     如果要插入多条数据，建议使用插入多行的方式而不是写多个单行的插入，减少硬盘IO的次数
 
+除了上述的插入方式以外，还可以插入一个查询结果，基本语法如下：
+
+```sql
+-- 不指定列
+insert into 表名 select 查询语句;
+-- 指定列
+insert into 表名 (列名1, 列名2, ...) select 查询语句;
+```
+
+这种插入方式必须保证查询出的表的列对应要插入的表的列，包括列的数量、列的类型以及列的顺序。关于查询语句的编写，见下面的查询部分
+
 ## 表中查询数据
 
 基本语法如下：
@@ -660,4 +671,673 @@ delete from 表名;
 ```sql
 -- 删除id为7的同学的数据
 delete from exam_result where id = 7;
+```
+
+## 表的约束
+
+数据库表的约束类型有下面几种：
+
+1. `not null`：表示指定列不能存储`null`值
+2. `unique`：表示指定列的值必须保证唯一，不能出现重复
+3. `default`：表示指定列的默认值
+4. `primary key`：表示主键，是`not null`与`unique`的结合体。确保某列（或两个列多个列的结合）有唯一标识，有助于更容易更快速地找到表中的一个特定的记录。经常结合`auto_increment`使用，该字段表示自动增长，默认情况下使用当前列最大值+1。如果删除最大值，后续依旧以最大值进行自动增长。启动自动增长也可以手动存储值
+5. `foreigh key`：表示外键，保证一张表中的数据必须确保在另外一张表中存在
+6. `check`：保证列中的值复合指定的条件。但是，对于MySQL来说，会对`check`进行分析，但是插入数据时并不会考虑`check`条件
+
+对于上面每一种约束类型，基本使用如下：
+
+=== "`not null`"
+
+    ```sql
+    create table test_null(
+        id int not null -- id列不能为空
+    );
+    ```
+
+=== "`unique`"
+
+    ```sql
+    create table test_unique(
+        id int unique -- id列必须保证值唯一
+    );
+    ```
+
+=== "`default`"
+
+    ```sql
+    create table test_default(
+        id int default 10
+    );
+    ```
+
+=== "`primary key`"
+
+    ```sql
+    create table test_primary_key(
+        id int primary key auto_increment
+    );
+    ```
+
+=== "`foreign key`"
+
+    ```sql
+    -- 班级表和学生表，学生表中的班级编号需要保证一定存在于班级表
+    -- 班级表
+    create table class(
+        id int primary key auto_increment comment '班级编号',
+        name varchar(20) not null comment '班级名称'
+    );
+
+    -- 学生表
+    create table student(
+        id int primary key auto_increment comment '学生编号',
+        name varchar(20) not null comment '学生姓名',
+        class_id int comment '班级编号',
+        foreign key (class_id) references class(id)
+        -- foreign key后面紧跟当前表中的字段，references后紧跟其他表名+列名
+    );
+    ```
+
+=== "`check`"
+
+    ```sql
+    -- MySQL中忽略check约束，此处了解即可
+    create table test_check(
+        id int,
+        check ( id > 0 and id < 100 )
+    );
+    ```
+
+在上面的几种约束中，需要注意下面几个问题：
+
+1. 在数据库中，一张表只能有一个主键列
+2. 使用外键约束时需要注意，`references`后面指定的列必须有主键约束或者`unique`约束，因为需要构建索引加快查询速度
+
+## 表的关系
+
+在关系型数据库中，表与表之间存在着三种关系：
+
+1. 一对一关系：表示一个字段能够唯一查询到另外一个字段，反之亦然。例如人与身份证号码
+2. 一对多关系：表示一个字段能够查询到多个字段，这些多个字段拥有共同的一个字段。例如学生和班级编号
+3. 多对多关系：一张表中的一条记录可以对应另一张表中的多条记录，另一张表中的一条记录也可以对应第一张表中的多条记录。例如学生与课程
+
+在数据库中，表示以上三种关系的常见方式可以有：
+
+1. 一对一关系：使用两张表。例如，对于人与身份证号码可以用一张表存储人的姓名，另一张表存储身份证号码
+2. 一对多关系：使用两张表并结合外键约束。例如，学生和班级编号，一张学生表和一张班级表，学生表中的班级字段通过外键约束关联到班级表
+3. 多对多关系：使用第三张表表示关系。例如，学生与课程，一张学生表和一张课程表，再建立一张学生与课程的关系表
+
+## 聚合函数
+
+在MySQL中，常见的聚合函数如下表：
+
+| 函数                     | 说明                                       |
+| ------------------------ | ------------------------------------------ |
+| `count([distinct] expr)` | 返回查询到的数据的数量                     |
+| `sum([distinct] expr)`   | 返回查询到的数据的总和，不是数字或者无法转换为数字没有意义   |
+| `avg([distinct] expr)`   | 返回查询到的数据的平均值，不是数字或者无法转换为数字没有意义 |
+| `max([distinct] expr)`   | 返回查询到的数据的最大值，不是数字或者无法转换为数字没有意义 |
+| `min([distinct] expr)`   | 返回查询到的数据的最小值，不是数字或者无法转换为数字没有意义 |
+
+其中，`[distinct]`表示可以使用`distinct`关键字进行去重
+
+例如，统计班上学生的数量：
+
+```sql
+select count(*) as number from exam_result;
+-- count(*)等价于count(0)
+```
+
+需要注意的是，如果指定的列存在`null`，那么`null`所在的行会被忽略
+
+例如，向`exam_result`中插入一条数据如下：
+
+```sql
+insert into exam_result values(null, '宋江', 90, 80, 90);
+```
+
+接着使用下面的SQL语句进行统计：
+
+```sql
+-- id列存在null值，插入后总行数为8，但是第8行id为null，所以结果为7
+select count(id) as number from exam_result;
+```
+
+## 分组查询
+
+基本语法如下：
+
+```sql
+select 分组依据列名, 聚合函数(其他列名), 聚合函数(其他列名), ... from 表名 group by 分组依据列名;
+```
+
+以下面的表为例：
+
+```
++--------+---------------+------+-----+---------+----------------+
+| Field  | Type          | Null | Key | Default | Extra          |
++--------+---------------+------+-----+---------+----------------+
+| id     | int           | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(20)   | NO   |     | NULL    |                |
+| role   | varchar(20)   | NO   |     | NULL    |                |
+| salary | decimal(11,2) | YES  |     | NULL    |                |
++--------+---------------+------+-----+---------+----------------+
+```
+
+插入以下数据：
+
+```sql
+insert into emp(name, role, salary) values
+('马云','服务员', 1000.20),
+('马化腾','游戏陪玩', 2000.99),
+('孙悟空','游戏角色', 999.11),
+('猪无能','游戏角色', 333.5),
+('沙和尚','游戏角色', 700.33),
+('隔壁老王','董事长', 12000.66);
+```
+
+现在要求查询出每一种角色的最高工资、最低工资和平均工资。根据这个要求可以得到「分组依据列」为角色，「其他列」都是`salary`，并且需要用到`max`、`min`和`avg`聚合函数，所以可以得到SQL语句为：
+
+```sql
+select role, max(salary), min(salary), avg(salary) from emp group by role;
+```
+
+得到的结果如下：
+
+```
++----------+-------------+-------------+--------------+
+| role     | max(salary) | min(salary) | avg(salary)  |
++----------+-------------+-------------+--------------+
+| 服务员   |     1000.20 |     1000.20 |  1000.200000 |
+| 游戏陪玩 |     2000.99 |     2000.99 |  2000.990000 |
+| 游戏角色 |      999.11 |      333.50 |   677.646667 |
+| 董事长   |    12000.66 |    12000.66 | 12000.660000 |
++----------+-------------+-------------+--------------+
+```
+
+如果需要对**分组的结果**进行进一步筛选，此时就需要用到`having`而不是之前的`where`，例如找出平均工资小于1500的角色和平均工资就可以写为：
+
+```sql
+-- 在having中可以使用别名
+select role, avg(salary) as average from emp group by role having average < 1500;
+```
+
+得到的结果如下：
+
+```
++----------+-------------+
+| role     | average     |
++----------+-------------+
+| 服务员   | 1000.200000 |
+| 游戏角色 |  677.646667 |
++----------+-------------+
+```
+
+了解了`having`和`where`两个可以指定条件的关键字之后就需要知道何时使用`having`，何时使用`where`，而确定的思路就是判断条件是针对分组之前的数据还是分组之后的数据，**如果是分组之前（原始数据）的数据，则使用`where`，否则（统计数据）使用`having`**
+
+例如统计每个角色的薪资，找出平均工资大于1500的角色，但是不统计员工姓名为猪无能的员工。对于这个案例来说，一共有两个条件：
+
+1. 平均工资大于1500的角色
+2. 员工姓名为猪无能
+
+第一个条件需要针对「平均工资」这种统计数据进行比较，所以使用`having`；第二个条件针对「员工姓名」这种原始数据进行比较，所以使用`where`。所以可以编写SQL语句如下：
+
+```sql
+select role, avg(salary) as average from emp where name != '猪无能' group by role having average > 1500;
+```
+
+得到的结果如下：
+
+```
++----------+--------------+
+| role     | average      |
++----------+--------------+
+| 游戏陪玩 |  2000.990000 |
+| 董事长   | 12000.660000 |
++----------+--------------+
+```
+
+## 联合查询
+
+### 笛卡尔积
+
+两个集合中，一个集合的每个元素都要和另一个集合中的每个元素配对一次。在数据库中的体现就是两张表中，一张表中的每一行数据要和另一张表的每一行数据匹配一次，如下图所示：
+
+<img src="basic-op.assets/download.png">
+
+在数据库的多表查询中需要使用到笛卡尔积的结果，但是笛卡尔积的结果就是简单的组合，其中包含很多无意义的数据，所以大多数时候需要指定条件以减少数据量
+
+多表查询一般分为5个步骤：
+
+1. 明确查询的信息来自哪些表
+2. 将需要用到的表进行笛卡尔积
+3. 指定连接条件，减少数据量
+4. 根据需要的条件进一步筛选
+5. 根据需要用到的列进行查询
+
+以下面四张表为例分别演示多表查询
+
+=== "班级表"
+
+    ```
+    +-------+--------------+------+-----+---------+----------------+
+    | Field | Type         | Null | Key | Default | Extra          |
+    +-------+--------------+------+-----+---------+----------------+
+    | id    | int          | NO   | PRI | NULL    | auto_increment |
+    | name  | varchar(20)  | NO   | UNI | NULL    |                |
+    | desc  | varchar(100) | YES  |     | NULL    |                |
+    +-------+--------------+------+-----+---------+----------------+
+    ```
+
+=== "学生表"
+
+    ```
+    +----------+-------------+------+-----+---------+----------------+
+    | Field    | Type        | Null | Key | Default | Extra          |
+    +----------+-------------+------+-----+---------+----------------+
+    | id       | int         | NO   | PRI | NULL    | auto_increment |
+    | sn       | varchar(20) | NO   | UNI | NULL    |                |
+    | name     | varchar(20) | NO   |     | NULL    |                |
+    | qq_email | varchar(20) | NO   | UNI | NULL    |                |
+    | class_id | int         | YES  | MUL | NULL    |                |
+    +----------+-------------+------+-----+---------+----------------+
+    ```
+
+=== "课程表"
+
+    ```
+    +-------+-------------+------+-----+---------+----------------+
+    | Field | Type        | Null | Key | Default | Extra          |
+    +-------+-------------+------+-----+---------+----------------+
+    | id    | int         | NO   | PRI | NULL    | auto_increment |
+    | name  | varchar(20) | NO   | UNI | NULL    |                |
+    +-------+-------------+------+-----+---------+----------------+
+    ```
+
+=== "分数表"
+
+    ```
+    +------------+-------------+------+-----+---------+-------+
+    | Field      | Type        | Null | Key | Default | Extra |
+    +------------+-------------+------+-----+---------+-------+
+    | scores     | double(3,1) | YES  |     | 0.0     |       |
+    | student_id | int         | YES  | MUL | NULL    |       |
+    | course_id  | int         | YES  | MUL | NULL    |       |
+    +------------+-------------+------+-----+---------+-------+
+    ```
+
+接下来分别插入以下数据：
+
+=== "班级表"
+
+    ```sql
+    -- 自增的主键可以在插入数据时不指定
+    insert into classes(name, `desc`) values
+    ('计算机系2019级1班', '学习了计算机原理、C和Java语言、数据结构和算法'),
+    ('中文系2019级3班','学习了中国传统文学'),
+    ('自动化2019级5班','学习了机械自动化');
+    ```
+
+=== "学生表"
+
+    ```sql
+    insert into students(sn, name, qq_email, class_id) values
+    ('09982','黑旋风李逵','xuanfeng@qq.com',1),
+    ('00835','菩提老祖','123@qq.com',1),
+    ('00391','白素贞','456@qq.com',1),
+    ('00031','许仙','xuxian@qq.com',1),
+    ('00054','不想毕业','789@qq.com',1),
+    ('51234','好好说话','say@qq.com',2),
+    ('83223','白蛇','snake@qq.com',2),
+    ('09527','老外学中文','foreigner@qq.com',2);
+    ```
+
+=== "课程表"
+
+    ```sql
+    insert into course(name) values
+    ('Java'),('中国传统文化'),('计算机原理'),
+    ('语文'),('高阶数学'),('英文');
+    ```
+
+=== "分数表"
+
+    ```sql
+    insert into score(scores, student_id, course_id) values
+    (70.5, 1, 1),(98.5, 1, 3),(33, 1, 5),(98, 1, 6),
+    (60, 2, 1),(59.5, 2, 5),
+    (33, 3, 1),(68, 3, 3),(99, 3, 5),
+    (67, 4, 1),(23, 4, 3),(56, 4, 5),(72, 4, 6),
+    (81, 5, 1),(37, 5, 5),
+    (56, 6, 2),(43, 6, 4),(79, 6, 6),
+    (80, 7, 2),(92, 7, 6);
+    ```
+
+### 内连接
+
+基本语法如下：
+
+```sql
+select 列名 from 表1 [别名] [inner] join 表2 [别名] on 连接条件 and 其他条件;
+select 列名 from 表1 [别名], 表2 [别名] where 连接条件 and 其他条件;
+-- 其中[inner]表示可以省略不写inner关键字，默认就是内连接
+```
+
+实例如下：
+
+??? question "查询名字为许仙的同学的成绩"
+
+    按照多表查询的步骤：
+
+    1. 明确查询的信息来自哪些表：名字->学生表，成绩->分数表
+    2. 将需要用到的表进行笛卡尔积：`select * from students, score`
+    3. 指定连接条件，减少数据量：此处的连接条件即为两个表相关联的条件，在学生表和分数表中，关联的条件就是`students.id = score.student_id`
+    4. 根据需要的条件进一步筛选：只需要许仙同学的成绩，所以条件为`name = '许仙'`
+    5. 查询列为`name`和`scores`
+
+    根据上面的步骤分析，可以得出SQL语句如下：
+
+    ```sql
+    select name, scores 
+    from students, score 
+    where students.id = score.student_id 
+    and name = '许仙';
+    -- 也可以写成
+    select name, scores 
+    from students 
+    inner join score on students.id = score.student_id 
+    and name = '许仙';
+    ```
+
+    结果如下：
+
+    ```
+    +------+--------+
+    | name | scores |
+    +------+--------+
+    | 许仙 |   67.0 |
+    | 许仙 |   23.0 |
+    | 许仙 |   56.0 |
+    | 许仙 |   72.0 |
+    +------+--------+
+    ```
+
+??? question "查询所有同学的总成绩，及同学的个人信息"
+
+    按照多表查询的步骤：
+
+    1. 明确查询的信息来自哪些表：个人信息->学生表，成绩->分数表
+    2. 将需要用到的表进行笛卡尔积：`select * from students, score`
+    3. 指定连接条件，减少数据量：此处的连接条件即为两个表相关联的条件，在学生表和分数表中，关联的条件就是`students.id = score.student_id`
+    4. 根据需要的条件进一步筛选：所有同学的总成绩，因为每一个同学有不同的课程，所以需要根据学生的`id`进行分组
+    5. 查询列为`sum(scores)`、`sn`、`name`和`qq_email`
+
+    根据上面的步骤分析，可以得出SQL语句如下：
+
+    ```sql
+    select sn, name, qq_email, sum(scores) 
+    from students, score 
+    where students.id = score.student_id 
+    group by student_id;
+    -- 也可以写成
+    select sn, name, qq_email, sum(scores) 
+    from students 
+    inner join score 
+    on students.id = score.student_id 
+    group by student_id;
+    ```
+
+    结果如下：
+
+    ```
+    +-------+------------+-----------------+-------------+
+    | sn    | name       | qq_email        | sum(scores) |
+    +-------+------------+-----------------+-------------+
+    | 09982 | 黑旋风李逵 | xuanfeng@qq.com |       300.0 |
+    | 00835 | 菩提老祖   | 123@qq.com      |       119.5 |
+    | 00391 | 白素贞     | 456@qq.com      |       200.0 |
+    | 00031 | 许仙       | xuxian@qq.com   |       218.0 |
+    | 00054 | 不想毕业   | 789@qq.com      |       118.0 |
+    | 51234 | 好好说话   | say@qq.com      |       178.0 |
+    | 83223 | 白蛇       | snake@qq.com    |       172.0 |
+    +-------+------------+-----------------+-------------+
+    ```
+
+??? question "查询每个同学的成绩，列出同学名字、课程名字和课程分数"
+
+    按照多表查询的步骤：
+
+    1. 明确查询的信息来自哪些表：同学名字->学生表，课程名字->课程表，课程分数->分数表
+    2. 将需要用到的表进行笛卡尔积：`select * from students, course, score`
+    3. 指定连接条件，减少数据量：此处的连接条件即为学生表关联分数表的条件和课程表关联分数表的条件，在学生表和分数表中，关联的条件就是`students.id = score.student_id`，在课程表和分数表中，关联条件就是`course.id = score.course_id`
+    4. 根据需要的条件进一步筛选：本次查询没有其他的条件，忽略
+    5. 查询列为`students.name`、`course.name`和`score.scores`
+
+    根据上面的步骤分析，可以得出SQL语句如下：
+
+    ```sql
+    select students.name, course.name, score.scores 
+    from students, course, score 
+    where students.id = score.student_id 
+    and course.id = score.course_id;
+    ```
+
+    结果如下：
+
+    ```
+    +------------+--------------+--------+
+    | name       | name         | scores |
+    +------------+--------------+--------+
+    | 黑旋风李逵 | Java         |   70.5 |
+    | 菩提老祖   | Java         |   60.0 |
+    | 白素贞     | Java         |   33.0 |
+    | 许仙       | Java         |   67.0 |
+    | 不想毕业   | Java         |   81.0 |
+    | 好好说话   | 中国传统文化 |   56.0 |
+    | 白蛇       | 中国传统文化 |   80.0 |
+    | 黑旋风李逵 | 英文         |   98.0 |
+    | 许仙       | 英文         |   72.0 |
+    | 好好说话   | 英文         |   79.0 |
+    | 白蛇       | 英文         |   92.0 |
+    | 黑旋风李逵 | 计算机原理   |   98.5 |
+    | 白素贞     | 计算机原理   |   68.0 |
+    | 许仙       | 计算机原理   |   23.0 |
+    | 好好说话   | 语文         |   43.0 |
+    | 黑旋风李逵 | 高阶数学     |   33.0 |
+    | 菩提老祖   | 高阶数学     |   59.5 |
+    | 白素贞     | 高阶数学     |   99.0 |
+    | 许仙       | 高阶数学     |   56.0 |
+    | 不想毕业   | 高阶数学     |   37.0 |
+    +------------+--------------+--------+
+    ```
+
+### 外连接
+
+外连接分为左外连接和右外连接。进行左外连接时，左侧表的内容会完全显示，右侧表的内容如果内容不足会以`null`代替，右外连接相反。基本语法如下：
+
+```sql
+-- 左外连接
+select 列名 from 列名1 [别名] left join 列名2 [别名] on 连接条件
+-- 右外连接
+select 列名 from 列名1 [别名] right join 列名2 [别名] on 连接条件
+```
+
+??? question "查询所有同学的成绩，及同学的个人信息，如果该同学没有成绩，也需要显示"
+
+    按照多表查询的步骤：
+
+    1. 明确查询的信息来自哪些表：个人信息->学生表，成绩->分数表
+    2. 将需要用到的表进行笛卡尔积：`select * from students, score`
+    3. 指定连接条件，减少数据量：此处的连接条件即为学生表关联分数表的条件和课程表关联分数表的条件，在学生表和分数表中，关联的条件就是`students.id = score.student_id`，因为需要满足「如果该同学没有成绩，也需要显示」，所以判断是左外连接
+    4. 根据需要的条件进一步筛选：本次查询没有其他的条件，忽略
+    5. 查询列为`scores`、`sn`、`name`和`qq_email`
+
+    根据上面的步骤分析，可以得出SQL语句如下：
+
+    ```sql
+    select sn, name, qq_email, scores from students left join score on students.id = score.student_id;
+    ```
+
+    得到的结果如下：
+
+    ```
+    +-------+------------+------------------+--------+
+    | sn    | name       | qq_email         | scores |
+    +-------+------------+------------------+--------+
+    | 09982 | 黑旋风李逵 | xuanfeng@qq.com  |   70.5 |
+    | 09982 | 黑旋风李逵 | xuanfeng@qq.com  |   98.5 |
+    | 09982 | 黑旋风李逵 | xuanfeng@qq.com  |   33.0 |
+    | 09982 | 黑旋风李逵 | xuanfeng@qq.com  |   98.0 |
+    | 00835 | 菩提老祖   | 123@qq.com       |   60.0 |
+    | 00835 | 菩提老祖   | 123@qq.com       |   59.5 |
+    | 00391 | 白素贞     | 456@qq.com       |   33.0 |
+    | 00391 | 白素贞     | 456@qq.com       |   68.0 |
+    | 00391 | 白素贞     | 456@qq.com       |   99.0 |
+    | 00031 | 许仙       | xuxian@qq.com    |   67.0 |
+    | 00031 | 许仙       | xuxian@qq.com    |   23.0 |
+    | 00031 | 许仙       | xuxian@qq.com    |   56.0 |
+    | 00031 | 许仙       | xuxian@qq.com    |   72.0 |
+    | 00054 | 不想毕业   | 789@qq.com       |   81.0 |
+    | 00054 | 不想毕业   | 789@qq.com       |   37.0 |
+    | 51234 | 好好说话   | say@qq.com       |   56.0 |
+    | 51234 | 好好说话   | say@qq.com       |   43.0 |
+    | 51234 | 好好说话   | say@qq.com       |   79.0 |
+    | 83223 | 白蛇       | snake@qq.com     |   80.0 |
+    | 83223 | 白蛇       | snake@qq.com     |   92.0 |
+    | 09527 | 老外学中文 | foreigner@qq.com |   NULL |
+    +-------+------------+------------------+--------+
+    ```
+
+    可以看到最后一行的分数列值为`null`，因为该同学没有成绩
+
+### 自连接
+
+自连接是指在同一张表连接自身进行查询，一般用于将行关系转换为列关系
+
+??? "显示所有计算机原理成绩比Java成绩高的计算机原理成绩"
+
+    首先对`score`表和`course`表进行内连接，只显示计算机原理和Java两门课程名称、课程`id`和成绩以及对应的学生姓名：
+
+    ```sql
+    select students.name, course.name, course.id, scores 
+    from students, course, score 
+    where course.id = score.course_id 
+    and students.id = score.student_id 
+    and (course.name = 'Java' or course.name = '计算机原理') 
+    order by students.name;
+    ```
+
+    根据题目要求，现在要找出满足「计算机原理比Java成绩高」这一条件的计算机原理成绩就需要用到比较运算符，但是比较运算符是建立在列而非行，所以接下来就需要考虑使用自连接将行关系转换为列关系，写出SQL语句如下：
+
+    ```sql
+    select s2.* 
+    from score s1, score s2 -- 自连接需要别名
+    where s1.student_id = s2.student_id 
+    and s1.scores < s2.scores 
+    and s1.course_id = 1 
+    and s2.course_id = 3;
+    ```
+
+    结果如下：
+
+    ```
+    +--------+------------+-----------+
+    | scores | student_id | course_id |
+    +--------+------------+-----------+
+    |   98.5 |          1 |         3 |
+    |   68.0 |          3 |         3 |
+    +--------+------------+-----------+
+    ```
+
+### 子查询（嵌套查询）
+
+子查询表示将一条查询语句的结果作为另外一条查询语句的条件值。但是因为子查询对性能消耗大，所以一般很少用，此处了解即可。子查询分为两种：
+
+1. 单行子查询：表示只返回一条查询结果的子查询
+2. 多行子查询：表示返回多条查询结果的子查询
+
+示例如下：
+
+=== "单行子查询"
+
+    查询与名字为不想毕业的同学同班的同学
+
+    ```sql
+    select name, class_id from students where class_id = (
+        select class_id from students where name = '不想毕业'
+    ) and name != '不想毕业';
+    ```
+
+    结果如下：
+
+    ```
+    +------------+----------+
+    | name       | class_id |
+    +------------+----------+
+    | 黑旋风李逵 |        1 |
+    | 菩提老祖   |        1 |
+    | 白素贞     |        1 |
+    | 许仙       |        1 |
+    +------------+----------+
+    ```
+
+=== "多行子查询"
+
+    查询语文或英文课程的成绩信息
+
+    ```sql
+    -- 使用[not] in关键字
+    select * from score where course_id in (
+        select id from course where name='语文' or name='英文'
+    );
+    -- 使用[not] exists关键字
+    select * from score where exists (
+        select course.id
+        from course
+        where course.id = score.course_id
+        and (name='语文' or name='英文')
+    );
+    -- 上面的exists写法等价于
+    select distinct s.* from score s
+    join course c on s.course_id = c.id
+    where c.name in ('语文', '英文');
+    ```
+
+子查询的结果还可以用在`from`中，例如查找所有成绩高于中文系2019级3班平均分的成绩记录，可以写为：
+
+```sql
+select * from
+    score,
+    (
+        select
+        avg( score.scores ) average
+        from score
+        join students
+        on score.student_id = students.id
+        join classes on students.class_id = classes.id
+        where classes.name = '中文系2019级3班'
+    ) tmp
+where scores > tmp.average;
+```
+
+### 合并查询
+
+在实际应用中，为了合并多个查询结果，可以使用集合操作符`union`，`union all`。使用`union`和`union all`时，前后查询的结果集中，字段需要一致
+
+例如：
+
+```sql
+select * from course where id < 3
+union
+select * from course where id < 6;
+-- 或者使用or来实现
+select * from course where id < 3 or id < 6;
+```
+
+默认情况下使用`union`会去除重复行，如果要包含重复行需要使用`union all`：
+
+```sql
+select * from course where id < 3
+union all
+select * from course where id < 6;
 ```

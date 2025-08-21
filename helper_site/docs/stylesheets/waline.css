@@ -151,6 +151,9 @@
     font-family: var(--md-text-font);
     font-size: 0.85rem;
 }
+.wl-tab-wrapper::-webkit-scrollbar {
+    background-color: var(--scrollbar-color) !important;
+}
 /* 响应式设计 */
 @media screen and (max-width: 768px) {
     .wl-editor {

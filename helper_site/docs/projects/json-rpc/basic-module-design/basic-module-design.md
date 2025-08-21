@@ -1666,7 +1666,7 @@ public:
 
 ### Server派生类设计
 
-本次项目中实现的Server派生类是基于Muduo库实现的，所以在Server派生类中少不了需要使用到Muduo库中的`TcpServer`，而对于创建一个`TcpServer`需要用到其他相关的组件，此处不具体介绍，详细见[关于Muduo库](https://www.help-doc.top/%E5%85%B6%E5%AE%83/%E5%85%B3%E4%BA%8EMuduo%E5%BA%93/%E5%85%B3%E4%BA%8EMuduo%E5%BA%93.html)，除了需要的组件外，还需要创建出协议类成员，在调用连接建立回调函数时需要创建连接对象和收到消息处理时的回调函数时需要对消息进行解析
+本次项目中实现的Server派生类是基于Muduo库实现的，所以在Server派生类中少不了需要使用到Muduo库中的`TcpServer`，而对于创建一个`TcpServer`需要用到其他相关的组件，此处不具体介绍，详细见[关于Muduo库](https://www.help-doc.top/other/muduo/muduo.html)，除了需要的组件外，还需要创建出协议类成员，在调用连接建立回调函数时需要创建连接对象和收到消息处理时的回调函数时需要对消息进行解析
 
 除了上面提到的内容，服务端与客户端还有一个不同之处，客户端只需要管理自己的连接，但是服务端需要管理多个客户端连接，所以此处还需要一张哈希表，用于建立TcpConnection类对象和BaseConnection派生类对象的联系
 

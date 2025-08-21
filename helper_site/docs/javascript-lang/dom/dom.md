@@ -95,7 +95,7 @@
     console.log(querySelector); // <div id="box"></div>
     ```
 
-对于创建元素节点来说，可以使用`document`对象方法：`createElement()`，但是这个方法只会创建一个元素节点，并不会将节点添加到页面中，后面会具体介绍[在页面中添加元素节点](https://www.help-doc.top/JavaScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/8.%20JavaScript%E4%B8%8EDOM%E6%93%8D%E4%BD%9C/8.%20JavaScript%E4%B8%8EDOM%E6%93%8D%E4%BD%9C.html#_6)
+对于创建元素节点来说，可以使用`document`对象方法：`createElement()`，但是这个方法只会创建一个元素节点，并不会将节点添加到页面中，后面会具体介绍[在页面中添加元素节点](https://www.help-doc.top/javascript-lang/dom/dom.html#_6)
 
 前面通过`document`对象中的方法可以获得一个元素节点对象，有时需要根据这一个元素节点对象访问到其他元素节点对象，根据DOM中的关系可以使用下面的属性获取其他元素节点：
 

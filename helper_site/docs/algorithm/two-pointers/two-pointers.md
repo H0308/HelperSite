@@ -628,7 +628,7 @@ public:
     !!! note
         之所以需要在开始处写排序是为了后面方便去重操作，如果数组无序，那么可能同样的数值会出现数组的任意位置，从而增加去重的难度
 
-    因为双指针可以取出连个数值，所以需要一层循环用于固定第三个数作为基数，假设为`target`，而两个指针计算的和为`sum`，因为三个数计算的结果为0，所以有`nums[i]+nums[j]+nums[k] = 0`，将`nums[i]`移动到等式的右侧后变为`nums[j]+nums[k] = -nums[i]`，所以可以考虑定义一个`left`指针代表`nums[j]`的位置，一个`right`指针代表`nums[k]`的位置，定义一个`target = -nums[i]`，接下来就是判断`nums[left] + nums[right]`是否等于`target`。而因为数组已经经过了排序，所以可以参考[力扣LCR179.查找总价格为目标值的两个商品](#)中的思路，此处不再赘述
+    因为双指针可以取出连个数值，所以需要一层循环用于固定第三个数作为基数，假设为`target`，而两个指针计算的和为`sum`，因为三个数计算的结果为0，所以有`nums[i]+nums[j]+nums[k] = 0`，将`nums[i]`移动到等式的右侧后变为`nums[j]+nums[k] = -nums[i]`，所以可以考虑定义一个`left`指针代表`nums[j]`的位置，一个`right`指针代表`nums[k]`的位置，定义一个`target = -nums[i]`，接下来就是判断`nums[left] + nums[right]`是否等于`target`。而因为数组已经经过了排序，所以可以参考[力扣LCR179.查找总价格为目标值的两个商品](https://www.help-doc.top/algorithm/two-pointers/two-pointers.html#lcr179)中的思路，此处不再赘述
 
     因为本题还需要进行去重操作，下面考虑去重的思路：
 

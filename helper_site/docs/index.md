@@ -82,13 +82,11 @@ body {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     font-family: var(--md-header-font);
-    animation: fadeInDown 1s ease-out;
 }
 
 .welcome-subtitle {
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    animation: fadeInUp 1s ease-out;
 }
 
 .feature-grid {
@@ -111,28 +109,6 @@ body {
 .feature-item:hover {
     background: var(--bg-white);
     box-shadow: var(--shadow-medium);
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* 重置主页内容区域的样式 */
@@ -363,32 +339,6 @@ a {
     background: var(--gradient-yellow);
     border: 1px solid var(--yellow-border);
 }
-
-/* 优化动画效果 */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* 添加布局动画 */
-.main-section > *,
-.side-section > * {
-    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    opacity: 0;
-}
-
-.main-section > *:nth-child(1) { animation-delay: 0.1s; }
-.main-section > *:nth-child(2) { animation-delay: 0.2s; }
-.main-section > *:nth-child(3) { animation-delay: 0.3s; }
-.side-section > *:nth-child(1) { animation-delay: 0.2s; }
-.side-section > *:nth-child(2) { animation-delay: 0.3s; }
-.side-section > *:nth-child(3) { animation-delay: 0.4s; }
 
 /* 优化响应式布局 */
 @media (max-width: 1024px) {

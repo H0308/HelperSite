@@ -294,7 +294,9 @@ nav:
       - JDBC高级: MySQL/JDBC/JDBC-advanced/JDBC-advanced.md
   - JavaEE应用开发:
     - 章节目录: JavaEE/index.md
-    - SpringMVC基础: JavaEE/Spring/springmvc-basic/springmvc-basic.md
+    - SpringMVC/SpringBoot:
+      - 章节目录: JavaEE/Spring/index.md
+      - SpringMVC基础: JavaEE/Spring/springmvc-basic/springmvc-basic.md
   - 软件测试:
     - 章节目录: software-test/index.md
     - 软件测试相关概念: software-test/basic-concept/basic-concept.md

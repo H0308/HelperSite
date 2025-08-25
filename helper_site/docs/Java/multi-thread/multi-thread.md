@@ -40,7 +40,7 @@ CPU调用一般分为两种：
 
 ## 创建线程对象与相关方法
 
-在Java中，创建线程对象一共有两种方式：
+在Java中，创建线程对象常见的有两种方式：
 
 1. 普通类继承`Thread`类，重写`Thread`中的`run`方法
 2. 普通类实现`Runnable`接口，重写接口中的`run`方法
@@ -49,45 +49,41 @@ CPU调用一般分为两种：
 
 继承`Thread`类后重写`Thread`中的`run`方法，该方法用于线程中执行的任务，例如循环等。创建完自定义线程类后就可以通过自定义类创建一个线程对象，使用该对象调用`start()`方法启动线程，例如：
 
-```java
-// 自定义线程类
-public class Thread01 extends Thread {
-    @Override
-    public void run() {
-        for (int i = 0; i < 10; i++) {
-            System.out.println("Thread01..." + i);
+=== "自定义线程类"
+
+    ```java
+    public class Thread01 extends Thread {
+        @Override
+        public void run() {
+            for (int i = 0; i < 10; i++) {
+                System.out.println("Thread01..." + i);
+            }
         }
     }
-}
+    ```
 
-// 主线程
-public class Test {
-    public static void main(String[] args) {
-        // 创建自定义线程类对象
-        Thread01 t1 = new Thread01();
-        // 调用start方法启动线程
-        t1.start();
+=== "主线程"
 
-        // 在主线程中执行其他任务
-        for (int i = 0; i < 10; i++) {
-            System.out.println("main..." + i);
+    ``` java
+    public class Test {
+        public static void main(String[] args) {
+            // 创建自定义线程类对象
+            Thread01 t1 = new Thread01();
+            // 调用start方法启动线程
+            t1.start();
+
+            // 在主线程中执行其他任务
+            for (int i = 0; i < 10; i++) {
+                System.out.println("main..." + i);
+            }
         }
     }
-}
-```
+    ```
 
 因为Java程序都是抢占式调用，所以会出现交替执行的情况，也会出现主线程先执行完，再执行自定义线程的任务
 
 !!! note
     需要注意，不要对同一个线程对象多次调用`start`方法，也不要显式调用`run`方法，直接调用`run`方法就不会被认为是线程启动执行任务
-
-### 多线程在内存中运行的原理
-
-在Java程序中，当存在多个线程时，对于主线程来说是一个栈空间，而其余线程相当于其他的栈空间，如下图所示：
-
-<img src="13. Java多线程.assets\image.png">
-
-两个线程相互抢占使用权，但是因为`main`函数有更大的概率抢到，所以可能出现主线程任务先执行完再执行自定义线程任务
 
 ### `Thread`类中常用的方法
 
@@ -220,31 +216,35 @@ public class Test {
 
 基本使用实例：
 
-```java
-// 自定义线程
-public class Thread01 extends Thread {
-    @Override
-    public void run() {
-        for (int i = 0; i < 10; i++) {
-            // 设置礼让线程
-            Thread.yield();
-            System.out.println(getName() + "..." + i);
+=== "自定义线程"
+
+    ```java
+    public class Thread01 extends Thread {
+        @Override
+        public void run() {
+            for (int i = 0; i < 10; i++) {
+                // 设置礼让线程
+                Thread.yield();
+                System.out.println(getName() + "..." + i);
+            }
         }
     }
-}
+    ```
 
-// 主线程
-public class Test {
-    public static void main(String[] args) throws InterruptedException {
-        // 创建自定义线程类对象
-        Thread01 t1 = new Thread01();
-        Thread01 t2 = new Thread01();
-        // 调用start方法启动线程
-        t1.start();
-        t2.start();
+=== "主线程"
+
+    ```java
+    public class Test {
+        public static void main(String[] args) throws InterruptedException {
+            // 创建自定义线程类对象
+            Thread01 t1 = new Thread01();
+            Thread01 t2 = new Thread01();
+            // 调用start方法启动线程
+            t1.start();
+            t2.start();
+        }
     }
-}
-```
+    ```
 
 ### 插入线程与`Thread`类中关于插入线程的方法
 
@@ -254,68 +254,76 @@ public class Test {
 
 基本使用实例：
 
-```java
-// 自定义线程
-public class Thread01 extends Thread {
-    @Override
-    public void run() {
-        for (int i = 0; i < 10; i++) {
-            System.out.println(getName() + "..." + i);
+=== "自定义线程"
+
+    ```java
+    public class Thread01 extends Thread {
+        @Override
+        public void run() {
+            for (int i = 0; i < 10; i++) {
+                System.out.println(getName() + "..." + i);
+            }
         }
     }
-}
+    ```
 
-// 主线程
-public class Test {
-    public static void main(String[] args) throws InterruptedException {
-        // 创建自定义线程类对象
-        Thread01 t1 = new Thread01();
-        Thread01 t2 = new Thread01();
+=== "主线程"
 
-        // 调用start方法启动线程
-        t1.start();
-        // 阻塞当前线程，等待t1线程执行完毕
-        t1.join();
+    ```java
+    public class Test {
+        public static void main(String[] args) throws InterruptedException {
+            // 创建自定义线程类对象
+            Thread01 t1 = new Thread01();
+            Thread01 t2 = new Thread01();
 
-        // 在主线程中执行其他任务
-        for (int i = 0; i < 10; i++) {
-            System.out.println(Thread01.currentThread().getName() + "..." + i);
+            // 调用start方法启动线程
+            t1.start();
+            // 阻塞当前线程，等待t1线程执行完毕
+            t1.join();
+
+            // 在主线程中执行其他任务
+            for (int i = 0; i < 10; i++) {
+                System.out.println(Thread01.currentThread().getName() + "..." + i);
+            }
         }
     }
-}
-```
+    ```
 
 ### （二）实现`Runnable`接口创建线程对象
 
 本方法创建线程对象与继承`Thread`方式类似，但因为`Runnable`是接口，所以必须重写对应的`run`方法，使用实现类创建对象（目前不是线程对象），将该对象使用`Thread`中的构造方法：`Thread(Runnable target)`创建线程对象
 
-```java
-// 自定义线程
-public class Runnable01 implements Runnable{
-    @Override
-    public void run() {
-        for (int i = 0; i < 10; i++) {
-            System.out.println(Thread.currentThread().getName() + "..." + i);
+=== "自定义线程"
+
+    ```java
+    public class Runnable01 implements Runnable{
+        @Override
+        public void run() {
+            for (int i = 0; i < 10; i++) {
+                System.out.println(Thread.currentThread().getName() + "..." + i);
+            }
         }
     }
-}
+    ```
 
-// 主线程
-public class Test01 {
-    public static void main(String[] args) {
-        // 创建实现类对象
-        Runnable01 r = new Runnable01();
-        // 实现类通过Thread构造函数创建线程类对象
-        Thread t1 = new Thread(r);
+=== "主线程"
 
-        t1.start();
+    ```java
+    public class Test01 {
+        public static void main(String[] args) {
+            // 创建实现类对象
+            Runnable01 r = new Runnable01();
+            // 实现类通过Thread构造函数创建线程类对象
+            Thread t1 = new Thread(r);
 
-        for (int i = 0; i < 10; i++) {
-            System.out.println(Thread.currentThread().getName()+"..."+i);
+            t1.start();
+
+            for (int i = 0; i < 10; i++) {
+                System.out.println(Thread.currentThread().getName()+"..."+i);
+            }
         }
     }
-}
-```
+    ```
 
 如果想为线程设置名字，可以使用`void setName(String name)`方法，也可以使用构造函数，例如：
 
@@ -373,7 +381,7 @@ public class Test02 {
 }
 ```
 
-### 使用继承or实现`Runnable`接口创建线程对象
+### 使用继承还是实现`Runnable`接口创建线程对象
 
 如果当前自定义线程类已经继承了其他类，则选择通过实现`Runnable`接口创建线程对象，否则使用继承创建线程对象，因为Java不支持多继承
 
@@ -386,7 +394,7 @@ public class Test02 {
 在该接口中，有一个`call()`方法，与`Runnable`接口中的`run()`类似，但是`call()`方法存在返回值，该返回值有`Callable<T>`接口的泛型`<T>`决定，并且`call()`方法在接口`Callable<T>`中抛出了异常，则实现类重写的`call()`方法也可以抛异常
 
 !!! note
-    需要注意，Java中的泛型只能写引用类型，具体会在[Java集合](#)章节介绍
+    需要注意，Java中的泛型只能写引用类型，具体会在[Java中的泛型](https://www.help-doc.top/Java/generic/generic.html)章节介绍
 
 当需要接收`call()`方法的返回值时，需要使用到`FutureTask<T>`（实现`Future<T>`接口）中的`get()`方法（重写`Future<T>`接口中的`get()`方法），该方法返回值也是泛型`<T>`
 

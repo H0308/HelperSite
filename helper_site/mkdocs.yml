@@ -24,7 +24,6 @@ copyright: Copyright &copy; 2024-2025 柯懒不是柯南
 
 nav:
   - 主页: index.md
-  - 网站介绍: intro/intro.md
   - 网站时间线: timeline/timeline.md
   - 编程语言:
     - 章节目录: languages/index.md

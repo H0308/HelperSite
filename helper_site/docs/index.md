@@ -12,9 +12,6 @@ search:
 body {
     background-color: var(--bg-primary);
 }
-#waline{
-    display: none;
-}
 #container {
     width: 100%;
     margin: 50px auto;
@@ -111,7 +108,10 @@ body {
     box-shadow: var(--shadow-medium);
 }
 
-/* 重置主页内容区域的样式 */
+/* 重置主页内容区域的样式：开始 */
+#waline{
+    display: none;
+}
 .md-content article {
     background: none;
     backdrop-filter: none;
@@ -149,6 +149,7 @@ body {
 .md-content__inner {
     margin-right: auto !important;
 }
+/* 重置主页内容区域的样式：结束 */
 
 /* 添加内容布局容器样式 */
 .content-container {

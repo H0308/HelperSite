@@ -1070,6 +1070,14 @@ strong {
     background: #999;
 }
 
+.md-typeset .tabbed-content {
+    border: 2px solid var(--primary-blue-strong);
+    border-radius: 0px 0px 12px 12px;
+    background: var(--bg-white);
+    position: relative;
+    overflow: hidden;
+}
+
 /* 主题切换蒙版 - 优化结构和性能 */
 .theme-transition-overlay {
     position: fixed;

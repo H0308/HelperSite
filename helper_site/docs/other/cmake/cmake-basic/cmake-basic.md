@@ -454,44 +454,40 @@ cmake -E 命令
 
 ??? "可以调用的外部命令"
 
-    ```
-    Available commands: 
-    capabilities              - Report capabilities built into cmake in JSON format
-    cat [--] <files>...       - concat the files and print them to the standard output
-    chdir dir cmd [args...]   - run command in a given directory
-    compare_files [--ignore-eol] file1 file2
-                                - check if file1 is same as file2
-    copy <file>... destination  - copy files to destination (either file or directory)
-    copy_directory <dir>... destination   - copy content of <dir>... directories to 'destination' directory
-    copy_directory_if_different <dir>... destination   - copy changed content of <dir>... directories to 'destination' directory
-    copy_if_different <file>... destination  - copy files if it has changed
-    echo [<string>...]        - displays arguments as text
-    echo_append [<string>...] - displays arguments as text but no new line
-    env [--unset=NAME ...] [NAME=VALUE ...] [--] <command> [<arg>...]
-                                - run command in a modified environment
-    environment               - display the current environment
-    make_directory <dir>...   - create parent and <dir> directories
-    md5sum <file>...          - create MD5 checksum of files
-    sha1sum <file>...         - create SHA1 checksum of files
-    sha224sum <file>...       - create SHA224 checksum of files
-    sha256sum <file>...       - create SHA256 checksum of files
-    sha384sum <file>...       - create SHA384 checksum of files
-    sha512sum <file>...       - create SHA512 checksum of files
-    remove [-f] <file>...     - remove the file(s), use -f to force it (deprecated: use rm instead)
-    remove_directory <dir>... - remove directories and their contents (deprecated: use rm instead)
-    rename oldname newname    - rename a file or directory (on one volume)
-    rm [-rRf] [--] <file/dir>... - remove files or directories, use -f to force it, r or R to remove directories and their contents recursively
-    sleep <number>...         - sleep for given number of seconds
-    tar [cxt][vf][zjJ] file.tar [file/dir1 file/dir2 ...]
-                                - create or extract a tar or zip archive
-    time command [args...]    - run command and display elapsed time
-    touch <file>...           - touch a <file>.
-    touch_nocreate <file>...  - touch a <file> but do not create it.
-    create_symlink old new    - create a symbolic link new -> old
-    create_hardlink old new   - create a hard link new -> old
-    true                      - do nothing with an exit code of 0
-    false                     - do nothing with an exit code of 1
-    ```
+    | 命令                                                                | 功能描述                                                 |
+    | ------------------------------------------------------------------- | -------------------------------------------------------- |
+    | `capabilities`                                                      | 以JSON格式报告cmake内置的功能                            |
+    | `cat [--] <files>...`                                               | 连接文件并将其打印到标准输出                             |
+    | `chdir dir cmd [args...]`                                           | 在指定目录中运行命令                                     |
+    | `compare_files [--ignore-eol] file1 file2`                          | 检查file1是否与file2相同                                 |
+    | `copy <file>... destination`                                        | 将文件复制到目标位置(文件或目录)                         |
+    | `copy_directory <dir>... destination`                               | 将目录内容复制到目标目录                                 |
+    | `copy_directory_if_different <dir>... destination`                  | 将已更改的目录内容复制到目标目录                         |
+    | `copy_if_different <file>... destination`                           | 如果文件已更改则复制文件                                 |
+    | `echo [<string>...]`                                                | 将参数显示为文本                                         |
+    | `echo_append [<string>...]`                                         | 将参数显示为文本但不换行                                 |
+    | `env [--unset=NAME ...] [NAME=VALUE ...] [--] <command> [<arg>...]` | 在修改的环境中运行命令                                   |
+    | `environment`                                                       | 显示当前环境                                             |
+    | `make_directory <dir>...`                                           | 创建父目录和指定目录                                     |
+    | `md5sum <file>...`                                                  | 创建文件的MD5校验和                                      |
+    | `sha1sum <file>...`                                                 | 创建文件的SHA1校验和                                     |
+    | `sha224sum <file>...`                                               | 创建文件的SHA224校验和                                   |
+    | `sha256sum <file>...`                                               | 创建文件的SHA256校验和                                   |
+    | `sha384sum <file>...`                                               | 创建文件的SHA384校验和                                   |
+    | `sha512sum <file>...`                                               | 创建文件的SHA512校验和                                   |
+    | `remove [-f] <file>...`                                             | 删除文件，使用-f强制删除(已弃用：请使用rm)               |
+    | `remove_directory <dir>...`                                         | 删除目录及其内容(已弃用：请使用rm)                       |
+    | `rename oldname newname`                                            | 重命名文件或目录(在同一卷上)                             |
+    | `rm [-rRf] [--] <file/dir>...`                                      | 删除文件或目录，使用-f强制删除，r或R递归删除目录及其内容 |
+    | `sleep <number>...`                                                 | 休眠指定秒数                                             |
+    | `tar [cxt][vf][zjJ] file.tar [file/dir1 file/dir2 ...]`             | 创建或提取tar或zip归档文件                               |
+    | `time command [args...]`                                            | 运行命令并显示耗时                                       |
+    | `touch <file>...`                                                   | 创建或更新文件时间戳                                     |
+    | `touch_nocreate <file>...`                                          | 更新文件时间戳但不创建文件                               |
+    | `create_symlink old new`                                            | 创建符号链接new->old                                     |
+    | `create_hardlink old new`                                           | 创建硬链接new->old                                       |
+    | `true`                                                              | 什么都不做，退出代码为0                                  |
+    | `false`                                                             | 什么都不做，退出代码为1                                  |
 
 ## 配置命令详细介绍
 
@@ -653,6 +649,10 @@ include(<file|module> [OPTIONAL] [RESULT_VARIABLE <var>] [NO_POLICY_SCOPE])
     # 打印正在执行的cmake脚本的全目录
     message(STATUS "正在执行的cmake脚本的全目录：" ${CMAKE_CURRENT_LIST_DIR})
     ```
+
+!!! info
+
+    关于`message`函数的介绍和使用会在[CMake常见语法](#)中介绍
 
 在`build`目录中运行构建命令，可以看到结果如下：
 

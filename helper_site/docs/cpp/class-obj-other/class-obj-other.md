@@ -2,12 +2,9 @@
 
 ## `explicit`关键字
 
-在C++中，给类对象初始化时会调用类的构造函数，但是也可以使用赋值运算符为构造函数只有一个参数（或者只有一个参数没有缺省值）的类对象赋值，如下面代码
+在C++中，给类对象初始化时会调用类的构造函数，但是也可以使用赋值运算符为构造函数只有一个参数（或者多个参数时，只有一个参数没有缺省值）的类对象赋值，如下面代码
 
-```C++
-#include <iostream>
-using namespace std;
-
+```cpp
 class test
 {
 private:
@@ -16,36 +13,22 @@ public:
     test(int num)
         :_num(num)
     {}
-
-    void print()
-    {
-        cout << _num << endl;
-    }
 };
 
 int main()
 {
-    test t(1);//直接调用构造函数进行对象实例化
-    test t1 = 1;
-
-    t.print();
-    t1.print();
+    test t(1); // 直接调用构造函数进行对象实例化
+    test t1 = 1; // 使用赋值运算符进行对象实例化
 
     return 0;
 }
-输出结果：
-1
-1
 ```
 
 在上面的代码中，`test`类对象初始化时需要调用有一个参数的构造函数（对应`test t(1)`），而也可以直接使用赋值运算符，将初始化值赋值给类对象，这个过程经历了：调用构造函数使用整型1为临时对象初始化，再调用拷贝构造函数将临时对象拷贝给`t1`对象，这个过程也是一种类型转换，但是实际上这个过程一般会被编译器优化为直接调用构造函数，使用整型1对类对象初始化，即优化过程：构造函数+拷贝构造函数->构造函数
 
-而如果不想以上面的方式，只用直接调用构造函数的方式对类对象进行初始化时，可以使用`explicit`关键字对构造函数进行修饰
+如果不想以上面的方式，**只允许用直接调用构造函数的方式创建类对象**时，可以使用`explicit`关键字对构造函数进行修饰：
 
-```C++
-#include <iostream>
-using namespace std;
-
+```cpp
 class test
 {
 private:
@@ -54,35 +37,20 @@ public:
     explicit test(int num)
         :_num(num)
     {}
-
-    void print()
-    {
-        cout << _num << endl;
-    }
 };
 
 int main()
 {
-    test t(1);//直接调用构造函数进行对象实例化
-    test t1 = 1;
-
-    t.print();
-    t1.print();
+    test t(1); // 直接调用构造函数进行对象实例化
+    test t1 = 1; // 不存在从 "int" 转换到 "test" 的适当构造函数
 
     return 0;
 }
-报错信息：
-不存在从 "int" 转换到 "test" 的适当构造函数
 ```
 
-当构造函数被`explicit`关键字修饰后，`test t1 = 1`的初始化方式失效
-
-在C++11标准规范中，也支持对不只有一个参数的构造函数使用对类对象进行赋值初始化的方式
+在C++ 11中，也支持对不只有一个参数的构造函数使用对类对象进行赋值初始化的方式
 
 ```C++
-#include <iostream>
-using namespace std;
-
 class test
 {
 private:
@@ -93,11 +61,6 @@ public:
         :_num(num)
         ,_num1(num1)
     {}
-
-    void print()
-    {
-        cout << _num << " " << _num1 << endl;
-    }
 };
 
 int main()
@@ -105,21 +68,13 @@ int main()
     test t(2, 3);
     test t1 = { 2,4 };
 
-    t.print();
-    t1.print();
     return 0;
 }
-输出结果：
-2 3
-2 4
 ```
 
-同样，如果不愿意使用直接赋值的方式为类对象进行初始化时，可以使用`explicit`关键字修饰构造函数
+同样，如果不愿意使用直接赋值的方式为类对象进行初始化时，可以使用`explicit`关键字修饰构造函数：
 
-```C++
-#include <iostream>
-using namespace std;
-
+```cpp
 class test
 {
 private:
@@ -130,32 +85,20 @@ public:
         :_num(num)
         ,_num1(num1)
     {}
-
-    void print()
-    {
-        cout << _num << " " << _num1 << endl;
-    }
 };
 
 int main()
 {
     test t(2, 3);
-    test t1 = { 2,4 };
+    test t1 = { 2,4 }; // "test"的复制列表初始化不能使用显式构造函数
 
-    t.print();
-    t1.print();
     return 0;
 }
-报错信息：
-"test" 的复制列表初始化不能使用显式构造函数
 ```
 
-但是，如果为已经实例化的对象再次赋值时，则会调用赋值运算符重载函数为对象赋值，如下面代码
+但是，如果为已经实例化的对象再次赋值时，则会调用赋值运算符重载函数为对象赋值，如下面代码：
 
-```C++
-#include <iostream>
-using namespace std;
-
+```cpp
 class test
 {
 private:
@@ -164,11 +107,6 @@ public:
     test(int num)
         :_num(num)
     {}
-
-    void print()
-    {
-        cout << _num << endl;
-    }
 
     test(const test& d)
     {
@@ -187,13 +125,98 @@ public:
 
 int main()
 {
-    test t(1);//为对象初始化
-    t = 2;
+    test t(1); // 为对象初始化
+    t = 2; // 重新赋值
     return 0;
 }
 ```
 
 在上面的代码中，`t`对象再次赋值时会调用赋值重载，首先会调用拷贝构造函数，但是会被编译器优化为直接调用构造函数，再调用赋值重载函数
+
+除了上面的场景外，`explicit`关键字还解决了在函数传参时进行的类型转换，例如下面的代码：
+
+```cpp
+class Test 
+{
+public:
+    Test(int a)
+        : a_(a)
+    {
+    }
+
+    static void print(Test t)
+    {
+        std::cout << t.a_ << "\n";
+    }
+
+private:
+    int a_;
+};
+
+int main()
+{
+    Test::print(2); // 2
+
+    return 0;
+}
+```
+
+在上面代码中，直接传递给`print`函数2时，会将这个2作为构造`Test`对象的参数传递给`Test`的构造函数，为了避免这种问题，也可以使用`explicit`关键字：
+
+```cpp
+class Test 
+{
+public:
+    explicit Test(int a)
+        : a_(a)
+    {
+    }
+
+    static void print(Test t)
+    {
+        std::cout << t.a_ << "\n";
+    }
+
+private:
+    int a_;
+};
+
+int main()
+{
+    Test::print(2); // 不存在从 "int" 转换到 "test" 的适当构造函数
+
+    return 0;
+}
+```
+
+在类中有时会定义类型转换运算符重载函数方便进行类型转换，为了防止出现隐式类型转换，也可以使用`explicit`关键字修饰类型转换运算符重载函数：
+
+```cpp
+class Double 
+{
+public:
+    explicit operator int() const 
+    {
+        return static_cast<int>(value);
+    }
+private:
+    double value;
+};
+
+int main()
+{
+    Double d;
+    int i = d;               // 错误，无法隐式转换
+    int j = static_cast<int>(d);  // 正确，显式转换
+    return 0;
+}
+```
+
+综上，`explicit`关键字一共解决了三个问题：
+
+1. 使用赋值运算符进行类对象的创建
+2. 函数传参时发生对象的创建
+3. 类型转换运算符重载函数的隐式类型转换
 
 ## `static`成员
 

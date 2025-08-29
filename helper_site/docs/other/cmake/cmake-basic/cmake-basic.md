@@ -1,4 +1,4 @@
-# CMake基础命令操作
+# CMake控制台命令核心操作
 
 !!! abstract
 
@@ -156,7 +156,7 @@ CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake
 lrwxrwxrwx 1 root root 4  4月  9  2024 /usr/bin/gmake -> make*
 ```
 
-## CMake工程构建基本流程
+## CMake从构建到打包基本流程
 
 ### 基本介绍与配置准备
 
@@ -313,7 +313,7 @@ add_test(test_add "/home/epsda/CmakeLearning_code/cmake_tools/build/main")
 
 ### 使用安装命令进行程序安装
 
-安装当前临时构建目录`build`中的可执行程序到指定的目录中可以在`build`目录所在路径使用下面的命令：
+安装当前临时构建目录`build`中的可执行程序到指定的目录中，可以在`build`目录所在路径使用下面的命令：
 
 ```bash
 cmake --install .
@@ -414,7 +414,7 @@ set(CPACK_PACKAGE_VERSION_PATCH "1")
 set(CPACK_SYSTEM_NAME "Linux")
 ```
 
-需要注意的是，这次打包之前没有执行安装命令，如果是先执行安装命令，再执行`cpack`，此时会出现权限不足问题：
+需要注意的是，如果在`CMakeLists.txt`中正确配置了`install`指令，那么CPack可以独立工作，无需手动执行`cmake --install <dir>`命令。如果是先手动执行`cmake --install <dir>`命令，再执行`cpack`，此时会出现权限不足问题：
 
 ```
 CPack: Create package using STGZ
@@ -492,3 +492,211 @@ cmake -E 命令
     true                      - do nothing with an exit code of 0
     false                     - do nothing with an exit code of 1
     ```
+
+## 配置命令详细介绍
+
+### 最低安装版本命令
+
+在前面已经提到可以使用`cmake_minimum_required`配置最低要求版本以及需要配置的原因，本次对该命令进行进一步的补充。除了可以指定最低版本以外，还可以指定版本范围，写法如下：
+
+```cmake
+cmake_minimum_required(VERSION 3.18...4.0)
+```
+
+需要注意的是，`cmake_minimum_required`的配置必须在顶级`CMakeLists.txt`中的最开始位置，甚至要在`project`配置之前调用
+
+??? "何为顶级`CMakeLists.txt`"
+
+    在CMake中，允许一个项目中有多个`CMakeLists.txt`，但是分布在不同的目录中，项目根目录中的`CMakeLists.txt`一般为顶级`CMakeLists.txt`。顶级`CMakeLists.txt`是CMake构建系统的起始位置，定义了整个项目的构建规则和配置并且管理项目的目录结构和依赖关系
+
+### 项目命令
+
+项目命令即`project`命令，基本语法介绍如下：
+
+```cmake
+project(<PROJECT-NAME> [<language-name>...])
+project(<PROJECT-NAME>
+        [VERSION <major>[.<minor>[.<patch>[.<tweak>]]]]
+        [COMPAT_VERSION <major>[.<minor>[.<patch>[.<tweak>]]]]
+        [DESCRIPTION <project-description-string>]
+        [HOMEPAGE_URL <url-string>]
+        [LANGUAGES <language-name>...])
+```
+
+根据官方介绍，`project`命令可以有两种写法：
+
+1. 第一种写法（简单写法），项目名称和语言名称，其中语言名称可选
+2. 第二种写法（完整写法），项目名称、项目版本号、兼容版本号、项目描述、项目主页URL和语言名称，其中除了项目名称以外，其余全部可选
+
+在CMake中，如果执行了`project`命令，那么默认会设置下面的变量：
+
+| 变量                    | 描述                                             |
+| ----------------------- | ------------------------------------------------ |
+| `PROJECT_NAME`          | 项目名称（如`MyProject`）                        |
+| `CMAKE_PROJECT_NAME`    | 顶级项目名称（与`PROJECT_NAME`相同）         |
+| `PROJECT_VERSION`       | 完整版本号（如`1.2.3`）                          |
+| `PROJECT_VERSION_MAJOR` | 主版本号                              |
+| `PROJECT_VERSION_MINOR` | 次版本号                                |
+| `PROJECT_VERSION_PATCH` | 修订号                                 |
+| `PROJECT_SOURCE_DIR`    | 顶级`CMakeLists.txt`所在目录（即源文件树根目录） |
+| `PROJECT_BINARY_DIR`    | 构建目录（如`build/`）                           |
+
+这些变量在后续的其他命令中可以直接通过`${}`进行引用，例如`${PROJECT_NAME}`
+
+需要注意的是语言名称的值，指定时可以指定一门语言，也可以指定多门语言。如果不指定语言，那么默认就是C和C++，如果值为`none`或者写了`LANGUAGES`但是没有给值，那么表示不启用任何语言
+
+根据官方文档的描述，`LANGUAGES`可以指定的语言有：C、CXX（即C++）、CSharp（即C#）、CUDA、OBJC（即Objective-C）、OBJCXX（即Objective-C++）、Fortran、HIP、ISPC、Swift、ASM、ASM_NASM、ASM_MARMASM、ASM_MASM和ASM-ATT
+
+对于`LANGUAGES`，推荐的使用方法就是**显式指定项目中所有使用到的语言**，确保CMake可以正确查找编译器
+
+### 安装命令
+
+安装命令的作用可以理解为拷贝，基本用法此处不再赘述。根据官方文档的描述，`install`命令有如下几种写法：
+
+```cmake
+install(TARGETS <targets>... [EXPORT <export-name>]
+        [RUNTIME DESTINATION <dir>]
+        [LIBRARY DESTINATION <dir>]
+        [ARCHIVE DESTINATION <dir>]
+        [INCLUDES DESTINATION <dir>]
+        [...])
+
+install(FILES <files>... DESTINATION <dir>
+        [PERMISSIONS <permissions>...]
+        [CONFIGURATIONS <configs>...]
+        [COMPONENT <component>]
+        [...])
+
+install(DIRECTORY <dirs>... DESTINATION <dir>
+        [FILE_PERMISSIONS <permissions>...]
+        [DIRECTORY_PERMISSIONS <permissions>...]
+        [...])
+
+install(EXPORT <export-name> DESTINATION <dir>
+        [NAMESPACE <namespace>::]
+        [FILE <filename>]
+        [...])
+```
+
+其中的关键参数解释如下表所示：
+
+| 参数          | 含义    |
+| ------------- | ---------------------------------------------------------------------------------- |
+| `TARGETS`     | 安装使用`add_executable`和`add_library`构建的目标文件                              |
+| `FILES`       | 安装文件 |
+| `DIRECTORY`   | 安装整个目录  |
+| `EXPORT`      | 安装导出目录，用于发布自己的程序，供别人使用   |
+| `DESTINATION` | 指定安装路径，路径可以是绝对路径，也可以是相对路径（相对于`CMAKE_INSTALL_PREFIX`）|
+
+在Linux中，`CMAKE_INSTALL_PREFIX`表示的就是`/usr/local`，在部分脚本中可以见到该路径，例如在`cmake_install.cmake`中可以看到该变量的设置：
+
+```cmake
+if(NOT DEFINED CMAKE_INSTALL_PREFIX)
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
+endif()
+```
+
+### 包含命令
+
+包含命令即`include`，其作用是加载指定的脚本文件或者模块到当前`CMakeLists.txt`执行上下文中并运行。在官方文档的描述中，该命令的使用如下：
+
+```cmake
+include(<file|module> [OPTIONAL] [RESULT_VARIABLE <var>] [NO_POLICY_SCOPE])
+```
+
+其中`<file|module>`表示的就是要运行的文件（一般会包含路径）或者模块名称。对于要查找的路径，如果是要运行的文件，`include`命令查找原则如下：
+
+1. 如果是相对路径，那么相对于当前`include`命令所在的`CMakeLists.txt`文件开始查找
+2. 如果是绝对路径，直接从根路径开始查找
+
+如果是模块，那么查找原则为：首先在当前目录中查找，如果没有再到`CMAKE_MODULE_PATH`变量指定的目录中查找
+
+对于包含到当前`CMakeLists.txt`的文件来说，会先执行`include`之前的代码，再在当前`CMakeLists.txt`中展开指定的文件并执行其中的内容。以下面的目录结构为例：
+
+```
+.
+├── build
+├── CMakeLists.txt
+└── sub
+    └── sub.cmake
+```
+
+其中`CMakeLists.txt`和`sub.cmake`脚本的内容分别如下：
+
+=== "`CMakeLists.txt`"
+
+    ```cmake
+    cmake_minimum_required(VERSION 3.18)
+
+    project(test_include)
+
+    message(STATUS "main cmake")
+    # 打印当前正在执行的源代码目录
+    message(STATUS, "当前源代码目录：" ${CMAKE_CURRENT_SOURCE_DIR})
+    # 打印正在执行的cmake脚本
+    message(STATUS "正在执行的cmake脚本：" ${CMAKE_CURRENT_LIST_FILE})
+    # 打印正在执行的cmake脚本的全目录
+    message(STATUS "正在执行的cmake脚本的全目录：" ${CMAKE_CURRENT_LIST_DIR})
+
+    # 包含子目录cmake脚本
+    include(./sub/sub.cmake) 
+    ```
+
+=== "`sub.cmake`"
+
+    ```cmake
+    message(STATUS "sub cmake")
+    # 打印当前正在执行的源代码目录
+    message(STATUS, "当前源代码目录：" ${CMAKE_CURRENT_SOURCE_DIR})
+    # 打印正在执行的cmake脚本
+    message(STATUS "正在执行的cmake脚本：" ${CMAKE_CURRENT_LIST_FILE})
+    # 打印正在执行的cmake脚本的全目录
+    message(STATUS "正在执行的cmake脚本的全目录：" ${CMAKE_CURRENT_LIST_DIR})
+    ```
+
+在`build`目录中运行构建命令，可以看到结果如下：
+
+```
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- main cmake
+STATUS,当前源代码目录：/home/epsda/CmakeLearning_code/test_include
+-- 正在执行的cmake脚本：/home/epsda/CmakeLearning_code/test_include/CMakeLists.txt
+-- 正在执行的cmake脚本的全目录：/home/epsda/CmakeLearning_code/test_include
+-- sub cmake
+STATUS,当前源代码目录：/home/epsda/CmakeLearning_code/test_include
+-- 正在执行的cmake脚本：/home/epsda/CmakeLearning_code/test_include/sub/sub.cmake
+-- 正在执行的cmake脚本的全目录：/home/epsda/CmakeLearning_code/test_include/sub
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/epsda/CmakeLearning_code/test_include/build
+```
+
+可以看到先执行了`CMakeLists.txt`文件中的打印，再执行`sub.cmake`中的打印，并且因为`sub.cmake`中的命令在`CMakeLists.txt`中展开，所以不论是`CMakeLists.txt`还是`sub.cmake`文件中的源代码目录打印均相同且均为`test_include`项目目录
+
+### 添加可执行程序命令
+
+根据官方文档的描述，`add_executable`命令使用方式如下：
+
+```cmake
+add_executable(<name> <options>... <sources>...)
+```
+
+其中，`name`表示生成的目标名称，`<sources>`表示目标的来源文件。根据官方文档对目标生成的路径描述：<a href="javascript:;" class="custom-tooltip" data-title="By default the executable file will be created in the build tree directory corresponding to the source tree directory in which the command was invoked">默认情况下，可执行文件会生成在构建目录里，位置和源代码目录的结构是对应的</a>
+
+例如，假设当前项目根目录为`project`，项目源代码目录为`src`，项目构建目录为`build`，那么根据上面的描述，应该为：编译出来的程序会放在`build`文件夹里，而且`build`文件夹中的结构和源代码的文件夹结构是一样的，即：
+
+- 源文件目录：`project/src/`
+- 构建程序目录：`project/build/src/`
+
+简单理解就是**源代码的目录会被拷贝到构建目录中用于存放生成的目标文件**

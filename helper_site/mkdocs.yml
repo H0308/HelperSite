@@ -300,6 +300,7 @@ nav:
     - 章节目录: software-test/index.md
     - 软件测试相关概念: software-test/basic-concept/basic-concept.md
     - 自动化测试: software-test/automatic-test/automatic-test.md
+    - 性能测试: software-test/performance-test/performance-test.md
   - 扩展知识: 
     - 章节目录: other/index.md
     - 关于Shell: other/shell/shell.md

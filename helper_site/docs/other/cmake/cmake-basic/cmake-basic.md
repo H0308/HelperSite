@@ -456,10 +456,10 @@ cmake -E 命令
 
     | 命令                                                                | 功能描述                                                 |
     | ------------------------------------------------------------------- | -------------------------------------------------------- |
-    | `capabilities`                                                      | 以JSON格式报告cmake内置的功能                            |
+    | `capabilities`                                                      | 以JSON格式报告CMake内置的功能                            |
     | `cat [--] <files>...`                                               | 连接文件并将其打印到标准输出                             |
     | `chdir dir cmd [args...]`                                           | 在指定目录中运行命令                                     |
-    | `compare_files [--ignore-eol] file1 file2`                          | 检查file1是否与file2相同                                 |
+    | `compare_files [--ignore-eol] file1 file2`                          | 检查`file1`是否与`file2`相同                                 |
     | `copy <file>... destination`                                        | 将文件复制到目标位置(文件或目录)                         |
     | `copy_directory <dir>... destination`                               | 将目录内容复制到目标目录                                 |
     | `copy_directory_if_different <dir>... destination`                  | 将已更改的目录内容复制到目标目录                         |
@@ -475,17 +475,17 @@ cmake -E 命令
     | `sha256sum <file>...`                                               | 创建文件的SHA256校验和                                   |
     | `sha384sum <file>...`                                               | 创建文件的SHA384校验和                                   |
     | `sha512sum <file>...`                                               | 创建文件的SHA512校验和                                   |
-    | `remove [-f] <file>...`                                             | 删除文件，使用-f强制删除(已弃用：请使用rm)               |
-    | `remove_directory <dir>...`                                         | 删除目录及其内容(已弃用：请使用rm)                       |
+    | `remove [-f] <file>...`                                             | 删除文件，使用`-f`强制删除(已弃用：请使用`rm`)               |
+    | `remove_directory <dir>...`                                         | 删除目录及其内容(已弃用：请使用`rm`)                       |
     | `rename oldname newname`                                            | 重命名文件或目录(在同一卷上)                             |
-    | `rm [-rRf] [--] <file/dir>...`                                      | 删除文件或目录，使用-f强制删除，r或R递归删除目录及其内容 |
+    | `rm [-rRf] [--] <file/dir>...`                                      | 删除文件或目录，使用`-f`强制删除，`r`或`R`递归删除目录及其内容 |
     | `sleep <number>...`                                                 | 休眠指定秒数                                             |
-    | `tar [cxt][vf][zjJ] file.tar [file/dir1 file/dir2 ...]`             | 创建或提取tar或zip归档文件                               |
+    | `tar [cxt][vf][zjJ] file.tar [file/dir1 file/dir2 ...]`             | 创建或提取`tar`或`zip`归档文件                               |
     | `time command [args...]`                                            | 运行命令并显示耗时                                       |
     | `touch <file>...`                                                   | 创建或更新文件时间戳                                     |
     | `touch_nocreate <file>...`                                          | 更新文件时间戳但不创建文件                               |
-    | `create_symlink old new`                                            | 创建符号链接new->old                                     |
-    | `create_hardlink old new`                                           | 创建硬链接new->old                                       |
+    | `create_symlink old new`                                            | 创建符号链接`new`->`old`                                     |
+    | `create_hardlink old new`                                           | 创建硬链接`new`->`old`                                       |
     | `true`                                                              | 什么都不做，退出代码为0                                  |
     | `false`                                                             | 什么都不做，退出代码为1                                  |
 

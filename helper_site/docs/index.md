@@ -438,14 +438,10 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="content-card">
                 <h2>字体说明</h2>
                 <ul>
-                    <li>导航栏标题：猫啃珠圆体</li>
-                    <li>标题：霞鹜臻楷</li>
-                    <li>
-                        内容：本网站一共提供四个字体，分别是上图东观体、OPPO Sans、江城黑体和霞鹜臻楷，具体可以通过右侧边栏的字体选项进行效果查看
-                    </li>
-                    <li>
-                        代码：本网站一共提供三个字体，分别是Dejavu Sans Mono、Google Sans Code和JetBrains Mono，具体可以通过右侧边栏的字体选项进行效果查看
-                    </li>
+                    <li>导航栏标题：上图东观体</li>
+                    <li>标题：上图东观体</li>
+                    <li>内容：江城黑体</li>
+                    <li>代码：Google Sans Code</li>
                 </ul>
             </div>
             
@@ -457,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <li><strong>原生主题：</strong>Material for MkDocs默认的文档主题</li>
                 </ul>
                 
-                网站支持主题切换功能，可以通过右侧边栏的主题选项进行切换。需要注意的是，<strong>移动端（手机和部分平板）默认使用原生主题，且不可更改</strong>
+                <strong>新版主题适用于PC端，原生主题适用于移动端，且不可更改</strong>
             </div>
         </div>
         

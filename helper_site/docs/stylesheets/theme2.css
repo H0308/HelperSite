@@ -1,17 +1,22 @@
-/* 霞鹜臻楷 */
-@import url("https://static.zeoseven.com/zsft/2/main/result.css");
-/* 猫啃珠圆体 */
-@import url("https://fontsapi.zeoseven.com/88/main/result.css");
+/* 上图东观体 */
+@import url("https://fontsapi.zeoseven.com/488/main/result.css");
+@import url("https://fontsapi.zeoseven.com/194/main/result.css");
+/* Google Sans Code */
+@font-face {
+    font-family: "ZSFT-669";
+    src: url("https://fontsapi.zeoseven.com/669/main.woff2") format("woff2"),
+        url("https://fontsapi-storage.zeoseven.com/669/main.woff2") format("woff2");
+    font-display: swap;
+}
 
 .md-header__topic .md-ellipsis {
-    font-family: "MaokenZhuyuanTi" !important;
+    font-family: "STDongGuanTi" !important;
 }
 
 :root {
-    /* --md-text-font: "STDongGuanTi", "OPPOSans", "JiangChengHeiTi 400W",
-        sans-serif; */
-    --md-header-font: "LXGW ZhenKai", sans-serif;
-    /* --md-code-font: "DejaVu Sans Mono", "ZSFT-hk"; */
+    --md-text-font: "JiangChengHeiTi 400W", sans-serif;
+    --md-header-font: "STDongGuanTi", sans-serif;
+    --md-code-font: "ZSFT-669";
     --code-font-color: var(--text-code);
 }
 
@@ -19,539 +24,97 @@ h1 + div > p {
     font-family: var(--md-header-font);
 }
 
-@media screen and (max-width: 1199px) {
-    /* 隐藏功能区的主题切换按钮 */
-    .theme-switcher {
-        display: none !important;
-    }
+/* 返回顶部按钮样式 */
+:root {
+    --footer-height: 120px; /* 默认页脚高度 */
 }
 
-/* 右侧固定功能条样式 */
-.floating-toolbar {
+.back-to-top-btn {
     position: fixed;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    z-index: 99999;
-    font-family: var(--md-text-font);
-    background: var(--bg-white);
-    border: 1px solid #eee;
-    border-right: none;
-    border-radius: 12px 0 0 12px;
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
-    padding: 8px 0;
-    min-width: 60px;
-    transition: all 0.3s ease;
-    display: block;
-    visibility: visible;
-    opacity: 1;
-    width: auto;
-    height: auto;
-    max-width: none;
-    max-height: none;
-    overflow: visible;
-}
-
-.floating-toolbar:hover {
-    box-shadow: -6px 0 30px var(--shadow-strong);
-    transform: translateY(-50%) translateX(-2px);
-}
-
-/* 功能条项目 */
-.toolbar-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 12px 8px;
+    bottom: calc(var(--footer-height) + 20px);
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(25, 118, 210, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
     cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    border-bottom: 1px solid #eee;
-    background: transparent;
-    color: #333;
-    width: auto;
-    height: auto;
-    visibility: visible;
-    opacity: 1;
-}
-
-.toolbar-item:last-child {
-    border-bottom: none;
-}
-
-.toolbar-item:hover {
-    background: var(--primary-blue-light);
-    transform: translateX(-2px);
-}
-
-.toolbar-item.active {
-    background: var(--primary-blue-medium);
-    color: var(--primary-blue);
-}
-
-/* 功能条图标 */
-.toolbar-icon {
-    font-size: 20px;
-    line-height: 1;
-    margin-bottom: 4px;
-    transition: all 0.3s ease;
-    display: block;
-    visibility: visible;
-    opacity: 1;
-    color: #333;
-}
-
-.toolbar-item:hover .toolbar-icon {
-    transform: scale(1.1) !important;
-}
-
-/* SVG图标样式 */
-.theme-icon {
-    width: 20px !important;
-    height: 20px !important;
-    fill: currentColor !important;
-    transition: all 0.3s ease !important;
-}
-
-.toolbar-item:hover .theme-icon {
-    fill: var(--primary-blue) !important;
-}
-
-/* 返回顶部SVG图标样式 */
-.back-to-top-icon {
-    width: 20px !important;
-    height: 20px !important;
-    fill: currentColor !important;
-    transition: all 0.3s ease !important;
-}
-
-.toolbar-item:hover .back-to-top-icon {
-    fill: var(--primary-blue) !important;
-}
-
-/* 字体切换SVG图标样式 */
-.font-icon {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-    transition: all 0.3s ease;
-}
-
-.toolbar-item:hover {
-    fill: var(--primary-blue);
-}
-
-/* 功能条标签 */
-.toolbar-label {
-    font-size: 11px !important;
-    font-weight: 500 !important;
-    color: #666 !important;
-    text-align: center !important;
-    line-height: 1.2 !important;
-    transition: all 0.3s ease !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
-.toolbar-item:hover .toolbar-label {
-    color: var(--text-primary);
-}
-
-/* 字体切换功能特殊样式 */
-.font-switcher {
-    position: relative;
-}
-
-.font-dropdown-toolbar {
-    position: absolute;
-    right: 100%;
-    top: 0;
-    margin-right: 8px;
-    min-width: 120px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(10px);
-    transition: all 0.3s ease;
-    z-index: 1001;
-}
-
-.font-switcher:hover .font-dropdown-toolbar,
-.font-dropdown-toolbar.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-}
-
-.font-current-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    background: var(--bg-white);
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--text-primary);
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px var(--shadow-light);
-    white-space: nowrap;
-}
-
-.font-current-toolbar:hover {
-    border-color: var(--primary-blue);
-    box-shadow: 0 4px 12px var(--shadow-primary-medium);
-}
-
-.current-font-name-toolbar {
-    font-weight: 500;
-    margin-right: 8px;
-}
-
-.dropdown-arrow-icon {
-    width: 12px !important;
-    height: 12px !important;
-    fill: currentColor !important;
-    color: var(--text-secondary) !important;
-    transition: transform 0.3s ease !important;
-}
-
-.font-dropdown-toolbar.active .dropdown-arrow-icon {
-    transform: rotate(180deg) !important;
-}
-
-.font-options-toolbar {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--bg-white);
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px var(--shadow-strong);
-    z-index: 1002;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    margin-top: 4px;
-    max-height: 150px;
-    overflow-y: auto;
-}
-
-.font-dropdown-toolbar.active .font-options-toolbar {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.font-option-toolbar {
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--text-primary);
-    transition: all 0.2s ease;
-    border-bottom: 1px solid var(--border-light);
-    white-space: nowrap;
-}
-
-.font-option-toolbar:last-child {
-    border-bottom: none;
-    border-radius: 0 0 8px 8px;
-}
-
-.font-option-toolbar:first-child {
-    border-radius: 8px 8px 0 0;
-}
-
-.font-option-toolbar:hover {
-    background: var(--primary-blue-light);
-    color: var(--text-primary-blue);
-}
-
-.font-option-toolbar.selected {
-    background: var(--primary-blue-medium);
-    color: var(--primary-blue);
-    font-weight: 500;
-}
-
-/* 代码字体切换功能样式 */
-.code-font-switcher {
-    position: relative;
-}
-
-.code-font-dropdown-toolbar {
-    position: absolute;
-    right: 100%;
-    top: 0;
-    margin-right: 8px;
-    min-width: 140px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(10px);
-    transition: all 0.3s ease;
-    z-index: 1001;
-}
-
-.code-font-switcher:hover .code-font-dropdown-toolbar,
-.code-font-dropdown-toolbar.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-}
-
-.code-font-current-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    background: var(--bg-white);
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--text-primary);
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px var(--shadow-light);
-    white-space: nowrap;
-}
-
-.code-font-current-toolbar:hover {
-    border-color: var(--primary-blue);
-    box-shadow: 0 4px 12px var(--shadow-primary-medium);
-}
-
-.current-code-font-name-toolbar {
-    font-weight: 500;
-    margin-right: 8px;
-}
-
-.code-font-dropdown-toolbar.active .dropdown-arrow-icon {
-    transform: rotate(180deg) !important;
-}
-
-.code-font-options-toolbar {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--bg-white);
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px var(--shadow-strong);
-    z-index: 1002;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    margin-top: 4px;
-    max-height: 150px;
-    overflow-y: auto;
-}
-
-.code-font-dropdown-toolbar.active .code-font-options-toolbar {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.code-font-option-toolbar {
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--text-primary);
-    transition: all 0.2s ease;
-    border-bottom: 1px solid var(--border-light);
-    white-space: nowrap;
-}
-
-.code-font-option-toolbar:last-child {
-    border-bottom: none;
-    border-radius: 0 0 8px 8px;
-}
-
-.code-font-option-toolbar:first-child {
-    border-radius: 8px 8px 0 0;
-}
-
-.code-font-option-toolbar:hover {
-    background: var(--primary-blue-light);
-    color: var(--text-primary-blue);
-}
-
-.code-font-option-toolbar.selected {
-    background: var(--primary-blue-medium);
-    color: var(--primary-blue);
-    font-weight: 500;
-}
-
-/* 独立的切换按钮样式 */
-.toolbar-toggle-btn {
-    position: fixed;
-    top: 50%;
-    right: 60px;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 60px;
-    background: #ffffff;
-    border: 1px solid #eee;
-    border-right: none;
-    border-radius: 8px 0 0 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 99999;
+    z-index: 999;
+    opacity: 0.6;
 }
 
-.toolbar-toggle-btn:hover {
-    background: var(--primary-blue-light) !important;
-    transform: translateY(-50%) translateX(-2px) !important;
-    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.15) !important;
+.back-to-top-btn:hover {
+    opacity: 1;
+    background: var(--md-primary-fg-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(15px);
 }
 
-.toggle-icon {
-    font-size: 16px;
-    color: #666;
+.back-to-top-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
     transition: all 0.3s ease;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    opacity: 0.9;
 }
 
-.toggle-arrow-icon {
-    width: 16px !important;
-    height: 16px !important;
-    fill: currentColor !important;
-    transition: all 0.3s ease !important;
+.back-to-top-btn:hover svg {
+    transform: translateY(-1px);
+    opacity: 1;
 }
 
-.toolbar-toggle-btn:hover .toggle-icon {
-    color: var(--primary-blue) !important;
-    transform: scale(1.1) !important;
-}
 
-.toolbar-toggle-btn:hover .toggle-arrow-icon {
-    fill: var(--primary-blue) !important;
-}
 
-/* 功能条隐藏状态 */
-.floating-toolbar.hidden {
-    transform: translateY(-50%) translateX(100%) !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-}
 
-/* 切换按钮在功能条隐藏时的状态 */
-.toolbar-toggle-btn.toolbar-hidden {
-    right: 0px !important;
-    background: var(--border-white) !important;
-    border-color: var(--border-white) !important;
-    border-radius: 8px 0 0 8px !important;
-}
 
-.toolbar-toggle-btn.toolbar-hidden .toggle-icon {
-    color: black !important;
-    transform: rotate(180deg) !important;
-}
 
-.toolbar-toggle-btn.toolbar-hidden .toggle-arrow-icon {
-    fill: black !important;
-}
 
-.toolbar-toggle-btn.toolbar-hidden:hover {
-    background: var(--primary-blue-dark) !important;
-    transform: translateY(-50%) translateX(-2px) !important;
-}
+
+
+
 
 /* 响应式设计 */
 @media screen and (max-width: 768px) {
-    .floating-toolbar {
-        min-width: 50px;
-        padding: 6px 0;
+    :root {
+        --footer-height: 100px; /* 移动端页脚高度 */
+    }
+    
+    .back-to-top-btn {
+        width: 45px;
+        height: 45px;
+        bottom: calc(var(--footer-height) + 15px);
+        right: 20px;
     }
 
-    .toolbar-icon {
-        font-size: 18px;
+    .back-to-top-btn svg {
+        width: 20px;
+        height: 20px;
     }
 
-    .theme-icon {
-        width: 18px !important;
-        height: 18px !important;
-    }
-
-    .back-to-top-icon {
-        width: 18px !important;
-        height: 18px !important;
-    }
-
-    .font-icon {
-        width: 18px !important;
-        height: 18px !important;
-    }
-
-    .toggle-arrow-icon {
-        width: 14px !important;
-        height: 14px !important;
-    }
-
-    .toolbar-label {
-        font-size: 10px;
-    }
-
-    .font-dropdown-toolbar {
-        min-width: 100px;
-        margin-right: 6px;
-    }
-
-    .dropdown-arrow-icon {
-        width: 10px !important;
-        height: 10px !important;
-    }
-
-    .font-current-toolbar {
-        padding: 6px 10px;
-        font-size: 12px;
-    }
 }
 
 @media screen and (max-width: 480px) {
-    .toolbar-label {
-        display: none;
+    :root {
+        --footer-height: 80px; /* 小屏幕页脚高度 */
+    }
+    
+    .back-to-top-btn {
+        width: 40px;
+        height: 40px;
+        bottom: calc(var(--footer-height) + 10px);
+        right: 15px;
     }
 
-    .theme-icon {
-        width: 16px !important;
-        height: 16px !important;
-    }
-
-    .back-to-top-icon {
-        width: 16px !important;
-        height: 16px !important;
-    }
-
-    .font-icon {
-        width: 16px !important;
-        height: 16px !important;
-    }
-
-    .toggle-arrow-icon {
-        width: 12px !important;
-        height: 12px !important;
-    }
-
-    .font-dropdown-toolbar {
-        min-width: 90px;
-        margin-right: 4px;
-    }
-
-    .dropdown-arrow-icon {
-        width: 8px !important;
-        height: 8px !important;
+    .back-to-top-btn svg {
+        width: 18px;
+        height: 18px;
     }
 }
 
@@ -689,18 +252,6 @@ body {
 .changelog-type-pageupdate {
     background-color: var(--primary-blue-semi) !important;
 }
-
-.md-footer-runtime {
-    position: relative;
-    z-index: 3;
-    margin: 0.5rem 0;
-    padding: 0.4rem 0;
-    font-size: 0.7rem;
-    line-height: 1.6;
-    color: var(--md-footer-fg-color--light);
-    display: flex;
-    align-items: center;
-}
 ::selection {
     background: var(--primary-blue-strong);
 }
@@ -827,14 +378,11 @@ strong {
 }
 
 @media screen and (max-width: 767px) {
-    /* 移除可能导致问题的现有样式 */
     .md-typeset .arithmatex {
         max-width: 100%;
         overflow-x: hidden;
         text-overflow: ellipsis;
     }
-
-    /* 修改为更有效的样式 */
     .katex-display {
         overflow-x: auto;
         overflow-y: hidden;
@@ -842,21 +390,15 @@ strong {
         padding: 0.25em 0;
     }
 
-    /* 对于行内公式的新样式 */
     .katex {
         font-size: 1em !important;
-        /* 减小字体大小 */
     }
-
-    /* 调整整体数学公式容器的样式 */
     .md-typeset .arithmatex {
         max-width: 100% !important;
         overflow-x: auto;
         padding: 0.1em 0;
         margin: 0;
     }
-
-    /* 确保行内公式不破坏布局 */
     .katex-inline {
         display: inline-block;
         max-width: 100%;
@@ -865,8 +407,6 @@ strong {
         white-space: normal;
         line-break: anywhere;
     }
-
-    /* 添加淡出效果指示可滚动 */
     .katex-display::after {
         content: "";
         position: absolute;
@@ -882,18 +422,14 @@ strong {
         pointer-events: none;
     }
 }
-
-/* 头像样式 - 增强版，添加悬浮区域控制 */
 .header-avatar {
     display: inline-flex;
     align-items: center;
     margin-right: 0.8rem;
     position: relative;
     z-index: 1;
-    /* 添加一个内边距以增加可点击区域，但不会影响布局 */
     padding: 3px;
 }
-
 .header-avatar img {
     width: 36px;
     height: 36px;
@@ -905,8 +441,6 @@ strong {
     position: relative;
     z-index: 5;
 }
-
-/* 下拉菜单样式 - 增强版，改进悬浮区域控制 */
 .avatar-dropdown {
     position: absolute;
     top: 100%;
@@ -916,16 +450,12 @@ strong {
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
     padding: 45px 0 8px 0;
-    /* 增加更多顶部内边距 */
     min-width: 140px;
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 4;
-    /* 低于头像 */
     margin-top: -10px;
-    /* 让菜单上移覆盖头像下半部分 */
-    /* 添加一个缓冲区，防止鼠标离开时闪烁 */
     pointer-events: none;
 }
 
@@ -1090,84 +620,6 @@ strong {
     position: relative;
     overflow: hidden;
 }
-
-/* 主题切换蒙版 - 优化结构和性能 */
-.theme-transition-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-white);
-    z-index: 100000;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* 简化过渡效果，提高性能 */
-    transition: opacity 0.3s ease-out, visibility 0.3s ease-out,
-        background-color 0.3s ease-out, backdrop-filter 0.3s ease-out;
-    backdrop-filter: blur(0px);
-}
-
-.theme-transition-overlay.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-    backdrop-filter: blur(5px);
-}
-
-/* 主题切换内容容器 - 整合样式 */
-.theme-transition-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    transform: scale(0.9);
-    opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-        opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.theme-transition-overlay.active .theme-transition-content {
-    transform: scale(1);
-    opacity: 1;
-}
-
-/* 简化加载图标结构，移除不必要的嵌套 */
-.theme-transition-spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid rgba(77, 166, 218, 0.2);
-    border-top-color: var(--primary-blue-semi);
-    border-radius: 50%;
-    animation: none;
-    transition: opacity 0.3s ease;
-}
-
-.theme-transition-overlay.active .theme-transition-spinner {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* 主题切换文字样式 */
-.theme-transition-text {
-    font-family: var(--md-text-font);
-    color: var(--primary-blue-semi);
-    font-size: 16px;
-    font-weight: 500;
-    text-align: center;
-    margin-top: 10px;
-}
-
 /* 页脚爱情宣言样式 */
 .md-footer-love {
     position: relative;
@@ -1199,8 +651,6 @@ strong {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 182, 193, 0.15);
 }
-
-/* 添加闪烁星星效果 */
 .md-footer-love::before,
 .md-footer-love::after {
     content: "★";
@@ -1239,8 +689,6 @@ strong {
         transform: scale(0.8);
     }
 }
-
-/* 名字高亮显示 */
 .love-highlight {
     font-weight: 500;
     background: linear-gradient(120deg, #ffb6c1, #ffc0cb);
@@ -1251,8 +699,6 @@ strong {
     position: relative;
     white-space: nowrap;
 }
-
-/* 添加心跳动画效果 */
 .love-heart {
     display: inline-block;
     font-size: 0.9em;
@@ -1287,8 +733,6 @@ strong {
         transform: scale(1);
     }
 }
-
-/* 添加响应式样式 - 平板设备 */
 @media screen and (max-width: 1199px) {
     .md-footer-love {
         font-size: 0.8rem;
@@ -1301,8 +745,6 @@ strong {
         font-size: 0.7rem;
     }
 }
-
-/* 添加响应式样式 - 移动设备 */
 @media screen and (max-width: 767px) {
     .md-footer-love {
         font-size: 0.75rem;

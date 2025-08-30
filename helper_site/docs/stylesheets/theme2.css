@@ -782,30 +782,43 @@ strong {
         left: 50%;
         transform: translateX(-50%);
         bottom: 130%;
-        /* 确保不会超出屏幕边缘 */
         box-sizing: border-box;
-
-        /* 新增：定位逻辑调整，防止溢出 */
-        position: fixed;
-        top: auto;
-        bottom: auto;
-        left: 20px;
-        /* 距离左边缘固定距离 */
-        right: 20px;
-        /* 距离右边缘固定距离 */
-        transform: none;
-        margin-top: -120px;
-        /* 在目标元素上方显示，可根据需要调整 */
-        width: auto;
-        /* 宽度由left和right决定 */
     }
 
-    /* 新增：处理靠近页面底部的 tooltip */
     .custom-tooltip:hover::before {
         max-height: 80vh;
-        /* 最大高度限制 */
         overflow-y: auto;
-        /* 内容过多时可滚动 */
+    }
+
+    .custom-tooltip:active::before,
+    .custom-tooltip:active::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* 移动设备点击显示tooltip */
+    .custom-tooltip:focus::before,
+    .custom-tooltip:focus::after,
+    .custom-tooltip.tooltip-active::before,
+    .custom-tooltip.tooltip-active::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* 使元素可以获得焦点 */
+    .custom-tooltip {
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
+        cursor: pointer;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    /* 专门针对触摸设备 */
+    .custom-tooltip:active::before,
+    .custom-tooltip:active::after {
+        opacity: 1;
+        visibility: visible;
     }
 }
 

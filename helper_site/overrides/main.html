@@ -97,7 +97,6 @@
         </div>
     </nav>
 </header>
-<!-- 返回顶部按钮 -->
 <div class="back-to-top-btn" id="backToTopBtn" onclick="window.scrollTo({top: 0})">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="currentColor"/>
@@ -114,21 +113,21 @@
 {% endblock %}
 
 {% block extrahead %} {{ super() }}
+<link rel="preload" href="{{ config.theme.favicon | url }}" as="image">
+<link rel="preload" href="{{ config.theme.logo | url }}" as="image">
 <link rel="preload" href="{{ base_url }}/stylesheets/colors.min.css" as="style">
+<link rel="preload" href="{{ base_url }}/stylesheets/theme1.min.css" as="style">
 <link rel="preload" href="{{ base_url }}/stylesheets/theme2.min.css" as="style">
 <link rel="preload" href="{{ base_url }}/javascripts/start.min.js" as="script">
-<link rel="preload" href="{{ config.theme.logo | url }}" as="image">
-<link rel="preload" href="{{ config.theme.favicon | url }}" as="image">
 <link rel="preload" href="{{ base_url }}/author/作者.assets/20250206-200653.jpg" as="image">
 <link rel="dns-prefetch" href="//unpkg.com">
 <link rel="dns-prefetch" href="//cloud.umami.is">
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/colors.min.css" />
-<link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.min.css" media="screen and (max-width: 1199px)" />
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/theme1.min.css" media="screen and (min-width: 1200px)" />
-<link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.min.css" media="screen and (min-width: 1200px)" />
-<link rel="stylesheet" href="{{ base_url }}/stylesheets/print.min.css" />
+<link rel="stylesheet" href="{{ base_url }}/stylesheets/theme2.min.css" media="screen and (max-width: 1199px)" />
+<link rel="stylesheet" href="{{ base_url }}/stylesheets/print.min.css" media="print" />
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
 <link rel="stylesheet" href="{{ base_url }}/stylesheets/waline.min.css" />
-<script src="{{ base_url }}/javascripts/start.min.js"></script>
+<script src="{{ base_url }}/javascripts/start.min.js" defer></script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="02f9b8b7-93d4-4026-bdd8-221f2fcea2cf"></script>
 {% endblock %}

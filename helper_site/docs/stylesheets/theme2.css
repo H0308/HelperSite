@@ -8,10 +8,10 @@
 }
 
 :root {
-    --md-text-font: "STDongGuanTi", "OPPOSans", "JiangChengHeiTi 400W",
-        sans-serif;
+    /* --md-text-font: "STDongGuanTi", "OPPOSans", "JiangChengHeiTi 400W",
+        sans-serif; */
     --md-header-font: "LXGW ZhenKai", sans-serif;
-    --md-code-font: "DejaVu Sans Mono", "ZSFT-hk";
+    /* --md-code-font: "DejaVu Sans Mono", "ZSFT-hk"; */
     --code-font-color: var(--text-code);
 }
 

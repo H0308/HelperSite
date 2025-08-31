@@ -151,11 +151,13 @@
 @media (max-width: 768px) {
     /* 搜索按钮在移动端只显示图标 */
     .DocSearch-Button {
+        background: transparent;
+        border: none;
         height: 32px;
         width: 32px;
         min-width: 20px;
         max-width: 38px;
-        padding: 6px;
+        padding: 5px;
         border-radius: 50%;
     }
 

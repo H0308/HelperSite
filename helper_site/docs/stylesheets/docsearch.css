@@ -151,10 +151,11 @@
 @media (max-width: 768px) {
     /* 搜索按钮在移动端只显示图标 */
     .DocSearch-Button {
-        width: 40px;
-        min-width: 40px;
-        max-width: 40px;
-        padding: 8px;
+        height: 32px;
+        width: 32px;
+        min-width: 20px;
+        max-width: 38px;
+        padding: 6px;
         border-radius: 50%;
     }
 
@@ -189,6 +190,7 @@
 
     /* 确保背景遮罩覆盖整个屏幕 */
     .DocSearch-Container {
+        font-size: 1rem;
         position: fixed;
         top: 0;
         left: 0;

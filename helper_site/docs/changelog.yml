@@ -1,6 +1,6 @@
 - "2025":
     - "2025-08-31":
-      - function: 暂时移除默认的搜索功能，替换为Algolia DocSearch功能（试用一个月）
+      - function: 暂时移除默认的搜索功能，临时替换为Algolia DocSearch功能（试用一个月）
     - "2025-08-30":
       - function: 修复移动端链接悬浮提示无法显示的问题
       - function: 移除内容字体切换和代码字体切换功能，固定字体江城黑体、Google Sans Code和上图东观体，移除原有的猫啃珠圆体和霞鹜臻楷

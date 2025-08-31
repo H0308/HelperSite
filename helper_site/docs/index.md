@@ -282,6 +282,121 @@ body {
 a {
     z-index: 100
 }
+
+/* 最近更新样式 */
+.recent-updates-container {
+    padding: 0;
+}
+
+.recent-updates-loading {
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: 1rem 0;
+}
+
+.recent-updates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.recent-update-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border-light);
+    transition: background-color 0.2s ease;
+}
+
+.recent-update-item:last-child {
+    border-bottom: none;
+}
+
+.recent-update-item:hover {
+    background-color: var(--bg-primary);
+}
+
+.recent-update-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.recent-update-content a {
+    transition: none;
+}
+
+.recent-update-title {
+    color: var(--text-primary);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.recent-update-title:hover {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.recent-update-nav {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.recent-update-date {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+.recent-updates-empty {
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: 2rem 0;
+}
+
+.recent-updates-refresh {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.recent-updates-refresh button {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.recent-updates-refresh button:hover {
+    background: var(--primary-blue-dark);
+    transform: translateY(-1px);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .recent-update-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .recent-update-date {
+        margin-left: 0;
+        align-self: flex-start;
+    }
+}
 /* 响应式调整 */
 @media (max-width: 1024px) {
     .main-content-area {
@@ -446,14 +561,13 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             
             <div class="content-card">
-                <h2>浏览提示</h2>
-                <p>本网页提供两种主题：</p>
-                <ul>
-                    <li><strong>新版主题：</strong>优化整体显示阅读性</li>
-                    <li><strong>原生主题：</strong>Material for MkDocs默认的文档主题</li>
-                </ul>
-                
-                <strong>新版主题适用于PC端，原生主题适用于移动端，且不可更改</strong>
+                <h2>最近更新</h2>
+                <p>最近的文档更新如下：</p>
+                <div id="recent-updates-container">
+                    <p class="recent-updates-loading">正在加载最近更新...</p>
+                </div>
+
+                <p>也可以<a href="https://www.help-doc.top/timeline/timeline.html">查看完整时间线</a>获取到最近更新的网站结构和功能</p>
             </div>
         </div>
         
@@ -486,10 +600,16 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             
             <div class="content-card">
-                <h2>最近更新</h2>
-                <p>查看<a href="https://www.help-doc.top/timeline/timeline.html">网站时间线</a>了解网站最近更新</p>
+                <h2>浏览提示</h2>
+                <p>本网页提供两种主题：</p>
+                <ul>
+                    <li><strong>新版主题：</strong>优化整体显示阅读性</li>
+                    <li><strong>原生主题：</strong>Material for MkDocs默认的文档主题</li>
+                </ul>
+                
+                <strong>新版主题适用于PC端，原生主题适用于移动端，且不可更改</strong>
             </div>
-
+            
             <div class="content-card">
                 <h2>使用提示</h2>
                 <p>本网站默认显示左侧内容目录（Menu）和右侧文章大纲（Table Of Content，TOC）</p>

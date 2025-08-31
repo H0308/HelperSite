@@ -101,15 +101,15 @@
 
 .DocSearch-Button-Placeholder {
     font-size: 0.75rem;
-    color: rgba(77, 166, 218, 0.8);
+    color: var(--text-secondary);
     font-weight: 400;
 }
 
 /* 搜索按钮样式 - 简约设计 */
 .DocSearch-Button {
     margin-right: 20px;
-    background: var(--primary-blue-light);
-    border: 1px solid var(--primary-blue-strong);
+    background: var(--border-light);
+    border: 1px solid var(--border-light);
     border-radius: 8px;
     transition: all 0.3s ease;
     height: 40px;

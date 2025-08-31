@@ -2,7 +2,7 @@
 
 !!! note
 
-    阅读本篇文章之前建议有一定的线程编程基础，此处可以参考[Linux线程部分](https://www.help-doc.top/linux-thread/thread-concept-op/thread-concept-op.html)
+    阅读本篇文章之前建议有一定的线程编程基础，此处可以参考[Linux线程部分](https://www.help-doc.top/Linux/linux-thread/thread-concept-op/thread-concept-op.html)
 
 ## 线程库`<thread>`
 

@@ -4,7 +4,7 @@
 
 本次总共需要两个软件：
 
-1. VMware：[下载地址](https://softwareupdate.vmware.com/cds/vmw-desktop/)
+1. VMware：[下载地址](https://www.techpowerup.com/download/vmware-workstation-pro/)
 2. Ubuntu系统镜像：[下载地址](https://ubuntu.com/download/desktop)
 
 下载Ubuntu系统镜像直接进入网站点击Download即可，主要考虑下载VMware，因为当前VMware已经被收购了，所以官网已经关闭了，上面这个是一个CDS仓库，与官网下载的内容一样，进入该网站后可以看到下面的页面

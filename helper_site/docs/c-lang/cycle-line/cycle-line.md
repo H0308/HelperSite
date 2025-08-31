@@ -1,6 +1,6 @@
 # C语言中的循环语句
 
-## while循环
+## `while`循环
 
 ### 基本结构
 
@@ -13,7 +13,7 @@ while(表达式)
 
 ### 基本语法
 
-表达式为执行循环的判断条件，当表达式为真（不为0）时，执行`while`循环内的语句，表达式为假时，不执行`while`。并且属于先判断后执行的循环
+表达式为执行循环的判断条件，当表达式为真（不为0，包括小于0）时，执行`while`循环内的语句，表达式为假时，不执行`while`。并且属于先判断后执行的循环
 
 例如：
 
@@ -46,7 +46,7 @@ int main()
 3. 在`while`循环中，`i++`用于更新`i`的值，防止死循环
 4. 在`while`循环中，循环体语句总是比判断条件少执行一次
 
-### while循环与自增操作结合置于判断条件内
+### `while`循环与自增操作结合置于判断条件内
 
 ```C
 #define _CRT_SECURE_NO_WARNINGS 1
@@ -81,7 +81,7 @@ int main()
 10
 ```
 
-## for循环
+## `for`循环
 
 ### 基本结构
 
@@ -127,7 +127,7 @@ int main()
 5. `for`循环中，更新循环变量语句在`for`循环中执行在`for`循环体语句后
 6. `for`循环中，如果循环结束条件部分什么也不写表示条件恒成立
 
-### for循环与while循环比较
+### `for`循环与`while`循环比较
 
 `for`循环比`while`循环更集中，将循环变量的初始化、循环结束条件的判断和循环变量的更新放在了一个语句中
 
@@ -149,7 +149,7 @@ int main()
     }
 ```
 
-## do-while循环
+## `do-while`循环
 
 ### 基本结构
 
@@ -186,7 +186,7 @@ int main()
 
 上面的代码中，首先会在判断之前执行一次循环体，然后再执行循环判断语句，首先打印一遍1，再循环打印2—9的数字。每一次循环中，`i++`语句用于更新循环变量`i`，而`int i = 1;`语句用于创建循环变量`i`。
 
-### do-while循环与自增操作结合置于判断条件内
+### `do-while`循环与自增操作结合置于判断条件内
 
 ```C
 #define _CRT_SECURE_NO_WARNINGS 1
@@ -220,17 +220,17 @@ int main()
 10
 ```
 
-## 循环中的break与continue
+## 循环中的`break`与`continue`
 
-### 循环中break和continue中的作用
+### 循环中`break`和`continue`中的作用
 
 `break`：永久终止循环，直接跳出当前循环，再执行当前循环以外的语句
 
 `continue`：跳过本次循环中`continue`后面的代码
 
-#### while中的break与continue
+#### `while`中的`break`与`continue`
 
-##### break
+##### `break`
 
 在`while`循环中，`break`用于跳出当前循环，并执行`while`循环以外的语句
 
@@ -259,7 +259,7 @@ int main()
 
 在上面的代码中，当`i`等于5时，`if`表达式为真，执行`if`语句中的`break`，跳出当前的`while`循环，不再执行循环体内的`printf`语句与更新循环变量`i`语句，而执行循环体外的`printf`语句。
 
-##### 嵌套while循环中的break
+##### 嵌套`while`循环中的`break`
 
 在嵌套`while`循环中，`break`会跳出包括`break`语句的一层循环
 
@@ -307,7 +307,7 @@ i = 10 n = 0 n = 1 n = 2 n = 3 n = 4 n = 5 n = 6
 
 当`i`为`5`时不打印`n`的值，即跳出了内层`while`循环执行外层`while`循环中的语句。
 
-##### continue
+##### `continue`
 
 在`while`循环中，`continue`用于跳过当前循环中`continue`后面的语句，但是注意，如果更新循环变量语句在`cotinue`后面会造成死循环
 
@@ -357,17 +357,17 @@ int main()
 2 3 4 6 7 8 9 10 11
 ```
 
-#### for循环中的break与continue
+#### `for`循环中的`break`与`continue`
 
-##### break
+##### `break`
 
 `for`循环中的`break`语句与`while`循环中的`break`语句作用效果一样。
 
-##### 嵌套for循环中的break
+##### 嵌套`for`循环中的`break`
 
 嵌套`for`循环中的`break`语句与嵌套`while`循环中的`break`语句作用效果一样
 
-##### continue
+##### `continue`
 
 由于`for`循环中的更新循环变量表达式在`for`表达式内，而不是在循环体内，所以`for`循环中的`continue`语句效果和`while`循环中的`continue`语句会有一些差异
 
@@ -397,19 +397,19 @@ int main()
 
 由于更新循环变量表达式`i++`在`for`循环表达式中，而不是在循环体内，所以执行`continue`语句后会执行更新循环变量表达式`i++`，从而不会造成死循环。
 
-#### do-while循环中的break与continue
+#### `do-while`循环中的`break`与`continue`
 
-##### break
+##### `break`
 
 `do-while`循环中的`break`语句与`while`循环中的`break`语句作用效果一样。
 
-##### continue
+##### `continue`
 
 `do-while`循环中的`continue`语句与`while`循环中的`continue`语句作用效果一样。
 
 ## 循环体内的变量可否访问
 
-### while循环
+### `while`循环
 
 ```C
 //while循环中的变量
@@ -442,7 +442,7 @@ int main()
 } 
 ```
 
-### for循环
+### `for`循环
 
 ```C
 #define _CRT_SECURE_NO_WARNINGS 1
@@ -473,6 +473,6 @@ int main()
 }
 ```
 
-### do-while循环
+### `do-while`循环
 
 与`while`循环相同

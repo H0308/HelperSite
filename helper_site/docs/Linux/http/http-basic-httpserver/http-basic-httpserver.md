@@ -118,11 +118,11 @@ URL编码确保了含有特殊字符的数据可以通过URL安全传输，是We
 
 在HTTP请求结构中：
 
-首先是请求行部分，其中第一个就是HTTP的请求方法，具体的方法一共有6种，但是最常见的就是`GET`和`POST`方法，具体二者的区别会在[后面的章节进行讲解](#)；接着是`URI`实际上对应的就是<a href="javascript:;" class="custom-tooltip" data-title="即去除协议+IP地址+端口号（域名）剩余的部分，但是不包括参数">资源路径</a>；最后就是HTTP版本，具体在[HTTP版本部分](#)会有具体介绍，此处不具体说明
+首先是请求行部分，其中第一个就是HTTP的请求方法，具体的方法一共有6种，但是最常见的就是`GET`和`POST`方法，具体二者的区别会在[后面的章节进行讲解](https://www.help-doc.top/Linux/http/http-header-request-method/http-header-request-method.html)；接着是`URI`实际上对应的就是<a href="javascript:;" class="custom-tooltip" data-title="即去除协议+IP地址+端口号（域名）剩余的部分，但是不包括参数">资源路径</a>；最后就是HTTP版本，具体在[HTTP版本部分](https://www.help-doc.top/Linux/http/http-version/http-version.html)会有具体介绍，此处不具体说明
 
-第二部分就是请求报头，请求报头所有的属性都是以`key: value`的形式存在，具体存在哪些属性在[后面的章节会提及](#)，此处不具体说明
+第二部分就是请求报头，请求报头所有的属性都是以`key: value`的形式存在，具体存在哪些属性在[后面的章节会提及](https://www.help-doc.top/Linux/http/http-header-request-method/http-header-request-method.html)，此处不具体说明
 
-最后就是请求正文，这里一般存放着请求时传递给服务器的参数，但是具体是否存在请求参数需要看请求方式，具体见[后面的章节进行讲解](#)
+最后就是请求正文，这里一般存放着请求时传递给服务器的参数，但是具体是否存在请求参数需要看请求方式，具体见[后面的章节进行讲解](https://www.help-doc.top/Linux/http/http-header-request-method/http-header-request-method.html)
 
 ### HTTP响应结构
 

@@ -2,7 +2,9 @@
 #waline {
     font-family: var(--md-text-font);
 }
-
+.wl-nick {
+    transition: none;
+}
 /* 评论输入框样式 */
 .wl-editor {
     border-radius: 6px !important;

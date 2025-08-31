@@ -88,6 +88,23 @@ search:
 .md-content__inner:before {
     content: none !important;
 }
+.back-to-top-btn {
+    display: none;
+}
+@media (max-width: 768px) {
+
+    .content-container {
+        padding: 2rem 0rem;
+    }
+    .content-card {
+        padding: 0.8rem;
+    }
+
+    .card-avatar img {
+        height: 75px;
+        width: 75px;
+    }
+}
 </style>
 
 <div class="content-container">
@@ -99,7 +116,7 @@ search:
             <h1>联系作者</h1>
             <ul>
                 <li>CSDN博客：<a href="https://blog.csdn.net/m0_73281594?spm=1010.2135.3001.5343" target="_blank">柯懒不是柯南</a></li>
-                <li>QQ：<a href="mqqwpa://im/chat?chat_type=wpa&uin=1848312235&version=1&src_type=web">1848312235</a></li>
+                <li>QQ：<a href="tencent://message/?uin=1848312235" onclick="this.href='mqqwpa://im/chat?chat_type=wpa&uin=1848312235&version=1&src_type=web'; return true;">1848312235</a></li>
                 <li>邮箱：<a href="mailto:watneymark82@gmail.com">watneymark82@gmail.com</a> 或 <a href="mailto:1848312235@qq.com">1848312235@qq.com</a></li>
             </ul>
         </div>

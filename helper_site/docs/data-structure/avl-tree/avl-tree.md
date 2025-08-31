@@ -476,7 +476,7 @@ void rotateRL(node* parent)
 
 ### 判断AVL树是否平衡
 
-如果想知道上面设计的AVL树是否平衡，可以参考[算法：二叉树基础练习篇](https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basicW.html#110)的代码
+如果想知道上面设计的AVL树是否平衡，可以参考[算法：二叉树基础练习篇](https://www.help-doc.top/algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html#110)的代码
 
 ### AVL旋转可行性
 

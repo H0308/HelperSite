@@ -371,7 +371,7 @@ int main()
 运行程序结果如下：
 <img src="13. Linux文件操作基础.assets\image6.png">
 
-可以看到此时文件权限就是正常的，但是因为存在[文件权限掩码`umask`](https://www.help-doc.top/permission/permission.html#_8)，所以其值并不是代码中设置的0666（对应为-rw-rw-rw-），当前系统的文件权限掩码可以通过`umask`指令查看，默认为0002
+可以看到此时文件权限就是正常的，但是因为存在[文件权限掩码`umask`](https://www.help-doc.top/Linux/permission/permission.html#_8)，所以其值并不是代码中设置的0666（对应为-rw-rw-rw-），当前系统的文件权限掩码可以通过`umask`指令查看，默认为0002
 
 如果不希望在程序中创建的文件所拥有的权限受到系统umask影响，可以在创建文件之前使用`umask`函数设置初始的文件权限掩码为0：
 ```c++

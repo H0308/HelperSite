@@ -1,0 +1,234 @@
+.DocSearch-Modal {
+    border-radius: 16px;
+    box-shadow: 0 25px 50px var(--shadow-dark);
+    border: 1px solid var(--primary-blue-light);
+    backdrop-filter: blur(10px);
+}
+
+.DocSearch-SearchBar {
+    background: var(--bg-white-semi);
+    border-radius: 12px 12px 0 0;
+    border-bottom: 1px solid var(--primary-blue-light);
+    padding: 20px;
+}
+
+.DocSearch-Form {
+    background: transparent;
+    border-radius: 10px;
+    border: 2px solid var(--primary-blue-light);
+    transition: all 0.3s ease;
+}
+
+.DocSearch-Form:focus-within {
+    border-color: var(--border-primary-dark);
+    box-shadow: 0 0 0 3px var(--primary-blue-light);
+}
+
+.DocSearch-Input {
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.DocSearch-Input::placeholder {
+    color: var(--text-lighter);
+}
+
+/* 搜索结果容器 */
+.DocSearch-Dropdown {
+    background: var(--bg-white-strong);
+    border-radius: 0 0 12px 12px;
+}
+
+/* 修复悬浮时文字颜色 */
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-title,
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-path,
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-content-wrapper {
+    color: var(--text-primary);
+}
+
+.DocSearch-Hit[aria-selected=true] a {
+    font-size: 1rem;
+}
+
+/* 搜索结果项悬浮过渡效果 */
+.DocSearch-Hit {
+    transition: all 0.25s ease;
+    border-radius: 6px;
+    margin: 2px 0;
+}
+
+.DocSearch-Hit:hover {
+    background: rgba(77, 166, 218, 0.08);
+    transform: translateX(4px);
+    box-shadow: 0 2px 12px rgba(77, 166, 218, 0.12);
+}
+
+.DocSearch-Hit[aria-selected="true"] {
+    background: rgba(77, 166, 218, 0.12);
+    border-radius: 8px;
+    transform: translateX(6px);
+    box-shadow: 0 4px 16px rgba(77, 166, 218, 0.2);
+    border-left: 3px solid #4da6da;
+}
+
+/* 搜索结果标题和路径的过渡效果 */
+.DocSearch-Hit-title {
+    transition: color 0.25s ease;
+}
+
+.DocSearch-Hit-path {
+    transition: color 0.25s ease;
+}
+
+.DocSearch-Hit:hover .DocSearch-Hit-title {
+    color: #275796;
+}
+
+.DocSearch-Hit:hover .DocSearch-Hit-path {
+    color: #4da6da;
+}
+/* 确保正常状态下文字颜色可见 */
+.DocSearch-Hit-title,
+.DocSearch-Hit-path,
+.DocSearch-Hit-content-wrapper {
+    color: #1a1a1a;
+}
+
+.DocSearch-Hit-content-wrapper {
+    overflow-x: unset;
+}
+
+.DocSearch-Button-Placeholder {
+    font-size: 0.75rem;
+    color: rgba(77, 166, 218, 0.8);
+    font-weight: 400;
+}
+
+/* 搜索按钮样式 - 简约设计 */
+.DocSearch-Button {
+    margin-right: 20px;
+    background: var(--primary-blue-light);
+    border: 1px solid var(--primary-blue-strong);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    height: 40px;
+    padding: 0 20px;
+    min-width: 280px;
+    max-width: 400px;
+    box-shadow: none;
+}
+
+.DocSearch-Button:hover {
+    background: var(--primary-blue-strong);
+    border-color: var(--primary-blue-strong);
+    transform: none;
+    box-shadow: 0 2px 8px var(--primary-blue-medium);
+}
+
+.DocSearch-Search-Icon {
+    color: rgba(77, 166, 218, 0.7);
+    width: 16px;
+    height: 16px;
+}
+
+/* 确保链接可点击 */
+.DocSearch-Hit > a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.DocSearch-Hit > a:hover {
+    text-decoration: none;
+}
+
+.DocSearch-Container {
+    z-index: 999;
+}
+
+/* 修复移动端搜索模态框问题 */
+@media (max-width: 768px) {
+    /* 搜索按钮在移动端只显示图标 */
+    .DocSearch-Button {
+        width: 40px;
+        min-width: 40px;
+        max-width: 40px;
+        padding: 8px;
+        border-radius: 50%;
+    }
+
+    /* 隐藏搜索框中的文本和快捷键 */
+    .DocSearch-Button-Placeholder,
+    .DocSearch-Button-Keys {
+        display: none;
+    }
+
+    /* 搜索图标居中显示 */
+    .DocSearch-Search-Icon {
+        width: 20px;
+        height: 20px;
+        margin: 0;
+    }
+
+    /* 确保搜索模态框覆盖整个屏幕 */
+    .DocSearch-Modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        max-height: none;
+        margin: 0;
+        border-radius: 0;
+        z-index: 9999;
+    }
+
+    /* 确保背景遮罩覆盖整个屏幕 */
+    .DocSearch-Container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9998;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    /* 防止背景页面滚动 */
+    body.DocSearch--active {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* 搜索框容器样式 */
+    .DocSearch-SearchBar {
+        padding: 16px;
+        border-bottom: 1px solid #e1e5e9;
+    }
+
+    /* 搜索结果容器 */
+    .DocSearch-Dropdown {
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+        padding: 0 16px;
+    }
+
+    /* 搜索输入框 */
+    .DocSearch-Input {
+        font-size: 16px; /* 防止iOS缩放 */
+    }
+
+    /* 关闭按钮 */
+    .DocSearch-Cancel {
+        padding: 8px 16px;
+        margin-left: 8px;
+    }
+}

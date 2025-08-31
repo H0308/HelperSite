@@ -53,7 +53,7 @@ RPC（Remote Procedure Call）远程过程调用，是一种通过网络从远�
 
 ### 网络服务模块
 
-基于Muduo库设计，，对于Muduo库的介绍和使用可以参考[关于Muduo库](https://www.help-doc.top/other/muduo/muduo.html#muduo)，关于Muduo库具体的设计原理，可以参考[仿Muduo库高并发服务器](https://www.help-doc.top/reactor-server/intro/intro.html)
+基于Muduo库设计，，对于Muduo库的介绍和使用可以参考[关于Muduo库](https://www.help-doc.top/other/muduo/muduo.html#muduo)，关于Muduo库具体的设计原理，可以参考[仿Muduo库高并发服务器](https://www.help-doc.top/projects/reactor-server/intro/intro.html)
 
 ### 应用层协议模块
 

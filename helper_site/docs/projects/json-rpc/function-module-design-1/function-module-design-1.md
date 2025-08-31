@@ -1002,7 +1002,7 @@ struct RequestDesc
 };
 ```
 
-既然提供了三种方式，那么请求处理模块在收到对应的响应之后又该如何分别是哪一种方式发送的请求，又该调用哪一种方式处理响应结果？此时就需要使用到消息发送模式枚举类，该类在前面的[基础模块设计](https://www.help-doc.top/%E9%A1%B9%E7%9B%AE/2.%20%E5%9F%BA%E4%BA%8EJSON%E7%9A%84RPC%E6%A1%86%E6%9E%B6/2.%20%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1/2.%20%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1.html#_4)部分已经展示过，此处不再重复。完整的请求描述类设计如下：
+既然提供了三种方式，那么请求处理模块在收到对应的响应之后又该如何分别是哪一种方式发送的请求，又该调用哪一种方式处理响应结果？此时就需要使用到消息发送模式枚举类，该类在前面的[基础模块设计](https://www.help-doc.top/projects/json-rpc/basic-module-design/basic-module-design.html#_4)部分已经展示过，此处不再重复。完整的请求描述类设计如下：
 
 ```cpp
 struct RequestDesc

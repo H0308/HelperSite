@@ -11,8 +11,7 @@ theme:
   features:
     - navigation.indexes
     - navigation.prune
-    - navigation.tabs 
-    - search.highlight
+    - navigation.tabs
     - content.code.copy
   language: zh
   palette:
@@ -374,8 +373,9 @@ markdown_extensions:
   - toc:
       permalink: true
       baselevel: 1  # 开始级别
-      toc_depth: 6  # 最大深度
+      toc_depth: 6
       title: 本节目录
+      separator: "_"
   - def_list
   - pymdownx.tasklist:
       custom_checkbox: true
@@ -385,12 +385,13 @@ extra_javascript:
   - javascripts/other.js
   - javascripts/copyright.js
   - javascripts/waline.js
+  - javascripts/docsearch.js
   - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js
   - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js
   - https://cdn.jsdelivr.net/npm/mermaid@11.5.0/dist/mermaid.min.js
+  - https://cdn.jsdelivr.net/npm/@docsearch/js@3
 
 extra:
-  extra:
   analytics:
     provider: google
     property: G-9XWRGNRRSY
@@ -400,7 +401,7 @@ extra:
         - icon: material/thumb-up-outline
           name: 页面对我有帮助
           data: 1
-          note: >-
+          note: >
             谢谢你的反馈！
         - icon: material/thumb-down-outline
           name: 页面没有帮助到我
@@ -413,14 +414,12 @@ extra:
     - icon: fontawesome/brands/qq
       link: https://www.help-doc.top/author/contact/contact.html
   generator: false
+  algolia:
+    app_id: SDEU4ZQ2OW
+    api_key: 57fa46cd9411b8431d55daeb5ae52b77
+    index_name: 柯懒不是柯南
 
 plugins:
-  - search:
-      lang: 
-        - zh
-        - en
-      jieba_dict: dict.it.txt
-      jieba_dict_user: dict.it.txt
   - encryptcontent:
       title_prefix: '[加密] '
       summary: '加密页面'
@@ -443,6 +442,7 @@ plugins:
           - javascripts/copyright.js
           - javascripts/start.js
           - javascripts/waline.js
+          - javascripts/docsearch.js
       css_files:
         - stylesheets/code-font-dejavu-sans-mono.css
         - stylesheets/code-font-zsft-hk.css
@@ -456,6 +456,7 @@ plugins:
         - stylesheets/print.css
         - stylesheets/waline.css
         - stylesheets/code-font-google-sans-code.css
+        - stylesheets/docsearch.css
   - glightbox:
       touchNavigation: true
       loop: false

@@ -251,7 +251,7 @@ int main()
 
 <img src="1. Linux线程概念与线程操作.assets\Snipaste_2025-02-06_16-15-28.png">
 
-从上面的运行结果可以看出，两个线程是异步打印到同一个资源（显示器）上，所以存在打印错乱的情况，但是的确可以做到每一个线程完成自己的任务而不会受到其他线程的干扰，这两个线程就是两个不同的执行流，而因为`routine`函数始终在访问同一个资源，所以此时其是[不可重入函数](https://www.help-doc.top/Linux/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/18.%20Linux%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html#_11)
+从上面的运行结果可以看出，两个线程是异步打印到同一个资源（显示器）上，所以存在打印错乱的情况，但是的确可以做到每一个线程完成自己的任务而不会受到其他线程的干扰，这两个线程就是两个不同的执行流，而因为`routine`函数始终在访问同一个资源，所以此时其是[不可重入函数](https://www.help-doc.top/Linux/signals-os-principles/signals-os-principles.html#_11)
 
 #### 理解资源划分
 

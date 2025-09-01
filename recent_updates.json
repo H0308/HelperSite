@@ -1,6 +1,6 @@
 [
   {
-    "title": "Contact",
+    "title": "联系作者",
     "url": "author/contact/contact.html",
     "nav_path": null,
     "created_str": "2025-02-25",
@@ -11,6 +11,20 @@
     "url": "cpp/multi-thread/multi-thread.html",
     "nav_path": null,
     "created_str": "2025-04-16",
+    "modified_str": "2025-08-31"
+  },
+  {
+    "title": "消息队列与信号量",
+    "url": "Linux/com-process/com-message-queue-semaphore/com-message-queue-semaphore.html",
+    "nav_path": null,
+    "created_str": "2025-02-25",
+    "modified_str": "2025-08-31"
+  },
+  {
+    "title": "UDP应用2：简易聊天室",
+    "url": "Linux/udp/udp-app2/udp-app2.html",
+    "nav_path": null,
+    "created_str": "2025-02-28",
     "modified_str": "2025-08-31"
   }
 ]

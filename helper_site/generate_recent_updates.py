@@ -38,7 +38,7 @@ def extract_title_from_md(file_path):
                     pass
                 content = parts[2]
         
-        # 查找第一个标题
+        # 查找第一个Markdown格式的标题
         lines = content.split('\n')
         for line in lines:
             line = line.strip()
@@ -47,7 +47,13 @@ def extract_title_from_md(file_path):
             elif line.startswith('## '):
                 return line[3:].strip()
         
-        # 如果没找到标题，使用文件名
+        # 如果没找到Markdown格式的标题，尝试查找HTML h1标签
+        import re
+        h1_match = re.search(r'<h1[^>]*>([^<]+)</h1>', content, re.IGNORECASE)
+        if h1_match:
+            return h1_match.group(1).strip()
+        
+        # 如果都没找到标题，使用文件名
         return Path(file_path).stem.replace('-', ' ').replace('_', ' ').title()
     except Exception:
         return Path(file_path).stem.replace('-', ' ').replace('_', ' ').title()
@@ -122,7 +128,7 @@ def generate_recent_updates(docs_dir='docs', max_items=10):
     # 按修改时间排序，最新的在前
     recent_files.sort(key=lambda x: x['modified_time'], reverse=True)
     
-    return recent_files[:2]
+    return recent_files[:4]
 
 def generate_html_list(recent_updates):
     """生成HTML格式的最近更新列表"""

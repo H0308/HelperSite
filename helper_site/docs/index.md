@@ -562,7 +562,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <div class="content-card">
                 <h2>最近更新</h2>
-                <p>最近的文档更新如下：</p>
+                <p>最近更新的文档如下：</p>
                 <div id="recent-updates-container">
                     <p class="recent-updates-loading">正在加载最近更新...</p>
                 </div>

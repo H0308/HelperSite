@@ -1,4 +1,8 @@
 @media print {
+    .back-to-top-btn {
+        display: none;
+    }
+    
     a[href]:after {
         content: "" !important;
     }

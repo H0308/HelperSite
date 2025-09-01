@@ -3,8 +3,7 @@ hide:
   - navigation
   - toc
   - feedback
-search:
-    exclude: true
+glightbox: false
 ---
 
 <style>

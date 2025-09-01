@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # Java中的Junit、类加载时机与机制、反射、注解及枚举
 
 ## Junit

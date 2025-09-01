@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # vim多模式文本编辑器
 
 ## vim 键盘图

@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # NAT技术、代理服务器和内网穿透
 
 ## NAT和NAPT技术

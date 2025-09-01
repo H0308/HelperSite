@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # C语言函数
 
 在C语言中，函数就是一个完成某项特定的任务的一小段代码

@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # 前端章节目录
 
 本节主要介绍一些前端的知识，目前包括：

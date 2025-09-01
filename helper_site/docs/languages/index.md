@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # 本章目录
 
 本章共包括对4种编程语言的介绍，其中详细介绍了C语言、C++和Java，简单了解了Python，可以通过下面的链接跳转到对应语言的目录了解更多：

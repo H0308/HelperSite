@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # DNS与ICMP
 
 在现代互联网世界中，DNS（Domain Name System）和ICMP（Internet Control Message Protocol）是两个不可或缺的组成部分。它们各自承担着不同的角色，但共同保障了网络通信的顺畅进行。本文将深入探讨DNS和ICMP的工作原理及其在网络中的重要性，并结合实际应用场景帮助读者更好地理解这两个概念

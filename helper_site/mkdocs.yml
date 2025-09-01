@@ -343,6 +343,7 @@ not_in_nav: |
   author/contact/contact.md
 
 markdown_extensions:
+  - meta
   - admonition
   - pymdownx.details
   - pymdownx.inlinehilite
@@ -381,14 +382,9 @@ markdown_extensions:
       custom_checkbox: true
 
 extra_javascript:
-  - javascripts/katex.js
   - javascripts/other.js
   - javascripts/copyright.js
-  - javascripts/waline.js
   - javascripts/docsearch.js
-  - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js
-  - https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js
-  - https://cdn.jsdelivr.net/npm/mermaid@11.5.0/dist/mermaid.min.js
   - https://cdn.jsdelivr.net/npm/@docsearch/js@3
 
 extra:

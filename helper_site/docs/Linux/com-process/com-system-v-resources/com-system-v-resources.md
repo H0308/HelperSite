@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # 操作系统管理System V标准中三种资源的方式
 
 前面介绍了四种进程间通信的方式，其中共享内存、消息队列和信号量属于System V标准的通信方式，在使用这三种进程间通信方式时可以发现其中的接口都比较类似，如下表所示：

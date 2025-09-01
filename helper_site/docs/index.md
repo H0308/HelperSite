@@ -4,8 +4,7 @@ hide:
   - navigation
   - toc
   - feedback
-search:
-    exclude: true
+glightbox: false
 ---
 
 <style>
@@ -509,7 +508,7 @@ a {
         }
     }
 </style>
-
+<script src="/javascripts/recent-updates.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   let mdTypeset = document.querySelector('.md-typeset');
@@ -553,10 +552,10 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="content-card">
                 <h2>字体说明</h2>
                 <ul>
-                    <li>导航栏标题：上图东观体</li>
-                    <li>标题：上图东观体</li>
-                    <li>内容：江城黑体</li>
-                    <li>代码：Google Sans Code</li>
+                    <li>导航栏标题：<span style="font-family: var(--md-header-font);">上图东观体</span></li>
+                    <li>标题：<span style="font-family: var(--md-header-font);">上图东观体</span></li>
+                    <li>内容：<span style="font-family: var(--md-text-font);">江城黑体</span></li>
+                    <li>代码：<span style="font-family: var(--md-code-font);">Google Sans Code</span></li>
                 </ul>
             </div>
             

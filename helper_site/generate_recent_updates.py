@@ -95,15 +95,22 @@ def generate_recent_updates(docs_dir='docs', max_items=10):
     
     # 遍历所有markdown文件
     for md_file in docs_path.rglob('*.md'):
-        # 跳过index.md文件
-        if md_file.name == 'index.md' and md_file.parent == docs_path:
+        # 跳过所有index.md文件（包括子目录的）
+        if md_file.name == 'index.md':
+            continue
+            
+        # 获取相对于docs目录的路径
+        relative_path = md_file.relative_to(docs_path).as_posix()
+        
+        # 跳过时间线文档和联系作者文档
+        if ('timeline/' in relative_path or 
+            'author/contact' in relative_path or
+            'author/about' in relative_path):
             continue
             
         mod_time = get_file_modification_time(md_file)
         created_time = get_file_creation_time(md_file)
         if mod_time and created_time:
-            # 获取相对于docs目录的路径
-            relative_path = md_file.relative_to(docs_path).as_posix()
             
             # 获取标题
             title = extract_title_from_md(md_file)

@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # Reactor模式与完善基于边缘触发模式epoll实现TCP服务器
 
 ## Reactor模式（反应堆模式）
@@ -14,7 +18,7 @@
 
 ### 数据准备
 
-既然要做IO处理，那么少不了的就是定制协议，这样才可以尽可能保障客户端和服务端之间通信，本次考虑使用前面在[序列化和反序列化与网络计算器](https://www.help-doc.top/serialization-net-cal/serialization-net-cal.html#_1)封装的协议：`Response`类和`Request`类
+既然要做IO处理，那么少不了的就是定制协议，这样才可以尽可能保障客户端和服务端之间通信，本次考虑使用前面在[序列化和反序列化与网络计算器](https://www.help-doc.top/Linux/serialization-net-cal/serialization-net-cal.html#_1)封装的协议：`Response`类和`Request`类
 
 ### 完善`recvData`函数
 

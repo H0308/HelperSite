@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # 关于C++日志库spdlog
 
 [spdlog](https://github.com/gabime/spdlog)是一个高性能、易于使用的C\+\+日志库，广泛应用于现代C\+\+项目中。它支持多线程、异步日志记录、多种日志格式、以及灵活的输出方式（如控制台、文件、甚至自定义输出）。下面将就常用功能方面介绍spdlog的安装、配置和使用方法

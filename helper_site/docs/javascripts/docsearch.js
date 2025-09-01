@@ -23,9 +23,6 @@ function initializeDocSearch() {
             indexName: '柯懒不是柯南',
             container: '#docsearch',
             placeholder: '搜索文档...',
-            // searchParameters: {
-            //     // facetFilters: ['language:zh'] // 暂时注释掉，可能导致搜索无结果
-            // },
             // 中文翻译配置
             translations: {
                 button: {

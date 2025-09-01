@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # 数组理论基础
 
 数组是一种在内存中有着连续空间的数据结构，可以使用下标访问，但是缺点是定长，在C++中一般情况下都需要在创建数组的同时给定数组空间

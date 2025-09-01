@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # C++ IO流
 
 C++系统中实现了一个庞大的类库，其中`ios`为基类，其他类都是直接或间接派生自`ios`类

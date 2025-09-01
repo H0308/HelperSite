@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # `reverse_iterator`迭代器结构设计
 
 前面的list类以及vector类设计了正向迭代器，现在考虑设计反向迭代器，常规的设计思路为单独为反向迭代器建一个新类，这个类中所有的函数全部重新设计，这种思路可取但是并不高效，可以考虑下面的设计思路：

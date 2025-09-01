@@ -27,8 +27,24 @@ if %errorlevel% neq 0 (
 )
 
 echo.
+echo Cleaning up root directory JSON file...
+del recent_updates.json
+
+REM Check if HTML file is needed (you can modify this condition as needed)
+REM For now, we assume HTML file is not needed and delete it
+echo Checking if HTML file is needed...
+if exist recent_updates.html (
+    echo HTML file found, deleting as it's not needed...
+    del recent_updates.html
+    echo HTML file deleted.
+) else (
+    echo No HTML file found to delete.
+)
+
+echo.
 echo Success: Recent documents update completed!
 echo JSON file has been copied to docs directory
+echo Root directory cleaned up
 echo.
 echo Press any key to exit...
 pause > nul

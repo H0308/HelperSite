@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # 数据结构章节目录
 
 本章节的[数据结构基础](https://www.help-doc.top/data-structure/time-space-complexity/time-space-complexity.html)首先介绍了数据结构中的一些基础概念，包括数据、数据对象、数据元素、数据项，分析了数据对象、数据元素和数据项之前的关系，接着介绍了算法的概念和特点以及算法设计和效率的衡量，最后基本介绍了时间复杂度和空间复杂度二者的计算方式

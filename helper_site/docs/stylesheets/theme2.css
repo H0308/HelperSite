@@ -10,15 +10,15 @@
     font-display: swap;
 }
 
-.md-header__topic .md-ellipsis {
-    font-family: "STDongGuanTi" !important;
-}
-
 :root {
     --md-text-font: "JiangChengHeiTi 400W", sans-serif;
     --md-header-font: "STDongGuanTi", sans-serif;
     --md-code-font: "ZSFT-669";
     --code-font-color: var(--text-code);
+}
+
+.md-header__topic .md-ellipsis {
+    font-family: var(--md-header-font) !important;
 }
 
 h1 + div > p {
@@ -71,16 +71,6 @@ h1 + div > p {
     opacity: 1;
 }
 
-
-
-
-
-
-
-
-
-
-
 /* 响应式设计 */
 @media screen and (max-width: 768px) {
     :root {
@@ -123,7 +113,7 @@ li::marker {
     color: var(--primary-blue-semi);
 }
 
-[data-md-toggle="search"]:checked ~ .md-header .md-search__form {
+/* [data-md-toggle="search"]:checked ~ .md-header .md-search__form {
     border-radius: 8px 8px 0px 0px;
 }
 
@@ -151,7 +141,7 @@ li::marker {
 
 .md-search__output {
     border-radius: 0px 0px 8px 8px !important;
-}
+} */
 
 .md-tooltip {
     background-color: var(--overlay-dark);
@@ -281,11 +271,9 @@ strong {
     padding: 10px;
     border-radius: 6px;
     bottom: 125%;
-    /* 定位在链接上方 */
     left: 50%;
     transform: translateX(-50%);
     z-index: 99999;
-    /* 确保显示在最上层 */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s;

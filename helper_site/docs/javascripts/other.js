@@ -48,3 +48,45 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+// 动态调整 tooltip 位置以防止溢出
+function adjustTooltipPosition() {
+    const tooltips = document.querySelectorAll('.custom-tooltip');
+
+    tooltips.forEach(tooltip => {
+        // 移除之前的定位类
+        tooltip.classList.remove('tooltip-left', 'tooltip-right');
+
+        // 获取元素位置信息
+        const rect = tooltip.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+
+        // 计算 tooltip 的预期宽度（最大 300px）
+        const tooltipWidth = Math.min(300, viewportWidth - 20);
+
+        // 检查是否会溢出右边
+        const rightOverflow = (rect.left + tooltipWidth / 2) > (viewportWidth - 10);
+
+        // 检查是否会溢出左边
+        const leftOverflow = (rect.left - tooltipWidth / 2) < 10;
+
+        if (rightOverflow) {
+            tooltip.classList.add('tooltip-right');
+        } else if (leftOverflow) {
+            tooltip.classList.add('tooltip-left');
+        }
+        // 如果都不溢出，保持默认居中
+    });
+}
+
+// 页面加载完成后执行
+document.addEventListener('DOMContentLoaded', adjustTooltipPosition);
+
+// 窗口大小改变时重新调整
+window.addEventListener('resize', adjustTooltipPosition);
+
+// 在移动设备上，当用户点击 tooltip 时也重新调整
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('custom-tooltip')) {
+        setTimeout(adjustTooltipPosition, 10);
+    }
+});

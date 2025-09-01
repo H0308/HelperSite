@@ -2,6 +2,7 @@
 @import url("https://fontsapi.zeoseven.com/488/main/result.css");
 /* 江城黑体 */
 @import url("https://fontsapi.zeoseven.com/194/main/result.css");
+
 /* Google Sans Code */
 @font-face {
     font-family: "ZSFT-669";
@@ -21,13 +22,14 @@
     font-family: var(--md-header-font) !important;
 }
 
-h1 + div > p {
+h1+div>p {
     font-family: var(--md-header-font);
 }
 
 /* 返回顶部按钮样式 */
 :root {
-    --footer-height: 120px; /* 默认页脚高度 */
+    --footer-height: 120px;
+    /* 默认页脚高度 */
 }
 
 .back-to-top-btn {
@@ -74,9 +76,10 @@ h1 + div > p {
 /* 响应式设计 */
 @media screen and (max-width: 768px) {
     :root {
-        --footer-height: 100px; /* 移动端页脚高度 */
+        --footer-height: 100px;
+        /* 移动端页脚高度 */
     }
-    
+
     .back-to-top-btn {
         width: 45px;
         height: 45px;
@@ -93,9 +96,10 @@ h1 + div > p {
 
 @media screen and (max-width: 480px) {
     :root {
-        --footer-height: 80px; /* 小屏幕页脚高度 */
+        --footer-height: 80px;
+        /* 小屏幕页脚高度 */
     }
-    
+
     .back-to-top-btn {
         width: 40px;
         height: 40px;
@@ -218,7 +222,7 @@ body {
     border-bottom: 2px solid var(--primary-blue-semi);
 }
 
-.md-tabs__list > .md-tabs__item--active > .md-tabs__link {
+.md-tabs__list>.md-tabs__item--active>.md-tabs__link {
     color: var(--primary-blue-semi) !important;
 }
 
@@ -243,15 +247,19 @@ body {
 .changelog-type-pageupdate {
     background-color: var(--primary-blue-semi) !important;
 }
+
 ::selection {
     background: var(--primary-blue-strong);
 }
+
 strong {
     color: var(--text-purple);
 }
-.md-typeset strong > code {
+
+.md-typeset strong>code {
     font-weight: bold;
 }
+
 .custom-tooltip {
     position: relative;
     display: inline-block;
@@ -315,19 +323,49 @@ strong {
 /* 修改移动设备上的 tooltip 样式，确保不会溢出屏幕 */
 @media (max-width: 767px) {
     .custom-tooltip::before {
-        width: calc(100vw - 40px);
-        max-width: 250px;
+        width: auto;
+        max-width: calc(100vw - 20px);
+        min-width: 250px;
         white-space: normal;
         font-size: 14px;
         left: 50%;
         transform: translateX(-50%);
         bottom: 130%;
         box-sizing: border-box;
+        /* 添加类来控制不同的定位 */
+    }
+
+    /* 左对齐样式 */
+    .custom-tooltip.tooltip-left::before {
+        left: 0;
+        transform: translateX(0);
+        margin-left: 10px;
+    }
+
+    .custom-tooltip.tooltip-left::after {
+        left: 20px;
+        margin-left: 0;
+    }
+
+    /* 右对齐样式 */
+    .custom-tooltip.tooltip-right::before {
+        left: auto;
+        right: 0;
+        transform: translateX(0);
+        margin-right: 10px;
+    }
+
+    .custom-tooltip.tooltip-right::after {
+        left: auto;
+        right: 20px;
+        margin-left: 0;
     }
 
     .custom-tooltip:hover::before {
-        max-height: 80vh;
         overflow-y: auto;
+        overflow-x: hidden;
+        word-break: break-word;
+        hyphens: auto;
     }
 
     .custom-tooltip:active::before,
@@ -354,6 +392,7 @@ strong {
 }
 
 @media (hover: none) and (pointer: coarse) {
+
     /* 专门针对触摸设备 */
     .custom-tooltip:active::before,
     .custom-tooltip:active::after {
@@ -372,6 +411,7 @@ strong {
         overflow-x: hidden;
         text-overflow: ellipsis;
     }
+
     .katex-display {
         overflow-x: auto;
         overflow-y: hidden;
@@ -382,12 +422,14 @@ strong {
     .katex {
         font-size: 1em !important;
     }
+
     .md-typeset .arithmatex {
         max-width: 100% !important;
         overflow-x: auto;
         padding: 0.1em 0;
         margin: 0;
     }
+
     .katex-inline {
         display: inline-block;
         max-width: 100%;
@@ -396,6 +438,7 @@ strong {
         white-space: normal;
         line-break: anywhere;
     }
+
     .katex-display::after {
         content: "";
         position: absolute;
@@ -403,14 +446,13 @@ strong {
         top: 0;
         height: 100%;
         width: 20px;
-        background: linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0),
-            rgba(255, 255, 255, 0.7)
-        );
+        background: linear-gradient(to right,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0.7));
         pointer-events: none;
     }
 }
+
 .header-avatar {
     display: inline-flex;
     align-items: center;
@@ -419,6 +461,7 @@ strong {
     z-index: 1;
     padding: 3px;
 }
+
 .header-avatar img {
     width: 36px;
     height: 36px;
@@ -430,6 +473,7 @@ strong {
     position: relative;
     z-index: 5;
 }
+
 .avatar-dropdown {
     position: absolute;
     top: 100%;
@@ -609,6 +653,7 @@ strong {
     position: relative;
     overflow: hidden;
 }
+
 /* 页脚爱情宣言样式 */
 .md-footer-love {
     position: relative;
@@ -620,11 +665,9 @@ strong {
     color: rgba(255, 255, 255, 0.85);
     text-align: center;
     border-radius: 8px;
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.1),
-        rgba(255, 255, 255, 0.05)
-    );
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1),
+            rgba(255, 255, 255, 0.05));
     backdrop-filter: blur(4px);
     transition: all 0.4s ease;
     overflow: hidden;
@@ -632,14 +675,13 @@ strong {
 }
 
 .md-footer-love:hover {
-    background: linear-gradient(
-        135deg,
-        rgba(255, 182, 193, 0.2),
-        rgba(255, 255, 255, 0.1)
-    );
+    background: linear-gradient(135deg,
+            rgba(255, 182, 193, 0.2),
+            rgba(255, 255, 255, 0.1));
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 182, 193, 0.15);
 }
+
 .md-footer-love::before,
 .md-footer-love::after {
     content: "★";
@@ -678,6 +720,7 @@ strong {
         transform: scale(0.8);
     }
 }
+
 .love-highlight {
     font-weight: 500;
     background: linear-gradient(120deg, #ffb6c1, #ffc0cb);
@@ -688,6 +731,7 @@ strong {
     position: relative;
     white-space: nowrap;
 }
+
 .love-heart {
     display: inline-block;
     font-size: 0.9em;
@@ -722,6 +766,7 @@ strong {
         transform: scale(1);
     }
 }
+
 @media screen and (max-width: 1199px) {
     .md-footer-love {
         font-size: 0.8rem;
@@ -734,6 +779,7 @@ strong {
         font-size: 0.7rem;
     }
 }
+
 @media screen and (max-width: 767px) {
     .md-footer-love {
         font-size: 0.75rem;
@@ -762,6 +808,7 @@ strong {
 
     /* 在非常小的屏幕上隐藏星星效果 */
     @media screen and (max-width: 360px) {
+
         .md-footer-love::before,
         .md-footer-love::after {
             display: none;

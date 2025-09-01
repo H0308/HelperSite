@@ -1,10 +1,10 @@
 [
   {
-    "title": "联系作者",
-    "url": "author/contact/contact.html",
+    "title": "Reactor模式与完善基于边缘触发模式epoll实现TCP服务器",
+    "url": "Linux/reactor-et/reactor-et.html",
     "nav_path": null,
-    "created_str": "2025-02-25",
-    "modified_str": "2025-08-31"
+    "created_str": "2025-04-13",
+    "modified_str": "2025-09-01"
   },
   {
     "title": "C++并发支持库",

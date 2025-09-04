@@ -298,8 +298,9 @@ nav:
   - 软件测试:
     - 章节目录: software-test/index.md
     - 软件测试相关概念: software-test/basic-concept/basic-concept.md
-    - 自动化测试: software-test/automatic-test/automatic-test.md
+    - 自动化测试概念及UI自动化测试: software-test/automatic-test/automatic-test.md
     - 性能测试: software-test/performance-test/performance-test.md
+    - 接口自动化测试: software-test/api-automatic-test/api-automatic-test.md
   - 扩展知识: 
     - 章节目录: other/index.md
     - 关于Shell: other/shell/shell.md
@@ -312,7 +313,7 @@ nav:
       - Git多人协作: other/git/git-collaboration/git-collaboration.md
     - 关于Muduo库: other/muduo/muduo.md
     - 关于CMake:
-      - CMake基础命令操作: other/cmake/cmake-basic/cmake-basic.md
+      - CMake控制台命令核心操作: other/cmake/cmake-basic/cmake-basic.md
   - 工具帮助:
     - 章节目录: tooltips/index.md
     - vscode中添加代码片段: tooltips/vscode-snippets/vscode-snippets.md

@@ -893,7 +893,29 @@ public @interface RequestMapping {
 3. `consumes`：指定处理请求的提交内容类型(`Content-Type`)，例如`application/json`, `text/html`
 4. `produces`：指定返回的内容类型，还可以同时设置返回值的字符编码
 5. `Params`：要求请求中必须包含某些参数值时，才让该方法处理
-6. `headers`：要求请求中必须包含某些指定的header值，才能让该方法处理请求
+6. `headers`：要求请求中必须包含某些指定的`header`值，才能让该方法处理请求
+
+对于`consumes`和`produces`使用方式如下：
+
+=== "`consumes`"
+
+    ```java
+    @PostMapping(value = "/only-json", consumes = "application/json")
+    public String onlyAcceptJson(@RequestBody User user) {
+        // 接收JSON请求体并返回处理结果
+        return "成功接收JSON格式用户：" + user.getName() + "（年龄：" + user.getAge() + "）";
+    }
+    ```
+
+=== "`produces`"
+
+    ```java
+    @GetMapping(value = "/return-text", produces = "text/plain;charset=UTF-8")
+    public String returnTextWithCharset() {
+        // 返回纯文本，指定Content-Type为text/plain，避免被当作HTML处理
+        return "这是纯文本响应：包含中文和特殊符号！@#￥%";
+    }
+    ```
 
 自定义Header可以通过`HttpServletResponse`对象进行设置：
 

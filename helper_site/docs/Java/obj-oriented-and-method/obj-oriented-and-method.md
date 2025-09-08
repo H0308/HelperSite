@@ -325,20 +325,20 @@ public class Person {
 
 === "`Person`类"
 
-```java
-package com.epsda.java_class;
+    ```java
+    package com.epsda.java_class;
 
-public class Person {
-    // 属性
-    String name;
-    int age;
+    public class Person {
+        // 属性
+        String name;
+        int age;
 
-    // 方法
-    public void print(){
-        System.out.println("name = " + name + " " + "age = " + age);
+        // 方法
+        public void print(){
+            System.out.println("name = " + name + " " + "age = " + age);
+        }
     }
-}
-```
+    ```
 
 === "测试类"
 

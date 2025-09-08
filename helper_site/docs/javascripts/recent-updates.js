@@ -89,6 +89,3 @@ function refreshRecentUpdates() {
             loadStaticRecentUpdates(container);
         });
 }
-
-// 暴露刷新函数到全局作用域，方便调试
-window.refreshRecentUpdates = refreshRecentUpdates;

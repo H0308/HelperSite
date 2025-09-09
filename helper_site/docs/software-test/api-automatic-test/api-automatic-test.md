@@ -329,56 +329,223 @@ def test_api():
 
 === "使用在方法上"
 
-```py
-# 指定参数test接收三次值
-@pytest.mark.parametrize("test", ["测试1", "测试2", "测试2"])
-def test_01(test):
-    print(test)
+    ```py
+    # 指定参数test接收三次值
+    @pytest.mark.parametrize("test", ["测试1", "测试2", "测试2"])
+    def test_01(test):
+        print(test)
 
-# 每一次测试接收多个参数
-@pytest.mark.parametrize("num1, num2, expected", [(3, 5, 8), (2, 4, 6)])
-def test_02(num1, num2, expected):
-    assert (num1 + num2) == expected
-```
+    # 每一次测试接收多个参数
+    @pytest.mark.parametrize("num1, num2, expected", [(3, 5, 8), (2, 4, 6)])
+    def test_02(num1, num2, expected):
+        assert (num1 + num2) == expected
+    ```
 
-输出结果如下：
+    输出结果如下：
 
-```
-cases/test04.py::test_01[\u6d4b\u8bd51] 测试1
-PASSED
-cases/test04.py::test_01[\u6d4b\u8bd52_0] 测试2
-PASSED
-cases/test04.py::test_01[\u6d4b\u8bd52_1] 测试2
-PASSED
-cases/test04.py::test_02[3-5-8] PASSED
-cases/test04.py::test_02[2-4-6] PASSED
-```
+    ```
+    cases/test04.py::test_01[\u6d4b\u8bd51] 测试1
+    PASSED
+    cases/test04.py::test_01[\u6d4b\u8bd52_0] 测试2
+    PASSED
+    cases/test04.py::test_01[\u6d4b\u8bd52_1] 测试2
+    PASSED
+    cases/test04.py::test_02[3-5-8] PASSED
+    cases/test04.py::test_02[2-4-6] PASSED
+    ```
 
 === "使用在类上"
 
-```py
-@pytest.mark.parametrize("test", ["测试1", "测试2", "测试2"])
-class Test_Param:
-    def test_01(self, test):
-        print(test)
+    ```py
+    @pytest.mark.parametrize("test", ["测试1", "测试2", "测试2"])
+    class Test_Param:
+        def test_01(self, test):
+            print(test)
 
-    def test_02(self, test):
-        print(test)
+        def test_02(self, test):
+            print(test)
+    ```
+
+    输出结果如下：
+
+    ```
+    cases/test04.py::Test_Param::test_01[\u6d4b\u8bd51] 测试1
+    PASSED
+    cases/test04.py::Test_Param::test_01[\u6d4b\u8bd52_0] 测试2
+    PASSED
+    cases/test04.py::Test_Param::test_01[\u6d4b\u8bd52_1] 测试2
+    PASSED
+    cases/test04.py::Test_Param::test_02[\u6d4b\u8bd51] 测试1
+    PASSED
+    cases/test04.py::Test_Param::test_02[\u6d4b\u8bd52_0] 测试2
+    PASSED
+    cases/test04.py::Test_Param::test_02[\u6d4b\u8bd52_1] 测试2
+    PASSED
+    ```
+
+## `fixture`
+
+`pytest`中的`fixture`是一种强大的机制，用于提供测试函数所需的资源或上下文，它可以用于设置测试环境、准备数据等。使用时需要借助`@pytest.fixture`注解
+
+### 基本使用
+
+在函数中，如果要在当前函数体提前执行一部分代码可以考虑封装一个函数，在函数体最开始时调用该函数，例如：
+
+```py
+def init_func():
+    print("初始化内容")
+
+def test_func():
+    init_func()
+    print("test_func执行")
+```
+
+通过`fixture`也可以实现同样的效果：
+
+```py
+# 定义fixture
+@pytest.fixture
+def init_func():
+    print("初始化内容")
+
+# 将fixture作为参数传递
+def test_func(init_func):
+    print("test_func执行")
 ```
 
 输出结果如下：
 
 ```
-cases/test04.py::Test_Param::test_01[\u6d4b\u8bd51] 测试1
-PASSED
-cases/test04.py::Test_Param::test_01[\u6d4b\u8bd52_0] 测试2
-PASSED
-cases/test04.py::Test_Param::test_01[\u6d4b\u8bd52_1] 测试2
-PASSED
-cases/test04.py::Test_Param::test_02[\u6d4b\u8bd51] 测试1
-PASSED
-cases/test04.py::Test_Param::test_02[\u6d4b\u8bd52_0] 测试2
-PASSED
-cases/test04.py::Test_Param::test_02[\u6d4b\u8bd52_1] 测试2
+cases/test05.py::test_func 初始化内容
+test_func执行
 PASSED
 ```
+
+未标记`fixture`方法的调用与`fixture`标记的方法调用完全不一样，**前者需要在方法体中调用，而后者可以将函数名作为参数进行调用**。测试脚本中存在的很多重复的代码、公共的数据对象时，使用`fixture`最为合适。对于有些资源依赖或者初始化的，使用`fixture`也会很方便，例如，一个资源接口的测试依赖登录结果，此时可以将登录接口封装成一个`fixture`，例如下面的代码：
+
+```py
+@pytest.fixture
+def login():
+    print("登录接口")
+
+def test_get_list(login):
+    print("获取主页列表测试，需要依赖login结果")
+```
+
+输出结果如下：
+
+```
+cases/test05.py::test_get_list 登录接口
+获取主页列表测试，需要依赖login结果
+PASSED
+```
+
+### 嵌套`fixture`
+
+`fixture`嵌套实际上就是在一个`fixture`中再使用另外一个`fixture`，例如：
+
+```py
+@pytest.fixture
+def fixture_01():
+    print("fixture_01")
+
+@pytest.fixture
+def fixture_02(fixture_01):
+    print("fixture_02")
+
+def test_func(fixture_02):
+    print("test_func")
+```
+
+输出结果如下：
+
+```py
+cases/test05.py::test_func fixture_01
+fixture_02
+test_func
+PASSED
+```
+
+### 使用`fixture`返回值与请求多个`fixture`
+
+`fixture`函数也可以有返回值，在参数列表中传递，使用`fixture`的函数可以正常使用`fixture`的返回结果，例如：
+
+```py
+@pytest.fixture
+def fruits():
+    return ["banana", "apple"]
+
+@pytest.fixture
+def my_fruits(fruits):
+    return [fruits, "pear"] # 使用到fruits的返回值
+
+@pytest.fixture
+def your_fruits(fruits):
+    return [fruits, "grapes"] # 使用到fruits的返回值
+
+def test_func(my_fruits, your_fruits):
+    assert my_fruits in your_fruits # 使用到my_fruits和your_fruits的返回值（使用多个fixture）
+```
+
+输出结果：
+
+```
+my_fruits = [['banana', 'apple'], 'pear'], your_fruits = [['banana', 'apple'], 'grapes']
+
+    def test_func(my_fruits, your_fruits):
+>       assert my_fruits in your_fruits # 使用到my_fruits和your_fruits的返回值
+E       AssertionError: assert [['banana', 'apple'], 'pear'] in [['banana', 'apple'], 'grapes']
+```
+
+### `fixture`与`yield`
+
+在上面的`fixture`中，需要返回结果都是使用`return`，但是一旦执行了`return`，整个`fixture`都会结束。当运行测试时，有时希望确保它们能够自我清理，以便它们不会干扰其他测试（同时也避免留下大量测试数据来膨胀系统）。`pytest`中的`fixture`提供了一个非常有用拆卸系统，它允许为每个`fixture`定义具体的清理步骤。例如下面的代码：
+
+```py
+@pytest.fixture
+def fixture_01():
+    print("执行初始化")
+
+    yield # 返回到调用fixture的函数
+
+    print("执行销毁")
+
+def test_func(fixture_01):
+    print("test_func执行")
+```
+
+输出结果：
+
+```
+cases/test06.py::test_func 执行初始化
+test_func执行
+PASSED执行销毁
+```
+
+也可以有返回值：
+
+```py
+@pytest.fixture
+def fixture_01():
+    print("执行初始化")
+
+    yield 10
+
+    print("执行销毁")
+
+def test_func(fixture_01):
+    print("test_func执行，得到：", fixture_01)
+```
+
+输出结果：
+
+```
+cases/test06.py::test_func 执行初始化
+test_func执行，得到： 10
+PASSED执行销毁
+```
+
+一旦`pytest`确定了`fixture`的线性顺序，它将运行每个`fixture`直到它返回或`yield`，然后继续执行列表中的下一个`fixture`做同样的事情。测试完成后，`pytest`将逆向遍历`fixture`列表，对于每个`yield`的`fixture`，运行`yield`语句之后的代码
+
+### 带参数的`fixture`
+

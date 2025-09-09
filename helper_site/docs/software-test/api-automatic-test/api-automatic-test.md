@@ -357,5 +357,28 @@ cases/test04.py::test_02[2-4-6] PASSED
 === "使用在类上"
 
 ```py
+@pytest.mark.parametrize("test", ["测试1", "测试2", "测试2"])
+class Test_Param:
+    def test_01(self, test):
+        print(test)
 
+    def test_02(self, test):
+        print(test)
+```
+
+输出结果如下：
+
+```
+cases/test04.py::Test_Param::test_01[\u6d4b\u8bd51] 测试1
+PASSED
+cases/test04.py::Test_Param::test_01[\u6d4b\u8bd52_0] 测试2
+PASSED
+cases/test04.py::Test_Param::test_01[\u6d4b\u8bd52_1] 测试2
+PASSED
+cases/test04.py::Test_Param::test_02[\u6d4b\u8bd51] 测试1
+PASSED
+cases/test04.py::Test_Param::test_02[\u6d4b\u8bd52_0] 测试2
+PASSED
+cases/test04.py::Test_Param::test_02[\u6d4b\u8bd52_1] 测试2
+PASSED
 ```

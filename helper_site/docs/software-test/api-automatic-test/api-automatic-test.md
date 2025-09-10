@@ -549,3 +549,298 @@ PASSED执行销毁
 
 ### 带参数的`fixture`
 
+前面使用到的`fixture`都是不带参数的，实际上`fixture`可以携带以下的参数：
+
+```py
+pytest.fixture(scope='', params='', autouse='', ids='', name='')
+```
+
+- `scope`参数用于控制`fixture`的作用范围，决定了`fixture`的生命周期，可选值有：
+
+    - `function`（默认）：每个测试函数都会调用一次`fixture`
+    - `class`：在同一个测试类中共享这个`fixture`
+    - `module`：在同一个测试模块中共享这个`fixture`（一个文件里）
+    - `session`：整个测试会话中共享这个`fixture`
+
+- `autouse`参数默认为`False`，如果设置为`True`，则每个测试函数都会自动调用该`fixture`，无需显式传入
+- `params`参数用于参数化`fixture`，支持列表传入，每个参数值都会使`fixture`执行一次，类似于`for`循环
+- `ids`参数与`params`配合使用，为每个参数化实例指定可读的标识符（给参数取名字）
+- `name`参数用于为`fixture`显式设置一个名称，如果使用了`name`，则在测试函数中需要使用这个名称来引用`fixture`（给`fixture`取名字）
+
+#### `scope`参数
+
+=== "`scope`为`class`"
+
+    `scope`设置为`class`，那么整个类的方法都可以使用到该`fixture`，但是这个`fixture`的调用**只会在类的第一个测试方法之前**。如果有返回值，那么不论是`return`还是`yield`都可以确保类中所有使用到对应`fixture`的测试方法都可以拿到该`fixture`的返回值：
+
+    ```py
+    @pytest.fixture(scope="class")
+    def manage_class():
+        print("类初始化")
+
+        yield
+
+        print("类销毁")
+
+    class Test_Fixture:
+        def test_01(self, manage_class):
+            print("test_01")
+
+        def test_02(self, manage_class):
+            print("test_02")
+    ```
+
+    输出结果如下：
+
+    ```
+    cases/test07.py::Test_Fixture::test_01 类初始化
+    test_01
+    PASSED
+    cases/test07.py::Test_Fixture::test_02 test_02
+    PASSED类销毁
+    ```
+
+    上面代码的效果类似于类上使用前置（`setup_class`）和后置（`teardown_class`）
+
+=== "`scope`为`module`"
+
+    `scope`设置为`module`可以实现全局的前置和后置，但是需要配合`conftest.py`文件使用
+
+    `conftest.py`是一个单独存放的夹具配置文件，名称是固定的不能修改。可以在项目中的不同目录下创建多个`conftest.py`文件，每个`conftest.py`文件都会对其所在目录及其子目录下的测试模块生效。在不同模块的测试中需要用到 `conftest.py` 的前后置功能时，不需要做任何的`import`导入操作
+
+    例如，当前`cases`目录下有一个`conftest.py`文件，内容如下：
+
+    ```py
+    @pytest.fixture(scope="module")
+    def manage_class():
+        print("执行初始化")
+
+        yield 10# 返回到调用fixture的函数
+
+        print("执行销毁")
+    ```
+
+    有两个测试类：
+
+    === "测试类1"
+
+        ```py
+        class Test_Fixture01:
+            def test_01(self, manage_class):
+                print(manage_class)
+                print("test_01")
+
+            def test_02(self, manage_class):
+                print(manage_class)
+                print("test_02")
+        ```
+
+    === "测试类2"
+
+        ```py
+        class Test_Fixture02:
+            def test_03(self, manage_class):
+                print(manage_class)
+                print("test_03")
+
+            def test_04(self, manage_class):
+                print(manage_class)
+                print("test_04")
+        ```
+
+    此时的输出结果：
+
+    ```py
+    cases/test08.py::Test_Fixture01::test_01 执行初始化
+    10
+    test_01
+    PASSED
+    cases/test08.py::Test_Fixture01::test_02 10
+    test_02
+    PASSED执行销毁
+
+    cases/test09.py::Test_Fixture02::test_03 执行初始化
+    10
+    test_03
+    PASSED
+    cases/test09.py::Test_Fixture02::test_04 10
+    test_04
+    PASSED执行销毁
+    ```
+
+    可以看到在上面的结果中，每一个测试文件执行时的最开始都会执行初始化，执行完毕后都会执行销毁，所以`module`的生命周期就是随着当前文件（模块）的
+
+=== "`scope`为`session`"
+
+    同样是`scope`为`module`部分的代码，将`scope`改为`session`，输出结果如下：
+
+    ```py
+    cases/test08.py::Test_Fixture01::test_01 执行初始化
+    10
+    test_01
+    PASSED
+    cases/test08.py::Test_Fixture01::test_02 10
+    test_02
+    PASSED
+    cases/test09.py::Test_Fixture02::test_03 10
+    test_03
+    PASSED
+    cases/test09.py::Test_Fixture02::test_04 10
+    test_04
+    PASSED执行销毁
+    ```
+
+    可以看到和`module`最明显的不同就是只在第一个开始执行测试的文件执行前进行初始化，只在最后一个执行完毕测试的文件结束后销毁
+
+#### `autouse`参数
+
+默认情况下，`fixture`的`autouse`参数值为`False`，表示只有显式调用才可以执行对应的`fixture`，如果修改为`True`，则代表可以不需要显式调用，根据`scope`的配置可以决定自动执行的范围，例如`scope`为`module`，配置`conftest.py`内容如下：
+
+```py
+@pytest.fixture(scope="module", autouse=True)
+def manage_class():
+    print("执行初始化")
+
+    yield # 返回到调用fixture的函数
+
+    print("执行销毁")
+```
+
+同样是两个测试类：
+
+=== "测试类1"
+
+    ```py
+    class Test_Fixture01:
+        def test_01(self):
+            print(manage_class)
+            print("test_01")
+
+        def test_02(self):
+            print(manage_class)
+            print("test_02")
+    ```
+
+=== "测试类2"
+
+    ```py
+    class Test_Fixture02:
+        def test_03(self):
+            print(manage_class)
+            print("test_03")
+
+        def test_04(self):
+            print(manage_class)
+            print("test_04")
+    ```
+
+但是，如果要使用到有返回值的`fixture`的返回值，那么还是需要进行显式调用：
+
+```py
+@pytest.fixture(autouse=True)
+def fixture_01():
+    print("初始化")
+
+    yield 10
+
+    print("销毁")
+
+def test_func(fixture_01):
+    print(fixture_01) # 需要显式指定参数
+    print("test_func")
+```
+
+输出结果为：
+
+```
+cases/test10.py::test_func 初始化
+10
+test_func
+PASSED销毁
+```
+
+#### `params`和`ids`参数
+
+通过`params`参数可以实现参数化，但是需要注意，获取参数时形参必须是`request`，例如下面的代码：
+
+```py
+@pytest.fixture(params=["测试1", "测试2"])
+def data_provider(request): # 必须是request
+    return request.param
+
+def test_func(data_provider):
+    print(data_provider)
+```
+
+输出结果：
+
+```
+cases/test11.py::test_func[\u6d4b\u8bd51] 测试1
+PASSED
+cases/test11.py::test_func[\u6d4b\u8bd52] 测试2
+PASSED
+```
+
+上面的输出结果中，出现了中文字符的编码，此时可以通过`ids`指定参数别名：
+
+```py
+@pytest.fixture(params=["测试1", "测试2"], ids=["first", "second"])
+def data_provider(request): # 必须是request
+    return request.param
+
+def test_func(data_provider):
+    print(data_provider)
+```
+
+输出结果：
+
+```
+cases/test11.py::test_func[first] 测试1
+PASSED
+cases/test11.py::test_func[second] 测试2
+PASSED
+```
+
+如果想使用动态生成别名，可以通过Lambda表达式实现，例如下面的代码：
+
+```py
+test_data = [
+    {"name": "user1", "age": 25},
+    {"name": "user2", "age": 30}
+]
+
+@pytest.fixture(
+    params=test_data,
+    ids=lambda x: f"{x['name']}_{x['age']}"
+)
+def user_fixture(request):
+    return request.param
+```
+
+在上面的代码中，`pytest`会逐个遍历`test_data`列表中的每个元素，每次遍历时，当前元素作为参数传递给`ids`的Lambda的`x`生成ID
+
+#### `name`参数
+
+为指定的`fixture`取别名：
+
+```py
+@pytest.fixture(params=["1", "2"], name="data")
+def data_provider(request): # 必须是request
+    return request.param
+
+# 使用别名
+def test_func(data):
+    print(data)
+```
+
+输出结果：
+
+```
+cases/test11.py::test_func[1] 1
+PASSED
+cases/test11.py::test_func[2] 2
+PASSED
+```
+
+## JSON Schema
+

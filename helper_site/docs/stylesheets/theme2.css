@@ -658,6 +658,10 @@ strong {
     overflow: hidden;
 }
 
+.md-typeset .tabbed-content .tabbed-block p{
+    padding: 0px 5px;
+}
+
 /* 页脚爱情宣言样式 */
 .md-footer-love {
     position: relative;

@@ -842,5 +842,3 @@ cases/test11.py::test_func[2] 2
 PASSED
 ```
 
-## JSON Schema
-

@@ -14,3 +14,5 @@
 6. 关于Git：本部分包括[Git基础操作（Git的基础使用指令）](https://www.help-doc.top/other/git/git-basic/git-basic.html)和[Git多人协作](https://www.help-doc.top/other/git/git-collaboration/git-collaboration.html)
 7. [关于Muduo库](https://www.help-doc.top/other/muduo/muduo.html)
 8. [关于YAML文件](https://www.help-doc.top/other/yaml/yaml.html)
+9. [关于JSON Schema](https://www.help-doc.top/other/json_schema/json_schema.html)
+10. [关于正则表达式](https://www.help-doc.top/other/regex/regex.html)

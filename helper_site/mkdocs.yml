@@ -315,6 +315,8 @@ nav:
     - 关于CMake:
       - CMake控制台命令核心操作: other/cmake/cmake-basic/cmake-basic.md
     - 关于YAML文件: other/yaml/yaml.md
+    - 关于JSON Schema: other/json_schema/json_schema.md
+    - 关于正则表达式: other/regex/regex.md
   - 工具帮助:
     - 章节目录: tooltips/index.md
     - vscode中添加代码片段: tooltips/vscode-snippets/vscode-snippets.md

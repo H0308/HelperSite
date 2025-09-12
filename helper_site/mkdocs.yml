@@ -389,6 +389,7 @@ extra_javascript:
   - javascripts/other.js
   - javascripts/copyright.js
   - javascripts/docsearch.js
+  - javascripts/navigation-overlay.js
   - https://cdn.jsdelivr.net/npm/@docsearch/js@3
 
 extra:
@@ -437,6 +438,7 @@ plugins:
       minify_js: true
       minify_css: true
       js_files:
+          - javascripts/navigation-overlay.js
           - javascripts/katex.js
           - javascripts/other.js
           - javascripts/copyright.js

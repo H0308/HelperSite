@@ -248,7 +248,7 @@ nav:
     - HTML与CSS:
       - 章节目录: html-css/index.md
       - HTML4和HTML5常见标签总结: html-css/html/html.md
-      - CSS2笔记: html-css/css2/css2.md
+      - CSS2和CSS3常用样式笔记: html-css/css/css.md
       - Emmet表达式: html-css/emmet/emmet.md
     - JavaScript:
       - 章节目录: javascript-lang/index.md

@@ -842,3 +842,68 @@ cases/test11.py::test_func[2] 2
 PASSED
 ```
 
+## Python日志`logging`模块
+
+### 介绍
+
+`logging`是Python标准库中的一个模块，它提供了灵活的日志记录功能。通过`logging`，开发者可以方便地将日志信息输出到控制台、文件、网络等多种目标，同时支持不同级别的日志记录，以满足不同场景下的需求
+
+### 日志等级
+
+`logging`模块默认有以下等级：
+
+| 级别 | 数值 | 何种含义/何时使用 |
+|------|------|------------------|
+| `logging.NOTSET` | 0 | 当在日志记录器上设置时，表示将查询上级日志记录器以确定生效的级别。如果仍被解析为`NOTSET`，则会记录所有事件。在处理器上设置时，所有事件都将被处理 |
+| `logging.DEBUG` | 10 | 详细的信息，通常只有试图诊断问题的开发人员才会感兴趣 |
+| `logging.INFO` | 20 | 确认程序按预期运行 |
+| `logging.WARNING` | 30 | 表明发生了意外情况，或近期有可能发生问题（例如磁盘空间不足）。软件仍会按预期工作 |
+| `logging.ERROR` | 40 | 由于严重的问题，程序的某些功能已经不能正常执行 |
+| `logging.CRITICAL` | 50 | 严重的错误，表明程序已不能继续执行 |
+
+**默认情况下，`logging`模块使用的是`CRITICAL`等级**。**每一个等级都会显示比当前等级高的对应的日志信息**，例如`DEBUG`会显示包括`DEBUG`、`INFO`及以后的所有等级的日志
+
+如果要修改默认的日志等级，可以使用`basicConfig`函数，设置其中的`level`参数为对应的日志等级即可，例如设置日志等级为`DEBUG`：
+
+```py
+logging.basicConfig(level=logging.DEBUG)
+```
+
+### 全局日志
+
+所谓全局日志就是直接调用日志函数进行日志打印，整个模块中使用的都是同一个日志对象。例如下面代码：
+
+```py
+import logging
+
+logging.critical("这是一条critical日志")
+logging.debug("这是一条debug日志")
+logging.info("这是一条info日志")
+```
+
+输出结果：
+
+```
+CRITICAL:root:这是一条critical日志
+```
+
+### 自定义日志对象
+
+在`logging`模块中提供了一个`getLogger(name)`函数，该函数返回一个日志对象，参数可以设置日志对象的名称，后续可以使用该日志对象进行日志显示，例如下面的代码：
+
+```py
+logger = logging.getLogger("my_logger")
+logger.debug("这是一条debug日志")
+logger.critical("这是一条critical日志")
+logger.info("这是一条info日志")
+```
+
+输出结果：
+
+```
+这是一条critical日志
+```
+
+
+
+

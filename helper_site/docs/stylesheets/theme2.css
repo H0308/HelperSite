@@ -218,6 +218,101 @@ body {
     font-family: var(--md-code-font), var(--md-text-font);
 }
 
+/* 导航栏动态覆盖动画效果 */
+.md-tabs__list {
+    position: relative;
+}
+
+/* 动态覆盖背景 - 只在悬浮时显示 */
+.md-tabs__list::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 0;
+    height: 70%;
+    background: rgba(128, 128, 128, 0.15);
+    border-radius: 8px;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+}
+
+/* 添加吸尘器式单侧压缩动画效果 */
+@keyframes suckToTarget {
+    0% {
+        transform: translateY(-50%) scaleX(1);
+        transform-origin: left center;
+    }
+    40% {
+        transform: translateY(-50%) scaleX(0.3);
+        transform-origin: right center;
+    }
+    70% {
+        transform: translateY(-50%) scaleX(1.2);
+        transform-origin: left center;
+    }
+    100% {
+        transform: translateY(-50%) scaleX(1);
+        transform-origin: center center;
+    }
+}
+
+@keyframes suckToTargetReverse {
+    0% {
+        transform: translateY(-50%) scaleX(1);
+        transform-origin: right center;
+    }
+    40% {
+        transform: translateY(-50%) scaleX(0.3);
+        transform-origin: left center;
+    }
+    70% {
+        transform: translateY(-50%) scaleX(1.2);
+        transform-origin: right center;
+    }
+    100% {
+        transform: translateY(-50%) scaleX(1);
+        transform-origin: center center;
+    }
+}
+
+/* 当覆盖背景向右移动时应用正向动画 */
+.md-tabs__list.animating-right::before {
+    animation: suckToTarget 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 当覆盖背景向左移动时应用反向动画 */
+.md-tabs__list.animating-left::before {
+    animation: suckToTargetReverse 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 只在悬浮非激活项时显示覆盖背景 */
+.md-tabs__list.show-hover-overlay::before {
+    opacity: 1;
+}
+
+/* 导航项基础样式 */
+.md-tabs__item {
+    position: relative;
+    z-index: 2;
+}
+
+.md-tabs__link {
+    position: relative;
+    transition: color 0.3s ease;
+    border-radius: 8px;
+    z-index: 2;
+}
+
+/* 悬浮效果 */
+.md-tabs__item:hover .md-tabs__link {
+    color: var(--primary-blue-semi) !important;
+}
+
+/* 激活状态样式 */
 .md-tabs__item.md-tabs__item--active {
     border-bottom: 2px solid var(--primary-blue-semi);
 }

@@ -12,7 +12,10 @@ theme:
     - navigation.indexes
     - navigation.prune
     - navigation.tabs
+    - navigation.sections
+    - toc.follow
     - content.code.copy
+    - navigation.top
   language: zh
   palette:
     - scheme: default
@@ -442,7 +445,6 @@ plugins:
           - javascripts/katex.js
           - javascripts/other.js
           - javascripts/copyright.js
-          - javascripts/start.js
           - javascripts/waline.js
           - javascripts/docsearch.js
           - javascripts/recent-updates.js

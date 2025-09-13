@@ -90,3 +90,27 @@ document.addEventListener('click', function (e) {
         setTimeout(adjustTooltipPosition, 10);
     }
 });
+
+// 动态调整返回顶部按钮位置
+// function adjustBackToTopPosition() {
+//     const footer = document.querySelector('.md-footer');
+//     if (footer) {
+//         const footerHeight = footer.offsetHeight;
+//         document.documentElement.style.setProperty('--footer-height', footerHeight + 'px');
+//     }
+// }
+
+// 页面加载完成后调整按钮位置
+// document.addEventListener('DOMContentLoaded', function() {
+//     adjustBackToTopPosition();
+    
+//     window.addEventListener('resize', adjustBackToTopPosition);
+    
+//     const observer = new MutationObserver(adjustBackToTopPosition);
+//     observer.observe(document.body, {
+//         childList: true,
+//         subtree: true,
+//         attributes: true,
+//         attributeFilter: ['class', 'style']
+//     });
+// });

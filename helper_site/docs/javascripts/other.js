@@ -91,26 +91,38 @@ document.addEventListener('click', function (e) {
     }
 });
 
-// 动态调整返回顶部按钮位置
-// function adjustBackToTopPosition() {
-//     const footer = document.querySelector('.md-footer');
-//     if (footer) {
-//         const footerHeight = footer.offsetHeight;
-//         document.documentElement.style.setProperty('--footer-height', footerHeight + 'px');
-//     }
-// }
+// 为激活目录添加竖线
+function updateActiveBorder() {
+    // 移除所有现有的边框样式
+    document.querySelectorAll('.active-border').forEach(el => {
+        el.classList.remove('active-border');
+    });
+    
+    let actives = document.querySelectorAll('.md-nav--secondary .md-nav__link--active');
+    
+    // 取到激活元素
+    let active = actives[1];
+    // 为激活元素的父元素添加svg边框
+    let active_parent = active && active.parentNode;
+    if(active && active_parent) {
+        // 为激活元素的父元素添加左侧边框样式
+        active_parent.classList.add('active-border');
+    }
+}
 
-// 页面加载完成后调整按钮位置
-// document.addEventListener('DOMContentLoaded', function() {
-//     adjustBackToTopPosition();
-    
-//     window.addEventListener('resize', adjustBackToTopPosition);
-    
-//     const observer = new MutationObserver(adjustBackToTopPosition);
-//     observer.observe(document.body, {
-//         childList: true,
-//         subtree: true,
-//         attributes: true,
-//         attributeFilter: ['class', 'style']
-//     });
-// });
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', updateActiveBorder);
+
+// 监听滚动事件，实时更新激活边框
+window.addEventListener('scroll', function() {
+    // 使用节流来优化性能
+    clearTimeout(window.scrollTimer);
+    window.scrollTimer = setTimeout(updateActiveBorder, 5);
+});
+
+// 监听导航点击事件，立即更新边框
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.md-nav__link')) {
+        setTimeout(updateActiveBorder, 5);
+    }
+});

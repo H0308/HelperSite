@@ -133,7 +133,7 @@ h1+div>p {
 }
 
 .md-typeset :target {
-    --md-scroll-margin: 0rem;
+    --md-scroll-margin: 1rem;
 }
 
 /* 公告区样式 */

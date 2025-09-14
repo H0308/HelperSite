@@ -449,18 +449,11 @@ plugins:
           - javascripts/docsearch.js
           - javascripts/recent-updates.js
       css_files:
-        - stylesheets/code-font-dejavu-sans-mono.css
-        - stylesheets/code-font-zsft-hk.css
-        - stylesheets/font-dongguanti.css
-        - stylesheets/font-oppoti.css
-        - stylesheets/font-jiangchengti.css
-        - stylesheets/font-lxgw.css
         - stylesheets/colors.css
         - stylesheets/theme1.css
         - stylesheets/theme2.css
         - stylesheets/print.css
         - stylesheets/waline.css
-        - stylesheets/code-font-google-sans-code.css
         - stylesheets/docsearch.css
   - glightbox:
       touchNavigation: true

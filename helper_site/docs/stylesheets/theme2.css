@@ -136,6 +136,12 @@ h1+div>p {
     --md-scroll-margin: 0rem;
 }
 
+/* 公告区样式 */
+/* .md-banner {
+    background-color: var(--primary-blue-semi);
+    text-align: center;
+} */
+
 .md-top {
     background-color: var(--primary-blue-strong);
 }

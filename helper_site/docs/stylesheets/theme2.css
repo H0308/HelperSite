@@ -551,50 +551,97 @@ strong {
 }
 
 @media screen and (max-width: 767px) {
+    /* 移动端数学公式容器基础样式 */
     .md-typeset .arithmatex {
-        max-width: 100%;
-        overflow-x: hidden;
-        text-overflow: ellipsis;
+        max-width: 100% !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0.5em 0;
+        margin: 0.5em 0;
+        position: relative;
     }
 
+    /* 块级数学公式样式 */
     .katex-display {
         overflow-x: auto;
         overflow-y: hidden;
         max-width: 100%;
-        padding: 0.25em 0;
-    }
-
-    .katex {
-        font-size: 1em !important;
-    }
-
-    .md-typeset .arithmatex {
-        max-width: 100% !important;
-        overflow-x: auto;
-        padding: 0.1em 0;
+        padding: 0.8em 0.5em;
         margin: 0;
+        position: relative;
+        box-sizing: border-box;
+        font-size: 1em;
+        text-align: center;
     }
 
+    /* KaTeX 基础样式调整 */
+    .katex {
+        font-size: 0.95em !important;
+        max-width: 100%;
+        line-height: 1.4;
+    }
+
+    /* 行内数学公式优化 */
     .katex-inline {
         display: inline-block;
-        max-width: 100%;
+        max-width: calc(100vw - 3rem);
         overflow-x: auto;
+        overflow-y: hidden;
         vertical-align: middle;
-        white-space: normal;
-        line-break: anywhere;
+        white-space: nowrap;
+        padding: 0.1em 0.2em;
+        margin: 0 0.1em;
+        border-radius: 2px;
+        font-size: 0.9em;
     }
 
-    .katex-display::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 100%;
-        width: 20px;
-        background: linear-gradient(to right,
-                rgba(255, 255, 255, 0),
-                rgba(255, 255, 255, 0.7));
-        pointer-events: none;
+    /* 数学公式中的特殊元素优化 */
+    .katex .mord,
+    .katex .mrel,
+    .katex .mbin,
+    .katex .mop {
+        font-size: inherit;
+    }
+
+    /* 分数和根号的特殊处理 */
+    .katex .frac-line {
+        border-bottom-width: 0.04em;
+    }
+
+    .katex .sqrt > .root {
+        margin-left: 0.1em;
+        margin-right: -0.1em;
+    }
+
+    /* 矩阵和表格的移动端优化 */
+    .katex .arraycolsep {
+        width: 0.25em;
+    }
+
+    .katex .mtable .col-align-c > .vlist-t {
+        text-align: center;
+    }
+
+    /* 长公式的换行处理 */
+    .katex-display .base {
+        display: inline-block;
+        min-width: max-content;
+    }
+
+    /* 触摸设备的交互优化 */
+    @media (hover: none) and (pointer: coarse) {
+        .md-typeset .arithmatex {
+            padding: 0.8em 0.5em;
+        }
+        
+        .katex-display {
+            padding: 1em 0.8em;
+        }
+        
+        .katex-inline {
+            padding: 0.2em 0.3em;
+            margin: 0 0.2em;
+        }
     }
 }
 

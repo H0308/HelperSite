@@ -132,6 +132,10 @@ h1+div>p {
     padding-left: 8px;
 }
 
+.md-typeset :target {
+    --md-scroll-margin: 0rem;
+}
+
 .md-top {
     background-color: var(--primary-blue-strong);
 }

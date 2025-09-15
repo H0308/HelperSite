@@ -904,6 +904,127 @@ logger.info("这是一条info日志")
 这是一条critical日志
 ```
 
+如果需要单独为某一个日志对象修改等级，可以使用`setLevel()`函数。但是必须满足日志消息的级别大于等于自定义日志对象日志级别和Handler级别时，消息才会被记录，所以要为自定义对象设置日志级别首先需要用`logger`对象设置等级，再创建一个`StreamHandler`对象，通过该对象调用`setLevel()`设置日志等级，再调用自定义的日志对象`logger`的`addHandler()`函数将`StreamHandler`对象添加到自定义日志对象中即可：
 
+```py
+import logging
 
+logger = logging.getLogger("my_logger")
 
+logger.setLevel(logging.INFO) # logger对象设置日志等级
+
+# 创建控制台handler
+handler = logging.StreamHandler()
+handler.setLevel(logging.INFO)
+logger.addHandler(handler)
+
+logger.debug("这是一条debug日志")
+logger.critical("这是一条critical日志")
+logger.info("这是一条info日志")
+```
+
+输出结果：
+
+```py
+这是一条critical日志
+这是一条info日志
+```
+
+### 文件日志
+
+文件日志可以保证日志的持久化，实现步骤为：
+
+1. 创建`FileHandler`对象，构造函数中指定日志文件和路径
+2. 将`FileHandler`通过`addHandler()`函数插入到自定义日志对象中
+
+例如下面的代码：
+
+```py
+import logging
+import os.path
+
+logger = logging.getLogger("my_logger")
+
+if not os.path.exists("./log"):
+    os.mkdir("./log")
+
+logger.setLevel(logging.DEBUG)
+
+file_handler = logging.FileHandler("./log/test.log", encoding="utf-8")
+file_handler.setLevel(logging.DEBUG)
+logger.addHandler(file_handler)
+
+logger.debug("这是一条debug日志")
+logger.critical("这是一条critical日志")
+logger.info("这是一条info日志")
+```
+
+文件内容：
+
+```
+这是一条debug日志
+这是一条critical日志
+这是一条info日志
+```
+
+### 日志格式
+
+设置日志格式可以通过`Formatter`构造函数设置并得到对应的对象，将该对象添加到对应的`handler`中，再将`handler`设置到自定义日志对象即可。常见的日志格式如下表：
+
+| 格式占位符 | 说明 |
+|-----------|------|
+| `%(asctime)s` | 日志记录的时间戳，通常显示为日期时间 |
+| `%(levelname)s` | 日志级别（如`DEBUG`、`INFO`、`WARNING`、`ERROR`、`CRITICAL`） |
+| `%(name)s` | 日志记录器的名称，通常为模块名称 |
+| `%(filename)s` | 日志记录发生的文件名 |
+| `%(funcName)s` | 日志记录发生的函数名 |
+| `%(lineno)d` | 日志记录发生的行号 |
+| `%(message)s` | 日志消息本身 |
+
+例如下面的代码：
+
+```py
+import logging
+import os.path
+
+logger = logging.getLogger("my_logger")
+
+logger.setLevel(logging.DEBUG)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.DEBUG)
+
+formatter = logging.Formatter("%(asctime)s %(levelname)s [%(name)s] [%(filename)s (%(funcName)s:%(lineno)d)] - %(message)s")
+stream_handler.setFormatter(formatter)
+
+logger.addHandler(stream_handler)
+
+logger.debug("这是一条debug日志")
+logger.critical("这是一条critical日志")
+logger.info("这是一条info日志")
+```
+
+输出结果：
+
+```
+2025-09-15 10:07:23,806 DEBUG [my_logger] [test14.py (<module>:36)] - 这是一条debug日志
+2025-09-15 10:07:23,806 CRITICAL [my_logger] [test14.py (<module>:37)] - 这是一条critical日志
+2025-09-15 10:07:23,806 INFO [my_logger] [test14.py (<module>:38)] - 这是一条info日志
+```
+
+## 测试报告生成工具`Allure`
+
+[Allure Report](https://allurereport.org/docs/)由一个框架适配器和`allure`命令行工具组成，是一个流行的开源工具，用于可视化测试运行的结果。它可以以很少甚至零配置的方式添加到您的测试工作流中。它生成的报告可以在任何地方打开，并且任何人都可以阅读，无需深厚的技术知识
+
+安装`Allure`可以到参考[官方文档](https://allurereport.org/docs/install-for-windows/)，结合`pytest`可以参考[此文档](https://allurereport.org/docs/pytest/)
+
+常用命令为：
+
+1. 生成测试结果：`pytest --alluredir=results_dir`（其中`results_dir`即目标目录）
+2. 本地查看测试报告：`allure serve [options] <allure-results>`，其中`<allure-results>`表示上一个命令中的`results_dir`。常用的选项有：
+    
+    1. `--port`：设置端口，例如`--port 8080`
+    2. `--host`：设置监听地址，默认为`localhost`
+    3. `--clean-alluredir`：清除上一次的测试报告
+
+3. 从测试结果生成测试报告：`allure generate [options] <allure-results> -o <reports>`，其中`<allure-results>`表示测试结果目录，`<reports>`表示测试报告目录（存在着`index.html`的目录）

@@ -78,6 +78,7 @@ console.log(`You are using: ${sBrowser}`); // You are using: Google Chrome or Ch
 2. `replace()`：使用新的地址替换已有的地址，参数传递一个网页地址字符串
 3. `reload()`：刷新页面，参数可以传递一个`true`来强制清缓存刷新
 4. `href`：获取当前页面的地址值
+5. `search`：获取到地址栏的以`?`参数字符串，例如`/en-US/docs/Location.search?q=123`可以获取到`?q=123`，可以结合`URLSearchParams`类进一步提取参数值，参考[官方文档](https://developer.mozilla.org/zh-CN/docs/Web/API/Location/search)
 
 例如下面的代码：
 

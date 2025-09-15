@@ -4,7 +4,21 @@
     "url": "software-test/api-automatic-test/api-automatic-test.html",
     "nav_path": null,
     "created_str": "2025-09-04",
-    "modified_str": "2025-09-12"
+    "modified_str": "2025-09-15"
+  },
+  {
+    "title": "进制转换与类型在内存中存储方式",
+    "url": "c-lang/num-in-memory/num-in-memory.html",
+    "nav_path": null,
+    "created_str": "2025-02-25",
+    "modified_str": "2025-09-14"
+  },
+  {
+    "title": "MySQL基础操作",
+    "url": "MySQL/mysql-op/basic-op/basic-op.html",
+    "nav_path": null,
+    "created_str": "2025-07-08",
+    "modified_str": "2025-09-14"
   },
   {
     "title": "自动化测试概念及UI自动化测试",
@@ -12,19 +26,5 @@
     "nav_path": null,
     "created_str": "2025-08-27",
     "modified_str": "2025-09-12"
-  },
-  {
-    "title": "CSS2和CSS3常用样式笔记",
-    "url": "html-css/css/css.html",
-    "nav_path": null,
-    "created_str": "2025-03-19",
-    "modified_str": "2025-09-12"
-  },
-  {
-    "title": "关于JSON Schema",
-    "url": "other/json_schema/json_schema.html",
-    "nav_path": null,
-    "created_str": "2025-09-11",
-    "modified_str": "2025-09-11"
   }
 ]

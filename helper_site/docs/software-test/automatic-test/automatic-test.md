@@ -78,7 +78,7 @@ driver.quit()
 
 在`find_element`中需要传递两个参数，第一个参数表示查找方式，第二个参数表示元素选择器。常见的查找方式是根据CSS选择器和<a href="javascript:;" class="custom-tooltip" data-title="XML路径语言，不仅可以在XML文件中查找信息，还可以在HTML中选取节点">XPath</a>，对应的第一个参数分别为：
 
-1. `By.CSS_SELECTOR`：使用[CSS的选择器](https://www.help-doc.top/html-css/css2/css2.html#_5)进行元素选择
+1. `By.CSS_SELECTOR`：使用[CSS的选择器](https://www.help-doc.top/html-css/css/css.html#_5)进行元素选择
 2. `By.XPATH`：使用XPath语法进行元素选择
 
 XPath常见语法如下：

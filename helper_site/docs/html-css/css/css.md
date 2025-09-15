@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
 <link rel="stylesheet" href="/stylesheets/waline.min.css" />
 
-# CSS2笔记
+# CSS2和CSS3常用样式笔记
 
 ## CSS三种写法及优先级
 

@@ -42,26 +42,6 @@ function renderRecentUpdates(container, updates) {
     container.innerHTML = html;
 }
 
-function loadStaticRecentUpdates(container) {
-    // 如果动态加载失败，显示一些静态的最近更新
-    const staticUpdates = [
-        {
-            title: 'C++并发支持库',
-            url: 'cpp/multi-thread/multi-thread.html',
-            nav_path: '编程语言 > C++',
-            modified_str: '2024-01-15'
-        },
-        {
-            title: 'Java中的JDK8及后续的重要新特性',
-            url: 'Java/new-jdk8-and-after/new-jdk8-and-after.html',
-            nav_path: '编程语言 > Java',
-            modified_str: '2024-01-10'
-        }
-    ];
-    
-    renderRecentUpdates(container, staticUpdates);
-}
-
 // 添加刷新最近更新的功能
 function refreshRecentUpdates() {
     const container = document.getElementById('recent-updates-container');

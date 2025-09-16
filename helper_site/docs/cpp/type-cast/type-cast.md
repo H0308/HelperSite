@@ -515,13 +515,20 @@ namespace simulate_list
 }
 ```
 
-## C++中的四种类型转换模版
+## 四种强制类型转换模版
 
 标准C++为了加强类型转换的可视性，引入了四种命名的强制类型转换操作符：`static_cast`、`reinterpret_cast`、`const_cast`和`dynamic_cast`
 
 ### `static_cast`
 
-`static_cast`相当于隐式类型转换，只是显式写，例如下面的代码：
+`static_cast`是一种相对安全的强制类型转换，常见转换类型为：
+
+- 基本数据类型之间的转换（如`int`到`double`）
+- 指针类型的上行转换（派生类指针转基类指针）
+- `void*`指针转换为具体类型指针
+- 枚举类型转换
+
+例如下面的代码：
 
 ```c++
 int main()
@@ -536,7 +543,13 @@ int main()
 
 ### `reinterpret_cast`
 
-`reinterpret_cast`相当于强制类型转换，例如下面的代码：
+`reinterpret_cast`是不相关类型之间的位级别重新解释，常见的用法是：
+
+- 指针类型之间的任意转换
+- 指针与整数之间的转换
+- 函数指针转换
+
+例如下面的代码：
 
 ```c++
 int main()

@@ -405,7 +405,21 @@ int main()
 }
 ```
 
-右值引用可以通过强制转换转化成左值引用，例如下面的代码
+??? "`std::move`函数的原理"
+
+    `std::move()`的函数原型为：
+
+    ```cpp
+    template <typename T>
+    typename remove_reference<T>::type&& move(T&& t)
+    {
+        return static_cast<typename remove_reference<T>::type &&>(t);
+    }
+    ```
+
+    在参数中使用到了`T&&`，根据引用折叠原理：**任何与`&`的结果均为`&`，只有两个`&&`结合的结果才为`&&`**，那么如果传递的是左值，则参数`t`的类型即为左值引用`&`（`T&& &` -> `T&`），在函数体中，调用`remove_reference<T>::type`得到的类型变为`T`，也就是说去除所有的引用，最后再转换为右值引用，所以`std::move()`也是使用类似强制转换的思路将左值引用转换为右值引用
+
+右值引用可以通过强制转换转化成左值引用，例如下面的代码：
 
 ```c++
 int main()

@@ -304,6 +304,7 @@ nav:
     - 自动化测试概念及UI自动化测试: software-test/automatic-test/automatic-test.md
     - 性能测试: software-test/performance-test/performance-test.md
     - 接口自动化测试: software-test/api-automatic-test/api-automatic-test.md
+    - 常见测试用例设计: software-test/common-test-cases/api-automatic-test.md
   - 扩展知识: 
     - 章节目录: other/index.md
     - 关于Shell: other/shell/shell.md

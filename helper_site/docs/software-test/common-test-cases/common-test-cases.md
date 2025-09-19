@@ -11,3 +11,15 @@
 <img src="./common-test-cases.assets/cup.webp">
 
 幕布链接：[https://www.mubu.com/doc/7Di7qI9GbiT](https://www.mubu.com/doc/7Di7qI9GbiT)
+
+## 登录页面
+
+<img src="./common-test-cases.assets/login.webp">
+
+幕布链接：[https://www.mubu.com/doc/2GYZsh9ys4T](https://www.mubu.com/doc/2GYZsh9ys4T)
+
+## 朋友圈点赞用例
+
+<img src="./common-test-cases.assets/thumb-up.webp">
+
+幕布链接：[https://www.mubu.com/doc/3lPPw_GGVkT](https://www.mubu.com/doc/3lPPw_GGVkT)

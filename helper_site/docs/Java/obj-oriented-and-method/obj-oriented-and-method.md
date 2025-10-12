@@ -98,7 +98,7 @@ public class Test_method {
 
 可以类比下面的C语言代码
 
-```java
+```c
 #include <stdio.h>
 #include <stdlib.h>
 

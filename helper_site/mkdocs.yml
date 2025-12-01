@@ -298,6 +298,15 @@ nav:
     - SpringMVC/SpringBoot:
       - 章节目录: JavaEE/Spring/index.md
       - SpringMVC基础: JavaEE/Spring/springmvc-basic/springmvc-basic.md
+    - SpringCloud:
+      - 章节目录: JavaEE/SpringCloud/index.md
+      - 基础环境搭建: JavaEE/SpringCloud/env-setup/env-setup.md
+    - SpringAI:
+      - 章节目录: JavaEE/spring-ai/index.md
+      - 基础环境搭建: JavaEE/spring-ai/env-setup/env-setup.md
+    - SpringSecurity基本使用: JavaEE/spring-security/spring-security.md
+    - MyBatis-Plus: JavaEE/mybatis-plus/mybatis-plus.md
+    - SpringBoot常见YML配置、配置类和工具类代码参考: JavaEE/springboot-help/springboot-help.md
   - 软件测试:
     - 章节目录: software-test/index.md
     - 软件测试相关概念: software-test/basic-concept/basic-concept.md
@@ -321,6 +330,8 @@ nav:
     - 关于YAML文件: other/yaml/yaml.md
     - 关于JSON Schema: other/json_schema/json_schema.md
     - 关于正则表达式: other/regex/regex.md
+    - 关于EasyExcel: other/easy-excel/easy-excel.md
+    - 关于Knife4j: other/knife4j/knife4j.md
   - 工具帮助:
     - 章节目录: tooltips/index.md
     - vscode中添加代码片段: tooltips/vscode-snippets/vscode-snippets.md

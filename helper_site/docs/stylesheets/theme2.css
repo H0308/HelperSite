@@ -219,7 +219,7 @@ li::marker {
 
 .md-typeset code,
 a code {
-    color: var(--text-orange) !important;
+    color: var(--text-code-blue) !important;
     font-weight: normal;
 }
 

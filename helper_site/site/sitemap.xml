@@ -117,6 +117,34 @@
          <lastmod>2025-12-01</lastmod>
     </url>
     <url>
+         <loc>https://www.help-doc.top/JavaEE/SpringCloud/index.html</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/JavaEE/SpringCloud/env-setup/env-setup.html</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/JavaEE/mybatis-plus/mybatis-plus.html</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/JavaEE/spring-ai/index.html</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/JavaEE/spring-ai/env-setup/env-setup.html</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/JavaEE/spring-security/spring-security.html</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/JavaEE/springboot-help/springboot-help.html</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
          <loc>https://www.help-doc.top/JavaWeb/2.%20Servlet%E5%BC%80%E5%8F%91/2.%20Servlet%E5%BC%80%E5%8F%91.html</loc>
          <lastmod>2025-12-01</lastmod>
     </url>
@@ -909,6 +937,10 @@
          <lastmod>2025-12-01</lastmod>
     </url>
     <url>
+         <loc>https://www.help-doc.top/other/easy-excel/easy-excel.html</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
          <loc>https://www.help-doc.top/other/func-stack-c/func-stack-c.html</loc>
          <lastmod>2025-12-01</lastmod>
     </url>
@@ -926,6 +958,10 @@
     </url>
     <url>
          <loc>https://www.help-doc.top/other/jsoncpp/jsoncpp.html</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://www.help-doc.top/other/knife4j/knife4j.html</loc>
          <lastmod>2025-12-01</lastmod>
     </url>
     <url>

@@ -34,7 +34,7 @@ public class Knife4jConfig {
 
 knife4j是在Swagger上做的增强，同样支持SpringDoc，开发者即可完全参考[springdoc-openapi](https://springdoc.org/)的项目说明
 
-```yml
+```yaml
 springdoc:
   api-docs:
     path: /v3/api-docs  # 更改 OpenAPI JSON/YAML 描述文件的路径，默认是 /v3/api-docs

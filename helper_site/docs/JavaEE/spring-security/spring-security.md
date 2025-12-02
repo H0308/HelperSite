@@ -141,7 +141,7 @@ public class JwtUtil {
 
 ```java
 public interface UserDetailsService {
-UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 }
 ```
 
@@ -207,7 +207,7 @@ public UsernamePasswordAuthenticationToken(
 
 不过有一个问题：`SecurityContextHolder`是如何保证同一个请求中使用的是同一个上下文对象呢？
 
-SpringBoot项目本质上是多线程的，虽然`SecurityContextHolder.getContext()` 并不是单例的，它的设计与线程绑定（Thread-Bound）相关，但是因为单个请求的处理流程（如从过滤器到控制器、服务层）通常在***\*同一个线程\****中完成，这使得 `SecurityContextHolder.getContext()`能在该请求的整个生命周期内获取到相同的认证信息
+SpringBoot项目本质上是多线程的，虽然`SecurityContextHolder.getContext()` 并不是单例的，它的设计与线程绑定（Thread-Bound）相关，但是因为单个请求的处理流程（如从过滤器到控制器、服务层）通常在**同一个线程**中完成，这使得 `SecurityContextHolder.getContext()`能在该请求的整个生命周期内获取到相同的认证信息
 
 根据这一特性，在获取SpringSecurity上下文对象时就不需要额外去保存这个对象
 
@@ -264,9 +264,9 @@ Collection<GrantedAuthority> authorities = new ArrayList<>();
 authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
 ```
 
-`SimpleGrantedAuthority` 是 Spring Security 提供的 `GrantedAuthority` 接口的***\*默认实现类\****，封装用户的权限信息（如角色、操作权限等），提供给 Spring Security 框架进行授权校验，其内部存储一个字符串类型的权限标识（如 `ROLE_管理员`），框架通过比对该标识与接口所需权限，判断用户是否有权访问资源
+`SimpleGrantedAuthority` 是 Spring Security 提供的 `GrantedAuthority` 接口的**默认实现类**，封装用户的权限信息（如角色、操作权限等），提供给 Spring Security 框架进行授权校验，其内部存储一个字符串类型的权限标识（如 `ROLE_管理员`），框架通过比对该标识与接口所需权限，判断用户是否有权访问资源
 
-需要注意的是，此处必须带`ROLE_`前缀，因为 Spring Security 对***\*角色（Role）和权限（Authority）的区分策略\****导致的，在Spring Security中，角色通常被视为一种特殊的权限，且默认要求角色名称必须以 `ROLE_` 为前缀，在 `SecurityConfig` 中配置角色权限时（如 `.hasRole("管理员")`），框架会自动在角色名称前拼接 `ROLE_` 进行校验
+需要注意的是，此处必须带`ROLE_`前缀，因为 Spring Security 对**角色（Role）和权限（Authority）的区分策略**导致的，在Spring Security中，角色通常被视为一种特殊的权限，且默认要求角色名称必须以 `ROLE_` 为前缀，在 `SecurityConfig` 中配置角色权限时（如 `.hasRole("管理员")`），框架会自动在角色名称前拼接 `ROLE_` 进行校验
 
 最后，创建`User`（Spring Security的）类对象并返回：
 

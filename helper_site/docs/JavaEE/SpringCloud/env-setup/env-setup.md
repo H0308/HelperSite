@@ -49,7 +49,7 @@
 
 ## 远程调用
 
-学了RestTemplate和OpenFeign，后面主要使用OpenFeign，使接口调用更加贴近本地调用的形式，对于RestTemplate的使用，直接看[课件](https://www.kdocs.cn/l/caWDCjR62Xll)
+学了RestTemplate和OpenFeign，后面主要使用OpenFeign，使接口调用更加贴近本地调用的形式，对于RestTemplate的使用，直接看[文档](https://www.kdocs.cn/l/caWDCjR62Xll)
 
 ## 服务注册和负载均衡
 

@@ -201,20 +201,20 @@ BookInfo(id=20, bookName=图书14, author=作者2, count=29, price=22.00, publis
 
 ```java
 @Test
-  public void test1() {
-      Page<BookInfo> page = new Page<>(1, 3);
-      // 构建出版社名称不为“出版社1”的条件构造器
-      LambdaQueryWrapper<BookInfo> publisher = new LambdaQueryWrapper<BookInfo>()
-                                              .ne(BookInfo::getPublish, "出版社1");
-      // 无条件查询
-      Page<BookInfo> result = bookInfoMapper.selectPage(page, publisher);
-      // 打印分页信息（调试用）
-      System.out.println("当前页: " + result.getCurrent());
-      System.out.println("每页大小: " + result.getSize());
-      System.out.println("总记录数: " + result.getTotal());
-      System.out.println("总页数: " + result.getPages());
-      System.out.println("数据列表: " + result.getRecords());
-  }
+public void test1() {
+    Page<BookInfo> page = new Page<>(1, 3);
+    // 构建出版社名称不为“出版社1”的条件构造器
+    LambdaQueryWrapper<BookInfo> publisher = new LambdaQueryWrapper<BookInfo>()
+                                            .ne(BookInfo::getPublish, "出版社1");
+    // 无条件查询
+    Page<BookInfo> result = bookInfoMapper.selectPage(page, publisher);
+    // 打印分页信息（调试用）
+    System.out.println("当前页: " + result.getCurrent());
+    System.out.println("每页大小: " + result.getSize());
+    System.out.println("总记录数: " + result.getTotal());
+    System.out.println("总页数: " + result.getPages());
+    System.out.println("数据列表: " + result.getRecords());
+}
 ```
 
 输出结果如下：

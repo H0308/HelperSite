@@ -43,7 +43,7 @@
 
 根据[官方文档](https://docs.springframework.org.cn/spring-ai/reference/api/chat/deepseek-chat.html)的介绍进行如下的配置：
 
-```yml
+```yaml
 spring:
   ai:
     openai:

@@ -131,7 +131,7 @@ public class JwtUtil {
 
 #### 创建认证对象
 
-首先是第一步：***\*创建认证对象\****，在Spring Security中提供了一个`UsernamePasswordAuthenticationToken`的类，这个类是 Spring Security 处理用户名密码认证的默认载体，其包含三个核心属性：
+首先是第一步：**创建认证对象**，在Spring Security中提供了一个`UsernamePasswordAuthenticationToken`的类，这个类是 Spring Security 处理用户名密码认证的默认载体，其包含三个核心属性：
 
 - `principal`：用户主体（通常是 `UserDetails` 对象）
 - `credentials`：凭证（通常是密码，认证通过后可置空）

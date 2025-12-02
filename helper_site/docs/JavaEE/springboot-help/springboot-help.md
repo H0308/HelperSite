@@ -38,7 +38,7 @@ spring:
   mail:
     host: smtp.qq.com
     username: 1848312235@qq.com
-    password: hmkotlztyewmeahh
+    password: xxxx
     port: 465
     properties:
       mail.smtp.ssl.enable: true

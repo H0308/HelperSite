@@ -20,7 +20,7 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   rabbitmq:
-    addresses: amqp://admin:admin@47.113.217.80:5670/blog
+    addresses: amqp://admin:admin@ip:port/blog
     listener:
       simple:
         acknowledge-mode: manual # 手动确认
@@ -45,7 +45,7 @@ spring:
       personal: "图书管理系统"
   ai:
     openai:
-      api-key: sk-4ab5979b46f24e55b944d7cf278f0199
+      api-key: xxx
       base-url: https://api.deepseek.com
       chat:
         options:

@@ -642,3 +642,172 @@ public class MethodController {
 - `hasRole('ADMIN') or (hasRole('USER') and #userId == principal.id)`
 - `hasAuthority('READ') and @securityService.canAccess(#resourceId)`
 - `isAuthenticated() and principal.username != 'guest'`
+
+## 实战代码参考——图书管理系统登录和方法鉴权
+
+Spring Security配置文件`SecurityConfig`：
+
+```java
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+public class SecurityConfig {
+
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    // 配置密码器，目前使用明文校验
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+    // 配置安全管理器
+    @Bean
+    @SneakyThrows
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) {
+        return configuration.getAuthenticationManager();
+    }
+
+    // 自定义安全过滤器链
+    @Bean
+    @SneakyThrows
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
+
+        httpSecurity.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(request ->
+                        request.requestMatchers("auth/**", "ai/chat").permitAll()
+                                .anyRequest().authenticated())
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return httpSecurity.build();
+    }
+
+}
+```
+
+=== "自定义的`CustomUserDetailService`"
+
+    ```java
+    // 接口
+    public interface CustomUserDetailService extends UserDetailsService {
+    }
+
+    // 实现类
+    @Service
+    public class CustomUserDetailServiceImpl implements CustomUserDetailService {
+
+        @Autowired
+        private UserMapper userMapper;
+        @Autowired
+        private RoleMapper roleMapper;
+
+        @Override
+        public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+            // 从数据库通过邮箱获取到用户和角色信息
+            User user = userMapper.selectByPreciseEmail(email);
+            if (user == null) {
+                throw new BookManagerException("邮箱错误或者用户未注册");
+            }
+
+            Role role = roleMapper.selectById(user.getRoleId());
+
+            Collection<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(Constants.SECURITY_ROLE_PREFIX + role.getRole()));
+
+            return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getId(), role.getId(), authorities);
+        }
+    }
+    ```
+
+=== "Jwt认证过滤器"
+
+    ```java
+    @Component
+    public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+        @Autowired
+        private CustomUserDetailService customUserDetailService;
+
+        @Override
+        protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+                                        FilterChain filterChain) throws ServletException, IOException {
+            // 基于JWT进行安全校验
+            // 从请求中拿到请求头
+            String header = request.getHeader(Constants.TOKEN_HEADER);
+            String token = null;
+            // 判断提取到的JWT是否包含Bearer头部
+            if (header != null && header.startsWith(Constants.TOKEN_START_FLAG)) {
+                token = header.substring(7);
+            }
+
+            // 从Token中获取邮箱
+            String email = null;
+            if (token != null) {
+                email = JwtUtil.extractEmail(token);
+            }
+
+            if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                // 从数据库获取到用户信息用于信息比对
+                UserDetails userDetails = customUserDetailService.loadUserByUsername(email);
+                if (!JwtUtil.validateToken(token, userDetails.getUsername())) {
+                    throw new BookManagerException("Token信息和当前用户信息不匹配，校验失败");
+                }
+
+                // 存储用户信息
+                UsernamePasswordAuthenticationToken authToken =
+                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+
+                // 设置认证详情
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                // 设置安全上下文
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+            }
+
+            // 继续后续的过滤器
+            filterChain.doFilter(request, response);
+        }
+    }
+    ```
+
+=== "登录方法"
+
+    ```java
+    @Service
+    public class AuthServiceImpl implements AuthService {
+
+        @Autowired
+        private AuthenticationManager authenticationManager;
+        @Autowired
+        private UserMapper userMapper;
+
+        @Override
+        public LoginResp login(LoginReq loginReq) {
+            String email = loginReq.getEmail();
+            String password = loginReq.getPassword();
+            // 进行用户存在性校验
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+
+            // 通过校验后，生成JWT Token
+            User user = userMapper.selectByPreciseEmail(email);
+            if (Constants.DELETED_FIELD_FLAG.equals(user.getDeleteFlag())) {
+                throw new BookManagerException("当前用户已经处于注销状态，无法登录");
+            }
+
+            // 普通用户需要输入验证码
+            if (Constants.USER_FLAG.equals(user.getRoleId()) &&
+                    (loginReq.getInputCaptcha() == null || !StringUtils.hasText(loginReq.getInputCaptcha()))) {
+                throw new BookManagerException("普通用户需要输入验证码");
+            }
+
+            String token = JwtUtil.generateToken(user.getEmail(), user.getUsername());
+
+            // 返回登录响应
+            // 此处可以对这个userId参数使用非对称密钥的公钥进行加密，例如RSA
+            // 前端传递该参数给后端，后端使用私钥解密
+            return new LoginResp(user.getId(), user.getUsername(), user.getRoleId(), token);
+        }
+    }
+    ```

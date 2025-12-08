@@ -339,6 +339,7 @@ nav:
     - Sunshine+Moonlight实现屏幕内容串流: tooltips/sunshine-moonlight/sunshine-moonlight.md
     - vim使用帮助: tooltips/vim/vim.md
     - 内网穿透部署: tooltips/frp/frp.md
+    - 常见MCP工具配置: tooltips/mcps/mcps.md
   - 测试加密功能:
     - 加密测试页面: test-encrypt/test-encrypt.md
   - 项目:

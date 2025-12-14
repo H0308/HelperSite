@@ -1,5 +1,19 @@
 [
   {
+    "title": "MyBatis-Plus",
+    "url": "JavaEE/mybatis-plus/mybatis-plus.html",
+    "nav_path": null,
+    "created_str": "2025-12-01",
+    "modified_str": "2025-12-14"
+  },
+  {
+    "title": "SpringBoot常见YML配置、配置类和工具类代码参考",
+    "url": "JavaEE/springboot-help/springboot-help.html",
+    "nav_path": null,
+    "created_str": "2025-12-01",
+    "modified_str": "2025-12-13"
+  },
+  {
     "title": "常见MCP工具配置",
     "url": "tooltips/mcps/mcps.html",
     "nav_path": null,
@@ -9,20 +23,6 @@
   {
     "title": "关于Knife4j",
     "url": "other/knife4j/knife4j.html",
-    "nav_path": null,
-    "created_str": "2025-12-01",
-    "modified_str": "2025-12-02"
-  },
-  {
-    "title": "Spring Security基本使用",
-    "url": "JavaEE/spring-security/spring-security.html",
-    "nav_path": null,
-    "created_str": "2025-12-01",
-    "modified_str": "2025-12-02"
-  },
-  {
-    "title": "SpringBoot常见YML配置、配置类和工具类代码参考",
-    "url": "JavaEE/springboot-help/springboot-help.html",
     "nav_path": null,
     "created_str": "2025-12-01",
     "modified_str": "2025-12-02"

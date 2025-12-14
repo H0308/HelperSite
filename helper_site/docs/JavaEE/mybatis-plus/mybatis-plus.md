@@ -72,6 +72,44 @@ INSERT INTO `book_info` VALUES (27, '图书21', '作者2', 29, 22.00, '出版社
 SET FOREIGN_KEY_CHECKS = 1;
 ```
 
+## 自动填空字段
+
+假设数据库已经配置了下面两个字段：
+
+```sql
+create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP -- 创建时间，创建时默认为当前时间戳
+update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- 更新时间，更新时自动使用当前时间戳
+```
+
+要使用MyBatis-Plus的自动填充字段功能，首先需要在实体类上使用`@TableField`注解并填入需要的枚举值：
+
+```java
+@TableField(fill = FieldFill.INSERT)
+private LocalDateTime createTime;
+@TableField(fill = FieldFill.UPDATE)
+private LocalDateTime updateTime;
+```
+
+接着创建一个配置类实现`MetaObjectHandler`，在该配置类中重写`insertFill`和`updateFill`方法：
+
+```java
+@Component
+public class MyBatisPlusTimeMetaObjectHandler implements MetaObjectHandler {
+
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
+    }
+
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        this.strictUpdateFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
+    }
+}
+```
+
+此时再插入/更新数据时可以不用显式指定时间，MyBatis-Plus会自动处理时间
+
 ## MyBatis-Plus插件
 
 ### 分页插件

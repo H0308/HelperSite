@@ -314,6 +314,10 @@ nav:
     - 性能测试: software-test/performance-test/performance-test.md
     - 接口自动化测试: software-test/api-automatic-test/api-automatic-test.md
     - 常见测试用例设计: software-test/common-test-cases/common-test-cases.md
+  - 容器化: 
+    - Docker:
+      - 章节目录: docker/index.md
+      - Docker简介与基础使用: docker/docker-base/docker-base.md
   - 扩展知识: 
     - 章节目录: other/index.md
     - 关于Shell: other/shell/shell.md

@@ -227,6 +227,18 @@ a code {
     color: var(--md-code-fg-color) !important;
 }
 
+/* Header font size adjustments */
+.md-typeset h4 {
+    font-size: 1.15em;
+    font-weight: 700;
+}
+
+.md-typeset h5,
+.md-typeset h6 {
+    font-size: 1.15em;
+    font-weight: 700;
+}
+
 .highlight .c1,
 .highlight .cm {
     color: var(--text-gray);

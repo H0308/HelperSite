@@ -1,20 +1,20 @@
-/* 上图东观体 */
-@import url("https://fontsapi.zeoseven.com/488/main/result.css");
-/* 江城黑体 */
-@import url("https://fontsapi.zeoseven.com/194/main/result.css");
-
-/* Google Sans Code */
 @font-face {
-    font-family: "ZSFT-669";
-    src: url("https://fontsapi.zeoseven.com/669/main.woff2") format("woff2"),
-        url("https://fontsapi-storage.zeoseven.com/669/main.woff2") format("woff2");
-    font-display: swap;
+    font-family: 'JiangChengHeiTi 400W';
+    src: url('https://help-site.oss-cn-hangzhou.aliyuncs.com/fonts/JiangChengHeiTi.woff') format('woff');
+}
+@font-face {
+    font-family: 'STDongGuanTi';
+    src: url('https://help-site.oss-cn-hangzhou.aliyuncs.com/fonts/STDongGuanTi.woff') format('woff');
+}
+@font-face {
+    font-family: 'Google Sans Code';
+    src: url('https://help-site.oss-cn-hangzhou.aliyuncs.com/fonts/GoogleSansCode.woff') format('woff') ;
 }
 
 :root {
     --md-text-font: "JiangChengHeiTi 400W", sans-serif;
     --md-header-font: "STDongGuanTi", sans-serif;
-    --md-code-font: "ZSFT-669";
+    --md-code-font: "Google Sans Code";
     --code-font-color: var(--text-code);
 }
 

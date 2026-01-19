@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # Docker简介与基础使用
 
 ## 虚拟化与容器化
@@ -22,9 +26,9 @@ Linux namespaces 是对全局系统资源的一种封装隔离，使得处于不
 
 Linux 提供了多个 API 用来操作 namespace，它们是 `clone()`、`setsns()` 和 `unshare()` 函数，为了确定隔离的到底是哪项 namespace，在使用这些 API 时，通常需要指定一些调用参数：`CLONE_NEWIPC`、`CLONE_NEWNET`、`CLONE_NEWNS`、`CLONE_NEWPID`、`CLONE_NEWUSER`、`CLONE_NEWUTS` 和 `CLONE_NEWCGROUP`。如果要同时隔离多个 namespace，可以使用`|`组合
 
-### 基础实战——`dd`命令
+### `dd`命令
 
-`dd`命令：Linux dd 命令用于读取、转换并输出数据。`dd` 可从标准输入或文件中读取数据，根据指定的格式来转换数据，再输出到文件、设备或标准输出。
+`dd`命令：用于读取、转换并输出数据。`dd` 可从标准输入或文件中读取数据，根据指定的格式来转换数据，再输出到文件、设备或标准输出。
 
 `dd`命令常用选项如下：
 
@@ -53,7 +57,7 @@ Linux 提供了多个 API 用来操作 namespace，它们是 `clone()`、`setsns
 - `--help`：显示帮助信息
 - `--version`：显示版本信息
 
-!!! note
+??? note "更多单位"
 
     对于需要指定转换文件大小的选项，例如`ibs`、`obs`、`bs`等，除了可以指定字节为单位以外，还可以指定下面的单位：
 
@@ -80,3 +84,133 @@ dd if=/dev/zero of=fdimage.img bs=8k count=10240
 ```shell
 dd if=testfile_2 of=testfile_1 conv=ucase
 ```
+
+### `mkfs`命令
+
+`mkfs`命令：用于在当前设备上创建Linux文件系统，俗成格式化
+
+基本语法如下：
+
+```shell
+mkfs 文件系统格式 需要操作的文件或设备名称
+```
+
+常见选项如下：
+
+- `-t 文件系统名称`: 指定要建立何种文件系统；如`ext3`，`ext4`
+- `blocks`：指定文件系统的磁盘块数
+- `-V`：详细显示模式
+- `fs - options`：传递给具体的文件系统的参数
+
+例如，将上面创建的80MB`fdimage.img`文件进行格式化
+
+```shell
+mkfs -t ext4 ./fdimage.img
+```
+
+结束后可以看到类似下面的信息：
+
+```
+mke2fs 1.46.5 (30-Dec-2021)
+Discarding device blocks: done                            
+Creating filesystem with 20480 4k blocks and 20480 inodes
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (1024 blocks): done
+Writing superblocks and filesystem accounting information: done
+```
+
+### `df`命令
+
+`df`命令：用于查看当前Linux系统下文件系统磁盘的使用情况
+
+常见选项如下：
+
+- `-a, --all`：包含所有的具有 0 Blocks 的文件系统
+- `-h, --human-readable`：使用人类可读的格式(预设值是不加这个选项的...)
+- `-H, --si`：很像`-h`, 但是用1000为单位而不是用1024
+- `-t, --type=TYPE`：指定需要的列出文件系统的类型
+- `-T, --print-type`：显示文件系统的形式
+
+例如，查看文件系统类型为`ext4`的：
+
+```shell
+df -t ext4
+```
+
+### `mount`命令
+
+`mount`命令：用于将指定文件或设备挂载到指定目录下
+
+基本语法如下：
+
+```shell
+mount 待挂载的文件 挂载的目标目录
+```
+
+常见选项如下：
+
+- `-l`：显示已加载的文件系统列表；
+- `-t`：指定挂载的文件系统类型，支持常见系统类型（大部分情况可以不指定，`mount`可以自己识别）
+- `-o options`：主要用来描述设备或档案的挂接方式，有下面几种值：
+    - `loop`：用来把一个文件当成硬盘分区挂接上系统
+    - `ro`：采用只读方式挂接设备
+    - `rw`：采用读写方式挂接设备
+
+例如，将前面格式化后的`fdimage.img`文件挂载到的`~/test/data`：
+
+```shell
+mount fdimage.img ~/test/data
+```
+
+但是如果是普通用户，直接挂载会出现报错：
+
+```
+epsda@ham-carrier:~/test$ mount fdimage.img test/data
+mount: test/data: failed to setup loop device for /home/epsda/test/fdimage.img.
+```
+
+所以还需要进行提权：
+
+```shell
+sudo mount fdimage.img ~/test/data
+```
+
+再使用`df`命令即可查看到刚才挂载的文件：
+
+```
+/dev/loop0       71M   24K   66M   1% /home/epsda/test/data
+```
+
+### `unshare`命令
+
+`unshare`命令：用于使用与父程序不共享的名称空间运行程序。
+
+基本使用方式：
+
+```shell
+unshare 待运行的程序名称
+```
+
+常见选项：
+
+- `-i, --ipc`：不共享IPC空间（程序的IPC机制（比如`ipcs`、`msgget`、`semget`等）只看得到隔离后的专属于这个新空间的信息，不再看到父进程的IPC）
+- `-m, --mount`：不共享Mount空间（运行的程序有自己的挂载点空间）
+- `-n, --net`：不共享Net空间（有独立的网络设备、路由表、IP等，是用来隔离网络环境的基础）
+- `-p, --pid`：不共享PID空间（在当前namespace里看不到外部namespace的进程）
+- `-u, --uts`：不共享UTS空间（主机名和域名隔离）
+- `-U, --user`：不共享用户（让程序拥有独立的用户/组空间）
+- `-V, --version`：版本查看
+- `--fork`：执行`unshare`的进程`fork`一个新的子进程，在子进程里执行`unshare`传入的参数。
+- `--mount-proc`：执行子进程前，将`proc`优先挂载过去
+
+例如，不共享主机名和域名运行`/bin/bash`：
+
+```shell
+unshare -u /bin/bash
+```
+
+### 进程隔离和挂载隔离
+
+参考[课件](https://www.kdocs.cn/l/chAkGu1MSCUU)

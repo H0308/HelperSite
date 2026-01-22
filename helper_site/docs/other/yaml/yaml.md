@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://help-site.oss-cn-hangzhou.aliyuncs.com/css/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # 关于YAML文件
 
 YAML（YAML Ain't Markup Language）是一种人类可读的数据序列化标准，常用于配置文件和数据交换。以下是YAML的主要语法规则：

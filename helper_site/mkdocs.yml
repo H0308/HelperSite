@@ -317,7 +317,7 @@ nav:
   - 容器化: 
     - Docker:
       - 章节目录: docker/index.md
-      - Docker简介与基础使用: docker/docker-base/docker-base.md
+      - Docker前置知识: docker/docker-base/docker-base.md
   - 扩展知识: 
     - 章节目录: other/index.md
     - 关于Shell: other/shell/shell.md
@@ -480,4 +480,3 @@ plugins:
       exclude:
         - index.md
         - author/contact/contact.md
-        - intro/intro.md

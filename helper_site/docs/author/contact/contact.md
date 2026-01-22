@@ -26,7 +26,16 @@ glightbox: false
     padding: 0rem 2rem !important;
     padding-bottom: 2rem !important;
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--md-header-font);
+    font-weight: normal !important;
+    color: var(--primary-blue) !important;
+}
 .md-content h1,
 .md-content h2,
 .md-content h3 {

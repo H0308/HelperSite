@@ -130,7 +130,16 @@ body {
     background-clip: unset;
     color: inherit;
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--md-header-font);
+    font-weight: normal !important;
+    color: var(--primary-blue) !important;
+}
 .md-content h1::before,
 .md-content h2::before,
 .md-content h3::before,

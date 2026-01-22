@@ -1,5 +1,5 @@
 <script defer src="/javascripts/waline.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="https://help-site.oss-cn-hangzhou.aliyuncs.com/css/waline.css" />
 <link rel="stylesheet" href="/stylesheets/waline.min.css" />
 
 # `Java.lang`中的`String`类和`StringBuilder`类介绍和常用方法

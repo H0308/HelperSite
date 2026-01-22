@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function () {
-    const { init } = await import('https://unpkg.com/@waline/client@v3/dist/waline.js');
+    const { init } = await import('https://help-site.oss-cn-hangzhou.aliyuncs.com/js/waline.js');
 
     const locale = {
         placeholder: "欢迎评论（登录后才可发布评论）",

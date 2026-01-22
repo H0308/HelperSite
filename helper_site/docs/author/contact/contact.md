@@ -118,7 +118,7 @@ h6 {
 <div class="content-container">
     <div class="content-card">
         <div class="card-avatar">
-            <img src="../作者.assets\20250206-200653.jpg" alt="头像">
+            <img src="https://help-site.oss-cn-hangzhou.aliyuncs.com/images/author/avatar.jpg" alt="头像">
         </div>
         <div class="card-info">
             <h1>联系作者</h1>

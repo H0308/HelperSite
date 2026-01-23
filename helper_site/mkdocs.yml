@@ -406,11 +406,15 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
 
+extra_css:
+  - stylesheets/link-preview.css
+
 extra_javascript:
   - javascripts/other.js
   - javascripts/copyright.js
   - javascripts/docsearch.js
   - javascripts/navigation-overlay.js
+  - javascripts/link-preview.js
   - https://help-site.oss-cn-hangzhou.aliyuncs.com/js/docsearch3.js
 
 extra:
@@ -452,6 +456,7 @@ plugins:
           - javascripts/waline.js
           - javascripts/docsearch.js
           - javascripts/recent-updates.js
+          - javascripts/link-preview.js
       css_files:
         - stylesheets/colors.css
         - stylesheets/theme1.css
@@ -459,6 +464,7 @@ plugins:
         - stylesheets/print.css
         - stylesheets/waline.css
         - stylesheets/docsearch.css
+        - stylesheets/link-preview.css
   - glightbox:
       touchNavigation: true
       loop: false

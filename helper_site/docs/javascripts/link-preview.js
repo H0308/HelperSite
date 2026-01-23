@@ -4,6 +4,7 @@
     let currentLink = null;
     let currentUrl = null;
     let justExpanded = false; // 标记是否刚刚展开
+    let scrollPosition = 0; // 保存滚动位置
 
     // 创建预览框
     function createPreviewBox() {
@@ -59,6 +60,23 @@
             </div>
         `;
         document.body.appendChild(box);
+        
+        // 阻止预览框内的滚动冒泡（移动端）
+        box.addEventListener('touchmove', function(e) {
+            e.stopPropagation();
+        }, { passive: false });
+        
+        // 阻止预览框内容区域的滚动冒泡（移动端）
+        const content = box.querySelector('.link-preview-content');
+        content.addEventListener('touchmove', function(e) {
+            e.stopPropagation();
+        }, { passive: false });
+        
+        // 阻止预览框的鼠标滚轮事件冒泡（桌面端）
+        // 使用捕获阶段拦截，只阻止冒泡不阻止默认行为
+        box.addEventListener('wheel', function(e) {
+            e.stopPropagation();
+        }, { passive: true, capture: true });
         
         // 关闭按钮事件
         box.querySelector('.link-preview-close').addEventListener('click', hidePreview);
@@ -206,6 +224,18 @@
         // 只添加 active 类，不移除 collapsed 类
         previewBox.classList.add('active');
         
+        // 禁止背景页面滚动（移动端）- 只在移动端应用
+        if (window.innerWidth <= 768) {
+            // 保存当前滚动位置
+            scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // 固定页面位置
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollPosition}px`;
+            document.body.style.width = '100%';
+        }
+        
         // 同时开始加载iframe
         setTimeout(() => {
             iframe.src = url;
@@ -261,6 +291,18 @@
         
         if (overlay) {
             overlay.classList.remove('active');
+        }
+        
+        // 恢复背景页面滚动（移动端）- 只在移动端应用
+        if (window.innerWidth <= 768) {
+            // 恢复样式
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            
+            // 恢复滚动位置
+            window.scrollTo(0, scrollPosition);
         }
         
         currentLink = null;

@@ -406,9 +406,6 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
 
-extra_css:
-  - stylesheets/link-preview.css
-
 extra_javascript:
   - javascripts/other.js
   - javascripts/copyright.js

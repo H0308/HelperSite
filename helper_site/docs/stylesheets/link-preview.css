@@ -83,7 +83,7 @@
 
 /* 收起状态 - 只显示一小部分 */
 .link-preview-box.collapsed {
-    transform: translateX(calc(100% - 60px));
+    transform: translateX(calc(100% - 20px));
 }
 
 .link-preview-box.collapsed .link-preview-resizer {
@@ -95,7 +95,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 60px;
+    width: 20px;
     height: 100%;
     display: none;
     align-items: center;
@@ -122,8 +122,8 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -143,6 +143,8 @@
 
 .link-preview-expand-btn svg {
     display: block;
+    width: 14px;
+    height: 14px;
 }
 
 /* 半透明遮罩层 */

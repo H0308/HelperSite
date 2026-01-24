@@ -380,6 +380,11 @@
             const url = getFullUrl(link);
             if (!url) return;
             
+            // 移动端直接跳转，不显示预览
+            if (window.innerWidth <= 768) {
+                return; // 不阻止默认行为，让链接正常跳转
+            }
+            
             // 阻止默认跳转行为
             e.preventDefault();
             

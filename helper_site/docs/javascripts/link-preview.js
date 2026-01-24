@@ -1,5 +1,20 @@
 // 链接悬浮预览功能
 (function() {
+    // 如果当前页面在iframe中，不初始化预览功能
+    if (window.self !== window.top) {
+        console.log('[Link Preview] 检测到在iframe中，跳过初始化');
+        return;
+    }
+    
+    // 防止重复执行
+    if (window.__linkPreviewInitialized) {
+        console.log('[Link Preview] 已经初始化过，跳过');
+        return;
+    }
+    window.__linkPreviewInitialized = true;
+    
+    console.log('[Link Preview] 开始初始化');
+    
     let previewBox = null;
     let currentLink = null;
     let currentUrl = null;
@@ -12,8 +27,9 @@
         const overlay = document.createElement('div');
         overlay.className = 'link-preview-overlay';
         overlay.addEventListener('click', function() {
-            // 只有在展开状态下点击遮罩层才关闭预览框
-            if (previewBox && !previewBox.classList.contains('collapsed')) {
+            // 只有在移动端且展开状态下点击遮罩层才关闭预览框
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile && previewBox && !previewBox.classList.contains('collapsed')) {
                 hidePreview();
             }
         });
@@ -24,13 +40,6 @@
         box.className = 'link-preview-box';
         box.innerHTML = `
             <div class="link-preview-resizer"></div>
-            <div class="link-preview-expand-trigger">
-                <button class="link-preview-expand-btn" aria-label="展开预览" title="展开预览">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-            </div>
             <div class="link-preview-content">
                 <div class="link-preview-header">
                     <span class="link-preview-title">页面预览</span>
@@ -60,6 +69,18 @@
             </div>
         `;
         document.body.appendChild(box);
+        
+        // 创建独立的展开按钮（在预览框外部）
+        const expandTrigger = document.createElement('div');
+        expandTrigger.className = 'link-preview-expand-trigger';
+        expandTrigger.innerHTML = `
+            <button class="link-preview-expand-btn" aria-label="展开预览" title="展开预览">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+        `;
+        document.body.appendChild(expandTrigger);
         
         // 阻止预览框内的滚动冒泡（移动端）
         box.addEventListener('touchmove', function(e) {
@@ -92,30 +113,69 @@
         const collapseBtn = box.querySelector('.link-preview-collapse');
         collapseBtn.addEventListener('click', function() {
             const isCollapsed = box.classList.contains('collapsed');
+            const isMobile = window.innerWidth <= 768;
+            const overlay = document.querySelector('.link-preview-overlay');
+            const expandTrigger = document.querySelector('.link-preview-expand-trigger');
+            
             if (isCollapsed) {
                 box.classList.remove('collapsed');
-                collapseBtn.setAttribute('aria-label', '收起预览');
-                collapseBtn.setAttribute('title', '收起预览');
-                collapseBtn.querySelector('svg').innerHTML = '<polyline points="9 18 15 12 9 6"></polyline>';
+                if (expandTrigger) expandTrigger.classList.remove('active');
+                
+                // 展开时只在移动端显示遮罩层并禁止背景滚动
+                if (isMobile) {
+                    if (overlay) {
+                        overlay.classList.add('active');
+                    }
+                    
+                    scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                    document.body.style.overflow = 'hidden';
+                    document.body.style.position = 'fixed';
+                    document.body.style.top = `-${scrollPosition}px`;
+                    document.body.style.width = '100%';
+                }
             } else {
                 box.classList.add('collapsed');
-                collapseBtn.setAttribute('aria-label', '展开预览');
-                collapseBtn.setAttribute('title', '展开预览');
-                collapseBtn.querySelector('svg').innerHTML = '<polyline points="15 18 9 12 15 6"></polyline>';
+                if (expandTrigger) expandTrigger.classList.add('active');
+                
+                // 收起时隐藏遮罩层并恢复背景滚动
+                if (overlay) {
+                    overlay.classList.remove('active');
+                }
+                
+                if (isMobile) {
+                    document.body.style.overflow = '';
+                    document.body.style.position = '';
+                    document.body.style.top = '';
+                    document.body.style.width = '';
+                    window.scrollTo(0, scrollPosition);
+                }
             }
         });
         
         // 展开按钮事件（收起状态下显示的按钮）
-        const expandTrigger = box.querySelector('.link-preview-expand-trigger');
         expandTrigger.addEventListener('click', function(e) {
             // 阻止事件冒泡和默认行为，避免触发下层元素的点击
             e.preventDefault();
             e.stopPropagation();
             
+            const isMobile = window.innerWidth <= 768;
+            const overlay = document.querySelector('.link-preview-overlay');
+            
             box.classList.remove('collapsed');
-            collapseBtn.setAttribute('aria-label', '收起预览');
-            collapseBtn.setAttribute('title', '收起预览');
-            collapseBtn.querySelector('svg').innerHTML = '<polyline points="9 18 15 12 9 6"></polyline>';
+            expandTrigger.classList.remove('active');
+            
+            // 展开时只在移动端显示遮罩层并禁止背景滚动
+            if (isMobile) {
+                if (overlay) {
+                    overlay.classList.add('active');
+                }
+                
+                scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${scrollPosition}px`;
+                document.body.style.width = '100%';
+            }
             
             // 设置保护标记，防止立即响应 URL 变化
             justExpanded = true;
@@ -208,6 +268,12 @@
         const iframe = previewBox.querySelector('.link-preview-iframe');
         const loading = previewBox.querySelector('.link-preview-loading');
         const overlay = document.querySelector('.link-preview-overlay');
+        const expandTrigger = document.querySelector('.link-preview-expand-trigger');
+        const isMobile = window.innerWidth <= 768;
+        
+        // 如果预览框已经打开，直接更新内容
+        const isAlreadyOpen = previewBox.classList.contains('active');
+        const isCollapsed = previewBox.classList.contains('collapsed');
         
         // 重置状态
         iframe.style.display = 'none';
@@ -216,24 +282,47 @@
         loading.innerHTML = '加载中...';
         iframe.src = '';
         
-        // 显示遮罩层和预览框（保持收起状态如果已经收起）
-        if (overlay) {
-            overlay.classList.add('active');
-        }
-        
-        // 只添加 active 类，不移除 collapsed 类
-        previewBox.classList.add('active');
-        
-        // 禁止背景页面滚动（移动端）- 只在移动端应用
-        if (window.innerWidth <= 768) {
-            // 保存当前滚动位置
-            scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        if (!isAlreadyOpen) {
+            // 首次打开：桌面端和移动端都默认展开
+            previewBox.classList.remove('collapsed');
+            if (expandTrigger) expandTrigger.classList.remove('active');
             
-            // 固定页面位置
-            document.body.style.overflow = 'hidden';
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${scrollPosition}px`;
-            document.body.style.width = '100%';
+            // 只有移动端显示遮罩层
+            if (isMobile && overlay) {
+                overlay.classList.add('active');
+            }
+            
+            // 添加 active 类
+            previewBox.classList.add('active');
+            
+            // 禁止背景页面滚动（仅移动端）
+            if (isMobile) {
+                // 保存当前滚动位置
+                scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // 固定页面位置
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${scrollPosition}px`;
+                document.body.style.width = '100%';
+            }
+        } else if (isCollapsed) {
+            // 如果预览框已打开但处于折叠状态，点击新链接时自动展开
+            previewBox.classList.remove('collapsed');
+            if (expandTrigger) expandTrigger.classList.remove('active');
+            
+            // 展开时只在移动端显示遮罩层并禁止背景滚动
+            if (isMobile) {
+                if (overlay) {
+                    overlay.classList.add('active');
+                }
+                
+                scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${scrollPosition}px`;
+                document.body.style.width = '100%';
+            }
         }
         
         // 同时开始加载iframe
@@ -283,10 +372,15 @@
     // 隐藏预览
     function hidePreview() {
         const overlay = document.querySelector('.link-preview-overlay');
+        const expandTrigger = document.querySelector('.link-preview-expand-trigger');
         
         if (previewBox) {
             previewBox.classList.remove('active');
             previewBox.classList.remove('collapsed'); // 同时移除收起状态
+        }
+        
+        if (expandTrigger) {
+            expandTrigger.classList.remove('active');
         }
         
         if (overlay) {
@@ -352,18 +446,57 @@
         }
     }
 
+    // 标记是否已初始化
+    let isInitialized = false;
+    
     // 初始化链接监听
     function initLinkListeners() {
-        // 只监听内容区域的链接
-        const contentArea = document.querySelector('.md-content');
-        if (!contentArea) return;
-
-        contentArea.addEventListener('click', function(e) {
+        // 防止重复初始化
+        if (isInitialized) return;
+        isInitialized = true;
+        
+        // 监听整个文档的链接点击
+        document.addEventListener('click', function(e) {
             const link = e.target.closest('a');
             if (!link) return;
             
-            // 检查是否在预览窗口内（防止嵌套预览）
-            if (link.closest('.link-preview-box')) return;
+            // 检查是否在预览窗口内
+            const isInPreviewBox = link.closest('.link-preview-box');
+            
+            if (isInPreviewBox) {
+                // 如果是预览框内的链接，直接在当前预览框中加载
+                if (!isValidLink(link)) return;
+                
+                const url = getFullUrl(link);
+                if (!url) return;
+                
+                // 阻止默认跳转行为和事件传播
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                
+                // 直接更新当前预览框的内容
+                if (previewBox && previewBox.classList.contains('active')) {
+                    currentUrl = url;
+                    const iframe = previewBox.querySelector('.link-preview-iframe');
+                    const loading = previewBox.querySelector('.link-preview-loading');
+                    
+                    // 显示加载状态
+                    iframe.style.display = 'none';
+                    loading.style.display = 'flex';
+                    loading.className = 'link-preview-loading';
+                    loading.innerHTML = '加载中...';
+                    
+                    // 加载新页面
+                    iframe.src = url;
+                }
+                
+                return;
+            }
+            
+            // 只监听内容区域的链接（原始页面）
+            const contentArea = document.querySelector('.md-content');
+            if (!contentArea || !contentArea.contains(link)) return;
             
             // 排除 tabbed-labels 和 tabbed-labels--linked 容器内的链接
             if (link.closest('.tabbed-labels') || link.closest('.tabbed-labels--linked')) return;
@@ -380,13 +513,9 @@
             const url = getFullUrl(link);
             if (!url) return;
             
-            // 移动端直接跳转，不显示预览
-            if (window.innerWidth <= 768) {
-                return; // 不阻止默认行为，让链接正常跳转
-            }
-            
-            // 阻止默认跳转行为
+            // 阻止默认跳转行为和事件传播
             e.preventDefault();
+            e.stopPropagation();
             
             // 显示预览
             showPreview(url, link);

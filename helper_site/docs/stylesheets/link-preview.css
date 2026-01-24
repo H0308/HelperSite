@@ -14,12 +14,14 @@
     pointer-events: none;
     visibility: hidden;
     display: flex;
+    will-change: transform;
 }
 
 .link-preview-box.active {
     transform: translateX(0);
     pointer-events: auto;
     visibility: visible;
+    overscroll-behavior: contain; /* 防止滚动冒泡 */
 }
 
 /* 宽度调整器 */
@@ -64,13 +66,6 @@
     touch-action: pan-y; /* 只允许垂直滚动 */
 }
 
-.link-preview-box.active {
-    transform: translateX(0);
-    pointer-events: auto;
-    visibility: visible;
-    overscroll-behavior: contain; /* 防止滚动冒泡 */
-}
-
 .link-preview-iframe {
     width: 100%;
     height: 100%;
@@ -92,8 +87,9 @@
 
 /* 展开触发区域 - 收起时显示 */
 .link-preview-expand-trigger {
-    position: absolute;
-    left: 0;
+    position: fixed;
+    right: 0;
+    left: auto;
     top: 0;
     width: 20px;
     height: 100%;
@@ -104,7 +100,7 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
-    z-index: 10;
+    z-index: 10000;
     cursor: pointer;
     transition: background 0.2s ease;
 }
@@ -113,8 +109,38 @@
     background: rgba(255, 255, 255, 0.85);
 }
 
-.link-preview-box.collapsed .link-preview-expand-trigger {
+.link-preview-expand-trigger.active {
     display: flex;
+}
+
+.link-preview-expand-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    color: var(--primary-blue-semi);
+    pointer-events: none;
+}
+
+.link-preview-expand-trigger:hover .link-preview-expand-btn {
+    transform: scale(1.1);
+}
+
+.link-preview-expand-btn:active {
+    transform: scale(0.95);
+}
+
+.link-preview-expand-btn svg {
+    display: block;
+    width: 14px;
+    height: 14px;
 }
 
 .link-preview-expand-btn {
@@ -165,6 +191,7 @@
 .link-preview-overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 .link-preview-header {
@@ -244,6 +271,21 @@
         min-width: unset;
     }
     
+    /* 移动端展开状态 */
+    .link-preview-box.active:not(.collapsed) {
+        transform: translateX(0) !important;
+    }
+    
+    /* 移动端折叠状态 - 完全隐藏预览框 */
+    .link-preview-box.collapsed {
+        transform: translateX(100%) !important;
+    }
+    
+    /* 移动端折叠时移除阴影 */
+    .link-preview-box.collapsed .link-preview-content {
+        box-shadow: none;
+    }
+    
     .link-preview-resizer {
         display: none;
     }
@@ -260,6 +302,47 @@
         font-size: 20px;
         width: 26px;
         height: 26px;
+    }
+    
+    /* 移动端遮罩层背景色 */
+    .link-preview-overlay.active {
+        background: rgba(0, 0, 0, 0.5);
+    }
+    
+    /* 移动端展开触发按钮 - 半圆形 */
+    .link-preview-expand-trigger {
+        position: fixed !important;
+        width: 32px;
+        height: 64px;
+        top: 50% !important;
+        right: 0 !important;
+        left: auto !important;
+        transform: translateY(-50%) !important;
+        background: rgb(255 255 255 / 35%);
+        box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 32px 0 0 32px;
+        transition: all 0.3s ease;
+        z-index: 10001 !important;
+        display: none;
+    }
+    
+    .link-preview-expand-trigger.active {
+        display: flex !important;
+    }
+    
+    .link-preview-expand-trigger:active {
+        background: rgba(33, 150, 243, 1);
+        transform: translateY(-50%) scale(0.95) !important;
+    }
+    
+    .link-preview-expand-btn {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .link-preview-expand-btn svg {
+        width: 16px;
+        height: 16px;
     }
 }
 
@@ -354,9 +437,4 @@
 
 .link-preview-iframe::-webkit-scrollbar-thumb:hover {
     background: #555;
-}
-
-/* 移除之前的卡片动画，使用纯平移动画 */
-.link-preview-box {
-    will-change: transform;
 }

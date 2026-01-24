@@ -2,18 +2,14 @@
 (function() {
     // 如果当前页面在iframe中，不初始化预览功能
     if (window.self !== window.top) {
-        console.log('[Link Preview] 检测到在iframe中，跳过初始化');
         return;
     }
     
     // 防止重复执行
     if (window.__linkPreviewInitialized) {
-        console.log('[Link Preview] 已经初始化过，跳过');
         return;
     }
     window.__linkPreviewInitialized = true;
-    
-    console.log('[Link Preview] 开始初始化');
     
     let previewBox = null;
     let currentLink = null;

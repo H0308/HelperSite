@@ -145,7 +145,7 @@ maxActive=20
     <jdbc>
         <url>jdbc:mysql://localhost:3306/atguigu</url>
         <username>root</username>
-        <passwd>037477..</passwd>
+        <passwd>password</passwd>
         <driver>com.mysql.cj.jdbc.Driver</driver>
     </jdbc>
     ```
@@ -185,7 +185,7 @@ maxActive=20
     ——username
     ————root
     ——passwd
-    ————037477..
+    ————password
     ——driver
     ————com.mysql.cj.jdbc.Driver
     ```

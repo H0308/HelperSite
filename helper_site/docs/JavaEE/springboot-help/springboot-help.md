@@ -129,35 +129,64 @@ public class ResultWrapper<T> {
 @ControllerAdvice
 @ResponseBody // 防止出现持续返回视图导致的死循环情况
 public class ExceptionAdvice {
+    
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
     @ExceptionHandler(Exception.class)
-    public ResultWrapper allExcetionHandler(Exception e) {
-        log.info("出现异常：{}", e.getMessage());
-        MethodArgumentNotValidException methodValidationException = null;
-        if (e instanceof MethodArgumentNotValidException) {
-            methodValidationException = (MethodArgumentNotValidException) e;
+    public ResultWrapper allExceptionHandler(Exception e) {
+        // 详细日志只在后端记录
+        log.error("系统异常: ", e);
+        
+        // 参数校验异常，返回具体校验信息
+        if (e instanceof MethodArgumentNotValidException validException) {
+            String errMsg = validException.getBindingResult().getFieldError().getDefaultMessage();
+            return ResultWrapper.fail(Constants.SERVER_ERROR, errMsg);
         }
-        String errMsg = e.getMessage();
-        if (methodValidationException != null) {
-            errMsg = methodValidationException.getBindingResult().getFieldError().getDefaultMessage();
-        }
-
-        return ResultWrapper.fail(Constants.SERVER_ERROR, Constants.SERVER_ERROR_MESSAGE + "：" + errMsg);
+        
+        // 其他异常返回通用提示，不暴露技术细节
+        return ResultWrapper.fail(Constants.SERVER_ERROR, Constants.SERVER_ERROR_MESSAGE);
     }
 
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
-    @ExceptionHandler(BookManagerException.class)
-    public ResultWrapper systemExceptionHandler(Exception e) {
-        log.info("出现异常：{}", e.getMessage());
-
-        return ResultWrapper.fail(Constants.SYSTEM_ERROR, Constants.SYSTEM_ERROR_MESSAGE + "：" + e.getMessage());
+    @ExceptionHandler(MusicException.class)
+    public ResultWrapper musicExceptionHandler(MusicException e) {
+        // 业务异常记录日志
+        log.warn("业务异常: {}", e.getMessage());
+        
+        // 业务异常可以返回具体提示（因为是我们自己定义的友好提示）
+        return ResultWrapper.fail(Constants.SYSTEM_ERROR, e.getMessage());
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoResourceFoundException.class)
-    public ResultWrapper noResourceFoundException(Exception e) {
-        log.info("出现异常：{}", e.getMessage());
+    public ResultWrapper noResourceFoundException(NoResourceFoundException e) {
+        log.warn("资源不存在: {}", e.getResourcePath());
         return ResultWrapper.fail(Constants.RESOURCE_NOT_FOUND, Constants.RESOURCE_NOT_FOUND_MESSAGE);
+    }
+    
+    @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
+    @ExceptionHandler(IllegalStateException.class)
+    public ResultWrapper illegalStateExceptionHandler(IllegalStateException e) {
+        log.warn("状态异常: {}", e.getMessage());
+        // 状态异常通常是业务逻辑问题，返回具体提示
+        return ResultWrapper.fail(Constants.SYSTEM_ERROR, e.getMessage());
+    }
+    
+    @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
+    @ExceptionHandler(RuntimeException.class)
+    public ResultWrapper runtimeExceptionHandler(RuntimeException e) {
+        log.error("运行时异常: ", e);
+        
+        // 检查是否是初始化相关的异常，返回友好提示
+        String message = e.getMessage();
+        if (message != null && message.contains("连接")) {
+            return ResultWrapper.fail(Constants.SYSTEM_ERROR, "连接失败，请检查网络或重试");
+        }
+        if (message != null && message.contains("Cookie")) {
+            return ResultWrapper.fail(Constants.SYSTEM_ERROR, "Cookie 无效或已过期，请重新输入");
+        }
+        
+        // 其他运行时异常返回通用提示
+        return ResultWrapper.fail(Constants.SERVER_ERROR, Constants.SERVER_ERROR_MESSAGE);
     }
 }
 ```

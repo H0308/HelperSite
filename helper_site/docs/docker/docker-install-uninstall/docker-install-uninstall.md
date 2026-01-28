@@ -186,7 +186,19 @@ sudo groupdel docker
 
 Windows下安装Docker首先需要确保开启了虚拟化。通常建议选用WSL2作为后端（需要启用`Windows Subsystem for Linux2`功能）
 
-需要注意，建议同时在Windows功能中打开Hyper-V和Windows Subsystem For Linux
+需要注意，建议同时在Windows功能中打开Hyper-V、Virtual Machine Platform和Windows Subsystem For Linux
+
+然后输入下面的命令安装WSL：
+
+```bash
+wsl --install
+```
+
+设置WSL版本为WSL2：
+
+```bash
+wsl --set-default-version 2
+```
 
 !!! note
 

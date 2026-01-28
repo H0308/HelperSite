@@ -214,3 +214,7 @@ unshare -u /bin/bash
 ### 进程隔离和挂载隔离
 
 参考[课件](https://www.kdocs.cn/l/chAkGu1MSCUU)
+
+## cgroups与LXC容器
+
+参考[cgroups课件](https://www.kdocs.cn/l/cfsjlUQkFQ9o)和[LXC容器课件](https://www.kdocs.cn/l/cd8IIltQ0k47)

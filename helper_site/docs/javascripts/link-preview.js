@@ -61,7 +61,10 @@
                     </div>
                 </div>
                 <div class="link-preview-loading">加载中...</div>
-                <iframe class="link-preview-iframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+                <div class="link-preview-iframe-container">
+                    <iframe class="link-preview-iframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+                    <div class="link-preview-error-overlay"></div>
+                </div>
             </div>
         `;
         document.body.appendChild(box);
@@ -278,6 +281,13 @@
         loading.innerHTML = '加载中...';
         iframe.src = '';
         
+        // 重置错误覆盖层
+        const errorOverlay = previewBox.querySelector('.link-preview-error-overlay');
+        if (errorOverlay) {
+            errorOverlay.classList.remove('active');
+            errorOverlay.innerHTML = '';
+        }
+        
         if (!isAlreadyOpen) {
             // 首次打开：桌面端和移动端都默认展开
             previewBox.classList.remove('collapsed');
@@ -333,21 +343,111 @@
             }
         }, 15000); // 15秒超时
         
+        // 用于检测加载状态的标志
+        let hasError = false;
+        
+        // 监听 CSP 违规事件（某些浏览器会触发）
+        const handleSecurityError = function(e) {
+            if (e.blockedURI && iframe.src && e.blockedURI.includes(new URL(url).hostname)) {
+                hasError = true;
+                clearTimeout(loadTimeout);
+                showError(loading);
+            }
+        };
+        document.addEventListener('securitypolicyviolation', handleSecurityError);
+        
         // iframe加载完成
         iframe.onload = function() {
             clearTimeout(loadTimeout);
+            document.removeEventListener('securitypolicyviolation', handleSecurityError);
             
-            // 简单检查：只要 onload 触发就认为加载成功
-            // 不再尝试访问 iframe 内容，避免跨域问题
+            if (hasError) return;
+            
+            const errorOverlay = previewBox.querySelector('.link-preview-error-overlay');
+            
+            // 尝试检测iframe是否正常加载
             setTimeout(() => {
-                loading.style.display = 'none';
-                iframe.style.display = 'block';
-            }, 100);
+                let isDefinitelyError = false;
+                let canAccessContent = false;
+                
+                try {
+                    const doc = iframe.contentDocument;
+                    const win = iframe.contentWindow;
+                    
+                    if (doc && doc.body) {
+                        canAccessContent = true;
+                        const title = (doc.title || '').toLowerCase();
+                        const bodyText = (doc.body?.innerText || '').toLowerCase();
+                        const bodyHtml = (doc.body?.innerHTML || '').toLowerCase();
+                        
+                        // 检测浏览器错误页面的特征
+                        const errorIndicators = [
+                            'refused to connect',
+                            'refused connection', 
+                            'connection refused',
+                            'err_blocked_by_response',
+                            'err_blocked',
+                            'err_connection',
+                            'x-frame-options',
+                            'frame-ancestors',
+                            'content security policy',
+                            'cannot be displayed in a frame',
+                            'this content cannot be displayed',
+                            'neterror',
+                            '拒绝连接',
+                            '禁止访问',
+                            '此网页无法显示',
+                            '连接被拒绝'
+                        ];
+                        
+                        isDefinitelyError = errorIndicators.some(indicator => 
+                            title.includes(indicator) || 
+                            bodyText.includes(indicator) ||
+                            bodyHtml.includes(indicator)
+                        );
+                    }
+                    
+                    // 检查 location
+                    if (win && !isDefinitelyError) {
+                        try {
+                            const loc = win.location.href;
+                            if (loc === 'about:blank' || 
+                                loc.startsWith('chrome-error:') || 
+                                loc.startsWith('about:neterror') ||
+                                loc.startsWith('about:blocked')) {
+                                isDefinitelyError = true;
+                            }
+                        } catch (locErr) {
+                            // 跨域异常
+                        }
+                    }
+                } catch (e) {
+                    // 跨域情况下无法访问iframe内容
+                    canAccessContent = false;
+                }
+                
+                if (isDefinitelyError) {
+                    // 确定是错误页面，显示友好提示
+                    showError(loading);
+                } else if (!canAccessContent) {
+                    // 无法访问内容（跨域），直接显示错误提示
+                    // 不显示 iframe，避免看到浏览器的错误页面
+                    showError(loading);
+                } else {
+                    // 能访问内容且没有错误，正常显示
+                    loading.style.display = 'none';
+                    iframe.style.display = 'block';
+                    if (errorOverlay) {
+                        errorOverlay.classList.remove('active');
+                    }
+                }
+            }, 200);
         };
         
         // iframe加载失败
         iframe.onerror = function() {
             clearTimeout(loadTimeout);
+            document.removeEventListener('securitypolicyviolation', handleSecurityError);
             showError(loading);
         };
     }
@@ -361,7 +461,7 @@
                 <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
             <div class="error-text">网页无法访问或禁止嵌入预览</div>
-            <div class="error-hint">请点击链接直接访问</div>
+            <div class="error-hint">请点击右上角的跳转按钮直接访问</div>
         `;
     }
 
@@ -476,12 +576,19 @@
                     currentUrl = url;
                     const iframe = previewBox.querySelector('.link-preview-iframe');
                     const loading = previewBox.querySelector('.link-preview-loading');
+                    const errorOverlay = previewBox.querySelector('.link-preview-error-overlay');
                     
                     // 显示加载状态
                     iframe.style.display = 'none';
                     loading.style.display = 'flex';
                     loading.className = 'link-preview-loading';
                     loading.innerHTML = '加载中...';
+                    
+                    // 重置错误覆盖层
+                    if (errorOverlay) {
+                        errorOverlay.classList.remove('active');
+                        errorOverlay.innerHTML = '';
+                    }
                     
                     // 加载新页面
                     iframe.src = url;

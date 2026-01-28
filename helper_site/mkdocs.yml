@@ -318,6 +318,7 @@ nav:
     - Docker:
       - 章节目录: docker/index.md
       - Docker前置知识: docker/docker-base/docker-base.md
+      - Docker安装与卸载: docker/docker-install-uninstall/docker-install-uninstall.md
   - 扩展知识: 
     - 章节目录: other/index.md
     - 关于Shell: other/shell/shell.md

@@ -121,7 +121,7 @@ docker image inspect [选项] 镜像名称...
 使用下面的命令进行标签设置：
 
 ```bash
-docker tag 源镜像标签 新镜像名称:标签
+docker tag 源镜像名称:标签 新镜像名称:标签
 ```
 
 例如：

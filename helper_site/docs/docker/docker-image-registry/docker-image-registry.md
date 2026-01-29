@@ -1,3 +1,7 @@
+<script defer src="/javascripts/waline.min.js"></script>
+<link rel="stylesheet" href="https://help-site.oss-cn-hangzhou.aliyuncs.com/css/waline.css" />
+<link rel="stylesheet" href="/stylesheets/waline.min.css" />
+
 # Docker镜像与镜像仓库
 
 ## 从镜像仓库登录和注销
@@ -69,8 +73,6 @@ docker push [选项] 镜像名称[:tag]
 ```bash
 docker push espda/test:tagname
 ```
-
-如果指定的仓库已经有了对应标签名的镜像，则会提示已经存在
 
 ## 在镜像仓库搜索镜像
 

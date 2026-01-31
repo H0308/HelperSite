@@ -320,6 +320,7 @@ nav:
       - Docker前置知识: docker/docker-base/docker-base.md
       - Docker安装与卸载: docker/docker-install-uninstall/docker-install-uninstall.md
       - Docker镜像与镜像仓库: docker/docker-image-registry/docker-image-registry.md
+      - Docker容器: docker/docker-container/docker-container.md
   - 扩展知识: 
     - 章节目录: other/index.md
     - 关于Shell: other/shell/shell.md

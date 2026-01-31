@@ -457,7 +457,7 @@ int pthread_join(pthread_t thread, void **retval);
 
 <img src="1. Linux线程概念与线程操作.assets\Snipaste_2025-02-06_17-35-43.png">
 
-需要注意，在上图中，线程执行函数的退出信息并不是直接就被`pthread_join`函数拿到的，而是先存放在[线程结构`pthread`](#)中，再有`pthread_join`函数通过获取对应的属性拿到线程执行函数的退出信息
+需要注意，在上图中，线程执行函数的退出信息并不是直接就被`pthread_join`函数拿到的，而是先存放在[线程结构`pthread`](https://www.help-doc.top/Linux/linux-thread/thread-lib/thread-lib.html#pthread)中，再有`pthread_join`函数通过获取对应的属性拿到线程执行函数的退出信息
 
 如果等待的线程没有退出，那么等待方式依旧是阻塞式等待，一旦等待成功，函数返回0，否则返回指定的错误码
 

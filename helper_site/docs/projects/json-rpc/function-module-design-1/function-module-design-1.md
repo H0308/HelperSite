@@ -1710,4 +1710,4 @@ void handleOnlineOfflineServiceRequest(const base_connection::BaseConnection::pt
 }
 ```
 
-至此，客户端服务注册模块设计完成90%，剩下10%见[功能模块设计（主题、客户端封装、服务端封装）](#)
+至此，客户端服务注册模块设计完成90%，剩下10%见[功能模块设计（主题、客户端封装、服务端封装）](https://www.help-doc.top/projects/json-rpc/function-module-design-2/function-module-design-2.html)

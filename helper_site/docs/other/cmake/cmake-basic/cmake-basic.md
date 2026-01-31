@@ -659,7 +659,7 @@ include(<file|module> [OPTIONAL] [RESULT_VARIABLE <var>] [NO_POLICY_SCOPE])
 
 !!! info
 
-    关于`message`函数的介绍和使用会在[CMake常见语法](#)中介绍
+    关于`message`函数的介绍和使用会在[CMake常见语法](javascript:;)中介绍
 
 在`build`目录中运行构建命令，可以看到结果如下：
 

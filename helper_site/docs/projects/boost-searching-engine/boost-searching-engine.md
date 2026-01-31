@@ -167,7 +167,7 @@ private:
 
 ### 读取所有HTML路径
 
-本步骤的基本思路就是获取到HTML路径存储到vector中，所以需要使用C++ 17中的`filesystem`库，也可以使用Boost库中提供的`filesystem`，二者在使用方式上都是一样的。关于`filesystem`的介绍可以看[C\+\+17 相关新特性](#)
+本步骤的基本思路就是获取到HTML路径存储到vector中，所以需要使用C++ 17中的`filesystem`库，也可以使用Boost库中提供的`filesystem`，二者在使用方式上都是一样的。关于`filesystem`的介绍可以看[C\+\+17 相关新特性](https://www.help-doc.top/cpp/new-in-cpp17/new-in-cpp17.html#filesystem)
 
 首先定义出当前HTML文件所在路径：
 
@@ -695,7 +695,7 @@ bool buildIndex()
 
 !!! note "为什么用string_view而不是string实现`split`函数"
 
-    因为string_view的性能远高于直接使用string，具体分析见[C\+\+17 相关新特性](#)
+    因为string_view的性能远高于直接使用string，具体分析见[C\+\+17 相关新特性](https://www.help-doc.top/cpp/new-in-cpp17/new-in-cpp17.html#string_view)
 
 **使用Boost库中的`split`函数：**
 

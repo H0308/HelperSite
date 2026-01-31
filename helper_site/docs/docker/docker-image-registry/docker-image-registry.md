@@ -4,6 +4,10 @@
 
 # Docker镜像与镜像仓库
 
+## 镜像与镜像仓库介绍
+
+Docker镜像是打包了应用及其运行所需依赖、环境和配置的只读模板，用来创建容器（类似于C++或者Java中的类，用于创建对象）；镜像仓库则是存放和分发镜像的集中式存储服务，用户可以从仓库拉取镜像或将本地镜像推送到仓库，实现镜像的共享、版本管理与部署。
+
 ## 从镜像仓库登录和注销
 
 登录到Docker镜像仓库可以使用下面的命令：
@@ -66,7 +70,7 @@ docker push [选项] 镜像名称[:tag]
 - `-a`：拉取所有镜像
 - `--disable-content-trust`：忽略镜像校验（默认情况下开启校验）
 
-需要注意的是，推送镜像必须要确保当前登录的账户有对应仓库的权限，否则无法推送当前镜像到指定的仓库，此时会报错。如果要推送指定的镜像首先需要使用[标签命令](#)为指定的镜像打上标签再进行推送
+需要注意的是，推送镜像必须要确保当前登录的账户有对应仓库的权限，否则无法推送当前镜像到指定的仓库，此时会报错。如果要推送指定的镜像首先需要使用[标签命令](https://www.help-doc.top/docker/docker-image-registry/docker-image-registry.html#_7)为指定的镜像打上标签再进行推送
 
 例如现在有一个仓库为`epsda/test`，正常推送的命令为：
 
@@ -104,7 +108,7 @@ docker images [选项] [镜像名称][:tag]
 - `-f`：显示满足条件的镜像，过滤条件可以参考[官方文档](https://docs.docker.com/reference/cli/docker/image/ls/#filter)
 - `--format`：指定返回值的模板文件
 - `--no-trunc`：显示完整的镜像信息
-- `-q`：只显示镜像 ID
+- `-q`：只显示镜像ID
 
 ## 查看指定镜像的详细信息
 
@@ -130,3 +134,119 @@ docker tag 源镜像名称:标签 新镜像名称:标签
 docker tag ubuntu:22.04 myregistry.com/myubuntu:22.04
 ```
 
+## 删除指定镜像
+
+使用下面的命令进行镜像删除：
+
+```bash
+docker image rmi [选项] 镜像名称...
+```
+
+常见的选项有：
+
+- `-f`：强制删除
+- `--no-prune`：不移除当前镜像的过程镜像，默认情况下不带该选项
+
+需要注意的是，在删除时，只有删除最后一个引用的才会完全删除数据，否则只是取消标签
+
+那么如何确认制定镜像是否有其他标签引用呢？可以通过`docker image inspect`查看`RepoTags`字段，例如当前的`nginx:1.29.4`有被两个标签为`epsda/test:v1.0`和`epsda/test:v2.0`引用：
+
+```bash
+$ docker image inspect nginx:1.29.4
+[
+    {
+        "Id": "...",
+        "RepoTags": [
+            "epsda/test:v1.0",
+            "epsda/test:v2.0",
+            "nginx:1.29.4"
+        ],
+        ...
+    }
+    ...
+]
+```
+
+根据输出可以看到标签有三个，删除时，如果仅仅删除`epsda/test:v1.*`那么结果只是取消标签，如下：
+
+```bash
+$ docker rmi epsda/test:v1.0 epsda/test:v2.0
+Untagged: epsda/test:v1.0
+Untagged: epsda/test:v2.0
+```
+
+直到删除`nginx:1.29.4`才会提示删除数据：
+
+```bash
+$ docker rmi nginx:1.29.4
+Untagged: nginx:1.29.4
+Deleted: sha256:c881927c4077710ac4b1da63b83aa163937fb47457950c267d92f7e4dedf4aec
+```
+
+## 归档指定镜像
+
+使用下面的命令进行镜像归档：
+
+```bash
+docker save [选项] 镜像名称...
+```
+
+使用时经常带上`-o`选项表示输出的文件（默认是`tar`文件，建议带上`.tar`后缀方便识别）：
+
+```bash
+docker save 镜像名称 -o 输出文件.tar
+```
+
+## 加载指定镜像
+
+使用下面的命令进行镜像加载：
+
+```bash
+docker load [选项] 待加载的文件
+```
+
+使用时经常带上`-i`以指定需要加载的文件：
+
+```bash
+docker load -i 待加载的文件
+```
+
+可以带上`-q`选项以精简输出的信息
+
+## 查看镜像构建历史（层信息）
+
+使用下面的命令查看镜像构建历史：
+
+```bash
+docker history [选项] 镜像名称
+```
+
+常见选项：
+
+- `-H, --human`：大小和日期采用易读形式（默认）
+- `--no-trunc`：显示全部信息，不进行截断
+- `-q, --quiet`：只显示镜像ID信息
+
+## 清理本地未被使用的镜像
+
+使用下面的命令进行镜像清理：
+
+```bash
+docker image prune [选项]
+```
+
+默认行为是：只会删除悬空镜像（dangling images），也就是没有标签、也没有被任何容器引用的镜像层
+
+常见选项：
+
+- `-a`：删除所有未被任何容器使用的镜像（不只是悬空镜像）
+- `--filter 过滤条件`：删除满足指定条件的镜像
+- `-f`：不提示确认，直接删除
+
+## 从归档中创建镜像
+
+具体见[Docker容器章节](javascript:;)
+
+## 构建镜像
+
+具体见[Docker镜像制作章节](javascript:;)

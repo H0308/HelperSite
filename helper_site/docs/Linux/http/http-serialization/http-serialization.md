@@ -612,7 +612,7 @@ bool getPairFromReqHead(std::string& oneLine)
 
 其中，更为常见的就是200（OK）、404（Not Found）、403（Forbidden）、302（Redirect）和504（Bad Gateway）
 
-本次优先考虑200（OK）和404（Not Found），对于重定向将在[后面的章节介绍](#)，此处不具体描述
+本次优先考虑200（OK）和404（Not Found），对于重定向将在[后面的章节介绍](https://www.help-doc.top/Linux/http/http-header-request-method/http-header-request-method.html#location)，此处不具体描述
 
 #### 处理响应行
 

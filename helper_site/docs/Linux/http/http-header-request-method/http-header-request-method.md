@@ -49,7 +49,7 @@ HTTP报头一共有两种，分别是请求报头和响应报头。虽然有两�
 - **Location**: 搭配`3xx`状态码使用，告诉客户端接下来要去哪里访问
 - **Content-Type**: 数据类型
 - **Content-Length**: Body的长度
-- **Cookie**: 用于在客户端存少量信息。通常用于实现会话（session）的功能，[关于Cookie和Session会在后面的章节讲解，此处不具体说明](#)
+- **Cookie**: 用于在客户端存少量信息。通常用于实现会话（session）的功能，关于Cookie和Session在[HTTP中的Cookie和Session](https://www.help-doc.top/Linux/http/http-cookie-session/http-cookie-session.html)有所讲解，此处不具体说明
 
 在上面常见的报头属性中存在三类：
 
@@ -63,7 +63,7 @@ HTTP报头一共有两种，分别是请求报头和响应报头。虽然有两�
 === "只出现在响应报头中"
 
     - **Location**: 只出现在响应中，主要配合3xx重定向状态码使用
-    - **Set-Cookie**: 只出现在响应中，用于服务器指示客户端保存Cookie，这个字段需要搭配客户端的Cookie使用，这一点会在[后面的Cookie中详细介绍](#)
+    - **Set-Cookie**: 只出现在响应中，用于服务器指示客户端保存Cookie，这个字段需要搭配客户端的Cookie使用，这一点在[HTTP中的Cookie和Session](https://www.help-doc.top/Linux/http/http-cookie-session/http-cookie-session.html)
 
 === "可能同时出现在请求或者响应报头中"
 

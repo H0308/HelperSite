@@ -56,7 +56,7 @@ ln -s /home/epsda/dependencies/build/release-install-cpp11/lib/
 
 !!! note
 
-    关于「一个线程一个EventLoop」的介绍可以参考[仿Muduo库的高并发服务器](#)
+    关于「一个线程一个EventLoop」的介绍可以参考[仿Muduo库的高并发服务器](https://www.help-doc.top/projects/reactor-server/intro/intro.html#_3)
 
 ## 主要组件介绍
 
@@ -229,7 +229,7 @@ private:
 };
 ```
 
-首先，该类除了继承了一个`noncopyable`类以外，还继承了`enable_shared_from_this`类，这个类在[C++智能指针](#)部分介绍，此处不具体描述
+首先，该类除了继承了一个`noncopyable`类以外，还继承了`enable_shared_from_this`类，这个类在[C++智能指针](javascript:;)部分介绍，此处不具体描述
 
 本次主要考虑下面几个函数：
 

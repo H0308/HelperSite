@@ -281,18 +281,23 @@ nav:
     - Qt:
       - 章节目录: qt/index.md
       - Qt环境准备与基础代码解释: qt/pre-qt/pre-qt.md
-  - MySQL:
-    - 章节目录: MySQL/index.md
-    - MySQL操作:
-      - 章节目录: MySQL/mysql-op/index.md
-      - MySQL基础操作: MySQL/mysql-op/basic-op/basic-op.md
-      - MySQL索引与事务: MySQL/mysql-op/index-routine/index-routine.md
-      - Ubuntu下安装和卸载MySQL: MySQL/mysql-op/install-uninstall-mysql-ubuntu/install-uninstall-mysql-ubuntu.md
-    - JDBC（Java连接数据库技术）:
-      - 章节目录: MySQL/JDBC/index.md
-      - JDBC基础: MySQL/JDBC/JDBC-basic/JDBC-basic.md
-      - JDBC进阶: MySQL/JDBC/JDBC-intermediate/JDBC-intermediate.md
-      - JDBC高级: MySQL/JDBC/JDBC-advanced/JDBC-advanced.md
+  - 基础服务组件:
+    - 章节目录: basic-service-component/index.md
+    - MySQL:
+      - 章节目录: MySQL/index.md
+      - MySQL操作:
+        - 章节目录: MySQL/mysql-op/index.md
+        - MySQL基础操作: MySQL/mysql-op/basic-op/basic-op.md
+        - MySQL索引与事务: MySQL/mysql-op/index-routine/index-routine.md
+        - Ubuntu下安装和卸载MySQL: MySQL/mysql-op/install-uninstall-mysql-ubuntu/install-uninstall-mysql-ubuntu.md
+      - JDBC（Java连接数据库技术）:
+        - 章节目录: MySQL/JDBC/index.md
+        - JDBC基础: MySQL/JDBC/JDBC-basic/JDBC-basic.md
+        - JDBC进阶: MySQL/JDBC/JDBC-intermediate/JDBC-intermediate.md
+        - JDBC高级: MySQL/JDBC/JDBC-advanced/JDBC-advanced.md
+    - RabbitMQ:
+      - 章节目录: rabbitmq/index.md
+      - Ubuntu下安装和卸载RabbitMQ: rabbitmq/rabbitmq-install-uninstall/rabbitmq-install-uninstall.md
   - JavaEE应用开发:
     - 章节目录: JavaEE/index.md
     - SpringMVC/SpringBoot:

@@ -1,12 +1,5 @@
 [
   {
-    "title": "Docker镜像与镜像仓库",
-    "url": "docker/docker-image-registry/docker-image-registry.html",
-    "nav_path": null,
-    "created_str": "2026-01-29",
-    "modified_str": "2026-02-01"
-  },
-  {
     "title": "Docker容器",
     "url": "docker/docker-container/docker-container.html",
     "nav_path": null,
@@ -14,17 +7,24 @@
     "modified_str": "2026-02-01"
   },
   {
+    "title": "Ubuntu和Docker下安装和卸载RabbitMQ",
+    "url": "rabbitmq/rabbitmq-install-uninstall/rabbitmq-install-uninstall.html",
+    "nav_path": null,
+    "created_str": "2026-02-01",
+    "modified_str": "2026-02-01"
+  },
+  {
+    "title": "Docker镜像与镜像仓库",
+    "url": "docker/docker-image-registry/docker-image-registry.html",
+    "nav_path": null,
+    "created_str": "2026-01-29",
+    "modified_str": "2026-02-01"
+  },
+  {
     "title": "二叉树基础题目",
     "url": "algorithm/recursion-binary-tree/binary-tree-basic/binary-tree-basic.html",
     "nav_path": null,
     "created_str": "2025-02-25",
-    "modified_str": "2026-01-31"
-  },
-  {
-    "title": "功能模块设计（RPC、注册）",
-    "url": "projects/json-rpc/function-module-design-1/function-module-design-1.html",
-    "nav_path": null,
-    "created_str": "2025-05-27",
     "modified_str": "2026-01-31"
   }
 ]

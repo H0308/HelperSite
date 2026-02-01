@@ -42,7 +42,7 @@ docker create [选项] 镜像名称 [命令] [命令行参数]
 - `-t`：为容器重新分配一个伪输入终端，通常与`-i`同时使用  
 - `--name="nginx-lb"`：为容器指定一个名称
 - `-h "mars"`：指定容器的`hostname`
-- `-e username="ritchie"`：设置环境变量  
+- `-e username="ritchie"`：设置环境变量，多个环境变量时，每一次设置都需要带上`-e`
 - `--cpuset-cpus="0-2"`或`--cpuset-cpus="0,1,2"`：绑定容器到指定CPU运行  
 - `-m`：设置容器使用内存最大值
 - `--network="bridge"`：指定容器的网络连接类型  

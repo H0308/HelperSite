@@ -245,7 +245,7 @@ docker image prune [选项]
 
 ## 从归档中创建镜像
 
-具体见[Docker容器章节](javascript:;)
+具体见[Docker容器章节](https://www.help-doc.top/docker/docker-container/docker-container.html#_23)
 
 ## 构建镜像
 

@@ -2,6 +2,11 @@
 <link rel="stylesheet" href="https://help-site.oss-cn-hangzhou.aliyuncs.com/css/waline.css" />
 <link rel="stylesheet" href="/stylesheets/waline.min.css" />
 
+<!-- 添加对Katex的支持 -->
+<script defer src="/javascripts/katex.min.js"></script>
+<script defer src="https://help-site.oss-cn-hangzhou.aliyuncs.com/js/katex.min.js"></script>
+<script defer src="https://help-site.oss-cn-hangzhou.aliyuncs.com/js/auto-render.min.js"></script>
+
 # Docker容器
 
 ## 容器介绍
@@ -44,7 +49,19 @@ docker create [选项] 镜像名称 [命令] [命令行参数]
 - `--link=[]`：添加链接到另一个容器  
 - `--volume, -v`：绑定一个卷  
 - `--rm`：容器退出时自动删除容器  
-- `--restart`：自动重启
+- `--restart`：自动重启，写法如下：
+    
+    ```bash
+    docker create --restart=<policy> 镜像名
+    ```
+
+    常见策略：
+    
+    - `no`：默认值，不自动重启  
+    - `on-failure[:max-retries]`：仅在非0退出码时重启，可选最大重试次数  
+    - `always`：无论退出原因都重启  
+    - `unless-stopped`：与`always`类似，但手动停止后不会再自动重启
+
 
 ??? info "如何理解`-i`和`-t`"
 
@@ -189,3 +206,224 @@ docker kill 容器名称...
 - `-s, --signal`：用于指定发送给容器主进程的停止信号，可以使用Linux的信号编号，例如信号`9`表示强制杀死信号`SIGKILL`
 
 需要注意的是，默认情况下，停止容器命令发送的是`SIGTERM`信号，杀死容器发送的是`SIGKILL`信号
+
+## 查看指定容器内的进程信息
+
+使用下面的命令查看指定容器内的进程信息：
+
+```bash
+docker top 容器名称 [选项]
+```
+
+其中的选项可以带上Linux中`ps`命令的选项，例如：
+
+```bash
+docker top 132e6efd910f axj
+```
+
+## 查看指定容器的资源使用情况
+
+使用下面的命令查看指定容器的资源使用情况：
+
+```bash
+docker stats [选项] 容器名称...
+```
+
+常见选项：
+
+- `--all, -a`：显示所有的容器，包括未运行的
+- `--format`：指定返回值的模板文件（如`table`、`json`）
+- `--no-stream`：展示当前状态后直接退出，不再实时更新（默认情况下实时更新）
+- `--no-trunc`：不截断输出
+
+## 查看指定容器的详细信息
+
+使用下面的命令查看指定容器的详细信息：
+
+```bash
+docker container inspect 容器名称
+```
+
+- `-f`：指定返回值的模板文件（如`table`、`json`）
+- `-s`：显示总的文件大小
+
+需要注意的是，命令可以省略`container`，Docker会根据容器名称区分是镜像还是容器
+
+## 查看指定容器的端口映射
+
+使用下面的命令查看指定容器的端口映射：
+
+```bash
+docker port 容器名称 [指定端口/指定协议]
+```
+
+例如，查看`mynginx`的TCP协议下的80端口：
+
+```bash
+docker port mynginx 80/tcp
+```
+
+## 宿主机和容器之间的数据拷贝
+
+使用下面的命令进行宿主机和容器之间的数据拷贝：
+
+```bash
+# 宿主机到容器
+docker cp [选项] 宿主机目标路径 容器名称:文件路径
+# 容器到宿主机
+docker cp [选项] 容器名称:文件路径 宿主机目标路径
+```
+
+## 查看指定容器中的文件修改
+
+使用下面的命令查看指定容器中的文件修改：
+
+```bash
+docker diff 容器名称
+```
+
+常见的标记：
+
+- `A`：Added，新增文件/目录
+- `C`：Changed，内容或元数据发生变化（例如权限、时间戳等）
+- `D`：Deleted，被删除的文件/目录
+
+## 利用容器创建一个镜像
+
+使用下面的命令利用容器创建一个镜像：
+
+```bash
+docker commit [选项] 容器名称 [镜像名称[:tag]]
+```
+
+常见选项：
+
+- `-a`：提交的镜像作者
+- `-c`：使用Dockerfile中的指令来创建镜像，可修改启动指令，具体见[Docker镜像制作](javascript:;)
+- `-m`：提交时的说明文字 
+- `-p`：在创建进行时将容器暂停
+
+例如：
+
+```bash
+docker commit -a 'epsda' -m 'commit mynginx' -p mynginx
+# 修改启动命令CMD的值
+docker commit -c 'CMD ["tail","-f","/etc/hosts"]' mynginx mynginx:v2
+```
+
+## 暂停正在运行的容器
+
+使用下面的命令暂停正在运行的容器：
+
+```bash
+docker pause 容器名称...
+```
+
+## 继续运行容器
+
+使用下面的命令继续运行容器：
+
+```bash
+docker unpause 容器名称...
+```
+
+## 删除容器
+
+使用下面的命令删除容器：
+
+```bash
+docker rm 容器名称...
+```
+
+常见选项：
+
+- `-f`：删除正在运行的容器
+
+需要注意的是，默认情况下该命令只会删除停止的容器，如果要删除正在运行的容器，就要带`-f`
+
+## 导出容器内容到归档文件中
+
+使用下面的命令导出容器内容到归档文件（后缀为`.tar`）中：
+
+```bash
+docker export [选项] 容器名称
+```
+
+常见选项：
+
+- `-o`：待写入的文件
+
+该命令尝搭配下面的命令使用：
+
+```bash
+docker import [选项] 归档文件名称 [镜像名称[:tag]]
+```
+
+常见选项：
+
+- `-c`：使用Dockerfile中的指令来创建镜像 
+- `-m`：提交时的说明文字 
+
+需要注意的是，默认情况下，使用`import`命令得到的镜像中`CMD`、`ENV`的值都是`null`，而`load`命令会保留
+
+## 查看容器退出码
+
+使用下面的命令查看容器退出码：
+
+```bash
+docker wait 容器名称...
+```
+
+需要注意，一旦执行这个命令，终端会阻塞直到容器停止打印出退出码。如果有指定了多个容器，会一直阻塞到最后一个容器退出才会显示所有停止的退出码
+
+## 重命名容器
+
+使用下面的命令重命名容器：
+
+```bash
+docker rename 源容器名称 目标名称
+```
+
+该命令可以修改正在运行的容器的名称
+
+## 删除闲置容器
+
+使用下面命令删除闲置（已经停止的）容器：
+
+```bash
+docker container prune [选项]
+```
+
+常见选项：
+
+- `-f, --force`：不进行删除确认提示
+
+## 更新容器的资源配置
+
+使用下面的命令更新容器的资源配置：
+
+```bash
+docker update [选项] 容器名称...
+```
+
+常见选项：
+
+- `--restart`：设置容器重启配置
+- `--cpus`：CPU数量
+- `--cpuset-cpus`：指定可使用的CPU
+- `--memory`：内存限制
+- `--memory-swap`：交换内存限制
+- `--cpu-period`：指定容器对CPU的使用在多长时间内重新分配一次
+- `--cpu-quota`：指定在该周期内可用于运行容器的最长时间  
+
+其中`--cpu-period`和`--cpu-quota`是一组配合使用的“时间片+配额”机制，核心概念是：**在一个固定周期内，容器最多能用多少CPU时间**：
+
+- `--cpu-period`：调度周期长度，单位是微秒（$\mu s$）
+- `--cpu-quota`：在这个周期内，容器最多可用的CPU时间，单位也是微秒 
+
+所以$可用CPU比例 = \frac{quota}{period}$
+
+举例：
+
+- `--cpu-period=100000 --cpu-quota=200000`：表示每100ms里最多用200ms CPU时间，相当于2个CPU
+- `--cpu-period=100000 --cpu-quota=25000`：表示每100ms里最多用25ms CPU时间，相当于0.25个CPU

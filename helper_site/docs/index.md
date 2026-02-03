@@ -634,6 +634,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </ul>
 
                 <p>注意：网站会保留上一次内容目录或者文章大纲的关闭状态，<span style="color: red;">某些浏览器插件会影响到快捷键，如果快捷键不生效请检查插件</span></p>
+                <p>本网站使用的评论系统服务在国内出现无法正常访问属于正常现象</p>
             </div>
         </div>
     </div>

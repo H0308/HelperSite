@@ -101,7 +101,7 @@ public class Producer {
 
 在RabbitMQ控制台中对应的队列中可以看到消息：
 
-<img src="rabbitmq-intro.assets\xw_20260203155338.png">
+<img src="rabbitmq-intro.assets\xw_20260203155338.png" style="width: 70%">
 
 ### 消息消费者
 

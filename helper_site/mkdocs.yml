@@ -298,6 +298,7 @@ nav:
     - RabbitMQ:
       - 章节目录: rabbitmq/index.md
       - Ubuntu下安装和卸载RabbitMQ: rabbitmq/rabbitmq-install-uninstall/rabbitmq-install-uninstall.md
+      - RabbitMQ介绍: rabbitmq/rabbitmq-intro/rabbitmq-intro.md
   - JavaEE应用开发:
     - 章节目录: JavaEE/index.md
     - SpringMVC/SpringBoot:
@@ -326,6 +327,7 @@ nav:
       - Docker安装与卸载: docker/docker-install-uninstall/docker-install-uninstall.md
       - Docker镜像与镜像仓库: docker/docker-image-registry/docker-image-registry.md
       - Docker容器: docker/docker-container/docker-container.md
+      - Docker存储卷: docker/docker-volume/docker-volume.md
   - 扩展知识: 
     - 章节目录: other/index.md
     - 关于Shell: other/shell/shell.md

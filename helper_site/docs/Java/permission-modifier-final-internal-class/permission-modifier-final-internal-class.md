@@ -614,6 +614,8 @@ new 接口类名/抽象类名() {
 对象名.重写的方法名();
 ```
 
+
+
 #### 匿名内部类基本使用
 
 ```java
@@ -639,6 +641,38 @@ public class Test {
     }
 }
 ```
+
+#### 匿名内部类与可继承的普通类
+
+除了接口和抽象类以外，匿名内部类还可以作用在普通类之上，即隐式继承一个可以被继承的普通类，例如下面的代码：
+
+=== "可继承的普通类"
+
+    ```java
+    public class Base {
+        public void print() {
+            System.out.println("这是父类的打印");
+        }
+    }
+    ```
+
+=== "测试类"
+
+    ```java
+    public class Test {
+        public static void main(String[] args) {
+            Base base = new Base() {
+                @Override
+                public void print() {
+                    System.out.println("这是匿名内部类的打印");
+                }
+            };
+
+            base.print(); // 这是匿名内部类的打印
+        }
+    }
+    ```
+
 
 #### 匿名内部类修改接口/抽象类型作为方法参数传递
 
@@ -701,3 +735,88 @@ public class Test {
         }
     }
     ```
+
+#### 匿名内部类的变量捕获
+
+默认情况下，当匿名内部类访问它所在方法中的局部变量时，这个内部类就捕获了这个变量，这个就是匿名内部类的变量捕获。但是想要正确捕获，需要满足两个条件中的任意一个：
+
+1. 变量被`final`关键字显式修饰
+2. 变量是事实上没有被修改过，即使没有写`final`
+
+=== "`final`显式修饰"
+
+    ```java
+    final int a = 10;
+    Base base = new Base() {
+        @Override
+        public void print() {
+            System.out.println("这是匿名内部类中的a：" + a);
+        }
+    };
+
+    base.print(); // 这是匿名内部类中的a：10
+    ```
+
+=== "事实没有修改过"
+
+    ```java
+    int a = 10;
+    Base base = new Base() {
+        @Override
+        public void print() {
+            System.out.println("这是匿名内部类中的a：" + a);
+        }
+    };
+
+    base.print(); // 这是匿名内部类中的a：10
+    ```
+
+    但是，如果是对匿名内部类使用的变量进行了修改就会报错，不论是匿名内部类内部修改还是外部修改：
+
+    === "情况一"
+    
+        ```java
+        int a = 10;
+        // 使用前进行过修改
+        a++;
+        Base base = new Base() {
+            @Override
+            public void print() {
+                // 报错：
+                // Variable 'a' is accessed from within inner class, needs to be final or effectively final
+                System.out.println("这是匿名内部类中的a：" + a);
+            }
+        };
+        ```
+
+    === "情况二"
+
+        ```java
+        int a = 10;
+        Base base = new Base() {
+            @Override
+            public void print() {
+                // 报错：
+                // Variable 'a' is accessed from within inner class, needs to be final or effectively final
+                System.out.println("这是匿名内部类中的a：" + a);
+            }
+        };
+        // 使用后进行过修改
+        a++;
+        ```
+
+    === "情况三"
+
+        ```java
+        int a = 10;
+        Base base = new Base() {
+            @Override
+            public void print() {
+                // 使用前进行过修改
+                a++;
+                // 报错：
+                // Variable 'a' is accessed from within inner class, needs to be final or effectively final
+                System.out.println("这是匿名内部类中的a：" + a);
+            }
+        };
+        ```

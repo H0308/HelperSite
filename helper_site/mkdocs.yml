@@ -328,6 +328,7 @@ nav:
       - Docker镜像与镜像仓库: docker/docker-image-registry/docker-image-registry.md
       - Docker容器: docker/docker-container/docker-container.md
       - Docker存储卷: docker/docker-volume/docker-volume.md
+      - Docker网络管理: docker/docker-network/docker-network.md
   - 扩展知识: 
     - 章节目录: other/index.md
     - 关于Shell: other/shell/shell.md

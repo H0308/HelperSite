@@ -66,3 +66,21 @@
   }
 }
 ```
+
+## Bing搜索 MCP
+
+```json
+{
+  "mcpServers": {
+    "bing-search": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "bing-cn-mcp"
+      ]
+    }
+  }
+}
+```

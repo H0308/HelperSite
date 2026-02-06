@@ -45,9 +45,9 @@ docker create [选项] 镜像名称 [命令] [命令行参数]
 - `-e username="ritchie"`：设置环境变量，多个环境变量时，每一次设置都需要带上`-e`
 - `--cpuset-cpus="0-2"`或`--cpuset-cpus="0,1,2"`：绑定容器到指定CPU运行  
 - `-m`：设置容器使用内存最大值
-- `--network="bridge"`：指定容器的网络连接类型  
+- `--network="bridge"`：指定容器的网络连接类型，具体参考[Docker网络管理](https://www.help-doc.top/docker/docker-network/docker-network.html)
 - `--link=[]`：添加链接到另一个容器  
-- `--volume, -v`：绑定一个卷  
+- `--volume, -v`：绑定一个卷，具体参考[Docker存储卷](https://www.help-doc.top/docker/docker-volume/docker-volume.html)
 - `--rm`：容器退出时自动删除容器  
 - `--restart`：自动重启，写法如下：
     

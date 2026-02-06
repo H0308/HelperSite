@@ -128,7 +128,7 @@ a code {
 .highlighttable tr {
     background-color: var(--bg-code-background);
     overflow-y: auto;
-    max-height: 500px;
+    max-height: 70vh;
 }
 
 .md-typeset pre>code {

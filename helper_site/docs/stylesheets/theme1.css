@@ -26,7 +26,6 @@ a[href*="/#"] {
     border-radius: 8px;
 }
 .md-typeset table:not([class]) th {
-    background-color: var(--bg-table-header);
     border-bottom: 2px solid var(--border-light);
 }
 .md-typeset table:not([class]) tr:nth-child(2n) {

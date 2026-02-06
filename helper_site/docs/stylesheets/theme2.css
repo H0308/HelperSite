@@ -125,6 +125,32 @@ a code {
     color: var(--text-gray);
 }
 
+.highlighttable tr {
+    background-color: var(--bg-code-background);
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.md-typeset pre>code {
+    overflow: initial;
+}
+
+.md-code__nav {
+    right: 1em;
+}
+
+.md-typeset table:not([class]) {
+    display: block;
+    overflow: auto;
+    max-height: 70vh;
+}
+
+.md-typeset table:not([class]) thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-white);
+}
+
 .md-typeset .admonition,
 .md-typeset details {
     border-width: 0;

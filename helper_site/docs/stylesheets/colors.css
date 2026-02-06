@@ -98,6 +98,7 @@
     
     /* 灰色系 - 用于背景 */
     --bg-gray-light: #efefef;
+    --bg-code-background: #f5f5f5;
     
     /* 代码高亮色 */
     --code-bg: #e5e5e6;

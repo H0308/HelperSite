@@ -1,0 +1,944 @@
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://www.help-doc.top/elastic-search/elastic-search.html><link rel=prev href=../rabbitmq/rabbitmq-intro/rabbitmq-intro.html><link rel=next href=../JavaEE/index.html><link rel=icon href=../images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.7.0"><title>ElasticSearch安装与基本使用 - 柯懒的知识库</title><link rel=stylesheet href=../assets/stylesheets/main.618322db.min.css><link rel=stylesheet href=../assets/stylesheets/palette.ab4e12ef.min.css><link rel=stylesheet href=../css/timeline.css><script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><link rel=preload href=../stylesheets/docsearch.min.css as=style><link rel=preload href=../stylesheets/colors.min.css as=style><link rel=preload href=../stylesheets/theme2.min.css as=style><link rel=preload href=https://help-site.oss-cn-hangzhou.aliyuncs.com/images/author/avatar.jpg as=image><link rel=preload href=https://help-site.oss-cn-hangzhou.aliyuncs.com/css/katex.min.css as=style><link rel=dns-prefetch href=//unpkg.com><link rel=dns-prefetch href=//cloud.umami.is><link rel=stylesheet href=../stylesheets/colors.min.css><link rel=stylesheet href=../stylesheets/theme2.min.css media="screen and (max-width: 1199px)"><link rel=stylesheet href=../stylesheets/theme1.min.css media="screen and (min-width: 1200px)"><link rel=stylesheet href=../stylesheets/theme2.min.css media="screen and (min-width: 1200px)"><link rel=stylesheet href=../stylesheets/print.min.css><link rel=stylesheet href=../stylesheets/link-preview.min.css><link rel=stylesheet href=https://help-site.oss-cn-hangzhou.aliyuncs.com/css/katex.min.css><link rel=stylesheet href=https://help-site.oss-cn-hangzhou.aliyuncs.com/css/docsearch3.css><link rel=stylesheet href=../stylesheets/docsearch.min.css><script defer src=https://cloud.umami.is/script.js data-website-id=02f9b8b7-93d4-4026-bdd8-221f2fcea2cf></script> <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=cyan> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#elasticsearch class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=页眉> <a href=../index.html title=柯懒的知识库 class="md-header__button md-logo" aria-label=柯懒的知识库 data-md-component=logo> <img src=../assets/logo.png alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> 柯懒的知识库 </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> ElasticSearch安装与基本使用 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=white data-md-color-accent=cyan aria-label type=radio name=__palette id=__palette_1> </form> <div class=header-avatar> <img src=https://help-site.oss-cn-hangzhou.aliyuncs.com/images/author/avatar.jpg alt=头像> <div class=avatar-dropdown> <p><strong>柯懒不是柯南</strong></p> <a href=../author/contact/contact.html class=avatar-dropdown-item>联系作者</a> <div class=avatar-dropdown-divider></div> <a href=../author/about/about.html class=avatar-dropdown-item>关于作者</a> <div class=avatar-dropdown-divider></div> <a href=https://github.com/H0308 class=avatar-dropdown-item>Github仓库</a> </div> </div> <div id=docsearch></div> </nav> </header> <!-- <div class="back-to-top-btn" id="backToTopBtn"  onclick="window.scrollTo({top: 0})">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="currentColor"/>
+    </svg>
+</div> --> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=标签 data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../index.html class=md-tabs__link> 主页 </a> </li> <li class=md-tabs__item> <a href=../timeline/timeline.html class=md-tabs__link> 网站时间线 </a> </li> <li class=md-tabs__item> <a href=../languages/index.html class=md-tabs__link> 编程语言 </a> </li> <li class=md-tabs__item> <a href=../data-structure-algo/index.html class=md-tabs__link> 数据结构与算法 </a> </li> <li class=md-tabs__item> <a href=../Linux/index.html class=md-tabs__link> Linux </a> </li> <li class=md-tabs__item> <a href=../front-end/index.html class=md-tabs__link> 前端 </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../basic-service-component/index.html class=md-tabs__link> 基础服务组件 </a> </li> <li class=md-tabs__item> <a href=../JavaEE/index.html class=md-tabs__link> JavaEE应用开发 </a> </li> <li class=md-tabs__item> <a href=../software-test/index.html class=md-tabs__link> 软件测试 </a> </li> <li class=md-tabs__item> <a href=../docker/index.html class=md-tabs__link> 容器化 </a> </li> <li class=md-tabs__item> <a href=../other/index.html class=md-tabs__link> 扩展知识 </a> </li> <li class=md-tabs__item> <a href=../tooltips/index.html class=md-tabs__link> 工具帮助 </a> </li> <li class=md-tabs__item> <a href=../test-encrypt/test-encrypt.html class=md-tabs__link> 测试加密功能 </a> </li> <li class=md-tabs__item> <a href=../projects/index.html class=md-tabs__link> 项目 </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=导航栏 data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../index.html title=柯懒的知识库 class="md-nav__button md-logo" aria-label=柯懒的知识库 data-md-component=logo> <img src=../assets/logo.png alt=logo> </a> 柯懒的知识库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../index.html class=md-nav__link> <span class=md-ellipsis> 主页 </span> </a> </li> <li class=md-nav__item> <a href=../timeline/timeline.html class=md-nav__link> <span class=md-ellipsis> 网站时间线 </span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../languages/index.html class=md-nav__link> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../data-structure-algo/index.html class=md-nav__link> <span class=md-ellipsis> 数据结构与算法 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../Linux/index.html class=md-nav__link> <span class=md-ellipsis> Linux </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../front-end/index.html class=md-nav__link> <span class=md-ellipsis> 前端 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_7 checked> <div class="md-nav__link md-nav__container"> <a href=../basic-service-component/index.html class="md-nav__link "> <span class=md-ellipsis> 基础服务组件 </span> </a> <label class="md-nav__link " for=__nav_7 id=__nav_7_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_7_label aria-expanded=true> <label class=md-nav__title for=__nav_7> <span class="md-nav__icon md-icon"></span> 基础服务组件 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_7_2> <div class="md-nav__link md-nav__container"> <a href=../MySQL/index.html class="md-nav__link "> <span class=md-ellipsis> MySQL </span> </a> <label class="md-nav__link " for=__nav_7_2 id=__nav_7_2_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_7_2_label aria-expanded=false> <label class=md-nav__title for=__nav_7_2> <span class="md-nav__icon md-icon"></span> MySQL </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../MySQL/mysql-op/index.html class=md-nav__link> <span class=md-ellipsis> MySQL操作 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../MySQL/JDBC/index.html class=md-nav__link> <span class=md-ellipsis> JDBC（Java连接数据库技术） </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_7_3> <div class="md-nav__link md-nav__container"> <a href=../rabbitmq/index.html class="md-nav__link "> <span class=md-ellipsis> RabbitMQ </span> </a> <label class="md-nav__link " for=__nav_7_3 id=__nav_7_3_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_7_3_label aria-expanded=false> <label class=md-nav__title for=__nav_7_3> <span class="md-nav__icon md-icon"></span> RabbitMQ </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../rabbitmq/rabbitmq-install-uninstall/rabbitmq-install-uninstall.html class=md-nav__link> <span class=md-ellipsis> Ubuntu下安装和卸载RabbitMQ </span> </a> </li> <li class=md-nav__item> <a href=../rabbitmq/rabbitmq-intro/rabbitmq-intro.html class=md-nav__link> <span class=md-ellipsis> RabbitMQ介绍 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> ElasticSearch安装与基本使用 </span> <span class="md-nav__icon md-icon"></span> </label> <a href=elastic-search.html class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> ElasticSearch安装与基本使用 </span> </a> <nav class="md-nav md-nav--secondary" aria-label=本节目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 本节目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#elasticsearch_1 class=md-nav__link> <span class=md-ellipsis> ElasticSearch介绍 </span> </a> </li> <li class=md-nav__item> <a href=#elasticsearch_2 class=md-nav__link> <span class=md-ellipsis> ElasticSearch相关概念 </span> </a> </li> <li class=md-nav__item> <a href=#elasticsearch_3 class=md-nav__link> <span class=md-ellipsis> 安装ElasticSearch </span> </a> </li> <li class=md-nav__item> <a href=#kibanaelasticsearch class=md-nav__link> <span class=md-ellipsis> 在Kibana开发工具中基本使用ElasticSearch </span> </a> </li> <li class=md-nav__item> <a href=#springbootelasticsearch class=md-nav__link> <span class=md-ellipsis> SpringBoot项目与ElasticSearch </span> </a> </li> <li class=md-nav__item> <a href=#sort class=md-nav__link> <span class=md-ellipsis> Sort类介绍 </span> </a> </li> <li class=md-nav__item> <a href=#pageable class=md-nav__link> <span class=md-ellipsis> Pageable类介绍 </span> </a> </li> <li class=md-nav__item> <a href=#page class=md-nav__link> <span class=md-ellipsis> Page类介绍 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../JavaEE/index.html class=md-nav__link> <span class=md-ellipsis> JavaEE应用开发 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../software-test/index.html class=md-nav__link> <span class=md-ellipsis> 软件测试 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../docker/index.html class=md-nav__link> <span class=md-ellipsis> 容器化 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../other/index.html class=md-nav__link> <span class=md-ellipsis> 扩展知识 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../tooltips/index.html class=md-nav__link> <span class=md-ellipsis> 工具帮助 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../test-encrypt/test-encrypt.html class=md-nav__link> <span class=md-ellipsis> 测试加密功能 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../projects/index.html class=md-nav__link> <span class=md-ellipsis> 项目 </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=本节目录> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 本节目录 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#elasticsearch_1 class=md-nav__link> <span class=md-ellipsis> ElasticSearch介绍 </span> </a> </li> <li class=md-nav__item> <a href=#elasticsearch_2 class=md-nav__link> <span class=md-ellipsis> ElasticSearch相关概念 </span> </a> </li> <li class=md-nav__item> <a href=#elasticsearch_3 class=md-nav__link> <span class=md-ellipsis> 安装ElasticSearch </span> </a> </li> <li class=md-nav__item> <a href=#kibanaelasticsearch class=md-nav__link> <span class=md-ellipsis> 在Kibana开发工具中基本使用ElasticSearch </span> </a> </li> <li class=md-nav__item> <a href=#springbootelasticsearch class=md-nav__link> <span class=md-ellipsis> SpringBoot项目与ElasticSearch </span> </a> </li> <li class=md-nav__item> <a href=#sort class=md-nav__link> <span class=md-ellipsis> Sort类介绍 </span> </a> </li> <li class=md-nav__item> <a href=#pageable class=md-nav__link> <span class=md-ellipsis> Pageable类介绍 </span> </a> </li> <li class=md-nav__item> <a href=#page class=md-nav__link> <span class=md-ellipsis> Page类介绍 </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <script defer src=/javascripts/waline.min.js></script> <p><link rel=stylesheet href=https://help-site.oss-cn-hangzhou.aliyuncs.com/css/waline.css> <link rel=stylesheet href=/stylesheets/waline.min.css></p> <h1 id=elasticsearch>ElasticSearch安装与基本使用<a class=headerlink href=#elasticsearch title="Permanent link">&para;</a></h1> <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;"> <p><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 2681 个字 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 576 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M360.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m64.6 136.1c-12.5 12.5-12.5 32.8 0 45.3l73.4 73.4-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0zm-274.7 0c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l73.3-73.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 485 行代码 <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 15 分钟</p> </div> <h2 id=elasticsearch_1>ElasticSearch介绍<a class=headerlink href=#elasticsearch_1 title="Permanent link">&para;</a></h2> <p>Elasticsearch是基于Lucene的分布式搜索与分析引擎，能够对大规模数据进行近实时的全文检索、结构化查询与聚合分析。它采用JSON文档存储模型，支持水平扩展、分片与副本机制，提供高可用与高性能，并常与Logstash、Kibana组成ELK/Elastic Stack，用于日志分析、全文检索、监控与数据可视化等场景</p> <h2 id=elasticsearch_2>ElasticSearch相关概念<a class=headerlink href=#elasticsearch_2 title="Permanent link">&para;</a></h2> <ol> <li>index（索引）：具有相同结构的文档集合，类似于关系型数据库的数据库实例（6.0.0版本type废弃后，索引的概念下降到等同于数据库表的级别）。一个集群里可以定义多个索引，如客户信息索引、商品分类索引、商品索引、订单索引、评论索引等等，分别定义自己的数据结构。索引命名要求全部使用小写，建立索引、搜索、更新、删除操作都需要用到索引名称</li> <li>type（类型）：原本是在索引内进行的逻辑细分，但后来发现企业研发为了增强可阅读性和可维护性，制订的规范约束，同一个索引下很少还会再使用type进行逻辑拆分（如同一个索引下既有订单数据，又有评论数据），因而在6.0.0版本之后，此定义废弃</li> <li>document（文档）：一个文档是一个可被索引的基础信息单元，document（文档）是JSON格式的，document就像是MySQL中某个Table里面每一行的数据，document中可以包含多个字段，每个字段可以是文本、数字、日期等类型</li> <li>field（字段）：文档中的一个元素或属性，每个字段都有一个数据类型，如字符串、整数、日期等</li> <li>mapping（映射）：类似于传统关系型数据中table的schema（定义了数据库中的数据如何组织，包括表的结构、字段的数据类型、键（如主键、外键）的设置等），用于定义一个索引的数据的结构（mapping中主要包括字段名、字段数据类型和字段索引类型）。在ES中，可以手动创建mapping，也可以采用默认创建方式。在默认配置下，ES可以根据插入的数据自动地创建mapping</li> </ol> <p>将MySQL中的概念与ES概念进行类比：</p> <table> <thead> <tr> <th style="text-align: left;">MySQL</th> <th style="text-align: left;">ElasticSearch</th> </tr> </thead> <tbody> <tr> <td style="text-align: left;">表Table</td> <td style="text-align: left;">索引Index</td> </tr> <tr> <td style="text-align: left;">数据行Row</td> <td style="text-align: left;">文档Document</td> </tr> <tr> <td style="text-align: left;">数据列Column</td> <td style="text-align: left;">字段Field</td> </tr> <tr> <td style="text-align: left;">模式Schema</td> <td style="text-align: left;">映射Mapping</td> </tr> </tbody> </table> <h2 id=elasticsearch_3>安装ElasticSearch<a class=headerlink href=#elasticsearch_3 title="Permanent link">&para;</a></h2> <p>下面主要介绍在Docker上安装ElasticSearch，首先拉取ES镜像：</p> <div class="language-bash highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Bash</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1>docker<span class=w> </span>pull<span class=w> </span>elasticsearch:8.5.3
+</span></code></pre></div></td></tr></table></div> <p>为了便于后续操作和维护ES，可以顺便安装Kibana，同样拉取Kibana镜像：</p> <div class="language-bash highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Bash</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1>docker<span class=w> </span>pull<span class=w> </span>kibana:8.5.3
+</span></code></pre></div></td></tr></table></div> <p>接着，需要保证ES和Kibana连接到同一个网络，这里可以创建一个自定义网络：</p> <div class="language-bash highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Bash</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1>docker<span class=w> </span>network<span class=w> </span>create<span class=w> </span>diy-network
+</span></code></pre></div></td></tr></table></div> <p>接着，先启动ES，再启动Kibana：</p> <div class="language-bash highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Bash</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span>
+<span class=normal>7</span>
+<span class=normal>8</span>
+<span class=normal>9</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><span class=c1># 启动ES</span>
+</span><span id=__span-3-2>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span>--name<span class=w> </span>es-dev<span class=w> </span>-e<span class=w> </span><span class=s2>&quot;ES_JAVA_OPTS=-Xms256m -Xmx256m&quot;</span><span class=w> </span>-e<span class=w> </span>
+</span><span id=__span-3-3><span class=s2>&quot;discovery.type=single-node&quot;</span><span class=w> </span>-v<span class=w> </span>/es-plugins:/usr/share/elasticsearch/plugins<span class=w> </span>-e<span class=w> </span>
+</span><span id=__span-3-4><span class=s2>&quot;xpack.security.enabled=false&quot;</span><span class=w> </span>--privileged<span class=w> </span>--network<span class=w> </span>diy-network<span class=w> </span>-p<span class=w> </span>
+</span><span id=__span-3-5><span class=m>9200</span>:9200<span class=w> </span>-p<span class=w> </span><span class=m>9300</span>:9300<span class=w> </span>elasticsearch:8.5.3
+</span><span id=__span-3-6>
+</span><span id=__span-3-7><span class=c1># 启动Kibana</span>
+</span><span id=__span-3-8>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span>--name<span class=w> </span>kibana-dev<span class=w> </span>-e<span class=w> </span><span class=s2>&quot;ELASTICSEARCH_HOSTS=http://oj-es-</span>
+</span><span id=__span-3-9><span class=s2>dev:9200&quot;</span><span class=w> </span>-e<span class=w> </span><span class=s2>&quot;I18N_LOCALE=zh-CN&quot;</span><span class=w> </span>-p15601:5601<span class=w> </span>--network<span class=w> </span>diy-network<span class=w> </span>kibana:8.5.3
+</span></code></pre></div></td></tr></table></div> <p>注意，需要确保ES启动成功后再启动Kibana，否则Kibana无法连接上ES，启动ES后，可以访问<code>http://localhost:9200/</code>进行验证</p> <p>如果需要对中文句子进行分词，可以使用ES插件，ik分词器，点击<a href=https://release.infinilabs.com/analysis-ik/stable/elasticsearch-analysis-ik-8.5.3.zip>网址</a>进行下载，下载完成后，将这个压缩包放在容器映射的宿主机目录<code>/es-plugins</code>下，需要注意，要先创建一个子目录，例如<code>elasticsearch-analysis-ik-8.5.3</code>，再在该子目录中将压缩包进行解压，解压完成后重启ES容器即可</p> <p>ik分词器默认有两种分词模式：</p> <ol> <li><code>ik_smart</code>：分词数量少，倾向于输出更语义完整的词，更适合短词或者关键词的检索场景</li> <li><code>ik_max_word</code>：尽可能细地拆分，会输出所有可能的词，适合需要尽可能匹配更多结果、做词云、关键词统计、召回优先的场景</li> </ol> <h2 id=kibanaelasticsearch>在Kibana开发工具中基本使用ElasticSearch<a class=headerlink href=#kibanaelasticsearch title="Permanent link">&para;</a></h2> <p>在Kibana的侧边栏找到“开发工具”，新增如下数据：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><span class=err>PUT</span><span class=w> </span><span class=err>/employee/_doc/</span><span class=mi>1</span>
+</span><span id=__span-4-2><span class=p>{</span>
+</span><span id=__span-4-3><span class=w> </span><span class=nt>&quot;first_name&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=s2>&quot;John&quot;</span><span class=p>,</span>
+</span><span id=__span-4-4><span class=w> </span><span class=nt>&quot;last_name&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=s2>&quot;Smith&quot;</span><span class=p>,</span>
+</span><span id=__span-4-5><span class=w> </span><span class=nt>&quot;age&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=mi>25</span><span class=p>,</span>
+</span><span id=__span-4-6><span class=w> </span><span class=nt>&quot;about&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=s2>&quot;I love to go rock climbing&quot;</span><span class=p>,</span>
+</span><span id=__span-4-7><span class=w> </span><span class=nt>&quot;interests&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=s2>&quot;sports&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;music&quot;</span><span class=w> </span><span class=p>]</span>
+</span><span id=__span-4-8><span class=p>}</span>
+</span><span id=__span-4-9><span class=err>PUT</span><span class=w> </span><span class=err>/employee/_doc/</span><span class=mi>2</span>
+</span><span id=__span-4-10><span class=p>{</span>
+</span><span id=__span-4-11><span class=w> </span><span class=nt>&quot;first_name&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=s2>&quot;Jane&quot;</span><span class=p>,</span>
+</span><span id=__span-4-12><span class=w> </span><span class=nt>&quot;last_name&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=s2>&quot;Smith&quot;</span><span class=p>,</span>
+</span><span id=__span-4-13><span class=w> </span><span class=nt>&quot;age&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=mi>32</span><span class=p>,</span>
+</span><span id=__span-4-14><span class=w> </span><span class=nt>&quot;about&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=s2>&quot;I like to collect rock albums&quot;</span><span class=p>,</span>
+</span><span id=__span-4-15><span class=w> </span><span class=nt>&quot;interests&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=s2>&quot;music&quot;</span><span class=w> </span><span class=p>]</span>
+</span><span id=__span-4-16><span class=p>}</span>
+</span><span id=__span-4-17><span class=err>PUT</span><span class=w> </span><span class=err>/employee/_doc/</span><span class=mi>3</span>
+</span><span id=__span-4-18><span class=p>{</span>
+</span><span id=__span-4-19><span class=w> </span><span class=nt>&quot;first_name&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=s2>&quot;Douglas&quot;</span><span class=p>,</span>
+</span><span id=__span-4-20><span class=w> </span><span class=nt>&quot;last_name&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=s2>&quot;Fir&quot;</span><span class=p>,</span>
+</span><span id=__span-4-21><span class=w> </span><span class=nt>&quot;age&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=mi>35</span><span class=p>,</span>
+</span><span id=__span-4-22><span class=w> </span><span class=nt>&quot;about&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;I like to build cabinets&quot;</span><span class=p>,</span>
+</span><span id=__span-4-23><span class=w> </span><span class=nt>&quot;interests&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=s2>&quot;forestry&quot;</span><span class=w> </span><span class=p>]</span>
+</span><span id=__span-4-24><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>接着，使用下面的命令进行所有数据的获取：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><span class=err>GET</span><span class=w> </span><span class=err>/employee/_search</span>
+</span></code></pre></div></td></tr></table></div> <p>如果要查询单个数据，可以使用下面的命令：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><span class=err>GET</span><span class=w> </span><span class=err>/employee/_doc/</span><span class=p>{</span><span class=err>id</span><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>如果要更新指定数据，使用下面的命令：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><span class=err>POST</span><span class=w> </span><span class=err>/employee/_upda</span><span class=kc>te</span><span class=err>/</span><span class=mi>3</span>
+</span><span id=__span-7-2><span class=p>{</span>
+</span><span id=__span-7-3><span class=w> </span><span class=nt>&quot;doc&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-7-4><span class=w> </span><span class=nt>&quot;last_name&quot;</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=s2>&quot;mark&quot;</span>
+</span><span id=__span-7-5><span class=w> </span><span class=p>}</span>
+</span><span id=__span-7-6><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>如果要删除指定数据，使用下面的命令：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><span class=err>DELETE</span><span class=w> </span><span class=err>/employee/_doc/</span><span class=p>{</span><span class=err>id</span><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>如果要删除整个索引，可以使用下面的命令：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><span class=err>DELETE</span><span class=w> </span><span class=err>/employee</span>
+</span></code></pre></div></td></tr></table></div> <h2 id=springbootelasticsearch>SpringBoot项目与ElasticSearch<a class=headerlink href=#springbootelasticsearch title="Permanent link">&para;</a></h2> <p>首先引入Maven依赖：</p> <div class="language-xml highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>XML</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><span class=nt>&lt;dependency&gt;</span>
+</span><span id=__span-10-2><span class=w>    </span><span class=nt>&lt;groupId&gt;</span>org.springframework.boot<span class=nt>&lt;/groupId&gt;</span>
+</span><span id=__span-10-3><span class=w>    </span><span class=nt>&lt;artifactId&gt;</span>spring-boot-starter-data-elasticsearch<span class=nt>&lt;/artifactId&gt;</span>
+</span><span id=__span-10-4><span class=nt>&lt;/dependency&gt;</span>
+</span></code></pre></div></td></tr></table></div> <p>本次演示实现一个基于MySQL数据库获取用户列表，并可以支持根据用户用户名进行模糊搜索。数据库设计如下：</p> <div class="language-sql highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>SQL</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><span class=c1>-- ----------------------------</span>
+</span><span id=__span-11-2><span class=c1>-- Table structure for users</span>
+</span><span id=__span-11-3><span class=c1>-- ----------------------------</span>
+</span><span id=__span-11-4><span class=k>DROP</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>IF</span><span class=w> </span><span class=k>EXISTS</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=p>;</span>
+</span><span id=__span-11-5><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w>  </span><span class=p>(</span>
+</span><span id=__span-11-6><span class=w>  </span><span class=o>`</span><span class=n>id</span><span class=o>`</span><span class=w> </span><span class=nb>int</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=n>AUTO_INCREMENT</span><span class=p>,</span>
+</span><span id=__span-11-7><span class=w>  </span><span class=o>`</span><span class=n>user_code</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>50</span><span class=p>)</span><span class=w> </span><span class=nb>CHARACTER</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=n>utf8mb4</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=n>utf8mb4_unicode_ci</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;用户编号&#39;</span><span class=p>,</span>
+</span><span id=__span-11-8><span class=w>  </span><span class=o>`</span><span class=n>username</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>50</span><span class=p>)</span><span class=w> </span><span class=nb>CHARACTER</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=n>utf8mb4</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=n>utf8mb4_unicode_ci</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=p>,</span>
+</span><span id=__span-11-9><span class=w>  </span><span class=o>`</span><span class=n>nickname</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>50</span><span class=p>)</span><span class=w> </span><span class=nb>CHARACTER</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=n>utf8mb4</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=n>utf8mb4_unicode_ci</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;昵称&#39;</span><span class=p>,</span>
+</span><span id=__span-11-10><span class=w>  </span><span class=o>`</span><span class=n>avatar</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>500</span><span class=p>)</span><span class=w> </span><span class=nb>CHARACTER</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=n>utf8mb4</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=n>utf8mb4_unicode_ci</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;头像URL&#39;</span><span class=p>,</span>
+</span><span id=__span-11-11><span class=w>  </span><span class=o>`</span><span class=n>email</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>100</span><span class=p>)</span><span class=w> </span><span class=nb>CHARACTER</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=n>utf8mb4</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=n>utf8mb4_unicode_ci</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=k>NULL</span><span class=p>,</span>
+</span><span id=__span-11-12><span class=w>  </span><span class=o>`</span><span class=n>phone</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>20</span><span class=p>)</span><span class=w> </span><span class=nb>CHARACTER</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=n>utf8mb4</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=n>utf8mb4_unicode_ci</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=k>NULL</span><span class=p>,</span>
+</span><span id=__span-11-13><span class=w>  </span><span class=o>`</span><span class=n>gender</span><span class=o>`</span><span class=w> </span><span class=n>tinyint</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=mi>2</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;0女 1男 2保密&#39;</span><span class=p>,</span>
+</span><span id=__span-11-14><span class=w>  </span><span class=o>`</span><span class=n>birthday</span><span class=o>`</span><span class=w> </span><span class=nb>date</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=k>NULL</span><span class=p>,</span>
+</span><span id=__span-11-15><span class=w>  </span><span class=o>`</span><span class=n>province</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>50</span><span class=p>)</span><span class=w> </span><span class=nb>CHARACTER</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=n>utf8mb4</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=n>utf8mb4_unicode_ci</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;省份&#39;</span><span class=p>,</span>
+</span><span id=__span-11-16><span class=w>  </span><span class=o>`</span><span class=n>city</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>50</span><span class=p>)</span><span class=w> </span><span class=nb>CHARACTER</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=n>utf8mb4</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=n>utf8mb4_unicode_ci</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;城市&#39;</span><span class=p>,</span>
+</span><span id=__span-11-17><span class=w>  </span><span class=o>`</span><span class=k>level</span><span class=o>`</span><span class=w> </span><span class=n>tinyint</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=mi>1</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;会员等级 1-5&#39;</span><span class=p>,</span>
+</span><span id=__span-11-18><span class=w>  </span><span class=o>`</span><span class=n>points</span><span class=o>`</span><span class=w> </span><span class=nb>int</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=mi>0</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;积分&#39;</span><span class=p>,</span>
+</span><span id=__span-11-19><span class=w>  </span><span class=o>`</span><span class=n>status</span><span class=o>`</span><span class=w> </span><span class=n>tinyint</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=mi>1</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;状态&#39;</span><span class=p>,</span>
+</span><span id=__span-11-20><span class=w>  </span><span class=o>`</span><span class=n>created_at</span><span class=o>`</span><span class=w> </span><span class=k>timestamp</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=k>CURRENT_TIMESTAMP</span><span class=p>,</span>
+</span><span id=__span-11-21><span class=w>  </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=w> </span><span class=p>(</span><span class=o>`</span><span class=n>id</span><span class=o>`</span><span class=p>)</span><span class=w> </span><span class=k>USING</span><span class=w> </span><span class=n>BTREE</span><span class=p>,</span>
+</span><span id=__span-11-22><span class=w>  </span><span class=k>UNIQUE</span><span class=w> </span><span class=k>INDEX</span><span class=w> </span><span class=o>`</span><span class=n>user_code</span><span class=o>`</span><span class=p>(</span><span class=o>`</span><span class=n>user_code</span><span class=o>`</span><span class=w> </span><span class=k>ASC</span><span class=p>)</span><span class=w> </span><span class=k>USING</span><span class=w> </span><span class=n>BTREE</span><span class=p>,</span>
+</span><span id=__span-11-23><span class=w>  </span><span class=k>UNIQUE</span><span class=w> </span><span class=k>INDEX</span><span class=w> </span><span class=o>`</span><span class=n>username</span><span class=o>`</span><span class=p>(</span><span class=o>`</span><span class=n>username</span><span class=o>`</span><span class=w> </span><span class=k>ASC</span><span class=p>)</span><span class=w> </span><span class=k>USING</span><span class=w> </span><span class=n>BTREE</span>
+</span><span id=__span-11-24><span class=p>)</span><span class=w> </span><span class=n>ENGINE</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>InnoDB</span><span class=w> </span><span class=n>AUTO_INCREMENT</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>16</span><span class=w> </span><span class=nb>CHARACTER</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>utf8mb4</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>utf8mb4_unicode_ci</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;用户表&#39;</span><span class=w> </span><span class=n>ROW_FORMAT</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>Dynamic</span><span class=p>;</span>
+</span><span id=__span-11-25>
+</span><span id=__span-11-26><span class=c1>-- ----------------------------</span>
+</span><span id=__span-11-27><span class=c1>-- Records of users</span>
+</span><span id=__span-11-28><span class=c1>-- ----------------------------</span>
+</span><span id=__span-11-29><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400001&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;zhangsan&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;张三&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/1.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;zhangsan@qq.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;13800138001&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1995-03-15&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;北京市&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;北京市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>3</span><span class=p>,</span><span class=w> </span><span class=mi>2580</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-30><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400002&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;lisi&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;李四&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/2.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;lisi@163.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;13900139002&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1992-07-22&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;上海市&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;上海市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>4</span><span class=p>,</span><span class=w> </span><span class=mi>5680</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-31><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>3</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400003&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;wangwu&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;王五&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/3.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;wangwu@gmail.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;13700137003&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1998-11-08&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;广东省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;广州市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=mi>1280</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-32><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>4</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400004&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;zhaoliu&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;赵六&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/4.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;zhaoliu@qq.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;13600136004&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1990-05-20&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;浙江省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;杭州市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>5</span><span class=p>,</span><span class=w> </span><span class=mi>12800</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-33><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>5</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400005&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;qianqi&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;钱七&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/5.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;qianqi@126.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;13500135005&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1996-09-12&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;江苏省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;南京市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>3</span><span class=p>,</span><span class=w> </span><span class=mi>3450</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-34><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>6</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400006&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;sunba&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;孙八&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/6.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;sunba@qq.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;13400134006&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1993-12-01&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;四川省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;成都市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>4</span><span class=p>,</span><span class=w> </span><span class=mi>7890</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-35><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>7</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400007&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;zhoujiu&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;周九&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/7.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;zhoujiu@163.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;13300133007&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1999-04-18&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;湖北省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;武汉市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=mi>580</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-36><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>8</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400008&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;wushi&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;吴十&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/8.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;wushi@gmail.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;13200132008&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1991-08-30&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;陕西省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;西安市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>4</span><span class=p>,</span><span class=w> </span><span class=mi>6780</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-37><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>9</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400009&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;zheng11&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;郑十一&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/9.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;zheng11@qq.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;13100131009&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1997-02-25&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;湖南省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;长沙市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=mi>1890</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-38><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>10</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400010&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;chen12&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;陈十二&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/10.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;chen12@126.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;13000130010&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1994-06-14&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;河南省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;郑州市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>3</span><span class=p>,</span><span class=w> </span><span class=mi>4560</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-39><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>11</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400011&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;lin13&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;林十三&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/11.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;lin13@qq.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;12900129011&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2000-10-05&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;福建省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;厦门市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=mi>320</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-40><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>12</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400012&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;huang14&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;黄十四&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/12.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;huang14@163.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;12800128012&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1989-01-28&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;山东省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;青岛市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>5</span><span class=p>,</span><span class=w> </span><span class=mi>15680</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-41><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>13</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400013&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;he15&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;何十五&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/13.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;he15@gmail.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;12700127013&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1995-07-09&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;安徽省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;合肥市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>3</span><span class=p>,</span><span class=w> </span><span class=mi>2890</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-42><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>14</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400014&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;gao16&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;高十六&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/14.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;gao16@qq.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;12600126014&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1992-11-17&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;江西省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;南昌市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>4</span><span class=p>,</span><span class=w> </span><span class=mi>5670</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span><span id=__span-11-43><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=o>`</span><span class=n>users</span><span class=o>`</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>15</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;U202400015&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;luo17&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;罗十七&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;https://example.com/avatar/15.jpg&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;luo17@126.com&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;12500125015&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1998-03-22&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;云南省&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;昆明市&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=mi>1560</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;2026-02-06 22:09:23&#39;</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> <p>接着，在ElasticSearch中配置连接地址：</p> <div class="language-yaml highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>YAML</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><span class=nt>spring</span><span class=p>:</span>
+</span><span id=__span-12-2><span class=w>  </span><span class=nt>elasticsearch</span><span class=p>:</span>
+</span><span id=__span-12-3><span class=w>    </span><span class=nt>uris</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:9200</span><span class=w> </span><span class=c1># ElasticSearch运行的IP地址和端口</span>
+</span></code></pre></div></td></tr></table></div> <p>要想操作ElasticSearch首先得有一个索引，在开发工具中操作ElasticSearch时，如果不存在指定索引会报错提示索引不存在，但是使用代码操作时可以通过实体类让ElasticSearch创建索引，例如下面的实体类：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><span class=nd>@Data</span>
+</span><span id=__span-13-2><span class=nd>@AllArgsConstructor</span>
+</span><span id=__span-13-3><span class=nd>@NoArgsConstructor</span>
+</span><span id=__span-13-4><span class=nd>@Document</span><span class=p>(</span><span class=n>indexName</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;idx_user&quot;</span><span class=p>)</span><span class=w> </span><span class=c1>// 声明索引</span>
+</span><span id=__span-13-5><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>UserDocument</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-13-6><span class=w>    </span><span class=nd>@Id</span><span class=w> </span><span class=c1>// 声明ID（类似于数据库的主键ID）</span>
+</span><span id=__span-13-7><span class=w>    </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Text</span><span class=p>)</span>
+</span><span id=__span-13-8><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>userCode</span><span class=p>;</span>
+</span><span id=__span-13-9><span class=w>    </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Integer</span><span class=p>)</span><span class=w> </span><span class=c1>// 指定字段类型</span>
+</span><span id=__span-13-10><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>Integer</span><span class=w> </span><span class=n>userId</span><span class=p>;</span>
+</span><span id=__span-13-11><span class=w>    </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Text</span><span class=p>,</span><span class=w> </span>
+</span><span id=__span-13-12><span class=w>        </span><span class=n>analyzer</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;ik_smart&quot;</span><span class=p>,</span><span class=w> </span><span class=c1>// 写入/索引时的分词器</span>
+</span><span id=__span-13-13><span class=w>        </span><span class=n>searchAnalyzer</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;ik_max_word&quot;</span><span class=p>)</span><span class=w> </span><span class=c1>// 搜索时的分词器</span>
+</span><span id=__span-13-14><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>nickname</span><span class=p>;</span>
+</span><span id=__span-13-15><span class=w>    </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Text</span><span class=p>)</span>
+</span><span id=__span-13-16><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>username</span><span class=p>;</span>
+</span><span id=__span-13-17><span class=w>    </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Date</span><span class=p>,</span><span class=w> </span>
+</span><span id=__span-13-18><span class=w>        </span><span class=n>format</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>DateFormat</span><span class=p>.</span><span class=na>date_hour_minute_second</span><span class=p>)</span><span class=w> </span><span class=c1>// 指定日期显示格式</span>
+</span><span id=__span-13-19><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>LocalDateTime</span><span class=w> </span><span class=n>birthday</span><span class=p>;</span>
+</span><span id=__span-13-20><span class=w>    </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Byte</span><span class=p>)</span>
+</span><span id=__span-13-21><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>Integer</span><span class=w> </span><span class=n>status</span><span class=p>;</span>
+</span><span id=__span-13-22><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <div class="admonition note"> <p class=admonition-title>Note</p> <p>需要注意，在ElasticSearch 8.5.3版本中存在使用<code>@Id</code>注解后会覆盖实际在Java代码中声明的类型（在ElasticSearch，<code>_id</code>默认为<code>keyword</code>类型），例如上面的代码，如果给<code>userId</code>用<code>@Id</code>，那么<code>@Field(type = FieldType.Integer)</code>就会失效，其他版本不确定是否有这种情况</p> </div> <p>有了索引之后，还需要操作索引的方法，这些方法可以通过一个父接口提供，但是首先需要创建子接口继承这个父接口：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><span class=nd>@Repository</span><span class=w> </span><span class=c1>// 持久层操作注解，保证可读性</span>
+</span><span id=__span-14-2><span class=kd>public</span><span class=w> </span><span class=kd>interface</span> <span class=nc>UserRepository</span><span class=w> </span><span class=kd>extends</span><span class=w> </span>
+</span><span id=__span-14-3><span class=w>    </span><span class=n>ElasticsearchRepository</span><span class=o>&lt;</span><span class=n>UserDocument</span><span class=p>,</span><span class=w> </span><span class=n>Integer</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=c1>// 第一个泛型表示指定索引，第二个泛型表示索引的ID类型</span>
+</span><span id=__span-14-4>
+</span><span id=__span-14-5><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>可以类比一下MybatisPlus的Mapper：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><span class=nd>@Mapper</span>
+</span><span id=__span-15-2><span class=kd>public</span><span class=w> </span><span class=kd>interface</span> <span class=nc>UserMapper</span><span class=w> </span><span class=kd>extends</span><span class=w> </span><span class=n>BaseMapper</span><span class=o>&lt;</span><span class=n>User</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-15-3><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>在<code>ElasticsearchRepository</code>提供了一些接口：</p> <table> <thead> <tr> <th>方法</th> <th>功能说明</th> </tr> </thead> <tbody> <tr> <td><code>save(T entity)</code></td> <td>保存单个实体：不存在则新增，已存在则更新覆盖</td> </tr> <tr> <td><code>saveAll(Iterable&lt;S&gt; entities)</code></td> <td>批量保存：逐个执行<code>save</code>语义，新增或更新</td> </tr> <tr> <td><code>deleteById(ID id)</code></td> <td>按主键删除指定文档</td> </tr> <tr> <td><code>delete(T entity)</code></td> <td>按实体删除（根据实体 id），等价于 <code>deleteById(entity.getId())</code></td> </tr> <tr> <td><code>findAll(Sort sort)</code></td> <td>查询全部并按排序返回</td> </tr> <tr> <td><code>findAll(Pageable pageable)</code></td> <td>分页查询全部，返回<code>Page</code></td> </tr> </tbody> </table> <p>但是，如果要按照指定字段进行查询，需要自行编写接口，有两种思路：</p> <ol> <li>在Spring Data中，可以按照方法名派生查询规则编写方法名</li> <li>使用<code>@Query</code>注解自行编写查询条件</li> </ol> <div class="tabbed-set tabbed-alternate" data-tabs=1:2><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>方法名查询规则</label><label for=__tabbed_1_2>使用<code>@Query</code>编写自定义查询条件</label></div> <div class=tabbed-content> <div class=tabbed-block> <p>在Spring Data中，有一下常见的规则：</p> <ul> <li>字段前缀：<code>find/get/query/read/count/exists/delete</code> + 字段名 + <code>By</code>，其中方法名里的字段必须与实体字段一致（如<code>Difficulty</code>对应<code>difficulty</code>），例如<code>findByDifficulty</code></li> <li>连接词：<code>And</code> / <code>Or</code> / <code>Not</code>，例如<code>findByTitleAndDifficulty</code> / <code>findByTitleOrContent</code></li> <li>比较关键字：<code>Equals</code>（可省略）、<code>GreaterThan</code>、<code>LessThan</code>、<code>Between</code>、<code>Like</code>、<code>Containing</code>、<code>In</code>、<code>IsNull</code>等，例如<code>findByDifficultyGreaterThan</code></li> <li>排序：<code>OrderByXxxAsc/Desc</code>，方法参数可带<code>Pageable</code> / <code>Sort</code>，例如<code>findByDifficultyOrderByCreateTimeDesc(Pageable pageable)</code></li> <li>限制条数：<code>findTop10By...</code> / <code>findFirst5By...</code></li> </ul> <p>根据上面的规则，本次需要按照<code>nickname</code>进行查询，可以写为：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><span class=c1>// 注意包</span>
+</span><span id=__span-16-2><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.data.domain.Page</span><span class=p>;</span>
+</span><span id=__span-16-3><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.data.domain.Pageable</span><span class=p>;</span><span class=w>    </span>
+</span><span id=__span-16-4>
+</span><span id=__span-16-5><span class=n>Page</span><span class=o>&lt;</span><span class=n>UserDocument</span><span class=o>&gt;</span><span class=w> </span><span class=nf>findUserDocumentByNickname</span><span class=p>(</span><span class=n>String</span><span class=w> </span><span class=n>nickname</span><span class=p>,</span><span class=w> </span><span class=n>Pageable</span><span class=w> </span><span class=n>pageable</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <p>在<code>@Query</code>中需要直接编写ElasticSearch的DSL JSON，常见规则如下：</p> <ul> <li> <p><code>@Query</code>的内容就是ES查询DSL<code>match</code>/<code>term</code>/<code>bool</code>/<code>should</code>/<code>must</code>等，含义如下：</p> <ul> <li><code>match</code>：全文检索，会对字段进行分词后匹配，适用于<code>text</code>类型字段</li> <li><code>term</code>：精确匹配，不进行分词，适用于<code>keyword</code>/数值/布尔等字段</li> <li><code>bool</code>：组合查询容器，用于把多个查询条件进行组合</li> <li><code>must</code>：必须满足的条件（“且”逻辑），即必须包含关键词才返回</li> <li><code>should</code>：可选条件（“或”逻辑），命中越多得分越高，即可匹配可不匹配，匹配了就更靠前，如果只有一个<code>should</code>则相当于<code>must</code></li> </ul> <p><code>bool</code>包<code>must</code>/<code>should</code>，<code>must</code>/<code>should</code>里放<code>match</code>/<code>term</code>，格式如下：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><span class=p>{</span>
+</span><span id=__span-17-2><span class=nt>&quot;bool&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-17-3><span class=w>    </span><span class=nt>&quot;must&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
+</span><span id=__span-17-4><span class=w>    </span><span class=p>{</span><span class=w> </span><span class=nt>&quot;term&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nt>&quot;difficulty&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>}</span>
+</span><span id=__span-17-5><span class=w>    </span><span class=p>],</span>
+</span><span id=__span-17-6><span class=w>    </span><span class=nt>&quot;should&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
+</span><span id=__span-17-7><span class=w>    </span><span class=p>{</span><span class=w> </span><span class=nt>&quot;match&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nt>&quot;title&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;foo&quot;</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
+</span><span id=__span-17-8><span class=w>    </span><span class=p>{</span><span class=w> </span><span class=nt>&quot;match&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nt>&quot;content&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;bar&quot;</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>}</span>
+</span><span id=__span-17-9><span class=w>    </span><span class=p>]</span>
+</span><span id=__span-17-10><span class=p>}</span>
+</span><span id=__span-17-11><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </li> <li> <p>参数使用占位符从<code>?0</code>开始依次对应方法参数，依次为<code>?1</code>、<code>?2</code>等</p> </li> <li><code>match</code>适合全文分词匹配（text），<code>term</code>适合精确匹配（keyword/数字/布尔）</li> <li>JSON字符串内双引号需要转义（<code>\"</code>），否则会解析失败</li> <li>方法参数可带<code>Pageable</code>/<code>Sort</code>，分页与排序由Spring自动追加</li> </ul> <p>例如：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span>
+<span class=normal>7</span>
+<span class=normal>8</span>
+<span class=normal>9</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><span class=p>{</span>
+</span><span id=__span-18-2><span class=nt>&quot;bool&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-18-3><span class=w>    </span><span class=nt>&quot;should&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
+</span><span id=__span-18-4><span class=w>    </span><span class=p>{</span><span class=w> </span><span class=nt>&quot;match&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nt>&quot;title&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;?0&quot;</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
+</span><span id=__span-18-5><span class=w>    </span><span class=p>{</span><span class=w> </span><span class=nt>&quot;match&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nt>&quot;content&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;?1&quot;</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>}</span>
+</span><span id=__span-18-6><span class=w>    </span><span class=p>],</span>
+</span><span id=__span-18-7><span class=w>    </span><span class=nt>&quot;minimum_should_match&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-18-8><span class=p>}</span>
+</span><span id=__span-18-9><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>其中：</p> <ul> <li><code>bool</code>：组合查询容器</li> <li><code>should</code>：两个可选条件（标题匹配 <code>?0</code> 或 内容匹配 <code>?1</code>）</li> <li><code>match</code>：分词后的全文匹配</li> <li><code>minimum_should_match: 1</code>：至少满足一个<code>should</code>条件即可命中</li> </ul> <p>对应的方法为：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><span class=nd>@Query</span><span class=p>(</span><span class=s>&quot;{\&quot;bool\&quot;: {\&quot;should\&quot;: [{ \&quot;match\&quot;: { \&quot;title\&quot;: \&quot;?0\&quot; } }, { \&quot;match\&quot;: { \&quot;content\&quot;: \&quot;?1\&quot; } }], \&quot;minimum_should_match\&quot;: 1}}&quot;</span><span class=p>)</span>
+</span><span id=__span-19-2><span class=n>Page</span><span class=o>&lt;</span><span class=n>QuestionES</span><span class=o>&gt;</span><span class=w> </span><span class=nf>findByTitleOrContent</span><span class=p>(</span><span class=n>String</span><span class=w> </span><span class=n>keywordTitle</span><span class=p>,</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>keywordContent</span><span class=p>,</span><span class=w> </span><span class=n>Pageable</span><span class=w> </span><span class=n>pageable</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> <p>回到当前项目，根据<code>nickname</code>进行模糊查询可以写为：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-20-1><span class=p>{</span>
+</span><span id=__span-20-2><span class=w>  </span><span class=nt>&quot;bool&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-20-3><span class=w>    </span><span class=nt>&quot;must&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
+</span><span id=__span-20-4><span class=w>      </span><span class=p>{</span>
+</span><span id=__span-20-5><span class=w>        </span><span class=nt>&quot;match&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-20-6><span class=w>          </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;?0&quot;</span>
+</span><span id=__span-20-7><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-20-8><span class=w>      </span><span class=p>}</span>
+</span><span id=__span-20-9><span class=w>    </span><span class=p>]</span>
+</span><span id=__span-20-10><span class=w>  </span><span class=p>}</span>
+</span><span id=__span-20-11><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>对应的方法为：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-21-1><span class=nd>@Query</span><span class=p>(</span><span class=s>&quot;{\&quot;bool\&quot;:{\&quot;must\&quot;:[{\&quot;match\&quot;:{\&quot;nickname\&quot;:\&quot;?0\&quot;}}]}}&quot;</span><span class=p>)</span>
+</span><span id=__span-21-2><span class=n>Page</span><span class=o>&lt;</span><span class=n>UserDocument</span><span class=o>&gt;</span><span class=w> </span><span class=nf>findUserDocumentByNickname</span><span class=p>(</span><span class=n>String</span><span class=w> </span><span class=n>nickname</span><span class=p>,</span><span class=w> </span><span class=n>Pageable</span><span class=w> </span><span class=n>pageable</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> </div> </div> </div> <p>接着编写测试的Controller、Service，如下：</p> <div class="tabbed-set tabbed-alternate" data-tabs=2:3><input checked=checked id=__tabbed_2_1 name=__tabbed_2 type=radio><input id=__tabbed_2_2 name=__tabbed_2 type=radio><input id=__tabbed_2_3 name=__tabbed_2 type=radio><div class=tabbed-labels><label for=__tabbed_2_1><code>SearchController</code></label><label for=__tabbed_2_2><code>SearchService</code></label><label for=__tabbed_2_3><code>SearchServiceImpl</code></label></div> <div class=tabbed-content> <div class=tabbed-block> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-22-1><span class=nd>@RestController</span>
+</span><span id=__span-22-2><span class=nd>@RequestMapping</span><span class=p>(</span><span class=s>&quot;/search&quot;</span><span class=p>)</span>
+</span><span id=__span-22-3><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>SearchController</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-22-4><span class=w>    </span><span class=nd>@Autowired</span>
+</span><span id=__span-22-5><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>SearchService</span><span class=w> </span><span class=n>searchService</span><span class=p>;</span>
+</span><span id=__span-22-6>
+</span><span id=__span-22-7><span class=w>    </span><span class=nd>@GetMapping</span><span class=p>(</span><span class=s>&quot;/list&quot;</span><span class=p>)</span>
+</span><span id=__span-22-8><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>UserListVO</span><span class=w> </span><span class=nf>list</span><span class=p>(</span><span class=nd>@RequestBody</span><span class=w> </span><span class=n>UserListDTO</span><span class=w> </span><span class=n>userListDTO</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-22-9><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>searchService</span><span class=p>.</span><span class=na>list</span><span class=p>(</span><span class=n>userListDTO</span><span class=p>);</span>
+</span><span id=__span-22-10><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-22-11><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-23-1><span class=kd>public</span><span class=w> </span><span class=kd>interface</span> <span class=nc>SearchService</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-23-2><span class=w>    </span><span class=n>UserListVO</span><span class=w> </span><span class=nf>list</span><span class=p>(</span><span class=n>UserListDTO</span><span class=w> </span><span class=n>userListDTO</span><span class=p>);</span>
+</span><span id=__span-23-3><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span>
+<span class=normal>44</span>
+<span class=normal>45</span>
+<span class=normal>46</span>
+<span class=normal>47</span>
+<span class=normal>48</span>
+<span class=normal>49</span>
+<span class=normal>50</span>
+<span class=normal>51</span>
+<span class=normal>52</span>
+<span class=normal>53</span>
+<span class=normal>54</span>
+<span class=normal>55</span>
+<span class=normal>56</span>
+<span class=normal>57</span>
+<span class=normal>58</span>
+<span class=normal>59</span>
+<span class=normal>60</span>
+<span class=normal>61</span>
+<span class=normal>62</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-24-1><span class=nd>@Service</span>
+</span><span id=__span-24-2><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>SearchServiceImpl</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>SearchService</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-24-3>
+</span><span id=__span-24-4><span class=w>    </span><span class=nd>@Autowired</span>
+</span><span id=__span-24-5><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>UserRepository</span><span class=w> </span><span class=n>userRepository</span><span class=p>;</span>
+</span><span id=__span-24-6><span class=w>    </span><span class=nd>@Autowired</span>
+</span><span id=__span-24-7><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>UserMapper</span><span class=w> </span><span class=n>userMapper</span><span class=p>;</span>
+</span><span id=__span-24-8>
+</span><span id=__span-24-9><span class=w>    </span><span class=nd>@Override</span>
+</span><span id=__span-24-10><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>UserListVO</span><span class=w> </span><span class=nf>list</span><span class=p>(</span><span class=n>UserListDTO</span><span class=w> </span><span class=n>userListDTO</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-24-11><span class=w>        </span><span class=c1>// 先获取ES中的数据总数量</span>
+</span><span id=__span-24-12><span class=w>        </span><span class=kt>long</span><span class=w> </span><span class=n>count</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>userRepository</span><span class=p>.</span><span class=na>count</span><span class=p>();</span>
+</span><span id=__span-24-13><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>count</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-24-14><span class=w>            </span><span class=c1>// 生成数据到ES中</span>
+</span><span id=__span-24-15><span class=w>            </span><span class=n>List</span><span class=o>&lt;</span><span class=n>User</span><span class=o>&gt;</span><span class=w> </span><span class=n>users</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>userMapper</span><span class=p>.</span><span class=na>selectList</span><span class=p>(</span><span class=kc>null</span><span class=p>);</span>
+</span><span id=__span-24-16><span class=w>            </span><span class=n>List</span><span class=o>&lt;</span><span class=n>UserDocument</span><span class=o>&gt;</span><span class=w> </span><span class=n>userDocumentList</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ArrayList</span><span class=o>&lt;&gt;</span><span class=p>();</span>
+</span><span id=__span-24-17><span class=w>            </span><span class=n>users</span><span class=p>.</span><span class=na>forEach</span><span class=p>(</span><span class=n>user</span><span class=w> </span><span class=o>-&gt;</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-24-18><span class=w>                </span><span class=n>UserDocument</span><span class=w> </span><span class=n>userDocument</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>UserDocument</span><span class=p>();</span>
+</span><span id=__span-24-19><span class=w>                </span><span class=n>userDocument</span><span class=p>.</span><span class=na>setUserId</span><span class=p>(</span><span class=n>user</span><span class=p>.</span><span class=na>getId</span><span class=p>());</span>
+</span><span id=__span-24-20><span class=w>                </span><span class=n>userDocument</span><span class=p>.</span><span class=na>setUsername</span><span class=p>(</span><span class=n>user</span><span class=p>.</span><span class=na>getUsername</span><span class=p>());</span>
+</span><span id=__span-24-21><span class=w>                </span><span class=n>userDocument</span><span class=p>.</span><span class=na>setUserCode</span><span class=p>(</span><span class=n>user</span><span class=p>.</span><span class=na>getUserCode</span><span class=p>());</span>
+</span><span id=__span-24-22><span class=w>                </span><span class=n>userDocument</span><span class=p>.</span><span class=na>setNickname</span><span class=p>(</span><span class=n>user</span><span class=p>.</span><span class=na>getNickname</span><span class=p>());</span>
+</span><span id=__span-24-23><span class=w>                </span><span class=n>userDocument</span><span class=p>.</span><span class=na>setBirthday</span><span class=p>(</span><span class=n>user</span><span class=p>.</span><span class=na>getBirthday</span><span class=p>());</span>
+</span><span id=__span-24-24><span class=w>                </span><span class=n>userDocument</span><span class=p>.</span><span class=na>setStatus</span><span class=p>(</span><span class=n>user</span><span class=p>.</span><span class=na>getStatus</span><span class=p>());</span>
+</span><span id=__span-24-25><span class=w>                </span><span class=n>userDocumentList</span><span class=p>.</span><span class=na>add</span><span class=p>(</span><span class=n>userDocument</span><span class=p>);</span>
+</span><span id=__span-24-26><span class=w>            </span><span class=p>});</span>
+</span><span id=__span-24-27><span class=w>            </span><span class=n>userRepository</span><span class=p>.</span><span class=na>saveAll</span><span class=p>(</span><span class=n>userDocumentList</span><span class=p>);</span><span class=w> </span><span class=c1>// 存储所有数据</span>
+</span><span id=__span-24-28><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-24-29>
+</span><span id=__span-24-30><span class=w>        </span><span class=c1>// 构建排序对象，本次为了演示，用ID倒序进行</span>
+</span><span id=__span-24-31><span class=w>        </span><span class=n>Sort</span><span class=w> </span><span class=n>sort</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Sort</span><span class=p>.</span><span class=na>by</span><span class=p>(</span><span class=n>Sort</span><span class=p>.</span><span class=na>Direction</span><span class=p>.</span><span class=na>DESC</span><span class=p>,</span><span class=w> </span><span class=s>&quot;userId&quot;</span><span class=p>);</span>
+</span><span id=__span-24-32><span class=w>        </span><span class=c1>// 构建分页对象，需要注意，第一页默认从0开始</span>
+</span><span id=__span-24-33><span class=w>        </span><span class=n>Pageable</span><span class=w> </span><span class=n>pageable</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>PageRequest</span><span class=p>.</span><span class=na>of</span><span class=p>(</span><span class=n>userListDTO</span><span class=p>.</span><span class=na>getCurrentPage</span><span class=p>()</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=n>userListDTO</span><span class=p>.</span><span class=na>getPageSize</span><span class=p>(),</span><span class=w> </span><span class=n>sort</span><span class=p>);</span>
+</span><span id=__span-24-34><span class=w>        </span><span class=n>String</span><span class=w> </span><span class=n>nickname</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>userListDTO</span><span class=p>.</span><span class=na>getNickname</span><span class=p>();</span>
+</span><span id=__span-24-35><span class=w>        </span><span class=n>Page</span><span class=o>&lt;</span><span class=n>UserDocument</span><span class=o>&gt;</span><span class=w> </span><span class=n>userVOPage</span><span class=p>;</span>
+</span><span id=__span-24-36><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>!</span><span class=n>StringUtils</span><span class=p>.</span><span class=na>hasText</span><span class=p>(</span><span class=n>nickname</span><span class=p>))</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-24-37><span class=w>            </span><span class=c1>// 不输入查询条件，返回所有数据</span>
+</span><span id=__span-24-38><span class=w>            </span><span class=n>userVOPage</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>userRepository</span><span class=p>.</span><span class=na>findAll</span><span class=p>(</span><span class=n>pageable</span><span class=p>);</span>
+</span><span id=__span-24-39><span class=w>        </span><span class=p>}</span><span class=w> </span><span class=k>else</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-24-40><span class=w>            </span><span class=c1>// 输入查询条件，返回满足条件的数据</span>
+</span><span id=__span-24-41><span class=w>            </span><span class=n>userVOPage</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>userRepository</span><span class=p>.</span><span class=na>findUserDocumentByNickname</span><span class=p>(</span><span class=n>nickname</span><span class=p>,</span><span class=w> </span><span class=n>pageable</span><span class=p>);</span>
+</span><span id=__span-24-42><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-24-43><span class=w>        </span><span class=n>List</span><span class=o>&lt;</span><span class=n>UserDocument</span><span class=o>&gt;</span><span class=w> </span><span class=n>userDocumentList</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>userVOPage</span><span class=p>.</span><span class=na>getContent</span><span class=p>();</span>
+</span><span id=__span-24-44><span class=w>        </span><span class=n>List</span><span class=o>&lt;</span><span class=n>UserVO</span><span class=o>&gt;</span><span class=w> </span><span class=n>userVOList</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ArrayList</span><span class=o>&lt;&gt;</span><span class=p>();</span>
+</span><span id=__span-24-45><span class=w>        </span><span class=n>userDocumentList</span><span class=p>.</span><span class=na>forEach</span><span class=p>(</span><span class=n>userDocument</span><span class=w> </span><span class=o>-&gt;</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-24-46><span class=w>            </span><span class=n>UserVO</span><span class=w> </span><span class=n>userVO</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>UserVO</span><span class=p>();</span>
+</span><span id=__span-24-47><span class=w>            </span><span class=n>userVO</span><span class=p>.</span><span class=na>setUserId</span><span class=p>(</span><span class=n>userDocument</span><span class=p>.</span><span class=na>getUserId</span><span class=p>());</span>
+</span><span id=__span-24-48><span class=w>            </span><span class=n>userVO</span><span class=p>.</span><span class=na>setUsername</span><span class=p>(</span><span class=n>userDocument</span><span class=p>.</span><span class=na>getUsername</span><span class=p>());</span>
+</span><span id=__span-24-49><span class=w>            </span><span class=n>userVO</span><span class=p>.</span><span class=na>setUserCode</span><span class=p>(</span><span class=n>userDocument</span><span class=p>.</span><span class=na>getUserCode</span><span class=p>());</span>
+</span><span id=__span-24-50><span class=w>            </span><span class=n>userVO</span><span class=p>.</span><span class=na>setNickname</span><span class=p>(</span><span class=n>userDocument</span><span class=p>.</span><span class=na>getNickname</span><span class=p>());</span>
+</span><span id=__span-24-51><span class=w>            </span><span class=n>userVO</span><span class=p>.</span><span class=na>setBirthday</span><span class=p>(</span><span class=n>userDocument</span><span class=p>.</span><span class=na>getBirthday</span><span class=p>());</span>
+</span><span id=__span-24-52><span class=w>            </span><span class=n>userVO</span><span class=p>.</span><span class=na>setStatus</span><span class=p>(</span><span class=n>userDocument</span><span class=p>.</span><span class=na>getStatus</span><span class=p>());</span>
+</span><span id=__span-24-53><span class=w>            </span><span class=n>userVOList</span><span class=p>.</span><span class=na>add</span><span class=p>(</span><span class=n>userVO</span><span class=p>);</span>
+</span><span id=__span-24-54><span class=w>        </span><span class=p>});</span>
+</span><span id=__span-24-55>
+</span><span id=__span-24-56><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>UserListVO</span><span class=p>.</span><span class=na>builder</span><span class=p>()</span>
+</span><span id=__span-24-57><span class=w>                </span><span class=p>.</span><span class=na>currentPage</span><span class=p>(</span><span class=n>userVOPage</span><span class=p>.</span><span class=na>getNumber</span><span class=p>()</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>)</span>
+</span><span id=__span-24-58><span class=w>                </span><span class=p>.</span><span class=na>totalCount</span><span class=p>(</span><span class=n>userVOPage</span><span class=p>.</span><span class=na>getTotalElements</span><span class=p>())</span>
+</span><span id=__span-24-59><span class=w>                </span><span class=p>.</span><span class=na>userVOList</span><span class=p>(</span><span class=n>userVOList</span><span class=p>)</span>
+</span><span id=__span-24-60><span class=w>                </span><span class=p>.</span><span class=na>build</span><span class=p>();</span>
+</span><span id=__span-24-61><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-24-62><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> </div> </div> <p>在PostMan测试分别测试不搜索和搜索数据：</p> <div class="tabbed-set tabbed-alternate" data-tabs=3:2><input checked=checked id=__tabbed_3_1 name=__tabbed_3 type=radio><input id=__tabbed_3_2 name=__tabbed_3 type=radio><div class=tabbed-labels><label for=__tabbed_3_1>不搜索</label><label for=__tabbed_3_2>搜索</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-25-1><span class=err>GET</span><span class=w> </span><span class=err>h</span><span class=kc>tt</span><span class=err>p</span><span class=p>:</span><span class=c1>//localhost:8080/search/list</span>
+</span><span id=__span-25-2><span class=p>{</span>
+</span><span id=__span-25-3><span class=w>    </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;&quot;</span><span class=p>,</span>
+</span><span id=__span-25-4><span class=w>    </span><span class=nt>&quot;currentPage&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span>
+</span><span id=__span-25-5><span class=w>    </span><span class=nt>&quot;pageSize&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>10</span>
+</span><span id=__span-25-6><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>结果：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span>
+<span class=normal>44</span>
+<span class=normal>45</span>
+<span class=normal>46</span>
+<span class=normal>47</span>
+<span class=normal>48</span>
+<span class=normal>49</span>
+<span class=normal>50</span>
+<span class=normal>51</span>
+<span class=normal>52</span>
+<span class=normal>53</span>
+<span class=normal>54</span>
+<span class=normal>55</span>
+<span class=normal>56</span>
+<span class=normal>57</span>
+<span class=normal>58</span>
+<span class=normal>59</span>
+<span class=normal>60</span>
+<span class=normal>61</span>
+<span class=normal>62</span>
+<span class=normal>63</span>
+<span class=normal>64</span>
+<span class=normal>65</span>
+<span class=normal>66</span>
+<span class=normal>67</span>
+<span class=normal>68</span>
+<span class=normal>69</span>
+<span class=normal>70</span>
+<span class=normal>71</span>
+<span class=normal>72</span>
+<span class=normal>73</span>
+<span class=normal>74</span>
+<span class=normal>75</span>
+<span class=normal>76</span>
+<span class=normal>77</span>
+<span class=normal>78</span>
+<span class=normal>79</span>
+<span class=normal>80</span>
+<span class=normal>81</span>
+<span class=normal>82</span>
+<span class=normal>83</span>
+<span class=normal>84</span>
+<span class=normal>85</span>
+<span class=normal>86</span>
+<span class=normal>87</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-26-1><span class=p>{</span>
+</span><span id=__span-26-2><span class=w>    </span><span class=nt>&quot;currentPage&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span>
+</span><span id=__span-26-3><span class=w>    </span><span class=nt>&quot;totalPages&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>2</span><span class=p>,</span>
+</span><span id=__span-26-4><span class=w>    </span><span class=nt>&quot;totalCount&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>15</span><span class=p>,</span>
+</span><span id=__span-26-5><span class=w>    </span><span class=nt>&quot;userVOList&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
+</span><span id=__span-26-6><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-26-7><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>15</span><span class=p>,</span>
+</span><span id=__span-26-8><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400015&quot;</span><span class=p>,</span>
+</span><span id=__span-26-9><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;luo17&quot;</span><span class=p>,</span>
+</span><span id=__span-26-10><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;罗十七&quot;</span><span class=p>,</span>
+</span><span id=__span-26-11><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1998-03-22T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-26-12><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-26-13><span class=w>        </span><span class=p>},</span>
+</span><span id=__span-26-14><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-26-15><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>14</span><span class=p>,</span>
+</span><span id=__span-26-16><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400014&quot;</span><span class=p>,</span>
+</span><span id=__span-26-17><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;gao16&quot;</span><span class=p>,</span>
+</span><span id=__span-26-18><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;高十六&quot;</span><span class=p>,</span>
+</span><span id=__span-26-19><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1992-11-17T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-26-20><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-26-21><span class=w>        </span><span class=p>},</span>
+</span><span id=__span-26-22><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-26-23><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>13</span><span class=p>,</span>
+</span><span id=__span-26-24><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400013&quot;</span><span class=p>,</span>
+</span><span id=__span-26-25><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;he15&quot;</span><span class=p>,</span>
+</span><span id=__span-26-26><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;何十五&quot;</span><span class=p>,</span>
+</span><span id=__span-26-27><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1995-07-09T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-26-28><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-26-29><span class=w>        </span><span class=p>},</span>
+</span><span id=__span-26-30><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-26-31><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>12</span><span class=p>,</span>
+</span><span id=__span-26-32><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400012&quot;</span><span class=p>,</span>
+</span><span id=__span-26-33><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;huang14&quot;</span><span class=p>,</span>
+</span><span id=__span-26-34><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;黄十四&quot;</span><span class=p>,</span>
+</span><span id=__span-26-35><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1989-01-28T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-26-36><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-26-37><span class=w>        </span><span class=p>},</span>
+</span><span id=__span-26-38><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-26-39><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>11</span><span class=p>,</span>
+</span><span id=__span-26-40><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400011&quot;</span><span class=p>,</span>
+</span><span id=__span-26-41><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;lin13&quot;</span><span class=p>,</span>
+</span><span id=__span-26-42><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;林十三&quot;</span><span class=p>,</span>
+</span><span id=__span-26-43><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;2000-10-05T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-26-44><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-26-45><span class=w>        </span><span class=p>},</span>
+</span><span id=__span-26-46><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-26-47><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>10</span><span class=p>,</span>
+</span><span id=__span-26-48><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400010&quot;</span><span class=p>,</span>
+</span><span id=__span-26-49><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;chen12&quot;</span><span class=p>,</span>
+</span><span id=__span-26-50><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;陈十二&quot;</span><span class=p>,</span>
+</span><span id=__span-26-51><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1994-06-14T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-26-52><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-26-53><span class=w>        </span><span class=p>},</span>
+</span><span id=__span-26-54><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-26-55><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>9</span><span class=p>,</span>
+</span><span id=__span-26-56><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400009&quot;</span><span class=p>,</span>
+</span><span id=__span-26-57><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;zheng11&quot;</span><span class=p>,</span>
+</span><span id=__span-26-58><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;郑十一&quot;</span><span class=p>,</span>
+</span><span id=__span-26-59><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1997-02-25T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-26-60><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-26-61><span class=w>        </span><span class=p>},</span>
+</span><span id=__span-26-62><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-26-63><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>8</span><span class=p>,</span>
+</span><span id=__span-26-64><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400008&quot;</span><span class=p>,</span>
+</span><span id=__span-26-65><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;wushi&quot;</span><span class=p>,</span>
+</span><span id=__span-26-66><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;吴十&quot;</span><span class=p>,</span>
+</span><span id=__span-26-67><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1991-08-30T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-26-68><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-26-69><span class=w>        </span><span class=p>},</span>
+</span><span id=__span-26-70><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-26-71><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>7</span><span class=p>,</span>
+</span><span id=__span-26-72><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400007&quot;</span><span class=p>,</span>
+</span><span id=__span-26-73><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;zhoujiu&quot;</span><span class=p>,</span>
+</span><span id=__span-26-74><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;周九&quot;</span><span class=p>,</span>
+</span><span id=__span-26-75><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1999-04-18T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-26-76><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-26-77><span class=w>        </span><span class=p>},</span>
+</span><span id=__span-26-78><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-26-79><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>6</span><span class=p>,</span>
+</span><span id=__span-26-80><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400006&quot;</span><span class=p>,</span>
+</span><span id=__span-26-81><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;sunba&quot;</span><span class=p>,</span>
+</span><span id=__span-26-82><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;孙八&quot;</span><span class=p>,</span>
+</span><span id=__span-26-83><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1993-12-01T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-26-84><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-26-85><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-26-86><span class=w>    </span><span class=p>]</span>
+</span><span id=__span-26-87><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-27-1><span class=err>GET</span><span class=w> </span><span class=err>h</span><span class=kc>tt</span><span class=err>p</span><span class=p>:</span><span class=c1>//localhost:8080/search/list</span>
+</span><span id=__span-27-2><span class=p>{</span>
+</span><span id=__span-27-3><span class=w>    </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;十一&quot;</span><span class=p>,</span>
+</span><span id=__span-27-4><span class=w>    </span><span class=nt>&quot;currentPage&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span>
+</span><span id=__span-27-5><span class=w>    </span><span class=nt>&quot;pageSize&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>10</span>
+</span><span id=__span-27-6><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>结果：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-28-1><span class=p>{</span>
+</span><span id=__span-28-2><span class=w>    </span><span class=nt>&quot;currentPage&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span>
+</span><span id=__span-28-3><span class=w>    </span><span class=nt>&quot;totalPages&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span>
+</span><span id=__span-28-4><span class=w>    </span><span class=nt>&quot;totalCount&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span>
+</span><span id=__span-28-5><span class=w>    </span><span class=nt>&quot;userVOList&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
+</span><span id=__span-28-6><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-28-7><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>9</span><span class=p>,</span>
+</span><span id=__span-28-8><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400009&quot;</span><span class=p>,</span>
+</span><span id=__span-28-9><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;zheng11&quot;</span><span class=p>,</span>
+</span><span id=__span-28-10><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;郑十一&quot;</span><span class=p>,</span>
+</span><span id=__span-28-11><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1997-02-25T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-28-12><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-28-13><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-28-14><span class=w>    </span><span class=p>]</span>
+</span><span id=__span-28-15><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> </div> </div> <p>上面的搜索对于多字匹配较为精确，但是有时用户会输入一个单字，这个单字可能没被分词器当做一个词分离，例如：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-29-1><span class=err>GET</span><span class=w> </span><span class=err>h</span><span class=kc>tt</span><span class=err>p</span><span class=p>:</span><span class=c1>//localhost:8080/search/list</span>
+</span><span id=__span-29-2><span class=p>{</span>
+</span><span id=__span-29-3><span class=w>    </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;十&quot;</span><span class=p>,</span>
+</span><span id=__span-29-4><span class=w>    </span><span class=nt>&quot;currentPage&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span>
+</span><span id=__span-29-5><span class=w>    </span><span class=nt>&quot;pageSize&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>10</span>
+</span><span id=__span-29-6><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>结果是：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-30-1><span class=p>{</span>
+</span><span id=__span-30-2><span class=w>    </span><span class=nt>&quot;currentPage&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span>
+</span><span id=__span-30-3><span class=w>    </span><span class=nt>&quot;totalPages&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span>
+</span><span id=__span-30-4><span class=w>    </span><span class=nt>&quot;totalCount&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span>
+</span><span id=__span-30-5><span class=w>    </span><span class=nt>&quot;userVOList&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
+</span><span id=__span-30-6><span class=w>        </span><span class=p>{</span>
+</span><span id=__span-30-7><span class=w>            </span><span class=nt>&quot;userId&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>8</span><span class=p>,</span>
+</span><span id=__span-30-8><span class=w>            </span><span class=nt>&quot;userCode&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;U202400008&quot;</span><span class=p>,</span>
+</span><span id=__span-30-9><span class=w>            </span><span class=nt>&quot;username&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;wushi&quot;</span><span class=p>,</span>
+</span><span id=__span-30-10><span class=w>            </span><span class=nt>&quot;nickname&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;吴十&quot;</span><span class=p>,</span>
+</span><span id=__span-30-11><span class=w>            </span><span class=nt>&quot;birthday&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1991-08-30T00:00:00&quot;</span><span class=p>,</span>
+</span><span id=__span-30-12><span class=w>            </span><span class=nt>&quot;status&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span>
+</span><span id=__span-30-13><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-30-14><span class=w>    </span><span class=p>]</span>
+</span><span id=__span-30-15><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <p>但是根据数据库中的数据，<code>nickname</code>有“十”的不止一个，原因就是“十一”、“十二”等被当做一个完整的词语所以没有拆出“十”，解决这个问题的方式很简单粗暴，对于单字，直接用<code>n-gram</code>进行单字拆解，对于多字查询条件，就用ik：</p> <p>首先，添加一个自定义分词配置文件，并在实体类引入这个配置文件，然后修改针对<code>nickname</code>字段的配置，确保可以动态指定字段：</p> <div class="tabbed-set tabbed-alternate" data-tabs=4:2><input checked=checked id=__tabbed_4_1 name=__tabbed_4 type=radio><input id=__tabbed_4_2 name=__tabbed_4 type=radio><div class=tabbed-labels><label for=__tabbed_4_1>配置文件</label><label for=__tabbed_4_2>索引实体类</label></div> <div class=tabbed-content> <div class=tabbed-block> <p>在<code>src/main/resources</code>中添加文件名为<code>elasticsearch-settings.json</code>的文件，内容如下：</p> <div class="language-json highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>JSON</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-31-1><span class=p>{</span>
+</span><span id=__span-31-2><span class=w>    </span><span class=nt>&quot;analysis&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-31-3><span class=w>        </span><span class=nt>&quot;analyzer&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-31-4><span class=w>            </span><span class=nt>&quot;ngram_analyzer&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-31-5><span class=w>                </span><span class=nt>&quot;tokenizer&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;ngram_tokenizer&quot;</span><span class=w> </span><span class=c1>// 使用下面定义的 n-gram 分词器</span>
+</span><span id=__span-31-6><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-31-7><span class=w>        </span><span class=p>},</span>
+</span><span id=__span-31-8><span class=w>        </span><span class=nt>&quot;tokenizer&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-31-9><span class=w>            </span><span class=nt>&quot;ngram_tokenizer&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-31-10><span class=w>                </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;ngram&quot;</span><span class=p>,</span><span class=w>           </span><span class=c1>// 分词器类型：n-gram（滑动窗口切分）</span>
+</span><span id=__span-31-11><span class=w>                </span><span class=nt>&quot;min_gram&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w>             </span><span class=c1>// 最小切分长度：1 个字</span>
+</span><span id=__span-31-12><span class=w>                </span><span class=nt>&quot;max_gram&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w>             </span><span class=c1>// 最大切分长度：2 个字</span>
+</span><span id=__span-31-13><span class=w>                </span><span class=nt>&quot;token_chars&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;letter&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;digit&quot;</span><span class=p>]</span><span class=w>  </span><span class=c1>// 只对字母和数字切分</span>
+</span><span id=__span-31-14><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-31-15><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-31-16><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-31-17><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> <div class=tabbed-block> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-32-1><span class=nd>@Data</span>
+</span><span id=__span-32-2><span class=nd>@AllArgsConstructor</span>
+</span><span id=__span-32-3><span class=nd>@NoArgsConstructor</span>
+</span><span id=__span-32-4><span class=nd>@Document</span><span class=p>(</span><span class=n>indexName</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;idx_user&quot;</span><span class=p>)</span>
+</span><span id=__span-32-5><span class=nd>@Setting</span><span class=p>(</span><span class=n>settingPath</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;elasticsearch-settings.json&quot;</span><span class=p>)</span><span class=w> </span><span class=c1>// 引入配置文件，注意SpringBoot版本要大于3.2.x</span>
+</span><span id=__span-32-6><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>UserDocument</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-32-7><span class=w>    </span><span class=nd>@Id</span>
+</span><span id=__span-32-8><span class=w>    </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Text</span><span class=p>)</span>
+</span><span id=__span-32-9><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>userCode</span><span class=p>;</span>
+</span><span id=__span-32-10><span class=w>    </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Integer</span><span class=p>)</span>
+</span><span id=__span-32-11><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>Integer</span><span class=w> </span><span class=n>userId</span><span class=p>;</span>
+</span><span id=__span-32-12><span class=w>    </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Text</span><span class=p>)</span>
+</span><span id=__span-32-13><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>username</span><span class=p>;</span>
+</span><span id=__span-32-14><span class=w>    </span><span class=c1>// @Field(type = FieldType.Text, analyzer = &quot;ik_smart&quot;, searchAnalyzer = &quot;ik_max_word&quot;)</span>
+</span><span id=__span-32-15><span class=w>    </span><span class=c1>// 修改为如下：</span>
+</span><span id=__span-32-16><span class=w>    </span><span class=nd>@MultiField</span><span class=p>(</span>
+</span><span id=__span-32-17><span class=w>            </span><span class=n>mainField</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Text</span><span class=p>,</span><span class=w> </span><span class=n>analyzer</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;ik_smart&quot;</span><span class=p>,</span><span class=w> </span><span class=n>searchAnalyzer</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;ik_max_word&quot;</span><span class=p>),</span><span class=w> </span><span class=c1>// 字段名为nickname</span>
+</span><span id=__span-32-18><span class=w>            </span><span class=n>otherFields</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-32-19><span class=w>                    </span><span class=nd>@InnerField</span><span class=p>(</span><span class=n>suffix</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;ngram&quot;</span><span class=p>,</span><span class=w> </span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Text</span><span class=p>,</span><span class=w> </span><span class=n>analyzer</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&quot;ngram_analyzer&quot;</span><span class=p>)</span><span class=w> </span><span class=c1>// 字段名为nickname.ngram</span>
+</span><span id=__span-32-20><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-32-21><span class=w>    </span><span class=p>)</span>
+</span><span id=__span-32-22><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>nickname</span><span class=p>;</span>
+</span><span id=__span-32-23><span class=w>    </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Date</span><span class=p>,</span><span class=w> </span><span class=n>format</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>DateFormat</span><span class=p>.</span><span class=na>date_hour_minute_second</span><span class=p>)</span>
+</span><span id=__span-32-24><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>LocalDateTime</span><span class=w> </span><span class=n>birthday</span><span class=p>;</span>
+</span><span id=__span-32-25><span class=w>    </span><span class=nd>@Field</span><span class=p>(</span><span class=n>type</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>FieldType</span><span class=p>.</span><span class=na>Byte</span><span class=p>)</span>
+</span><span id=__span-32-26><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>Integer</span><span class=w> </span><span class=n>status</span><span class=p>;</span>
+</span><span id=__span-32-27><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> </div> </div> </div> <p>接着，修改<code>nickname</code>不为空时的查询逻辑：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-33-1><span class=c1>// 输入查询条件，返回满足条件的数据</span>
+</span><span id=__span-33-2><span class=c1>// userVOPage = userRepository.findUserDocumentByNickname(nickname, pageable);</span>
+</span><span id=__span-33-3><span class=c1>// 根据搜索词长度选择查询策略</span>
+</span><span id=__span-33-4><span class=c1>// 动态选择字段名</span>
+</span><span id=__span-33-5><span class=n>String</span><span class=w> </span><span class=n>fieldName</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>nickname</span><span class=p>.</span><span class=na>length</span><span class=p>()</span><span class=w> </span><span class=o>&lt;=</span><span class=w> </span><span class=mi>1</span><span class=p>)</span>
+</span><span id=__span-33-6><span class=w>        </span><span class=o>?</span><span class=w> </span><span class=s>&quot;nickname.ngram&quot;</span>
+</span><span id=__span-33-7><span class=w>        </span><span class=p>:</span><span class=w> </span><span class=s>&quot;nickname&quot;</span><span class=p>;</span>
+</span><span id=__span-33-8>
+</span><span id=__span-33-9><span class=c1>// 构建match查询并设置fieldName</span>
+</span><span id=__span-33-10><span class=n>NativeQuery</span><span class=w> </span><span class=n>nativeQuery</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>NativeQuery</span><span class=p>.</span><span class=na>builder</span><span class=p>()</span>
+</span><span id=__span-33-11><span class=w>        </span><span class=p>.</span><span class=na>withQuery</span><span class=p>(</span><span class=n>query</span><span class=w> </span><span class=o>-&gt;</span><span class=w> </span><span class=n>query</span>
+</span><span id=__span-33-12><span class=w>                </span><span class=p>.</span><span class=na>match</span><span class=p>(</span><span class=n>matchQuery</span><span class=w> </span><span class=o>-&gt;</span><span class=w> </span><span class=n>matchQuery</span>
+</span><span id=__span-33-13><span class=w>                        </span><span class=p>.</span><span class=na>field</span><span class=p>(</span><span class=n>fieldName</span><span class=p>)</span><span class=w> </span><span class=c1>// 使用动态字段名</span>
+</span><span id=__span-33-14><span class=w>                        </span><span class=p>.</span><span class=na>query</span><span class=p>(</span><span class=n>nickname</span><span class=p>)))</span>
+</span><span id=__span-33-15><span class=w>        </span><span class=p>.</span><span class=na>withPageable</span><span class=p>(</span><span class=n>pageable</span><span class=p>)</span>
+</span><span id=__span-33-16><span class=w>        </span><span class=p>.</span><span class=na>build</span><span class=p>();</span>
+</span><span id=__span-33-17><span class=c1>// 进行查询</span>
+</span><span id=__span-33-18><span class=n>SearchHits</span><span class=o>&lt;</span><span class=n>UserDocument</span><span class=o>&gt;</span><span class=w> </span><span class=n>search</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>elasticsearchOperations</span><span class=p>.</span><span class=na>search</span><span class=p>(</span><span class=n>nativeQuery</span><span class=p>,</span><span class=w> </span><span class=n>UserDocument</span><span class=p>.</span><span class=na>class</span><span class=p>);</span>
+</span><span id=__span-33-19><span class=c1>// 把SearchHits转为Page&lt;SearchHit&gt;，再调用父接口Page的map方法提取每个SearchHit里的实际文档内容，得到Page&lt;UserDocument&gt;对象</span>
+</span><span id=__span-33-20><span class=n>userVOPage</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>SearchHitSupport</span><span class=p>.</span><span class=na>searchPageFor</span><span class=p>(</span><span class=n>search</span><span class=p>,</span><span class=w> </span><span class=n>pageable</span><span class=p>).</span><span class=na>map</span><span class=p>(</span><span class=n>SearchHit</span><span class=p>::</span><span class=n>getContent</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> <h2 id=sort><code>Sort</code>类介绍<a class=headerlink href=#sort title="Permanent link">&para;</a></h2> <p><code>Sort</code> 是 Spring Data 提供的排序工具类，用于构建数据库/搜索引擎查询的排序规则</p> <p>常见的方法如下：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-34-1><span class=n>Sort</span><span class=p>.</span><span class=na>by</span><span class=p>(</span><span class=n>direction</span><span class=p>,</span><span class=w> </span><span class=n>properties</span><span class=p>...)</span>
+</span></code></pre></div></td></tr></table></div> <p>其中，<code>direction</code>表示升序和降序：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-35-1><span class=n>Sort</span><span class=p>.</span><span class=na>Direction</span><span class=p>.</span><span class=na>ASC</span><span class=w>   </span><span class=c1>// 升序：从小到大（1, 2, 3 / A, B, C）</span>
+</span><span id=__span-35-2><span class=n>Sort</span><span class=p>.</span><span class=na>Direction</span><span class=p>.</span><span class=na>DESC</span><span class=w>  </span><span class=c1>// 降序：从大到小（3, 2, 1 / C, B, A）</span>
+</span></code></pre></div></td></tr></table></div> <p><code>properties</code>表示排序字段名，可以使用单字段：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-36-1><span class=c1>// 按年龄升序</span>
+</span><span id=__span-36-2><span class=n>Sort</span><span class=w> </span><span class=n>sort</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Sort</span><span class=p>.</span><span class=na>by</span><span class=p>(</span><span class=n>Sort</span><span class=p>.</span><span class=na>Direction</span><span class=p>.</span><span class=na>ASC</span><span class=p>,</span><span class=w> </span><span class=s>&quot;age&quot;</span><span class=p>);</span>
+</span><span id=__span-36-3>
+</span><span id=__span-36-4><span class=c1>// 按创建时间降序</span>
+</span><span id=__span-36-5><span class=n>Sort</span><span class=w> </span><span class=n>sort</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Sort</span><span class=p>.</span><span class=na>by</span><span class=p>(</span><span class=n>Sort</span><span class=p>.</span><span class=na>Direction</span><span class=p>.</span><span class=na>DESC</span><span class=p>,</span><span class=w> </span><span class=s>&quot;createTime&quot;</span><span class=p>);</span>
+</span></code></pre></div></td></tr></table></div> <p>也可以多字段排序：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-37-1><span class=c1>// 方式1：传入多个字段（同方向）</span>
+</span><span id=__span-37-2><span class=n>Sort</span><span class=w> </span><span class=n>sort</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Sort</span><span class=p>.</span><span class=na>by</span><span class=p>(</span><span class=n>Sort</span><span class=p>.</span><span class=na>Direction</span><span class=p>.</span><span class=na>DESC</span><span class=p>,</span><span class=w> </span><span class=s>&quot;priority&quot;</span><span class=p>,</span><span class=w> </span><span class=s>&quot;createTime&quot;</span><span class=p>);</span>
+</span><span id=__span-37-3>
+</span><span id=__span-37-4><span class=c1>// 方式2：使用 Order 对象（不同方向）</span>
+</span><span id=__span-37-5><span class=n>Sort</span><span class=w> </span><span class=n>sort</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Sort</span><span class=p>.</span><span class=na>by</span><span class=p>(</span>
+</span><span id=__span-37-6><span class=w>    </span><span class=n>Sort</span><span class=p>.</span><span class=na>Order</span><span class=p>.</span><span class=na>desc</span><span class=p>(</span><span class=s>&quot;priority&quot;</span><span class=p>),</span><span class=w>     </span><span class=c1>// 先按优先级降序</span>
+</span><span id=__span-37-7><span class=w>    </span><span class=n>Sort</span><span class=p>.</span><span class=na>Order</span><span class=p>.</span><span class=na>asc</span><span class=p>(</span><span class=s>&quot;createTime&quot;</span><span class=p>)</span><span class=w>     </span><span class=c1>// 再按时间升序</span>
+</span><span id=__span-37-8><span class=p>);</span>
+</span><span id=__span-37-9>
+</span><span id=__span-37-10><span class=c1>// 方式3：链式添加</span>
+</span><span id=__span-37-11><span class=n>Sort</span><span class=w> </span><span class=n>sort</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Sort</span><span class=p>.</span><span class=na>by</span><span class=p>(</span><span class=s>&quot;priority&quot;</span><span class=p>).</span><span class=na>descending</span><span class=p>()</span>
+</span><span id=__span-37-12><span class=w>                </span><span class=p>.</span><span class=na>and</span><span class=p>(</span><span class=n>Sort</span><span class=p>.</span><span class=na>by</span><span class=p>(</span><span class=s>&quot;createTime&quot;</span><span class=p>).</span><span class=na>ascending</span><span class=p>());</span>
+</span></code></pre></div></td></tr></table></div> <p>常用的其他方法：</p> <table> <thead> <tr> <th>方法</th> <th>作用</th> </tr> </thead> <tbody> <tr> <td><code>sort.ascending()</code></td> <td>改为升序</td> </tr> <tr> <td><code>sort.descending()</code></td> <td>改为降序</td> </tr> <tr> <td><code>sort.and(otherSort)</code></td> <td>合并多个排序</td> </tr> <tr> <td><code>Sort.unsorted()</code></td> <td>无排序（默认）</td> </tr> </tbody> </table> <p>特殊处理方法：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-38-1><span class=c1>// 忽略大小写排序</span>
+</span><span id=__span-38-2><span class=n>Sort</span><span class=p>.</span><span class=na>Order</span><span class=w> </span><span class=n>order</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Sort</span><span class=p>.</span><span class=na>Order</span><span class=p>.</span><span class=na>asc</span><span class=p>(</span><span class=s>&quot;name&quot;</span><span class=p>).</span><span class=na>ignoreCase</span><span class=p>();</span>
+</span><span id=__span-38-3>
+</span><span id=__span-38-4><span class=c1>// 空值处理（JPA支持）</span>
+</span><span id=__span-38-5><span class=n>Sort</span><span class=p>.</span><span class=na>Order</span><span class=p>.</span><span class=na>asc</span><span class=p>(</span><span class=s>&quot;description&quot;</span><span class=p>).</span><span class=na>nullsFirst</span><span class=p>();</span><span class=w>  </span><span class=c1>// null放前面</span>
+</span><span id=__span-38-6><span class=n>Sort</span><span class=p>.</span><span class=na>Order</span><span class=p>.</span><span class=na>asc</span><span class=p>(</span><span class=s>&quot;description&quot;</span><span class=p>).</span><span class=na>nullsLast</span><span class=p>();</span><span class=w>   </span><span class=c1>// null放后面</span>
+</span></code></pre></div></td></tr></table></div> <h2 id=pageable><code>Pageable</code>类介绍<a class=headerlink href=#pageable title="Permanent link">&para;</a></h2> <p><code>Pageable</code> 是 Spring Data 提供的<strong>分页参数接口</strong>，用于封装分页查询的页码、每页大小、排序等信息。</p> <p>创建<code>Pageable</code>的方式：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-39-1><span class=c1>// page: 页码（从0开始，0表示第1页）</span>
+</span><span id=__span-39-2><span class=c1>// size: 每页记录数</span>
+</span><span id=__span-39-3><span class=n>PageRequest</span><span class=p>.</span><span class=na>of</span><span class=p>(</span><span class=n>page</span><span class=p>,</span><span class=w> </span><span class=n>size</span><span class=p>)</span>
+</span><span id=__span-39-4><span class=c1>// 带上排序Sort对象</span>
+</span><span id=__span-39-5><span class=n>PageRequest</span><span class=p>.</span><span class=na>of</span><span class=p>(</span><span class=n>page</span><span class=p>,</span><span class=w> </span><span class=n>size</span><span class=p>,</span><span class=w> </span><span class=n>sort</span><span class=p>)</span>
+</span></code></pre></div></td></tr></table></div> <p>常用方法如下：</p> <table> <thead> <tr> <th>方法</th> <th>返回值</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>getPageNumber()</code></td> <td><code>int</code></td> <td>当前页码（从0开始）</td> </tr> <tr> <td><code>getPageSize()</code></td> <td><code>int</code></td> <td>每页大小</td> </tr> <tr> <td><code>getOffset()</code></td> <td><code>long</code></td> <td>偏移量（跳过多少条）</td> </tr> <tr> <td><code>getSort()</code></td> <td><code>Sort</code></td> <td>排序信息</td> </tr> <tr> <td><code>next()</code></td> <td><code>Pageable</code></td> <td>下一页</td> </tr> <tr> <td><code>previous()</code></td> <td><code>Pageable</code></td> <td>上一页</td> </tr> <tr> <td><code>first()</code></td> <td><code>Pageable</code></td> <td>第一页</td> </tr> </tbody> </table> <p>需要注意的时页码问题：</p> <table> <thead> <tr> <th>前端习惯</th> <th>后端（Pageable）</th> <th>转换</th> </tr> </thead> <tbody> <tr> <td>第1页</td> <td>0</td> <td><code>page - 1</code></td> </tr> <tr> <td>第2页</td> <td>1</td> <td><code>page - 1</code></td> </tr> <tr> <td>第n页</td> <td>n-1</td> <td><code>page - 1</code></td> </tr> </tbody> </table> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-40-1><span class=c1>// 转换示例</span>
+</span><span id=__span-40-2><span class=kd>public</span><span class=w> </span><span class=n>Pageable</span><span class=w> </span><span class=nf>convert</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>frontendPage</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>pageSize</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-40-3><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>PageRequest</span><span class=p>.</span><span class=na>of</span><span class=p>(</span><span class=n>frontendPage</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=n>pageSize</span><span class=p>);</span>
+</span><span id=__span-40-4><span class=p>}</span>
+</span></code></pre></div></td></tr></table></div> <h2 id=page><code>Page</code>类介绍<a class=headerlink href=#page title="Permanent link">&para;</a></h2> <table> <thead> <tr> <th>方法</th> <th>返回值类型</th> <th>说明</th> <th>示例值</th> </tr> </thead> <tbody> <tr> <td><code>getNumber()</code></td> <td><code>int</code></td> <td>当前页码（<strong>从0开始</strong>）</td> <td><code>0</code>, <code>1</code>, <code>2</code>...</td> </tr> <tr> <td><code>getNumber() + 1</code></td> <td><code>int</code></td> <td>当前页码（转为<strong>从1开始</strong>）</td> <td><code>1</code>, <code>2</code>, <code>3</code>...</td> </tr> <tr> <td><code>getSize()</code></td> <td><code>int</code></td> <td>每页大小</td> <td><code>10</code></td> </tr> <tr> <td><code>getTotalElements()</code></td> <td><code>long</code></td> <td>总记录数</td> <td><code>100</code></td> </tr> <tr> <td><code>getTotalPages()</code></td> <td><code>int</code></td> <td>总页数</td> <td><code>10</code></td> </tr> <tr> <td><code>getContent()</code></td> <td><code>List&lt;T&gt;</code></td> <td>当前页数据列表</td> <td><code>List&lt;UserDocument&gt;</code></td> </tr> <tr> <td><code>hasContent()</code></td> <td><code>boolean</code></td> <td>当前页是否有数据</td> <td><code>true</code> / <code>false</code></td> </tr> <tr> <td><code>hasNext()</code></td> <td><code>boolean</code></td> <td>是否有下一页</td> <td><code>true</code> / <code>false</code></td> </tr> <tr> <td><code>hasPrevious()</code></td> <td><code>boolean</code></td> <td>是否有上一页</td> <td><code>true</code> / <code>false</code></td> </tr> <tr> <td><code>isFirst()</code></td> <td><code>boolean</code></td> <td>是否是第一页</td> <td><code>true</code> / <code>false</code></td> </tr> <tr> <td><code>isLast()</code></td> <td><code>boolean</code></td> <td>是否是最后一页</td> <td><code>true</code> / <code>false</code></td> </tr> <tr> <td><code>nextPageable()</code></td> <td><code>Pageable</code></td> <td>下一页的分页对象</td> <td><code>PageRequest</code></td> </tr> <tr> <td><code>previousPageable()</code></td> <td><code>Pageable</code></td> <td>上一页的分页对象</td> <td><code>PageRequest</code></td> </tr> </tbody> </table> <p>示例：</p> <div class="language-java highlight"><table class=highlighttable><tr><th colspan=2 class=filename><span class=filename>Java</span></th></tr><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
+<span class=normal>2</span>
+<span class=normal>3</span>
+<span class=normal>4</span>
+<span class=normal>5</span>
+<span class=normal>6</span>
+<span class=normal>7</span>
+<span class=normal>8</span>
+<span class=normal>9</span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-41-1><span class=k>return</span><span class=w> </span><span class=n>PageResult</span><span class=p>.</span><span class=o>&lt;</span><span class=n>UserVO</span><span class=o>&gt;</span><span class=n>builder</span><span class=p>()</span>
+</span><span id=__span-41-2><span class=w>        </span><span class=p>.</span><span class=na>currentPage</span><span class=p>(</span><span class=n>page</span><span class=p>.</span><span class=na>getNumber</span><span class=p>()</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>)</span><span class=w>      </span><span class=c1>// 页码+1</span>
+</span><span id=__span-41-3><span class=w>        </span><span class=p>.</span><span class=na>pageSize</span><span class=p>(</span><span class=n>page</span><span class=p>.</span><span class=na>getSize</span><span class=p>())</span><span class=w>               </span><span class=c1>// 每页大小</span>
+</span><span id=__span-41-4><span class=w>        </span><span class=p>.</span><span class=na>totalCount</span><span class=p>(</span><span class=n>page</span><span class=p>.</span><span class=na>getTotalElements</span><span class=p>())</span><span class=w>    </span><span class=c1>// 总记录数</span>
+</span><span id=__span-41-5><span class=w>        </span><span class=p>.</span><span class=na>totalPages</span><span class=p>(</span><span class=n>page</span><span class=p>.</span><span class=na>getTotalPages</span><span class=p>())</span><span class=w>       </span><span class=c1>// 总页数</span>
+</span><span id=__span-41-6><span class=w>        </span><span class=p>.</span><span class=na>data</span><span class=p>(</span><span class=n>page</span><span class=p>.</span><span class=na>getContent</span><span class=p>())</span><span class=w>                </span><span class=c1>// 数据列表</span>
+</span><span id=__span-41-7><span class=w>        </span><span class=p>.</span><span class=na>hasNext</span><span class=p>(</span><span class=n>page</span><span class=p>.</span><span class=na>hasNext</span><span class=p>())</span><span class=w>                </span><span class=c1>// 是否有下一页</span>
+</span><span id=__span-41-8><span class=w>        </span><span class=p>.</span><span class=na>hasPrevious</span><span class=p>(</span><span class=n>page</span><span class=p>.</span><span class=na>hasPrevious</span><span class=p>())</span><span class=w>        </span><span class=c1>// 是否有上一页</span>
+</span><span id=__span-41-9><span class=w>        </span><span class=p>.</span><span class=na>build</span><span class=p>();</span>
+</span></code></pre></div></td></tr></table></div> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最后更新> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2026年2月7日</span> </span> </aside> <!-- Waline 评论系统 --> <div id=waline></div> <!-- Waline 评论系统 --> <div id=waline></div> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> 回到页面顶部 </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2024-2026 柯懒不是柯南 </div> </div> <div class=md-social> <a href=https://github.com/H0308 target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://www.help-doc.top/author/contact/contact.html target=_blank rel=noopener title=www.help-doc.top class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M434.1 420.4c-11.5 1.4-44.9-52.7-44.9-52.7 0 31.3-16.1 72.2-51 101.8 16.8 5.2 54.8 19.2 45.8 34.4-7.3 12.3-125.5 7.9-159.6 4-34.1 3.8-152.3 8.3-159.6-4-9-15.2 28.9-29.2 45.8-34.4-34.9-29.5-51.1-70.4-51.1-101.8 0 0-33.3 54.1-44.9 52.7-5.4-.6-12.4-29.6 9.3-99.7 10.3-33 22-60.5 40.1-105.8C60.9 98 109.2-.1 224.3-.1 338-.1 387.5 96 384.6 214.9c18.1 45.2 29.9 72.9 40.1 105.8 21.8 70.1 14.7 99.1 9.3 99.7z"/></svg> </a> <a href=mailto:watneymark82@gmail.com target=_blank rel=noopener title class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 576 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M536.4-26.3c9.8-3.5 20.6-1 28 6.3s9.8 18.2 6.3 28l-178 496.9c-5 13.9-18.1 23.1-32.8 23.1-14.2 0-27-8.6-32.3-21.7l-64.2-158c-4.5-11-2.5-23.6 5.2-32.6l94.5-112.4c5.1-6.1 4.7-15-.9-20.6s-14.6-6-20.6-.9l-112.4 94.3c-9.1 7.6-21.6 9.6-32.6 5.2L38.1 216.8c-13.1-5.3-21.7-18.1-21.7-32.3 0-14.7 9.2-27.8 23.1-32.8z"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "..", "features": ["navigation.indexes", "navigation.prune", "navigation.tabs", "navigation.sections", "toc.follow", "content.code.copy", "navigation.top"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script> <script src=../assets/javascripts/bundle.e71a0d61.min.js></script> <script src=../javascripts/other.min.js></script> <script src=../javascripts/copyright.min.js></script> <script src=../javascripts/docsearch.min.js></script> <script src=../javascripts/navigation-overlay.min.js></script> <script src=../javascripts/link-preview.min.js></script> <script src=https://help-site.oss-cn-hangzhou.aliyuncs.com/js/docsearch3.js></script> <script src=../assets/javascripts/toggle-sidebar.js async></script> <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body> </html>

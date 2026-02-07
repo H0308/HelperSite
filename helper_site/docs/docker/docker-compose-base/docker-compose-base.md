@@ -8,11 +8,12 @@
 
 docker-compose是Docker官方的开源项目，使用Python编写，实现上调用了Docker服务的API进行容器管理及编排，其官方定义为定义和运行多个Docker容器的应用
 
-docker-compose中有两个非常重要的概念:
+docker-compose中有两个非常重要的概念：
+
 - 服务（service）：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例
 - 项目（project）：由一组关联的应用容器组成的一个完整业务单元，在`docker-compose.yml`文件中定义，整个`docker-compose.yml`定义一个项目
 
-Compose的默认管理对象是项目，通过子命令对项目中的一组容器进行便捷地生命周期管理。通过 compose 可以方便的管理多个服务。如下图所示：
+Compose的默认管理对象是项目，通过子命令对项目中的一组容器进行便捷地生命周期管理。通过compose可以方便的管理多个服务。如下图所示：
 
 <img src="docker-compose-base.assets\6de6134e-8e57-4594-a538-5eb4bc80cc09.webp">
 

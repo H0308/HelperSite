@@ -299,6 +299,7 @@ nav:
       - 章节目录: rabbitmq/index.md
       - Ubuntu下安装和卸载RabbitMQ: rabbitmq/rabbitmq-install-uninstall/rabbitmq-install-uninstall.md
       - RabbitMQ介绍: rabbitmq/rabbitmq-intro/rabbitmq-intro.md
+    - ElasticSearch安装与基本使用: elastic-search/elastic-search.md
   - JavaEE应用开发:
     - 章节目录: JavaEE/index.md
     - SpringMVC/SpringBoot:

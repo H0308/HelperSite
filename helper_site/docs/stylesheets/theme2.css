@@ -137,6 +137,22 @@ a code {
 
 .md-code__nav {
     right: 1em;
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform: scale(0.8);
+}
+.highlight {
+    position: relative !important;
+}
+.highlight:hover .md-code__nav {
+    opacity: 1;
+    transform: scale(1);
+}
+@media screen and (max-width: 1199px) {
+    .md-code__nav {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .md-typeset table:not([class]) {

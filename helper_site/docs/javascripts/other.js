@@ -1,8 +1,24 @@
+// 将复制按钮移动到代码块容器下，使其不随内容滚动，并添加点击炫光效果
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".md-clipboard").forEach((button) => {
-        button.addEventListener("click", function (e) {
-            e.preventDefault();
+    document.querySelectorAll(".highlight").forEach((highlight) => {
+        const nav = highlight.querySelector(".md-code__nav");
+        if (nav && nav.parentElement !== highlight) {
+            // 将按钮容器移动到.highlight下
+            highlight.appendChild(nav);
+            // 设置定位样式
+            nav.style.position = "absolute";
+            nav.style.top = "0.2rem";
+            nav.style.right = "0.5rem";
+            nav.style.left = "auto";
+            nav.style.zIndex = "10";
+        }
+    });
+
+    // 为复制按钮添加点击炫光效果
+    document.querySelectorAll(".md-code__button").forEach((button) => {
+        button.addEventListener("click", function () {
             const codeBlock = this.closest(".highlight");
+            if (!codeBlock) return;
 
             // 移除已存在的炫光元素
             const oldFlash = codeBlock.querySelector(".copy-flash");
@@ -20,32 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 flash.remove();
             });
         });
-    });
-});
-// 获取内容
-function getContent() {
-    // 使用HTML标记增强显示效果
-    return `一闪一闪亮晶晶，不及<span class="love-highlight">小亮</span><span class="love-heart">♥</span>照我心。To Li Liang`;
-}
-
-// 为已存在的爱心元素添加交互效果
-document.addEventListener("DOMContentLoaded", () => {
-    const loveDiv = document.querySelector(".md-footer-love");
-    if (!loveDiv) return;
-
-    // 添加交互效果
-    loveDiv.addEventListener("mouseenter", () => {
-        const heart = loveDiv.querySelector(".love-heart");
-        if (heart) {
-            heart.style.animationDuration = "0.8s";
-        }
-    });
-
-    loveDiv.addEventListener("mouseleave", () => {
-        const heart = loveDiv.querySelector(".love-heart");
-        if (heart) {
-            heart.style.animationDuration = "1.5s";
-        }
     });
 });
 // 动态调整 tooltip 位置以防止溢出

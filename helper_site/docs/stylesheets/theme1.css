@@ -302,15 +302,6 @@ blockquote {
 .md-sidebar__scrollwrap {
     scrollbar-color: var(--scrollbar-color) #0000 !important;
 }
-.md-clipboard {
-    opacity: 0;
-    transition: all 0.3s ease;
-    transform: scale(0.8);
-}
-.highlight:hover .md-clipboard {
-    opacity: 1;
-    transform: scale(1);
-}
 .highlight {
     position: relative !important;
     overflow: hidden !important;

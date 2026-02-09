@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://help-site.oss-cn-hangzhou.aliyuncs.com/css/waline.css" />
 <link rel="stylesheet" href="/stylesheets/waline.min.css" />
 <!-- 添加mermaid支持 -->
-<script defer src="https://cdn.jsdelivr.net/npm/mermaid@11.5.0/dist/mermaid.min.js"></script>
+<script defer src="https://help-site.oss-cn-hangzhou.aliyuncs.com/js/mermaid.min.js"></script>
 <!-- 添加对Katex的支持 -->
 <script defer src="/javascripts/katex.min.js"></script>
 <script defer src="https://help-site.oss-cn-hangzhou.aliyuncs.com/js/katex.min.js"></script>

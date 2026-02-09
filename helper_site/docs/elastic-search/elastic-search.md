@@ -61,7 +61,7 @@ dev:9200" -e "I18N_LOCALE=zh-CN" -p15601:5601 --network diy-network kibana:8.5.3
 
 注意，需要确保ES启动成功后再启动Kibana，否则Kibana无法连接上ES，启动ES后，可以访问`http://localhost:9200/`进行验证
 
-如果需要对中文句子进行分词，可以使用ES插件，ik分词器，点击[网址](https://release.infinilabs.com/analysis-ik/stable/elasticsearch-analysis-ik-8.5.3.zip)进行下载，下载完成后，将这个压缩包放在容器映射的宿主机目录`/es-plugins`下，需要注意，要先创建一个子目录，例如`elasticsearch-analysis-ik-8.5.3`，再在该子目录中将压缩包进行解压，解压完成后重启ES容器即可
+如果需要对中文句子进行分词，可以使用ES插件，ik分词器，点击[网址](https://release.infinilabs.com/analysis-ik/stable)（推荐下载8.5.3版本）进行下载，下载完成后，将这个压缩包放在容器映射的宿主机目录`/es-plugins`下，需要注意，要先创建一个子目录，例如`elasticsearch-analysis-ik-8.5.3`，再在该子目录中将压缩包进行解压，解压完成后重启ES容器即可
 
 ik分词器默认有两种分词模式：
 

@@ -451,17 +451,15 @@
         }
     }
 
-    // 标记是否已初始化
-    let isInitialized = false;
-    
     // 初始化链接监听
     function initLinkListeners() {
-        // 防止重复初始化
-        if (isInitialized) return;
-        isInitialized = true;
-        
-        // 监听整个文档的链接点击
-        document.addEventListener('click', function(e) {
+        // 监听整个文档的链接点击（使用命名函数以便移除，防止重复绑定）
+        document.removeEventListener('click', handleLinkClick, true);
+        document.addEventListener('click', handleLinkClick, true);
+    }
+
+    // 链接点击事件处理器
+    function handleLinkClick(e) {
             const link = e.target.closest('a');
             if (!link) return;
             
@@ -531,8 +529,6 @@
             
             // 显示预览
             showPreview(url, link);
-            
-        }, true);
     }
 
     // 键盘ESC关闭预览

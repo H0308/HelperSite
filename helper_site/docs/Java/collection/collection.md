@@ -1497,6 +1497,53 @@ public class Test01 {
 }
 ```
 
+### `SortSet`类
+
+`SortedSet`是Java集合框架中`Set`接口的子接口，它维护**有序**的元素集合（按元素的自然顺序或指定的比较器排序）。下面是`SortedSet`的特点：
+
+1. **有序性**：元素始终按升序（或自定义顺序）排列
+2. **唯一性**：继承 `Set`，不允许重复元素
+3. **范围视图**：可获取集合的局部视图（子集）
+4. **端点访问**：可直接获取最小/最大元素
+
+`SortedSet`类的主要实现类是`TreeSet`
+
+除了继承 `Set` 的方法外，新增：
+
+- `first()` / `last()`：获取首/尾元素
+- `headSet(toElement)`：返回小于指定元素的子集
+- `tailSet(fromElement)`：返回大于等于指定元素的子集
+- `subSet(from, to)`：返回区间子集
+- `comparator()`：获取排序器（自然排序返回`null`）
+
+基本使用如下：
+
+```java
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+// 自然排序（数字升序）
+SortedSet<Integer> numbers = new TreeSet<>();
+numbers.add(5);
+numbers.add(1);
+numbers.add(9);
+System.out.println(numbers); // [1, 5, 9]
+
+// 获取首尾
+System.out.println(numbers.first()); // 1
+System.out.println(numbers.last());  // 9
+
+// 范围查询（5到9之间，不含9）
+System.out.println(numbers.subSet(5, 9)); // [5]
+
+// 自定义排序（字符串长度倒序）
+SortedSet<String> words = new TreeSet<>((a, b) -> b.length() - a.length());
+words.add("apple");
+words.add("banana");
+words.add("pie");
+System.out.println(words); // [banana, apple, pie]
+```
+
 ## 哈希值介绍
 
 在Java中，哈希值是由计算机算出来的一个十进制数，可以看做是对象的地址值

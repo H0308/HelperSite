@@ -302,6 +302,9 @@ nav:
       - RabbitMQ工作模式介绍: rabbitmq/rabbitmq-workmode/rabbitmq-workmode.md
       - 在SpringBoot应用中使用RabbitMQ: rabbitmq/rabbitmq-springboot/rabbitmq-springboot.md
     - ElasticSearch安装与基本使用: elastic-search/elastic-search.md
+    - Redis:
+      - 章节目录: redis/index.md
+      - Redis介绍与基本使用: redis/redis-intro/redis-intro.md
   - JavaEE应用开发:
     - 章节目录: JavaEE/index.md
     - SpringMVC/SpringBoot:

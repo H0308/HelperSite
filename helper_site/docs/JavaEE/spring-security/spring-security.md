@@ -458,6 +458,8 @@ public class SecurityConfig {
             
             // 配置请求授权
             .authorizeHttpRequests(authz -> authz
+                // 允许异步分发（SSE/流式响应需要）
+                .dispatcherTypeMatchers(DispatcherType.ASYNC).permitAll()
                 // 允许登录接口无需认证
                 .requestMatchers("/auth/login", "/auth/test").permitAll()
                 // 管理员接口需要管理员权限

@@ -400,7 +400,7 @@ public class JsonUtil {
     ```java
     public class JwtUtil {
         // 生成密钥
-        private final static String secretKeySignature = "uh7Ib5KBKRwQCLal4ziR1UmsVJ07FirkpEJl10JFu+c=";
+        private final static String secretKeySignature = "e5sxcGbQ8qJEiJvn5ZbGHgoPp2ObPgdrwqQY8JA9Ql0=";
 
         // 过期时间
         private static final long EXPIRATION_TIME = 24 * 60 * 60 * 1000;
@@ -409,10 +409,11 @@ public class JsonUtil {
             return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKeySignature));
         }
 
-        public static String generateToken(String email, String username) {
+        public static String generateToken(String email, String username, Long userId) {
             Map<String, Object> claims = new HashMap<>();
             claims.put("email", email);
             claims.put("username", username);
+            claims.put("userId", userId);
 
             return Jwts.builder()
                     .claims(claims)
@@ -429,6 +430,14 @@ public class JsonUtil {
 
         public static String extractUsername(String token) {
             return (String) extractClaims(token).get("username");
+        }
+
+        public static Long extractUserId(String token) {
+            Object userId = extractClaims(token).get("userId");
+            if (userId instanceof Number) {
+                return ((Number) userId).longValue();
+            }
+            return null;
         }
 
         public static Date extractExpiration(String token) {
@@ -458,7 +467,7 @@ public class JsonUtil {
     }
     ```
 
-## 邮件发送配置类
+## 邮件发送工具类
 
 ```java
 @Component
